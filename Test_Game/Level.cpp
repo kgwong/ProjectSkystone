@@ -50,17 +50,47 @@ void Level::load(const std::string& filepath)
 	}
 }
 
-void Level::drawLevel() 
+void Level::update()
+{
+	updatePlayerProjectiles();
+}
+
+void Level::updatePlayerProjectiles()
+{
+	std::cout << playerProjectiles.size() << std::endl;
+	for (auto i = playerProjectiles.begin(); i != playerProjectiles.end(); ++i)
+	{
+		i->update();
+	}
+}
+
+
+void Level::render()
+{
+	renderTiles();
+	renderEnemies();
+	renderPlayerProjectiles();
+}
+
+void Level::renderTiles() 
 {
 	for (int y = 0; y < _numTilesHigh; ++y)
 		for (int x = 0; x < _numTilesWide; ++x)
 			tileArrangement[y][x].render();
 }
 
-void Level::drawEnemies()
+void Level::renderEnemies()
 {
 	for (auto i = enemies.begin(); i < enemies.end(); ++i)
 		i->draw();
+}
+
+void Level::renderPlayerProjectiles()
+{
+	for (auto i = playerProjectiles.begin(); i != playerProjectiles.end(); ++i)
+	{
+		i->draw();
+	}
 }
 
 int Level::getLevelWidth() const

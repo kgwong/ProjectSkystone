@@ -10,21 +10,24 @@
 #include "PhysicalObject.h"
 #include "Enemy.h"
 #include "Level.h"
-
-enum  Direction {UP, DOWN, LEFT, RIGHT} ; //
+#include "PlayerProjectile.h"
+#include "Direction.h"
 
 class Player : public CollidingObject,
 			   public DamageableObject,
 			   public PhysicalObject
 {
+
 public:
 	Player(GameWindow* gw);
 	~Player();
 
+	void setLevel(Level* level);
+
 	void handleInput(SDL_Event &e);
 	void handleInput2(); //
 
-	void update(Level& level);
+	void update();
 	void jump();
 	void shoot();
 
@@ -38,7 +41,13 @@ private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
 
 	Animation animation;
+	Animation projectileAnimation;
+
+	Direction dir; 
+
 	bool grounded;
+
+	Level* currLevel;
 
 	SDL_Texture* test;//!!!!!!!!!!!
 

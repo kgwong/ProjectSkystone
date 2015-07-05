@@ -81,6 +81,7 @@
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollidingObject.h" />
     <ClInclude Include="DamageableObject.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="PhysicalObject.h" />
@@ -103,6 +105,7 @@
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="PlayerProjectile.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MusicPlayer.h" />

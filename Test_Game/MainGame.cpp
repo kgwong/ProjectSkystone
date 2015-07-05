@@ -18,6 +18,8 @@ MainGame::MainGame()
 
 	gw.camera.setLevelBounds(currLevel.getLevelWidth(), currLevel.getLevelHeight());
 
+
+	player.setLevel(&currLevel);
 	player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
 }
 
@@ -65,7 +67,8 @@ void MainGame::processInput()
 void MainGame::update()
 {
 	Sleep(20);
-	player.update(currLevel);
+	player.update();
+	currLevel.update();
 }
 
 void MainGame::render()
@@ -73,10 +76,7 @@ void MainGame::render()
 	SDL_RenderClear(gw.renderer);
 
 	gw.camera.followObject(player);
-
-	currLevel.drawLevel();
-	currLevel.drawEnemies();
-
+	currLevel.render();
 	player.draw();
 
 	SDL_RenderPresent(gw.renderer);
