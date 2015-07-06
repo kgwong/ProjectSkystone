@@ -4,7 +4,7 @@
 Player::Player(GameWindow* gw)
 	:dir(RIGHT), animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
 	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1),
-	currLevel(nullptr)
+	_shoot(false)
 {
 	width = animation.getWidth();
 	height = animation.getHeight();
@@ -15,11 +15,6 @@ Player::Player(GameWindow* gw)
 
 Player::~Player()
 {
-}
-
-void Player::setLevel(Level* level)
-{
-	currLevel = level;
 }
 
 void Player::handleInput2()
@@ -63,7 +58,7 @@ void Player::handleInput(SDL_Event &e)
 			break;
 		case SDLK_s:
 			std::cout << "S pressed" << std::endl;
-			shoot();
+			_shoot = true;
 			break;
 		/*
 		case SDLK_LEFT:
@@ -77,22 +72,22 @@ void Player::handleInput(SDL_Event &e)
 	}
 }
 
-void Player::draw()
+void Player::render()
 {
 	animation.renderFrame(position.x, position.y);
 }
 
-void Player::update()
+void Player::update(LevelEntities& entities)
 {
 	moveX();
 
-	for (auto e = currLevel->enemies.begin(); e < currLevel->enemies.end(); ++e)
+	for (auto e = entities.enemies.begin(); e < entities.enemies.end(); ++e)
 	{
 		if (checkCollision(*e))
 			handleCollisionX(*e);
 	}
 
-	int sz = currLevel->getTileSize();
+	int sz = entities.tileSize;
 	int minX = position.x;
 	int maxX = position.x + width;
 
@@ -104,8 +99,8 @@ void Player::update()
 	{
 		for(int y = minY/sz; y <= maxY/sz; ++y)
 		{
-			currLevel->tileArrangement[y][x].changeImage(test);
-			Tile& tile = currLevel->tileArrangement[y][x];
+			entities.tiles[y][x].changeImage(test);
+			Tile& tile = entities.tiles[y][x];
 			if(tile.tileType == 1 && checkCollision(tile))
 			{
 				handleCollisionX(tile);
@@ -115,7 +110,7 @@ void Player::update()
 
 	moveY();
 
-	for (auto e = currLevel->enemies.begin(); e < currLevel->enemies.end(); ++e)
+	for (auto e = entities.enemies.begin(); e < entities.enemies.end(); ++e)
 	{
 		if (checkCollision(*e))
 			handleCollisionY(*e); //double
@@ -126,8 +121,8 @@ void Player::update()
 	{
 		for(int y = position.y/sz; y <= (position.y+height)/sz; ++y)
 		{
-			currLevel->tileArrangement[y][x].changeImage(test);
-			Tile& tile = currLevel->tileArrangement[y][x];
+			entities.tiles[y][x].changeImage(test);
+			Tile& tile = entities.tiles[y][x];
 			if(tile.tileType == 1 && checkCollision(tile))
 			{
 				handleCollisionY(tile);
@@ -135,6 +130,9 @@ void Player::update()
 		}
 	}
 
+
+	if (_shoot)
+		shoot(entities);
 
 }
 
@@ -147,9 +145,10 @@ void Player::jump()
 	}
 }
 
-void Player::shoot()
+void Player::shoot(LevelEntities& entities)
 {
-	currLevel->playerProjectiles.push_front(PlayerProjectile(position, 30, &projectileAnimation, dir));
+	entities.playerProjectiles.push_front(PlayerProjectile(position, 30, &projectileAnimation, dir));
+	_shoot = false;
 }
 
 void Player::handleCollisionX(CollidingObject& other)

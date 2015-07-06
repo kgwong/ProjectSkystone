@@ -8,10 +8,11 @@
 #include "CollidingObject.h"
 #include "DamageableObject.h"
 #include "PhysicalObject.h"
-#include "Enemy.h"
-#include "Level.h"
-#include "PlayerProjectile.h"
 #include "Direction.h"
+
+#include "LevelEntities.h"
+
+struct LevelEntities;
 
 class Player : public CollidingObject,
 			   public DamageableObject,
@@ -22,19 +23,17 @@ public:
 	Player(GameWindow* gw);
 	~Player();
 
-	void setLevel(Level* level);
-
 	void handleInput(SDL_Event &e);
 	void handleInput2(); //
 
-	void update();
+	void update(LevelEntities& entities);
 	void jump();
-	void shoot();
+	void shoot(LevelEntities& entities);
 
 	void handleCollisionX(CollidingObject& enemy);
 	void handleCollisionY(CollidingObject& enemy);
 
-	void draw();
+	void render();
 
 
 private:
@@ -45,9 +44,8 @@ private:
 
 	Direction dir; 
 
-	bool grounded;
+	bool _shoot;
 
-	Level* currLevel;
 
 	SDL_Texture* test;//!!!!!!!!!!!
 

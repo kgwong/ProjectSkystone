@@ -12,7 +12,7 @@ public:
 	Animation(GameWindow* window, const std::string& filepath, 
 		int numFrames, int width, int height, 
 		int framesPerRow, int framesPerColumn, 
-		int padding = 0); //change to smaller constructor.... read image data from a seperator file instead?
+		int padding = 0); //change to smaller constructor.... read image data from a seperate file instead?
 	~Animation();
 
 	void renderFrame(int x, int y);

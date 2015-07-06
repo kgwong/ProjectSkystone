@@ -1,5 +1,7 @@
 #include "MainGame.h"
 
+#include "Resources.h"
+
 #include <windows.h> // for "sleep"
 
 const int SCREEN_WIDTH  = 640;
@@ -13,13 +15,13 @@ MainGame::MainGame()
 	currLevel(&gw, &tileSet)
 {
 	currLevel.load("LevelTest");
+	currLevel.setPlayer(&player);
+
 	musicPlayer.loadSong("tempSong.wav");
 	musicPlayer.play();
 
 	gw.camera.setLevelBounds(currLevel.getLevelWidth(), currLevel.getLevelHeight());
 
-
-	player.setLevel(&currLevel);
 	player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
 }
 
@@ -67,7 +69,6 @@ void MainGame::processInput()
 void MainGame::update()
 {
 	Sleep(20);
-	player.update();
 	currLevel.update();
 }
 
@@ -77,7 +78,6 @@ void MainGame::render()
 
 	gw.camera.followObject(player);
 	currLevel.render();
-	player.draw();
 
 	SDL_RenderPresent(gw.renderer);
 }

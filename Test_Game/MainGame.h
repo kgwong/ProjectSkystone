@@ -15,11 +15,8 @@
 #include "Animation.h"
 #include "MusicPlayer.h"
 #include "Camera.h"
-#include "Enemy.h"
 #include "TileSet.h"
 #include "Level.h"
-
-#include "Resources.h"
 
 
 class MainGame

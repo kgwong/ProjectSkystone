@@ -1,7 +1,5 @@
 #include "CollidingObject.h"
 
-#include <iostream> //
-
 CollidingObject::CollidingObject(void)
 {
 }
