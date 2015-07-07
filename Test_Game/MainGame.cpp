@@ -68,7 +68,7 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
-	Sleep(20);
+	//Sleep(20);
 	currLevel.update();
 }
 

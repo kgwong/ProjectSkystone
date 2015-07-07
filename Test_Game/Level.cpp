@@ -61,6 +61,7 @@ void Level::update()
 {
 	updatePlayer();
 	updatePlayerProjectiles();
+	updateEnemies();
 }
 
 void Level::updatePlayer()
@@ -70,7 +71,6 @@ void Level::updatePlayer()
 
 void Level::updatePlayerProjectiles()
 {
-	std::cout << _entities.playerProjectiles.size() << std::endl;
 	/*for (auto i = _entities.playerProjectiles.begin(); i != _entities.playerProjectiles.end(); ++i)
 	{
 		i->update(_entities);
@@ -91,13 +91,33 @@ void Level::updatePlayerProjectiles()
 	}
 }
 
+//similar code above and below...bad!
+
+void Level::updateEnemies()
+{
+	auto it = _entities.enemies.begin();
+	while (it != _entities.enemies.end())
+	{
+		if (it->isDead())
+		{
+			it = _entities.enemies.erase(it);
+		}
+		else
+		{
+			it->update(_entities);
+			++it;
+		}
+	}
+}
+
 
 void Level::render()
 {
-	renderPlayer();
+	//note order of rendering
 	renderTiles();
 	renderEnemies();
 	renderPlayerProjectiles();
+	renderPlayer();
 }
 
 void Level::renderPlayer()
@@ -115,7 +135,7 @@ void Level::renderTiles()
 void Level::renderEnemies()
 {
 	for (auto i = _entities.enemies.begin(); i < _entities.enemies.end(); ++i)
-		i->draw();
+		i->render();
 }
 
 void Level::renderPlayerProjectiles()

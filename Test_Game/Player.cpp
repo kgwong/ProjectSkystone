@@ -2,12 +2,12 @@
 
 
 Player::Player(GameWindow* gw)
-	:dir(RIGHT), animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
+	:dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
 	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1),
 	_shoot(false)
 {
-	width = animation.getWidth();
-	height = animation.getHeight();
+	width = _animation.getWidth();
+	height = _animation.getHeight();
 
 	test = loadTexture(gw->renderer, "testTile.png");
 }
@@ -53,11 +53,9 @@ void Player::handleInput(SDL_Event &e)
 	switch (e.key.keysym.sym)
 	{
 		case SDLK_a:
-			std::cout << "a pressed" << std::endl;
 			jump();
 			break;
 		case SDLK_s:
-			std::cout << "S pressed" << std::endl;
 			_shoot = true;
 			break;
 		/*
@@ -74,7 +72,7 @@ void Player::handleInput(SDL_Event &e)
 
 void Player::render()
 {
-	animation.renderFrame(position.x, position.y);
+	_animation.renderFrame(position.x, position.y);
 }
 
 void Player::update(LevelEntities& entities)

@@ -23,6 +23,7 @@ public:
 	void update();
 	void updatePlayer();
 	void updatePlayerProjectiles();
+	void updateEnemies();
 
 	void render();
 	void renderPlayer();
@@ -37,13 +38,7 @@ public:
 
 
 public:
-	//std::vector<std::vector<Tile>> tiles;
-	//std::vector<Enemy> enemies; //should probably change this to a forward list
-	//std::list<PlayerProjectile> playerProjectiles;
-	/*maybe std::vector would be better, projectiles are not expected to last long,
-	so the length of the vector would short, therefore random removals would not 
-	take long either. vector also is more cache friendly*/
-		LevelEntities _entities;
+	LevelEntities _entities;
 
 private:
 	Sprite enemySprite;

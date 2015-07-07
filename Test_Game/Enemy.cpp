@@ -13,7 +13,12 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::draw()
+void Enemy::update(LevelEntities& entities)
+{
+
+}
+
+void Enemy::render()
 {
 	_sprite->render(position.x, position.y);
 }

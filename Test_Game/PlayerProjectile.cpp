@@ -34,6 +34,17 @@ bool PlayerProjectile::isActive()
 void PlayerProjectile::update(LevelEntities& entities)
 {
 	moveX();
+	//lots of repeated code!!!
+
+	for (auto i = entities.enemies.begin(); i < entities.enemies.end(); ++i)
+	{
+		if (checkCollision(*i))
+		{
+			handleCollisionX(*i);
+			i->takeDamage(damage);
+			_active = false;
+		}	
+	}
 
 	for (int x = position.x/entities.tileSize; x <= (position.x + width)/entities.tileSize; ++x)
 	{
@@ -61,6 +72,17 @@ void PlayerProjectile::update(LevelEntities& entities)
 			}
 		}
 	}
+
+	for (auto i = entities.enemies.begin(); i < entities.enemies.end(); ++i)
+	{
+		if (checkCollision(*i))
+		{
+			handleCollisionY(*i);
+			i->takeDamage(damage);
+			_active = false;
+		}	
+	}
+
 }
 
 void PlayerProjectile::render()

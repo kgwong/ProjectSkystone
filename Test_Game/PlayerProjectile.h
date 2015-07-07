@@ -23,12 +23,13 @@ public:
 	void render();
 
 private:
+	static const int damage = 10; //
 	bool _active;
 	Animation* _animation;
 
 private:
 	void handleCollisionX(CollidingObject& other);
-	void handleCollisionY(CollidingObject& other);
+	void handleCollisionY(CollidingObject& other);	
 
 };
 
