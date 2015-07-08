@@ -27,15 +27,17 @@ protected:
 	static const int GRAVITY = 1;
 	static const int TERMINAL_VELOCITY = 20;
 
-	void fall();
-	void moveX();
-	void moveY();
-
 	int velX, velY;
 	int accelX, accelY;
 
 	bool gravityEnabled; //gravity enabled?
 	bool falling; //object is falling
+
+protected:
+	void fall();
+	void move();
+	void moveX();
+	void moveY();
 };
 
 

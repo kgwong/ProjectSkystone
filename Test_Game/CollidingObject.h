@@ -10,7 +10,12 @@ public:
 	~CollidingObject();
 
 	bool checkCollision(const CollidingObject& other);
+	
+protected:
 
+	/*void resolveEnvironmentCollision(LevelEntities& entities, Axis axis)
+	void resolveCollisionX(const CollidingObject& other);
+	void resolveCollisionY(const CollidingObject& other);*/
 };
 
 

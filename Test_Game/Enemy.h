@@ -23,6 +23,9 @@ public:
 
 private:
 	Sprite* _sprite;
+
+	void handleCollisionX(CollidingObject& other);
+	void handleCollisionY(CollidingObject& other);
 };
 
 #endif //ENEMY_H

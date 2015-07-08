@@ -1,11 +1,10 @@
 #include "CollidingObject.h"
 
-CollidingObject::CollidingObject(void)
+CollidingObject::CollidingObject()
 {
 }
 
-
-CollidingObject::~CollidingObject(void)
+CollidingObject::~CollidingObject()
 {
 }
 
@@ -35,4 +34,41 @@ bool CollidingObject::checkCollision(const CollidingObject& other)
 
 	return true;
 }
+
+/*
+
+//belongs with code that handles collision.... probably not here!
+void CollidingObject::resolveEnvironmentCollision(LevelEntities& entities, Axis axis)
+{
+	//will throw std::out_of_range if player goes off screen!
+	for (int x = position.x/entities.tileSize; x <= (position.x + width)/entities.tileSize; ++x)
+	{
+		for(int y = position.y/entities.tileSize; y <= (position.y + height)/entities.tileSize; ++y)
+		{
+			Tile& tile = entities.tiles[y][x];
+			if(tile.tileType == 1 && checkCollision(dynamic_cast<CollidingObject &>(tile))
+			{
+				switch(axis)
+				{
+					case X: handleCollisionX(tile); break;
+					case Y: handleCollisionY(tile); break;
+				}
+			}
+		}
+	}
+
+}
+
+void resolveCollisionX(const CollidingObject& other)
+{
+	if (isMovingLeft())
+		position.x = other.getPosX() + other.getWidth();
+	else //isMovingRight
+		position.x = other.getPosX() - width;
+}
+
+void resolveCollisionY(const CollidingObject& other)
+{
+
+}*/
 

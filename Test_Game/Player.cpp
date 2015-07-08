@@ -24,13 +24,11 @@ void Player::handleInput2()
 	if(keyStates[SDL_SCANCODE_LEFT])
 	{
 		velX = -5;
-		falling = true;
 		dir = LEFT;
 	}
 	else if(keyStates[SDL_SCANCODE_RIGHT])
 	{
 		velX = 5;
-		falling = true;
 		dir = RIGHT;
 	}
 	else if (keyStates[SDL_SCANCODE_UP])
@@ -58,13 +56,6 @@ void Player::handleInput(SDL_Event &e)
 		case SDLK_s:
 			_shoot = true;
 			break;
-		/*
-		case SDLK_LEFT:
-			velX = -5;
-			break;
-		case SDLK_RIGHT:
-			velX = 5;
-			break;*/
 		default:
 			break;
 	}
@@ -167,8 +158,7 @@ void Player::handleCollisionY(CollidingObject& other)
 	else //isMovingDown
 	{
 		position.y = other.getPosY() - height;
-		if (falling) 
-			falling = false;
+		falling = false;
 	}
 
 	velY = 0;

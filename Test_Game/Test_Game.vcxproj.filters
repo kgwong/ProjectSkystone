@@ -149,5 +149,8 @@
     <ClInclude Include="LevelEntities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

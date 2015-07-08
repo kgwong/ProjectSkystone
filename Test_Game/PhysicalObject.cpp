@@ -2,7 +2,8 @@
 
 
 PhysicalObject::PhysicalObject()
-	:velX(0), velY(0), accelX(0), accelY(0), falling(true)
+	:velX(0), velY(0), accelX(0), accelY(0), 
+	falling(true), gravityEnabled(true)
 {
 }
 
@@ -58,12 +59,19 @@ void PhysicalObject::toggleGravity(bool gravity)
 
 void PhysicalObject::fall()
 {
-	if (gravityEnabled && falling)
+	if (gravityEnabled)
 	{
 		velY += GRAVITY;
 		if (velY > TERMINAL_VELOCITY)
 			velY = TERMINAL_VELOCITY;
+		falling = true;
 	}
+}
+
+void PhysicalObject::move()
+{
+	moveX();
+	moveY();
 }
 
 void PhysicalObject::moveX()
