@@ -2,10 +2,12 @@
 
 
 Player::Player(GameWindow* gw)
-	:dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
+	:_renderComponent(gw), dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
 	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1),
 	_shoot(false)
 {
+	_renderComponent.setAnimation(&_animation);
+
 	width = _animation.getWidth();
 	height = _animation.getHeight();
 
@@ -63,7 +65,7 @@ void Player::handleInput(SDL_Event &e)
 
 void Player::render()
 {
-	_animation.renderFrame(position.x, position.y);
+	_renderComponent.update(*this);
 }
 
 void Player::update(LevelEntities& entities)

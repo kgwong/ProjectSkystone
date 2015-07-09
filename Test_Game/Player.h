@@ -4,14 +4,19 @@
 #include "GameWindow.h"
 #include "GameObject.h"
 #include "Animation.h"
-#include "Sprite.h"
 #include "CollidingObject.h"
 #include "DamageableObject.h"
 #include "PhysicalObject.h"
 #include "Direction.h"
 
+
+
 #include "LevelEntities.h"
 
+
+#include "RenderComponent.h"
+
+class RenderComponent;
 struct LevelEntities;
 
 class Player : public CollidingObject,
@@ -38,6 +43,8 @@ public:
 
 private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
+
+	RenderComponent _renderComponent;
 
 	Animation _animation;
 	Animation projectileAnimation;
