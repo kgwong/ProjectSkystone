@@ -59,9 +59,17 @@ void Level::setPlayer(Player* player)
 
 void Level::update()
 {
+	updateTiles();
 	updatePlayer();
 	updatePlayerProjectiles();
 	updateEnemies();
+}
+
+void Level::updateTiles()
+{
+	for (int y = 0; y < _numTilesHigh; ++y)
+		for (int x = 0; x < _numTilesWide; ++x)
+			_entities.tiles[y][x].update();
 }
 
 void Level::updatePlayer()
@@ -71,22 +79,17 @@ void Level::updatePlayer()
 
 void Level::updatePlayerProjectiles()
 {
-	/*for (auto i = _entities.playerProjectiles.begin(); i != _entities.playerProjectiles.end(); ++i)
-	{
-		i->update(_entities);
-	}*/
-
 	auto it = _entities.playerProjectiles.begin();
 	while (it != _entities.playerProjectiles.end())
 	{
-		if (it->isActive())
+		if (it->isDead())
 		{
-			it->update(_entities);
-			++it;
+			it = _entities.playerProjectiles.erase(it);
 		}
 		else
 		{
-			it = _entities.playerProjectiles.erase(it);
+			it->update(_entities);
+			++it;
 		}
 	}
 }

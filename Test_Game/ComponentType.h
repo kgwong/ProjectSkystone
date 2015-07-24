@@ -1,0 +1,9 @@
+#ifndef COMPONENTTYPE_H
+#define COMPONENTTYPE_H
+
+enum ComponentType
+{
+	COLLIDER, DAMAGE, HEALTH, PHYSICS, RENDER
+};
+
+#endif //COMPONENTTYPE_H

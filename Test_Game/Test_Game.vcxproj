@@ -44,6 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>C:\Users\Kevin\Documents\Visual Studio 2010\Projects\Test_Game\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -72,15 +73,16 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CollidingObject.cpp" />
-    <ClCompile Include="DamageableObject.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="DamageComponent.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="PhysicalObject.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -97,17 +99,21 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CollidingObject.h" />
-    <ClInclude Include="DamageableObject.h" />
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentType.h" />
+    <ClInclude Include="DamageComponent.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EntityType.h" />
     <ClInclude Include="Errors.h" />
+    <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="LevelEntities.h" />
-    <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PlayerProjectile.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="SpriteSheet.h" />

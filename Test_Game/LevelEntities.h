@@ -4,7 +4,7 @@
 #include <vector>
 #include <list>
 
-#include "Player.h"
+//#include "Player.h"
 #include "Tile.h"
 #include "Enemy.h"
 #include "PlayerProjectile.h"
@@ -20,10 +20,7 @@ struct LevelEntities
 	std::vector<std::vector<Tile>> tiles;
 	int tileSize;
 	std::vector<Enemy> enemies;
-	std::list<PlayerProjectile> playerProjectiles;
-	/*maybe std::vector would be better, projectiles are not expected to last long,
-	so the length of the vector would short, therefore random removals would not 
-	take long either. vector also is more cache friendly*/
+	std::vector<PlayerProjectile> playerProjectiles;
 };
 
 #endif //LEVELENTITIES_H

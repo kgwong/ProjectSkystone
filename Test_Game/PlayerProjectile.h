@@ -1,35 +1,36 @@
 #ifndef PLAYERPROJECTILE_H
 #define PLAYERPROJECTILE_H
 
-#include "CollidingObject.h"
-#include "PhysicalObject.h"
-
 #include "Animation.h"
 #include "Direction.h"
 
-#include "LevelEntities.h"
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+#include "DamageComponent.h"
 
 struct LevelEntities;
 
-class PlayerProjectile : public CollidingObject,
-						 public PhysicalObject
+class PlayerProjectile : public GameObject
 {
 public:
 	PlayerProjectile(Point position, int vel, Animation* animation, Direction dir);
 	~PlayerProjectile();
 
-	bool isActive();
+	bool isDead();
 	void update(LevelEntities& entities);
 	void render();
 
-private:
-	static const int damage = 10; //
-	bool _active;
-	Animation* _animation;
+	Component* getComponent(ComponentType type);
+
+	virtual void onCollision(GameObject& other);
+	virtual EntityType getType() const;
 
 private:
-	void handleCollisionX(CollidingObject& other);
-	void handleCollisionY(CollidingObject& other);	
+	bool _alive;
+	Animation* _animation;
+	PhysicsComponent _physicsComponent;
+	ColliderComponent _colliderComponent;
+	DamageComponent _damageComponent;
 
 };
 

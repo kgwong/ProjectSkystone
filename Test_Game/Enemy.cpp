@@ -4,6 +4,8 @@
 Enemy::Enemy(GameWindow* gw, Sprite* s)
 	: _sprite(s)
 {
+	_healthComponent.initHealth(100); //
+
 	width = _sprite->getWidth();
 	height = _sprite->getHeight();
 }
@@ -15,32 +17,8 @@ Enemy::~Enemy()
 
 void Enemy::update(LevelEntities& entities)
 {
-	PhysicalObject::moveX();
-	for (auto i = entities.tiles.begin(); i < entities.tiles.end(); ++i)
-	{
-		for (auto j = i->begin(); j < i->end(); ++j)
-		{
-			Tile& t = *j;
-			if (t.tileType == 1 && checkCollision(t))
-			{
-				handleCollisionX(t);
-			}
-		}
-	}
-
-	PhysicalObject::moveY();
-
-	for (auto i = entities.tiles.begin(); i < entities.tiles.end(); ++i)
-	{
-		for (auto j = i->begin(); j < i->end(); ++j)
-		{
-			Tile& t = *j;
-			if (t.tileType == 1 && checkCollision(t))
-			{
-				handleCollisionY(t);
-			}
-		}
-	}
+	_colliderComponent.update(*this);
+	_physicsComponent.update(*this, entities, &_colliderComponent);
 }
 
 void Enemy::render()
@@ -48,22 +26,31 @@ void Enemy::render()
 	_sprite->render(position.x, position.y);
 }
 
-void Enemy::handleCollisionX(CollidingObject& other)
+void Enemy::takeDamage(int damage)
 {
-	if (isMovingLeft())
-		position.x = other.getPosX() + other.getWidth();
-	else //isMovingRight
-		position.x = other.getPosX() - width;
+	_healthComponent.takeDamage(damage);
 }
 
-
-void Enemy::handleCollisionY(CollidingObject& other)
+bool Enemy::isDead()
 {
-	if (isMovingUp())
-		position.y = other.getPosY() + other.getHeight();
-	else //isMovingDown
+	return _healthComponent.isDead();
+}
+
+std::string Enemy::getName()
+{
+	return "Enemy";
+}
+
+EntityType Enemy::getType()
+{
+	return ENEMY;
+}
+
+void Enemy::onCollision(GameObject& other)
+{
+	if (other.getType() == PLAYER_PROJECTILE)
 	{
-		position.y = other.getPosY() - height;
-		falling = false;
+		//well this is ugly
+		takeDamage(*((int*)other.getComponent(DAMAGE)->getAttribute("damage"))); 
 	}
 }

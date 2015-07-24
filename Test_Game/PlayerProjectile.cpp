@@ -2,9 +2,9 @@
 
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation, Direction dir)
-	:_active(true), _animation(animation)
+	:_alive(true), _animation(animation), _damageComponent(10)
 {
-	toggleGravity(false);
+	_physicsComponent.enableGravity(false);
 
 	width = _animation->getWidth();
 	height = _animation->getHeight();
@@ -13,10 +13,10 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation
 
 	switch (dir)
 	{
-		case UP: velY = -vel; break;
-		case DOWN: velY = vel; break;
-		case LEFT: velX = -vel; break;
-		case RIGHT: velX = vel; break;
+		case UP: _physicsComponent.setVelY(-vel); break;
+		case DOWN: _physicsComponent.setVelY(vel); break;
+		case LEFT: _physicsComponent.setVelX(-vel); break;
+		case RIGHT: _physicsComponent.setVelX(vel); break;
 		default: break;
 	}
 }
@@ -26,62 +26,15 @@ PlayerProjectile::~PlayerProjectile()
 {
 }
 
-bool PlayerProjectile::isActive()
+bool PlayerProjectile::isDead()
 {
-	return _active;
+	return !_alive;
 }
 
 void PlayerProjectile::update(LevelEntities& entities)
 {
-	moveX();
-	//lots of repeated code!!!
-
-	for (auto i = entities.enemies.begin(); i < entities.enemies.end(); ++i)
-	{
-		if (checkCollision(*i))
-		{
-			handleCollisionX(*i);
-			i->takeDamage(damage);
-			_active = false;
-		}	
-	}
-
-	for (int x = position.x/entities.tileSize; x <= (position.x + width)/entities.tileSize; ++x)
-	{
-		for(int y = position.y/entities.tileSize; y <= (position.y + height)/entities.tileSize; ++y)
-		{
-			Tile& tile = entities.tiles[y][x];
-			if(tile.tileType == 1 && checkCollision(tile))
-			{
-				handleCollisionX(tile);
-				_active = false;
-			}
-		}
-	}
-	moveY();
-
-	for (int x = position.x/entities.tileSize; x <= (position.x + width)/entities.tileSize; ++x)
-	{
-		for(int y = position.y/entities.tileSize; y <= (position.y + height)/entities.tileSize; ++y)
-		{
-			Tile& tile = entities.tiles[y][x];
-			if(tile.tileType == 1 && checkCollision(tile))
-			{
-				handleCollisionY(tile);
-				_active = false;
-			}
-		}
-	}
-
-	for (auto i = entities.enemies.begin(); i < entities.enemies.end(); ++i)
-	{
-		if (checkCollision(*i))
-		{
-			handleCollisionY(*i);
-			i->takeDamage(damage);
-			_active = false;
-		}	
-	}
+	_colliderComponent.update(*this);
+	_physicsComponent.update(*this, entities, &_colliderComponent);
 
 }
 
@@ -90,28 +43,21 @@ void PlayerProjectile::render()
 	_animation->renderFrame(position.x, position.y);
 }
 
-
-void PlayerProjectile::handleCollisionX(CollidingObject& other)
+void PlayerProjectile::onCollision(GameObject& other)
 {
-	if (isMovingLeft())
-		position.x = other.getPosX() + other.getWidth();
-	else //isMovingRight
-		position.x = other.getPosX() - width;
-
-	velX = 0;
-
+	_alive = false;
 }
 
-void PlayerProjectile::handleCollisionY(CollidingObject& other)
+EntityType PlayerProjectile::getType() const
 {
-	if (isMovingUp())
-		position.y = other.getPosY() + other.getHeight();
-	else //isMovingDown
-	{
-		position.y = other.getPosY() - height;
-		if (falling) 
-			falling = false;
-	}
+	return PLAYER_PROJECTILE;
+}
 
-	velY = 0;
+Component* PlayerProjectile::getComponent(ComponentType type) 
+{
+	if (type == DAMAGE)
+	{
+		return &_damageComponent;
+	}
+	return nullptr;
 }

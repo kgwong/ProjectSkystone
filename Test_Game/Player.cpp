@@ -1,5 +1,6 @@
 #include "Player.h"
 
+#include "LevelEntities.h"
 
 Player::Player(GameWindow* gw)
 	:_renderComponent(gw), dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
@@ -10,8 +11,6 @@ Player::Player(GameWindow* gw)
 
 	width = _animation.getWidth();
 	height = _animation.getHeight();
-
-	test = loadTexture(gw->renderer, "testTile.png");
 }
 
 
@@ -25,26 +24,26 @@ void Player::handleInput2()
 
 	if(keyStates[SDL_SCANCODE_LEFT])
 	{
-		velX = -5;
+		_physicsComponent.setVelX(-5);
 		dir = LEFT;
 	}
 	else if(keyStates[SDL_SCANCODE_RIGHT])
 	{
-		velX = 5;
+		_physicsComponent.setVelX(5);
 		dir = RIGHT;
 	}
 	else if (keyStates[SDL_SCANCODE_UP])
 	{
 		dir = UP;
-		velX = 0;
+		_physicsComponent.setVelX(0);
 	}
 	else if (keyStates[SDL_SCANCODE_DOWN])
 	{
 		dir = DOWN;
-		velX = 0;
+		_physicsComponent.setVelX(0);
 	}
 	else
-		velX = 0;
+		_physicsComponent.setVelX(0);
 
 }
 
@@ -70,57 +69,8 @@ void Player::render()
 
 void Player::update(LevelEntities& entities)
 {
-	moveX();
-
-	for (auto e = entities.enemies.begin(); e < entities.enemies.end(); ++e)
-	{
-		if (checkCollision(*e))
-			handleCollisionX(*e);
-	}
-
-	int sz = entities.tileSize;
-	int minX = position.x;
-	int maxX = position.x + width;
-
-	int minY = position.y;
-	int maxY = position.y + height;
-
-	//will throw std::out_of_range if player goes off screen!
-	for (int x = minX/sz; x <= maxX/sz; ++x)
-	{
-		for(int y = minY/sz; y <= maxY/sz; ++y)
-		{
-			entities.tiles[y][x].changeImage(test);
-			Tile& tile = entities.tiles[y][x];
-			if(tile.tileType == 1 && checkCollision(tile))
-			{
-				handleCollisionX(tile);
-			}
-		}
-	}
-
-	moveY();
-
-	for (auto e = entities.enemies.begin(); e < entities.enemies.end(); ++e)
-	{
-		if (checkCollision(*e))
-			handleCollisionY(*e); //double
-	}
-
-
-	for (int x = position.x/sz; x <= (position.x+width)/sz; ++x)
-	{
-		for(int y = position.y/sz; y <= (position.y+height)/sz; ++y)
-		{
-			entities.tiles[y][x].changeImage(test);
-			Tile& tile = entities.tiles[y][x];
-			if(tile.tileType == 1 && checkCollision(tile))
-			{
-				handleCollisionY(tile);
-			}
-		}
-	}
-
+	_colliderComponent.update(*this);
+	_physicsComponent.update(*this, entities, &_colliderComponent);
 
 	if (_shoot)
 		shoot(entities);
@@ -129,39 +79,36 @@ void Player::update(LevelEntities& entities)
 
 void Player::jump()
 {
-	if (!falling)
-	{
-		velY = JUMP_VELOCITY;
-		falling = true;
-	}
+	if (!_physicsComponent.isFalling())
+		_physicsComponent.setVelY(JUMP_VELOCITY);
 }
 
 void Player::shoot(LevelEntities& entities)
 {
-	entities.playerProjectiles.push_front(PlayerProjectile(position, 30, &projectileAnimation, dir));
+	entities.playerProjectiles.push_back(PlayerProjectile(position, 30, &projectileAnimation, dir));
 	_shoot = false;
 }
 
-void Player::handleCollisionX(CollidingObject& other)
+
+Component* Player::getComponent(const std::string& componentName)
 {
-	if (isMovingLeft())
-		position.x = other.getPosX() + other.getWidth();
-	else //isMovingRight
-		position.x = other.getPosX() - width;
-
-	velX = 0;
-
+	if (componentName == "Collider")
+		return &_colliderComponent;
+	else 
+		return nullptr;
 }
 
-void Player::handleCollisionY(CollidingObject& other)
+std::string Player::getName() const
 {
-	if (isMovingUp())
-		position.y = other.getPosY() + other.getHeight();
-	else //isMovingDown
-	{
-		position.y = other.getPosY() - height;
-		falling = false;
-	}
+	return "Player";
+}
 
-	velY = 0;
+EntityType Player::getType() const
+{
+	return PLAYER;
+}
+
+void Player::onCollision(GameObject& other)
+{
+
 }

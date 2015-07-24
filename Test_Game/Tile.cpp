@@ -25,6 +25,11 @@ Tile::~Tile()
 {
 }
 
+void Tile::update()
+{
+	_colliderComponent.update(*this);
+}
+
 void Tile::changeImage(SDL_Texture* newImage) //temp;
 {
 	_tileSetImage = newImage;
@@ -37,3 +42,8 @@ void Tile::render()
 	_drawDestination.y = position.y - cameraPos.y;
 	SDL_RenderCopy(_window->renderer, _tileSetImage, &_tileRect, &_drawDestination);
 }	
+
+EntityType Tile::getType()
+{
+	return ENVIRONMENT;
+}

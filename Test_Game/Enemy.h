@@ -1,18 +1,18 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "CollidingObject.h"
-#include "DamageableObject.h"
-#include "PhysicalObject.h"
+#include "HealthComponent.h"
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+
 #include "GameWindow.h"
 #include "Sprite.h"
-#include "LevelEntities.h"
+
 
 struct LevelEntities;
+class PhysicsComponent;
 
-class Enemy : public CollidingObject,
-			  public DamageableObject,
-			  public PhysicalObject
+class Enemy : public GameObject
 {
 public:
 	Enemy(GameWindow* gw, Sprite* sprite);
@@ -21,11 +21,21 @@ public:
 	void update(LevelEntities& entities);
 	void render();
 
+	void takeDamage(int damage);
+	bool isDead();
+
+	virtual std::string getName();
+	virtual EntityType getType();
+	virtual void onCollision(GameObject& other);
+
+public: 
+	ColliderComponent _colliderComponent;
+
 private:
 	Sprite* _sprite;
+	HealthComponent _healthComponent;
+	PhysicsComponent _physicsComponent;
 
-	void handleCollisionX(CollidingObject& other);
-	void handleCollisionY(CollidingObject& other);
 };
 
 #endif //ENEMY_H

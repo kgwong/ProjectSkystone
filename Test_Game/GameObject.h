@@ -2,6 +2,13 @@
 #define GAMEOBJECT_H
 
 #include "Point.h"
+#include "Component.h"
+#include "EntityType.h"
+
+#include "ComponentType.h"
+
+#include <string>
+#include <iostream>
 
 class GameObject
 {
@@ -32,6 +39,12 @@ public:
 	Point getCenterPos() const;
 	int getCenterPosX() const;
 	int getCenterPosY() const;
+
+	//throw stuff
+	virtual Component* getComponent(ComponentType type);
+	virtual std::string getName() const;
+	virtual EntityType getType() const;
+	virtual void onCollision(GameObject& other) {};
 
 protected:
 	Point position;
