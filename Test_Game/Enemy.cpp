@@ -1,11 +1,9 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(GameWindow* gw, Sprite* s)
-	: _sprite(s)
+Enemy::Enemy(GameWindow* gw, Sprite* sprite)
+	: _sprite(sprite), _healthComponent(100)
 {
-	_healthComponent.initHealth(100); //
-
 	width = _sprite->getWidth();
 	height = _sprite->getHeight();
 }
@@ -41,7 +39,7 @@ std::string Enemy::getName()
 	return "Enemy";
 }
 
-EntityType Enemy::getType()
+EntityType Enemy::getType() const
 {
 	return ENEMY;
 }

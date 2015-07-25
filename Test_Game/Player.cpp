@@ -110,5 +110,8 @@ EntityType Player::getType() const
 
 void Player::onCollision(GameObject& other)
 {
-
+	if (other.getType() == PICKUP)
+	{
+		std::cout << "thing acquired! yay!" << std::endl;
+	}
 }

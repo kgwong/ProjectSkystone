@@ -16,7 +16,7 @@ class Enemy : public GameObject
 {
 public:
 	Enemy(GameWindow* gw, Sprite* sprite);
-	~Enemy();
+	virtual ~Enemy();
 
 	void update(LevelEntities& entities);
 	void render();
@@ -25,7 +25,7 @@ public:
 	bool isDead();
 
 	virtual std::string getName();
-	virtual EntityType getType();
+	virtual EntityType getType() const;
 	virtual void onCollision(GameObject& other);
 
 public: 

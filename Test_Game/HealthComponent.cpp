@@ -6,6 +6,12 @@ HealthComponent::HealthComponent()
 {
 }
 
+HealthComponent::HealthComponent(int initHealth)
+	:_health(initHealth)
+{
+
+}
+
 
 HealthComponent::~HealthComponent()
 {
@@ -16,10 +22,10 @@ void HealthComponent::update(GameObject& owner)
 
 }
 
-void HealthComponent::initHealth(int health)
+/*void HealthComponent::initHealth(int health)
 {
 	_health = health;
-}
+}*/
 
 void HealthComponent::takeDamage(int damage)
 {

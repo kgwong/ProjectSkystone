@@ -83,6 +83,7 @@
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="Pickup.h" />
     <ClInclude Include="PlayerProjectile.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="SpriteSheet.h" />

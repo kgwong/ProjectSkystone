@@ -4,8 +4,13 @@
 
 
 Level::Level(GameWindow* window, TileSet* tileSet) //
-	:_window(window), _tileSet(tileSet), enemySprite(window, "Enemies/enemy.png"), _tileSize(tileSet->getTileSize())
+	:_window(window), _tileSet(tileSet), 
+	enemySprite(window, "Enemies/enemy.png"), pickupSprite(window, "Pickups/pickup.png"),
+	_tileSize(tileSet->getTileSize())
 {
+	Pickup testPickup(_window, &pickupSprite);
+	testPickup.setPos(100, 100);
+	_entities.pickups.push_back(testPickup);
 
 	Enemy newEnemy(_window, &enemySprite);
 	newEnemy.setPos(660, 660);
@@ -63,6 +68,7 @@ void Level::update()
 	updatePlayer();
 	updatePlayerProjectiles();
 	updateEnemies();
+	updatePickups();
 }
 
 void Level::updateTiles()
@@ -79,40 +85,18 @@ void Level::updatePlayer()
 
 void Level::updatePlayerProjectiles()
 {
-	auto it = _entities.playerProjectiles.begin();
-	while (it != _entities.playerProjectiles.end())
-	{
-		if (it->isDead())
-		{
-			it = _entities.playerProjectiles.erase(it);
-		}
-		else
-		{
-			it->update(_entities);
-			++it;
-		}
-	}
+	updateEntityVector(_entities.playerProjectiles);
 }
-
-//similar code above and below...bad!
 
 void Level::updateEnemies()
 {
-	auto it = _entities.enemies.begin();
-	while (it != _entities.enemies.end())
-	{
-		if (it->isDead())
-		{
-			it = _entities.enemies.erase(it);
-		}
-		else
-		{
-			it->update(_entities);
-			++it;
-		}
-	}
+	updateEntityVector(_entities.enemies);
 }
 
+void Level::updatePickups()
+{
+	updateEntityVector(_entities.pickups);
+}
 
 void Level::render()
 {
@@ -121,11 +105,7 @@ void Level::render()
 	renderEnemies();
 	renderPlayerProjectiles();
 	renderPlayer();
-}
-
-void Level::renderPlayer()
-{
-	_entities.player->render();
+	renderPickups();
 }
 
 void Level::renderTiles() 
@@ -137,17 +117,24 @@ void Level::renderTiles()
 
 void Level::renderEnemies()
 {
-	for (auto i = _entities.enemies.begin(); i < _entities.enemies.end(); ++i)
-		i->render();
+	renderEntityVector(_entities.enemies);
 }
 
 void Level::renderPlayerProjectiles()
 {
-	for (auto i = _entities.playerProjectiles.begin(); i != _entities.playerProjectiles.end(); ++i)
-	{
-		i->render();
-	}
+	renderEntityVector(_entities.playerProjectiles);
 }
+
+void Level::renderPickups()
+{
+	renderEntityVector(_entities.pickups);
+}
+
+void Level::renderPlayer()
+{
+	_entities.player->render();
+}
+
 
 int Level::getLevelWidth() const
 {

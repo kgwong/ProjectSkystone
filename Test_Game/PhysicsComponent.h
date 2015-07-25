@@ -24,17 +24,17 @@ public:
 	void setAccelX(int accelX);
 	void setAccelY(int accelY);
 
-	int getVelX();
-	int getVelY();
-	int getAccelX();
-	int getAccelY();
+	int getVelX() const;
+	int getVelY() const;
+	int getAccelX() const;
+	int getAccelY() const;
 
-	bool isMovingUp();
-	bool isMovingDown();
-	bool isMovingLeft();
-	bool isMovingRight();
+	bool isMovingUp() const;
+	bool isMovingDown() const;
+	bool isMovingLeft() const;
+	bool isMovingRight() const;
 
-	bool isFalling(); 
+	bool isFalling() const; 
 
 	void enableGravity(bool gravity);
 
@@ -46,6 +46,7 @@ private:
 	bool _falling;
 
 	void updatePosition(GameObject& owner, Axis axis);
+	void updatePositionAfterCollision(GameObject& owner, LevelEntities& entities, ColliderComponent* collider, Axis axis);
 	void handleCollision(GameObject& owner, GameObject& other, ColliderComponent* collider, Axis axis);
 
 private:

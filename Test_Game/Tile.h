@@ -18,7 +18,7 @@ public:
 	void changeImage(SDL_Texture* newImage); //temp;
 	void render();
 
-	virtual EntityType getType();
+	virtual EntityType getType() const;
 
 public:
 	int tileType; //should probably replace with enum or something more meaningful, rather than just an index

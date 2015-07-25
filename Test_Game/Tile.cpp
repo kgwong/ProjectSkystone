@@ -43,7 +43,7 @@ void Tile::render()
 	SDL_RenderCopy(_window->renderer, _tileSetImage, &_tileRect, &_drawDestination);
 }	
 
-EntityType Tile::getType()
+EntityType Tile::getType() const
 {
 	return ENVIRONMENT;
 }
