@@ -19,10 +19,10 @@ public:
 	void render();
 
 	virtual EntityType getType() const;
+	virtual Component* getComponent(ComponentType type);
 
 public:
 	int tileType; //should probably replace with enum or something more meaningful, rather than just an index
-	ColliderComponent _colliderComponent;
 
 private:
 	GameWindow* _window; 
@@ -30,7 +30,7 @@ private:
 	SDL_Rect _tileRect;
 	SDL_Rect _drawDestination;
 
-
+	ColliderComponent _colliderComponent;
 
 };
 

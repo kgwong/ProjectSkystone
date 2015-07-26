@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+#include "LevelEntities.h"
+#include "Pickup.h"
 
 Enemy::Enemy(GameWindow* gw, Sprite* sprite)
 	: _sprite(sprite), _healthComponent(100)
@@ -32,6 +34,19 @@ void Enemy::takeDamage(int damage)
 bool Enemy::isDead()
 {
 	return _healthComponent.isDead();
+}
+
+void Enemy::onDeath(LevelEntities& entities)
+{
+	std::cout << "enemyDied!" << std::endl;
+	//entities.pickups.push_back(Pickup(_gw, new Sprite(_gw, "Pickups/pickup.png")));
+}
+
+Component* Enemy::getComponent(ComponentType type)
+{
+	if (type == COLLIDER)
+		return &_colliderComponent;
+	return nullptr;
 }
 
 std::string Enemy::getName()

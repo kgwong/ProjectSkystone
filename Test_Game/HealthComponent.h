@@ -13,7 +13,6 @@ public:
 
 	virtual void update(GameObject& owner);
 
-//	void initHealth(int health);
 	void takeDamage(int damage);
 	void heal(int addedHealth);
 

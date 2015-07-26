@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 
+struct LevelEntities;
+
 class GameObject
 {
 public:
@@ -45,6 +47,7 @@ public:
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(GameObject& other) {};
+	virtual void onDeath(LevelEntities& entities) {};
 
 protected:
 	Point position;

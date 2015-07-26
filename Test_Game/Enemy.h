@@ -8,7 +8,6 @@
 #include "GameWindow.h"
 #include "Sprite.h"
 
-
 struct LevelEntities;
 class PhysicsComponent;
 
@@ -25,16 +24,17 @@ public:
 	bool isDead();
 
 	virtual std::string getName();
+	virtual Component* getComponent(ComponentType type);
 	virtual EntityType getType() const;
 	virtual void onCollision(GameObject& other);
-
-public: 
-	ColliderComponent _colliderComponent;
+	virtual void onDeath(LevelEntities& entities);
 
 private:
+	GameWindow* _gw;
 	Sprite* _sprite;
 	HealthComponent _healthComponent;
 	PhysicsComponent _physicsComponent;
+	ColliderComponent _colliderComponent;
 
 };
 

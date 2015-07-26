@@ -7,7 +7,7 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 
-class Pickup :public GameObject
+class Pickup : public GameObject
 {
 public:
 	Pickup(GameWindow* gw, Sprite* sprite);

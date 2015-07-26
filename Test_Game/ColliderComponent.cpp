@@ -28,20 +28,26 @@ void ColliderComponent::update(GameObject& owner)
 	setCollider(owner.getPosX(), owner.getPosY(), owner.getWidth(), owner.getHeight());
 }
 
-bool ColliderComponent::checkCollision(ColliderComponent& other)
+bool ColliderComponent::checkCollision(GameObject& other)
 {
-	if (&other == this) return false; //do not detect collision with itself
+	return checkCollision( static_cast<ColliderComponent*> (other.getComponent(COLLIDER) ) );
+}
 
-	int topOther = other.collider.y;
+bool ColliderComponent::checkCollision(ColliderComponent* other)
+{
+	if (other == this) return false; //do not detect collision with itself
+	if (other == nullptr) return false; //no collision detected with nonexistant collider
+
+	int topOther = other->collider.y;
 	int topSelf = collider.y; 
 
-	int bottomOther = other.collider.y + other.collider.h;
+	int bottomOther = other->collider.y + other->collider.h;
 	int bottomSelf = collider.y + collider.h; 
 
-	int leftOther = other.collider.x;
+	int leftOther = other->collider.x;
 	int leftSelf = collider.x; 
 
-	int rightOther = other.collider.x + other.collider.w;
+	int rightOther = other->collider.x + other->collider.w;
 	int rightSelf = collider.x + collider.w; 
 
 	if (topSelf >= bottomOther)

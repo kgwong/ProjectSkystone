@@ -34,15 +34,14 @@ public:
 
 	void render();
 
-public:
-	ColliderComponent _colliderComponent;
-
 private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
 
+	GameWindow* _gw;
 	RenderComponent _renderComponent;
 	HealthComponent _healthComponent;
 	PhysicsComponent _physicsComponent;
+	ColliderComponent _colliderComponent;
 
 	Animation _animation;
 	Animation projectileAnimation;

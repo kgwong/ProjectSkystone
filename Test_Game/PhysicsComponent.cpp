@@ -140,7 +140,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEnti
 				{
 					Tile& tile = entities.tiles[y][x];
 
-					if(tile.tileType == 1 && tile._colliderComponent.checkCollision(*collider))
+					if(tile.tileType == 1 && collider->checkCollision(tile))
 						handleCollision(owner, tile, collider, axis);
 				}
 			}
@@ -150,21 +150,17 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEnti
 		{
 			for (auto enemyIter = entities.enemies.begin(); enemyIter < entities.enemies.end(); ++enemyIter)
 			{
-				if(enemyIter->_colliderComponent.checkCollision(*collider))
+				if(collider->checkCollision(*enemyIter))
 					handleCollision(owner, *enemyIter, collider, axis);
 			}
 		}
 
-		if (owner.getType() == PLAYER) //only player has collision with pickups
+		if (owner.getType() == PLAYER) //only player has collision with pickups 
 		{
 			for (auto pickupIter = entities.pickups.begin(); pickupIter < entities.pickups.end(); ++pickupIter)
 			{
-				Component* c = pickupIter->getComponent(COLLIDER);
-				ColliderComponent* cc = static_cast<ColliderComponent*>(c);
-				if (cc->checkCollision(*collider))
-				{
-					handleCollision(owner, *pickupIter, collider, axis);
-				}
+				if (collider->checkCollision(*pickupIter))
+					handleCollision(owner, *pickupIter, collider, axis); //make this a non-physical collision!
 			}
 		}
 	}

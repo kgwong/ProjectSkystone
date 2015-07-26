@@ -43,6 +43,13 @@ void Tile::render()
 	SDL_RenderCopy(_window->renderer, _tileSetImage, &_tileRect, &_drawDestination);
 }	
 
+Component* Tile::getComponent(ComponentType type)
+{
+	if (type == COLLIDER)
+		return &_colliderComponent;
+	return nullptr;
+}
+
 EntityType Tile::getType() const
 {
 	return ENVIRONMENT;

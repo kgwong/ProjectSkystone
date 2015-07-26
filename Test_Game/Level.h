@@ -70,6 +70,7 @@ void Level::updateEntityVector(std::vector<Entity>& v)
 	{
 		if (it->isDead())
 		{
+			it->onDeath(_entities);
 			it = v.erase(it);
 		}
 		else

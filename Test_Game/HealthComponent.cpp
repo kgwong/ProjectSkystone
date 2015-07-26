@@ -22,11 +22,6 @@ void HealthComponent::update(GameObject& owner)
 
 }
 
-/*void HealthComponent::initHealth(int health)
-{
-	_health = health;
-}*/
-
 void HealthComponent::takeDamage(int damage)
 {
 	_health -= damage;

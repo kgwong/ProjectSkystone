@@ -4,7 +4,7 @@
 
 Player::Player(GameWindow* gw)
 	:_renderComponent(gw), dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
-	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1),
+	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1), _gw(gw),
 	_shoot(false)
 {
 	_renderComponent.setAnimation(&_animation);

@@ -14,7 +14,8 @@ public:
 
 	virtual void update(GameObject& owner);
 
-	bool checkCollision(ColliderComponent& other); //maybe take a ColliderComponent* ?
+	bool checkCollision(GameObject& other);
+	bool checkCollision(ColliderComponent* other); //maybe take a ColliderComponent* ?
 
 
 private:

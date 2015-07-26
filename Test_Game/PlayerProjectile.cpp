@@ -33,14 +33,17 @@ bool PlayerProjectile::isDead()
 
 void PlayerProjectile::update(LevelEntities& entities)
 {
-	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, entities, &_colliderComponent);
-
+	//if (_alive)
+//	{
+		_colliderComponent.update(*this);
+		_physicsComponent.update(*this, entities, &_colliderComponent);
+	//}
 }
 
 void PlayerProjectile::render()
 {
-	_animation->renderFrame(position.x, position.y);
+	//if (_alive)
+		_animation->renderFrame(position.x, position.y);
 }
 
 void PlayerProjectile::onCollision(GameObject& other)

@@ -19,6 +19,7 @@ struct LevelEntities
 	std::vector<Enemy> enemies;
 	std::vector<PlayerProjectile> playerProjectiles;
 	std::vector<Pickup> pickups;
+
 };
 
 #endif //LEVELENTITIES_H
