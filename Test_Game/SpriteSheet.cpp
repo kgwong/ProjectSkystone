@@ -1,22 +1,16 @@
 #include "SpriteSheet.h"
 
-void calculateSpriteLocations(std::vector<SDL_Rect>& locations, 
-								int numSprites,
-								int spriteWidth,
-								int spriteHeight,
-								int spritesPerRow,
-								int spritesPerColumn,
-								int padding)
+void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo spritesheetInfo)
 {
-	for (int y = 0; y < spritesPerColumn && locations.size() < numSprites; ++y)
+	for (int y = 0; (y < spritesheetInfo.perColumn) && (locations.size() < spritesheetInfo.num); ++y) 
 	{
-		for (int x = 0; x < spritesPerRow && locations.size() < numSprites; ++x)
+		for (int x = 0; (x < spritesheetInfo.perRow) && (locations.size() < spritesheetInfo.num); ++x) 
 		{
 			SDL_Rect rect; //
-			rect.x = x * (spriteWidth + padding);
-			rect.y = y * (spriteHeight + padding);
-			rect.w = spriteWidth;
-			rect.h = spriteHeight;
+			rect.x = x * (spritesheetInfo.width + spritesheetInfo.padding);
+			rect.y = y * (spritesheetInfo.height + spritesheetInfo.padding);
+			rect.w = spritesheetInfo.width;
+			rect.h = spritesheetInfo.height;
 			locations.push_back(rect);
 		}
 	}

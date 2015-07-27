@@ -3,28 +3,30 @@
 #include "Resources.h"
 
 
-Level::Level(GameWindow* window, TileSet* tileSet) //
-	:_window(window), _tileSet(tileSet), 
-	enemySprite(window, "Enemies/enemy.png"), pickupSprite(window, "Pickups/pickup.png"),
+Level::Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator) //
+	:_window(window), _tileSet(tileSet), _resourceLocator(resourceLocator),
 	_tileSize(tileSet->getTileSize())
 {
-	Pickup testPickup(_window, &pickupSprite);
+	_entities.window = _window;
+	_entities.resourceLocator = _resourceLocator; //change this 
+
+	Pickup testPickup(_window, _resourceLocator->getSprite("Pickups/pickup.png"));
 	testPickup.setPos(100, 100);
 	_entities.pickups.push_back(testPickup);
 
-	Enemy newEnemy(_window, &enemySprite);
+	Enemy newEnemy(_window, _resourceLocator->getSprite("Enemies/enemy.png"));
 	newEnemy.setPos(660, 660);
 	_entities.enemies.push_back(newEnemy);
 
-	Enemy newEnemy1(_window, &enemySprite);
+	Enemy newEnemy1(_window,  _resourceLocator->getSprite("Enemies/enemy.png"));
 	newEnemy1.setPos(630, 660);
 	_entities.enemies.push_back(newEnemy1);
 
-	Enemy newEnemy2(_window, &enemySprite);
+	Enemy newEnemy2(_window,  _resourceLocator->getSprite("Enemies/enemy.png"));
 	newEnemy2.setPos(444, 444);
 	_entities.enemies.push_back(newEnemy2);
 
-	Enemy newEnemy3(_window, &enemySprite);
+	Enemy newEnemy3(_window,  _resourceLocator->getSprite("Enemies/enemy.png"));
 	newEnemy3.setPos(333, 333);
 	_entities.enemies.push_back(newEnemy3);
 

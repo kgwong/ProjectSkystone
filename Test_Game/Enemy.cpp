@@ -38,8 +38,7 @@ bool Enemy::isDead()
 
 void Enemy::onDeath(LevelEntities& entities)
 {
-	std::cout << "enemyDied!" << std::endl;
-	//entities.pickups.push_back(Pickup(_gw, new Sprite(_gw, "Pickups/pickup.png")));
+	entities.addPickupAtLocation(position);
 }
 
 Component* Enemy::getComponent(ComponentType type)

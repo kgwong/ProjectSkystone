@@ -4,13 +4,8 @@
 #include <vector>
 #include <SDL/SDL.h>
 
-void calculateSpriteLocations(std::vector<SDL_Rect>& locations, 
-								int numSprites,
-								int spriteWidth,
-								int spriteHeight,
-								int spritesPerRow,
-								int spritesPerColumn,
-								int padding);
+#include "SpritesheetInfo.h"
 
+void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo spritesheetInfo);
 
 #endif //SPRITESHEET_H

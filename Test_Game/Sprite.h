@@ -2,6 +2,7 @@
 #define SPRITE_H
 
 #include <string>
+#include <memory>
 
 #include <SDL/SDL_image.h>
 
@@ -9,10 +10,12 @@
 #include "Resources.h"
 #include "Point.h"
 
+
+
 class Sprite
 {
 public:
-	Sprite(GameWindow* window, const std::string& filepath);
+	Sprite(GameWindow* window, std::shared_ptr<SDL_Texture> texture);
 	~Sprite();
 
 	void setWidth(int w);
@@ -25,7 +28,7 @@ public:
 private:
 	GameWindow* _window;
 
-	SDL_Texture* _image;
+	std::shared_ptr<SDL_Texture> _texture;
 	SDL_Rect _drawDestination;
 
 	int _width;

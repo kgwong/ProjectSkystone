@@ -105,6 +105,9 @@
     <ClCompile Include="Pickup.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceLocator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -196,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Pickup.h">
       <Filter>Header Files\Entity Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpritesheetInfo.h">
+      <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

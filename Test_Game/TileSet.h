@@ -6,14 +6,14 @@
 #include "GameWindow.h"
 #include "Resources.h"
 #include "Tile.h"
+#include "SpritesheetInfo.h"
+
 
 class TileSet
 {
 public:
-	TileSet(GameWindow* window, const std::string& filepath, 
-			int numTiles, int tileSize, 
-			int tilesPerRow, int tilesPerColumn, 
-			int padding = 0);
+	TileSet(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
+			SpritesheetInfo spritesheetInfo);
 	~TileSet();
 
 	SDL_Texture* getImage();
@@ -26,7 +26,7 @@ public:
 private:
 	GameWindow* _window; //should probably change this later
 
-	SDL_Texture* _image;
+	std::shared_ptr<SDL_Texture> _texture;
 	std::vector<SDL_Rect> _tiles;
 
 	int _numTiles;

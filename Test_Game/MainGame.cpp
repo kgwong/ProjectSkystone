@@ -8,21 +8,21 @@ const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
 
 MainGame::MainGame()
-	:gw("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
-	player(&gw),
-	quit(false),
-	tileSet(&gw, "bw.png", 2, 40, 2, 1),
-	currLevel(&gw, &tileSet)
+	:_gw("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
+	_resourceLocator(&_gw),
+	_player(&_gw, &_resourceLocator),
+	_quit(false),
+	_currLevel(&_gw, _resourceLocator.getTileSet("bw.png"), &_resourceLocator)
 {
-	currLevel.load("LevelTest");
-	currLevel.setPlayer(&player);
+	_currLevel.load("LevelTest");
+	_currLevel.setPlayer(&_player);
 
-	musicPlayer.loadSong("tempSong.wav");
-	musicPlayer.play();
+	_musicPlayer.loadSong("tempSong.wav");
+	_musicPlayer.play();
 
-	gw.camera.setLevelBounds(currLevel.getLevelWidth(), currLevel.getLevelHeight());
+	_gw.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
 
-	player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
+	_player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
 }
 
 
@@ -32,7 +32,7 @@ MainGame::~MainGame()
 
 void MainGame::run()
 {
-	while (!quit)
+	while (!_quit)
 	{
 		processInput();
 		update();
@@ -48,10 +48,10 @@ void MainGame::processInput()
 		switch(e.type)
 		{
 			case SDL_QUIT:
-				quit = true;
+				_quit = true;
 			case SDL_KEYDOWN:
 				std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
-				player.handleInput(e);
+				_player.handleInput(e);
 				break;
 			case SDL_MOUSEMOTION:
 				std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
@@ -63,21 +63,21 @@ void MainGame::processInput()
 				break;
 		}
 	}
-	player.handleInput2();
+	_player.handleInput2();
 }
 
 void MainGame::update()
 {
-	//Sleep(20);
-	currLevel.update();
+	//Sleep(50);
+	_currLevel.update();
 }
 
 void MainGame::render()
 {
-	SDL_RenderClear(gw.renderer);
+	SDL_RenderClear(_gw.renderer);
 
-	gw.camera.followObject(player);
-	currLevel.render();
+	_gw.camera.followObject(_player);
+	_currLevel.render();
 
-	SDL_RenderPresent(gw.renderer);
+	SDL_RenderPresent(_gw.renderer);
 }

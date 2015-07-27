@@ -2,15 +2,14 @@
 
 #include "LevelEntities.h"
 
-Player::Player(GameWindow* gw)
-	:_renderComponent(gw), dir(RIGHT), _animation(gw, "playerAnimation.png", 4, 30, 60, 4, 1), 
-	projectileAnimation(gw, "playerProjectile.png", 2, 20, 10, 2, 1), _gw(gw),
+Player::Player(GameWindow* window, ResourceLocator* resourceLocator)
+	:_window(window), _renderComponent(_window), dir(RIGHT), _animation(resourceLocator->getAnimation("playerAnimation.png")), 
 	_shoot(false)
 {
-	_renderComponent.setAnimation(&_animation);
+	_renderComponent.setAnimation(_animation);
 
-	width = _animation.getWidth();
-	height = _animation.getHeight();
+	width = _animation->getWidth();
+	height = _animation->getHeight();
 }
 
 
@@ -85,7 +84,7 @@ void Player::jump()
 
 void Player::shoot(LevelEntities& entities)
 {
-	entities.playerProjectiles.push_back(PlayerProjectile(position, 30, &projectileAnimation, dir));
+	entities.addPlayerProjectileAtLocation(position, 30, dir);
 	_shoot = false;
 }
 

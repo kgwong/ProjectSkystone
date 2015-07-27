@@ -1,11 +1,11 @@
 #include "Sprite.h"
 
-Sprite::Sprite(GameWindow* window, const std::string& filepath)
-	:_window(window)
-{
-	_image = loadTexture(_window->renderer, filepath);
+#include "ResourceLocator.h"
 
-	SDL_QueryTexture(_image, NULL, NULL, &_width, &_height);
+Sprite::Sprite(GameWindow* window, std::shared_ptr<SDL_Texture> texture)
+	:_window(window), _texture(texture)
+{
+	SDL_QueryTexture(_texture.get(), NULL, NULL, &_width, &_height);
 
 	_drawDestination.w = _width;
 	_drawDestination.h = _height;
@@ -13,7 +13,6 @@ Sprite::Sprite(GameWindow* window, const std::string& filepath)
 
 Sprite::~Sprite()
 {
-	SDL_DestroyTexture(_image);
 }
 
 int Sprite::getWidth() const
@@ -44,5 +43,5 @@ void Sprite::render(int x, int y)
 	Point cameraPos = _window->camera.getPos();
 	_drawDestination.x = x - cameraPos.x;
 	_drawDestination.y = y - cameraPos.y;
-	SDL_RenderCopy(_window->renderer, _image, NULL, &_drawDestination);
+	SDL_RenderCopy(_window->renderer, _texture.get(), NULL, &_drawDestination);
 }

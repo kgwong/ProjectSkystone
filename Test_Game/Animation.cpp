@@ -2,27 +2,21 @@
 
 #include "SpriteSheet.h"
 
-Animation::Animation(GameWindow* window, const std::string& filepath, 
-					int numFrames, int frameWidth, int frameHeight,
-					int framesPerRow, int framesPerColumn, 
-					int padding)
-	: _window(window),  
-	  _numFrames(numFrames), 
-	  _width(frameWidth), _height(frameHeight),
+Animation::Animation(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
+					SpritesheetInfo spritesheetInfo)
+	: _window(window),  _texture(texture),
+	  _numFrames(spritesheetInfo.num), 
+	  _width(spritesheetInfo.width), _height(spritesheetInfo.height),
 	  _currFrame(0)
 {
-	_image = loadTexture(_window->renderer, filepath);
+	_drawDestination.w = _width;
+	_drawDestination.h = _height;
 
-	_drawDestination.w = frameWidth;
-	_drawDestination.h = frameHeight;
-
-	calculateSpriteLocations(_frames, numFrames, frameWidth, frameHeight, framesPerRow, framesPerColumn, padding);
+	calculateSpriteLocations(_frames, spritesheetInfo);
 }
-
 
 Animation::~Animation()
 {
-	SDL_DestroyTexture(_image);
 }
 
 int Animation::getWidth()
@@ -35,12 +29,17 @@ int Animation::getHeight()
 	return _height;
 }
 
+int Animation::getNumFrames()
+{
+	return _numFrames;
+}
+
 void Animation::renderFrame(int x, int y)
 {
 	Point cameraPos = _window->camera.getPos();
 	_drawDestination.x = x - cameraPos.x;
 	_drawDestination.y = y - cameraPos.y;
-	SDL_RenderCopy(_window->renderer, _image, &_frames[_currFrame], &_drawDestination);
+	SDL_RenderCopy(_window->renderer, _texture.get(), &_frames[_currFrame], &_drawDestination);
 	nextFrame();
 }
 

@@ -9,10 +9,14 @@
 #include "PlayerProjectile.h"
 #include "Pickup.h"
 
+#include "ResourceLocator.h"
+
 class Player;
 
 struct LevelEntities 
 {
+	GameWindow* window;
+	ResourceLocator* resourceLocator;
 	Player* player;
 	std::vector<std::vector<Tile>> tiles;
 	int tileSize;
@@ -20,6 +24,16 @@ struct LevelEntities
 	std::vector<PlayerProjectile> playerProjectiles;
 	std::vector<Pickup> pickups;
 
+	void addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
+	{
+		playerProjectiles.push_back( PlayerProjectile(position, vel, resourceLocator->getAnimation("playerProjectile.png"), dir) );
+	};
+
+	void addPickupAtLocation(Point position)
+	{
+		pickups.push_back(Pickup(window, resourceLocator->getSprite("Pickups/pickup.png")));
+		pickups.back().setPos(position);
+	};
 };
 
 #endif //LEVELENTITIES_H

@@ -1,25 +1,21 @@
 #include "TileSet.h"
+
 #include "SpriteSheet.h"
 
-TileSet::TileSet(GameWindow* window, const std::string& filepath, 
-					int numTiles, int tileSize, 
-					int tilesPerRow, int tilesPerColumn, 
-					int padding)
-	: _window(window), _numTiles(numTiles), _tileSize(tileSize)
+TileSet::TileSet(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
+					SpritesheetInfo spritesheetInfo)
+	: _window(window), _texture(texture), _numTiles(spritesheetInfo.num), _tileSize(spritesheetInfo.width)
 {
-	_image = loadTexture(window->renderer, filepath);
-	
-	calculateSpriteLocations(_tiles, numTiles, tileSize, tileSize, tilesPerRow, tilesPerColumn, padding);
+	calculateSpriteLocations(_tiles, spritesheetInfo);
 }
 
 TileSet::~TileSet()
 {
-	SDL_DestroyTexture(_image);
 }
 
 SDL_Texture* TileSet::getImage()
 {
-	return _image;
+	return _texture.get();
 }
 
 SDL_Rect TileSet::getTile(int tileIndex)
@@ -29,7 +25,7 @@ SDL_Rect TileSet::getTile(int tileIndex)
 
 Tile TileSet::createTile(int tileIndex, int x, int y)
 {
-	return Tile(_window, _image, _tiles[tileIndex], tileIndex, x, y, _tileSize);
+	return Tile(_window, _texture.get(), _tiles[tileIndex], tileIndex, x, y, _tileSize);
 }
 
 int TileSet::getTileSize()

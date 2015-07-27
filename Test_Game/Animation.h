@@ -1,18 +1,17 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include <vector>
+
 #include "GameWindow.h"
 #include "Resources.h"
-
-#include <vector>
+#include "SpritesheetInfo.h"
 
 class Animation
 {
 public:
-	Animation(GameWindow* window, const std::string& filepath, 
-		int numFrames, int width, int height, 
-		int framesPerRow, int framesPerColumn, 
-		int padding = 0); //change to smaller constructor.... read image data from a seperate file instead?
+	Animation(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
+		SpritesheetInfo spritesheetInfo); //change to smaller constructor.... read image data from a seperate file instead?
 	~Animation();
 
 	void renderFrame(int x, int y);
@@ -20,10 +19,12 @@ public:
 	int getWidth();
 	int getHeight();
 
+	int getNumFrames();
+
 private:
 	GameWindow* _window;
 
-	SDL_Texture* _image;
+	std::shared_ptr<SDL_Texture> _texture;
 	std::vector<SDL_Rect> _frames;
 
 	int _numFrames;

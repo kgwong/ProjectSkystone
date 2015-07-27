@@ -17,6 +17,7 @@
 #include "Camera.h"
 #include "TileSet.h"
 #include "Level.h"
+#include "ResourceLocator.h"
 
 
 class MainGame
@@ -27,16 +28,16 @@ public:
 
 	void run();
 
-
 private:
-	GameWindow gw;
-	MusicPlayer musicPlayer;
-	TileSet tileSet;
-	Level currLevel;
+	GameWindow _gw;
+	ResourceLocator _resourceLocator;
 
-	Player player;
+	MusicPlayer _musicPlayer;
+	Level _currLevel;
 
-	bool quit;
+	Player _player;
+
+	bool _quit;
 
 private: 
 	void processInput();

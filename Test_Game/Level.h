@@ -12,10 +12,12 @@
 #include "GameWindow.h"
 #include "LevelEntities.h"
 
+#include "ResourceLocator.h"
+
 class Level
 {
 public:
-	Level(GameWindow* window, TileSet* tileSet);
+	Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator);
 	~Level();
 
 	void load(const std::string& filepath);
@@ -30,10 +32,9 @@ public:
 	int getTileSize() const;
 
 private:
+	ResourceLocator* _resourceLocator;
 	LevelEntities _entities;
 
-	Sprite enemySprite; //
-	Sprite pickupSprite; //
 	GameWindow* _window;
 	TileSet* _tileSet;
 
