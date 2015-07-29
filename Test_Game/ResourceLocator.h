@@ -34,14 +34,14 @@ public:
 	Animation* getAnimation(const std::string& basename);
 	TileSet* getTileSet(const std::string& basename);
 
-private:
 	std::string getFullPath(const std::string& basename);
-	std::shared_ptr<SDL_Texture> loadTexture(SDL_Renderer* renderer, const std::string& basename);
+	std::shared_ptr<SDL_Texture> loadTexture(SDL_Renderer* renderer, const std::string& fullpath);
 
 private:
 	GameWindow* _gw;
 
-	std::string _assetsPath;
+	std::string _basePath;
+
 	std::unordered_map<std::string, Sprite> _resources; 
 	std::unordered_map<std::string, Animation> _animations;
 	std::unordered_map<std::string, TileSet> _tileSets;

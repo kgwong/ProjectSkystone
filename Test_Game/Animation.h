@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "GameWindow.h"
-#include "Resources.h"
 #include "SpritesheetInfo.h"
 
 class Animation

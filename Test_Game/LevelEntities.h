@@ -26,12 +26,12 @@ struct LevelEntities
 
 	void addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
 	{
-		playerProjectiles.push_back( PlayerProjectile(position, vel, resourceLocator->getAnimation("playerProjectile.png"), dir) );
+		playerProjectiles.push_back( PlayerProjectile(position, vel, resourceLocator->getAnimation("Assets/Animations/playerProjectile.png"), dir) );
 	};
 
 	void addPickupAtLocation(Point position)
 	{
-		pickups.push_back(Pickup(window, resourceLocator->getSprite("Pickups/pickup.png")));
+		pickups.push_back(Pickup(window, resourceLocator->getSprite("Assets/Pickups/pickup.png")));
 		pickups.back().setPos(position);
 	};
 };

@@ -3,7 +3,7 @@
 #include "LevelEntities.h"
 
 Player::Player(GameWindow* window, ResourceLocator* resourceLocator)
-	:_window(window), _renderComponent(_window), dir(RIGHT), _animation(resourceLocator->getAnimation("playerAnimation.png")), 
+	:_window(window), _renderComponent(_window), dir(RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")), 
 	_shoot(false)
 {
 	_renderComponent.setAnimation(_animation);

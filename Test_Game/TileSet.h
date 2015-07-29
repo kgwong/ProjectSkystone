@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "GameWindow.h"
-#include "Resources.h"
 #include "Tile.h"
 #include "SpritesheetInfo.h"
 

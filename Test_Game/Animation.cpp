@@ -9,6 +9,17 @@ Animation::Animation(GameWindow* window, std::shared_ptr<SDL_Texture> texture,
 	  _width(spritesheetInfo.width), _height(spritesheetInfo.height),
 	  _currFrame(0)
 {
+	if (spritesheetInfo.num == 0) //failure
+	{ //workaround for _frames vector not having a 0th element 
+		SDL_Rect dummy;
+		dummy.x = 0;
+		dummy.y = 0;
+		dummy.w = 0;
+		dummy.h = 0;
+		_frames.push_back(dummy);
+		return; //don't waste time in constructor for a fail
+	}
+
 	_drawDestination.w = _width;
 	_drawDestination.h = _height;
 

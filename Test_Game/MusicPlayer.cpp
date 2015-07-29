@@ -14,7 +14,7 @@ MusicPlayer::~MusicPlayer()
 
 void MusicPlayer::loadSong(const std::string& filepath)
 {
-	song = Mix_LoadMUS(getAssetsPath(filepath).c_str());
+	song = Mix_LoadMUS(filepath.c_str());
 
 	if (song == nullptr)
 		MySDL_Error("song failed to load");
@@ -28,7 +28,7 @@ void MusicPlayer::play()
 
 bool MusicPlayer::isPlaying()
 {
-	return (bool)Mix_PlayingMusic();
+	return Mix_PlayingMusic() != 0;
 }
 
 void MusicPlayer::pause()

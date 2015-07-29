@@ -1,5 +1,6 @@
 #include "ResourceLocator.h"
 
+#include "SpritesheetInfoReader.h"
 #include "Sprite.h"
 
 ResourceLocator::ResourceLocator(GameWindow* gw)
@@ -8,16 +9,12 @@ ResourceLocator::ResourceLocator(GameWindow* gw)
 	char* basePath = SDL_GetBasePath(); //SDL_GetBasePath() should only be called once
 
 	std::string base = basePath;
-	SDL_free(basePath); 
+	SDL_free(basePath);  
 
 	base.pop_back();
 	size_t pos = base.rfind('\\'); //
-	_assetsPath = base.substr(0, pos) + '/' + "Assets" + '/';
-
-	std::shared_ptr<std::string> ptr(new std::string());
-
+	_basePath = base.substr(0, pos) + '/';
 }
-
 
 ResourceLocator::~ResourceLocator()
 {
@@ -25,47 +22,42 @@ ResourceLocator::~ResourceLocator()
 
 std::string ResourceLocator::getFullPath(const std::string& basename)
 {
-	return _assetsPath + basename;	
+	return _basePath + basename;	
 }
 
-std::shared_ptr<SDL_Texture> ResourceLocator::loadTexture(SDL_Renderer* renderer, const std::string& basename)
+std::shared_ptr<SDL_Texture> ResourceLocator::loadTexture(SDL_Renderer* renderer, const std::string& fullpath)
 {
-	std::cout << "Loading Texture: " << getFullPath(basename) << std::endl; //
+	std::cout << "Loading Texture: " << fullpath << std::endl; //
 
-	SDL_Texture* texture = IMG_LoadTexture(renderer, getFullPath(basename).c_str());
+	SDL_Texture* texture = IMG_LoadTexture(renderer, fullpath.c_str());
 	if (texture == nullptr)
-		MySDL_Error("LoadTexture (" + basename + ")");
+		MySDL_Error("LoadTexture (" + fullpath + ")");
 	return std::shared_ptr<SDL_Texture>(texture, TextureDestroyer());
 }
 
+
+//lots of repeat here
 Sprite* ResourceLocator::getSprite(const std::string& basename)
 {
+	std::string fullpath = getFullPath(basename);
 	//better way to do this?
-	if (_resources.count(basename) == 0)
-	{
-		_resources.insert( std::make_pair( basename, Sprite(_gw, loadTexture(_gw->renderer, basename)) ) );
-	}
-	return &_resources.at(basename);
+	if (_resources.count(fullpath) == 0)
+		_resources.insert( std::make_pair( fullpath, Sprite(_gw, loadTexture(_gw->renderer, fullpath)) ) );
+	return &_resources.at(fullpath);
 }
 
 Animation* ResourceLocator::getAnimation(const std::string& basename)
 {
-	if (_animations.count(basename) == 0)
-	{
-		if (basename == "playerAnimation.png")//
-			_animations.insert( std::make_pair( basename, Animation( _gw, loadTexture(_gw->renderer, basename), SpritesheetInfo(4, 30, 60, 4, 1) ) ) );
-		else if (basename == "playerProjectile.png")
-			_animations.insert( std::make_pair( basename, Animation( _gw, loadTexture(_gw->renderer, basename), SpritesheetInfo(2, 20, 10, 2, 1) ) ) );
-	}
-	return &_animations.at(basename);
+	std::string fullpath = getFullPath(basename);
+	if (_animations.count(fullpath) == 0)
+		_animations.insert( std::make_pair( fullpath, Animation( _gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info() ) ) );
+	return &_animations.at(fullpath);
 }
 
 TileSet* ResourceLocator::getTileSet(const std::string& basename)
 {
-	if (_tileSets.count(basename) == 0)
-	{
-		if (basename == "bw.png")//
-			_tileSets.insert( std::make_pair( basename, TileSet( _gw, loadTexture(_gw->renderer, basename), SpritesheetInfo(2, 40, 40, 2, 1) ) ) );
-	}
-	return &_tileSets.at(basename);
+	std::string fullpath = getFullPath(basename);
+	if (_tileSets.count(fullpath) == 0)
+		_tileSets.insert( std::make_pair( fullpath, TileSet( _gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info() ) ) );
+	return &_tileSets.at(fullpath);
 }

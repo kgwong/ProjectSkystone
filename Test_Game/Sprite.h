@@ -7,10 +7,7 @@
 #include <SDL/SDL_image.h>
 
 #include "GameWindow.h"
-#include "Resources.h"
 #include "Point.h"
-
-
 
 class Sprite
 {

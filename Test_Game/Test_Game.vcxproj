@@ -92,8 +92,8 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpritesheetInfoReader.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
   </ItemGroup>
@@ -125,9 +125,9 @@
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="Resources.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpritesheetInfo.h" />
+    <ClInclude Include="SpritesheetInfoReader.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
   </ItemGroup>

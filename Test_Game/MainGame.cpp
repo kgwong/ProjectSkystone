@@ -1,7 +1,5 @@
 #include "MainGame.h"
 
-#include "Resources.h"
-
 #include <windows.h> // for "sleep"
 
 const int SCREEN_WIDTH  = 640;
@@ -12,12 +10,12 @@ MainGame::MainGame()
 	_resourceLocator(&_gw),
 	_player(&_gw, &_resourceLocator),
 	_quit(false),
-	_currLevel(&_gw, _resourceLocator.getTileSet("bw.png"), &_resourceLocator)
+	_currLevel(&_gw, _resourceLocator.getTileSet("Assets/TileSets/bw.png"), &_resourceLocator)
 {
-	_currLevel.load("LevelTest");
+	_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"));
 	_currLevel.setPlayer(&_player);
 
-	_musicPlayer.loadSong("tempSong.wav");
+	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
 
 	_gw.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());

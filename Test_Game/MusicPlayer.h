@@ -5,7 +5,6 @@
 
 #include <string>
 
-#include "Resources.h"
 #include "Errors.h"
 
 class MusicPlayer
