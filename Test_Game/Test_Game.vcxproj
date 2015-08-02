@@ -82,6 +82,7 @@
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpritesheetInfoReader.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileArrangement.cpp" />
     <ClCompile Include="TileSet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +112,11 @@
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="LevelEntities.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PlayerProjectile.h" />
@@ -129,6 +131,7 @@
     <ClInclude Include="SpritesheetInfo.h" />
     <ClInclude Include="SpritesheetInfoReader.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileArrangement.h" />
     <ClInclude Include="TileSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

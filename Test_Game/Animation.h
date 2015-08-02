@@ -10,10 +10,10 @@ class Animation
 {
 public:
 	Animation(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
-		SpritesheetInfo spritesheetInfo); //change to smaller constructor.... read image data from a seperate file instead?
+		SpritesheetInfo spritesheetInfo);
 	~Animation();
 
-	void renderFrame(int x, int y);
+	void renderFrame(Point renderPosition, int frameIndex);
 	
 	int getWidth();
 	int getHeight();
@@ -27,15 +27,13 @@ private:
 	std::vector<SDL_Rect> _frames;
 
 	int _numFrames;
-	int _currFrame;
 
 	int _width;
 	int _height;
 
 	SDL_Rect _drawDestination;
 
-private:
-	void nextFrame();
+	bool _valid;
 };
 
 #endif //ANIMATION_H

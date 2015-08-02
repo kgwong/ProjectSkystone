@@ -18,9 +18,8 @@ namespace
 
 
 SpritesheetInfoReader::SpritesheetInfoReader(const std::string& fullPath)
-	:_fullPath(fullPath)
+	:_fullPath(fullPath), _infoPath(fullPath.substr(0, fullPath.rfind('.')) + ".info")
 {
-	_infoPath = fullPath.substr(0, fullPath.rfind('.')) + ".info";
 }
 
 SpritesheetInfo SpritesheetInfoReader::info()
@@ -41,7 +40,7 @@ SpritesheetInfo SpritesheetInfoReader::info()
 	catch ( ... )
 	{
 		std::cout << "Failed to read '" << _infoPath << '\'' << std::endl; 
-		return SpritesheetInfo(0, 0, 0, 0, 0, 0); //dummy info
+		return SpritesheetInfo(-1, -1, -1, -1, -1, -1); //dummy info
 	}
 
 	bool fail = false; //this is dumb 
@@ -52,7 +51,7 @@ SpritesheetInfo SpritesheetInfoReader::info()
 	mapContains(loadedValues, "spritesPerCol", fail);
 	mapContains(loadedValues, "padding", fail);
 
-	return fail ? SpritesheetInfo(0, 0, 0, 0, 0, 0):	
+	return fail ? SpritesheetInfo(-1, -1, -1, -1, -1, -1):	
 					SpritesheetInfo(loadedValues["numSprites"], 
 									loadedValues["spriteWidth"],
 									loadedValues["spriteHeight"],

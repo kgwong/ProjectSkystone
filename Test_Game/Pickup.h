@@ -10,10 +10,10 @@
 class Pickup : public GameObject
 {
 public:
-	Pickup(GameWindow* gw, Sprite* sprite);
+	Pickup(Sprite* sprite);
 	virtual ~Pickup();
 
-	void update(LevelEntities& entities);
+	void update(Level& level);
 	void render();
 
 	bool isDead();

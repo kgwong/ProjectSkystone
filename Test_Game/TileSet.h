@@ -17,7 +17,7 @@ public:
 
 	SDL_Texture* getImage();
 	SDL_Rect getTile(int tileIndex);
-	Tile createTile(int tileIndex, int x, int y);
+	Tile createTile(int tileIndex, int r, int c);
 
 	int getTileSize();
 	int getNumTiles();

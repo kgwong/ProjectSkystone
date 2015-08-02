@@ -108,6 +108,12 @@
     <ClCompile Include="SpritesheetInfoReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileArrangement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -155,12 +161,6 @@
     <ClInclude Include="Point.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
-    <ClInclude Include="LevelEntities.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentType.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
     <ClInclude Include="ColliderComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
@@ -205,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="SpritesheetInfoReader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentType.h">
+      <Filter>Header Files\Enum Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TileArrangement.h">
+      <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

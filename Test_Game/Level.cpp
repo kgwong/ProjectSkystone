@@ -1,33 +1,16 @@
 #include "Level.h"
 
-Level::Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator) //
-	:_window(window), _tileSet(tileSet), _resourceLocator(resourceLocator),
-	_tileSize(tileSet->getTileSize())
+#include "LevelLoader.h"
+
+Level::Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator) 
+	:_window(window), _tileSet(tileSet), _resourceLocator(resourceLocator)
 {
-	_entities.window = _window;
-	_entities.resourceLocator = _resourceLocator; //change this 
+	addPickupAtLocation(Point(100, 100));
 
-	Pickup testPickup(_window, _resourceLocator->getSprite("Assets/Pickups/pickup.png"));
-	testPickup.setPos(100, 100);
-	_entities.pickups.push_back(testPickup);
-
-	Enemy newEnemy(_window, _resourceLocator->getSprite("Assets/Enemies/enemy.png"));
-	newEnemy.setPos(660, 660);
-	_entities.enemies.push_back(newEnemy);
-
-	Enemy newEnemy1(_window, _resourceLocator->getSprite("Assets/Enemies/enemy.png"));
-	newEnemy1.setPos(630, 660);
-	_entities.enemies.push_back(newEnemy1);
-
-	Enemy newEnemy2(_window, _resourceLocator->getSprite("Assets/Enemies/enemy.png"));
-	newEnemy2.setPos(444, 444);
-	_entities.enemies.push_back(newEnemy2);
-
-	Enemy newEnemy3(_window, _resourceLocator->getSprite("Assets/Enemies/enemy.png"));
-	newEnemy3.setPos(333, 333);
-	_entities.enemies.push_back(newEnemy3);
-
-	_entities.tileSize = tileSet->getTileSize();
+	addEnemyAtLocation(Point(660, 660));
+	addEnemyAtLocation(Point(630, 660));
+	addEnemyAtLocation(Point(444, 444));
+	addEnemyAtLocation(Point(333, 333));
 }
 
 
@@ -35,31 +18,34 @@ Level::~Level()
 {
 }
 
-void Level::load(const std::string& filepath) //should probably make anothe class for this
+void Level::load(const std::string& filepath)
 {
-	std::ifstream map(filepath); //should probably do more error checking
-	if (map == nullptr)
-		std::cout << "Loading Level failed!" << std::endl;
-
-	map >> _numTilesWide >> _numTilesHigh;
-
-	_entities.tiles = std::vector<std::vector<Tile>>(_numTilesHigh, std::vector<Tile>(_numTilesWide));
-
-	for (int y = 0; y < _numTilesHigh; ++y)
-	{
-		for (int x = 0; x < _numTilesWide; ++x)
-		{
-			int tileNum;
-			map >> tileNum;
-			_entities.tiles[y][x] = _tileSet->createTile(tileNum, x, y);
-		}
-	}
+	tileArrangement = LevelLoader::load(filepath, _tileSet);
 }
 
-void Level::setPlayer(Player* player)
+void Level::setPlayer(Player* p)
 {
-	_entities.player = player;
+	player = p;
 }
+
+void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
+{
+	playerProjectiles.push_back( PlayerProjectile(position, vel, _resourceLocator->getAnimation("Assets/Animations/playerProjectile.png"), dir) );
+};
+
+void Level::addPickupAtLocation(Point position)
+{
+	Pickup pickup(_resourceLocator->getSprite("Assets/Pickups/pickup.png"));
+	pickup.setPos(position);
+	pickups.push_back(pickup);
+};
+
+void Level::addEnemyAtLocation(Point position)
+{
+	Enemy enemy(_resourceLocator->getSprite("Assets/Enemies/enemy.png"));
+	enemy.setPos(position);
+	enemies.push_back(enemy);
+};
 
 void Level::update()
 {
@@ -72,29 +58,29 @@ void Level::update()
 
 void Level::updateTiles()
 {
-	for (int y = 0; y < _numTilesHigh; ++y)
-		for (int x = 0; x < _numTilesWide; ++x)
-			_entities.tiles[y][x].update();
+	for (int r = 0; r < tileArrangement._rows; ++r)
+		for (int c = 0; c < tileArrangement._cols; ++c)
+			tileArrangement._tiles[r][c].update();
 }
 
 void Level::updatePlayer()
 {
-	_entities.player->update(_entities);
+	player->update(*this);
 }
 
 void Level::updatePlayerProjectiles()
 {
-	updateEntityVector(_entities.playerProjectiles);
+	updateEntityVector(playerProjectiles);
 }
 
 void Level::updateEnemies()
 {
-	updateEntityVector(_entities.enemies);
+	updateEntityVector(enemies);
 }
 
 void Level::updatePickups()
 {
-	updateEntityVector(_entities.pickups);
+	updateEntityVector(pickups);
 }
 
 void Level::render()
@@ -109,43 +95,37 @@ void Level::render()
 
 void Level::renderTiles() 
 {
-	for (int y = 0; y < _numTilesHigh; ++y)
-		for (int x = 0; x < _numTilesWide; ++x)
-			_entities.tiles[y][x].render();
+	for (int r = 0; r < tileArrangement._rows; ++r)
+		for (int c = 0; c < tileArrangement._cols; ++c)
+			tileArrangement._tiles[r][c].render();
 }
 
 void Level::renderEnemies()
 {
-	renderEntityVector(_entities.enemies);
+	renderEntityVector(enemies);
 }
 
 void Level::renderPlayerProjectiles()
 {
-	renderEntityVector(_entities.playerProjectiles);
+	renderEntityVector(playerProjectiles);
 }
 
 void Level::renderPickups()
 {
-	renderEntityVector(_entities.pickups);
+	renderEntityVector(pickups);
 }
 
 void Level::renderPlayer()
 {
-	_entities.player->render();
+	player->render();
 }
-
 
 int Level::getLevelWidth() const
 {
-	return _numTilesWide * _tileSet->getTileSize();
+	return tileArrangement._cols * tileArrangement._tileSize;
 }
 
 int Level::getLevelHeight() const
 {
-	return _numTilesHigh * _tileSet->getTileSize();
-}
-
-int Level::getTileSize() const
-{
-	return _tileSize;
+	return tileArrangement._rows * tileArrangement._tileSize;
 }

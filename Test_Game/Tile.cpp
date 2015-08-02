@@ -9,11 +9,11 @@ Tile::Tile(GameWindow* window,
 			SDL_Texture* tileSetImage, 
 			SDL_Rect tileRect, 
 			int tileType, 
-			int x, int y, int size)
+			int r, int c, int size)
 	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), tileType(tileType)
 {
-	position.x = x * size;
-	position.y = y * size;
+	position.x = c * size;
+	position.y = r * size;
 	width = size;
 	height = size;
 	_drawDestination.w = size;

@@ -11,7 +11,7 @@ class Tile : public GameObject
 {
 public:
 	Tile();
-	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, int tileType, int x, int y, int size);
+	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, int tileType, int r, int c, int size);
 	~Tile();
 
 	void update();

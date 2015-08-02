@@ -20,3 +20,8 @@ void MySDL_Error(const std::string& message)
 	std::cin.ignore();
 	throw FailureException();
 }
+
+void printCoord(int x, int y)
+{
+	std::cout << "(" << x << ", " << y << ")" << std::endl;
+}

@@ -8,16 +8,16 @@
 #include "GameWindow.h"
 #include "Sprite.h"
 
-struct LevelEntities;
+class Level;
 class PhysicsComponent;
 
 class Enemy : public GameObject
 {
 public:
-	Enemy(GameWindow* gw, Sprite* sprite);
+	Enemy(Sprite* sprite);
 	virtual ~Enemy();
 
-	void update(LevelEntities& entities);
+	void update(Level& level);
 	void render();
 
 	void takeDamage(int damage);
@@ -27,7 +27,7 @@ public:
 	virtual Component* getComponent(ComponentType type);
 	virtual EntityType getType() const;
 	virtual void onCollision(GameObject& other);
-	virtual void onDeath(LevelEntities& entities);
+	virtual void onDeath(Level& level);
 
 private:
 	GameWindow* _gw;

@@ -7,8 +7,7 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "DamageComponent.h"
-
-struct LevelEntities;
+#include "RenderComponent.h"
 
 class PlayerProjectile : public GameObject
 {
@@ -17,7 +16,7 @@ public:
 	~PlayerProjectile();
 
 	bool isDead();
-	void update(LevelEntities& entities);
+	void update(Level& level);
 	void render();
 
 	Component* getComponent(ComponentType type);
@@ -28,6 +27,7 @@ public:
 private:
 	bool _alive;
 	Animation* _animation;
+	RenderComponent _renderComponent;
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
 	DamageComponent _damageComponent;

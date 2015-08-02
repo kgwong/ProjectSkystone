@@ -10,9 +10,7 @@
 
 #include "Errors.h"
 #include "GameWindow.h"
-#include "Sprite.h"
 #include "Player.h"
-#include "Animation.h"
 #include "MusicPlayer.h"
 #include "Camera.h"
 #include "TileSet.h"

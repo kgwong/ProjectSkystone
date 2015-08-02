@@ -9,17 +9,18 @@
 class RenderComponent
 {
 public:
-	RenderComponent(GameWindow* gameWindow);
+	RenderComponent(Animation* animation);
 	virtual ~RenderComponent();
-
-	void setAnimation(Animation* animation);
 
 	virtual void update(GameObject& owner);
 	
 
 private:
-	GameWindow* _window;
 	Animation* _animation;
+	int _currFrame;
+
+private:
+	void incrementFrame();
 };
 
 #endif //RENDERCOMPONENT_H

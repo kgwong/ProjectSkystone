@@ -1,16 +1,14 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <fstream>
-
+#include "GameWindow.h"
 #include "Player.h"
 #include "Tile.h"
 #include "Enemy.h"
 #include "PlayerProjectile.h"
 #include "TileSet.h"
-#include "Sprite.h"
-#include "GameWindow.h"
-#include "LevelEntities.h"
+#include "TileArrangement.h"
+#include "Pickup.h"
 
 #include "ResourceLocator.h"
 
@@ -29,19 +27,21 @@ public:
 	int getLevelWidth() const;
 	int getLevelHeight() const;
 
-	int getTileSize() const;
+	void addPlayerProjectileAtLocation(Point position, int vel, Direction dir);
+	void addPickupAtLocation(Point position);
+	void addEnemyAtLocation(Point position);
+
+public:
+	Player* player;
+	TileArrangement tileArrangement;
+	std::vector<Enemy> enemies;
+	std::vector<PlayerProjectile> playerProjectiles;
+	std::vector<Pickup> pickups;
 
 private:
-	ResourceLocator* _resourceLocator;
-	LevelEntities _entities;
-
 	GameWindow* _window;
+	ResourceLocator* _resourceLocator;
 	TileSet* _tileSet;
-
-	int _tileSize;
-
-	int _numTilesWide;
-	int _numTilesHigh;
 
 private:
 	void updateTiles();
@@ -71,12 +71,12 @@ void Level::updateEntityVector(std::vector<Entity>& v)
 	{
 		if (it->isDead())
 		{
-			it->onDeath(_entities);
+			it->onDeath(*this);
 			it = v.erase(it);
 		}
 		else
 		{
-			it->update(_entities);
+			it->update(*this);
 			++it;
 		}
 	}

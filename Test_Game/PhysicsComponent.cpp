@@ -1,7 +1,7 @@
 #include "PhysicsComponent.h"
 
 #include "GameObject.h"
-#include "LevelEntities.h"
+#include "Level.h"
 
 PhysicsComponent::PhysicsComponent()
 	:_velX(0), _velY(0),
@@ -16,13 +16,13 @@ PhysicsComponent::~PhysicsComponent()
 }
 
 
-void PhysicsComponent::update(GameObject& owner, LevelEntities& entities, ColliderComponent* collider)
+void PhysicsComponent::update(GameObject& owner, Level& level, ColliderComponent* collider)
 {
 	updatePosition(owner, X_AXIS);
-	updatePositionAfterCollision(owner, entities, collider, X_AXIS);
+	updatePositionAfterCollision(owner, level, collider, X_AXIS);
 
 	updatePosition(owner, Y_AXIS);
-	updatePositionAfterCollision(owner, entities, collider, Y_AXIS);
+	updatePositionAfterCollision(owner, level, collider, Y_AXIS);
 }
 
 void PhysicsComponent::enableGravity(bool gravity)
@@ -126,7 +126,7 @@ void PhysicsComponent::updatePosition(GameObject& owner, Axis axis)
 	}
 }
 
-void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEntities& entities, ColliderComponent* collider, Axis axis)
+void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis)
 {
 	if (collider)
 	{
@@ -134,11 +134,11 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEnti
 
 		if (owner.getType() != ENVIRONMENT)
 		{
-			for (int x = owner.getPosX()/entities.tileSize; x <= (owner.getPosX()+owner.getWidth())/entities.tileSize; ++x)
+			for (int c = owner.getPosX()/level.tileArrangement._tileSize; c <= (owner.getPosX()+owner.getWidth())/level.tileArrangement._tileSize; ++c)
 			{
-				for(int y = owner.getPosY()/entities.tileSize; y <= (owner.getPosY()+owner.getHeight())/entities.tileSize; ++y)
+				for(int r = owner.getPosY()/level.tileArrangement._tileSize; r <= (owner.getPosY()+owner.getHeight())/level.tileArrangement._tileSize; ++r)
 				{
-					Tile& tile = entities.tiles[y][x];
+					Tile& tile = level.tileArrangement._tiles[r][c];
 
 					if(tile.tileType == 1 && collider->checkCollision(tile))
 						handleCollision(owner, tile, collider, axis);
@@ -148,7 +148,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEnti
 
 		if (owner.getType() != ENEMY)
 		{
-			for (auto enemyIter = entities.enemies.begin(); enemyIter < entities.enemies.end(); ++enemyIter)
+			for (auto enemyIter = level.enemies.begin(); enemyIter < level.enemies.end(); ++enemyIter)
 			{
 				if(collider->checkCollision(*enemyIter))
 					handleCollision(owner, *enemyIter, collider, axis);
@@ -157,7 +157,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, LevelEnti
 
 		if (owner.getType() == PLAYER) //only player has collision with pickups 
 		{
-			for (auto pickupIter = entities.pickups.begin(); pickupIter < entities.pickups.end(); ++pickupIter)
+			for (auto pickupIter = level.pickups.begin(); pickupIter < level.pickups.end(); ++pickupIter)
 			{
 				if (collider->checkCollision(*pickupIter))
 					handleCollision(owner, *pickupIter, collider, axis); //make this a non-physical collision!

@@ -1,7 +1,7 @@
 #include "Pickup.h"
 
 
-Pickup::Pickup(GameWindow* gw, Sprite* sprite)
+Pickup::Pickup(Sprite* sprite)
 	:_alive(true), _sprite(sprite)
 {
 	width = _sprite->getWidth();
@@ -13,10 +13,10 @@ Pickup::~Pickup()
 {
 }
 
-void Pickup::update(LevelEntities& entities)
+void Pickup::update(Level& level)
 {
 	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, entities, &_colliderComponent);
+	_physicsComponent.update(*this, level, &_colliderComponent);
 }
 
 void Pickup::render()

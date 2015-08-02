@@ -1,9 +1,9 @@
 #include "Enemy.h"
 
-#include "LevelEntities.h"
+#include "Level.h"
 #include "Pickup.h"
 
-Enemy::Enemy(GameWindow* gw, Sprite* sprite)
+Enemy::Enemy(Sprite* sprite)
 	: _sprite(sprite), _healthComponent(100)
 {
 	width = _sprite->getWidth();
@@ -15,10 +15,10 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::update(LevelEntities& entities)
+void Enemy::update(Level& level)
 {
 	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, entities, &_colliderComponent);
+	_physicsComponent.update(*this, level, &_colliderComponent);
 }
 
 void Enemy::render()
@@ -36,9 +36,9 @@ bool Enemy::isDead()
 	return _healthComponent.isDead();
 }
 
-void Enemy::onDeath(LevelEntities& entities)
+void Enemy::onDeath(Level& level)
 {
-	entities.addPickupAtLocation(position);
+	level.addPickupAtLocation(position);
 }
 
 Component* Enemy::getComponent(ComponentType type)

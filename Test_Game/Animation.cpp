@@ -7,18 +7,10 @@ Animation::Animation(GameWindow* window, std::shared_ptr<SDL_Texture> texture,
 	: _window(window),  _texture(texture),
 	  _numFrames(spritesheetInfo.num), 
 	  _width(spritesheetInfo.width), _height(spritesheetInfo.height),
-	  _currFrame(0)
+	  _valid (true)
 {
-	if (spritesheetInfo.num == 0) //failure
-	{ //workaround for _frames vector not having a 0th element 
-		SDL_Rect dummy;
-		dummy.x = 0;
-		dummy.y = 0;
-		dummy.w = 0;
-		dummy.h = 0;
-		_frames.push_back(dummy);
-		return; //don't waste time in constructor for a fail
-	}
+	if (spritesheetInfo.num == -1)
+		_valid = false; //
 
 	_drawDestination.w = _width;
 	_drawDestination.h = _height;
@@ -45,19 +37,11 @@ int Animation::getNumFrames()
 	return _numFrames;
 }
 
-void Animation::renderFrame(int x, int y)
+void Animation::renderFrame(Point renderPosition, int frameIndex)
 {
 	Point cameraPos = _window->camera.getPos();
-	_drawDestination.x = x - cameraPos.x;
-	_drawDestination.y = y - cameraPos.y;
-	SDL_RenderCopy(_window->renderer, _texture.get(), &_frames[_currFrame], &_drawDestination);
-	nextFrame();
+	_drawDestination.x = renderPosition.x - cameraPos.x;
+	_drawDestination.y = renderPosition.y - cameraPos.y;
+	SDL_RenderCopy(_window->renderer, _texture.get(), &_frames[frameIndex], &_drawDestination);
 }
-
-void Animation::nextFrame()
-{
-	if (++_currFrame >= _numFrames) 
-		_currFrame = 0;
-}
-
 

@@ -9,5 +9,7 @@
 void MySDL_Error(const std::string& message);
 void MySDL_Error(std::ostream &os, const std::string& message);
 
+void printCoord(int x, int y);
+
 
 #endif //FATALERRORS_H

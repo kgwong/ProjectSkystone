@@ -4,7 +4,7 @@
 #include "ColliderComponent.h"
 #include "Axis.h"
 
-struct LevelEntities;
+class Level;
 class GameObject;
 
 class PhysicsComponent
@@ -17,7 +17,7 @@ public:
 	PhysicsComponent();
 	virtual ~PhysicsComponent();
 
-	void update(GameObject& owner, LevelEntities& entities, ColliderComponent* collider);
+	void update(GameObject& owner, Level& level, ColliderComponent* collider);
 
 	void setVelX(int velX);
 	void setVelY(int velY);
@@ -46,7 +46,7 @@ private:
 	bool _falling;
 
 	void updatePosition(GameObject& owner, Axis axis);
-	void updatePositionAfterCollision(GameObject& owner, LevelEntities& entities, ColliderComponent* collider, Axis axis);
+	void updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis);
 	void handleCollision(GameObject& owner, GameObject& other, ColliderComponent* collider, Axis axis);
 
 private:

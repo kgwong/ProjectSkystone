@@ -2,7 +2,7 @@
 
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation, Direction dir)
-	:_alive(true), _animation(animation), _damageComponent(10)
+	:_alive(true), _animation(animation), _damageComponent(10), _renderComponent(_animation)
 {
 	_physicsComponent.enableGravity(false);
 
@@ -31,19 +31,18 @@ bool PlayerProjectile::isDead()
 	return !_alive;
 }
 
-void PlayerProjectile::update(LevelEntities& entities)
+void PlayerProjectile::update(Level& level)
 {
 	//if (_alive)
 //	{
 		_colliderComponent.update(*this);
-		_physicsComponent.update(*this, entities, &_colliderComponent);
+		_physicsComponent.update(*this, level, &_colliderComponent);
 	//}
 }
 
 void PlayerProjectile::render()
 {
-	//if (_alive)
-		_animation->renderFrame(position.x, position.y);
+	_renderComponent.update(*this);
 }
 
 void PlayerProjectile::onCollision(GameObject& other)

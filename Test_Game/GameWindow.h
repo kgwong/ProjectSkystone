@@ -1,5 +1,5 @@
-#ifndef GAMEWINDOW_H
-#define GAMEWINDOW_H
+#ifndef GAME_WINDOW_H
+#define GAME_WINDOW_H
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -12,7 +12,7 @@
 class GameWindow
 {
 public:
-	GameWindow(std::string windowName, int width, int height);
+	GameWindow(std::string windowName, int width, int height);;
 	~GameWindow();
 
 	int getWidth() const;
@@ -30,5 +30,5 @@ private:
 
 };
 
-#endif //GAMEWINDOW_H
+#endif //GAME_WINDOW_H
 

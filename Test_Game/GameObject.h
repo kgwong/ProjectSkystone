@@ -1,5 +1,8 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef GAME_OBJECT_H
+#define GAME_OBJECT_H
+
+#include <string>
+#include <iostream>
 
 #include "Point.h"
 #include "Component.h"
@@ -7,10 +10,7 @@
 
 #include "ComponentType.h"
 
-#include <string>
-#include <iostream>
-
-struct LevelEntities;
+class Level;
 
 class GameObject
 {
@@ -47,7 +47,7 @@ public:
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(GameObject& other) {};
-	virtual void onDeath(LevelEntities& entities) {};
+	virtual void onDeath(Level& level) {};
 
 protected:
 	Point position;
@@ -55,4 +55,4 @@ protected:
 	int height;
 };
 
-#endif //GAMEOBJECT_H
+#endif //GAME_OBJECT_H

@@ -23,9 +23,9 @@ SDL_Rect TileSet::getTile(int tileIndex)
 	return _tiles[tileIndex];
 }
 
-Tile TileSet::createTile(int tileIndex, int x, int y)
+Tile TileSet::createTile(int tileIndex, int r, int c)
 {
-	return Tile(_window, _texture.get(), _tiles[tileIndex], tileIndex, x, y, _tileSize);
+	return Tile(_window, _texture.get(), _tiles[tileIndex], tileIndex, r, c, _tileSize);
 }
 
 int TileSet::getTileSize()

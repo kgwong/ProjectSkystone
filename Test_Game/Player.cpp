@@ -1,13 +1,12 @@
 #include "Player.h"
 
-#include "LevelEntities.h"
+#include "Level.h"
 
 Player::Player(GameWindow* window, ResourceLocator* resourceLocator)
-	:_window(window), _renderComponent(_window), dir(RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")), 
-	_shoot(false)
+	:_window(window), dir(RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
+	 _renderComponent(_animation),
+	 _shoot(false)
 {
-	_renderComponent.setAnimation(_animation);
-
 	width = _animation->getWidth();
 	height = _animation->getHeight();
 }
@@ -66,13 +65,13 @@ void Player::render()
 	_renderComponent.update(*this);
 }
 
-void Player::update(LevelEntities& entities)
+void Player::update(Level& level)
 {
 	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, entities, &_colliderComponent);
+	_physicsComponent.update(*this, level, &_colliderComponent);
 
 	if (_shoot)
-		shoot(entities);
+		shoot(level);
 
 }
 
@@ -82,9 +81,9 @@ void Player::jump()
 		_physicsComponent.setVelY(JUMP_VELOCITY);
 }
 
-void Player::shoot(LevelEntities& entities)
+void Player::shoot(Level& level)
 {
-	entities.addPlayerProjectileAtLocation(position, 30, dir);
+	level.addPlayerProjectileAtLocation(position, 30, dir);
 	_shoot = false;
 }
 

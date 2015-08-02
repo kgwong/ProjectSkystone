@@ -12,7 +12,7 @@
 
 #include "ResourceLocator.h"
 
-struct LevelEntities;
+class Level;
 class PhysicsComponent;
 
 class Player : public GameObject
@@ -25,9 +25,9 @@ public:
 	void handleInput(SDL_Event &e);
 	void handleInput2(); //
 
-	void update(LevelEntities& entities);
+	void update(Level& Level);
 	void jump();
-	void shoot(LevelEntities& entities);
+	void shoot(Level& level);
 
 	virtual Component* getComponent(const std::string& componentName);
 	virtual std::string getName() const;
@@ -40,13 +40,14 @@ private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
 
 	GameWindow* _window;
+	Animation* _animation;
+
 	RenderComponent _renderComponent;
 	HealthComponent _healthComponent;
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
 
-	Animation* _animation;
-	Animation* _projectileAnimation;
+
 
 	Direction dir; 
 
