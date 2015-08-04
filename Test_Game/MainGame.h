@@ -1,5 +1,5 @@
-#ifndef MAINGAME_H
-#define MAINGAME_H
+#ifndef MAIN_GAME_H
+#define MAIN_GAME_H
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -21,13 +21,16 @@
 class MainGame
 {
 public:
+	static const int SCREEN_WIDTH  = 640;
+	static const int SCREEN_HEIGHT = 480;
+
 	MainGame();
 	~MainGame();
 
 	void run();
 
 private:
-	GameWindow _gw;
+	GameWindow _window;
 	ResourceLocator _resourceLocator;
 
 	MusicPlayer _musicPlayer;
@@ -44,5 +47,5 @@ private:
 
 };
 
-#endif //MAINGAME_H
+#endif //MAIN_GAME_H
 

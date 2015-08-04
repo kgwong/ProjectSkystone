@@ -2,13 +2,13 @@
 
 void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo spritesheetInfo)
 {
-	for (int y = 0; (y < spritesheetInfo.perColumn) && (locations.size() < spritesheetInfo.num); ++y) 
+	for (int r = 0; (r < spritesheetInfo.numRows) && (locations.size() < spritesheetInfo.num); ++r) 
 	{
-		for (int x = 0; (x < spritesheetInfo.perRow) && (locations.size() < spritesheetInfo.num); ++x) 
+		for (int c = 0; (c < spritesheetInfo.numCols) && (locations.size() < spritesheetInfo.num); ++c) 
 		{
 			SDL_Rect rect; //
-			rect.x = x * (spritesheetInfo.width + spritesheetInfo.padding);
-			rect.y = y * (spritesheetInfo.height + spritesheetInfo.padding);
+			rect.x = c * (spritesheetInfo.width + spritesheetInfo.padding);
+			rect.y = r * (spritesheetInfo.height + spritesheetInfo.padding);
 			rect.w = spritesheetInfo.width;
 			rect.h = spritesheetInfo.height;
 			locations.push_back(rect);

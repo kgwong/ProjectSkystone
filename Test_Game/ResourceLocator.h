@@ -1,5 +1,5 @@
-#ifndef RESOURCELOCATOR_H
-#define RESOURCELOCATOR_H
+#ifndef RESOURCE_LOCATOR_H
+#define RESOURCE_LOCATOR_H
 
 #include <SDL\SDL.h>
 #include <SDL\SDL_image.h>
@@ -47,5 +47,5 @@ private:
 	std::unordered_map<std::string, TileSet> _tileSets;
 };
 
-#endif //RESOURCELOCATOR_H
+#endif //RESOURCE_LOCATOR_H
 

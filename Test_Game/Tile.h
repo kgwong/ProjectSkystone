@@ -15,7 +15,6 @@ public:
 	~Tile();
 
 	void update();
-	void changeImage(SDL_Texture* newImage); //temp;
 	void render();
 
 	virtual EntityType getType() const;

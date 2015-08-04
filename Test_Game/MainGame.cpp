@@ -2,23 +2,22 @@
 
 #include <windows.h> // for "sleep"
 
-const int SCREEN_WIDTH  = 640;
-const int SCREEN_HEIGHT = 480;
+
 
 MainGame::MainGame()
-	:_gw("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
-	_resourceLocator(&_gw),
-	_player(&_gw, &_resourceLocator),
+	:_window("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
+	_resourceLocator(&_window),
+	_player(&_window, &_resourceLocator),
 	_quit(false),
-	_currLevel(&_gw, _resourceLocator.getTileSet("Assets/TileSets/bw.png"), &_resourceLocator)
+	_currLevel(&_window, &_resourceLocator)
 {
-	_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"));
+	_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
 	_currLevel.setPlayer(&_player);
 
 	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
 
-	_gw.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
+	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
 
 	_player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
 }
@@ -72,10 +71,10 @@ void MainGame::update()
 
 void MainGame::render()
 {
-	SDL_RenderClear(_gw.renderer);
+	SDL_RenderClear(_window.renderer);
 
-	_gw.camera.followObject(_player);
+	_window.camera.followObject(_player);
 	_currLevel.render();
 
-	SDL_RenderPresent(_gw.renderer);
+	SDL_RenderPresent(_window.renderer);
 }

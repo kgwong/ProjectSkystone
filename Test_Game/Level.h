@@ -15,10 +15,10 @@
 class Level
 {
 public:
-	Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator);
+	Level(GameWindow* window, ResourceLocator* resourceLocator);
 	~Level();
 
-	void load(const std::string& filepath);
+	void load(const std::string& filepath, TileSet* tileSet);
 	void setPlayer(Player* player);
 
 	void update();
@@ -41,7 +41,6 @@ public:
 private:
 	GameWindow* _window;
 	ResourceLocator* _resourceLocator;
-	TileSet* _tileSet;
 
 private:
 	void updateTiles();

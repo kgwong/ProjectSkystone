@@ -2,8 +2,8 @@
 
 #include "LevelLoader.h"
 
-Level::Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLocator) 
-	:_window(window), _tileSet(tileSet), _resourceLocator(resourceLocator)
+Level::Level(GameWindow* window, ResourceLocator* resourceLocator) 
+	:_window(window), _resourceLocator(resourceLocator)
 {
 	addPickupAtLocation(Point(100, 100));
 
@@ -13,14 +13,13 @@ Level::Level(GameWindow* window, TileSet* tileSet, ResourceLocator* resourceLoca
 	addEnemyAtLocation(Point(333, 333));
 }
 
-
 Level::~Level()
 {
 }
 
-void Level::load(const std::string& filepath)
+void Level::load(const std::string& filepath, TileSet* tileSet)
 {
-	tileArrangement = LevelLoader::load(filepath, _tileSet);
+	tileArrangement = LevelLoader::load(filepath, tileSet);
 }
 
 void Level::setPlayer(Player* p)

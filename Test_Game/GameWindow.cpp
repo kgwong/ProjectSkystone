@@ -24,8 +24,8 @@ GameWindow::GameWindow(std::string windowName, int width, int height)
 
 GameWindow::~GameWindow()
 {
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window); //
+	SDL_DestroyRenderer(renderer); //
 }
 
 int GameWindow::getWidth() const

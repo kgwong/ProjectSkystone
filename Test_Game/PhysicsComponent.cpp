@@ -138,6 +138,9 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 			{
 				for(int r = owner.getPosY()/level.tileArrangement._tileSize; r <= (owner.getPosY()+owner.getHeight())/level.tileArrangement._tileSize; ++r)
 				{
+					if (r < 0 || c < 0 || r >= level.tileArrangement._rows || c >= level.tileArrangement._cols)
+						continue; //avoid out_of_range
+
 					Tile& tile = level.tileArrangement._tiles[r][c];
 
 					if(tile.tileType == 1 && collider->checkCollision(tile))

@@ -4,13 +4,13 @@
 struct SpritesheetInfo
 {
 	SpritesheetInfo(int n, int w, int h, int r, int c, int p = 0)
-		:num(n), width(w), height(h), perRow(r), perColumn(c), padding(p)
+		:num(n), width(w), height(h), numRows(r), numCols(c), padding(p)
 	{};
 	int num;
 	int width;
 	int height;
-	int perRow;
-	int perColumn;
+	int numRows;
+	int numCols;
 	int padding;
 };
 

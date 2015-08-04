@@ -47,15 +47,15 @@ SpritesheetInfo SpritesheetInfoReader::info()
 	mapContains(loadedValues, "numSprites", fail);
 	mapContains(loadedValues, "spriteWidth", fail);
 	mapContains(loadedValues, "spriteHeight", fail);
-	mapContains(loadedValues, "spritesPerRow", fail);
-	mapContains(loadedValues, "spritesPerCol", fail);
+	mapContains(loadedValues, "numRows", fail);
+	mapContains(loadedValues, "numCols", fail);
 	mapContains(loadedValues, "padding", fail);
 
 	return fail ? SpritesheetInfo(-1, -1, -1, -1, -1, -1):	
 					SpritesheetInfo(loadedValues["numSprites"], 
 									loadedValues["spriteWidth"],
 									loadedValues["spriteHeight"],
-									loadedValues["spritesPerRow"],
-									loadedValues["spritesPerCol"],
+									loadedValues["numRows"], 
+									loadedValues["numCols"],
 									loadedValues["padding"]);
 }

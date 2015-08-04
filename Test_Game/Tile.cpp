@@ -2,7 +2,6 @@
 
 Tile::Tile()
 {
-
 }
 
 Tile::Tile(GameWindow* window, 
@@ -28,11 +27,6 @@ Tile::~Tile()
 void Tile::update()
 {
 	_colliderComponent.update(*this);
-}
-
-void Tile::changeImage(SDL_Texture* newImage) //temp;
-{
-	_tileSetImage = newImage;
 }
 
 void Tile::render()
