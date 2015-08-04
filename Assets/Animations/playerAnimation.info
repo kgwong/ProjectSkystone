@@ -1,6 +1,6 @@
 numSprites 4
 spriteWidth 30
 spriteHeight 60
-spritesPerRow 4
-spritesPerCol 1
+numRows 1
+numCols 4
 padding 0
