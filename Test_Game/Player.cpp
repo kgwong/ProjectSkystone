@@ -1,9 +1,10 @@
 #include "Player.h"
 
 #include "Level.h"
+#include "PhysicsComponent.h"
 
-Player::Player(GameWindow* window, ResourceLocator* resourceLocator)
-	:_window(window), dir(RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
+Player::Player(ResourceLocator* resourceLocator)
+	: dir(Direction::RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
 	 _renderComponent(_animation),
 	 _shoot(false)
 {
@@ -23,21 +24,21 @@ void Player::handleInput2()
 	if(keyStates[SDL_SCANCODE_LEFT])
 	{
 		_physicsComponent.setVelX(-5);
-		dir = LEFT;
+		dir = Direction::LEFT;
 	}
 	else if(keyStates[SDL_SCANCODE_RIGHT])
 	{
 		_physicsComponent.setVelX(5);
-		dir = RIGHT;
+		dir = Direction::RIGHT;
 	}
 	else if (keyStates[SDL_SCANCODE_UP])
 	{
-		dir = UP;
+		dir = Direction::UP;
 		_physicsComponent.setVelX(0);
 	}
 	else if (keyStates[SDL_SCANCODE_DOWN])
 	{
-		dir = DOWN;
+		dir = Direction::DOWN;
 		_physicsComponent.setVelX(0);
 	}
 	else
@@ -103,12 +104,12 @@ std::string Player::getName() const
 
 EntityType Player::getType() const
 {
-	return PLAYER;
+	return EntityType::PLAYER;
 }
 
 void Player::onCollision(GameObject& other)
 {
-	if (other.getType() == PICKUP)
+	if (other.getType() == EntityType::PICKUP)
 	{
 		std::cout << "thing acquired! yay!" << std::endl;
 	}

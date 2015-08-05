@@ -19,7 +19,7 @@ class Player : public GameObject
 {
 
 public:
-	Player(GameWindow* window, ResourceLocator* resourceLocator);
+	Player(ResourceLocator* resourceLocator);
 	~Player();
 
 	void handleInput(SDL_Event &e);

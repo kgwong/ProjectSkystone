@@ -1,11 +1,11 @@
 #ifndef PHYSICSCOMPONENT_H
 #define PHYSICSCOMPONENT_H
 
-#include "ColliderComponent.h"
 #include "Axis.h"
 
 class Level;
 class GameObject;
+class ColliderComponent;
 
 class PhysicsComponent
 {

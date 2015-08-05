@@ -1,7 +1,7 @@
 #ifndef COMPONENTTYPE_H
 #define COMPONENTTYPE_H
 
-enum ComponentType
+enum class ComponentType
 {
 	COLLIDER, DAMAGE, HEALTH, PHYSICS, RENDER
 };

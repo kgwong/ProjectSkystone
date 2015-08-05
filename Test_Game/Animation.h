@@ -2,6 +2,7 @@
 #define ANIMATION_H
 
 #include <vector>
+#include <memory>
 
 #include "GameWindow.h"
 #include "SpritesheetInfo.h"

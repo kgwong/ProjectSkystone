@@ -25,7 +25,7 @@ SpritesheetInfoReader::SpritesheetInfoReader(const std::string& fullPath)
 SpritesheetInfo SpritesheetInfoReader::info()
 {
 	std::ifstream fileInfo(_infoPath);
-	std::map<std::string, int> loadedValues; 
+	std::map<std::string, int> loadedValues;
 
 	std::string parameterName;
 	int parameterValue;
@@ -37,10 +37,10 @@ SpritesheetInfo SpritesheetInfoReader::info()
 			loadedValues.insert(std::make_pair(parameterName, parameterValue));
 		}
 	}
-	catch ( ... )
+	catch (...)
 	{
-		std::cout << "Failed to read '" << _infoPath << '\'' << std::endl; 
-		return SpritesheetInfo(-1, -1, -1, -1, -1, -1); //dummy info
+		std::cout << "Failed to read '" << _infoPath << '\'' << std::endl;
+		return SpritesheetInfo{ -1, -1, -1, -1, -1, -1 }; //dummy info
 	}
 
 	bool fail = false; //this is dumb 
@@ -51,11 +51,11 @@ SpritesheetInfo SpritesheetInfoReader::info()
 	mapContains(loadedValues, "numCols", fail);
 	mapContains(loadedValues, "padding", fail);
 
-	return fail ? SpritesheetInfo(-1, -1, -1, -1, -1, -1):	
-					SpritesheetInfo(loadedValues["numSprites"], 
+	return fail ? SpritesheetInfo{ -1, -1, -1, -1, -1, -1 } :
+					SpritesheetInfo{loadedValues["numSprites"], 
 									loadedValues["spriteWidth"],
 									loadedValues["spriteHeight"],
 									loadedValues["numRows"], 
 									loadedValues["numCols"],
-									loadedValues["padding"]);
+									loadedValues["padding"]};
 }

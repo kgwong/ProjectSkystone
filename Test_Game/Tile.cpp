@@ -39,12 +39,12 @@ void Tile::render()
 
 Component* Tile::getComponent(ComponentType type)
 {
-	if (type == COLLIDER)
+	if (type == ComponentType::COLLIDER)
 		return &_colliderComponent;
 	return nullptr;
 }
 
 EntityType Tile::getType() const
 {
-	return ENVIRONMENT;
+	return EntityType::ENVIRONMENT;
 }

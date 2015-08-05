@@ -43,7 +43,7 @@ void Enemy::onDeath(Level& level)
 
 Component* Enemy::getComponent(ComponentType type)
 {
-	if (type == COLLIDER)
+	if (type == ComponentType::COLLIDER)
 		return &_colliderComponent;
 	return nullptr;
 }
@@ -55,14 +55,14 @@ std::string Enemy::getName()
 
 EntityType Enemy::getType() const
 {
-	return ENEMY;
+	return EntityType::ENEMY;
 }
 
 void Enemy::onCollision(GameObject& other)
 {
-	if (other.getType() == PLAYER_PROJECTILE)
+	if (other.getType() == EntityType::PLAYER_PROJECTILE)
 	{
 		//well this is ugly
-		takeDamage(*((int*)other.getComponent(DAMAGE)->getAttribute("damage"))); 
+		takeDamage(*((int*)other.getComponent(ComponentType::DAMAGE)->getAttribute("damage")));
 	}
 }

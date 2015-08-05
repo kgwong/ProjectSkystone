@@ -84,8 +84,8 @@ void Level::updateEntityVector(std::vector<Entity>& v)
 template <typename Entity>
 void Level::renderEntityVector(std::vector<Entity>& v)
 {
-	for (auto i = v.begin(); i != v.end(); ++i)
-		i->render();
+	for (auto& entity : v)
+		entity.render();
 }
 
 

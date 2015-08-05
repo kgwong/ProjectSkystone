@@ -7,7 +7,7 @@
 MainGame::MainGame()
 	:_window("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
 	_resourceLocator(&_window),
-	_player(&_window, &_resourceLocator),
+	_player(&_resourceLocator),
 	_quit(false),
 	_currLevel(&_window, &_resourceLocator)
 {

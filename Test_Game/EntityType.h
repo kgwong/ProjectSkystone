@@ -1,7 +1,7 @@
 #ifndef ENTITYTYPE_H
 #define ENTITYTYPE_H
 
-enum EntityType 
+enum class EntityType 
 {
 	PLAYER, PLAYER_PROJECTILE, ENEMY, ENEMY_PROJECTILE, ENVIRONMENT, PICKUP, NONE
 };

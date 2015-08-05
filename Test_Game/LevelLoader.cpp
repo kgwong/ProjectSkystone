@@ -5,7 +5,7 @@
 TileArrangement LevelLoader::load(const std::string& filepath, TileSet* tileSet)
 {
 	std::ifstream ifs(filepath); //should probably do more error checking
-	if (ifs == nullptr)
+	if (!ifs)
 		std::cout << "Loading Level failed!" << std::endl;
 
 	int numRows, numCols;

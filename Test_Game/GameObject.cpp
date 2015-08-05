@@ -119,5 +119,5 @@ std::string GameObject::getName() const
 
 EntityType GameObject::getType() const
 {
-	return NONE;
+	return EntityType::NONE;
 }

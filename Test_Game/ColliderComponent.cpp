@@ -2,11 +2,8 @@
 
 
 ColliderComponent::ColliderComponent()
+	:collider{0, 0, 0 ,0}
 {
-	collider.x = 0;
-	collider.y = 0;
-	collider.w = 0;
-	collider.h = 0;
 }
 
 
@@ -14,23 +11,19 @@ ColliderComponent::~ColliderComponent()
 {
 }
 
-void ColliderComponent::setCollider(int x, int y, int w, int h)
+void ColliderComponent::setCollider(BoxCollider newCollider)
 {
-	collider.x = x;
-	collider.y = y;
-	collider.w = w;
-	collider.h = h;
+	collider = newCollider;
 }
 
 void ColliderComponent::update(GameObject& owner)
 {
-	//default to owner's attributes
-	setCollider(owner.getPosX(), owner.getPosY(), owner.getWidth(), owner.getHeight());
+	setCollider(BoxCollider{owner.getPosX(), owner.getPosY(), owner.getWidth(), owner.getHeight()});
 }
 
 bool ColliderComponent::checkCollision(GameObject& other)
 {
-	return checkCollision( static_cast<ColliderComponent*> (other.getComponent(COLLIDER) ) );
+	return checkCollision( static_cast<ColliderComponent*> (other.getComponent(ComponentType::COLLIDER) ) );
 }
 
 bool ColliderComponent::checkCollision(ColliderComponent* other)

@@ -13,7 +13,7 @@ TileSet::~TileSet()
 {
 }
 
-SDL_Texture* TileSet::getImage()
+SDL_Texture* TileSet::getTexture()
 {
 	return _texture.get();
 }

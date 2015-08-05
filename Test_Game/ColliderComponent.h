@@ -6,18 +6,6 @@
 
 class ColliderComponent : public Component
 {
-public:
-	ColliderComponent();
-	virtual ~ColliderComponent();
-
-	void setCollider(int x, int y, int w, int h); 
-
-	virtual void update(GameObject& owner);
-
-	bool checkCollision(GameObject& other);
-	bool checkCollision(ColliderComponent* other); //maybe take a ColliderComponent* ?
-
-
 private:
 	struct BoxCollider
 	{
@@ -26,6 +14,17 @@ private:
 		int w;
 		int h;
 	};
+
+public:
+	ColliderComponent();
+	virtual ~ColliderComponent();
+
+	void setCollider(BoxCollider newCollider); 
+
+	virtual void update(GameObject& owner);
+
+	bool checkCollision(GameObject& other);
+	bool checkCollision(ColliderComponent* other);
 
 private:
 	BoxCollider collider;

@@ -1,5 +1,6 @@
 #include "PhysicsComponent.h"
 
+#include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Level.h"
 
@@ -10,7 +11,6 @@ PhysicsComponent::PhysicsComponent()
 {
 }
 
-
 PhysicsComponent::~PhysicsComponent()
 {
 }
@@ -18,11 +18,11 @@ PhysicsComponent::~PhysicsComponent()
 
 void PhysicsComponent::update(GameObject& owner, Level& level, ColliderComponent* collider)
 {
-	updatePosition(owner, X_AXIS);
-	updatePositionAfterCollision(owner, level, collider, X_AXIS);
+	updatePosition(owner, Axis::X);
+	updatePositionAfterCollision(owner, level, collider, Axis::X);
 
-	updatePosition(owner, Y_AXIS);
-	updatePositionAfterCollision(owner, level, collider, Y_AXIS);
+	updatePosition(owner, Axis::Y);
+	updatePositionAfterCollision(owner, level, collider, Axis::Y);
 }
 
 void PhysicsComponent::enableGravity(bool gravity)
@@ -112,11 +112,11 @@ void PhysicsComponent::updatePosition(GameObject& owner, Axis axis)
 {
 	switch(axis)
 	{
-		case X_AXIS:
+		case Axis::X:
 			_velX += _accelX; 
 			owner.setPosX(owner.getPosX() + _velX);
 			break;
-		case Y_AXIS:
+		case Axis::Y:
 			enactGravity();
 			_velY += _accelY; 
 			owner.setPosY(owner.getPosY() + _velY);
@@ -132,7 +132,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 	{
 		collider->update(owner);
 
-		if (owner.getType() != ENVIRONMENT)
+		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
 			for (int c = owner.getPosX()/level.tileArrangement._tileSize; c <= (owner.getPosX()+owner.getWidth())/level.tileArrangement._tileSize; ++c)
 			{
@@ -149,22 +149,18 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 			}
 		}
 
-		if (owner.getType() != ENEMY)
+		if (owner.getType() != EntityType::ENEMY)
 		{
-			for (auto enemyIter = level.enemies.begin(); enemyIter < level.enemies.end(); ++enemyIter)
-			{
-				if(collider->checkCollision(*enemyIter))
-					handleCollision(owner, *enemyIter, collider, axis);
-			}
+			for (auto& enemy : level.enemies)
+				if (collider->checkCollision(enemy))
+					handleCollision(owner, enemy, collider, axis);
 		}
 
-		if (owner.getType() == PLAYER) //only player has collision with pickups 
+		if (owner.getType() == EntityType::PLAYER) //only player has collision with pickups 
 		{
-			for (auto pickupIter = level.pickups.begin(); pickupIter < level.pickups.end(); ++pickupIter)
-			{
-				if (collider->checkCollision(*pickupIter))
-					handleCollision(owner, *pickupIter, collider, axis); //make this a non-physical collision!
-			}
+			for (auto& pickup : level.pickups)
+				if (collider->checkCollision(pickup))
+					handleCollision(owner, pickup, collider, axis); //make this a non-physical collision!
 		}
 	}
 
@@ -174,7 +170,7 @@ void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Col
 {
 	switch(axis)
 	{
-		case X_AXIS:
+		case Axis::X:
 			if (isMovingLeft())
 				owner.setPosX(other.getPosX() + other.getWidth());
 			else //isMovingRight
@@ -182,7 +178,7 @@ void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Col
 			setVelX(0);
 			break;
 
-		case Y_AXIS:
+		case Axis::Y:
 			if (isMovingUp())
 				owner.setPosY(other.getPosY() + other.getHeight());
 			else //isMovingDown

@@ -6,12 +6,10 @@ void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo 
 	{
 		for (int c = 0; (c < spritesheetInfo.numCols) && (locations.size() < spritesheetInfo.num); ++c) 
 		{
-			SDL_Rect rect; //
-			rect.x = c * (spritesheetInfo.width + spritesheetInfo.padding);
-			rect.y = r * (spritesheetInfo.height + spritesheetInfo.padding);
-			rect.w = spritesheetInfo.width;
-			rect.h = spritesheetInfo.height;
-			locations.push_back(rect);
+			locations.push_back(SDL_Rect{ c * (spritesheetInfo.width + spritesheetInfo.padding),
+										r * (spritesheetInfo.height + spritesheetInfo.padding),
+										spritesheetInfo.width, 
+										spritesheetInfo.height });
 		}
 	}
 }

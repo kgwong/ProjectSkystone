@@ -1,6 +1,7 @@
 #ifndef TILESET_H
 #define TILESET_H
 
+#include <memory>
 #include <vector>
 
 #include "GameWindow.h"
@@ -15,7 +16,7 @@ public:
 			SpritesheetInfo spritesheetInfo);
 	~TileSet();
 
-	SDL_Texture* getImage();
+	SDL_Texture* getTexture();
 	SDL_Rect getTile(int tileIndex);
 	Tile createTile(int tileIndex, int r, int c);
 

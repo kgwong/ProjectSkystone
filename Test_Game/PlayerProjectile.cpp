@@ -13,10 +13,10 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation
 
 	switch (dir)
 	{
-		case UP: _physicsComponent.setVelY(-vel); break;
-		case DOWN: _physicsComponent.setVelY(vel); break;
-		case LEFT: _physicsComponent.setVelX(-vel); break;
-		case RIGHT: _physicsComponent.setVelX(vel); break;
+		case Direction::UP: _physicsComponent.setVelY(-vel); break;
+		case Direction::DOWN: _physicsComponent.setVelY(vel); break;
+		case Direction::LEFT: _physicsComponent.setVelX(-vel); break;
+		case Direction::RIGHT: _physicsComponent.setVelX(vel); break;
 		default: break;
 	}
 }
@@ -52,12 +52,12 @@ void PlayerProjectile::onCollision(GameObject& other)
 
 EntityType PlayerProjectile::getType() const
 {
-	return PLAYER_PROJECTILE;
+	return EntityType::PLAYER_PROJECTILE;
 }
 
 Component* PlayerProjectile::getComponent(ComponentType type) 
 {
-	if (type == DAMAGE)
+	if (type == ComponentType::DAMAGE)
 	{
 		return &_damageComponent;
 	}

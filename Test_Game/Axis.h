@@ -1,6 +1,6 @@
 #ifndef AXIS_H
 #define AXIS_H
 
-enum Axis {X_AXIS, Y_AXIS}; 
+enum class Axis {X, Y}; 
 
 #endif //AXIS_H

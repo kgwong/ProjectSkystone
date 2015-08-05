@@ -31,18 +31,18 @@ bool Pickup::isDead()
 
 EntityType Pickup::getType() const
 {
-	return PICKUP;
+	return EntityType::PICKUP;
 }
 
 void Pickup::onCollision(GameObject& other)
 {
-	if (other.getType() == PLAYER)
+	if (other.getType() == EntityType::PLAYER)
 		_alive = false;
 }
 
 Component* Pickup::getComponent(ComponentType type)
 {
-	if (type == COLLIDER)
+	if (type == ComponentType::COLLIDER)
 		return &_colliderComponent;
 	return nullptr;
 }
