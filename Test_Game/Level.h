@@ -11,6 +11,7 @@
 #include "Pickup.h"
 
 #include "ResourceLocator.h"
+#include "EnemyBuilder.h"
 
 class Level
 {
@@ -29,7 +30,7 @@ public:
 
 	void addPlayerProjectileAtLocation(Point position, int vel, Direction dir);
 	void addPickupAtLocation(Point position);
-	void addEnemyAtLocation(Point position);
+	void addEnemyAtLocation(const std::string& name, Point position);
 
 public:
 	Player* player;
@@ -41,6 +42,7 @@ public:
 private:
 	GameWindow* _window;
 	ResourceLocator* _resourceLocator;
+	EnemyBuilder _enemyBuilder;
 
 private:
 	void updateTiles();

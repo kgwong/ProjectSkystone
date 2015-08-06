@@ -1,11 +1,14 @@
 #ifndef PICKUP_H
 #define PICKUP_H
 
+#include <memory>
+
 #include "GameObject.h"
 #include "Sprite.h"
 
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "RenderComponent.h"
 
 class Pickup : public GameObject
 {
@@ -25,7 +28,7 @@ public:
 private:
 	bool _alive;
 
-	Sprite* _sprite;
+	std::shared_ptr<RenderComponent> _renderComponent;
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
 };

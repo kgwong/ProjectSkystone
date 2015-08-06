@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <memory>
+
 #include "GameWindow.h"
 #include "Animation.h"
 #include "Direction.h"
@@ -42,7 +44,7 @@ private:
 	GameWindow* _window;
 	Animation* _animation;
 
-	RenderComponent _renderComponent;
+	std::unique_ptr<RenderComponent> _renderComponent;
 	HealthComponent _healthComponent;
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;

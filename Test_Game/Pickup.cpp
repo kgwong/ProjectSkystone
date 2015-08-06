@@ -1,11 +1,12 @@
 #include "Pickup.h"
 
+#include "StaticSpriteRenderer.h"
 
 Pickup::Pickup(Sprite* sprite)
-	:_alive(true), _sprite(sprite)
+	:_alive(true), _renderComponent(new StaticSpriteRenderer(sprite))
 {
-	width = _sprite->getWidth();
-	height = _sprite->getHeight();
+	width = sprite->getWidth();
+	height = sprite->getHeight();
 }
 
 
@@ -21,7 +22,7 @@ void Pickup::update(Level& level)
 
 void Pickup::render()
 {
-	_sprite->render(position.x, position.y);
+	_renderComponent->update(*this);
 }
 
 bool Pickup::isDead()

@@ -45,3 +45,8 @@ void Sprite::render(int x, int y)
 	_drawDestination.y = y - cameraPos.y;
 	SDL_RenderCopy(_window->renderer, _texture.get(), NULL, &_drawDestination);
 }
+
+void Sprite::render(Point position)
+{
+	render(position.x, position.y);
+}

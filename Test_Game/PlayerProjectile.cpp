@@ -1,8 +1,9 @@
 #include "PlayerProjectile.h"
 
+#include "AnimationRenderer.h"
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation, Direction dir)
-	:_alive(true), _animation(animation), _damageComponent(10), _renderComponent(_animation)
+	:_alive(true), _animation(animation), _damageComponent(10), _renderComponent(new AnimationRenderer(_animation))
 {
 	_physicsComponent.enableGravity(false);
 
@@ -42,7 +43,7 @@ void PlayerProjectile::update(Level& level)
 
 void PlayerProjectile::render()
 {
-	_renderComponent.update(*this);
+	_renderComponent->update(*this);
 }
 
 void PlayerProjectile::onCollision(GameObject& other)

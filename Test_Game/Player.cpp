@@ -2,10 +2,11 @@
 
 #include "Level.h"
 #include "PhysicsComponent.h"
+#include "AnimationRenderer.h"
 
 Player::Player(ResourceLocator* resourceLocator)
 	: dir(Direction::RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
-	 _renderComponent(_animation),
+	 _renderComponent(new AnimationRenderer(_animation)),
 	 _shoot(false)
 {
 	width = _animation->getWidth();
@@ -63,7 +64,7 @@ void Player::handleInput(SDL_Event &e)
 
 void Player::render()
 {
-	_renderComponent.update(*this);
+	_renderComponent->update(*this);
 }
 
 void Player::update(Level& level)

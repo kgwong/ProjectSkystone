@@ -4,6 +4,8 @@
 #include "HealthComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+#include "RenderComponent.h"
+#include "EnemyBuilder.h"
 
 #include "GameWindow.h"
 #include "Sprite.h"
@@ -13,8 +15,10 @@ class PhysicsComponent;
 
 class Enemy : public GameObject
 {
+	friend  EnemyBuilder;
+
 public:
-	Enemy(Sprite* sprite);
+	Enemy();
 	virtual ~Enemy();
 
 	void update(Level& level);
@@ -30,11 +34,14 @@ public:
 	virtual void onDeath(Level& level);
 
 private:
-	GameWindow* _gw;
-	Sprite* _sprite;
-	HealthComponent _healthComponent;
+	std::shared_ptr<RenderComponent> _renderComponent;
+	std::shared_ptr<HealthComponent> _healthComponent;
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
+
+private:
+	void setRenderComponent(RenderComponent* renderComponent);
+	void setHealthComponent(HealthComponent* healthComponent);
 
 };
 

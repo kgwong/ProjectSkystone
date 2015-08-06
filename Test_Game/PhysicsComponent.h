@@ -2,12 +2,14 @@
 #define PHYSICSCOMPONENT_H
 
 #include "Axis.h"
+#include "Component.h"
 
 class Level;
 class GameObject;
 class ColliderComponent;
 
-class PhysicsComponent
+
+class PhysicsComponent : public Component
 {
 public:
 	static const int GRAVITY = 1;

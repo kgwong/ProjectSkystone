@@ -3,11 +3,13 @@
 
 #include <string>
 
+class GameObject;
+
 class Component
 {
 public:
 	virtual ~Component() {};
-	//virtual void update() = 0;
+	virtual void update(GameObject& owner) {};
 	virtual void* getAttribute(const std::string& name) { return nullptr; };
 };
 

@@ -1,26 +1,16 @@
-#ifndef RENDERCOMPONENT_H
-#define RENDERCOMPONENT_H
+#ifndef RENDER_COMPONENT_H
+#define RENDER_COMPONENT_H
 
-#include "GameWindow.h"
+#include "Component.h"
 
-#include "GameObject.h"
-#include "Animation.h"
-
-class RenderComponent
+class RenderComponent : public Component
 {
 public:
-	RenderComponent(Animation* animation);
+	RenderComponent();
 	virtual ~RenderComponent();
 
 	virtual void update(GameObject& owner);
-	
-
-private:
-	Animation* _animation;
-	int _currFrame;
-
-private:
-	void incrementFrame();
 };
 
-#endif //RENDERCOMPONENT_H
+#endif //RENDER_COMPONENT_H
+

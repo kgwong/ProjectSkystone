@@ -17,7 +17,9 @@ public:
 
 	void setWidth(int w);
 	void setHeight(int h);
+
 	void render(int x, int y);
+	void render(Point position);
 
 	int getWidth() const;
 	int getHeight() const;

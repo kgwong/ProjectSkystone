@@ -3,11 +3,10 @@
 #include "Level.h"
 #include "Pickup.h"
 
-Enemy::Enemy(Sprite* sprite)
-	: _sprite(sprite), _healthComponent(100)
+#include "StaticSpriteRenderer.h"
+
+Enemy::Enemy()
 {
-	width = _sprite->getWidth();
-	height = _sprite->getHeight();
 }
 
 
@@ -23,17 +22,17 @@ void Enemy::update(Level& level)
 
 void Enemy::render()
 {
-	_sprite->render(position.x, position.y);
+	_renderComponent->update(*this);
 }
 
 void Enemy::takeDamage(int damage)
 {
-	_healthComponent.takeDamage(damage);
+	_healthComponent->takeDamage(damage);
 }
 
 bool Enemy::isDead()
 {
-	return _healthComponent.isDead();
+	return _healthComponent->isDead();
 }
 
 void Enemy::onDeath(Level& level)
@@ -65,4 +64,17 @@ void Enemy::onCollision(GameObject& other)
 		//well this is ugly
 		takeDamage(*((int*)other.getComponent(ComponentType::DAMAGE)->getAttribute("damage")));
 	}
+}
+
+
+//private
+
+void Enemy::setRenderComponent(RenderComponent* renderComponent)
+{
+	_renderComponent = std::shared_ptr<RenderComponent>(renderComponent);
+}
+
+void Enemy::setHealthComponent(HealthComponent* healthComponent)
+{
+	_healthComponent = std::shared_ptr<HealthComponent>(healthComponent);
 }

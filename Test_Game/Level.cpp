@@ -3,14 +3,17 @@
 #include "LevelLoader.h"
 
 Level::Level(GameWindow* window, ResourceLocator* resourceLocator) 
-	:_window(window), _resourceLocator(resourceLocator)
+	:_window(window), _resourceLocator(resourceLocator),
+	_enemyBuilder(_resourceLocator)
 {
 	addPickupAtLocation(Point(100, 100));
 
-	addEnemyAtLocation(Point(660, 660));
-	addEnemyAtLocation(Point(630, 660));
-	addEnemyAtLocation(Point(444, 444));
-	addEnemyAtLocation(Point(333, 333));
+	addEnemyAtLocation("", Point(660, 660));
+	addEnemyAtLocation("", Point(630, 660));
+	addEnemyAtLocation("", Point(444, 444));
+	addEnemyAtLocation("", Point(333, 333));
+
+	addEnemyAtLocation("strong", Point(563, 300));
 }
 
 Level::~Level()
@@ -39,11 +42,12 @@ void Level::addPickupAtLocation(Point position)
 	pickups.push_back(pickup);
 };
 
-void Level::addEnemyAtLocation(Point position)
+void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	Enemy enemy(_resourceLocator->getSprite("Assets/Enemies/enemy.png"));
-	enemy.setPos(position);
-	enemies.push_back(enemy);
+	Enemy* enemy = _enemyBuilder.create(name);
+	enemy->setPos(position);
+	enemies.push_back(*enemy);
+	delete enemy;//
 };
 
 void Level::update()

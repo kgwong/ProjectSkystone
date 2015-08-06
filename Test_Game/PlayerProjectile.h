@@ -1,5 +1,7 @@
-#ifndef PLAYERPROJECTILE_H
-#define PLAYERPROJECTILE_H
+#ifndef PLAYER_PROJECTILE_H
+#define PLAYER_PROJECTILE_H
+
+#include <memory>
 
 #include "Animation.h"
 #include "Direction.h"
@@ -27,11 +29,11 @@ public:
 private:
 	bool _alive;
 	Animation* _animation;
-	RenderComponent _renderComponent;
+	std::shared_ptr<RenderComponent> _renderComponent; //lazy!!
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
 	DamageComponent _damageComponent;
 
 };
 
-#endif //PLAYERPROJECTILE_H
+#endif //PLAYER_PROJECTILE_H
