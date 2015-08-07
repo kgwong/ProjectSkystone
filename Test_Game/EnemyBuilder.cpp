@@ -17,7 +17,7 @@ EnemyBuilder::~EnemyBuilder()
 Enemy* EnemyBuilder::create(const std::string& enemyName)
 {
 	Enemy* enemy = new Enemy();
-	if (enemyName == "strong")
+	if (enemyName == "TestMobStrong")
 	{
 		Sprite* enemySprite = _resourceLocator->getSprite("Assets/Enemies/enemyStrong.png");
 		enemy->setRenderComponent(new StaticSpriteRenderer(enemySprite));
@@ -25,7 +25,7 @@ Enemy* EnemyBuilder::create(const std::string& enemyName)
 		enemy->setWidth(enemySprite->getWidth());
 		enemy->setHeight(enemySprite->getHeight());
 	}
-	else 
+	else if (enemyName == "TestMob1")
 	{
 		Sprite* enemySprite = _resourceLocator->getSprite("Assets/Enemies/enemy.png");
 		enemy->setRenderComponent(new StaticSpriteRenderer(enemySprite));

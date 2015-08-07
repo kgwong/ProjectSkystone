@@ -141,6 +141,7 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileArrangement.h" />
     <ClInclude Include="TileSet.h" />
+    <ClInclude Include="TileType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

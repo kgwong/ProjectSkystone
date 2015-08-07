@@ -1,15 +1,11 @@
 #include "Tile.h"
 
-Tile::Tile()
-{
-}
-
 Tile::Tile(GameWindow* window, 
 			SDL_Texture* tileSetImage, 
 			SDL_Rect tileRect, 
-			int tileType, 
+			TileType type, 
 			int r, int c, int size)
-	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), tileType(tileType)
+	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), tileType(type)
 {
 	position.x = c * size;
 	position.y = r * size;
@@ -17,6 +13,18 @@ Tile::Tile(GameWindow* window,
 	height = size;
 	_drawDestination.w = size;
 	_drawDestination.h = size;
+
+	switch (tileType)
+	{
+	case EMPTY:
+		_colliderComponent = nullptr;
+		break;
+	case SOLID:
+		_colliderComponent = std::make_shared<ColliderComponent>();
+		break;
+	default:
+		std::cout << "!!!!!" << std::endl;
+	}
 }
 
 
@@ -26,7 +34,8 @@ Tile::~Tile()
 
 void Tile::update()
 {
-	_colliderComponent.update(*this);
+	if (_colliderComponent)
+		_colliderComponent->update(*this);
 }
 
 void Tile::render()
@@ -40,7 +49,7 @@ void Tile::render()
 Component* Tile::getComponent(ComponentType type)
 {
 	if (type == ComponentType::COLLIDER)
-		return &_colliderComponent;
+		return _colliderComponent.get();
 	return nullptr;
 }
 

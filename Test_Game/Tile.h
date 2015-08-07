@@ -7,11 +7,14 @@
 #include "GameObject.h"
 #include "ColliderComponent.h"
 
+#include "TileType.h"
+#include <memory>
+
 class Tile : public GameObject
 {
 public:
-	Tile();
-	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, int tileType, int r, int c, int size);
+	Tile() {}//
+	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, TileType tileType, int r, int c, int size);
 	~Tile();
 
 	void update();
@@ -20,8 +23,7 @@ public:
 	virtual EntityType getType() const;
 	virtual Component* getComponent(ComponentType type);
 
-public:
-	int tileType; //should probably replace with enum or something more meaningful, rather than just an index
+
 
 private:
 	GameWindow* _window; 
@@ -29,7 +31,9 @@ private:
 	SDL_Rect _tileRect;
 	SDL_Rect _drawDestination;
 
-	ColliderComponent _colliderComponent;
+	TileType tileType;
+
+	std::shared_ptr<ColliderComponent> _colliderComponent;
 
 };
 

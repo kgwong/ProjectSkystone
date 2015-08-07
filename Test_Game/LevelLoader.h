@@ -3,12 +3,15 @@
 
 #include <string>
 
-#include "TileArrangement.h"
+#include "TileSet.h"
+
+class Level;
 
 class LevelLoader
 {
 public:
-	static TileArrangement load(const std::string& filepathm, TileSet* tileSet); 
+	static void loadTiles(const std::string& filepath, Level& level, TileSet* tileSet); 
+	static void loadEnemies(const std::string& filepath, Level& level);
 };
 
 #endif //LEVEL_LOADER_H

@@ -134,16 +134,16 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 
 		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
-			for (int c = owner.getPosX()/level.tileArrangement._tileSize; c <= (owner.getPosX()+owner.getWidth())/level.tileArrangement._tileSize; ++c)
+			for (int c = owner.getPosX()/level.tileArrangement.tileSize; c <= (owner.getPosX()+owner.getWidth())/level.tileArrangement.tileSize; ++c)
 			{
-				for(int r = owner.getPosY()/level.tileArrangement._tileSize; r <= (owner.getPosY()+owner.getHeight())/level.tileArrangement._tileSize; ++r)
+				for(int r = owner.getPosY()/level.tileArrangement.tileSize; r <= (owner.getPosY()+owner.getHeight())/level.tileArrangement.tileSize; ++r)
 				{
-					if (r < 0 || c < 0 || r >= level.tileArrangement._rows || c >= level.tileArrangement._cols)
+					if (r < 0 || c < 0 || r >= level.tileArrangement.rows || c >= level.tileArrangement.cols)
 						continue; //avoid out_of_range
 
-					Tile& tile = level.tileArrangement._tiles[r][c];
+					Tile& tile = level.tileArrangement.tiles[r][c];
 
-					if(tile.tileType == 1 && collider->checkCollision(tile))
+					if(collider->checkCollision(tile))
 						handleCollision(owner, tile, collider, axis);
 				}
 			}

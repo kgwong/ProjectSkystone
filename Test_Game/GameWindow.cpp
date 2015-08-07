@@ -9,6 +9,8 @@ GameWindow::GameWindow(std::string windowName, int width, int height)
 		MySDL_Error("SDL_CreateWindow");
 
 	
+
+	
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	if (renderer == nullptr)

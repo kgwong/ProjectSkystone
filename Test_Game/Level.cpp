@@ -7,13 +7,6 @@ Level::Level(GameWindow* window, ResourceLocator* resourceLocator)
 	_enemyBuilder(_resourceLocator)
 {
 	addPickupAtLocation(Point(100, 100));
-
-	addEnemyAtLocation("", Point(660, 660));
-	addEnemyAtLocation("", Point(630, 660));
-	addEnemyAtLocation("", Point(444, 444));
-	addEnemyAtLocation("", Point(333, 333));
-
-	addEnemyAtLocation("strong", Point(563, 300));
 }
 
 Level::~Level()
@@ -22,7 +15,9 @@ Level::~Level()
 
 void Level::load(const std::string& filepath, TileSet* tileSet)
 {
-	tileArrangement = LevelLoader::load(filepath, tileSet);
+	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet);
+	LevelLoader::loadEnemies(filepath + "Enemies", *this);
+
 }
 
 void Level::setPlayer(Player* p)
@@ -33,14 +28,14 @@ void Level::setPlayer(Player* p)
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
 {
 	playerProjectiles.push_back( PlayerProjectile(position, vel, _resourceLocator->getAnimation("Assets/Animations/playerProjectile.png"), dir) );
-};
+}
 
 void Level::addPickupAtLocation(Point position)
 {
 	Pickup pickup(_resourceLocator->getSprite("Assets/Pickups/pickup.png"));
 	pickup.setPos(position);
 	pickups.push_back(pickup);
-};
+}
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
@@ -48,7 +43,7 @@ void Level::addEnemyAtLocation(const std::string& name, Point position)
 	enemy->setPos(position);
 	enemies.push_back(*enemy);
 	delete enemy;//
-};
+}
 
 void Level::update()
 {
@@ -61,9 +56,9 @@ void Level::update()
 
 void Level::updateTiles()
 {
-	for (int r = 0; r < tileArrangement._rows; ++r)
-		for (int c = 0; c < tileArrangement._cols; ++c)
-			tileArrangement._tiles[r][c].update();
+	for (int r = 0; r < tileArrangement.rows; ++r)
+		for (int c = 0; c < tileArrangement.cols; ++c)
+			tileArrangement.tiles[r][c].update();
 }
 
 void Level::updatePlayer()
@@ -98,9 +93,9 @@ void Level::render()
 
 void Level::renderTiles() 
 {
-	for (int r = 0; r < tileArrangement._rows; ++r)
-		for (int c = 0; c < tileArrangement._cols; ++c)
-			tileArrangement._tiles[r][c].render();
+	for (int r = 0; r < tileArrangement.rows; ++r)
+		for (int c = 0; c < tileArrangement.cols; ++c)
+			tileArrangement.tiles[r][c].render();
 }
 
 void Level::renderEnemies()
@@ -125,10 +120,10 @@ void Level::renderPlayer()
 
 int Level::getLevelWidth() const
 {
-	return tileArrangement._cols * tileArrangement._tileSize;
+	return tileArrangement.cols * tileArrangement.tileSize;
 }
 
 int Level::getLevelHeight() const
 {
-	return tileArrangement._rows * tileArrangement._tileSize;
+	return tileArrangement.rows * tileArrangement.tileSize;
 }
