@@ -134,10 +134,12 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 
 		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
-			for (int c = owner.getPosX()/level.tileArrangement.tileSize; c <= (owner.getPosX()+owner.getWidth())/level.tileArrangement.tileSize; ++c)
+			for (int c = owner.getPosX()/level.tileArrangement.tileSize; c <= (owner.getPosX()+collider->getWidth())/level.tileArrangement.tileSize; ++c)
 			{
-				for(int r = owner.getPosY()/level.tileArrangement.tileSize; r <= (owner.getPosY()+owner.getHeight())/level.tileArrangement.tileSize; ++r)
+				for(int r = owner.getPosY()/level.tileArrangement.tileSize; r <= (owner.getPosY()+collider->getHeight())/level.tileArrangement.tileSize; ++r)
 				{
+					if (owner.getType() == EntityType::PLAYER && c >= level.tileArrangement.cols)
+						level.changeLevel(1234);
 					if (r < 0 || c < 0 || r >= level.tileArrangement.rows || c >= level.tileArrangement.cols)
 						continue; //avoid out_of_range
 
@@ -168,22 +170,24 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 
 void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, ColliderComponent* collider, Axis axis)
 {
+	//
+	ColliderComponent* otherCollider = static_cast<ColliderComponent*>(other.getComponent(ComponentType::COLLIDER));
 	switch(axis)
 	{
 		case Axis::X:
 			if (isMovingLeft())
-				owner.setPosX(other.getPosX() + other.getWidth());
+				owner.setPosX(otherCollider->getRight() - collider->getOffsetX());
 			else //isMovingRight
-				owner.setPosX(other.getPosX() - owner.getWidth());
+				owner.setPosX(otherCollider->getLeft() - collider->getWidth() - collider->getOffsetX());
 			setVelX(0);
 			break;
 
 		case Axis::Y:
 			if (isMovingUp())
-				owner.setPosY(other.getPosY() + other.getHeight());
+				owner.setPosY(otherCollider->getBottom() - collider->getOffsetY());
 			else //isMovingDown
 			{
-				owner.setPosY(other.getPosY() - owner.getHeight());
+				owner.setPosY(otherCollider->getTop() - collider->getHeight() - collider->getOffsetY());
 				_falling = false;
 			}
 			setVelY(0);

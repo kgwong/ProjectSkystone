@@ -72,6 +72,8 @@ void Enemy::onCollision(GameObject& other)
 void Enemy::setRenderComponent(RenderComponent* renderComponent)
 {
 	_renderComponent = std::shared_ptr<RenderComponent>(renderComponent);
+	//
+	_colliderComponent = ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
 }
 
 void Enemy::setHealthComponent(HealthComponent* healthComponent)

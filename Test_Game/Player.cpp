@@ -7,12 +7,10 @@
 Player::Player(ResourceLocator* resourceLocator)
 	: dir(Direction::RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
 	 _renderComponent(new AnimationRenderer(_animation)),
+	 _colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
 	 _shoot(false)
 {
-	width = _animation->getWidth();
-	height = _animation->getHeight();
 }
-
 
 Player::~Player()
 {
@@ -90,9 +88,9 @@ void Player::shoot(Level& level)
 }
 
 
-Component* Player::getComponent(const std::string& componentName)
+Component* Player::getComponent(ComponentType type)
 {
-	if (componentName == "Collider")
+	if (type == ComponentType::COLLIDER)
 		return &_colliderComponent;
 	else 
 		return nullptr;

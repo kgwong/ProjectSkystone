@@ -13,14 +13,17 @@
 #include "ResourceLocator.h"
 #include "EnemyBuilder.h"
 
+class MainGame;
+
 class Level
 {
 public:
-	Level(GameWindow* window, ResourceLocator* resourceLocator);
+	Level(MainGame* mainGame, GameWindow* window, ResourceLocator* resourceLocator);
 	~Level();
 
 	void load(const std::string& filepath, TileSet* tileSet);
 	void setPlayer(Player* player);
+	void changeLevel(int levelID);
 
 	void update();
 	void render();
@@ -40,6 +43,7 @@ public:
 	std::vector<Pickup> pickups;
 
 private:
+	MainGame* _mainGame;
 	GameWindow* _window;
 	ResourceLocator* _resourceLocator;
 	EnemyBuilder _enemyBuilder;

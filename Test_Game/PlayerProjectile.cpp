@@ -3,12 +3,13 @@
 #include "AnimationRenderer.h"
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation, Direction dir)
-	:_alive(true), _animation(animation), _damageComponent(10), _renderComponent(new AnimationRenderer(_animation))
+	:_alive(true), 
+	_animation(animation), //
+	_damageComponent(10), 
+	_renderComponent(new AnimationRenderer(_animation)),
+	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())
 {
 	_physicsComponent.enableGravity(false);
-
-	width = _animation->getWidth();
-	height = _animation->getHeight();
 
 	this->position = position; 
 

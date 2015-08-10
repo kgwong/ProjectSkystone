@@ -9,17 +9,12 @@ MainGame::MainGame()
 	_resourceLocator(&_window),
 	_player(&_resourceLocator),
 	_quit(false),
-	_currLevel(&_window, &_resourceLocator)
+	_currLevel(this, &_window, &_resourceLocator)
 {
-	_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-	_currLevel.setPlayer(&_player);
+	changeLevel(1);
 
 	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
-
-	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
-
-	_player.setPos(SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2);
 }
 
 
@@ -35,6 +30,24 @@ void MainGame::run()
 		update();
 		render();
 	}
+}
+
+void MainGame::changeLevel(int levelID)
+{
+	if (levelID == 1)
+	{
+		_currLevel = Level(this, &_window, &_resourceLocator);
+		_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+		_currLevel.setPlayer(&_player);
+	}
+	else
+	{
+		_currLevel = Level(this, &_window, &_resourceLocator);
+		_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest2"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+		_currLevel.setPlayer(&_player);
+	}
+	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
+
 }
 
 void MainGame::processInput()

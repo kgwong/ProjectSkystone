@@ -4,7 +4,8 @@
 enum TileType
 {
 	EMPTY = 0,
-	SOLID = 1
+	SOLID = 1,
+	TRANSITION = 2
 };
 
 #endif //TILE_TYPE_H

@@ -9,8 +9,6 @@ Tile::Tile(GameWindow* window,
 {
 	position.x = c * size;
 	position.y = r * size;
-	width = size;
-	height = size;
 	_drawDestination.w = size;
 	_drawDestination.h = size;
 
@@ -20,7 +18,10 @@ Tile::Tile(GameWindow* window,
 		_colliderComponent = nullptr;
 		break;
 	case SOLID:
-		_colliderComponent = std::make_shared<ColliderComponent>();
+		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, size, size);
+		break;
+	case TRANSITION:
+		_colliderComponent = std::make_shared<ColliderComponent>(size - 3, 0, 3, size);
 		break;
 	default:
 		std::cout << "!!!!!" << std::endl;

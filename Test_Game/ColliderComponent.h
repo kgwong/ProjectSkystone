@@ -6,20 +6,33 @@
 
 class ColliderComponent : public Component
 {
-private:
+public:
 	struct BoxCollider
 	{
 		int x;
 		int y;
-		int w;
-		int h;
+		int width;
+		int height;
 	};
 
 public:
 	ColliderComponent();
+	ColliderComponent(int offsetX, int offsetY, int width, int height);
+	ColliderComponent(BoxCollider collider);
 	virtual ~ColliderComponent();
 
 	void setCollider(BoxCollider newCollider); 
+
+	int getHeight();
+	int getWidth();
+
+	int getTop();
+	int getBottom();
+	int getLeft();
+	int getRight();
+
+	int getOffsetX();
+	int getOffsetY();
 
 	virtual void update(GameObject& owner);
 
@@ -27,7 +40,8 @@ public:
 	bool checkCollision(ColliderComponent* other);
 
 private:
-	BoxCollider collider;
+	BoxCollider _collider;
+	int _offsetX, _offsetY;
 };
 
 #endif //COLLIDERCOMPONENT_H

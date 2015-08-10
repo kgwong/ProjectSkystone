@@ -29,6 +29,8 @@ public:
 
 	void run();
 
+	 void changeLevel(int levelID);
+
 private:
 	GameWindow _window;
 	ResourceLocator _resourceLocator;

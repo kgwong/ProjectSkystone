@@ -16,6 +16,16 @@ void AnimationRenderer::update(GameObject& owner)
 	incrementFrame();
 }
 
+int AnimationRenderer::getWidth()
+{
+	return _animation->getWidth();
+}
+
+int AnimationRenderer::getHeight()
+{
+	return _animation->getHeight();
+}
+
 void AnimationRenderer::incrementFrame()
 {
 	_currFrame = (++_currFrame) % _animation->getNumFrames();

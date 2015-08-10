@@ -224,14 +224,14 @@
     <ClInclude Include="RenderComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="StaticSpriteRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileType.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticSpriteRenderer.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

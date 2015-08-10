@@ -3,10 +3,10 @@
 #include "StaticSpriteRenderer.h"
 
 Pickup::Pickup(Sprite* sprite)
-	:_alive(true), _renderComponent(new StaticSpriteRenderer(sprite))
+	:_alive(true), 
+	_renderComponent(new StaticSpriteRenderer(sprite)),
+	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())
 {
-	width = sprite->getWidth();
-	height = sprite->getHeight();
 }
 
 

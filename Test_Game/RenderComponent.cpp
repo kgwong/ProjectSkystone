@@ -1,6 +1,6 @@
 #include "RenderComponent.h"
 
-
+/*
 
 RenderComponent::RenderComponent()
 {
@@ -15,3 +15,6 @@ void RenderComponent::update(GameObject& owner)
 {
 	
 }
+
+
+*/

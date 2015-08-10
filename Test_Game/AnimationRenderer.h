@@ -14,6 +14,8 @@ public:
 
 	virtual void update(GameObject& owner);
 	
+	virtual int getWidth();
+	virtual int getHeight();
 
 private:
 	Animation* _animation;
