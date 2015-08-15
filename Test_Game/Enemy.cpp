@@ -57,12 +57,12 @@ EntityType Enemy::getType() const
 	return EntityType::ENEMY;
 }
 
-void Enemy::onCollision(GameObject& other)
+void Enemy::onCollision(CollisionInfo& collision)
 {
-	if (other.getType() == EntityType::PLAYER_PROJECTILE)
+	if (collision.other.getType() == EntityType::PLAYER_PROJECTILE)
 	{
 		//well this is ugly
-		takeDamage(*((int*)other.getComponent(ComponentType::DAMAGE)->getAttribute("damage")));
+		takeDamage(*((int*)collision.other.getComponent(ComponentType::DAMAGE)->getAttribute("damage")));
 	}
 }
 

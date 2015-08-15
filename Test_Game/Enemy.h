@@ -30,7 +30,7 @@ public:
 	virtual std::string getName();
 	virtual Component* getComponent(ComponentType type);
 	virtual EntityType getType() const;
-	virtual void onCollision(GameObject& other);
+	virtual void onCollision(CollisionInfo& collision);
 	virtual void onDeath(Level& level);
 
 private:

@@ -7,7 +7,6 @@
 struct TileArrangement
 {
 	std::vector<std::vector<Tile>> tiles;
-	int tileSize;
 	int rows;
 	int cols;
 };

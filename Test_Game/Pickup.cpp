@@ -35,9 +35,9 @@ EntityType Pickup::getType() const
 	return EntityType::PICKUP;
 }
 
-void Pickup::onCollision(GameObject& other)
+void Pickup::onCollision(CollisionInfo& collision)
 {
-	if (other.getType() == EntityType::PLAYER)
+	if (collision.other.getType() == EntityType::PLAYER)
 		_alive = false;
 }
 

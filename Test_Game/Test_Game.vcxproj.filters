@@ -233,5 +233,8 @@
     <ClInclude Include="StaticSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

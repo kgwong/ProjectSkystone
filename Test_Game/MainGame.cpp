@@ -9,9 +9,11 @@ MainGame::MainGame()
 	_resourceLocator(&_window),
 	_player(&_resourceLocator),
 	_quit(false),
-	_currLevel(this, &_window, &_resourceLocator)
+	_currLevel(this, &_window, &_resourceLocator),
+	_nextLevelID(-1)
 {
-	changeLevel(1);
+	_nextLevelID = 1;
+	changeLevel();
 
 	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
@@ -32,21 +34,33 @@ void MainGame::run()
 	}
 }
 
-void MainGame::changeLevel(int levelID)
+void MainGame::setNextLevel(int levelID)
 {
-	if (levelID == 1)
+	_nextLevelID = levelID;
+}
+
+void MainGame::changeLevel()
+{
+	if (_nextLevelID != -1)
 	{
-		_currLevel = Level(this, &_window, &_resourceLocator);
-		_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-		_currLevel.setPlayer(&_player);
+		if (_nextLevelID == 1)
+		{
+			_currLevel = Level(this, &_window, &_resourceLocator);
+			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+			_currLevel.addAdjacentLevel(Direction::RIGHT, 2);
+			_currLevel.setPlayer(&_player);
+		}
+		else if (_nextLevelID == 2)
+		{
+			_currLevel = Level(this, &_window, &_resourceLocator);
+			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest2"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+			_currLevel.addAdjacentLevel(Direction::LEFT, 1);
+			_currLevel.setPlayer(&_player);
+		}
+		_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
+
+		_nextLevelID = -1;
 	}
-	else
-	{
-		_currLevel = Level(this, &_window, &_resourceLocator);
-		_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest2"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-		_currLevel.setPlayer(&_player);
-	}
-	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
 
 }
 
@@ -80,6 +94,7 @@ void MainGame::update()
 {
 	//Sleep(50);
 	_currLevel.update();
+	changeLevel();
 }
 
 void MainGame::render()

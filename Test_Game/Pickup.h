@@ -22,7 +22,7 @@ public:
 	bool isDead();
 
 	virtual EntityType getType() const;
-	virtual void onCollision(GameObject& other);
+	virtual void onCollision(CollisionInfo& collision);
 	virtual Component* getComponent(ComponentType type);
 
 private:

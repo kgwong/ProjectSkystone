@@ -24,19 +24,27 @@ public:
 	static const int SCREEN_WIDTH  = 640;
 	static const int SCREEN_HEIGHT = 480;
 
+	static const int TILE_SIZE = 45;
+
+	static const int BLOCK_WIDTH = SCREEN_WIDTH / TILE_SIZE;
+	static const int BLOCK_HEIGHT = SCREEN_HEIGHT / TILE_SIZE;
+
 	MainGame();
 	~MainGame();
 
 	void run();
 
-	 void changeLevel(int levelID);
+	 void setNextLevel(int levelID);
+	 void changeLevel();
 
 private:
 	GameWindow _window;
 	ResourceLocator _resourceLocator;
 
 	MusicPlayer _musicPlayer;
+
 	Level _currLevel;
+	int _nextLevelID;
 
 	Player _player;
 

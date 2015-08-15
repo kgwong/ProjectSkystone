@@ -9,6 +9,7 @@
 #include "EntityType.h"
 
 #include "ComponentType.h"
+#include "CollisionInfo.h"
 
 class Level;
 
@@ -46,7 +47,7 @@ public:
 	virtual Component* getComponent(ComponentType type);
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
-	virtual void onCollision(GameObject& other) {};
+	virtual void onCollision(CollisionInfo& collision) {};
 	virtual void onDeath(Level& level) {};
 
 protected:

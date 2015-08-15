@@ -1,6 +1,7 @@
 #include "LevelLoader.h"
 
 #include "Level.h"
+#include "MainGame.h"
 
 #include <fstream>
 
@@ -15,7 +16,6 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level, TileSet* 
 
 	level.tileArrangement.rows = numRows;
 	level.tileArrangement.cols = numCols;
-	level.tileArrangement.tileSize = tileSet->getTileSize();
 	level.tileArrangement.tiles = std::vector<std::vector<Tile>> (numRows, std::vector<Tile>(numCols));
 
 	for (int r = 0; r < numRows; ++r)

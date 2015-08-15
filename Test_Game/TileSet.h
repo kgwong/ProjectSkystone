@@ -20,7 +20,6 @@ public:
 	SDL_Rect getTile(int tileIndex);
 	Tile createTile(int tileIndex, int r, int c);
 
-	int getTileSize();
 	int getNumTiles();
 
 private:
@@ -30,8 +29,6 @@ private:
 	std::vector<SDL_Rect> _tiles;
 
 	int _numTiles;
-
-	int _tileSize; //square tiles, please
 };
 
 #endif //TILESET_H

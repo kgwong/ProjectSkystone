@@ -34,7 +34,7 @@ public:
 	virtual Component* getComponent(ComponentType type);
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
-	virtual void onCollision(GameObject& other);
+	virtual void onCollision(CollisionInfo& collision);
 
 	void render();
 

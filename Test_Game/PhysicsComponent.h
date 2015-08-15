@@ -49,7 +49,7 @@ private:
 
 	void updatePosition(GameObject& owner, Axis axis);
 	void updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis);
-	void handleCollision(GameObject& owner, GameObject& other, ColliderComponent* collider, Axis axis);
+	void handleCollision(GameObject& owner, GameObject& other, Level& level, ColliderComponent* collider, Axis axis);
 
 private:
 	void enactGravity();

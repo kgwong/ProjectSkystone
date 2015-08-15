@@ -14,7 +14,7 @@ class Tile : public GameObject
 {
 public:
 	Tile() {}//
-	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, TileType tileType, int r, int c, int size);
+	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, TileType tileType, int r, int c);
 	~Tile();
 
 	void update();
@@ -23,7 +23,9 @@ public:
 	virtual EntityType getType() const;
 	virtual Component* getComponent(ComponentType type);
 
+	void onCollision(CollisionInfo& collision);
 
+	TileType getTileType();
 
 private:
 	GameWindow* _window; 
@@ -31,7 +33,7 @@ private:
 	SDL_Rect _tileRect;
 	SDL_Rect _drawDestination;
 
-	TileType tileType;
+	TileType _tileType;
 
 	std::shared_ptr<ColliderComponent> _colliderComponent;
 

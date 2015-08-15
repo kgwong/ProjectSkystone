@@ -13,6 +13,8 @@
 #include "ResourceLocator.h"
 #include "EnemyBuilder.h"
 
+#include <map>
+
 class MainGame;
 
 class Level
@@ -23,7 +25,9 @@ public:
 
 	void load(const std::string& filepath, TileSet* tileSet);
 	void setPlayer(Player* player);
-	void changeLevel(int levelID);
+
+	void addAdjacentLevel(Direction dir, int levelID);
+	void setNextLevel(Direction dir);
 
 	void update();
 	void render();
@@ -47,6 +51,9 @@ private:
 	GameWindow* _window;
 	ResourceLocator* _resourceLocator;
 	EnemyBuilder _enemyBuilder;
+
+	std::map<Direction, int> _adjacentLevels;
+	//std::vector<int> _adjacentLevelIDs;
 
 private:
 	void updateTiles();

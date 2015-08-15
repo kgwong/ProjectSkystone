@@ -5,10 +5,11 @@
 #include "AnimationRenderer.h"
 
 Player::Player(ResourceLocator* resourceLocator)
-	: dir(Direction::RIGHT), _animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
-	 _renderComponent(new AnimationRenderer(_animation)),
-	 _colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
-	 _shoot(false)
+	: dir(Direction::RIGHT), 
+	_animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
+	_renderComponent(new AnimationRenderer(_animation)),
+	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
+	_shoot(false)
 {
 }
 
@@ -73,6 +74,15 @@ void Player::update(Level& level)
 	if (_shoot)
 		shoot(level);
 
+	if (position.x > level.getLevelWidth())
+		level.setNextLevel(Direction::RIGHT);
+	else if (position.x < 0)
+		level.setNextLevel(Direction::LEFT);
+	else if (position.y > level.getLevelHeight())
+		level.setNextLevel(Direction::DOWN);
+	else if (position.y < 0)
+		level.setNextLevel(Direction::UP);
+
 }
 
 void Player::jump()
@@ -106,9 +116,9 @@ EntityType Player::getType() const
 	return EntityType::PLAYER;
 }
 
-void Player::onCollision(GameObject& other)
+void Player::onCollision(CollisionInfo& collision)
 {
-	if (other.getType() == EntityType::PICKUP)
+	if (collision.other.getType() == EntityType::PICKUP)
 	{
 		std::cout << "thing acquired! yay!" << std::endl;
 	}

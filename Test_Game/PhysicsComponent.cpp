@@ -3,6 +3,10 @@
 #include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Level.h"
+#include "MainGame.h"
+#include "CollisionInfo.h"
+
+#include <algorithm>
 
 PhysicsComponent::PhysicsComponent()
 	:_velX(0), _velY(0),
@@ -134,19 +138,19 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 
 		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
-			for (int c = owner.getPosX()/level.tileArrangement.tileSize; c <= (owner.getPosX()+collider->getWidth())/level.tileArrangement.tileSize; ++c)
-			{
-				for(int r = owner.getPosY()/level.tileArrangement.tileSize; r <= (owner.getPosY()+collider->getHeight())/level.tileArrangement.tileSize; ++r)
-				{
-					if (owner.getType() == EntityType::PLAYER && c >= level.tileArrangement.cols)
-						level.changeLevel(1234);
-					if (r < 0 || c < 0 || r >= level.tileArrangement.rows || c >= level.tileArrangement.cols)
-						continue; //avoid out_of_range
+			int startC = std::max(0, owner.getPosX() / MainGame::TILE_SIZE);
+			int startR = std::max(0, owner.getPosY() / MainGame::TILE_SIZE);
+			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider->getWidth()) / MainGame::TILE_SIZE);
+			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider->getHeight()) / MainGame::TILE_SIZE);
 
+			for (int c = startC; c <= endC; ++c)
+			{
+				for(int r = startR; r <= endR; ++r)
+				{						
 					Tile& tile = level.tileArrangement.tiles[r][c];
 
-					if(collider->checkCollision(tile))
-						handleCollision(owner, tile, collider, axis);
+					if (collider->checkCollision(tile))
+						handleCollision(owner, tile, level, collider, axis);
 				}
 			}
 		}
@@ -155,20 +159,20 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 		{
 			for (auto& enemy : level.enemies)
 				if (collider->checkCollision(enemy))
-					handleCollision(owner, enemy, collider, axis);
+					handleCollision(owner, enemy, level, collider, axis);
 		}
 
 		if (owner.getType() == EntityType::PLAYER) //only player has collision with pickups 
 		{
 			for (auto& pickup : level.pickups)
 				if (collider->checkCollision(pickup))
-					handleCollision(owner, pickup, collider, axis); //make this a non-physical collision!
+					handleCollision(owner, pickup, level, collider, axis); //make this a non-physical collision!
 		}
 	}
 
 }
 
-void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, ColliderComponent* collider, Axis axis)
+void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Level& level, ColliderComponent* collider, Axis axis)
 {
 	//
 	ColliderComponent* otherCollider = static_cast<ColliderComponent*>(other.getComponent(ComponentType::COLLIDER));
@@ -196,6 +200,6 @@ void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Col
 			break;
 	}
 	collider->update(owner); 
-	other.onCollision(owner);
-	owner.onCollision(other);
+	other.onCollision(CollisionInfo{level, owner, *otherCollider});
+	owner.onCollision(CollisionInfo{level, other, *otherCollider});
 }

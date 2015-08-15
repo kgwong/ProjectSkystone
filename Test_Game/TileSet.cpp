@@ -7,7 +7,9 @@
 
 TileSet::TileSet(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
 					SpritesheetInfo spritesheetInfo)
-	: _window(window), _texture(texture), _numTiles(spritesheetInfo.num), _tileSize(spritesheetInfo.width)
+	: _window(window), 
+	_texture(texture), 
+	_numTiles(spritesheetInfo.num) 
 {
 	assert(spritesheetInfo.width == spritesheetInfo.height); //square tiles only
 	calculateSpriteLocations(_tiles, spritesheetInfo);
@@ -29,12 +31,7 @@ SDL_Rect TileSet::getTile(int tileIndex)
 
 Tile TileSet::createTile(int tileIndex, int r, int c)
 {
-	return Tile(_window, _texture.get(), _tiles[tileIndex], static_cast<TileType>(tileIndex), r, c, _tileSize);
-}
-
-int TileSet::getTileSize()
-{
-	return _tileSize;
+	return Tile(_window, _texture.get(), _tiles[tileIndex], static_cast<TileType>(tileIndex), r, c);
 }
 
 int TileSet::getNumTiles()

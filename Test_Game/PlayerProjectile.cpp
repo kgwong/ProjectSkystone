@@ -47,7 +47,7 @@ void PlayerProjectile::render()
 	_renderComponent->update(*this);
 }
 
-void PlayerProjectile::onCollision(GameObject& other)
+void PlayerProjectile::onCollision(CollisionInfo& collision)
 {
 	_alive = false;
 }

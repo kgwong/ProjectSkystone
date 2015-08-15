@@ -3,6 +3,8 @@
 #include "LevelLoader.h"
 #include "MainGame.h"
 
+#include <cassert>
+
 Level::Level(MainGame* mainGame, GameWindow* window, ResourceLocator* resourceLocator)
 	:_mainGame(mainGame),
 	_window(window), 
@@ -31,9 +33,15 @@ void Level::setPlayer(Player* p)
 	player->setPos(getLevelWidth()/ 2 + 100, getLevelHeight() / 2);
 }
 
-void Level::changeLevel(int levelID)
+void Level::addAdjacentLevel(Direction dir, int levelID)
 {
-	_mainGame->changeLevel(levelID);
+	_adjacentLevels[dir] = levelID;
+}
+
+void Level::setNextLevel(Direction dir)
+{
+	if (_adjacentLevels.count(dir))
+		_mainGame->setNextLevel(_adjacentLevels[dir]);
 }
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
@@ -131,10 +139,10 @@ void Level::renderPlayer()
 
 int Level::getLevelWidth() const
 {
-	return tileArrangement.cols * tileArrangement.tileSize;
+	return tileArrangement.cols * MainGame::TILE_SIZE;
 }
 
 int Level::getLevelHeight() const
 {
-	return tileArrangement.rows * tileArrangement.tileSize;
+	return tileArrangement.rows * MainGame::TILE_SIZE;
 }

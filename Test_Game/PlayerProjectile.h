@@ -23,7 +23,7 @@ public:
 
 	Component* getComponent(ComponentType type);
 
-	virtual void onCollision(GameObject& other);
+	virtual void onCollision(CollisionInfo& collision);
 	virtual EntityType getType() const;
 
 private:

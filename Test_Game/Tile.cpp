@@ -1,27 +1,30 @@
 #include "Tile.h"
 
+#include "Level.h"
+#include "MainGame.h"
+
 Tile::Tile(GameWindow* window, 
 			SDL_Texture* tileSetImage, 
 			SDL_Rect tileRect, 
 			TileType type, 
-			int r, int c, int size)
-	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), tileType(type)
+			int r, int c)
+	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), _tileType(type)
 {
-	position.x = c * size;
-	position.y = r * size;
-	_drawDestination.w = size;
-	_drawDestination.h = size;
+	position.x = c * MainGame::TILE_SIZE;
+	position.y = r * MainGame::TILE_SIZE;
+	_drawDestination.w = MainGame::TILE_SIZE;
+	_drawDestination.h = MainGame::TILE_SIZE;
 
-	switch (tileType)
+	switch (_tileType)
 	{
 	case EMPTY:
 		_colliderComponent = nullptr;
 		break;
 	case SOLID:
-		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, size, size);
+		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, MainGame::TILE_SIZE, MainGame::TILE_SIZE);
 		break;
 	case TRANSITION:
-		_colliderComponent = std::make_shared<ColliderComponent>(size - 3, 0, 3, size);
+		//_colliderComponent = std::make_shared<ColliderComponent>(size - 3, 0, 3, size);
 		break;
 	default:
 		std::cout << "!!!!!" << std::endl;
@@ -52,6 +55,15 @@ Component* Tile::getComponent(ComponentType type)
 	if (type == ComponentType::COLLIDER)
 		return _colliderComponent.get();
 	return nullptr;
+}
+
+void Tile::onCollision(CollisionInfo& collision)
+{
+}
+
+TileType Tile::getTileType()
+{
+	return _tileType;
 }
 
 EntityType Tile::getType() const
