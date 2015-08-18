@@ -16,9 +16,12 @@
 #include <map>
 
 class MainGame;
+class LevelLoader;
 
 class Level
 {
+	friend LevelLoader;
+
 public:
 	Level(MainGame* mainGame, GameWindow* window, ResourceLocator* resourceLocator);
 	~Level();
@@ -26,11 +29,13 @@ public:
 	void load(const std::string& filepath, TileSet* tileSet);
 	void setPlayer(Player* player);
 
-	void addAdjacentLevel(Direction dir, int levelID);
-	void setNextLevel(Direction dir);
-
 	void update();
 	void render();
+
+	int getID();
+
+	int getBlockWidth();
+	int getBlockHeight();
 
 	int getLevelWidth() const;
 	int getLevelHeight() const;
@@ -52,8 +57,8 @@ private:
 	ResourceLocator* _resourceLocator;
 	EnemyBuilder _enemyBuilder;
 
-	std::map<Direction, int> _adjacentLevels;
-	//std::vector<int> _adjacentLevelIDs;
+	int _levelID;
+	int _blockWidth, _blockHeight;
 
 private:
 	void updateTiles();

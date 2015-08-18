@@ -1,7 +1,7 @@
 #include "Tile.h"
 
 #include "Level.h"
-#include "MainGame.h"
+#include "GameConstants.h"
 
 Tile::Tile(GameWindow* window, 
 			SDL_Texture* tileSetImage, 
@@ -10,10 +10,10 @@ Tile::Tile(GameWindow* window,
 			int r, int c)
 	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), _tileType(type)
 {
-	position.x = c * MainGame::TILE_SIZE;
-	position.y = r * MainGame::TILE_SIZE;
-	_drawDestination.w = MainGame::TILE_SIZE;
-	_drawDestination.h = MainGame::TILE_SIZE;
+	position.x = c * Constants::TILE_SIZE;
+	position.y = r * Constants::TILE_SIZE;
+	_drawDestination.w = Constants::TILE_SIZE;
+	_drawDestination.h = Constants::TILE_SIZE;
 
 	switch (_tileType)
 	{
@@ -21,7 +21,7 @@ Tile::Tile(GameWindow* window,
 		_colliderComponent = nullptr;
 		break;
 	case SOLID:
-		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, MainGame::TILE_SIZE, MainGame::TILE_SIZE);
+		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE);
 		break;
 	case TRANSITION:
 		//_colliderComponent = std::make_shared<ColliderComponent>(size - 3, 0, 3, size);

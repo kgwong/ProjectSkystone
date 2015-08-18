@@ -3,7 +3,7 @@
 #include "ColliderComponent.h"
 #include "GameObject.h"
 #include "Level.h"
-#include "MainGame.h"
+#include "GameConstants.h"
 #include "CollisionInfo.h"
 
 #include <algorithm>
@@ -138,10 +138,10 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 
 		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
-			int startC = std::max(0, owner.getPosX() / MainGame::TILE_SIZE);
-			int startR = std::max(0, owner.getPosY() / MainGame::TILE_SIZE);
-			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider->getWidth()) / MainGame::TILE_SIZE);
-			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider->getHeight()) / MainGame::TILE_SIZE);
+			int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
+			int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
+			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider->getWidth()) / Constants::TILE_SIZE);
+			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider->getHeight()) / Constants::TILE_SIZE);
 
 			for (int c = startC; c <= endC; ++c)
 			{
@@ -155,7 +155,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 			}
 		}
 
-		if (owner.getType() != EntityType::ENEMY)
+		if (owner.getType() == EntityType::PLAYER || owner.getType() == EntityType::PLAYER_PROJECTILE )
 		{
 			for (auto& enemy : level.enemies)
 				if (collider->checkCollision(enemy))

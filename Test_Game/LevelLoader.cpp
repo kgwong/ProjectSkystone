@@ -1,7 +1,7 @@
 #include "LevelLoader.h"
 
 #include "Level.h"
-#include "MainGame.h"
+#include "GameConstants.h"
 
 #include <fstream>
 
@@ -11,8 +11,13 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level, TileSet* 
 	if (!ifs)
 		std::cout << "Failed to load: " << filepath << std::endl;
 
-	int numRows, numCols;
-	ifs >> numCols >> numRows;
+	ifs >> level._levelID;
+
+	int blockWidth, blockHeight;
+	ifs >> blockWidth >> blockHeight;
+
+	int numRows = blockHeight * Constants::TILES_PER_BLOCK_HEIGHT;
+	int numCols = blockWidth * Constants::TILES_PER_BLOCK_WIDTH;
 
 	level.tileArrangement.rows = numRows;
 	level.tileArrangement.cols = numCols;

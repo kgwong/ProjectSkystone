@@ -11,7 +11,6 @@ TileSet::TileSet(GameWindow* window, std::shared_ptr<SDL_Texture> texture,
 	_texture(texture), 
 	_numTiles(spritesheetInfo.num) 
 {
-	assert(spritesheetInfo.width == spritesheetInfo.height); //square tiles only
 	calculateSpriteLocations(_tiles, spritesheetInfo);
 }
 

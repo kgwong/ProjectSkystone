@@ -2,6 +2,7 @@
 
 #include "LevelLoader.h"
 #include "MainGame.h"
+#include "GameConstants.h"
 
 #include <cassert>
 
@@ -31,17 +32,6 @@ void Level::setPlayer(Player* p)
 {
 	player = p;
 	player->setPos(getLevelWidth()/ 2 + 100, getLevelHeight() / 2);
-}
-
-void Level::addAdjacentLevel(Direction dir, int levelID)
-{
-	_adjacentLevels[dir] = levelID;
-}
-
-void Level::setNextLevel(Direction dir)
-{
-	if (_adjacentLevels.count(dir))
-		_mainGame->setNextLevel(_adjacentLevels[dir]);
 }
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
@@ -110,6 +100,21 @@ void Level::render()
 	renderPickups();
 }
 
+int Level::getID()
+{
+	return _levelID;
+}
+
+int Level::getBlockWidth()
+{
+	return _blockWidth;
+}
+
+int Level::getBlockHeight()
+{
+	return _blockHeight;
+}
+
 void Level::renderTiles() 
 {
 	for (int r = 0; r < tileArrangement.rows; ++r)
@@ -139,10 +144,10 @@ void Level::renderPlayer()
 
 int Level::getLevelWidth() const
 {
-	return tileArrangement.cols * MainGame::TILE_SIZE;
+	return tileArrangement.cols * Constants::TILE_SIZE;
 }
 
 int Level::getLevelHeight() const
 {
-	return tileArrangement.rows * MainGame::TILE_SIZE;
+	return tileArrangement.rows * Constants::TILE_SIZE;
 }

@@ -14,6 +14,8 @@ MainGame::MainGame()
 {
 	_nextLevelID = 1;
 	changeLevel();
+	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
+
 
 	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
@@ -47,14 +49,12 @@ void MainGame::changeLevel()
 		{
 			_currLevel = Level(this, &_window, &_resourceLocator);
 			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-			_currLevel.addAdjacentLevel(Direction::RIGHT, 2);
 			_currLevel.setPlayer(&_player);
 		}
 		else if (_nextLevelID == 2)
 		{
 			_currLevel = Level(this, &_window, &_resourceLocator);
 			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest2"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-			_currLevel.addAdjacentLevel(Direction::LEFT, 1);
 			_currLevel.setPlayer(&_player);
 		}
 		_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());

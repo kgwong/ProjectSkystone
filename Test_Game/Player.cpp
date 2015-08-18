@@ -74,15 +74,6 @@ void Player::update(Level& level)
 	if (_shoot)
 		shoot(level);
 
-	if (position.x > level.getLevelWidth())
-		level.setNextLevel(Direction::RIGHT);
-	else if (position.x < 0)
-		level.setNextLevel(Direction::LEFT);
-	else if (position.y > level.getLevelHeight())
-		level.setNextLevel(Direction::DOWN);
-	else if (position.y < 0)
-		level.setNextLevel(Direction::UP);
-
 }
 
 void Player::jump()

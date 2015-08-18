@@ -87,6 +87,7 @@
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Axis.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="CollisionInfo.h" />
@@ -118,12 +120,14 @@
     <ClInclude Include="EnemyBuilder.h" />
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="Errors.h" />
+    <ClInclude Include="GameConstants.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelMap.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PlayerProjectile.h" />
