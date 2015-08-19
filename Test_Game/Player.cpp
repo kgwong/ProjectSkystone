@@ -73,6 +73,21 @@ void Player::update(Level& level)
 
 	if (_shoot)
 		shoot(level);
+	
+	if (_colliderComponent.getLeft() < 0)
+		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::LEFT );
+	else if (_colliderComponent.getRight() > level.getLevelWidth())
+		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::RIGHT);
+	else if (_colliderComponent.getTop() < 0)
+		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::UP);
+	else if (_colliderComponent.getBottom() > level.getLevelHeight())
+		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::DOWN);
+	
+	_oldBlock = Block::getBlock(getPos());
+	_oldPosInBlock = Point{ getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
+							getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
+	//printCoord(_oldBlock.r, _oldBlock.c);
+	//printCoord(_oldPosInBlock.x, _oldPosInBlock.y);
 
 }
 

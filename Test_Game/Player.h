@@ -6,11 +6,13 @@
 #include "GameWindow.h"
 #include "Animation.h"
 #include "Direction.h"
+#include "Block.h"
 
 #include "RenderComponent.h"
 #include "HealthComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
+
 
 #include "ResourceLocator.h"
 
@@ -49,7 +51,8 @@ private:
 	PhysicsComponent _physicsComponent;
 	ColliderComponent _colliderComponent;
 
-
+	Block _oldBlock;
+	Point _oldPosInBlock;
 
 	Direction dir; 
 

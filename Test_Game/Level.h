@@ -17,22 +17,28 @@
 
 class MainGame;
 class LevelLoader;
+class LevelMap;
 
 class Level
 {
 	friend LevelLoader;
 
 public:
-	Level(MainGame* mainGame, GameWindow* window, ResourceLocator* resourceLocator);
+	Level(MainGame* mainGame,
+		GameWindow* window,
+		ResourceLocator* resourceLocator,
+		LevelMap* levelMap);
 	~Level();
 
 	void load(const std::string& filepath, TileSet* tileSet);
-	void setPlayer(Player* player);
+	void setPlayer(Player* player, Point newPlayerPosition);
 
 	void update();
 	void render();
 
 	int getID();
+
+	void setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir);
 
 	int getBlockWidth();
 	int getBlockHeight();
@@ -56,6 +62,7 @@ private:
 	GameWindow* _window;
 	ResourceLocator* _resourceLocator;
 	EnemyBuilder _enemyBuilder;
+	LevelMap* _levelMap;
 
 	int _levelID;
 	int _blockWidth, _blockHeight;

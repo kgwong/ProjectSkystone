@@ -3,18 +3,22 @@
 #include "LevelLoader.h"
 #include "MainGame.h"
 #include "GameConstants.h"
+#include "LevelMap.h"
 
 #include <cassert>
 
-Level::Level(MainGame* mainGame, GameWindow* window, ResourceLocator* resourceLocator)
+Level::Level(MainGame* mainGame,
+	GameWindow* window,
+	ResourceLocator* resourceLocator,
+	LevelMap* levelMap)
 	:_mainGame(mainGame),
-	_window(window), 
+	_window(window),
 	_resourceLocator(resourceLocator),
-	_enemyBuilder(_resourceLocator)
+	_enemyBuilder(_resourceLocator),
+	_levelMap(levelMap)
 {
 	addPickupAtLocation(Point(100, 100));
 }
-
 
 
 Level::~Level()
@@ -28,10 +32,10 @@ void Level::load(const std::string& filepath, TileSet* tileSet)
 
 }
 
-void Level::setPlayer(Player* p)
+void Level::setPlayer(Player* p, Point newPlayerPosition)
 {
 	player = p;
-	player->setPos(getLevelWidth()/ 2 + 100, getLevelHeight() / 2);
+	player->setPos(newPlayerPosition);
 }
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
@@ -103,6 +107,39 @@ void Level::render()
 int Level::getID()
 {
 	return _levelID;
+}
+
+void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
+{
+	Block nextBlock = _levelMap->getAdjBlock(oldBlock + _levelMap->getBaseBlock(_levelID), dir);
+	int nextLevelID = _levelMap->getLevelID(nextBlock);
+
+	Block nextBaseBlock = _levelMap->getBaseBlock(nextLevelID);
+	Block newRelativeBlock{ nextBlock.r - nextBaseBlock.r,
+							nextBlock.c - nextBaseBlock.c };
+	
+
+	switch (dir)
+	{
+	case Direction::UP:
+		oldPlayerPosition.y = Constants::BLOCK_HEIGHT_IN_PIXELS - 2 * Constants::TILE_SIZE;
+		break;
+	case Direction::DOWN:
+		oldPlayerPosition.y = 2 * Constants::TILE_SIZE;
+		break;
+	case Direction::LEFT:
+		oldPlayerPosition.x = Constants::BLOCK_WIDTH_IN_PIXELS - 2 * Constants::TILE_SIZE;
+		break;
+	case Direction::RIGHT:
+		oldPlayerPosition.x = 2 * Constants::TILE_SIZE;
+		break;
+	}
+
+
+	Point newPlayerPosition{ newRelativeBlock.c * Constants::BLOCK_WIDTH_IN_PIXELS + oldPlayerPosition.x,
+								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosition.y};
+
+	_mainGame->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
 int Level::getBlockWidth()

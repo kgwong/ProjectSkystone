@@ -9,13 +9,18 @@ MainGame::MainGame()
 	_resourceLocator(&_window),
 	_player(&_resourceLocator),
 	_quit(false),
-	_currLevel(this, &_window, &_resourceLocator),
+	_levelMap(10, 10),
+	_currLevel(this, &_window, &_resourceLocator, &_levelMap),
 	_nextLevelID(-1)
 {
-	_nextLevelID = 1;
-	changeLevel();
-	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
+	_levelMap.addLevel(1, 2, 2, 1, 1);
+	_levelMap.addLevel(2, 1, 2, 1, 3);
+	_levelMap.addLevel(3, 2, 1, 0, 2);
 
+	_currLevel = Level(this, &_window, &_resourceLocator, &_levelMap);
+	_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+	_currLevel.setPlayer(&_player, Point{ _currLevel.getLevelWidth() / 2, _currLevel.getLevelHeight() / 2 });
+	_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
 
 	_musicPlayer.loadSong(_resourceLocator.getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
@@ -36,9 +41,10 @@ void MainGame::run()
 	}
 }
 
-void MainGame::setNextLevel(int levelID)
+void MainGame::setNextLevel(int levelID, Point newPlayerPosition)
 {
 	_nextLevelID = levelID;
+	_newPlayerPosition = newPlayerPosition;
 }
 
 void MainGame::changeLevel()
@@ -47,16 +53,20 @@ void MainGame::changeLevel()
 	{
 		if (_nextLevelID == 1)
 		{
-			_currLevel = Level(this, &_window, &_resourceLocator);
+			_currLevel = Level(this, &_window, &_resourceLocator, &_levelMap);
 			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-			_currLevel.setPlayer(&_player);
 		}
 		else if (_nextLevelID == 2)
 		{
-			_currLevel = Level(this, &_window, &_resourceLocator);
+			_currLevel = Level(this, &_window, &_resourceLocator, &_levelMap);
 			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest2"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
-			_currLevel.setPlayer(&_player);
 		}
+		else if (_nextLevelID == 3)
+		{
+			_currLevel = Level(this, &_window, &_resourceLocator, &_levelMap);
+			_currLevel.load(_resourceLocator.getFullPath("Levels/LevelTest3"), _resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+		}
+		_currLevel.setPlayer(&_player, _newPlayerPosition);
 		_window.camera.setLevelBounds(_currLevel.getLevelWidth(), _currLevel.getLevelHeight());
 
 		_nextLevelID = -1;
@@ -76,6 +86,8 @@ void MainGame::processInput()
 			case SDL_KEYDOWN:
 				std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
 				_player.handleInput(e);
+				if (e.key.keysym.sym == SDLK_p)
+					_levelMap.print();
 				break;
 			case SDL_MOUSEMOTION:
 				std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;

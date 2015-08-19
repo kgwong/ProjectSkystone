@@ -16,6 +16,7 @@
 #include "TileSet.h"
 #include "Level.h"
 #include "ResourceLocator.h"
+#include "LevelMap.h"
 
 
 class MainGame
@@ -34,7 +35,7 @@ public:
 
 	void run();
 
-	 void setNextLevel(int levelID);
+	 void setNextLevel(int levelID, Point newPlayerPosition);
 	 void changeLevel();
 
 private:
@@ -43,8 +44,10 @@ private:
 
 	MusicPlayer _musicPlayer;
 
+	LevelMap _levelMap;
 	Level _currLevel;
 	int _nextLevelID;
+	Point _newPlayerPosition;
 
 	Player _player;
 

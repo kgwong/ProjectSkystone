@@ -16,8 +16,8 @@ LevelMap::~LevelMap()
 void LevelMap::addLevel(int id, int blockWidth, int blockHeight, int row, int col)
 {
 	_levelBasePosition[id] = Block{ row, col };
-	for (int r = row; r < row + blockWidth; ++r)
-		for (int c = col; c < col + blockHeight; ++c)
+	for (int r = row; r < row + blockHeight; ++r)
+		for (int c = col; c < col + blockWidth; ++c)
 			_levels[r][c] = id;
 }
 
@@ -32,7 +32,7 @@ void LevelMap::addLevel(Level& level, int row, int col)
 
 Block LevelMap::getAdjBlock(Block block, Direction dir)
 {
-	switch (dir)
+		switch (dir)
 	{
 	case Direction::UP:
 		block.r--;
@@ -74,7 +74,8 @@ void LevelMap::print()
 {
 	for (auto &v : _levels)
 	{
-		for (int i : v) std::cout << i << ' ';
+		for (int i : v) 
+			std::cout << i << ' ';
 		std::cout << std::endl;
 	}
 }
