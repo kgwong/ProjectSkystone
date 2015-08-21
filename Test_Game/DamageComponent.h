@@ -10,8 +10,9 @@ public:
 	DamageComponent(int damage);
 	virtual ~DamageComponent();
 
-	virtual void* getAttribute(const std::string& name);
+	int getDamage();
 
+	virtual void* getAttribute(const std::string& name);
 private:
 	int _damage;
 };

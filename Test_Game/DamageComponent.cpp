@@ -18,6 +18,12 @@ DamageComponent::~DamageComponent()
 {
 }
 
+
+int DamageComponent::getDamage()
+{
+	return _damage;
+}
+
 void* DamageComponent::getAttribute(const std::string& name)
 {
 	if (name == "damage")

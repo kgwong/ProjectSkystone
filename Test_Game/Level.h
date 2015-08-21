@@ -25,7 +25,6 @@ class Level
 
 public:
 	Level(MainGame* mainGame,
-		GameWindow* window,
 		ResourceLocator* resourceLocator,
 		LevelMap* levelMap);
 	~Level();

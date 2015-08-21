@@ -17,7 +17,7 @@
 #include "Level.h"
 #include "ResourceLocator.h"
 #include "LevelMap.h"
-
+#include "LoadedLevelCache.h"
 
 class MainGame
 {
@@ -44,8 +44,9 @@ private:
 
 	MusicPlayer _musicPlayer;
 
+	LoadedLevelCache _levelCache;
 	LevelMap _levelMap;
-	Level _currLevel;
+	Level* _currLevel;
 	int _nextLevelID;
 	Point _newPlayerPosition;
 

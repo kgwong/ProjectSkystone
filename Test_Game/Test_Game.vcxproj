@@ -88,6 +88,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="LoadedLevelCache.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelMap.h" />
+    <ClInclude Include="LoadedLevelCache.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PlayerProjectile.h" />

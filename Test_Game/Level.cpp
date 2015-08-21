@@ -8,16 +8,13 @@
 #include <cassert>
 
 Level::Level(MainGame* mainGame,
-	GameWindow* window,
 	ResourceLocator* resourceLocator,
 	LevelMap* levelMap)
 	:_mainGame(mainGame),
-	_window(window),
 	_resourceLocator(resourceLocator),
 	_enemyBuilder(_resourceLocator),
 	_levelMap(levelMap)
 {
-	addPickupAtLocation(Point(100, 100));
 }
 
 
@@ -29,7 +26,6 @@ void Level::load(const std::string& filepath, TileSet* tileSet)
 {
 	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet);
 	LevelLoader::loadEnemies(filepath + "Enemies", *this);
-
 }
 
 void Level::setPlayer(Player* p, Point newPlayerPosition)

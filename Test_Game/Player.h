@@ -43,7 +43,6 @@ public:
 private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
 
-	GameWindow* _window;
 	Animation* _animation;
 
 	std::unique_ptr<RenderComponent> _renderComponent;
