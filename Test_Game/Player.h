@@ -56,6 +56,7 @@ private:
 	Direction dir; 
 
 	bool _shoot;
+	bool _flying;
 
 };
 

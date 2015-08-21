@@ -9,7 +9,8 @@ Player::Player(ResourceLocator* resourceLocator)
 	_animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
 	_renderComponent(new AnimationRenderer(_animation)),
 	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
-	_shoot(false)
+	_shoot(false), 
+	_flying(false)
 {
 }
 
@@ -21,29 +22,62 @@ void Player::handleInput2()
 {
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
 
-	if(keyStates[SDL_SCANCODE_LEFT])
+	_physicsComponent.setVelX(0);
+
+
+	if (_flying)
 	{
-		_physicsComponent.setVelX(-5);
-		dir = Direction::LEFT;
-	}
-	else if(keyStates[SDL_SCANCODE_RIGHT])
-	{
-		_physicsComponent.setVelX(5);
-		dir = Direction::RIGHT;
-	}
-	else if (keyStates[SDL_SCANCODE_UP])
-	{
-		dir = Direction::UP;
-		_physicsComponent.setVelX(0);
-	}
-	else if (keyStates[SDL_SCANCODE_DOWN])
-	{
-		dir = Direction::DOWN;
-		_physicsComponent.setVelX(0);
+		if (keyStates[SDL_SCANCODE_LEFT])
+		{
+			_physicsComponent.setVelX(-5);
+			dir = Direction::LEFT;
+		}
+		if (keyStates[SDL_SCANCODE_RIGHT])
+		{
+			_physicsComponent.setVelX(5);
+			dir = Direction::RIGHT;
+		}
+		if (keyStates[SDL_SCANCODE_A])
+		{
+			_physicsComponent.setVelY(0);
+		}
+		else
+			_flying = false;
+		if (keyStates[SDL_SCANCODE_UP])
+		{
+			dir = Direction::UP;
+			_physicsComponent.setVelY(-5);
+		}
+
+		if (keyStates[SDL_SCANCODE_DOWN])
+		{
+			dir = Direction::DOWN;
+			_physicsComponent.setVelY(5);
+		}
+
+
 	}
 	else
-		_physicsComponent.setVelX(0);
-
+	{
+		if (keyStates[SDL_SCANCODE_LEFT])
+		{
+			_physicsComponent.setVelX(-5);
+			dir = Direction::LEFT;
+		}
+		if (keyStates[SDL_SCANCODE_RIGHT])
+		{
+			_physicsComponent.setVelX(5);
+			dir = Direction::RIGHT;
+		}
+		if (keyStates[SDL_SCANCODE_UP])
+		{
+			dir = Direction::UP;
+		}
+		if (keyStates[SDL_SCANCODE_DOWN])
+		{
+			dir = Direction::DOWN;
+		}
+	}
 }
 
 void Player::handleInput(SDL_Event &e)
@@ -51,7 +85,10 @@ void Player::handleInput(SDL_Event &e)
 	switch (e.key.keysym.sym)
 	{
 		case SDLK_a:
-			jump();
+			if (!_physicsComponent.isFalling())
+				jump();
+			else
+				_flying = true;
 			break;
 		case SDLK_s:
 			_shoot = true;
@@ -73,7 +110,15 @@ void Player::update(Level& level)
 
 	if (_shoot)
 		shoot(level);
-	
+
+	if (!_physicsComponent.isFalling())
+		_flying = false; 
+
+	if (_flying)
+		std::cout << "Flying" << std::endl;
+	else
+		std::cout << "g" << std::endl;
+
 	if (_colliderComponent.getLeft() < 0)
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::LEFT );
 	else if (_colliderComponent.getRight() > level.getLevelWidth())
@@ -86,14 +131,11 @@ void Player::update(Level& level)
 	_oldBlock = Block::getBlock(getPos());
 	_oldPosInBlock = Point{ getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
 							getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
-	//printCoord(_oldBlock.r, _oldBlock.c);
-	//printCoord(_oldPosInBlock.x, _oldPosInBlock.y);
-
 }
 
 void Player::jump()
 {
-	if (!_physicsComponent.isFalling())
+	//if (!_physicsComponent.isFalling())
 		_physicsComponent.setVelY(JUMP_VELOCITY);
 }
 

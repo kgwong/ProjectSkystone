@@ -136,6 +136,9 @@ void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosition.y};
 
 	_mainGame->setNextLevel(nextLevelID, newPlayerPosition);
+
+	//
+	playerProjectiles.clear();
 }
 
 int Level::getBlockWidth()
