@@ -10,7 +10,6 @@ class Component
 public:
 	virtual ~Component() {};
 	virtual void update(GameObject& owner) {};
-	virtual void* getAttribute(const std::string& name) { return nullptr; };
 };
 
 #endif //COMPONENT_H

@@ -13,7 +13,7 @@
 class Tile : public GameObject
 {
 public:
-	Tile() {}//
+	Tile() {}
 	Tile(GameWindow* window, SDL_Texture* tileSetImage, SDL_Rect tileRect, TileType tileType, int r, int c);
 	~Tile();
 
@@ -21,8 +21,6 @@ public:
 	void render();
 
 	virtual EntityType getType() const;
-	virtual Component* getComponent(ComponentType type);
-
 	void onCollision(CollisionInfo& collision);
 
 	TileType getTileType();

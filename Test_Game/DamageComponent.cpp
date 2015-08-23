@@ -23,12 +23,3 @@ int DamageComponent::getDamage()
 {
 	return _damage;
 }
-
-void* DamageComponent::getAttribute(const std::string& name)
-{
-	if (name == "damage")
-	{
-		return &_damage;
-	}
-	return nullptr; //should probably throw an exception
-}

@@ -21,18 +21,16 @@ public:
 	void update(Level& level);
 	void render();
 
-	Component* getComponent(ComponentType type);
-
 	virtual void onCollision(CollisionInfo& collision);
 	virtual EntityType getType() const;
 
 private:
 	bool _alive;
 	Animation* _animation;
-	std::shared_ptr<RenderComponent> _renderComponent; //lazy!!
-	PhysicsComponent _physicsComponent;
-	ColliderComponent _colliderComponent;
-	DamageComponent _damageComponent;
+	std::shared_ptr<RenderComponent> _renderComponent; 
+	std::shared_ptr<PhysicsComponent> _physicsComponent;
+	std::shared_ptr<ColliderComponent> _colliderComponent;
+	std::shared_ptr<DamageComponent> _damageComponent;
 
 };
 

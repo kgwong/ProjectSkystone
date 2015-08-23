@@ -7,7 +7,7 @@ ColliderComponent::ColliderComponent()
 }
 
 ColliderComponent::ColliderComponent(int offsetX, int offsetY, int width, int height)
-	:_offsetX(offsetX), _offsetY(offsetY), _collider{0, 0, width, height}
+	: _collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
 {
 
 }
@@ -77,7 +77,7 @@ void ColliderComponent::update(GameObject& owner)
 
 bool ColliderComponent::checkCollision(GameObject& other)
 {
-	return checkCollision( static_cast<ColliderComponent*> (other.getComponent(ComponentType::COLLIDER) ) );
+	return checkCollision(other.getComponent<ColliderComponent>());
 }
 
 bool ColliderComponent::checkCollision(ColliderComponent* other)

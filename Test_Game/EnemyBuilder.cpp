@@ -20,16 +20,16 @@ Enemy* EnemyBuilder::create(const std::string& enemyName)
 	if (enemyName == "TestMobStrong")
 	{
 		Sprite* enemySprite = _resourceLocator->getSprite("Assets/Enemies/enemyStrong.png");
-		enemy->setRenderComponent(new StaticSpriteRenderer(enemySprite));
-		enemy->setHealthComponent(new HealthComponent(500));
+		enemy->setRenderComponent(std::shared_ptr<RenderComponent>(new StaticSpriteRenderer(enemySprite)));
+		enemy->setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(500)));
 		enemy->setWidth(enemySprite->getWidth());
 		enemy->setHeight(enemySprite->getHeight());
 	}
 	else if (enemyName == "TestMob1")
 	{
 		Sprite* enemySprite = _resourceLocator->getSprite("Assets/Enemies/enemy.png");
-		enemy->setRenderComponent(new StaticSpriteRenderer(enemySprite));
-		enemy->setHealthComponent(new HealthComponent(100));
+		enemy->setRenderComponent(std::shared_ptr<RenderComponent>(new StaticSpriteRenderer(enemySprite)));
+		enemy->setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
 		enemy->setWidth(enemySprite->getWidth());
 		enemy->setHeight(enemySprite->getHeight());
 	}

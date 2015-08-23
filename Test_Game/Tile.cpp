@@ -8,7 +8,10 @@ Tile::Tile(GameWindow* window,
 			SDL_Rect tileRect, 
 			TileType type, 
 			int r, int c)
-	:_window(window), _tileSetImage(tileSetImage), _tileRect(tileRect), _tileType(type)
+	:_window(window), 
+	_tileSetImage(tileSetImage), 
+	_tileRect(tileRect), 
+	_tileType(type)
 {
 	position.x = c * Constants::TILE_SIZE;
 	position.y = r * Constants::TILE_SIZE;
@@ -23,12 +26,11 @@ Tile::Tile(GameWindow* window,
 	case SOLID:
 		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE);
 		break;
-	case TRANSITION:
-		//_colliderComponent = std::make_shared<ColliderComponent>(size - 3, 0, 3, size);
-		break;
 	default:
 		std::cout << "!!!!!" << std::endl;
 	}
+
+	addComponent(_colliderComponent.get());
 }
 
 
@@ -49,13 +51,6 @@ void Tile::render()
 	_drawDestination.y = position.y - cameraPos.y;
 	SDL_RenderCopy(_window->renderer, _tileSetImage, &_tileRect, &_drawDestination);
 }	
-
-Component* Tile::getComponent(ComponentType type)
-{
-	if (type == ComponentType::COLLIDER)
-		return _colliderComponent.get();
-	return nullptr;
-}
 
 void Tile::onCollision(CollisionInfo& collision)
 {

@@ -5,13 +5,19 @@
 #include "AnimationRenderer.h"
 
 Player::Player(ResourceLocator* resourceLocator)
-	: dir(Direction::RIGHT), 
+	: dir(Direction::RIGHT),
 	_animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
 	_renderComponent(new AnimationRenderer(_animation)),
-	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
+	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
+	_healthComponent(new HealthComponent(100)),
+	_physicsComponent(new PhysicsComponent()),
 	_shoot(false), 
 	_flying(false)
 {
+	addComponent(_renderComponent.get());
+	addComponent(_physicsComponent.get());
+	addComponent(_healthComponent.get());
+	addComponent(_colliderComponent.get());
 }
 
 Player::~Player()
@@ -22,37 +28,37 @@ void Player::handleInput2()
 {
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
 
-	_physicsComponent.setVelX(0);
+	_physicsComponent->setVelX(0);
 
 
 	if (_flying)
 	{
 		if (keyStates[SDL_SCANCODE_LEFT])
 		{
-			_physicsComponent.setVelX(-5);
+			_physicsComponent->setVelX(-5);
 			dir = Direction::LEFT;
 		}
 		if (keyStates[SDL_SCANCODE_RIGHT])
 		{
-			_physicsComponent.setVelX(5);
+			_physicsComponent->setVelX(5);
 			dir = Direction::RIGHT;
 		}
 		if (keyStates[SDL_SCANCODE_A])
 		{
-			_physicsComponent.setVelY(0);
+			_physicsComponent->setVelY(0);
 		}
 		else
 			_flying = false;
 		if (keyStates[SDL_SCANCODE_UP])
 		{
 			dir = Direction::UP;
-			_physicsComponent.setVelY(-5);
+			_physicsComponent->setVelY(-5);
 		}
 
 		if (keyStates[SDL_SCANCODE_DOWN])
 		{
 			dir = Direction::DOWN;
-			_physicsComponent.setVelY(5);
+			_physicsComponent->setVelY(5);
 		}
 
 
@@ -61,12 +67,12 @@ void Player::handleInput2()
 	{
 		if (keyStates[SDL_SCANCODE_LEFT])
 		{
-			_physicsComponent.setVelX(-5);
+			_physicsComponent->setVelX(-5);
 			dir = Direction::LEFT;
 		}
 		if (keyStates[SDL_SCANCODE_RIGHT])
 		{
-			_physicsComponent.setVelX(5);
+			_physicsComponent->setVelX(5);
 			dir = Direction::RIGHT;
 		}
 		if (keyStates[SDL_SCANCODE_UP])
@@ -85,7 +91,7 @@ void Player::handleInput(SDL_Event &e)
 	switch (e.key.keysym.sym)
 	{
 		case SDLK_a:
-			if (!_physicsComponent.isFalling())
+			if (!_physicsComponent->isFalling())
 				jump();
 			else
 				_flying = true;
@@ -105,13 +111,13 @@ void Player::render()
 
 void Player::update(Level& level)
 {
-	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, level, &_colliderComponent);
+	_colliderComponent->update(*this);
+	_physicsComponent->update(*this, level, _colliderComponent.get());
 
 	if (_shoot)
 		shoot(level);
 
-	if (!_physicsComponent.isFalling())
+	if (!_physicsComponent->isFalling())
 		_flying = false; 
 
 	if (_flying)
@@ -119,13 +125,13 @@ void Player::update(Level& level)
 	else
 		std::cout << "g" << std::endl;
 
-	if (_colliderComponent.getLeft() < 0)
+	if (_colliderComponent->getLeft() < 0)
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::LEFT );
-	else if (_colliderComponent.getRight() > level.getLevelWidth())
+	else if (_colliderComponent->getRight() > level.getLevelWidth())
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::RIGHT);
-	else if (_colliderComponent.getTop() < 0)
+	else if (_colliderComponent->getTop() < 0)
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::UP);
-	else if (_colliderComponent.getBottom() > level.getLevelHeight())
+	else if (_colliderComponent->getBottom() > level.getLevelHeight())
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::DOWN);
 	
 	_oldBlock = Block::getBlock(getPos());
@@ -135,23 +141,13 @@ void Player::update(Level& level)
 
 void Player::jump()
 {
-	//if (!_physicsComponent.isFalling())
-		_physicsComponent.setVelY(JUMP_VELOCITY);
+	_physicsComponent->setVelY(JUMP_VELOCITY);
 }
 
 void Player::shoot(Level& level)
 {
 	level.addPlayerProjectileAtLocation(position, 30, dir);
 	_shoot = false;
-}
-
-
-Component* Player::getComponent(ComponentType type)
-{
-	if (type == ComponentType::COLLIDER)
-		return &_colliderComponent;
-	else 
-		return nullptr;
 }
 
 std::string Player::getName() const

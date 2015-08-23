@@ -16,18 +16,13 @@ Enemy::~Enemy()
 
 void Enemy::update(Level& level)
 {
-	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, level, &_colliderComponent);
+	_colliderComponent->update(*this);
+	_physicsComponent->update(*this, level, _colliderComponent.get());
 }
 
 void Enemy::render()
 {
 	_renderComponent->update(*this);
-}
-
-void Enemy::takeDamage(int damage)
-{
-	_healthComponent->takeDamage(damage);
 }
 
 bool Enemy::isDead()
@@ -38,13 +33,6 @@ bool Enemy::isDead()
 void Enemy::onDeath(Level& level)
 {
 	level.addPickupAtLocation(position);
-}
-
-Component* Enemy::getComponent(ComponentType type)
-{
-	if (type == ComponentType::COLLIDER)
-		return &_colliderComponent;
-	return nullptr;
 }
 
 std::string Enemy::getName()
@@ -61,22 +49,27 @@ void Enemy::onCollision(CollisionInfo& collision)
 {
 	if (collision.other.getType() == EntityType::PLAYER_PROJECTILE)
 	{
-		//well this is ugly
-		takeDamage(*((int*)collision.other.getComponent(ComponentType::DAMAGE)->getAttribute("damage")));
+		_healthComponent->takeDamage(collision.other.getComponent<DamageComponent>()->getDamage());
 	}
 }
 
 
 //private
 
-void Enemy::setRenderComponent(RenderComponent* renderComponent)
+void Enemy::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
 {
-	_renderComponent = std::shared_ptr<RenderComponent>(renderComponent);
+	_renderComponent = renderComponent;
 	//
-	_colliderComponent = ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
+	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
+	_physicsComponent = std::make_shared<PhysicsComponent>();
+
+	addComponent(_renderComponent.get());
+	addComponent(_colliderComponent.get());
+	addComponent(_physicsComponent.get());
 }
 
-void Enemy::setHealthComponent(HealthComponent* healthComponent)
+void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)
 {
-	_healthComponent = std::shared_ptr<HealthComponent>(healthComponent);
+	_healthComponent = healthComponent;
+	addComponent(_healthComponent.get());
 }

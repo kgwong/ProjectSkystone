@@ -23,14 +23,13 @@ public:
 
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
-	virtual Component* getComponent(ComponentType type);
 
 private:
 	bool _alive;
 
 	std::shared_ptr<RenderComponent> _renderComponent;
-	PhysicsComponent _physicsComponent;
-	ColliderComponent _colliderComponent;
+	std::shared_ptr<PhysicsComponent> _physicsComponent;
+	std::shared_ptr<ColliderComponent> _colliderComponent;
 };
 
 #endif //PICKUP_H

@@ -215,9 +215,6 @@
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentType.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="TileArrangement.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>

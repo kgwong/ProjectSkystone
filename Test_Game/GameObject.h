@@ -3,12 +3,12 @@
 
 #include <string>
 #include <iostream>
+#include <unordered_map>
 
 #include "Point.h"
 #include "Component.h"
 #include "EntityType.h"
 
-#include "ComponentType.h"
 #include "CollisionInfo.h"
 
 class Level;
@@ -43,8 +43,13 @@ public:
 	int getCenterPosX() const;
 	int getCenterPosY() const;
 
+	void addComponent(Component* component);
+	
+	template <typename ComponentT>
+	ComponentT* getComponent();
+
 	//throw stuff
-	virtual Component* getComponent(ComponentType type);
+	//virtual Component* getComponent(ComponentType type);
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision) {};
@@ -54,6 +59,22 @@ protected:
 	Point position;
 	int width;
 	int height;
+
+	std::unordered_map<const std::type_info*, Component*> components_;
 };
 
+//http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components
+
+template<typename ComponentT>
+ComponentT* GameObject::getComponent()
+{
+	if (components_.count(&typeid(ComponentT)))
+		return static_cast<ComponentT*>(components_[&typeid(ComponentT)]);
+	else
+		//return NullComponent::getInstance();
+		return nullptr;
+}
+
+
 #endif //GAME_OBJECT_H
+

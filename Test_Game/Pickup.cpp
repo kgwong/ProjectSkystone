@@ -5,10 +5,13 @@
 Pickup::Pickup(Sprite* sprite)
 	:_alive(true), 
 	_renderComponent(new StaticSpriteRenderer(sprite)),
-	_colliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())
+	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
+	_physicsComponent(new PhysicsComponent())
 {
+	addComponent(_renderComponent.get());
+	addComponent(_physicsComponent.get());
+	addComponent(_colliderComponent.get());
 }
-
 
 Pickup::~Pickup()
 {
@@ -16,8 +19,8 @@ Pickup::~Pickup()
 
 void Pickup::update(Level& level)
 {
-	_colliderComponent.update(*this);
-	_physicsComponent.update(*this, level, &_colliderComponent);
+	_colliderComponent->update(*this);
+	_physicsComponent->update(*this, level, _colliderComponent.get());
 }
 
 void Pickup::render()
@@ -39,11 +42,4 @@ void Pickup::onCollision(CollisionInfo& collision)
 {
 	if (collision.other.getType() == EntityType::PLAYER)
 		_alive = false;
-}
-
-Component* Pickup::getComponent(ComponentType type)
-{
-	if (type == ComponentType::COLLIDER)
-		return &_colliderComponent;
-	return nullptr;
 }

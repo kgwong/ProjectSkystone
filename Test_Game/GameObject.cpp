@@ -107,9 +107,10 @@ int GameObject::getCenterPosY() const
 	return position.y + height/2;
 }
 
-Component* GameObject::getComponent(ComponentType type)
+void GameObject::addComponent(Component* component)
 {
-	return nullptr; //no components by default, intended to be overridden 
+	if (component)
+		components_[&typeid(*component)] = component;
 }
 
 std::string GameObject::getName() const

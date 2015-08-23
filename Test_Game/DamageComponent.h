@@ -12,7 +12,6 @@ public:
 
 	int getDamage();
 
-	virtual void* getAttribute(const std::string& name);
 private:
 	int _damage;
 };

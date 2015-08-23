@@ -33,7 +33,6 @@ public:
 	void jump();
 	void shoot(Level& level);
 
-	virtual Component* getComponent(ComponentType type);
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
@@ -45,10 +44,10 @@ private:
 
 	Animation* _animation;
 
-	std::unique_ptr<RenderComponent> _renderComponent;
-	HealthComponent _healthComponent;
-	PhysicsComponent _physicsComponent;
-	ColliderComponent _colliderComponent;
+	std::shared_ptr<RenderComponent> _renderComponent;
+	std::shared_ptr<HealthComponent> _healthComponent;
+	std::shared_ptr<PhysicsComponent> _physicsComponent;
+	std::shared_ptr<ColliderComponent> _colliderComponent;
 
 	Block _oldBlock;
 	Point _oldPosInBlock;

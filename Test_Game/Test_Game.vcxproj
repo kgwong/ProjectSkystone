@@ -114,7 +114,6 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="CollisionInfo.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="ComponentType.h" />
     <ClInclude Include="DamageComponent.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Enemy.h" />

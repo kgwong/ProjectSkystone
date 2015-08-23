@@ -24,11 +24,9 @@ public:
 	void update(Level& level);
 	void render();
 
-	void takeDamage(int damage);
 	bool isDead();
 
 	virtual std::string getName();
-	virtual Component* getComponent(ComponentType type);
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 	virtual void onDeath(Level& level);
@@ -36,12 +34,12 @@ public:
 private:
 	std::shared_ptr<RenderComponent> _renderComponent;
 	std::shared_ptr<HealthComponent> _healthComponent;
-	PhysicsComponent _physicsComponent;
-	ColliderComponent _colliderComponent;
+	std::shared_ptr<PhysicsComponent> _physicsComponent;
+	std::shared_ptr<ColliderComponent> _colliderComponent;
 
 private:
-	void setRenderComponent(RenderComponent* renderComponent);
-	void setHealthComponent(HealthComponent* healthComponent);
+	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
+	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
 
 };
 

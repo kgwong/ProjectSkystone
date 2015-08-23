@@ -175,7 +175,8 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Level& level, ColliderComponent* collider, Axis axis)
 {
 	//
-	ColliderComponent* otherCollider = static_cast<ColliderComponent*>(other.getComponent(ComponentType::COLLIDER));
+	//ColliderComponent* otherCollider = static_cast<ColliderComponent*>(other.getComponent(ComponentType::COLLIDER));
+	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>();
 	switch(axis)
 	{
 		case Axis::X:
