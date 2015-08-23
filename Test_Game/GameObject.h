@@ -48,8 +48,6 @@ public:
 	template <typename ComponentT>
 	ComponentT* getComponent();
 
-	//throw stuff
-	//virtual Component* getComponent(ComponentType type);
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision) {};
@@ -71,7 +69,6 @@ ComponentT* GameObject::getComponent()
 	if (components_.count(&typeid(ComponentT)))
 		return static_cast<ComponentT*>(components_[&typeid(ComponentT)]);
 	else
-		//return NullComponent::getInstance();
 		return nullptr;
 }
 

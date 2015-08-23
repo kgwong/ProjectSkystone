@@ -3,20 +3,14 @@
 #include "Level.h"
 #include "GameConstants.h"
 
-Tile::Tile(GameWindow* window, 
-			SDL_Texture* tileSetImage, 
-			SDL_Rect tileRect, 
+Tile::Tile(SpriteRenderer* renderer,
 			TileType type, 
 			int r, int c)
-	:_window(window), 
-	_tileSetImage(tileSetImage), 
-	_tileRect(tileRect), 
+	:renderer_(renderer),
 	_tileType(type)
 {
 	position.x = c * Constants::TILE_SIZE;
 	position.y = r * Constants::TILE_SIZE;
-	_drawDestination.w = Constants::TILE_SIZE;
-	_drawDestination.h = Constants::TILE_SIZE;
 
 	switch (_tileType)
 	{
@@ -46,10 +40,7 @@ void Tile::update()
 
 void Tile::render()
 {
-	Point cameraPos = _window->camera.getPos();
-	_drawDestination.x = position.x - cameraPos.x;
-	_drawDestination.y = position.y - cameraPos.y;
-	SDL_RenderCopy(_window->renderer, _tileSetImage, &_tileRect, &_drawDestination);
+	renderer_->update(*this);
 }	
 
 void Tile::onCollision(CollisionInfo& collision)

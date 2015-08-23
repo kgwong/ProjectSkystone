@@ -1,8 +1,7 @@
 #include "TileSet.h"
 
-#include <cassert>
-
 #include "SpriteSheet.h"
+#include "SpriteRenderer.h"
 
 
 TileSet::TileSet(GameWindow* window, std::shared_ptr<SDL_Texture> texture, 
@@ -30,7 +29,7 @@ SDL_Rect TileSet::getTile(int tileIndex)
 
 Tile TileSet::createTile(int tileIndex, int r, int c)
 {
-	return Tile(_window, _texture.get(), _tiles[tileIndex], static_cast<TileType>(tileIndex), r, c);
+	return Tile(new SpriteRenderer(_window, _texture.get(), _tiles[tileIndex]), static_cast<TileType>(tileIndex), r, c);
 }
 
 int TileSet::getNumTiles()

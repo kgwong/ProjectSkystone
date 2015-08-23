@@ -95,6 +95,7 @@
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="ResourceLocator.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MusicPlayer.h" />

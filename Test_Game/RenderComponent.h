@@ -3,6 +3,9 @@
 
 #include "Component.h"
 
+
+#include "GameWindow.h"
+
 //change to virtual class
 
 class RenderComponent : public Component
