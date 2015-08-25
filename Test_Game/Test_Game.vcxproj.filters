@@ -90,9 +90,6 @@
     <ClCompile Include="Pickup.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceLocator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SpritesheetInfoReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -118,6 +115,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,9 +194,6 @@
     <ClInclude Include="Pickup.h">
       <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SpritesheetInfo.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
@@ -237,6 +237,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

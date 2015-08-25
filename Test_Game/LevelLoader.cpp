@@ -8,10 +8,10 @@
 
 
 LevelLoader::LevelLoader(MainGame* mainGame,
-	ResourceLocator* resourceLocator,
+	TextureLoader* textureLoader,
 	LevelMap* levelMap)
 	:_mainGame(mainGame),
-	_resourceLocator(resourceLocator),
+	textureLoader_(textureLoader),
 	_levelMap(levelMap)
 {
 }
@@ -25,7 +25,7 @@ Level& LevelLoader::getLevel(const std::string& filepath, TextureSheet* tileSet,
 {
 	if (_loadedLevels.count(filepath) == 0)
 	{
-		auto level = _loadedLevels.insert({ filepath, Level(_mainGame, _resourceLocator, _levelMap) });
+		auto level = _loadedLevels.insert({ filepath, Level(_mainGame, textureLoader_, _levelMap) });
 		level.first->second.load(filepath, tileSet, creator);
 	}
 	return _loadedLevels.at(filepath);

@@ -3,21 +3,21 @@
 
 #include <string>
 
-#include "ResourceLocator.h"
+#include "TextureLoader.h"
 
 class Enemy;
 
 class EnemyBuilder
 {
 public:
-	EnemyBuilder(ResourceLocator* resourceLocator);
+	EnemyBuilder(TextureLoader* textureLoader);
 	virtual ~EnemyBuilder();
 
 	Enemy* create(const std::string& enemyName);
 	
 
 private:
-	ResourceLocator* _resourceLocator;
+	TextureLoader* textureLoader_;
 };
 
 #endif //ENEMY_BUILDER_H

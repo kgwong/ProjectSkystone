@@ -7,7 +7,6 @@
 
 #include "Errors.h"
 
-
 void initAllSystems();
 void quitAllSystems();
 

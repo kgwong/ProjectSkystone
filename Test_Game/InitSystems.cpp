@@ -1,5 +1,7 @@
 #include "InitSystems.h"
 
+#include "Path.h"
+
 void initAllSystems()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -11,6 +13,8 @@ void initAllSystems()
 
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0) 
 		MySDL_Error("Mixer failed to initialize");
+
+	Path::initBasePath();
 }
 
 void quitAllSystems()

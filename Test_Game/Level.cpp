@@ -8,11 +8,11 @@
 #include <cassert>
 
 Level::Level(MainGame* mainGame,
-	ResourceLocator* resourceLocator,
+	TextureLoader* textureLoader,
 	LevelMap* levelMap)
 	:_mainGame(mainGame),
-	_resourceLocator(resourceLocator),
-	_enemyBuilder(_resourceLocator),
+	textureLoader_(textureLoader),
+	_enemyBuilder(textureLoader_),
 	_levelMap(levelMap)
 {
 }
@@ -36,12 +36,12 @@ void Level::setPlayer(Player* p, Point newPlayerPosition)
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
 {
-	playerProjectiles.push_back( PlayerProjectile(position, vel, _resourceLocator, dir) );
+	playerProjectiles.push_back( PlayerProjectile(position, vel, textureLoader_, dir) );
 }
 
 void Level::addPickupAtLocation(Point position)
 {
-	Pickup pickup(_resourceLocator);
+	Pickup pickup(textureLoader_);
 	pickup.setPos(position);
 	pickups.push_back(pickup);
 }

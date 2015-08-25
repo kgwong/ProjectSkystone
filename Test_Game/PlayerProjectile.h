@@ -10,12 +10,12 @@
 #include "DamageComponent.h"
 #include "RenderComponent.h"
 
-#include "ResourceLocator.h"
+#include "TextureLoader.h"
 
 class PlayerProjectile : public GameObject
 {
 public:
-	PlayerProjectile(Point position, int vel, ResourceLocator* resourceLocator, Direction dir);
+	PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, Direction dir);
 	~PlayerProjectile();
 
 	bool isDead();

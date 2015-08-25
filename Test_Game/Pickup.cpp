@@ -2,9 +2,9 @@
 
 #include "SpriteRenderer.h"
 
-Pickup::Pickup(ResourceLocator* resourceLocator)
+Pickup::Pickup(TextureLoader* textureLoader)
 	:_alive(true), 
-	_renderComponent(new SpriteRenderer(resourceLocator->getTextureSheet("Assets/Pickups/pickup.png"))),
+	_renderComponent(new SpriteRenderer(textureLoader->getTextureSheet("Assets/Pickups/pickup.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_physicsComponent(new PhysicsComponent())
 {

@@ -14,7 +14,7 @@
 #include "MusicPlayer.h"
 #include "Camera.h"
 #include "Level.h"
-#include "ResourceLocator.h"
+#include "TextureLoader.h"
 #include "LevelMap.h"
 #include "LevelLoader.h"
 
@@ -31,7 +31,7 @@ public:
 
 private:
 	GameWindow _window;
-	ResourceLocator _resourceLocator;
+	TextureLoader textureLoader_;
 
 	MusicPlayer _musicPlayer;
 

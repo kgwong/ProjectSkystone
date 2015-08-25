@@ -22,6 +22,8 @@ void AnimationRenderer::update(GameObject& owner)
 	drawDest_.y = owner.getPosY() - cameraPos.y;
 	drawSrc_ = textureSheet_->getFrame(currFrame_);
 	SDL_RenderCopy(textureSheet_->getWindow()->renderer, textureSheet_->getTexture(), drawSrc_, &drawDest_);
+
+	incrementFrame();
 }
 
 int AnimationRenderer::getWidth()

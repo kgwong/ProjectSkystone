@@ -9,7 +9,7 @@
 
 class Level;
 class MainGame;
-class ResourceLocator;
+class TextureLoader;
 class LevelMap;
 
 
@@ -17,7 +17,7 @@ class LevelLoader
 {
 public:
 	LevelLoader(MainGame* mainGame,
-		ResourceLocator* resourceLocator,
+		TextureLoader* textureLoader,
 		LevelMap* levelMap);
 	~LevelLoader();
 
@@ -29,7 +29,7 @@ public:
 
 private:
 	MainGame* _mainGame;
-	ResourceLocator* _resourceLocator;
+	TextureLoader* textureLoader_;
 	LevelMap* _levelMap;
 
 	std::map<std::string, Level> _loadedLevels;

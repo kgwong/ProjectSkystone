@@ -9,7 +9,7 @@
 #include "TileArrangement.h"
 #include "Pickup.h"
 
-#include "ResourceLocator.h"
+#include "TextureLoader.h"
 #include "EnemyBuilder.h"
 
 #include <map>
@@ -26,7 +26,7 @@ class Level
 
 public:
 	Level(MainGame* mainGame,
-		ResourceLocator* resourceLocator,
+		TextureLoader* textureLoader,
 		LevelMap* levelMap);
 	~Level();
 
@@ -60,7 +60,7 @@ public:
 private:
 	MainGame* _mainGame;
 	GameWindow* _window;
-	ResourceLocator* _resourceLocator;
+	TextureLoader* textureLoader_;
 	EnemyBuilder _enemyBuilder;
 	LevelMap* _levelMap;
 

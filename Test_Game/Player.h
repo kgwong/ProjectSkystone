@@ -13,7 +13,7 @@
 #include "ColliderComponent.h"
 
 
-#include "ResourceLocator.h"
+#include "TextureLoader.h"
 
 class Level;
 class PhysicsComponent;
@@ -22,7 +22,7 @@ class Player : public GameObject
 {
 
 public:
-	Player(ResourceLocator* resourceLocator);
+	Player(TextureLoader* textureLoader);
 	~Player();
 
 	void handleInput(SDL_Event &e);
