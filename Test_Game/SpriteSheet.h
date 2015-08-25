@@ -6,6 +6,6 @@
 
 #include "SpritesheetInfo.h"
 
-void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo spritesheetInfo);
+void calculateSpriteLocations(std::vector<SDL_Rect>& locations, SpritesheetInfo* sInfo);
 
 #endif //SPRITESHEET_H

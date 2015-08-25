@@ -3,13 +3,13 @@
 
 #include "GameWindow.h"
 #include "GameObject.h"
-#include "Animation.h"
 #include "RenderComponent.h"
+#include "TextureSheet.h"
 
 class AnimationRenderer : public RenderComponent
 {
 public:
-	AnimationRenderer(Animation* animation);
+	AnimationRenderer(TextureSheet* textureSheet);
 	virtual ~AnimationRenderer();
 
 	virtual void update(GameObject& owner);
@@ -18,8 +18,13 @@ public:
 	virtual int getHeight();
 
 private:
-	Animation* _animation;
-	int _currFrame;
+	GameWindow* window_;
+	TextureSheet* textureSheet_;
+
+	int currFrame_;
+
+	SDL_Rect* drawSrc_;
+	SDL_Rect drawDest_;
 
 private:
 	void incrementFrame();

@@ -8,7 +8,6 @@
 #include "EnemyBuilder.h"
 
 #include "GameWindow.h"
-#include "Sprite.h"
 
 class Level;
 class PhysicsComponent;

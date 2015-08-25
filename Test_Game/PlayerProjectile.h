@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include "Animation.h"
 #include "Direction.h"
 
 #include "PhysicsComponent.h"
@@ -11,10 +10,12 @@
 #include "DamageComponent.h"
 #include "RenderComponent.h"
 
+#include "ResourceLocator.h"
+
 class PlayerProjectile : public GameObject
 {
 public:
-	PlayerProjectile(Point position, int vel, Animation* animation, Direction dir);
+	PlayerProjectile(Point position, int vel, ResourceLocator* resourceLocator, Direction dir);
 	~PlayerProjectile();
 
 	bool isDead();
@@ -26,7 +27,6 @@ public:
 
 private:
 	bool _alive;
-	Animation* _animation;
 	std::shared_ptr<RenderComponent> _renderComponent; 
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;

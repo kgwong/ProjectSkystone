@@ -6,8 +6,7 @@
 
 Player::Player(ResourceLocator* resourceLocator)
 	: dir(Direction::RIGHT),
-	_animation(resourceLocator->getAnimation("Assets/Animations/playerAnimation.png")),
-	_renderComponent(new AnimationRenderer(_animation)),
+	_renderComponent(new AnimationRenderer(resourceLocator->getTextureSheet("Assets/Animations/playerAnimation.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_healthComponent(new HealthComponent(100)),
 	_physicsComponent(new PhysicsComponent()),
@@ -120,10 +119,11 @@ void Player::update(Level& level)
 	if (!_physicsComponent->isFalling())
 		_flying = false; 
 
+	/*
 	if (_flying)
 		std::cout << "Flying" << std::endl;
 	else
-		std::cout << "g" << std::endl;
+		std::cout << "g" << std::endl;*/
 
 	if (_colliderComponent->getLeft() < 0)
 		level.setNextLevel(_oldBlock, _oldPosInBlock, Direction::LEFT );

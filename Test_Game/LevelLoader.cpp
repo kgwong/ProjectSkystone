@@ -2,10 +2,36 @@
 
 #include "Level.h"
 #include "GameConstants.h"
+#include "MainGame.h"
 
 #include <fstream>
 
-void LevelLoader::loadTiles(const std::string& filepath, Level& level, TileSet* tileSet)
+
+LevelLoader::LevelLoader(MainGame* mainGame,
+	ResourceLocator* resourceLocator,
+	LevelMap* levelMap)
+	:_mainGame(mainGame),
+	_resourceLocator(resourceLocator),
+	_levelMap(levelMap)
+{
+}
+
+
+LevelLoader::~LevelLoader()
+{
+}
+
+Level& LevelLoader::getLevel(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
+{
+	if (_loadedLevels.count(filepath) == 0)
+	{
+		auto level = _loadedLevels.insert({ filepath, Level(_mainGame, _resourceLocator, _levelMap) });
+		level.first->second.load(filepath, tileSet, creator);
+	}
+	return _loadedLevels.at(filepath);
+}
+
+void LevelLoader::loadTiles(const std::string& filepath, Level& level, TextureSheet* tileSet, TileCreator* creator)
 {
 	std::ifstream ifs(filepath); //should probably do more error checking
 	if (!ifs)
@@ -29,7 +55,8 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level, TileSet* 
 		{
 			int tileNum;
 			ifs >> tileNum;
-			level.tileArrangement.tiles[r][c] = tileSet->createTile(tileNum, r, c);
+			level.tileArrangement.tiles[r][c] = creator->create(tileSet, tileNum, r, c);
+			//level.tileArrangement.tiles[r][c] = tileSet->createTile(tileNum, r, c);
 		}
 	}
 }

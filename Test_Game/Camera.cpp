@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include <algorithm>
 
 Camera::Camera()
 {
@@ -23,12 +24,9 @@ void Camera::followObject(const GameObject& object)
 
 void Camera::stayInLevelBounds()
 {
-	if (position.x < 0)
-		position.x = 0;
-	if (position.y < 0)
-		position.y = 0;
-	if (position.x > maximumX - width)
-		position.x = maximumX - width;
-	if (position.y > maximumY - height)
-		position.y = maximumY - height;
+	position.x = std::max(0, position.x);
+	position.x = std::min(position.x, maximumX - width);
+
+	position.y = std::max(0, position.y);
+	position.y = std::min(position.y, maximumY - height);
 }

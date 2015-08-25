@@ -6,7 +6,6 @@
 #include "Tile.h"
 #include "Enemy.h"
 #include "PlayerProjectile.h"
-#include "TileSet.h"
 #include "TileArrangement.h"
 #include "Pickup.h"
 
@@ -18,6 +17,8 @@
 class MainGame;
 class LevelLoader;
 class LevelMap;
+class TextureSheet;
+class TileCreator;
 
 class Level
 {
@@ -29,7 +30,7 @@ public:
 		LevelMap* levelMap);
 	~Level();
 
-	void load(const std::string& filepath, TileSet* tileSet);
+	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
 
 	void update();

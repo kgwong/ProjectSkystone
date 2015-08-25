@@ -13,23 +13,14 @@
 #include "Player.h"
 #include "MusicPlayer.h"
 #include "Camera.h"
-#include "TileSet.h"
 #include "Level.h"
 #include "ResourceLocator.h"
 #include "LevelMap.h"
-#include "LoadedLevelCache.h"
+#include "LevelLoader.h"
 
 class MainGame
 {
 public:
-	static const int SCREEN_WIDTH  = 640;
-	static const int SCREEN_HEIGHT = 480;
-
-	static const int TILE_SIZE = 45;
-
-	static const int BLOCK_WIDTH = SCREEN_WIDTH / TILE_SIZE;
-	static const int BLOCK_HEIGHT = SCREEN_HEIGHT / TILE_SIZE;
-
 	MainGame();
 	~MainGame();
 
@@ -44,7 +35,9 @@ private:
 
 	MusicPlayer _musicPlayer;
 
-	LoadedLevelCache _levelCache;
+	TileCreator creator;//temporary
+
+	LevelLoader _levelLoader;
 	LevelMap _levelMap;
 	Level* _currLevel;
 	int _nextLevelID;

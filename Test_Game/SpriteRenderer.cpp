@@ -3,15 +3,21 @@
 
 
 
-SpriteRenderer::SpriteRenderer(GameWindow* window, 
-	SDL_Texture* texture, 
-	SDL_Rect drawSrc)
-	: window_(window),
-	texture_(texture),
-	drawSrc_(drawSrc)
+SpriteRenderer::SpriteRenderer(TextureSheet* textureSheet)
+	:textureSheet_(textureSheet),
+	drawSrc_(textureSheet->getFrame(0))
 {
-	drawDest_.w = drawSrc.w;
-	drawDest_.h = drawSrc.h;
+	drawDest_.w = drawSrc_->w;
+	drawDest_.h = drawSrc_->h;
+}
+
+SpriteRenderer::SpriteRenderer(TextureSheet* textureSheet,
+	int textureIndex)
+	:textureSheet_(textureSheet),
+	drawSrc_(textureSheet->getFrame(textureIndex))
+{
+	drawDest_.w = drawSrc_->w;
+	drawDest_.h = drawSrc_->h;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -20,18 +26,18 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::update(GameObject& owner)
 {
-	Point cameraPos = window_->camera.getPos();
+	Point cameraPos = textureSheet_->getWindow()->camera.getPos();
 	drawDest_.x = owner.getPosX() - cameraPos.x;
-	drawDest_.y = owner.getPosY() - cameraPos.y;
-	SDL_RenderCopy(window_->renderer, texture_, &drawSrc_, &drawDest_);
+	drawDest_.y = owner.getPosY() -cameraPos.y;
+	SDL_RenderCopy(textureSheet_->getWindow()->renderer, textureSheet_->getTexture(), drawSrc_, &drawDest_);
 }
 
 int SpriteRenderer::getWidth()
 {
-	return drawSrc_.w;
+	return drawSrc_->w;
 }
 
 int SpriteRenderer::getHeight()
 {
-	return drawSrc_.h;
+	return drawSrc_->h;
 }

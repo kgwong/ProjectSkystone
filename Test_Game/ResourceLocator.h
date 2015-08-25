@@ -9,10 +9,9 @@
 #include <memory>
 
 #include "Errors.h"
+#include "GameWindow.h"
 
-#include "Sprite.h"
-#include "Animation.h"
-#include "TileSet.h"
+#include "TextureSheet.h"
 
 #include "SpritesheetInfo.h"
 
@@ -30,9 +29,8 @@ public:
 	ResourceLocator(GameWindow *gw);
 	~ResourceLocator();
 
-	Sprite* getSprite(const std::string& basename);
-	Animation* getAnimation(const std::string& basename);
-	TileSet* getTileSet(const std::string& basename);
+	TextureSheet* getTextureSheet(const std::string& basename);
+
 
 	std::string getFullPath(const std::string& basename);
 	std::shared_ptr<SDL_Texture> loadTexture(SDL_Renderer* renderer, const std::string& fullpath);
@@ -42,9 +40,7 @@ private:
 
 	std::string _basePath;
 
-	std::unordered_map<std::string, Sprite> _resources; 
-	std::unordered_map<std::string, Animation> _animations;
-	std::unordered_map<std::string, TileSet> _tileSets;
+	std::unordered_map<std::string, TextureSheet> _textureSheets;
 };
 
 #endif //RESOURCE_LOCATOR_H

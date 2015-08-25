@@ -1,7 +1,6 @@
 #ifndef TILE_ARRANGEMENT_H
 #define TILE_ARRANGEMENT_H	
 
-#include "TileSet.h"
 #include "Tile.h"
 
 struct TileArrangement

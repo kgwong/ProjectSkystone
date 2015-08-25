@@ -42,13 +42,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
@@ -61,9 +55,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
@@ -117,17 +108,17 @@
     <ClCompile Include="EnemyBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StaticSpriteRenderer.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadedLevelCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileCreator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +131,6 @@
     <ClInclude Include="Errors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -153,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TileSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
@@ -221,9 +206,6 @@
     <ClInclude Include="TileArrangement.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
@@ -235,9 +217,6 @@
     </ClInclude>
     <ClInclude Include="TileType.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticSpriteRenderer.h">
-      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="CollisionInfo.h">
       <Filter>Header Files</Filter>
@@ -251,11 +230,14 @@
     <ClInclude Include="GameConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadedLevelCache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileCreator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

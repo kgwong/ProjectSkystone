@@ -22,9 +22,9 @@ Level::~Level()
 {
 }
 
-void Level::load(const std::string& filepath, TileSet* tileSet)
+void Level::load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
 {
-	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet);
+	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet, creator);
 	LevelLoader::loadEnemies(filepath + "Enemies", *this);
 }
 
@@ -36,12 +36,12 @@ void Level::setPlayer(Player* p, Point newPlayerPosition)
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
 {
-	playerProjectiles.push_back( PlayerProjectile(position, vel, _resourceLocator->getAnimation("Assets/Animations/playerProjectile.png"), dir) );
+	playerProjectiles.push_back( PlayerProjectile(position, vel, _resourceLocator, dir) );
 }
 
 void Level::addPickupAtLocation(Point position)
 {
-	Pickup pickup(_resourceLocator->getSprite("Assets/Pickups/pickup.png"));
+	Pickup pickup(_resourceLocator);
 	pickup.setPos(position);
 	pickups.push_back(pickup);
 }

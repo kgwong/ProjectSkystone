@@ -1,9 +1,14 @@
 #include "AnimationRenderer.h"
 
 
-AnimationRenderer::AnimationRenderer(Animation* animation)
-	:_animation(animation), _currFrame(0)
+
+AnimationRenderer::AnimationRenderer(TextureSheet* textureSheet)
+	: textureSheet_(textureSheet), 
+	currFrame_(0),
+	drawSrc_(textureSheet->getFrame(currFrame_))
 {
+	drawDest_.w = drawSrc_->w;
+	drawDest_.h = drawSrc_->h;
 }
 
 AnimationRenderer::~AnimationRenderer()
@@ -12,23 +17,26 @@ AnimationRenderer::~AnimationRenderer()
 
 void AnimationRenderer::update(GameObject& owner)
 {
-	_animation->renderFrame(owner.getPos(), _currFrame);
-	incrementFrame();
+	Point cameraPos = textureSheet_->getWindow()->camera.getPos();
+	drawDest_.x = owner.getPosX() - cameraPos.x;
+	drawDest_.y = owner.getPosY() - cameraPos.y;
+	drawSrc_ = textureSheet_->getFrame(currFrame_);
+	SDL_RenderCopy(textureSheet_->getWindow()->renderer, textureSheet_->getTexture(), drawSrc_, &drawDest_);
 }
 
 int AnimationRenderer::getWidth()
 {
-	return _animation->getWidth();
+	return drawSrc_->w;
 }
 
 int AnimationRenderer::getHeight()
 {
-	return _animation->getHeight();
+	return drawSrc_->h;
 }
 
 void AnimationRenderer::incrementFrame()
 {
-	_currFrame = (++_currFrame) % _animation->getNumFrames();
+	currFrame_ = (++currFrame_) % textureSheet_->getNumFrames();
 }
 
 

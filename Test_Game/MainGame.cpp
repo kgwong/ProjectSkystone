@@ -4,21 +4,22 @@
 
 
 MainGame::MainGame()
-	:_window("Test Game!", SCREEN_WIDTH, SCREEN_HEIGHT),
+	:_window("Test Game!", Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	_resourceLocator(&_window),
 	_player(&_resourceLocator),
 	_quit(false),
 	_levelMap(10, 10),
 	_currLevel(nullptr),
 	_nextLevelID(-1),
-	_levelCache(this, &_resourceLocator, &_levelMap)
+	_levelLoader(this, &_resourceLocator, &_levelMap),
+	creator(&_window)
 {
 	_levelMap.addLevel(1, 2, 2, 1, 1);
 	_levelMap.addLevel(2, 1, 2, 1, 3);
 	_levelMap.addLevel(3, 2, 1, 0, 2);
 
-	_currLevel = &_levelCache.getLevel(_resourceLocator.getFullPath("Levels/LevelTest"), 
-										_resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+	_currLevel = &_levelLoader.getLevel(_resourceLocator.getFullPath("Levels/LevelTest"),
+										_resourceLocator.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
 	_window.camera.setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
@@ -53,18 +54,18 @@ void MainGame::changeLevel()
 	{
 		if (_nextLevelID == 1)
 		{
-			_currLevel = &_levelCache.getLevel(_resourceLocator.getFullPath("Levels/LevelTest"),
-				_resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+			_currLevel = &_levelLoader.getLevel(_resourceLocator.getFullPath("Levels/LevelTest"),
+				_resourceLocator.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		else if (_nextLevelID == 2)
 		{
-			_currLevel = &_levelCache.getLevel(_resourceLocator.getFullPath("Levels/LevelTest2"),
-				_resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+			_currLevel = &_levelLoader.getLevel(_resourceLocator.getFullPath("Levels/LevelTest2"),
+				_resourceLocator.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		else if (_nextLevelID == 3)
 		{
-			_currLevel = &_levelCache.getLevel(_resourceLocator.getFullPath("Levels/LevelTest3"),
-				_resourceLocator.getTileSet("Assets/TileSets/bw.png"));
+			_currLevel = &_levelLoader.getLevel(_resourceLocator.getFullPath("Levels/LevelTest3"),
+				_resourceLocator.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		_currLevel->setPlayer(&_player, _newPlayerPosition);
 		_window.camera.setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());

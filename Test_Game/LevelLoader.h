@@ -2,16 +2,39 @@
 #define LEVEL_LOADER_H
 
 #include <string>
+#include <map>
 
-#include "TileSet.h"
+#include "TextureSheet.h"
+#include "TileCreator.h"
 
 class Level;
+class MainGame;
+class ResourceLocator;
+class LevelMap;
+
 
 class LevelLoader
 {
 public:
-	static void loadTiles(const std::string& filepath, Level& level, TileSet* tileSet); 
+	LevelLoader(MainGame* mainGame,
+		ResourceLocator* resourceLocator,
+		LevelMap* levelMap);
+	~LevelLoader();
+
+	Level& getLevel(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
+
+public:
+	static void loadTiles(const std::string& filepath, Level& level, TextureSheet* tileSet, TileCreator* creator);
 	static void loadEnemies(const std::string& filepath, Level& level);
+
+private:
+	MainGame* _mainGame;
+	ResourceLocator* _resourceLocator;
+	LevelMap* _levelMap;
+
+	std::map<std::string, Level> _loadedLevels;
+
+
 };
 
 #endif //LEVEL_LOADER_H

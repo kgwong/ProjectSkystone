@@ -1,11 +1,12 @@
 #include "ResourceLocator.h"
 
 #include "SpritesheetInfoReader.h"
-#include "Sprite.h"
+#include "GameWindow.h"
 
 ResourceLocator::ResourceLocator(GameWindow* gw)
 	: _gw(gw)
 {
+
 	char* basePath = SDL_GetBasePath(); //SDL_GetBasePath() should only be called once
 
 	std::string base = basePath;
@@ -35,29 +36,12 @@ std::shared_ptr<SDL_Texture> ResourceLocator::loadTexture(SDL_Renderer* renderer
 	return std::shared_ptr<SDL_Texture>(texture, TextureDestroyer());
 }
 
-
-//lots of repeat here
-Sprite* ResourceLocator::getSprite(const std::string& basename)
+TextureSheet* ResourceLocator::getTextureSheet(const std::string & basename)
 {
 	std::string fullpath = getFullPath(basename);
-	//better way to do this?
-	if (_resources.count(fullpath) == 0)
-		_resources.insert( std::make_pair( fullpath, Sprite(_gw, loadTexture(_gw->renderer, fullpath)) ) );
-	return &_resources.at(fullpath);
-}
 
-Animation* ResourceLocator::getAnimation(const std::string& basename)
-{
-	std::string fullpath = getFullPath(basename);
-	if (_animations.count(fullpath) == 0)
-		_animations.insert( std::make_pair( fullpath, Animation( _gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info() ) ) );
-	return &_animations.at(fullpath);
-}
+	if (_textureSheets.count(basename) == 0)
+		_textureSheets.insert({ basename, TextureSheet(_gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info()) });
 
-TileSet* ResourceLocator::getTileSet(const std::string& basename)
-{
-	std::string fullpath = getFullPath(basename);
-	if (_tileSets.count(fullpath) == 0)
-		_tileSets.insert( std::make_pair( fullpath, TileSet( _gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info() ) ) );
-	return &_tileSets.at(fullpath);
+	return &_textureSheets.at(basename);
 }

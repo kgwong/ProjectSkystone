@@ -2,14 +2,17 @@
 #define SPRITE_RENDERER_H
 
 #include "RenderComponent.h"
+#include "TextureSheet.h"
 
 
 class SpriteRenderer : public RenderComponent
 {
 public:
-	SpriteRenderer(GameWindow* window, 
-		SDL_Texture* texture, 
-		SDL_Rect drawSrc);
+	SpriteRenderer(TextureSheet* textureSheet);
+
+	SpriteRenderer(TextureSheet* textureSheet,
+		int textureIndex);
+
 	virtual ~SpriteRenderer();
 
 	virtual void update(GameObject& owner);
@@ -18,9 +21,9 @@ public:
 	virtual int getHeight();
 
 private:
-	GameWindow* window_;
-	SDL_Texture* texture_;
-	SDL_Rect drawSrc_;
+	TextureSheet* textureSheet_;
+
+	SDL_Rect* drawSrc_;
 
 	SDL_Rect drawDest_;
 

@@ -10,11 +10,13 @@ class SpritesheetInfoReader
 public:
 	SpritesheetInfoReader(const std::string& fullPath);
 
-	SpritesheetInfo info();
+	SpritesheetInfo* info();
 
 private:
 	std::string _fullPath;
 	std::string _infoPath;
+
+	SpritesheetInfo info_;
 };
 
 

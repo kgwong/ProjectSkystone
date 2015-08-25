@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "GameObject.h"
-#include "Sprite.h"
+#include "ResourceLocator.h"
 
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
@@ -13,7 +13,7 @@
 class Pickup : public GameObject
 {
 public:
-	Pickup(Sprite* sprite);
+	Pickup(ResourceLocator* resourceLocator);
 	virtual ~Pickup();
 
 	void update(Level& level);

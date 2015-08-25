@@ -1,12 +1,12 @@
 #include "PlayerProjectile.h"
 
 #include "AnimationRenderer.h"
+//#include "ResourceLocator.h"
 
-PlayerProjectile::PlayerProjectile(Point position, int vel, Animation* animation, Direction dir)
+PlayerProjectile::PlayerProjectile(Point position, int vel, ResourceLocator* resourceLocator, Direction dir)
 	:_alive(true), 
-	_animation(animation), //
 	_damageComponent(new DamageComponent(10)), 
-	_renderComponent(new AnimationRenderer(_animation)),
+	_renderComponent(new AnimationRenderer(resourceLocator->getTextureSheet("Assets/Animations/playerProjectile.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_physicsComponent(new PhysicsComponent())
 {

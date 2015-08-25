@@ -3,8 +3,6 @@
 #include "Level.h"
 #include "Pickup.h"
 
-#include "StaticSpriteRenderer.h"
-
 Enemy::Enemy()
 {
 }

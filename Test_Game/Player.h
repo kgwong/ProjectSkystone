@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "GameWindow.h"
-#include "Animation.h"
 #include "Direction.h"
 #include "Block.h"
 
@@ -41,8 +40,6 @@ public:
 
 private:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
-
-	Animation* _animation;
 
 	std::shared_ptr<RenderComponent> _renderComponent;
 	std::shared_ptr<HealthComponent> _healthComponent;
