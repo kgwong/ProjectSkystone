@@ -1,7 +1,6 @@
 #include "PlayerProjectile.h"
 
 #include "AnimationRenderer.h"
-//#include "TextureLoader.h"
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, Direction dir)
 	:_alive(true), 

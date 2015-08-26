@@ -2,7 +2,7 @@
 
 
 GameObject::GameObject()
-	:width(0), height(0)
+	:width_(0), height_(0)
 {
 }
 
@@ -33,12 +33,12 @@ void GameObject::setPosY(int y)
 
 void GameObject::setWidth(int w)
 {
-	width = w;
+	width_ = w;
 }
 
 void GameObject::setHeight(int h)
 {
-	height = h;
+	height_ = h;
 }
 
 Point GameObject::getPos() const
@@ -58,53 +58,53 @@ int GameObject::getPosY() const
 
 int GameObject::getWidth() const
 {
-	return width;
+	return width_;
 }
 
 int GameObject::getHeight() const
 {
-	return height;
+	return height_;
 }
 
 void GameObject::setCenterPos(const GameObject& other)
 {
 	position = other.getCenterPos();
-	position.x -= width/2;
-	position.y -= height/2;
+	position.x -= width_/2;
+	position.y -= height_/2;
 }
 
 
 void GameObject::setCenterPos(Point newCenterPos)
 {
 	position = newCenterPos;
-	position.x -= width/2;
-	position.y -= height/2;
+	position.x -= width_/2;
+	position.y -= height_/2;
 }		
 
 void GameObject::setCenterPosX(int x)
 {
-	position.x = x - width/2;
+	position.x = x - width_/2;
 }
 
 void GameObject::setCenterPosY(int y)
 {
-	position.y = y - height/2;
+	position.y = y - height_/2;
 }
 
 Point GameObject::getCenterPos() const
 {
-	return Point(position.x + width/2, position.y + height/2);
+	return Point(position.x + width_/2, position.y + height_/2);
 }
 
 
 int GameObject::getCenterPosX() const
 {
-	return position.x + width/2; 
+	return position.x + width_/2; 
 }
 
 int GameObject::getCenterPosY() const
 {
-	return position.y + height/2;
+	return position.y + height_/2;
 }
 
 void GameObject::addComponent(Component* component)

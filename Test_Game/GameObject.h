@@ -55,8 +55,8 @@ public:
 
 protected:
 	Point position;
-	int width;
-	int height;
+	int width_;
+	int height_;
 
 	std::unordered_map<const std::type_info*, Component*> components_;
 };

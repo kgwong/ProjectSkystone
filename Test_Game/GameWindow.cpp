@@ -1,41 +1,42 @@
 #include "GameWindow.h"
 
-GameWindow::GameWindow(std::string windowName, int width, int height)
-	:_width(width), _height(height)
+GameWindow::GameWindow(const std::string& windowName, int width, int height)
+	:width_(width), height_(height),
+	window_(MySDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN)),
+	renderer_(MySDL_CreateRenderer(window_.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)),
+	camera_(width, height)
 {
-	window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-
-	if (window == nullptr)
-		MySDL_Error("SDL_CreateWindow");
-
-	
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
-	if (renderer == nullptr)
-	{
-		SDL_DestroyWindow(window);
-		MySDL_Error("SDL_CreateRenderer");
-	}
-
-	camera.setWidth(width);
-	camera.setHeight(height);
-
 }
 
 GameWindow::~GameWindow()
 {
-	SDL_DestroyWindow(window); //
-	SDL_DestroyRenderer(renderer); //
+}
+
+SDL_Window* GameWindow::getWindow()
+{
+	return window_.get();
+}
+
+SDL_Renderer* GameWindow::getRenderer()
+{
+	return renderer_.get();
+}
+
+Camera& GameWindow::getCamera()
+{
+	return camera_;
 }
 
 int GameWindow::getWidth() const
 {
-	return _width;
+	return width_;
 }
 
 int GameWindow::getHeight() const
 {
-	return _height;	
+	return height_;	
 }
+
+
 
 

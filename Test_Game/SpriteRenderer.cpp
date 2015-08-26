@@ -26,10 +26,10 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::update(GameObject& owner)
 {
-	Point cameraPos = textureSheet_->getWindow()->camera.getPos();
+	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
 	drawDest_.x = owner.getPosX() - cameraPos.x;
 	drawDest_.y = owner.getPosY() -cameraPos.y;
-	SDL_RenderCopy(textureSheet_->getWindow()->renderer, textureSheet_->getTexture(), drawSrc_, &drawDest_);
+	SDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
 }
 
 int SpriteRenderer::getWidth()

@@ -23,14 +23,10 @@ MainGame::MainGame()
 	_currLevel = &_levelLoader.getLevel(Path::getFullPath("Levels/LevelTest"),
 										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
-	_window.camera.setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
+	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
 	_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
-
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  // Get handle to standard output
-	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-	LOG << "test test test";
 }
 
 
@@ -74,7 +70,7 @@ void MainGame::changeLevel()
 				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		_currLevel->setPlayer(&_player, _newPlayerPosition);
-		_window.camera.setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
+		_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
 		_nextLevelID = -1;
 	}
@@ -118,10 +114,10 @@ void MainGame::update()
 
 void MainGame::render()
 {
-	SDL_RenderClear(_window.renderer);
+	SDL_RenderClear(_window.getRenderer());
 
-	_window.camera.followObject(_player);
+	_window.getCamera().followObject(_player);
 	_currLevel->render();
 
-	SDL_RenderPresent(_window.renderer);
+	SDL_RenderPresent(_window.getRenderer());
 }

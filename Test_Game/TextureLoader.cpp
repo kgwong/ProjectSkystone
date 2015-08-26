@@ -30,7 +30,7 @@ TextureSheet* TextureLoader::getTextureSheet(const std::string& basename)
 	std::string fullpath = Path::getFullPath(basename);
 
 	if (_textureSheets.count(basename) == 0)
-		_textureSheets.insert({ basename, TextureSheet(_gw, loadTexture(_gw->renderer, fullpath), SpritesheetInfoReader(fullpath).info()) });
+		_textureSheets.insert({ basename, TextureSheet(_gw, loadTexture(_gw->getRenderer(), fullpath), SpritesheetInfoReader(fullpath).info()) });
 
 	return &_textureSheets.at(basename);
 }
