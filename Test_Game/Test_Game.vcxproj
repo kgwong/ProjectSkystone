@@ -87,6 +87,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Pickup.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelMap.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Pickup.h" />

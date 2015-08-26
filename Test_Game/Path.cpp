@@ -11,7 +11,6 @@ void Path::initBasePath()
 	if (basePath.empty()) //only run if not initialized
 	{
 		char* base = SDL_GetBasePath(); //SDL_GetBasePath() should only be called once
-
 		basePath = base;
 		SDL_free(base);
 

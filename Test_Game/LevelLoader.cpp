@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "GameConstants.h"
 #include "MainGame.h"
+#include "Log.h"
 
 #include <fstream>
 
@@ -35,7 +36,7 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level, TextureSh
 {
 	std::ifstream ifs(filepath); //should probably do more error checking
 	if (!ifs)
-		std::cout << "Failed to load: " << filepath << std::endl;
+		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
 
 	ifs >> level._levelID;
 
@@ -56,7 +57,6 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level, TextureSh
 			int tileNum;
 			ifs >> tileNum;
 			level.tileArrangement.tiles[r][c] = creator->create(tileSet, tileNum, r, c);
-			//level.tileArrangement.tiles[r][c] = tileSet->createTile(tileNum, r, c);
 		}
 	}
 }
@@ -65,7 +65,7 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level& level)
 {
 	std::ifstream ifs(filepath);
 	if (!ifs)
-		std::cout << "Failed to load: " << filepath << std::endl;
+		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
 
 	std::string enemyName;
 	Point pos;

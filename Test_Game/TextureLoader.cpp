@@ -4,6 +4,7 @@
 #include "GameWindow.h"
 
 #include "Path.h"
+#include "Log.h"
 
 TextureLoader::TextureLoader(GameWindow* gw)
 	: _gw(gw)
@@ -16,7 +17,7 @@ TextureLoader::~TextureLoader()
 
 std::shared_ptr<SDL_Texture> TextureLoader::loadTexture(SDL_Renderer* renderer, const std::string& fullpath)
 {
-	std::cout << "Loading Texture: " << fullpath << std::endl; //
+	LOG << "Loading Texture: " << fullpath;
 
 	SDL_Texture* texture = IMG_LoadTexture(renderer, fullpath.c_str());
 	if (texture == nullptr)

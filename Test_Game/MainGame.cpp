@@ -2,6 +2,7 @@
 
 #include <windows.h> // for "sleep"
 
+#include "Log.h"
 #include "Path.h"
 
 MainGame::MainGame()
@@ -26,6 +27,10 @@ MainGame::MainGame()
 
 	_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
 	_musicPlayer.play();
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  // Get handle to standard output
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+	LOG << "test test test";
 }
 
 

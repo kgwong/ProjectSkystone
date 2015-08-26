@@ -4,13 +4,15 @@
 #include <iostream> 
 #include <map>
 
+#include "Log.h"
+
 namespace 
 {
 	void mapContains(const std::map<std::string, int>& map, const std::string& index, bool& fail)
 	{
 		if (map.find(index) == map.end())
 		{
-			std::cout << "Missing "<< index << std::endl; 
+			LOG << "Missing " << index;
 			fail = true;
 		}
 	};
@@ -42,7 +44,7 @@ SpritesheetInfo* SpritesheetInfoReader::info()
 	}
 	catch (...)
 	{
-		std::cout << "Failed to read '" << _infoPath << '\'' << std::endl;
+		LOG_STREAM(std::cerr) << "Failed to read '" << _infoPath << '\'';
 		return nullptr;
 	}
 
