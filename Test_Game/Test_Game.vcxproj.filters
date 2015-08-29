@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Entity Source Files">
       <UniqueIdentifier>{31ac2075-344b-4bc5-83da-1f18e87ef026}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Player State Source Files">
+      <UniqueIdentifier>{b7873fdf-0ddc-46bf-af76-beb1a9f1d048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player State Headers">
+      <UniqueIdentifier>{56522169-f370-4fbd-b23c-e0247b49ff18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -126,6 +132,15 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WalkingState.cpp">
+      <Filter>Source Files\Player State Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingState.cpp">
+      <Filter>Source Files\Player State Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AirborneState.cpp">
+      <Filter>Source Files\Player State Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -218,12 +233,6 @@
     <ClInclude Include="EnemyBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TileType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
@@ -250,6 +259,27 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>Header Files\Struct Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TileType.h">
+      <Filter>Header Files\Enum Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AirborneState.h">
+      <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkingState.h">
+      <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPlayerStates.h">
+      <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingState.h">
+      <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

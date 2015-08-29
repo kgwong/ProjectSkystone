@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "GameConstants.h"
 #include "MainGame.h"
+#include "Path.h"
 #include "Log.h"
 
 #include <fstream>
@@ -22,14 +23,15 @@ LevelLoader::~LevelLoader()
 {
 }
 
-Level& LevelLoader::getLevel(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
+Level& LevelLoader::getLevel(const std::string& relativePath, TextureSheet* tileSet, TileCreator* creator)
 {
-	if (_loadedLevels.count(filepath) == 0)
+
+	if (!_loadedLevels.count(relativePath))
 	{
-		auto level = _loadedLevels.insert({ filepath, Level(_mainGame, textureLoader_, _levelMap) });
-		level.first->second.load(filepath, tileSet, creator);
+		auto level = _loadedLevels.insert({ relativePath, Level(_mainGame, textureLoader_, _levelMap) });
+		level.first->second.load(Path::getFullPath(relativePath), tileSet, creator);
 	}
-	return _loadedLevels.at(filepath);
+	return _loadedLevels.at(relativePath);
 }
 
 void LevelLoader::loadTiles(const std::string& filepath, Level& level, TextureSheet* tileSet, TileCreator* creator)

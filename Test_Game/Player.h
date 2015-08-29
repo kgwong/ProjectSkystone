@@ -12,11 +12,11 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 
-
 #include "TextureLoader.h"
 
 class Level;
 class PhysicsComponent;
+class PlayerState;
 
 class Player : public GameObject
 {
@@ -29,6 +29,9 @@ public:
 	void handleInput2(); //
 
 	void update(Level& Level);
+	void render();
+
+	void changeState(PlayerState* state);
 	void jump();
 	void shoot(Level& level);
 
@@ -36,11 +39,11 @@ public:
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 
-	void render();
+public:
+	static const int JUMP_VELOCITY = -20; //negative Y means up!
+	static const int WALK_VELOCITY = 5; 
 
 private:
-	static const int JUMP_VELOCITY = -20; //negative Y means up!
-
 	std::shared_ptr<RenderComponent> _renderComponent;
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
@@ -52,8 +55,8 @@ private:
 	Direction dir; 
 
 	bool _shoot;
-	bool _flying;
 
+	PlayerState* currState_;
 };
 
 #endif //PLAYER_H

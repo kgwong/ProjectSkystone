@@ -34,7 +34,7 @@ int GameWindow::getWidth() const
 
 int GameWindow::getHeight() const
 {
-	return height_;	
+	return height_;
 }
 
 

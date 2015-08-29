@@ -1,7 +1,5 @@
 #include "MainGame.h"
 
-#include <windows.h> // for "sleep"
-
 #include "Log.h"
 #include "Path.h"
 
@@ -20,8 +18,9 @@ MainGame::MainGame()
 	_levelMap.addLevel(2, 1, 2, 1, 3);
 	_levelMap.addLevel(3, 2, 1, 0, 2);
 
-	_currLevel = &_levelLoader.getLevel(Path::getFullPath("Levels/LevelTest"),
-										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+	_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
+										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"),
+										&creator);
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
 	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
@@ -56,17 +55,17 @@ void MainGame::changeLevel()
 	{
 		if (_nextLevelID == 1)
 		{
-			_currLevel = &_levelLoader.getLevel(Path::getFullPath("Levels/LevelTest"),
+			_currLevel = &_levelLoader.getLevel("Levels/LevelTest",
 				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		else if (_nextLevelID == 2)
 		{
-			_currLevel = &_levelLoader.getLevel(Path::getFullPath("Levels/LevelTest2"),
+			_currLevel = &_levelLoader.getLevel("Levels/LevelTest2",
 				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		else if (_nextLevelID == 3)
 		{
-			_currLevel = &_levelLoader.getLevel(Path::getFullPath("Levels/LevelTest3"),
+			_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
 				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
 		_currLevel->setPlayer(&_player, _newPlayerPosition);
@@ -92,6 +91,8 @@ void MainGame::processInput()
 				if (e.key.keysym.sym == SDLK_p)
 					_levelMap.print();
 				break;
+			case SDL_KEYUP:
+				_player.handleInput(e);
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
 				break;
@@ -107,7 +108,7 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
-	//Sleep(50);
+	//SDL_Delay(100);
 	_currLevel->update();
 	changeLevel();
 }

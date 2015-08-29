@@ -30,7 +30,6 @@ private:
 	bool info_;
 
 	SDL_Rect fullTexture_;
-
 	std::shared_ptr<SDL_Texture> texture_;
 	std::vector<SDL_Rect> frames_;
 };
