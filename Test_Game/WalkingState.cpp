@@ -23,12 +23,9 @@ void WalkingState::handleInput(Player& player, SDL_Event& e)
 {
 	if (e.type == SDL_KEYDOWN)
 	{
-		switch (e.key.keysym.sym)
-		{
-		case SDLK_a:
+		if (e.key.keysym.sym == controlMap[JUMP])
 			player.getComponent<PhysicsComponent>()->setVelY(Player::JUMP_VELOCITY);
-			break;
-		}
+
 	}
 }
 
@@ -43,12 +40,12 @@ void WalkingState::update(Player& player)
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
 	player.getComponent<PhysicsComponent>()->setVelX(0);
 
-	if (keyStates[SDL_SCANCODE_LEFT])
+	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-5);
+		player.getComponent<PhysicsComponent>()->setVelX(-Player::WALK_VELOCITY);
 	}
-	if (keyStates[SDL_SCANCODE_RIGHT])
+	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(5);
+		player.getComponent<PhysicsComponent>()->setVelX(Player::WALK_VELOCITY);
 	}
 }

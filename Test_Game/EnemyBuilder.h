@@ -13,7 +13,7 @@ public:
 	EnemyBuilder(TextureLoader* textureLoader);
 	virtual ~EnemyBuilder();
 
-	Enemy* create(const std::string& enemyName);
+	Enemy* build(const std::string& enemyName, Enemy& enemyToBuild);
 	
 
 private:

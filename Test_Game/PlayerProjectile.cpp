@@ -2,7 +2,10 @@
 
 #include "AnimationRenderer.h"
 
-PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, Direction dir)
+#include <cmath>
+#include "CircleMath.h"
+
+PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, double degrees)
 	:_alive(true), 
 	_damageComponent(new DamageComponent(10)), 
 	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/Animations/playerProjectile.png"))),
@@ -13,14 +16,8 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textu
 
 	this->position = position; 
 
-	switch (dir)
-	{
-		case Direction::UP: _physicsComponent->setVelY(-vel); break;
-		case Direction::DOWN: _physicsComponent->setVelY(vel); break;
-		case Direction::LEFT: _physicsComponent->setVelX(-vel); break;
-		case Direction::RIGHT: _physicsComponent->setVelX(vel); break;
-		default: break;
-	}
+	_physicsComponent->setVelX(vel * cos(toRadians(degrees))); //
+	_physicsComponent->setVelY(vel * sin(toRadians(degrees))); //
 
 	addComponent(_renderComponent.get());
 	addComponent(_physicsComponent.get());

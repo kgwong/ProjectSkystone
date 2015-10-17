@@ -15,7 +15,7 @@
 class PlayerProjectile : public GameObject
 {
 public:
-	PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, Direction dir);
+	PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, double degrees);
 	~PlayerProjectile();
 
 	bool isDead();

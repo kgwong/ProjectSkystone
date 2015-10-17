@@ -46,7 +46,7 @@ public:
 	int getLevelWidth() const;
 	int getLevelHeight() const;
 
-	void addPlayerProjectileAtLocation(Point position, int vel, Direction dir);
+	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);
 	void addPickupAtLocation(Point position);
 	void addEnemyAtLocation(const std::string& name, Point position);
 

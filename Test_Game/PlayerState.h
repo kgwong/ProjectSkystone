@@ -3,6 +3,7 @@
 
 #include <SDL/SDL.h>
 #include <string>
+#include "Controls.h"
 
 class Player;
 

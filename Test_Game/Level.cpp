@@ -34,9 +34,9 @@ void Level::setPlayer(Player* p, Point newPlayerPosition)
 	player->setPos(newPlayerPosition);
 }
 
-void Level::addPlayerProjectileAtLocation(Point position, int vel, Direction dir)
+void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	playerProjectiles.push_back( PlayerProjectile(position, vel, textureLoader_, dir) );
+	playerProjectiles.push_back( PlayerProjectile(position, vel, textureLoader_, degrees) );
 }
 
 void Level::addPickupAtLocation(Point position)
@@ -48,10 +48,12 @@ void Level::addPickupAtLocation(Point position)
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	Enemy* enemy = _enemyBuilder.create(name);
-	enemy->setPos(position);
-	enemies.push_back(*enemy);
-	delete enemy;//
+	Enemy enemy;
+	enemy.setPos(position);
+
+	enemies.push_back(enemy);
+	_enemyBuilder.build(name, enemies.back());
+
 }
 
 void Level::update()

@@ -8,13 +8,14 @@
 #include "Log.h"
 
 Player::Player(TextureLoader* textureLoader)
-	: dir(Direction::RIGHT),
+	: degrees_(0),
 	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/Animations/playerAnimation.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_healthComponent(new HealthComponent(100)),
 	_physicsComponent(new PhysicsComponent()),
-	_shoot(false), 
-	currState_(&states::walkingState)
+	shoot_(false), 
+	currState_(&states::walkingState),
+	aimState_(AimState::RIGHT)
 {
 	addComponent(_renderComponent.get());
 	addComponent(_physicsComponent.get());
@@ -28,24 +29,86 @@ Player::~Player()
 
 void Player::handleInput2()
 {
-	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
+
 }
 
 void Player::handleInput(SDL_Event &e)
 {
 	currState_->handleInput(*this, e);
+	if (e.key.keysym.sym == controlMap[ATTACK])
+		shoot_ = true;
+
+	if (aimState_ == AimState::UP)
+	{
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+		{
+			aimState_ = AimState::UP_LEFT;
+		}
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+		{
+			aimState_ = AimState::UP_RIGHT;
+		}
+		if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[UP])
+		{
+			aimState_ = prevAimState_;
+		}
+	}
+	else
+	{
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+		{
+			aimState_ = AimState::LEFT;
+		}
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+		{
+			aimState_ = AimState::RIGHT;
+		}
+		if (e.key.keysym.sym == controlMap[UP])
+		{
+			if (aimState_ == AimState::LEFT || aimState_ == AimState::RIGHT)
+			{
+				prevAimState_ = aimState_;
+			}
+			aimState_ = AimState::UP;
+		}
+	}
 }
 
+void Player::aim()
+{
+	switch (aimState_)
+	{
+	case AimState::UP:
+		degrees_ = 270;
+		break;
+	case AimState::UP_LEFT:
+		_physicsComponent->setVelX(0);
+		degrees_ = 225;
+		break;
+	case AimState::UP_RIGHT:
+		_physicsComponent->setVelX(0);
+		degrees_ = 315;
+		break;
+	case AimState::LEFT:
+		degrees_ = 180;
+		break;
+	case AimState::RIGHT:
+		degrees_ = 0;
+		break;
+	}
+}
 
 void Player::update(Level& level)
 {
 	//LOG << "Current State: " << currState_->name();
 	currState_->update(*this);
+	aim();
+
 	_colliderComponent->update(*this);
 	_physicsComponent->update(*this, level, _colliderComponent.get());
 
 
-	if (_shoot)
+	if (shoot_)
 		shoot(level);
 
 
@@ -70,6 +133,7 @@ void Player::render()
 
 void Player::changeState(PlayerState* state)
 {
+	currState_->onExit(*this);
 	currState_ = state;
 	currState_->onEnter(*this);
 }
@@ -81,8 +145,8 @@ void Player::jump()
 
 void Player::shoot(Level& level)
 {
-	level.addPlayerProjectileAtLocation(position, 30, dir);
-	_shoot = false;
+	level.addPlayerProjectileAtLocation(position, Player::PROJECTILE_VELOCITY, degrees_);
+	shoot_ = false;
 }
 
 std::string Player::getName() const

@@ -14,20 +14,19 @@ EnemyBuilder::~EnemyBuilder()
 {
 }
 
-Enemy* EnemyBuilder::create(const std::string& enemyName)
+Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 {
-	Enemy* enemy = new Enemy();
 	if (enemyName == "TestMobStrong")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemyStrong.png");
-		enemy->setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
-		enemy->setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(500)));
+		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
+		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(500)));
 	}
 	else if (enemyName == "TestMob1")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemy.png");
-		enemy->setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
-		enemy->setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
+		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
+		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
 	}
-	return enemy;
+	return &enemyToBuild;
 }

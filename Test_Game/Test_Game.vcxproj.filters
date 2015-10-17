@@ -141,6 +141,9 @@
     <ClCompile Include="AirborneState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CircleMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -280,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="FlyingState.h">
       <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleMath.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
