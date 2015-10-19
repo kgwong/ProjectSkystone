@@ -24,8 +24,8 @@ MainGame::MainGame()
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
 	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
-	_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
-	_musicPlayer.play();
+	//_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
+	//_musicPlayer.play();
 }
 
 
