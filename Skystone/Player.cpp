@@ -9,7 +9,7 @@
 
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
-	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/Animations/playerAnimation.png"))),
+	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_healthComponent(new HealthComponent(100)),
 	_physicsComponent(new PhysicsComponent()),
