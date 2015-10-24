@@ -43,7 +43,7 @@ public:
 	int getBlockWidth();
 	int getBlockHeight();
 
-	int getLevelWidth() const;
+	int getLevelWidth() const; //pixels
 	int getLevelHeight() const;
 
 	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);

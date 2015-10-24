@@ -31,7 +31,7 @@ public:
 	int getPosX() const;
 	int getPosY() const;
 
-	int getWidth() const;
+	int getWidth() const; //remove later?
 	int getHeight() const;
 
 	void setCenterPos(const GameObject& other);

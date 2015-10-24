@@ -16,6 +16,8 @@ void Enemy::update(Level& level)
 {
 	_colliderComponent->update(*this);
 	_physicsComponent->update(*this, level, _colliderComponent.get());
+	_movementComponent->update(*this);
+
 }
 
 void Enemy::render()
@@ -70,4 +72,10 @@ void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)
 {
 	_healthComponent = healthComponent;
 	addComponent(_healthComponent.get());
+}
+
+void Enemy::setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent> movementComponent)
+{
+	_movementComponent = movementComponent;
+	addComponent(_movementComponent.get());
 }
