@@ -14,9 +14,9 @@ Enemy::~Enemy()
 
 void Enemy::update(Level& level)
 {
+	_movementComponent->update(*this);
 	_colliderComponent->update(*this);
 	_physicsComponent->update(*this, level, _colliderComponent.get());
-	_movementComponent->update(*this);
 
 }
 

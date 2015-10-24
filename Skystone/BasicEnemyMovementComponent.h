@@ -1,10 +1,9 @@
-#ifndef BASIC_ENEMY_MOVEMENT_H
-#define BASIC_ENEMY_MOVEMENT_H
+#ifndef BASIC_ENEMY_MOVEMENT_COMPONENT_H
+#define BASIC_ENEMY_MOVEMENT_COMPONENT_H
 
 #include "Component.h"
 
-class BasicEnemyMovementComponent :
-	public Component
+class BasicEnemyMovementComponent :	public Component
 {
 public:
 	static const int DEFAULT_SPEED = 1;
@@ -22,4 +21,4 @@ private:
 	bool initialized;
 };
 
-#endif //BASIC_ENEMY_MOVEMENT_H
+#endif //BASIC_ENEMY_MOVEMENT_COMPONENT_H

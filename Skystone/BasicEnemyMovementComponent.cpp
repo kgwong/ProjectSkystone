@@ -3,7 +3,6 @@
 #include "PhysicsComponent.h"
 #include "GameObject.h"
 
-
 BasicEnemyMovementComponent::BasicEnemyMovementComponent()
 	: speed_(DEFAULT_SPEED), initialized(false)
 {
@@ -18,9 +17,9 @@ BasicEnemyMovementComponent::~BasicEnemyMovementComponent()
 {
 }
 
-void BasicEnemyMovementComponent::update(GameObject& owner) {
+void BasicEnemyMovementComponent::update(GameObject& owner) 
+{
 	PhysicsComponent* physics = owner.getComponent<PhysicsComponent>();
-	physics->setVelX(speed_);
 
 	if (!initialized)
 	{
@@ -29,11 +28,13 @@ void BasicEnemyMovementComponent::update(GameObject& owner) {
 	}
 	if (owner.getPosX() > oldEnemyPosition + 300)
 	{
-		physics->setVelX(-physics->getVelX());
+		speed_ = -speed_;
 	}
-	else if (owner.getPosX() < oldEnemyPosition + 300)
+	else if (owner.getPosX() < oldEnemyPosition - 300)
 	{
-		physics->setVelX(- physics->getVelX());
+		speed_ = -speed_;
 	}
+
+	physics->setVelX(speed_);
 
 }
