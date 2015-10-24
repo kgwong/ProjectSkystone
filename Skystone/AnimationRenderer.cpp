@@ -38,7 +38,9 @@ int AnimationRenderer::getHeight()
 
 void AnimationRenderer::incrementFrame()
 {
-	currFrame_ = (++currFrame_) % textureSheet_->getNumFrames();
+	int framesInAnimation = textureSheet_->getNumFrames();
+	if (framesInAnimation)
+		currFrame_ = (++currFrame_) % framesInAnimation;
 }
 
 

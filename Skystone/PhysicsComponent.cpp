@@ -63,7 +63,7 @@ void PhysicsComponent::setAccelX(int accelX)
 
 void PhysicsComponent::setAccelY(int accelY)
 {
-	_accelY = accelY;		
+	_accelY = accelY;
 }
 
 
@@ -84,7 +84,7 @@ int PhysicsComponent::getAccelX() const
 
 int PhysicsComponent::getAccelY() const
 {
-	return _accelY;		
+	return _accelY;
 }
 
 bool PhysicsComponent::isMovingUp() const
@@ -146,7 +146,7 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 			for (int c = startC; c <= endC; ++c)
 			{
 				for(int r = startR; r <= endR; ++r)
-				{						
+				{
 					Tile& tile = level.tileArrangement.tiles[r][c];
 
 					if (collider->checkCollision(tile))

@@ -145,7 +145,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BasicEnemyMovementComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -294,7 +294,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicEnemyMovementComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
