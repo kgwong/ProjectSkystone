@@ -20,8 +20,7 @@ public:
 
 private:
 	int speed_; 
-	int oldEnemyPosition;
-	bool initialized;
+	int oldEnemyPosition_;
 
 	PhysicsComponent* physics_;
 };

@@ -18,7 +18,6 @@ BasicEnemyMovementComponent::~BasicEnemyMovementComponent()
 }
 
 
-
 void BasicEnemyMovementComponent::start(GameObject& owner)
 {
 	physics_ = owner.getComponent<PhysicsComponent>();
