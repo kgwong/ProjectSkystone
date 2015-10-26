@@ -21,6 +21,7 @@ Player::Player(TextureLoader* textureLoader)
 	addComponent(_physicsComponent.get());
 	addComponent(_healthComponent.get());
 	addComponent(_colliderComponent.get());
+	callStartOnComponents();
 }
 
 Player::~Player()
@@ -105,7 +106,7 @@ void Player::update(Level& level)
 	aim();
 
 	_colliderComponent->update(*this);
-	_physicsComponent->update(*this, level, _colliderComponent.get());
+	_physicsComponent->update(*this, level);
 
 
 	if (shoot_)

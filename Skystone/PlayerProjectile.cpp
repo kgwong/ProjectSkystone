@@ -23,6 +23,7 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textu
 	addComponent(_physicsComponent.get());
 	addComponent(_colliderComponent.get());
 	addComponent(_damageComponent.get());
+	callStartOnComponents();
 }
 
 
@@ -38,7 +39,7 @@ bool PlayerProjectile::isDead()
 void PlayerProjectile::update(Level& level)
 {
 	_colliderComponent->update(*this);
-	_physicsComponent->update(*this, level, _colliderComponent.get());
+	_physicsComponent->update(*this, level);
 }
 
 void PlayerProjectile::render()

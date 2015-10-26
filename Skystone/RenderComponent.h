@@ -14,6 +14,7 @@ public:
 	RenderComponent() {};
 	virtual ~RenderComponent() {} ;
 
+	virtual void start(GameObject& owner) {};
 	virtual void update(GameObject& owner) {} ;
 
 	virtual int getWidth() { return 0; }

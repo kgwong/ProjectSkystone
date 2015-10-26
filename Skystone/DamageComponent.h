@@ -10,6 +10,9 @@ public:
 	DamageComponent(int damage);
 	virtual ~DamageComponent();
 
+	virtual void start(GameObject& owner) {};
+	virtual void update(GameObject& owner) {};
+
 	int getDamage();
 
 private:

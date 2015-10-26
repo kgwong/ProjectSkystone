@@ -19,7 +19,8 @@ public:
 	PhysicsComponent();
 	virtual ~PhysicsComponent();
 
-	void update(GameObject& owner, Level& level, ColliderComponent* collider);
+	virtual void start(GameObject& owner);
+	void update(GameObject& owner, Level& level);
 
 	void setVelX(int velX);
 	void setVelY(int velY);
@@ -46,6 +47,8 @@ private:
 
 	bool _gravityEnabled;
 	bool _falling;
+
+	ColliderComponent* collider_;
 
 	void updatePosition(GameObject& owner, Axis axis);
 	void updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis);

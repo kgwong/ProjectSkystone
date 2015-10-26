@@ -11,6 +11,7 @@ public:
 	HealthComponent(int initHealth);
 	virtual ~HealthComponent();
 
+	virtual void start(GameObject& owner) {};
 	virtual void update(GameObject& owner);
 
 	void takeDamage(int damage);

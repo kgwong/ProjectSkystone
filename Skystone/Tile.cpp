@@ -25,6 +25,7 @@ Tile::Tile(SpriteRenderer* renderer,
 	}
 
 	addComponent(_colliderComponent.get());
+	callStartOnComponents();
 }
 
 

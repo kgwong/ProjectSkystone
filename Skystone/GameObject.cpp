@@ -122,3 +122,11 @@ EntityType GameObject::getType() const
 {
 	return EntityType::NONE;
 }
+
+void GameObject::callStartOnComponents()
+{
+	for (auto& i : components_)
+	{
+		i.second->start(*this);
+	}
+}

@@ -11,7 +11,8 @@
 PhysicsComponent::PhysicsComponent()
 	:_velX(0), _velY(0),
 	_accelX(0), _accelY(0),
-	_gravityEnabled(true), _falling(true)
+	_gravityEnabled(true), _falling(true),
+	collider_(nullptr)
 {
 }
 
@@ -19,14 +20,18 @@ PhysicsComponent::~PhysicsComponent()
 {
 }
 
+void PhysicsComponent::start(GameObject& owner)
+{
+	collider_ = owner.getComponent<ColliderComponent>();
+}
 
-void PhysicsComponent::update(GameObject& owner, Level& level, ColliderComponent* collider)
+void PhysicsComponent::update(GameObject& owner, Level& level)
 {
 	updatePosition(owner, Axis::X);
-	updatePositionAfterCollision(owner, level, collider, Axis::X);
+	updatePositionAfterCollision(owner, level, collider_, Axis::X);
 
 	updatePosition(owner, Axis::Y);
-	updatePositionAfterCollision(owner, level, collider, Axis::Y);
+	updatePositionAfterCollision(owner, level, collider_, Axis::Y);
 }
 
 void PhysicsComponent::enableGravity(bool gravity)

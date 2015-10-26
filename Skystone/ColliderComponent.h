@@ -21,6 +21,9 @@ public:
 	ColliderComponent(BoxCollider collider);
 	virtual ~ColliderComponent();
 
+	virtual void start(GameObject& owner) {};
+	virtual void update(GameObject& owner);
+
 	void setCollider(BoxCollider newCollider); 
 
 	int getHeight();
@@ -34,7 +37,7 @@ public:
 	int getOffsetX();
 	int getOffsetY();
 
-	virtual void update(GameObject& owner);
+
 
 	bool checkCollision(GameObject& other);
 	bool checkCollision(ColliderComponent* other);

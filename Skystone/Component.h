@@ -9,6 +9,8 @@ class Component
 {
 public:
 	virtual ~Component() {};
+
+	virtual void start(GameObject& owner) {};
 	virtual void update(GameObject& owner) {};
 };
 
