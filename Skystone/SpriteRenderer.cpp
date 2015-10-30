@@ -22,7 +22,7 @@ SpriteRenderer::~SpriteRenderer()
 {
 }
 
-void SpriteRenderer::update(GameObject& owner)
+void SpriteRenderer::update(GameObject& owner, Level& level)
 {
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
 	drawDest_.x = owner.getPosX() - cameraPos.x;

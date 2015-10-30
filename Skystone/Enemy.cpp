@@ -14,15 +14,15 @@ Enemy::~Enemy()
 
 void Enemy::update(Level& level)
 {
-	_movementComponent->update(*this);
-	_colliderComponent->update(*this);
+	_movementComponent->update(*this, level);
+	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 
 }
 
-void Enemy::render()
+void Enemy::render(Level& level)
 {
-	_renderComponent->update(*this);
+	_renderComponent->update(*this, level);
 }
 
 bool Enemy::isDead()

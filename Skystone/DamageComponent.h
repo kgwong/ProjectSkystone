@@ -10,8 +10,8 @@ public:
 	DamageComponent(int damage);
 	virtual ~DamageComponent();
 
-	virtual void start(GameObject& owner) {};
-	virtual void update(GameObject& owner) {};
+	virtual void start(GameObject& owner, Level& level) {};
+	virtual void update(GameObject& owner, Level& level) {};
 
 	int getDamage();
 

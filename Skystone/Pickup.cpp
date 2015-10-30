@@ -11,7 +11,7 @@ Pickup::Pickup(TextureLoader* textureLoader)
 	addComponent(_renderComponent.get());
 	addComponent(_physicsComponent.get());
 	addComponent(_colliderComponent.get());
-	callStartOnComponents();
+	//callStartOnComponents();
 }
 
 Pickup::~Pickup()
@@ -20,13 +20,13 @@ Pickup::~Pickup()
 
 void Pickup::update(Level& level)
 {
-	_colliderComponent->update(*this);
+	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 }
 
-void Pickup::render()
+void Pickup::render(Level& level)
 {
-	_renderComponent->update(*this);
+	_renderComponent->update(*this, level);
 }
 
 bool Pickup::isDead()

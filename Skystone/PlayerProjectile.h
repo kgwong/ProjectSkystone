@@ -20,7 +20,7 @@ public:
 
 	bool isDead();
 	void update(Level& level);
-	void render();
+	void render(Level& level);
 
 	virtual void onCollision(CollisionInfo& collision);
 	virtual EntityType getType() const;

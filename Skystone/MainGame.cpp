@@ -17,11 +17,13 @@ MainGame::MainGame()
 	_levelMap.addLevel(1, 2, 2, 1, 1);
 	_levelMap.addLevel(2, 1, 2, 1, 3);
 	_levelMap.addLevel(3, 2, 1, 0, 2);
+	_levelMap.addLevel(4, 1, 1, 0 , 4);
 
-	_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
+	_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
 										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"),
 										&creator);
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
+	_currLevel->startEntityComponents();
 	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
 	//_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
@@ -68,7 +70,13 @@ void MainGame::changeLevel()
 			_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
 				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
 		}
+		else if (_nextLevelID == 4)
+		{
+			_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
+				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+		}
 		_currLevel->setPlayer(&_player, _newPlayerPosition);
+		_currLevel->startEntityComponents();
 		_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 
 		_nextLevelID = -1;

@@ -123,10 +123,10 @@ EntityType GameObject::getType() const
 	return EntityType::NONE;
 }
 
-void GameObject::callStartOnComponents()
+void GameObject::callStartOnComponents(Level& level)
 {
 	for (auto& i : components_)
 	{
-		i.second->start(*this);
+		i.second->start(*this, level);
 	}
 }

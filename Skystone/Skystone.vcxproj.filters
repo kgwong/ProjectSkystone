@@ -105,9 +105,6 @@
     <ClCompile Include="AnimationRenderer.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -294,6 +291,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicEnemyMovementComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>

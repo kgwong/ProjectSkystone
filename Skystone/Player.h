@@ -36,7 +36,7 @@ public:
 	void aim();
 
 	void update(Level& Level);
-	void render();
+	void render(Level& level);
 
 	void changeState(PlayerState* state);
 

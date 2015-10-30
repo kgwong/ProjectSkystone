@@ -20,7 +20,7 @@ PhysicsComponent::~PhysicsComponent()
 {
 }
 
-void PhysicsComponent::start(GameObject& owner)
+void PhysicsComponent::start(GameObject& owner, Level& level)
 {
 	collider_ = owner.getComponent<ColliderComponent>();
 }
@@ -28,10 +28,10 @@ void PhysicsComponent::start(GameObject& owner)
 void PhysicsComponent::update(GameObject& owner, Level& level)
 {
 	updatePosition(owner, Axis::X);
-	updatePositionAfterCollision(owner, level, collider_, Axis::X);
+	updatePositionAfterCollision(owner, level, Axis::X);
 
 	updatePosition(owner, Axis::Y);
-	updatePositionAfterCollision(owner, level, collider_, Axis::Y);
+	updatePositionAfterCollision(owner, level, Axis::Y);
 }
 
 void PhysicsComponent::enableGravity(bool gravity)
@@ -135,18 +135,18 @@ void PhysicsComponent::updatePosition(GameObject& owner, Axis axis)
 	}
 }
 
-void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis)
+void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& level, Axis axis)
 {
-	if (collider)
+	if (collider_)
 	{
-		collider->update(owner);
+		collider_->update(owner, level);
 
 		if (owner.getType() != EntityType::ENVIRONMENT)
 		{
 			int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
 			int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
-			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider->getWidth()) / Constants::TILE_SIZE);
-			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider->getHeight()) / Constants::TILE_SIZE);
+			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE);
+			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE);
 
 			for (int c = startC; c <= endC; ++c)
 			{
@@ -154,8 +154,8 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 				{
 					Tile& tile = level.tileArrangement.tiles[r][c];
 
-					if (collider->checkCollision(tile))
-						handleCollision(owner, tile, level, collider, axis);
+					if (collider_->checkCollision(tile))
+						handleCollision(owner, tile, level, axis);
 				}
 			}
 		}
@@ -163,41 +163,39 @@ void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& le
 		if (owner.getType() == EntityType::PLAYER || owner.getType() == EntityType::PLAYER_PROJECTILE )
 		{
 			for (auto& enemy : level.enemies)
-				if (collider->checkCollision(enemy))
-					handleCollision(owner, enemy, level, collider, axis);
+				if (collider_->checkCollision(enemy))
+					handleCollision(owner, enemy, level, axis);
 		}
 
 		if (owner.getType() == EntityType::PLAYER) //only player has collision with pickups 
 		{
 			for (auto& pickup : level.pickups)
-				if (collider->checkCollision(pickup))
-					handleCollision(owner, pickup, level, collider, axis); //make this a non-physical collision!
+				if (collider_->checkCollision(pickup))
+					handleCollision(owner, pickup, level, axis); //make this a non-physical collision!
 		}
 	}
 
 }
 
-void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Level& level, ColliderComponent* collider, Axis axis)
+void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Level& level, Axis axis)
 {
-	//
-	//ColliderComponent* otherCollider = static_cast<ColliderComponent*>(other.getComponent(ComponentType::COLLIDER));
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>();
 	switch(axis)
 	{
 		case Axis::X:
 			if (isMovingLeft())
-				owner.setPosX(otherCollider->getRight() - collider->getOffsetX());
+				owner.setPosX(otherCollider->getRight() - collider_->getOffsetX());
 			else //isMovingRight
-				owner.setPosX(otherCollider->getLeft() - collider->getWidth() - collider->getOffsetX());
+				owner.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
 			setVelX(0);
 			break;
 
 		case Axis::Y:
 			if (isMovingUp())
-				owner.setPosY(otherCollider->getBottom() - collider->getOffsetY());
+				owner.setPosY(otherCollider->getBottom() - collider_->getOffsetY());
 			else //isMovingDown
 			{
-				owner.setPosY(otherCollider->getTop() - collider->getHeight() - collider->getOffsetY());
+				owner.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
 				_falling = false;
 			}
 			setVelY(0);
@@ -205,7 +203,7 @@ void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Lev
 		default:
 			break;
 	}
-	collider->update(owner); 
+	collider_->update(owner, level); 
 	other.onCollision(CollisionInfo{level, owner, *otherCollider});
 	owner.onCollision(CollisionInfo{level, other, *otherCollider});
 }

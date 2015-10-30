@@ -31,6 +31,6 @@ Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
 		enemyToBuild.setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent>(new BasicEnemyMovementComponent()));
 	}
-	enemyToBuild.callStartOnComponents(); //
+	//enemyToBuild.callStartOnComponents(); //
 	return &enemyToBuild;
 }

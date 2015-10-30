@@ -34,15 +34,29 @@ void Level::setPlayer(Player* p, Point newPlayerPosition)
 	player->setPos(newPlayerPosition);
 }
 
+void Level::startEntityComponents()
+{
+	for (int r = 0; r < tileArrangement.rows; ++r)
+		for (int c = 0; c < tileArrangement.cols; ++c)
+			tileArrangement.tiles[r][c].callStartOnComponents(*this);
+	player->callStartOnComponents(*this);
+	startComponents(playerProjectiles);
+	startComponents(enemies);
+	startComponents(pickups);
+}
+
 void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	playerProjectiles.push_back( PlayerProjectile(position, vel, textureLoader_, degrees) );
+	PlayerProjectile projectile(PlayerProjectile(position, vel, textureLoader_, degrees));
+	projectile.callStartOnComponents(*this); //call start
+	playerProjectiles.push_back(projectile);
 }
 
 void Level::addPickupAtLocation(Point position)
 {
 	Pickup pickup(textureLoader_);
 	pickup.setPos(position);
+	pickup.callStartOnComponents(*this); //call start
 	pickups.push_back(pickup);
 }
 
@@ -69,7 +83,7 @@ void Level::updateTiles()
 {
 	for (int r = 0; r < tileArrangement.rows; ++r)
 		for (int c = 0; c < tileArrangement.cols; ++c)
-			tileArrangement.tiles[r][c].update();
+			tileArrangement.tiles[r][c].update(*this);
 }
 
 void Level::updatePlayer()
@@ -157,7 +171,7 @@ void Level::renderTiles()
 {
 	for (int r = 0; r < tileArrangement.rows; ++r)
 		for (int c = 0; c < tileArrangement.cols; ++c)
-			tileArrangement.tiles[r][c].render();
+			tileArrangement.tiles[r][c].render(*this);
 }
 
 void Level::renderEnemies()
@@ -177,7 +191,7 @@ void Level::renderPickups()
 
 void Level::renderPlayer()
 {
-	player->render();
+	player->render(*this);
 }
 
 int Level::getLevelWidth() const

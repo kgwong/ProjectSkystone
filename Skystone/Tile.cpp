@@ -25,7 +25,7 @@ Tile::Tile(SpriteRenderer* renderer,
 	}
 
 	addComponent(_colliderComponent.get());
-	callStartOnComponents();
+//	callStartOnComponents();
 }
 
 
@@ -33,15 +33,15 @@ Tile::~Tile()
 {
 }
 
-void Tile::update()
+void Tile::update(Level& level)
 {
 	if (_colliderComponent)
-		_colliderComponent->update(*this);
+		_colliderComponent->update(*this, level);
 }
 
-void Tile::render()
+void Tile::render(Level& level)
 {
-	renderer_->update(*this);
+	renderer_->update(*this, level);
 }	
 
 void Tile::onCollision(CollisionInfo& collision)

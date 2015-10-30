@@ -4,14 +4,15 @@
 #include <string>
 
 class GameObject;
+class Level;
 
 class Component
 {
 public:
 	virtual ~Component() {};
 
-	virtual void start(GameObject& owner) {};
-	virtual void update(GameObject& owner) {};
+	virtual void start(GameObject& owner, Level& level) = 0;
+	virtual void update(GameObject& owner, Level& level) = 0;
 };
 
 #endif //COMPONENT_H

@@ -15,7 +15,7 @@ AnimationRenderer::~AnimationRenderer()
 {
 }
 
-void AnimationRenderer::update(GameObject& owner)
+void AnimationRenderer::update(GameObject& owner, Level& level)
 {
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
 	drawDest_.x = owner.getPosX() - cameraPos.x;

@@ -53,7 +53,7 @@ public:
 	virtual void onCollision(CollisionInfo& collision) {};
 	virtual void onDeath(Level& level) {};
 
-	virtual void callStartOnComponents();
+	virtual void callStartOnComponents(Level& level);
 
 protected:
 	Point position;

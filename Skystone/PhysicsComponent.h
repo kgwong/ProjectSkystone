@@ -19,8 +19,8 @@ public:
 	PhysicsComponent();
 	virtual ~PhysicsComponent();
 
-	virtual void start(GameObject& owner);
-	void update(GameObject& owner, Level& level);
+	virtual void start(GameObject& owner, Level& level);
+	virtual void update(GameObject& owner, Level& level);
 
 	void setVelX(int velX);
 	void setVelY(int velY);
@@ -51,8 +51,8 @@ private:
 	ColliderComponent* collider_;
 
 	void updatePosition(GameObject& owner, Axis axis);
-	void updatePositionAfterCollision(GameObject& owner, Level& level, ColliderComponent* collider, Axis axis);
-	void handleCollision(GameObject& owner, GameObject& other, Level& level, ColliderComponent* collider, Axis axis);
+	void updatePositionAfterCollision(GameObject& owner, Level& level, Axis axis);
+	void handleCollision(GameObject& owner, GameObject& other, Level& level, Axis axis);
 
 private:
 	void enactGravity();

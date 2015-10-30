@@ -12,14 +12,8 @@ HealthComponent::HealthComponent(int initHealth)
 
 }
 
-
 HealthComponent::~HealthComponent()
 {
-}
-
-void HealthComponent::update(GameObject& owner)
-{
-
 }
 
 void HealthComponent::takeDamage(int damage)

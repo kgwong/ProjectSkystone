@@ -33,6 +33,8 @@ public:
 	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
 
+	void startEntityComponents();
+
 	void update();
 	void render();
 
@@ -68,6 +70,9 @@ private:
 	int _blockWidth, _blockHeight;
 
 private:
+	template <typename Entity>
+	void startComponents(std::vector<Entity>& v);
+
 	void updateTiles();
 	void updatePlayer();
 	void updatePlayerProjectiles();
@@ -86,6 +91,13 @@ private:
 	template <typename Entity>
 	void renderEntityVector(std::vector<Entity>& v); //render() must be defined for Entity
 };
+
+template <typename Entity>
+void Level::startComponents(std::vector<Entity>& v)
+{
+	for (auto& entity : v)
+		entity.callStartOnComponents(*this);
+}
 
 template <typename Entity>
 void Level::updateEntityVector(std::vector<Entity>& v)
@@ -110,9 +122,8 @@ template <typename Entity>
 void Level::renderEntityVector(std::vector<Entity>& v)
 {
 	for (auto& entity : v)
-		entity.render();
+		entity.render(*this);
 }
-
 
 #endif //LEVEL_H
 

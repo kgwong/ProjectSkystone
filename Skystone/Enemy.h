@@ -23,7 +23,7 @@ public:
 	virtual ~Enemy();
 
 	void update(Level& level);
-	void render();
+	void render(Level& level); // temporary
 
 	bool isDead();
 

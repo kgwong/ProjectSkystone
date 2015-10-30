@@ -14,8 +14,8 @@ public:
 	Tile(SpriteRenderer* spriteRenderer, TileType tileType, int r, int c);
 	~Tile();
 
-	void update();
-	void render();
+	void update(Level& level);
+	void render(Level& level);
 
 	virtual EntityType getType() const;
 	void onCollision(CollisionInfo& collision);

@@ -22,6 +22,14 @@ ColliderComponent::~ColliderComponent()
 {
 }
 
+void ColliderComponent::update(GameObject& owner, Level& level)
+{
+	_collider.x = owner.getPosX() + _offsetX;
+	_collider.y = owner.getPosY() + _offsetY;
+	//setCollider(BoxCollider{owner.getPosX() + _offsetX, owner.getPosY() + _offsetY,
+	//						owner.getWidth(), owner.getHeight()});
+}
+
 void ColliderComponent::setCollider(BoxCollider newCollider)
 {
 	_collider = newCollider;
@@ -65,14 +73,6 @@ int ColliderComponent::getOffsetX()
 int ColliderComponent::getOffsetY()
 {
 	return _offsetY;
-}
-
-void ColliderComponent::update(GameObject& owner)
-{
-	_collider.x = owner.getPosX() + _offsetX;
-	_collider.y = owner.getPosY() + _offsetY;
-	//setCollider(BoxCollider{owner.getPosX() + _offsetX, owner.getPosY() + _offsetY,
-	//						owner.getWidth(), owner.getHeight()});
 }
 
 bool ColliderComponent::checkCollision(GameObject& other)

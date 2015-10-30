@@ -17,7 +17,7 @@ public:
 	virtual ~Pickup();
 
 	void update(Level& level);
-	void render();
+	void render(Level& level);
 
 	bool isDead();
 

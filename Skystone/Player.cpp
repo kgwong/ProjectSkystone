@@ -21,7 +21,7 @@ Player::Player(TextureLoader* textureLoader)
 	addComponent(_physicsComponent.get());
 	addComponent(_healthComponent.get());
 	addComponent(_colliderComponent.get());
-	callStartOnComponents();
+	//callStartOnComponents();
 }
 
 Player::~Player()
@@ -105,7 +105,7 @@ void Player::update(Level& level)
 	currState_->update(*this);
 	aim();
 
-	_colliderComponent->update(*this);
+	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 
 
@@ -127,9 +127,9 @@ void Player::update(Level& level)
 							getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 }
 
-void Player::render()
+void Player::render(Level& level)
 {
-	_renderComponent->update(*this);
+	_renderComponent->update(*this, level);
 }
 
 void Player::changeState(PlayerState* state)

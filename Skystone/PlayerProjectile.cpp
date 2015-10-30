@@ -16,14 +16,16 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textu
 
 	this->position = position; 
 
-	_physicsComponent->setVelX(vel * cos(toRadians(degrees))); //
-	_physicsComponent->setVelY(vel * sin(toRadians(degrees))); //
+	int newVelX = (int)(vel * cos(toRadians(degrees)));
+	int newVelY = (int)(vel * sin(toRadians(degrees)));
+	_physicsComponent->setVelX(newVelX); //
+	_physicsComponent->setVelY(newVelY); //
 
 	addComponent(_renderComponent.get());
 	addComponent(_physicsComponent.get());
 	addComponent(_colliderComponent.get());
 	addComponent(_damageComponent.get());
-	callStartOnComponents();
+	//callStartOnComponents();
 }
 
 
@@ -38,13 +40,13 @@ bool PlayerProjectile::isDead()
 
 void PlayerProjectile::update(Level& level)
 {
-	_colliderComponent->update(*this);
+	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 }
 
-void PlayerProjectile::render()
+void PlayerProjectile::render(Level& level)
 {
-	_renderComponent->update(*this);
+	_renderComponent->update(*this, level);
 }
 
 void PlayerProjectile::onCollision(CollisionInfo& collision)
