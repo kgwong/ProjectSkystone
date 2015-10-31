@@ -23,4 +23,4 @@ void MySDL_RenderCopy(SDL_Renderer* renderer,
 void printCoord(int x, int y);
 
 
-#endif //ERRORS_H
+#endif //ERRORS_Hz

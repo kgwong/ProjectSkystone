@@ -98,6 +98,7 @@
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
+    <ClCompile Include="RNG.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="RNG.h" />
     <ClInclude Include="TestPlayerStates.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="SpriteRenderer.h" />
