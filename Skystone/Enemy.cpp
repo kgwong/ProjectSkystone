@@ -74,7 +74,7 @@ void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)
 	addComponent(_healthComponent.get());
 }
 
-void Enemy::setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent> movementComponent)
+void Enemy::setMovementComponent(std::shared_ptr<AIComponent> movementComponent)
 {
 	_movementComponent = movementComponent;
 	addComponent(_movementComponent.get());

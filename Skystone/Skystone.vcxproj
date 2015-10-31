@@ -98,6 +98,7 @@
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
+    <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="PlayerProjectile.h" />
     <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="RandomJumperComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="TestPlayerStates.h" />

@@ -6,7 +6,7 @@
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
 #include "BasicEnemyMovementComponent.h"
-
+#include "AIComponent.h"
 #include "EnemyBuilder.h"
 
 #include "GameWindow.h"
@@ -37,12 +37,12 @@ private:
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
-	std::shared_ptr<BasicEnemyMovementComponent> _movementComponent;
+	std::shared_ptr<AIComponent> _movementComponent;
 
 private:
 	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
-	void setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent> movementComponent);
+	void setMovementComponent(std::shared_ptr<AIComponent> movementComponent);
 
 };
 

@@ -147,6 +147,9 @@
     <ClCompile Include="RNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RandomJumperComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="RNG.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomJumperComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
