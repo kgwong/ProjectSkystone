@@ -9,6 +9,8 @@ class RandomJumperComponent : public AIComponent
 {
 public:
 	static const int DEFAULT_TIME_INTERVAL = 100;
+	static const int DEFAULT_JUMP_VELOCITY = -15;
+	static const int DEFAULT_X_VELOCITY = 5;
 
 public:
 	RandomJumperComponent();
@@ -18,8 +20,8 @@ public:
 private:
 	int timeInterval_;
 	PhysicsComponent* physics_;
-	int oldVelX_;
-	int oldVelY_;
+	int jumpVelocity_;
+	int xVelocity_;
 };
 
 #endif //RANDOM_JUMPER_COMPONENT_H
