@@ -1,6 +1,6 @@
 numSprites 2
-spriteWidth 40
-spriteHeight 40
+spriteWidth 32
+spriteHeight 32
 numRows 1
 numCols 2
 padding 0

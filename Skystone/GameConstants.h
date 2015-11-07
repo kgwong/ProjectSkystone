@@ -1,8 +1,12 @@
 #ifndef GAME_CONSTANTS_H
 #define GAME_CONSTANTS_H
 
+#include <string>
+
 namespace Constants
 {
+	const std::string GAME_TITLE = "Test Game!";
+
 	const int SCREEN_WIDTH = 640;
 	const int SCREEN_HEIGHT = 480;
 

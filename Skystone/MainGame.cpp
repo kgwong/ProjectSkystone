@@ -4,7 +4,7 @@
 #include "Path.h"
 
 MainGame::MainGame()
-	:_window("Test Game!", Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
+	:_window(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	textureLoader_(&_window),
 	_player(&textureLoader_),
 	_quit(false),
