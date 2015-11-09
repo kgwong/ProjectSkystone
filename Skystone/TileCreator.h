@@ -6,14 +6,11 @@
 class TileCreator
 {
 public:
-	TileCreator(GameWindow* window);
+	TileCreator();
 	~TileCreator();
 
 	Tile create(TextureSheet* textureSheet,
 		int tileIndex, int r, int c);
-
-private:
-	GameWindow* window_;
 };
 
 #endif //TILE_CREATOR_H

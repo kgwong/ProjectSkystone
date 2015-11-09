@@ -35,8 +35,6 @@ private:
 
 	MusicPlayer _musicPlayer;
 
-	TileCreator creator;//temporary
-
 	LevelLoader _levelLoader;
 	LevelMap _levelMap;
 	Level* _currLevel;

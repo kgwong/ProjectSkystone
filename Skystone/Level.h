@@ -30,6 +30,9 @@ public:
 		LevelMap* levelMap);
 	~Level();
 
+	void setTileCreator(TileCreator* tileCreator);
+	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
+
 	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
 
@@ -61,9 +64,9 @@ public:
 
 private:
 	MainGame* _mainGame;
-	GameWindow* _window;
 	TextureLoader* textureLoader_;
-	EnemyBuilder _enemyBuilder;
+	EnemyBuilder* enemyBuilder_;
+	TileCreator* tileCreator_;
 	LevelMap* _levelMap;
 
 	int _levelID;

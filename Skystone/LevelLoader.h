@@ -6,6 +6,7 @@
 
 #include "TextureSheet.h"
 #include "TileCreator.h"
+#include "EnemyBuilder.h"
 
 class Level;
 class MainGame;
@@ -21,8 +22,7 @@ public:
 	~LevelLoader();
 
 	Level& getLevel(const std::string& relativePath, 
-						TextureSheet* tileSet, 
-						TileCreator* creator);
+						TextureSheet* tileSet);
 
 public:
 	static void loadTiles(const std::string& filepath, Level& level, TextureSheet* tileSet, TileCreator* creator);
@@ -32,6 +32,9 @@ private:
 	MainGame* _mainGame;
 	TextureLoader* textureLoader_;
 	LevelMap* _levelMap;
+
+	TileCreator tileCreator_;
+	EnemyBuilder enemyBuilder_;
 
 	std::map<std::string, Level> _loadedLevels;
 

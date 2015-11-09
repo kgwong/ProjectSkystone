@@ -3,8 +3,7 @@
 #include "TileType.h"
 
 
-TileCreator::TileCreator(GameWindow* window)
-	:window_(window)
+TileCreator::TileCreator()
 {
 }
 

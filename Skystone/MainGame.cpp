@@ -11,8 +11,7 @@ MainGame::MainGame()
 	_levelMap(10, 10),
 	_currLevel(nullptr),
 	_nextLevelID(-1),
-	_levelLoader(this, &textureLoader_, &_levelMap),
-	creator(&_window)
+	_levelLoader(this, &textureLoader_, &_levelMap)
 {
 	_levelMap.addLevel(1, 2, 2, 1, 1);
 	_levelMap.addLevel(2, 1, 2, 1, 3);
@@ -20,8 +19,7 @@ MainGame::MainGame()
 	_levelMap.addLevel(4, 1, 1, 0 , 4);
 
 	_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
-										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"),
-										&creator);
+										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
 	_currLevel->startEntityComponents();
 	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
@@ -58,22 +56,22 @@ void MainGame::changeLevel()
 		if (_nextLevelID == 1)
 		{
 			_currLevel = &_levelLoader.getLevel("Levels/LevelTest",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 		}
 		else if (_nextLevelID == 2)
 		{
 			_currLevel = &_levelLoader.getLevel("Levels/LevelTest2",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 		}
 		else if (_nextLevelID == 3)
 		{
 			_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 		}
 		else if (_nextLevelID == 4)
 		{
 			_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"), &creator);
+				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 		}
 		_currLevel->setPlayer(&_player, _newPlayerPosition);
 		_currLevel->startEntityComponents();

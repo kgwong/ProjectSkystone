@@ -12,7 +12,8 @@ Level::Level(MainGame* mainGame,
 	LevelMap* levelMap)
 	:_mainGame(mainGame),
 	textureLoader_(textureLoader),
-	_enemyBuilder(textureLoader_),
+	tileCreator_(nullptr),
+	enemyBuilder_(nullptr),
 	_levelMap(levelMap)
 {
 }
@@ -20,6 +21,16 @@ Level::Level(MainGame* mainGame,
 
 Level::~Level()
 {
+}
+
+void Level::setTileCreator(TileCreator* tileCreator)
+{
+	tileCreator_ = tileCreator;
+}
+
+void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
+{
+	enemyBuilder_ = enemyBuilder;
 }
 
 void Level::load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
@@ -66,7 +77,7 @@ void Level::addEnemyAtLocation(const std::string& name, Point position)
 	enemy.setPos(position);
 
 	enemies.push_back(enemy);
-	_enemyBuilder.build(name, enemies.back());
+	enemyBuilder_->build(name, enemies.back());
 
 }
 
