@@ -24,12 +24,18 @@ LevelLoader::~LevelLoader()
 {
 }
 
+void LevelLoader::setLevelManager(LevelManager* levelManager)
+{
+	levelManager_ = levelManager;
+}
+
 Level& LevelLoader::getLevel(const std::string& relativePath, TextureSheet* tileSet)
 {
 
 	if (!_loadedLevels.count(relativePath))
 	{
 		auto level = _loadedLevels.insert({ relativePath, Level(_mainGame, textureLoader_, _levelMap) });
+		level.first->second.setLevelManager(levelManager_);
 		level.first->second.setTileCreator(&tileCreator_);
 		level.first->second.setEnemyBuilder(&enemyBuilder_);
 		level.first->second.load(Path::getFullPath(relativePath), tileSet, &tileCreator_);

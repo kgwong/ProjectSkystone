@@ -12,6 +12,7 @@ class Level;
 class MainGame;
 class TextureLoader;
 class LevelMap;
+class LevelManager;
 
 class LevelLoader
 {
@@ -20,6 +21,8 @@ public:
 		TextureLoader* textureLoader,
 		LevelMap* levelMap);
 	~LevelLoader();
+
+	void setLevelManager(LevelManager* levelManager);
 
 	Level& getLevel(const std::string& relativePath, 
 						TextureSheet* tileSet);
@@ -31,6 +34,7 @@ public:
 private:
 	MainGame* _mainGame;
 	TextureLoader* textureLoader_;
+	LevelManager* levelManager_;
 	LevelMap* _levelMap;
 
 	TileCreator tileCreator_;

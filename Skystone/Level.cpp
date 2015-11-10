@@ -4,6 +4,7 @@
 #include "MainGame.h"
 #include "GameConstants.h"
 #include "LevelMap.h"
+#include "LevelManager.h"
 
 #include <cassert>
 
@@ -12,6 +13,7 @@ Level::Level(MainGame* mainGame,
 	LevelMap* levelMap)
 	:_mainGame(mainGame),
 	textureLoader_(textureLoader),
+	levelManager_(nullptr),
 	tileCreator_(nullptr),
 	enemyBuilder_(nullptr),
 	_levelMap(levelMap)
@@ -21,6 +23,11 @@ Level::Level(MainGame* mainGame,
 
 Level::~Level()
 {
+}
+
+void Level::setLevelManager(LevelManager* levelManager)
+{
+	levelManager_ = levelManager;
 }
 
 void Level::setTileCreator(TileCreator* tileCreator)
@@ -162,7 +169,7 @@ void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 	Point newPlayerPosition{ newRelativeBlock.c * Constants::BLOCK_WIDTH_IN_PIXELS + oldPlayerPosition.x,
 								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosition.y};
 
-	_mainGame->setNextLevel(nextLevelID, newPlayerPosition);
+	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 
 	//
 	playerProjectiles.clear();

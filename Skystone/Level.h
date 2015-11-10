@@ -19,6 +19,7 @@ class LevelLoader;
 class LevelMap;
 class TextureSheet;
 class TileCreator;
+class LevelManager;
 
 class Level
 {
@@ -30,6 +31,7 @@ public:
 		LevelMap* levelMap);
 	~Level();
 
+	void setLevelManager(LevelManager* levelManager);
 	void setTileCreator(TileCreator* tileCreator);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
 
@@ -65,6 +67,7 @@ public:
 private:
 	MainGame* _mainGame;
 	TextureLoader* textureLoader_;
+	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
 	TileCreator* tileCreator_;
 	LevelMap* _levelMap;

@@ -8,21 +8,26 @@ MainGame::MainGame()
 	textureLoader_(&_window),
 	_player(&textureLoader_),
 	_quit(false),
-	_levelMap(10, 10),
-	_currLevel(nullptr),
-	_nextLevelID(-1),
-	_levelLoader(this, &textureLoader_, &_levelMap)
+	//_levelMap(10, 10),
+	//_currLevel(nullptr),
+	//_nextLevelID(-1),
+	//_levelLoader(this, &textureLoader_, &_levelMap),
+	levelManager_(this, &textureLoader_, &_player)
 {
-	_levelMap.addLevel(1, 2, 2, 1, 1);
+	/*_levelMap.addLevel(1, 2, 2, 1, 1);
 	_levelMap.addLevel(2, 1, 2, 1, 3);
 	_levelMap.addLevel(3, 2, 1, 0, 2);
-	_levelMap.addLevel(4, 1, 1, 0 , 4);
+	_levelMap.addLevel(4, 1, 1, 0 , 4);*/
+	levelManager_.setTextureLoader(&textureLoader_);
+	levelManager_.setPlayer(&_player);
+	
 
-	_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
+	/*_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
 										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
 	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
 	_currLevel->startEntityComponents();
-	_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
+	*/
+	_window.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
 
 	//_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
 	//_musicPlayer.play();
@@ -43,7 +48,7 @@ void MainGame::run()
 	}
 }
 
-void MainGame::setNextLevel(int levelID, Point newPlayerPosition)
+/*void MainGame::setNextLevel(int levelID, Point newPlayerPosition)
 {
 	_nextLevelID = levelID;
 	_newPlayerPosition = newPlayerPosition;
@@ -80,7 +85,7 @@ void MainGame::changeLevel()
 		_nextLevelID = -1;
 	}
 
-}
+}*/
 
 void MainGame::processInput()
 {
@@ -95,7 +100,7 @@ void MainGame::processInput()
 				//std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
 				_player.handleInput(e);
 				if (e.key.keysym.sym == SDLK_p)
-					_levelMap.print();
+					;//_levelMap.print();
 				break;
 			case SDL_KEYUP:
 				_player.handleInput(e);
@@ -114,9 +119,12 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
-	//SDL_Delay(100);
-	_currLevel->update();
-	changeLevel();
+	levelManager_.getCurrentLevel()->update();
+	levelManager_.changeLevel();
+	if (levelManager_.getlevelWasChangedFlag())
+	{
+		updateCameraBounds();
+	}
 }
 
 void MainGame::render()
@@ -124,7 +132,13 @@ void MainGame::render()
 	SDL_RenderClear(_window.getRenderer());
 
 	_window.getCamera().followObject(_player);
-	_currLevel->render();
+	levelManager_.getCurrentLevel()->render();
 
 	SDL_RenderPresent(_window.getRenderer());
+}
+
+void MainGame::updateCameraBounds()
+{
+	_window.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
+	levelManager_.setLevelWasChangedFlag(false);
 }

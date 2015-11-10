@@ -17,6 +17,7 @@
 #include "TextureLoader.h"
 #include "LevelMap.h"
 #include "LevelLoader.h"
+#include "LevelManager.h"
 
 class MainGame
 {
@@ -26,8 +27,8 @@ public:
 
 	void run();
 
-	 void setNextLevel(int levelID, Point newPlayerPosition);
-	 void changeLevel();
+	 //void setNextLevel(int levelID, Point newPlayerPosition);
+	 //void changeLevel();
 
 private:
 	GameWindow _window;
@@ -35,13 +36,16 @@ private:
 
 	MusicPlayer _musicPlayer;
 
-	LevelLoader _levelLoader;
-	LevelMap _levelMap;
-	Level* _currLevel;
-	int _nextLevelID;
-	Point _newPlayerPosition;
+
+
+	//LevelLoader _levelLoader;
+	//LevelMap _levelMap;
+	//Level* _currLevel;
+	//int _nextLevelID;
+	//Point _newPlayerPosition;
 
 	Player _player;
+	LevelManager levelManager_;
 
 	bool _quit;
 
@@ -49,6 +53,8 @@ private:
 	void processInput();
 	void update();
 	void render();
+
+	void updateCameraBounds();
 
 };
 

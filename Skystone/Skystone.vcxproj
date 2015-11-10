@@ -90,6 +90,7 @@
     <ClCompile Include="InitSystems.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Path.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="InitSystems.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Path.h" />
