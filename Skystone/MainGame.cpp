@@ -8,25 +8,11 @@ MainGame::MainGame()
 	textureLoader_(&_window),
 	_player(&textureLoader_),
 	_quit(false),
-	//_levelMap(10, 10),
-	//_currLevel(nullptr),
-	//_nextLevelID(-1),
-	//_levelLoader(this, &textureLoader_, &_levelMap),
 	levelManager_(this, &textureLoader_, &_player)
 {
-	/*_levelMap.addLevel(1, 2, 2, 1, 1);
-	_levelMap.addLevel(2, 1, 2, 1, 3);
-	_levelMap.addLevel(3, 2, 1, 0, 2);
-	_levelMap.addLevel(4, 1, 1, 0 , 4);*/
 	levelManager_.setTextureLoader(&textureLoader_);
 	levelManager_.setPlayer(&_player);
-	
 
-	/*_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
-										textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
-	_currLevel->setPlayer(&_player, Point{ _currLevel->getLevelWidth() / 2, _currLevel->getLevelHeight() / 2 });
-	_currLevel->startEntityComponents();
-	*/
 	_window.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
 
 	//_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
@@ -47,45 +33,6 @@ void MainGame::run()
 		render();
 	}
 }
-
-/*void MainGame::setNextLevel(int levelID, Point newPlayerPosition)
-{
-	_nextLevelID = levelID;
-	_newPlayerPosition = newPlayerPosition;
-}
-
-void MainGame::changeLevel()
-{
-	if (_nextLevelID != -1)
-	{
-		if (_nextLevelID == 1)
-		{
-			_currLevel = &_levelLoader.getLevel("Levels/LevelTest",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
-		}
-		else if (_nextLevelID == 2)
-		{
-			_currLevel = &_levelLoader.getLevel("Levels/LevelTest2",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
-		}
-		else if (_nextLevelID == 3)
-		{
-			_currLevel = &_levelLoader.getLevel("Levels/LevelTest3",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
-		}
-		else if (_nextLevelID == 4)
-		{
-			_currLevel = &_levelLoader.getLevel("Levels/LevelTest4",
-				textureLoader_.getTextureSheet("Assets/TileSets/bw.png"));
-		}
-		_currLevel->setPlayer(&_player, _newPlayerPosition);
-		_currLevel->startEntityComponents();
-		_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
-
-		_nextLevelID = -1;
-	}
-
-}*/
 
 void MainGame::processInput()
 {

@@ -86,7 +86,6 @@ void LevelManager::changeLevel()
 		}
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->startEntityComponents();
-		//_window.getCamera().setLevelBounds(_currLevel->getLevelWidth(), _currLevel->getLevelHeight());
 		levelWasChangedFlag_ = true;
 		nextLevelID_ = -1;
 	}

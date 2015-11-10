@@ -27,22 +27,11 @@ public:
 
 	void run();
 
-	 //void setNextLevel(int levelID, Point newPlayerPosition);
-	 //void changeLevel();
-
 private:
 	GameWindow _window;
 	TextureLoader textureLoader_;
 
 	MusicPlayer _musicPlayer;
-
-
-
-	//LevelLoader _levelLoader;
-	//LevelMap _levelMap;
-	//Level* _currLevel;
-	//int _nextLevelID;
-	//Point _newPlayerPosition;
 
 	Player _player;
 	LevelManager levelManager_;
