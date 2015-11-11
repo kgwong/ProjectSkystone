@@ -30,7 +30,7 @@ void LevelMap::addLevel(Level& level, int row, int col)
 			_levels[r][c] = id;
 }
 
-Block LevelMap::getAdjBlock(Block block, Direction dir)
+Block LevelMap::getAdjBlock(Block block, Direction dir) const
 {
 		switch (dir)
 	{
@@ -50,24 +50,24 @@ Block LevelMap::getAdjBlock(Block block, Direction dir)
 	return block;
 }
 
-int LevelMap::getLevelID(Block block, Direction dir)
+int LevelMap::getLevelID(Block block, Direction dir) const
 {
 	return getLevelID(getAdjBlock(block, dir));
 }
 
-int LevelMap::getLevelID(Block block)
+int LevelMap::getLevelID(Block block) const
 {
 	return _levels[block.r][block.c];
 }
 
-Block LevelMap::getBaseBlock(Level& level)
+Block LevelMap::getBaseBlock(Level& level) const
 {
 	return getBaseBlock(level.getID());
 }
 
-Block LevelMap::getBaseBlock(int levelID)
+Block LevelMap::getBaseBlock(int levelID) const
 {
-	return _levelBasePosition[levelID];
+	return _levelBasePosition.at(levelID);
 }
 
 void LevelMap::print()

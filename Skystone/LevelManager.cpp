@@ -2,11 +2,13 @@
 
 #include "Level.h"
 
-LevelManager::LevelManager(MainGame* mainGame, TextureLoader* tl, Player* player)
+#include "Log.h"
+
+LevelManager::LevelManager(TextureLoader* tl)
 	:textureLoader_(tl),
-	player_(player),
+	player_(nullptr),
 	levelMap_(10, 10),
-	levelLoader_(mainGame, textureLoader_, &levelMap_),
+	levelLoader_(textureLoader_),
 	currLevel_(nullptr),
 	nextLevelID_(-1),
 	levelWasChangedFlag_(true)
@@ -17,12 +19,6 @@ LevelManager::LevelManager(MainGame* mainGame, TextureLoader* tl, Player* player
 	levelMap_.addLevel(4, 1, 1, 0, 4);
 
 	levelLoader_.setLevelManager(this);
-
-	currLevel_ = &levelLoader_.getLevel("Levels/LevelTest4",
-		textureLoader_->getTextureSheet("Assets/TileSets/bw.png"));
-	currLevel_->setPlayer(player, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
-	currLevel_->startEntityComponents();
-
 }
 
 LevelManager::~LevelManager()
@@ -39,19 +35,29 @@ void LevelManager::setPlayer(Player* player)
 	player_ = player;
 }
 
+void LevelManager::initStartingLevel()
+{
+	if (player_ != nullptr && textureLoader_ != nullptr)
+	{
+		currLevel_ = &levelLoader_.getLevel("Levels/LevelTest4",
+			textureLoader_->getTextureSheet("Assets/TileSets/bw.png"));
+		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
+		currLevel_->startEntityComponents();
+	}
+	else
+	{
+		LOG << "set Player and TextureLoader first";
+	}
+}
+
+LevelMap* LevelManager::getLevelMap()
+{
+	return &levelMap_;
+}
+
 Level* LevelManager::getCurrentLevel()
 {
 	return currLevel_;
-}
-
-bool LevelManager::getlevelWasChangedFlag()
-{
-	return levelWasChangedFlag_;
-}
-
-void LevelManager::setLevelWasChangedFlag(bool flag)
-{
-	levelWasChangedFlag_ = flag;
 }
 
 void LevelManager::setNextLevel(int levelID, Point newPlayerPosition)
@@ -60,7 +66,7 @@ void LevelManager::setNextLevel(int levelID, Point newPlayerPosition)
 	newPlayerPosition_ = newPlayerPosition;
 }
 
-void LevelManager::changeLevel()
+bool LevelManager::changeLevelIfNecessary()
 {
 	if (nextLevelID_ != -1)
 	{
@@ -86,8 +92,9 @@ void LevelManager::changeLevel()
 		}
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->startEntityComponents();
-		levelWasChangedFlag_ = true;
 		nextLevelID_ = -1;
+		return true;
 	}
+	return false;
 }
 

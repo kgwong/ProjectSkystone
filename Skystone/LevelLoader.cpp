@@ -9,12 +9,8 @@
 #include <fstream>
 
 
-LevelLoader::LevelLoader(MainGame* mainGame,
-	TextureLoader* textureLoader,
-	LevelMap* levelMap)
-	:_mainGame(mainGame),
-	textureLoader_(textureLoader),
-	_levelMap(levelMap),
+LevelLoader::LevelLoader(TextureLoader* textureLoader)
+	:textureLoader_(textureLoader),
 	enemyBuilder_(textureLoader)
 {
 }
@@ -33,8 +29,8 @@ Level& LevelLoader::getLevel(const std::string& relativePath, TextureSheet* tile
 {
 
 	if (!_loadedLevels.count(relativePath))
-	{
-		auto level = _loadedLevels.insert({ relativePath, Level(_mainGame, textureLoader_, _levelMap) });
+	{ //UGLY!!!
+		auto level = _loadedLevels.insert({ relativePath, Level(textureLoader_) });
 		level.first->second.setLevelManager(levelManager_);
 		level.first->second.setTileCreator(&tileCreator_);
 		level.first->second.setEnemyBuilder(&enemyBuilder_);

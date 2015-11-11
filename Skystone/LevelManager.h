@@ -4,25 +4,25 @@
 #include "LevelMap.h"
 #include "LevelLoader.h"
 
-class MainGame; // 
 class Player;
 
 class LevelManager
 {
 public:
-	LevelManager(MainGame* mainGame, TextureLoader* tl, Player* player);
+	LevelManager(TextureLoader* tl);
 	~LevelManager();
 
 	void setTextureLoader(TextureLoader* textureLoader);
 
 	void setPlayer(Player* player);
 
+	void initStartingLevel();
+
+	LevelMap* getLevelMap();
 	Level* getCurrentLevel();
-	bool getlevelWasChangedFlag();
-	void setLevelWasChangedFlag(bool flag);
 
 	void setNextLevel(int levelID, Point newPlayerPosition);
-	void changeLevel();
+	bool changeLevelIfNecessary();
 
 private:
 	TextureLoader* textureLoader_;

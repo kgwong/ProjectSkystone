@@ -9,7 +9,6 @@
 #include "EnemyBuilder.h"
 
 class Level;
-class MainGame;
 class TextureLoader;
 class LevelMap;
 class LevelManager;
@@ -17,9 +16,7 @@ class LevelManager;
 class LevelLoader
 {
 public:
-	LevelLoader(MainGame* mainGame,
-		TextureLoader* textureLoader,
-		LevelMap* levelMap);
+	LevelLoader(TextureLoader* textureLoader);
 	~LevelLoader();
 
 	void setLevelManager(LevelManager* levelManager);
@@ -32,10 +29,8 @@ public:
 	static void loadEnemies(const std::string& filepath, Level& level);
 
 private:
-	MainGame* _mainGame;
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
-	LevelMap* _levelMap;
 
 	TileCreator tileCreator_;
 	EnemyBuilder enemyBuilder_;

@@ -28,15 +28,15 @@ public:
 	void run();
 
 private:
-	GameWindow _window;
+	GameWindow window_;
 	TextureLoader textureLoader_;
 
-	MusicPlayer _musicPlayer;
+	MusicPlayer musicPlayer_;
 
-	Player _player;
+	Player player_;
 	LevelManager levelManager_;
 
-	bool _quit;
+	bool quit_;
 
 private: 
 	void processInput();

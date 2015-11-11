@@ -1,25 +1,18 @@
 #include "Level.h"
 
-#include "LevelLoader.h"
-#include "MainGame.h"
 #include "GameConstants.h"
+#include "LevelLoader.h"
 #include "LevelMap.h"
 #include "LevelManager.h"
 
-#include <cassert>
 
-Level::Level(MainGame* mainGame,
-	TextureLoader* textureLoader,
-	LevelMap* levelMap)
-	:_mainGame(mainGame),
-	textureLoader_(textureLoader),
+Level::Level(TextureLoader* textureLoader)
+	:textureLoader_(textureLoader),
 	levelManager_(nullptr),
 	tileCreator_(nullptr),
-	enemyBuilder_(nullptr),
-	_levelMap(levelMap)
+	enemyBuilder_(nullptr)
 {
 }
-
 
 Level::~Level()
 {
@@ -141,10 +134,11 @@ int Level::getID()
 
 void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 {
-	Block nextBlock = _levelMap->getAdjBlock(oldBlock + _levelMap->getBaseBlock(_levelID), dir);
-	int nextLevelID = _levelMap->getLevelID(nextBlock);
+	LevelMap* levelMap = levelManager_->getLevelMap();
+	Block nextBlock = levelMap->getAdjBlock(oldBlock + levelMap->getBaseBlock(_levelID), dir);
+	int nextLevelID = levelMap->getLevelID(nextBlock);
 
-	Block nextBaseBlock = _levelMap->getBaseBlock(nextLevelID);
+	Block nextBaseBlock = levelMap->getBaseBlock(nextLevelID);
 	Block newRelativeBlock{ nextBlock.r - nextBaseBlock.r,
 							nextBlock.c - nextBaseBlock.c };
 	

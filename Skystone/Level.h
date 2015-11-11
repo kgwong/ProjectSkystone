@@ -1,7 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "GameWindow.h"
 #include "Player.h"
 #include "Tile.h"
 #include "Enemy.h"
@@ -12,9 +11,6 @@
 #include "TextureLoader.h"
 #include "EnemyBuilder.h"
 
-#include <map>
-
-class MainGame;
 class LevelLoader;
 class LevelMap;
 class TextureSheet;
@@ -26,9 +22,7 @@ class Level
 	friend LevelLoader;
 
 public:
-	Level(MainGame* mainGame,
-		TextureLoader* textureLoader,
-		LevelMap* levelMap);
+	Level(TextureLoader* textureLoader);
 	~Level();
 
 	void setLevelManager(LevelManager* levelManager);
@@ -65,7 +59,6 @@ public:
 	std::vector<Pickup> pickups;
 
 private:
-	MainGame* _mainGame;
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;

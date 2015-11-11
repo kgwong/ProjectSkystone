@@ -18,12 +18,12 @@ public:
 	void addLevel(int id, int blockWidth, int blockHeight, int row, int col);
 	void addLevel(Level& level, int row, int col);
 	
-	Block getAdjBlock(Block block, Direction dir);
-	int getLevelID(Block block, Direction dir);
-	int getLevelID(Block block);
+	Block getAdjBlock(Block block, Direction dir) const;
+	int getLevelID(Block block, Direction dir) const;
+	int getLevelID(Block block) const;
 
-	Block getBaseBlock(Level& level);
-	Block getBaseBlock(int levelID);
+	Block getBaseBlock(Level& level) const;
+	Block getBaseBlock(int levelID) const;
 
 	void print();
 

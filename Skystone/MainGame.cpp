@@ -4,19 +4,20 @@
 #include "Path.h"
 
 MainGame::MainGame()
-	:_window(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
-	textureLoader_(&_window),
-	_player(&textureLoader_),
-	_quit(false),
-	levelManager_(this, &textureLoader_, &_player)
+	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
+	textureLoader_(&window_),
+	player_(&textureLoader_),
+	quit_(false),
+	levelManager_(&textureLoader_)
 {
 	levelManager_.setTextureLoader(&textureLoader_);
-	levelManager_.setPlayer(&_player);
+	levelManager_.setPlayer(&player_);
+	levelManager_.initStartingLevel();
 
-	_window.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
+	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
 
-	//_musicPlayer.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
-	//_musicPlayer.play();
+	//musicPlayer_.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
+	//musicPlayer_.play();
 }
 
 
@@ -26,7 +27,7 @@ MainGame::~MainGame()
 
 void MainGame::run()
 {
-	while (!_quit)
+	while (!quit_)
 	{
 		processInput();
 		update();
@@ -42,15 +43,15 @@ void MainGame::processInput()
 		switch(e.type)
 		{
 			case SDL_QUIT:
-				_quit = true;
+				quit_ = true;
 			case SDL_KEYDOWN:
 				//std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
-				_player.handleInput(e);
+				player_.handleInput(e);
 				if (e.key.keysym.sym == SDLK_p)
-					;//_levelMap.print();
+					levelManager_.getLevelMap()->print();
 				break;
 			case SDL_KEYUP:
-				_player.handleInput(e);
+				player_.handleInput(e);
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
 				break;
@@ -61,31 +62,29 @@ void MainGame::processInput()
 				break;
 		}
 	}
-	_player.handleInput2();
+	player_.handleInput2();
 }
 
 void MainGame::update()
 {
 	levelManager_.getCurrentLevel()->update();
-	levelManager_.changeLevel();
-	if (levelManager_.getlevelWasChangedFlag())
-	{
+
+	if (levelManager_.changeLevelIfNecessary())
 		updateCameraBounds();
-	}
 }
 
 void MainGame::render()
 {
-	SDL_RenderClear(_window.getRenderer());
+	SDL_RenderClear(window_.getRenderer());
 
-	_window.getCamera().followObject(_player);
+	window_.getCamera().followObject(player_);
 	levelManager_.getCurrentLevel()->render();
 
-	SDL_RenderPresent(_window.getRenderer());
+	SDL_RenderPresent(window_.getRenderer());
 }
 
 void MainGame::updateCameraBounds()
 {
-	_window.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
-	levelManager_.setLevelWasChangedFlag(false);
+	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), 
+										levelManager_.getCurrentLevel()->getLevelHeight());
 }
