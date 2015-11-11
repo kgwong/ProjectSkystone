@@ -35,8 +35,6 @@ private:
 	int nextLevelID_;
 	Point newPlayerPosition_;
 
-	bool levelWasChangedFlag_;
-
 };
 
 #endif //LEVEL_MANAGER_H
