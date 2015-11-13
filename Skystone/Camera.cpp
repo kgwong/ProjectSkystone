@@ -29,9 +29,9 @@ void Camera::followObject(const GameObject& object)
 
 void Camera::stayInLevelBounds()
 {
-	position.x = std::max(0, position.x);
-	position.x = std::min(position.x, maxX_ - width_);
+	position_.x = std::max(0, position_.x);
+	position_.x = std::min(position_.x, maxX_ - width_);
 
-	position.y = std::max(0, position.y);
-	position.y = std::min(position.y, maxY_ - height_);
+	position_.y = std::max(0, position_.y);
+	position_.y = std::min(position_.y, maxY_ - height_);
 }

@@ -146,7 +146,7 @@ void Player::jump()
 
 void Player::shoot(Level& level)
 {
-	level.addPlayerProjectileAtLocation(position, Player::PROJECTILE_VELOCITY, degrees_);
+	level.addPlayerProjectileAtLocation(position_, Player::PROJECTILE_VELOCITY, degrees_);
 	shoot_ = false;
 }
 

@@ -6,12 +6,10 @@
 Tile::Tile(SpriteRenderer* renderer,
 			TileType type, 
 			int r, int c)
-	:renderer_(renderer),
+	:GameObject(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE),
+	renderer_(renderer),
 	_tileType(type)
 {
-	position.x = c * Constants::TILE_SIZE;
-	position.y = r * Constants::TILE_SIZE;
-
 	switch (_tileType)
 	{
 	case EMPTY:

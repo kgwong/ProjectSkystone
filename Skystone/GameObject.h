@@ -17,6 +17,8 @@ class GameObject
 {
 public:
 	GameObject();
+	GameObject(Point position);
+	GameObject(int x, int y);
 	virtual ~GameObject();
 	
 	void setPos(int x, int y);
@@ -56,7 +58,7 @@ public:
 	virtual void callStartOnComponents(Level& level);
 
 protected:
-	Point position;
+	Point position_;
 	int width_;
 	int height_;
 

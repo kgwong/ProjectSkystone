@@ -32,7 +32,7 @@ bool Enemy::isDead()
 
 void Enemy::onDeath(Level& level)
 {
-	level.addPickupAtLocation(position);
+	level.addPickupAtLocation(position_);
 }
 
 std::string Enemy::getName()

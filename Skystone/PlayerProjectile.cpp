@@ -6,15 +6,14 @@
 #include "CircleMath.h"
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, double degrees)
-	:_alive(true), 
+	:GameObject(position),
+	_alive(true), 
 	_damageComponent(new DamageComponent(10)), 
 	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/Animations/playerProjectile.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_physicsComponent(new PhysicsComponent())
 {
 	_physicsComponent->enableGravity(false);
-
-	this->position = position; 
 
 	int newVelX = (int)(vel * cos(toRadians(degrees)));
 	int newVelY = (int)(vel * sin(toRadians(degrees)));
