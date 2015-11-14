@@ -21,12 +21,18 @@ public:
 	void onCollision(CollisionInfo& collision);
 
 	TileType getTileType();
+	void setTileType(int tileType);
+
+	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
+	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
+	
+
 
 private:
 	TileType _tileType;
 
-	std::shared_ptr<RenderComponent> renderer_;
-	std::shared_ptr<ColliderComponent> _colliderComponent;
+	std::shared_ptr<RenderComponent> renderComponent_;
+	std::shared_ptr<ColliderComponent> colliderComponent_;
 
 };
 

@@ -33,6 +33,11 @@ void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 	enemyBuilder_ = enemyBuilder;
 }
 
+void Level::setTileBuilder(TileBuilder* tileBuilder)
+{
+	tileBuilder_ = tileBuilder;
+}
+
 void Level::load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
 {
 	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet, creator);
@@ -78,12 +83,25 @@ void Level::addPickupAtLocation(Point position)
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	Enemy enemy;
+	Enemy enemy; //use constructor fool
 	enemy.setPos(position);
 
 	enemies.push_back(enemy);
 	enemyBuilder_->build(name, enemies.back());
 
+}
+
+void Level::addTileAtLocation(int tileType, Point position)
+{
+	Tile tile;
+
+	tileBuilder_->build(tileType, tile);
+	int r = position.y / Constants::TILE_SIZE;
+	int c = position.x / Constants::TILE_SIZE;
+
+	tile.setPos(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
+
+	tileArrangement.tiles[r][c] = tile;
 }
 
 void Level::update()

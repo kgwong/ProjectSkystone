@@ -157,6 +157,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ChaserComponent.cpp">
+	  <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -321,6 +324,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TrackerComponent.h">
+	  <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

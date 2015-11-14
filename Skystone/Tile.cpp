@@ -7,9 +7,10 @@ Tile::Tile(SpriteRenderer* renderer,
 			TileType type, 
 			int r, int c)
 	:GameObject(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE),
-	renderer_(renderer),
+	renderComponent_(renderer),
 	_tileType(type)
 {
+	/*
 	switch (_tileType)
 	{
 	case EMPTY:
@@ -22,7 +23,7 @@ Tile::Tile(SpriteRenderer* renderer,
 		std::cout << "!!!!!" << std::endl;
 	}
 
-	addComponent(_colliderComponent.get());
+	addComponent(_colliderComponent.get());*/
 //	callStartOnComponents();
 }
 
@@ -33,13 +34,13 @@ Tile::~Tile()
 
 void Tile::update(Level& level)
 {
-	if (_colliderComponent)
-		_colliderComponent->update(*this, level);
+	if (colliderComponent_)
+		colliderComponent_->update(*this, level);
 }
 
 void Tile::render(Level& level)
 {
-	renderer_->update(*this, level);
+	renderComponent_->update(*this, level);
 }	
 
 void Tile::onCollision(CollisionInfo& collision)
@@ -51,7 +52,24 @@ TileType Tile::getTileType()
 	return _tileType;
 }
 
+void Tile::setTileType(int tileType)
+{
+	_tileType = (TileType)tileType;
+}
+
 EntityType Tile::getType() const
 {
 	return EntityType::ENVIRONMENT;
+}
+
+void Tile::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
+{
+	renderComponent_ = renderComponent;
+	addComponent(renderComponent_.get());
+}
+
+void Tile::setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent)
+{
+	colliderComponent_ = colliderComponent;
+	addComponent(colliderComponent_.get());
 }

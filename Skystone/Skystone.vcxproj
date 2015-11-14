@@ -113,6 +113,7 @@
     <ClCompile Include="SpritesheetInfoReader.cpp" />
     <ClCompile Include="TextureSheet.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileBuilder.cpp" />
     <ClCompile Include="TileCreator.cpp" />
     <ClCompile Include="WalkingState.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="TextureSheet.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileArrangement.h" />
+    <ClInclude Include="TileBuilder.h" />
     <ClInclude Include="TileCreator.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="WalkingState.h" />
