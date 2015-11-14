@@ -14,24 +14,18 @@
 
 class LevelLoader;
 class LevelMap;
-class TextureSheet;
-class TileCreator;
 class LevelManager;
 
 class Level
 {
-	friend LevelLoader;
-
 public:
-	Level(TextureLoader* textureLoader);
+	Level(int levelID, TextureLoader* textureLoader);
 	~Level();
 
 	void setLevelManager(LevelManager* levelManager);
-	void setTileCreator(TileCreator* tileCreator);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
 	void setTileBuilder(TileBuilder* tileBuilder);
 
-	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
 	Point getPlayerPos();
 
@@ -43,9 +37,6 @@ public:
 	int getID();
 
 	void setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir);
-
-	int getBlockWidth();
-	int getBlockHeight();
 
 	int getLevelWidth() const; //pixels
 	int getLevelHeight() const;
@@ -66,12 +57,9 @@ private:
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
-	TileCreator* tileCreator_;
-
 	TileBuilder* tileBuilder_;
 
-	int _levelID;
-	int _blockWidth, _blockHeight;
+	int levelID_;
 
 private:
 	template <typename Entity>

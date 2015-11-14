@@ -7,6 +7,15 @@ Enemy::Enemy()
 {
 }
 
+Enemy::Enemy(Point position)
+	:GameObject(position)
+{
+}
+
+Enemy::Enemy(int x, int y)
+	:GameObject(x, y)
+{
+}
 
 Enemy::~Enemy()
 {
@@ -52,9 +61,6 @@ void Enemy::onCollision(CollisionInfo& collision)
 		_healthComponent->takeDamage(collision.other.getComponent<DamageComponent>()->getDamage());
 	}
 }
-
-
-//private
 
 void Enemy::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
 {

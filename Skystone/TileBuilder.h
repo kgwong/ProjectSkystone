@@ -1,7 +1,6 @@
 #ifndef TILE_BUILDER_H
 #define TILE_BUILDER_H
 
-#include <string>
 #include "Tile.h"
 
 class TextureLoader;

@@ -21,18 +21,9 @@ void LevelMap::addLevel(int id, int blockWidth, int blockHeight, int row, int co
 			_levels[r][c] = id;
 }
 
-void LevelMap::addLevel(Level& level, int row, int col)
-{
-	int id = level.getID();
-	_levelBasePosition[id] = Block{ row, col };
-	for (int r = row; r < row + level.getBlockHeight(); ++r)
-		for (int c = col; c < col + level.getBlockWidth(); ++c)
-			_levels[r][c] = id;
-}
-
 Block LevelMap::getAdjBlock(Block block, Direction dir) const
 {
-		switch (dir)
+	switch (dir)
 	{
 	case Direction::UP:
 		block.r--;

@@ -3,30 +3,19 @@
 #include "Level.h"
 #include "GameConstants.h"
 
-Tile::Tile(SpriteRenderer* renderer,
-			TileType type, 
-			int r, int c)
-	:GameObject(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE),
-	renderComponent_(renderer),
-	_tileType(type)
+Tile::Tile()
 {
-	/*
-	switch (_tileType)
-	{
-	case EMPTY:
-		_colliderComponent = nullptr;
-		break;
-	case SOLID:
-		_colliderComponent = std::make_shared<ColliderComponent>(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE);
-		break;
-	default:
-		std::cout << "!!!!!" << std::endl;
-	}
-
-	addComponent(_colliderComponent.get());*/
-//	callStartOnComponents();
 }
 
+Tile::Tile(Point position)
+	:GameObject(position)
+{
+}
+
+Tile::Tile(int x, int y)
+	:GameObject(x, y)
+{
+}
 
 Tile::~Tile()
 {

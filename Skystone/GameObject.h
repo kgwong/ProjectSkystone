@@ -2,7 +2,6 @@
 #define GAME_OBJECT_H
 
 #include <string>
-#include <iostream>
 #include <unordered_map>
 
 #include "Point.h"

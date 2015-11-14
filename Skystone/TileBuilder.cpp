@@ -1,7 +1,6 @@
 #include "TileBuilder.h"
 
 #include "TextureLoader.h"
-#include <iostream> //
 #include "GameConstants.h"
 
 TileBuilder::TileBuilder(TextureLoader* textureLoader)
@@ -20,17 +19,9 @@ Tile* TileBuilder::build(int tileType, Tile& tileToBuild)
 	tileToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(tileSet, tileType)));
 	tileToBuild.setTileType(tileType);
 
-	if (tileType == 0)
-	{
-
-	}
-	else if (tileType == 1)
+	if (tileType == 1)
 	{
 		tileToBuild.setColliderComponent(std::shared_ptr<ColliderComponent>(new ColliderComponent(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE)));
-	}
-	else
-	{
-		std::cout << "TILETYPE NOT 0 or 1 WTF" << std::endl;
 	}
 
 	return &tileToBuild;

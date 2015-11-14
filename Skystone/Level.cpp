@@ -6,11 +6,11 @@
 #include "LevelManager.h"
 
 
-Level::Level(TextureLoader* textureLoader)
+Level::Level(int levelID, TextureLoader* textureLoader)
 	:textureLoader_(textureLoader),
 	levelManager_(nullptr),
-	tileCreator_(nullptr),
-	enemyBuilder_(nullptr)
+	enemyBuilder_(nullptr),
+	levelID_(levelID)
 {
 }
 
@@ -23,11 +23,6 @@ void Level::setLevelManager(LevelManager* levelManager)
 	levelManager_ = levelManager;
 }
 
-void Level::setTileCreator(TileCreator* tileCreator)
-{
-	tileCreator_ = tileCreator;
-}
-
 void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 {
 	enemyBuilder_ = enemyBuilder;
@@ -36,12 +31,6 @@ void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 void Level::setTileBuilder(TileBuilder* tileBuilder)
 {
 	tileBuilder_ = tileBuilder;
-}
-
-void Level::load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator)
-{
-	LevelLoader::loadTiles(filepath + "Tiles", *this, tileSet, creator);
-	LevelLoader::loadEnemies(filepath + "Enemies", *this);
 }
 
 void Level::setPlayer(Player* p, Point newPlayerPosition)
@@ -83,8 +72,7 @@ void Level::addPickupAtLocation(Point position)
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	Enemy enemy; //use constructor fool
-	enemy.setPos(position);
+	Enemy enemy(position);
 
 	enemies.push_back(enemy);
 	enemyBuilder_->build(name, enemies.back());
@@ -93,14 +81,10 @@ void Level::addEnemyAtLocation(const std::string& name, Point position)
 
 void Level::addTileAtLocation(int tileType, Point position)
 {
-	Tile tile;
-
-	tileBuilder_->build(tileType, tile);
 	int r = position.y / Constants::TILE_SIZE;
 	int c = position.x / Constants::TILE_SIZE;
-
-	tile.setPos(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
-
+	Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
+	tileBuilder_->build(tileType, tile);
 	tileArrangement.tiles[r][c] = tile;
 }
 
@@ -152,13 +136,13 @@ void Level::render()
 
 int Level::getID()
 {
-	return _levelID;
+	return levelID_;
 }
 
 void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 {
 	LevelMap* levelMap = levelManager_->getLevelMap();
-	Block nextBlock = levelMap->getAdjBlock(oldBlock + levelMap->getBaseBlock(_levelID), dir);
+	Block nextBlock = levelMap->getAdjBlock(oldBlock + levelMap->getBaseBlock(levelID_), dir);
 	int nextLevelID = levelMap->getLevelID(nextBlock);
 
 	Block nextBaseBlock = levelMap->getBaseBlock(nextLevelID);
@@ -190,16 +174,6 @@ void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 
 	//
 	playerProjectiles.clear();
-}
-
-int Level::getBlockWidth()
-{
-	return _blockWidth;
-}
-
-int Level::getBlockHeight()
-{
-	return _blockHeight;
 }
 
 void Level::renderTiles() 

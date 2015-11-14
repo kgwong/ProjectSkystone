@@ -10,8 +10,9 @@
 class Tile : public GameObject
 {
 public:
-	Tile() {}
-	Tile(SpriteRenderer* spriteRenderer, TileType tileType, int r, int c);
+	Tile();
+	Tile(Point position);
+	Tile(int x, int y);
 	~Tile();
 
 	void update(Level& level);
@@ -25,11 +26,9 @@ public:
 
 	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
-	
-
 
 private:
-	TileType _tileType;
+	TileType _tileType;//
 
 	std::shared_ptr<RenderComponent> renderComponent_;
 	std::shared_ptr<ColliderComponent> colliderComponent_;

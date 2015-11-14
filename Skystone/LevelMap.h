@@ -15,8 +15,7 @@ public:
 	LevelMap(int rows, int cols);
 	~LevelMap();
 
-	void addLevel(int id, int blockWidth, int blockHeight, int row, int col);
-	void addLevel(Level& level, int row, int col);
+	void addLevel(int id, int blockWidth, int blockHeight, int row, int col);	
 	
 	Block getAdjBlock(Block block, Direction dir) const;
 	int getLevelID(Block block, Direction dir) const;

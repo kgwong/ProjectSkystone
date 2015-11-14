@@ -15,7 +15,6 @@ public:
 
 	Enemy* build(const std::string& enemyName, Enemy& enemyToBuild);
 	
-
 private:
 	TextureLoader* textureLoader_;
 };

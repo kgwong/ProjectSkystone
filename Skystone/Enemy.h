@@ -5,21 +5,17 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
-#include "BasicEnemyMovementComponent.h"
 #include "AIComponent.h"
-#include "EnemyBuilder.h"
-
-#include "GameWindow.h"
 
 class Level;
 class PhysicsComponent;
 
 class Enemy : public GameObject
 {
-	friend  EnemyBuilder;
-
 public:
 	Enemy();
+	Enemy(Point position);
+	Enemy(int x, int y);
 	virtual ~Enemy();
 
 	void update(Level& level);
@@ -39,7 +35,7 @@ private:
 	std::shared_ptr<ColliderComponent> _colliderComponent;
 	std::shared_ptr<AIComponent> _movementComponent;
 
-private:
+public:
 	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
 	void setMovementComponent(std::shared_ptr<AIComponent> movementComponent);

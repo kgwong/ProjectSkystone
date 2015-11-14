@@ -117,9 +117,6 @@
     <ClCompile Include="TextureSheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TileCreator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,7 +154,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ChaserComponent.cpp">
-	  <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileBuilder.cpp">
       <Filter>Source Files</Filter>
@@ -269,9 +266,6 @@
     <ClInclude Include="TextureSheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TileCreator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Path.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -324,7 +318,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TrackerComponent.h">
-	  <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileBuilder.h">
       <Filter>Header Files</Filter>
