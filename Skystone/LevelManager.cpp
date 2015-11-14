@@ -38,8 +38,9 @@ void LevelManager::initStartingLevel()
 {
 	if (player_ != nullptr && textureLoader_ != nullptr)
 	{
-		currLevel_ = &levelLoader_.getLevel("Levels/LevelTest4",
-			textureLoader_->getTextureSheet("Assets/TileSets/bw.png"));
+		currLevel_ = &levelLoader_.getLevelWithID(1);
+		//currLevel_ = &levelLoader_.getLevel("Levels/LevelTest4",
+		//	textureLoader_->getTextureSheet("Assets/TileSets/bw.png"));
 		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
 		currLevel_->startEntityComponents();
 	}
@@ -69,6 +70,8 @@ bool LevelManager::changeLevelIfNecessary()
 {
 	if (nextLevelID_ != -1)
 	{
+		currLevel_ = &levelLoader_.getLevelWithID(nextLevelID_);
+		/*
 		if (nextLevelID_ == 1)
 		{
 			currLevel_ = &levelLoader_.getLevel("Levels/LevelTest",
@@ -88,7 +91,7 @@ bool LevelManager::changeLevelIfNecessary()
 		{
 			currLevel_ = &levelLoader_.getLevel("Levels/LevelTest4",
 				textureLoader_->getTextureSheet("Assets/TileSets/bw.png"));
-		}
+		}*/
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->startEntityComponents();
 		nextLevelID_ = -1;

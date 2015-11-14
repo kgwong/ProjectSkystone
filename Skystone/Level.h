@@ -10,6 +10,7 @@
 
 #include "TextureLoader.h"
 #include "EnemyBuilder.h"
+#include "TileBuilder.h"
 
 class LevelLoader;
 class LevelMap;
@@ -28,6 +29,7 @@ public:
 	void setLevelManager(LevelManager* levelManager);
 	void setTileCreator(TileCreator* tileCreator);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
+	void setTileBuilder(TileBuilder* tileBuilder);
 
 	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
@@ -51,6 +53,7 @@ public:
 	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);
 	void addPickupAtLocation(Point position);
 	void addEnemyAtLocation(const std::string& name, Point position);
+	void addTileAtLocation(int tileType, Point position);
 
 public:
 	Player* player;
@@ -64,6 +67,8 @@ private:
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
 	TileCreator* tileCreator_;
+
+	TileBuilder* tileBuilder_;
 
 	int _levelID;
 	int _blockWidth, _blockHeight;
