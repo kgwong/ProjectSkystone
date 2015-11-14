@@ -50,10 +50,10 @@ public:
 	template <typename ComponentT>
 	ComponentT* getComponent();
 
-	virtual std::string getName() const;
-	virtual EntityType getType() const;
-	virtual void onCollision(CollisionInfo& collision) {};
-	virtual void onDeath(Level& level) {};
+	virtual std::string getName() const; //???
+	virtual EntityType getType() const; //TypeComponents
+	virtual void onCollision(CollisionInfo& collision) {}; //ColliderComponent
+	virtual void onDeath(Level& level) {}; //DeathComponent
 
 	virtual void callStartOnComponents(Level& level);
 

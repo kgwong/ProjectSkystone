@@ -31,6 +31,7 @@ public:
 
 	void load(const std::string& filepath, TextureSheet* tileSet, TileCreator* creator);
 	void setPlayer(Player* player, Point newPlayerPosition);
+	Point getPlayerPos();
 
 	void startEntityComponents();
 
@@ -63,7 +64,6 @@ private:
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
 	TileCreator* tileCreator_;
-	LevelMap* _levelMap;
 
 	int _levelID;
 	int _blockWidth, _blockHeight;

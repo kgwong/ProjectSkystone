@@ -45,6 +45,11 @@ void Level::setPlayer(Player* p, Point newPlayerPosition)
 	player->setPos(newPlayerPosition);
 }
 
+Point Level::getPlayerPos()
+{
+	return player->getPos();
+}
+
 void Level::startEntityComponents()
 {
 	for (int r = 0; r < tileArrangement.rows; ++r)
