@@ -38,7 +38,7 @@ void LevelManager::initStartingLevel()
 {
 	if (player_ != nullptr && textureLoader_ != nullptr)
 	{
-		currLevel_ = &levelLoader_.getLevelWithID(4);
+		currLevel_ = levelLoader_.getLevelWithID(4);
 		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
 		currLevel_->startEntityComponents();
 	}
@@ -68,7 +68,7 @@ bool LevelManager::changeLevelIfNecessary()
 {
 	if (nextLevelID_ != -1)
 	{
-		currLevel_ = &levelLoader_.getLevelWithID(nextLevelID_);
+		currLevel_ = levelLoader_.getLevelWithID(nextLevelID_);
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->startEntityComponents();
 		nextLevelID_ = -1;
