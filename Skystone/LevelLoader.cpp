@@ -27,11 +27,11 @@ void LevelLoader::setLevelManager(LevelManager* levelManager)
 	levelManager_ = levelManager;
 }
 
-Level& LevelLoader::getLevelWithID(int levelID)
+Level* LevelLoader::getLevelWithID(int levelID)
 {
 	if (!levelLoaded(levelID))
 		load(levelID);
-	return loadedLevels_.at(levelID);
+	return loadedLevels_.at(levelID).get();
 }
 
 bool LevelLoader::levelLoaded(int levelID)
@@ -41,12 +41,13 @@ bool LevelLoader::levelLoaded(int levelID)
 
 void LevelLoader::load(int levelID)
 {
-	Level level(levelID, textureLoader_);
-	level.setLevelManager(levelManager_);
-	level.setTileBuilder(&tileBuilder_);
-	level.setEnemyBuilder(&enemyBuilder_);
-	loadEnemies(generateFilePath("Enemies", levelID), level);
-	loadTiles(generateFilePath("Tiles", levelID), level);
+	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
+	//Level level(levelID, textureLoader_);
+	level->setLevelManager(levelManager_);
+	level->setTileBuilder(&tileBuilder_);
+	level->setEnemyBuilder(&enemyBuilder_);
+	loadEnemies(generateFilePath("Enemies", levelID), level.get());
+	loadTiles(generateFilePath("Tiles", levelID), level.get());
 
 	loadedLevels_.insert({levelID, level});
 }
@@ -57,7 +58,7 @@ std::string LevelLoader::generateFilePath(const std::string & tag, int levelID)
 	return Path::getFullPath(LEVEL_FILEPATH_PREFIX + id + tag);
 }
 
-void LevelLoader::loadTiles(const std::string& filepath, Level& level)
+void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 {
 	std::ifstream ifs(filepath); //should probably do more error checking
 	if (!ifs)
@@ -69,9 +70,9 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level)
 	int numRows = blockHeight * Constants::TILES_PER_BLOCK_HEIGHT;
 	int numCols = blockWidth * Constants::TILES_PER_BLOCK_WIDTH;
 
-	level.tileArrangement.rows = numRows;
-	level.tileArrangement.cols = numCols;
-	level.tileArrangement.tiles = std::vector<std::vector<Tile>>(numRows, std::vector<Tile>(numCols));
+	level->tileArrangement.rows = numRows;
+	level->tileArrangement.cols = numCols;
+	level->tileArrangement.tiles = std::vector<std::vector<Tile>>(numRows, std::vector<Tile>(numCols));
 
 	for (int r = 0; r < numRows; ++r)
 	{
@@ -79,12 +80,12 @@ void LevelLoader::loadTiles(const std::string& filepath, Level& level)
 		{
 			int tileNum;
 			ifs >> tileNum;
-			level.addTileAtLocation(tileNum, Point{ c * Constants::TILE_SIZE, r * Constants::TILE_SIZE });
+			level->addTileAtLocation(tileNum, Point{ c * Constants::TILE_SIZE, r * Constants::TILE_SIZE });
 		}
 	}
 }
 
-void LevelLoader::loadEnemies(const std::string& filepath, Level& level)
+void LevelLoader::loadEnemies(const std::string& filepath, Level* level)
 {
 	std::ifstream ifs(filepath);
 	if (!ifs)
@@ -95,6 +96,6 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level& level)
 
 	while (ifs >> enemyName >> pos.x >> pos.y)
 	{
-		level.addEnemyAtLocation(enemyName, pos);
+		level->addEnemyAtLocation(enemyName, pos);
 	}
 }

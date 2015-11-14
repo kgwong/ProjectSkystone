@@ -7,6 +7,7 @@
 #include "TextureSheet.h"
 #include "EnemyBuilder.h"
 #include "TileBuilder.h"
+#include <memory>
 
 class TextureLoader;
 class LevelMap;
@@ -23,7 +24,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	
-	Level& getLevelWithID(int levelID);
+	Level* getLevelWithID(int levelID);
 
 private:
 	TextureLoader* textureLoader_;
@@ -32,7 +33,7 @@ private:
 	EnemyBuilder enemyBuilder_;
 	TileBuilder tileBuilder_;
 
-	std::map<int, Level> loadedLevels_;
+	std::map<int, std::shared_ptr<Level>> loadedLevels_;
 
 private:
 	bool levelLoaded(int levelID);
@@ -40,8 +41,8 @@ private:
 
 	std::string generateFilePath(const std::string& tag, int levelID);
 
-	void loadEnemies(const std::string& filepath, Level& level);
-	void loadTiles(const std::string& filepath, Level& level);
+	void loadEnemies(const std::string& filepath, Level* level);
+	void loadTiles(const std::string& filepath, Level* level);
 
 
 };
