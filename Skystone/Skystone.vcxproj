@@ -79,7 +79,6 @@
     <ClCompile Include="AirborneState.cpp" />
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="ChaserComponent.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -114,6 +113,7 @@
     <ClCompile Include="TextureSheet.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileBuilder.cpp" />
+    <ClCompile Include="TrackerComponent.cpp" />
     <ClCompile Include="WalkingState.cpp" />
   </ItemGroup>
   <ItemGroup>

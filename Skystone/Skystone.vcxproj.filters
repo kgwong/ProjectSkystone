@@ -153,10 +153,10 @@
     <ClCompile Include="AIComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChaserComponent.cpp">
+    <ClCompile Include="TileBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TileBuilder.cpp">
+    <ClCompile Include="TrackerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
