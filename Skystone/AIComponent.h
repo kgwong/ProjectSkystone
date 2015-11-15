@@ -17,6 +17,7 @@ public:
 	static int getDistance(Point& a,Point& b);
 	static int getXDirection(Point& a, Point& b);
 	static bool isNearby(int dist, int radius);
+	static int getYDirection(Point& a, Point& b);
 };
 
 #endif //AI_COMPONENT_H

@@ -21,5 +21,9 @@ int AIComponent::getXDirection(Point & a, Point & b)
 
 bool AIComponent::isNearby(int dist,int radius)
 {
-	return dist <= radius;
+	return std::abs(dist) <= radius;
+}
+int AIComponent::getYDirection(Point & a, Point & b)
+{
+	return a.y - b.y;
 }

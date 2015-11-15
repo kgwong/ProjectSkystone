@@ -84,6 +84,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBuilder.cpp" />
     <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="FallingAIComponent.cpp" />
     <ClCompile Include="FlyingState.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="BasicEnemyMovementComponent.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />

@@ -17,23 +17,30 @@ class TrackerComponent :
 
 public:
 	static const int DEFAULT_X_VELOCITY = 0;
-	static const int RUNNING_X_VELOCITY = 1;
+	static const int RUNNING_X_VELOCITY = 2;
 	static const int DEFAULT_RADIUS = 150;
 
 public:
 	TrackerComponent();
 	virtual ~TrackerComponent();
 
-	virtual void start(GameObject& owner,Level& level);
-	virtual void update(GameObject& owner,Level& level);
-	
+	//NEED FOR EVERY AICOMPONENT
+	virtual void start(GameObject& owner, Level& level);
+	virtual void update(GameObject& owner, Level& level);
+
 	EnemyState getEnemyState();
+	void setEnemyState(EnemyState state);
+
+	void followCommand(int player_direction);
+	void fleeCommand(int player_direction);
 
 private:
 	int xVelocity_;
 	int radius_;
 	EnemyState enemyState_;
+	//need it this always ~ maybe put it the base class.
 	PhysicsComponent* physics_;
+
 };
 
 #endif
