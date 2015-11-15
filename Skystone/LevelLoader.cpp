@@ -39,7 +39,7 @@ bool LevelLoader::levelLoaded(int levelID)
 	return loadedLevels_.count(levelID) > 0;
 }
 
-void LevelLoader::load(int levelID)
+void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
 	//Level level(levelID, textureLoader_);

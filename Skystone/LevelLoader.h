@@ -37,7 +37,7 @@ private:
 
 private:
 	bool levelLoaded(int levelID);
-	void load(int levelID);
+	void load(const int levelID);
 
 	std::string generateFilePath(const std::string& tag, int levelID);
 
