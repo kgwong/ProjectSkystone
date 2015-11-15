@@ -3,7 +3,7 @@
 #include "TextureLoader.h"
 #include "GameConstants.h"
 #include "ColliderComponent.h"
-//#include "SpriteRenderer.h"
+#include "SpriteRenderer.h"
 
 #include "Tile.h"
 

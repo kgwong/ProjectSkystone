@@ -1,6 +1,12 @@
 #include "Enemy.h"
 
 #include "Level.h"
+#include "HealthComponent.h"
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+#include "RenderComponent.h"
+#include "AIComponent.h"
+#include "DamageComponent.h"
 
 Enemy::Enemy()
 {

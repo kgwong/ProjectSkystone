@@ -5,11 +5,10 @@
 
 #include "GameObject.h"
 
-#include "PhysicsComponent.h"
-#include "ColliderComponent.h"
-#include "RenderComponent.h"
-
 class TextureLoader;
+class RenderComponent;
+class PhysicsComponent;
+class ColliderComponent;
 
 class Pickup : public GameObject
 {

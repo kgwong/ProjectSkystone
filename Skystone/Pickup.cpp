@@ -4,6 +4,11 @@
 
 #include "TextureLoader.h"
 
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+#include "RenderComponent.h"
+
+
 Pickup::Pickup(TextureLoader* textureLoader)
 	:_alive(true), 
 	_renderComponent(new SpriteRenderer(textureLoader->getTextureSheet("Assets/Pickups/pickup.png"))),

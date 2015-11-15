@@ -8,15 +8,19 @@
 #include "Direction.h"
 #include "Block.h"
 
-#include "RenderComponent.h"
-#include "HealthComponent.h"
-#include "PhysicsComponent.h"
-#include "ColliderComponent.h"
+//#include "RenderComponent.h"
+//#include "HealthComponent.h"
+//#include "PhysicsComponent.h"
 
 class Level;
 class PhysicsComponent;
 class PlayerState;
 class TextureLoader;
+class ColliderComponent;
+class RenderComponent;
+class ColliderComponent;
+class DamageComponent;
+class HealthComponent;
 
 enum class AimState
 {

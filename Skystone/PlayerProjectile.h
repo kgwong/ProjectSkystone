@@ -6,12 +6,11 @@
 #include "GameObject.h"
 #include "Direction.h"
 
-#include "PhysicsComponent.h"
-#include "ColliderComponent.h"
-#include "DamageComponent.h"
-#include "RenderComponent.h"
-
 class TextureLoader;
+class RenderComponent;
+class PhysicsComponent;
+class ColliderComponent;
+class DamageComponent;
 
 class PlayerProjectile : public GameObject
 {

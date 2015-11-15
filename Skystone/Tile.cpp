@@ -2,6 +2,8 @@
 
 #include "Level.h"
 #include "GameConstants.h"
+#include "RenderComponent.h"
+#include "ColliderComponent.h"
 
 Tile::Tile()
 {

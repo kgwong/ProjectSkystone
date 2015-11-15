@@ -5,7 +5,8 @@
 #include <string>
 #include "Controls.h"
 
-class Player;
+#include "Player.h"
+#include "PhysicsComponent.h"
 
 class PlayerState
 {

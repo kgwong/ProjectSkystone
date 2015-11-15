@@ -7,6 +7,10 @@
 #include "Level.h"
 #include "PhysicsComponent.h"
 #include "AnimationRenderer.h"
+#include "HealthComponent.h"
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+#include "RenderComponent.h"
 
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),

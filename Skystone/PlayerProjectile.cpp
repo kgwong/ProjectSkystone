@@ -5,6 +5,10 @@
 #include <cmath>
 #include "CircleMath.h"
 #include "TextureLoader.h"
+#include "PhysicsComponent.h"
+#include "ColliderComponent.h"
+#include "DamageComponent.h"
+#include "RenderComponent.h"
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, double degrees)
 	:GameObject(position),

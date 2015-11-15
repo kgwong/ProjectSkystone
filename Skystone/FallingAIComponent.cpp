@@ -1,8 +1,5 @@
 #include "FallingAIComponent.h"
-#include "GameObject.h"
-#include "Level.h"
 #include "PhysicsComponent.h"
-
 
 
 FallingAIComponent::FallingAIComponent()

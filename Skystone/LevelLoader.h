@@ -11,7 +11,6 @@
 #include "Level.h"
 
 class TextureLoader;
-class LevelMap;
 class LevelManager;
 
 class LevelLoader

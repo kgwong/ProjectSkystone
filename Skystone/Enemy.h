@@ -2,19 +2,14 @@
 #define ENEMY_H
 
 #include <memory>
-
-#include "HealthComponent.h"
-#include "PhysicsComponent.h"
-#include "ColliderComponent.h"
-#include "RenderComponent.h"
-#include "AIComponent.h"
+#include "GameObject.h"
 
 class Level;
-/*class PhysicsComponent;
+class PhysicsComponent;
 class HealthComponent;
 class ColliderComponent;
 class RenderComponent;
-class AIComponent;*/
+class AIComponent;
 
 class Enemy : public GameObject
 {

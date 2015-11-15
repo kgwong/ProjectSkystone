@@ -1,15 +1,13 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include "SpriteRenderer.h"
-
 #include "TileType.h"
 #include <memory>
 
 #include "GameObject.h"
 
 class ColliderComponent;
-//class SpriteRenderer;
+class RenderComponent;
 
 class Tile : public GameObject
 {

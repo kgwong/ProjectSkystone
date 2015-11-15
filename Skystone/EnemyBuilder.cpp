@@ -8,6 +8,7 @@
 #include "RandomJumperComponent.h"
 #include "TrackerComponent.h"
 #include "FallingAIComponent.h"
+#include "HealthComponent.h"
 
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)

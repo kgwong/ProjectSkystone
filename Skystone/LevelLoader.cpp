@@ -2,7 +2,6 @@
 
 #include "Level.h"
 #include "GameConstants.h"
-#include "MainGame.h"
 #include "Path.h"
 #include "Log.h"
 
@@ -42,7 +41,6 @@ bool LevelLoader::levelLoaded(int levelID)
 void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
-	//Level level(levelID, textureLoader_);
 	level->setLevelManager(levelManager_);
 	level->setTileBuilder(&tileBuilder_);
 	level->setEnemyBuilder(&enemyBuilder_);

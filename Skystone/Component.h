@@ -2,9 +2,9 @@
 #define COMPONENT_H
 
 #include "GameObject.h"
-//#include "Level.h"
+#include "Level.h"
 //class GameObject;
-class Level;
+//class Level;
 
 class Component
 {
