@@ -2,6 +2,8 @@
 
 #include "SpriteRenderer.h"
 
+#include "TextureLoader.h"
+
 Pickup::Pickup(TextureLoader* textureLoader)
 	:_alive(true), 
 	_renderComponent(new SpriteRenderer(textureLoader->getTextureSheet("Assets/Pickups/pickup.png"))),

@@ -1,7 +1,6 @@
 #include "SpriteRenderer.h"
 
-
-
+#include "GameWindow.h"
 
 SpriteRenderer::SpriteRenderer(TextureSheet* textureSheet)
 	:textureSheet_(textureSheet),

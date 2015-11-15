@@ -1,8 +1,7 @@
 #include "RandomJumperComponent.h"
 #include "PhysicsComponent.h"
-#include "GameObject.h"
+
 #include "RNG.h"
-#include <iostream>
 
 RandomJumperComponent::RandomJumperComponent()
 	: timeInterval_(0),jumpVelocity_(DEFAULT_JUMP_VELOCITY),xVelocity_(DEFAULT_X_VELOCITY)

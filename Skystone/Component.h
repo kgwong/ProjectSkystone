@@ -1,9 +1,9 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <string>
-
-class GameObject;
+#include "GameObject.h"
+//#include "Level.h"
+//class GameObject;
 class Level;
 
 class Component

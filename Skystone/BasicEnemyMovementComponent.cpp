@@ -1,7 +1,6 @@
 #include "BasicEnemyMovementComponent.h"
 
 #include "PhysicsComponent.h"
-#include "GameObject.h"
 
 BasicEnemyMovementComponent::BasicEnemyMovementComponent()
 	: speed_(DEFAULT_SPEED)

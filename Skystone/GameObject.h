@@ -5,12 +5,12 @@
 #include <unordered_map>
 
 #include "Point.h"
-#include "Component.h"
 #include "EntityType.h"
 
 #include "CollisionInfo.h"
 
 class Level;
+class Component;
 
 class GameObject
 {

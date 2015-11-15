@@ -2,7 +2,6 @@
 #define HEALTHCOMPONENT_H
 
 #include "Component.h"
-#include "GameObject.h"
 
 class HealthComponent : public Component
 {

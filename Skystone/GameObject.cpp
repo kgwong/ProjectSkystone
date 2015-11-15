@@ -1,5 +1,6 @@
 #include "GameObject.h"
 
+#include "Component.h" //for CallStartOnComponents... 
 
 GameObject::GameObject()
 	:width_(0), height_(0)

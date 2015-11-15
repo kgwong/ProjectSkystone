@@ -3,9 +3,6 @@
 
 #include "Component.h"
 
-#include "GameWindow.h"
-
-
 class RenderComponent : public Component
 {
 public:

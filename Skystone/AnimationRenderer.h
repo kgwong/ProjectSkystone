@@ -1,10 +1,10 @@
 #ifndef ANIMATION_RENDERER_H
 #define ANIMATION_RENDERER_H
 
-#include "GameWindow.h"
-#include "GameObject.h"
 #include "RenderComponent.h"
 #include "TextureSheet.h"
+
+class GameWindow;
 
 class AnimationRenderer : public RenderComponent
 {

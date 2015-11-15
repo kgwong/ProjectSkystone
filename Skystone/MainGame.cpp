@@ -2,6 +2,7 @@
 
 #include "Log.h"
 #include "Path.h"
+#include "Level.h"
 
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),

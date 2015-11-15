@@ -12,11 +12,7 @@
 #include "GameWindow.h"
 #include "Player.h"
 #include "MusicPlayer.h"
-#include "Camera.h"
-#include "Level.h"
 #include "TextureLoader.h"
-#include "LevelMap.h"
-#include "LevelLoader.h"
 #include "LevelManager.h"
 
 class MainGame

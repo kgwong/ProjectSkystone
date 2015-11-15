@@ -1,7 +1,5 @@
 #include "DamageComponent.h"
 
-#include <iostream>
-
 DamageComponent::DamageComponent()
 	: _damage(0)
 {

@@ -4,10 +4,11 @@
 #include <string>
 #include <map>
 
-#include "TextureSheet.h"
 #include "EnemyBuilder.h"
 #include "TileBuilder.h"
 #include <memory>
+
+#include "Level.h"
 
 class TextureLoader;
 class LevelMap;

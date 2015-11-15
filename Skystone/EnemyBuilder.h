@@ -3,8 +3,7 @@
 
 #include <string>
 
-#include "TextureLoader.h"
-
+class TextureLoader;
 class Enemy;
 
 class EnemyBuilder

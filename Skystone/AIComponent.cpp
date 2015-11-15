@@ -1,6 +1,4 @@
 #include "AIComponent.h"
-#include "GameObject.h"
-
 
 int AIComponent::getDistance(Point& a,Point& b)
 {

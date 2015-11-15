@@ -1,7 +1,6 @@
 #include "TrackerComponent.h"
 
 #include "PhysicsComponent.h"
-#include "GameObject.h"
 #include "Level.h"
 
 //all AICOMPONENTS get called in EnemyBuilder.cpp

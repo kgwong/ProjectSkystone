@@ -1,7 +1,6 @@
 #include "PhysicsComponent.h"
 
 #include "ColliderComponent.h"
-#include "GameObject.h"
 #include "Level.h"
 #include "GameConstants.h"
 #include "CollisionInfo.h"

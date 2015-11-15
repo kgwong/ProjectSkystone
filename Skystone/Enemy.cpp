@@ -1,7 +1,6 @@
 #include "Enemy.h"
 
 #include "Level.h"
-#include "Pickup.h"
 
 Enemy::Enemy()
 {

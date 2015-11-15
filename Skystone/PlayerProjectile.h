@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "GameObject.h"
 #include "Direction.h"
 
 #include "PhysicsComponent.h"
@@ -10,7 +11,7 @@
 #include "DamageComponent.h"
 #include "RenderComponent.h"
 
-#include "TextureLoader.h"
+class TextureLoader;
 
 class PlayerProjectile : public GameObject
 {

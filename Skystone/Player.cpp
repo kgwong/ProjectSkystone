@@ -1,11 +1,12 @@
 #include "Player.h"
 
+#include "TestPlayerStates.h"
+#include "Log.h"
+#include "TextureLoader.h"
+
 #include "Level.h"
 #include "PhysicsComponent.h"
 #include "AnimationRenderer.h"
-
-#include "TestPlayerStates.h"
-#include "Log.h"
 
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),

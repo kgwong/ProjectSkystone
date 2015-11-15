@@ -4,7 +4,6 @@
 #include "RenderComponent.h"
 #include "TextureSheet.h"
 
-
 class SpriteRenderer : public RenderComponent
 {
 public:

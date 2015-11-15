@@ -1,6 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <memory>
+
 #include "HealthComponent.h"
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
@@ -8,7 +10,11 @@
 #include "AIComponent.h"
 
 class Level;
-class PhysicsComponent;
+/*class PhysicsComponent;
+class HealthComponent;
+class ColliderComponent;
+class RenderComponent;
+class AIComponent;*/
 
 class Enemy : public GameObject
 {

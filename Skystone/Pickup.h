@@ -4,11 +4,12 @@
 #include <memory>
 
 #include "GameObject.h"
-#include "TextureLoader.h"
 
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
+
+class TextureLoader;
 
 class Pickup : public GameObject
 {

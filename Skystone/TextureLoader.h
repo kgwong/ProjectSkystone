@@ -11,7 +11,6 @@
 #include "Errors.h"
 #include "GameWindow.h"
 #include "TextureSheet.h"
-#include "SpritesheetInfo.h"
 
 struct TextureDestroyer
 {

@@ -1,5 +1,6 @@
 #include "EnemyBuilder.h"
 
+#include "TextureLoader.h"
 #include "Enemy.h"
 
 #include "SpriteRenderer.h"

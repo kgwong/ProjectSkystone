@@ -4,10 +4,7 @@
 #include "Axis.h"
 #include "Component.h"
 
-class Level;
-class GameObject;
 class ColliderComponent;
-
 
 class PhysicsComponent : public Component
 {

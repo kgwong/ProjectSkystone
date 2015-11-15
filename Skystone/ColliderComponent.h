@@ -2,7 +2,6 @@
 #define COLLIDERCOMPONENT_H
 
 #include "Component.h"
-#include "GameObject.h"
 
 class ColliderComponent : public Component
 {

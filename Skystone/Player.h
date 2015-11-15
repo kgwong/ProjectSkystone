@@ -3,7 +3,8 @@
 
 #include <memory>
 
-#include "GameWindow.h"
+#include <SDL\SDL.h>
+#include "GameObject.h"
 #include "Direction.h"
 #include "Block.h"
 
@@ -12,11 +13,10 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 
-#include "TextureLoader.h"
-
 class Level;
 class PhysicsComponent;
 class PlayerState;
+class TextureLoader;
 
 enum class AimState
 {

@@ -1,6 +1,6 @@
 #include "AnimationRenderer.h"
 
-
+#include "GameWindow.h"
 
 AnimationRenderer::AnimationRenderer(TextureSheet* textureSheet)
 	: textureSheet_(textureSheet), 

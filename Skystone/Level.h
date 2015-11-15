@@ -2,19 +2,17 @@
 #define LEVEL_H
 
 #include "Player.h"
-#include "Tile.h"
 #include "Enemy.h"
 #include "PlayerProjectile.h"
 #include "TileArrangement.h"
 #include "Pickup.h"
 
-#include "TextureLoader.h"
-#include "EnemyBuilder.h"
-#include "TileBuilder.h"
-
 class LevelLoader;
 class LevelMap;
 class LevelManager;
+class TextureLoader;
+class EnemyBuilder;
+class TileBuilder;
 
 class Level
 {

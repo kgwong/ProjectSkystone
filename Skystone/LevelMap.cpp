@@ -1,6 +1,7 @@
 #include "LevelMap.h"
 
 #include "Level.h"
+#include <iostream>
 
 LevelMap::LevelMap(int rows, int cols)
 	:_levels(rows, std::vector<int>(cols, 0)),

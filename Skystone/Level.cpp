@@ -4,6 +4,9 @@
 #include "LevelLoader.h"
 #include "LevelMap.h"
 #include "LevelManager.h"
+#include "TextureLoader.h"
+#include "EnemyBuilder.h"
+#include "TileBuilder.h"
 
 
 Level::Level(int levelID, TextureLoader* textureLoader)
