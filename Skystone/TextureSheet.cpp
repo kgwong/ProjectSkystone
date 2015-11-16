@@ -9,7 +9,7 @@ TextureSheet::TextureSheet(GameWindow* window,
 	SpritesheetInfo* sInfo)
 	:window_(window),
 	texture_(texture),
-	info_(sInfo == nullptr),
+	info_(sInfo != nullptr),
 	fullTexture_{ 0,0,0,0 }
 {
 	calculateSpriteLocations(frames_, sInfo);
