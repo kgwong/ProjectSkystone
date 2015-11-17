@@ -26,6 +26,9 @@ private:
 	int yVelocity_;
 	int radius_;
 	PhysicsComponent* physics_;
+
+	int timer_;
+	bool isFalling_;
 };
 
 #endif
