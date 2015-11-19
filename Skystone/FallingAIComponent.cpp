@@ -4,10 +4,11 @@
 
 FallingAIComponent::FallingAIComponent()
 	:yVelocity_(DEFAULT_Y_VELOCITY),
-	radius_(DEFAULT_RADIUS)
+	xRadius_(DEFAULT_X_RADIUS),
+	yRadius_(DEFAULT_Y_RADIUS),
+	timer_(0),
+	isFalling_(false)
 {
-	timer_ = 0;
-	isFalling_ = false;
 }
 
 void FallingAIComponent::start(GameObject & owner, Level & level)
@@ -22,7 +23,7 @@ void FallingAIComponent::update(GameObject & owner, Level & level)
 	int yDist = getYDirection(owner.getPos(), level.getPlayerPos());
 	int xDist = getXDirection(owner.getPos(), level.getPlayerPos());
 
-	if (AIComponent::isNearby(yDist, 100) && AIComponent::isNearby(xDist, 20))
+	if (AIComponent::isNearby(yDist,DEFAULT_Y_RADIUS) && AIComponent::isNearby(xDist,DEFAULT_X_RADIUS))
 	{
 		physics_->enableGravity(true);
 		isFalling_ = true;
@@ -38,7 +39,7 @@ void FallingAIComponent::update(GameObject & owner, Level & level)
 		else
 		{
 			timer_++;
-			timer_ = timer_ % 100;
+			timer_ = timer_ % DEFAULT_TIME_INTERVAL;
 		}
 
 

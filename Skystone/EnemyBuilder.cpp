@@ -9,6 +9,7 @@
 #include "TrackerComponent.h"
 #include "FallingAIComponent.h"
 #include "HealthComponent.h"
+#include "FlyingAIComponent.h"
 
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -37,7 +38,8 @@ Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemy.png");
 		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
-		enemyToBuild.setMovementComponent(std::shared_ptr<RandomJumperComponent>(new RandomJumperComponent()));
+		//enemyToBuild.setMovementComponent(std::shared_ptr<RandomJumperComponent>(new RandomJumperComponent()));
+		enemyToBuild.setMovementComponent(std::shared_ptr<FlyingAIComponent>(new FlyingAIComponent()));
 	}
 	//enemyToBuild.callStartOnComponents(); //
 	return &enemyToBuild;
