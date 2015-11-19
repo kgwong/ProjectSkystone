@@ -29,70 +29,31 @@ void TrackerComponent::start(GameObject & owner, Level & level)
 void TrackerComponent::update(GameObject & owner, Level & level)
 {
 	int player_dist = AIComponent::getDistance(owner.getPos(), level.getPlayerPos());
-	
-	if (enemyState_ == EnemyState::FOLLOWER)
+
+	if (AIComponent::isNearby(player_dist, radius_))
 	{
-		if (AIComponent::isNearby(player_dist, radius_))
-		{
-			xVelocity_ = RUNNING_X_VELOCITY;
-			int player_direction = AIComponent::getXDirection(owner.getPos(), level.getPlayerPos());
-			//if player is to left of enemy
-			if (player_direction < 0)
-				physics_->setVelX(xVelocity_);
-			else//if player is to right of enemy
-				physics_->setVelX(-xVelocity_);
-		}
-		else
-		{
-			xVelocity_ = DEFAULT_X_VELOCITY;
-			physics_->setVelX(xVelocity_);
-		}
+		int player_direction = AIComponent::getXDirection(owner.getPos(), level.getPlayerPos());
+
+		EnemyState currentState = enemyState_;
+			switch (currentState)
+			{
+			case EnemyState::FOLLOWER:
+				followCommand(player_direction);
+				break;
+			case EnemyState::COWARD:
+				fleeCommand(player_direction);
+				break;
+			case EnemyState::NEUTRAL:
+				break;
+			default:
+				break;
+			}
 	}
-	else if (enemyState_ == EnemyState::COWARD)
+	else
 	{
-		if (AIComponent::isNearby(player_dist, radius_))
-		{
-			xVelocity_ = RUNNING_X_VELOCITY;
-			int player_direction = AIComponent::getXDirection(owner.getPos(), level.getPlayerPos());
-			//if player is to left of enemy
-			if (player_direction < 0)
-				physics_->setVelX(-xVelocity_);
-			else//if player is to right of enemy
-				physics_->setVelX(xVelocity_);
-		}
-		else
-		{
-			xVelocity_ = DEFAULT_X_VELOCITY;
-			physics_->setVelX(xVelocity_);
-		}
+		xVelocity_ = DEFAULT_X_VELOCITY;
+		physics_->setVelX(xVelocity_);
 	}
-
-	
-	
-
-
-
-	//WIP CODE
-
-	/*if (AIComponent::isNearby(player_dist, radius_))
-	{
-	int player_direction = AIComponent::getXDirection(owner.getPos(), level.getPlayerPos());
-
-	EnemyState currentState;
-	switch (currentState)
-	{
-	case EnemyState::FOLLOWER:
-	followCommand(player_dist,player_direction);
-	break;
-	case EnemyState::COWARD:
-	fleeCommand(player_dist,player_direction);
-	break;
-	case EnemyState::NEUTRAL:
-	break;
-	default:
-	break;
-	}
-	}*/
 }
 
 EnemyState TrackerComponent::getEnemyState()

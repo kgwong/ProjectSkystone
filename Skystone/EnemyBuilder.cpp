@@ -40,6 +40,7 @@ Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
 		//enemyToBuild.setMovementComponent(std::shared_ptr<RandomJumperComponent>(new RandomJumperComponent()));
 		enemyToBuild.setMovementComponent(std::shared_ptr<FlyingAIComponent>(new FlyingAIComponent()));
+		//enemyToBuild.setMovementComponent(std::shared_ptr<TrackerComponent>(new TrackerComponent()));
 	}
 	//enemyToBuild.callStartOnComponents(); //
 	return &enemyToBuild;
