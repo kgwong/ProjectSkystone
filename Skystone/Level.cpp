@@ -36,10 +36,10 @@ void Level::setTileBuilder(TileBuilder* tileBuilder)
 	tileBuilder_ = tileBuilder;
 }
 
-void Level::setPlayer(Player* p, Point newPlayerPosition)
+void Level::setPlayer(Player* p, Point startPosition)
 {
 	player = p;
-	player->setPos(newPlayerPosition);
+	player->setPos(startPosition);
 }
 
 Point Level::getPlayerPos()
@@ -110,6 +110,9 @@ void Level::updateTiles()
 void Level::updatePlayer()
 {
 	player->update(*this);
+	oldPlayerBlock_ = Block::getBlock(player->getPos());
+	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
+		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 }
 
 void Level::updatePlayerProjectiles()
@@ -142,10 +145,10 @@ int Level::getID()
 	return levelID_;
 }
 
-void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
+void Level::setNextLevel(Direction dir)
 {
 	LevelMap* levelMap = levelManager_->getLevelMap();
-	Block nextBlock = levelMap->getAdjBlock(oldBlock + levelMap->getBaseBlock(levelID_), dir);
+	Block nextBlock = levelMap->getAdjBlock(oldPlayerBlock_ + levelMap->getBaseBlock(levelID_), dir);
 	int nextLevelID = levelMap->getLevelID(nextBlock);
 
 	Block nextBaseBlock = levelMap->getBaseBlock(nextLevelID);
@@ -156,26 +159,25 @@ void Level::setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir)
 	switch (dir)
 	{
 	case Direction::UP:
-		oldPlayerPosition.y = Constants::BLOCK_HEIGHT_IN_PIXELS - 2 * Constants::TILE_SIZE;
+		oldPlayerPosInBlock_.y = Constants::BLOCK_HEIGHT_IN_PIXELS - 2 * Constants::TILE_SIZE;
 		break;
 	case Direction::DOWN:
-		oldPlayerPosition.y = 2 * Constants::TILE_SIZE;
+		oldPlayerPosInBlock_.y = 2 * Constants::TILE_SIZE;
 		break;
 	case Direction::LEFT:
-		oldPlayerPosition.x = Constants::BLOCK_WIDTH_IN_PIXELS - 2 * Constants::TILE_SIZE;
+		oldPlayerPosInBlock_.x = Constants::BLOCK_WIDTH_IN_PIXELS - 2 * Constants::TILE_SIZE;
 		break;
 	case Direction::RIGHT:
-		oldPlayerPosition.x = 2 * Constants::TILE_SIZE;
+		oldPlayerPosInBlock_.x = 2 * Constants::TILE_SIZE;
 		break;
 	}
 
 
-	Point newPlayerPosition{ newRelativeBlock.c * Constants::BLOCK_WIDTH_IN_PIXELS + oldPlayerPosition.x,
-								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosition.y};
+	Point newPlayerPosition{ newRelativeBlock.c * Constants::BLOCK_WIDTH_IN_PIXELS + oldPlayerPosInBlock_.x,
+								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosInBlock_.y};
 
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 
-	//
 	playerProjectiles.clear();
 }
 

@@ -24,7 +24,7 @@ public:
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
 	void setTileBuilder(TileBuilder* tileBuilder);
 
-	void setPlayer(Player* player, Point newPlayerPosition);
+	void setPlayer(Player* player, Point startPosition);
 	Point getPlayerPos();
 
 	void startEntityComponents();
@@ -34,7 +34,7 @@ public:
 
 	int getID();
 
-	void setNextLevel(Block oldBlock, Point oldPlayerPosition, Direction dir);
+	void setNextLevel(Direction dir);
 
 	int getLevelWidth() const; //pixels
 	int getLevelHeight() const;
@@ -57,6 +57,8 @@ private:
 	EnemyBuilder* enemyBuilder_;
 	TileBuilder* tileBuilder_;
 
+	Block oldPlayerBlock_;
+	Point oldPlayerPosInBlock_;
 	int levelID_;
 
 private:

@@ -8,10 +8,6 @@
 #include "Direction.h"
 #include "Block.h"
 
-//#include "RenderComponent.h"
-//#include "HealthComponent.h"
-//#include "PhysicsComponent.h"
-
 class Level;
 class PhysicsComponent;
 class PlayerState;
@@ -63,9 +59,6 @@ private:
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
-
-	Block _oldBlock;
-	Point _oldPosInBlock;
 
 	AimState aimState_;
 	AimState prevAimState_;
