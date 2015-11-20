@@ -6,6 +6,9 @@ GameWindow::GameWindow(const std::string& windowName, int width, int height)
 	renderer_(MySDL_CreateRenderer(window_.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)),
 	camera_(width, height)
 {
+	//sets default color of background. Useful for testing holes in graphics
+	//default is black
+	//SDL_SetRenderDrawColor(renderer_.get(), 255, 0, 0, 255);
 }
 
 GameWindow::~GameWindow()

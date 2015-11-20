@@ -57,7 +57,8 @@ void MainGame::processInput()
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				//std::cout << "MOUSE PRESSED!!!! pos (x: " << e.button.x << ", y: " << e.button.y << ")" << std::endl;
+				std::cout << "MousePressed(x = " << e.button.x + window_.getCamera().getPosX() << 
+								", y = " << e.button.y + window_.getCamera().getPosY() << ")" << std::endl;
 				break;
 			default:
 				break;
@@ -77,6 +78,7 @@ void MainGame::update()
 void MainGame::render()
 {
 	SDL_RenderClear(window_.getRenderer());
+
 
 	window_.getCamera().followObject(player_);
 	levelManager_.getCurrentLevel()->render();

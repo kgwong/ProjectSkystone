@@ -31,7 +31,8 @@ void Tile::update(Level& level)
 
 void Tile::render(Level& level)
 {
-	renderComponent_->update(*this, level);
+	if (renderComponent_)
+		renderComponent_->update(*this, level);
 }	
 
 void Tile::onCollision(CollisionInfo& collision)
