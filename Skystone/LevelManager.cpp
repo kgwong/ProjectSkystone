@@ -10,7 +10,8 @@ LevelManager::LevelManager(TextureLoader* tl)
 	levelMap_(10, 10),
 	levelLoader_(textureLoader_),
 	currLevel_(nullptr),
-	nextLevelID_(-1)
+	nextLevelID_(-1),
+	background_(textureLoader_)
 {
 	levelMap_.addLevel(1, 2, 2, 1, 1);
 	levelMap_.addLevel(2, 1, 2, 1, 3);
@@ -56,6 +57,11 @@ LevelMap* LevelManager::getLevelMap()
 Level* LevelManager::getCurrentLevel()
 {
 	return currLevel_;
+}
+
+Background* LevelManager::getBackground()
+{
+	return &background_;
 }
 
 void LevelManager::setNextLevel(int levelID, Point newPlayerPosition)

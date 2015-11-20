@@ -77,6 +77,7 @@
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AirborneState.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
@@ -121,6 +122,7 @@
   <ItemGroup>
     <ClInclude Include="AirborneState.h" />
     <ClInclude Include="Axis.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BasicEnemyMovementComponent.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />

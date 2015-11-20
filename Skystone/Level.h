@@ -7,6 +7,7 @@
 #include "TileArrangement.h"
 #include "Pickup.h"
 
+class Background;
 class LevelLoader;
 class LevelMap;
 class LevelManager;
@@ -22,11 +23,13 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
+	void setBackground(Background * background);
 	void setTileBuilder(TileBuilder* tileBuilder);
 
 	void setPlayer(Player* player, Point startPosition);
 	Point getPlayerPos();
 
+	LevelManager* getLevelManager();
 	void startEntityComponents();
 
 	void update();
@@ -56,6 +59,7 @@ private:
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
 	TileBuilder* tileBuilder_;
+	Background* background_;
 
 	Block oldPlayerBlock_;
 	Point oldPlayerPosInBlock_;
@@ -65,6 +69,7 @@ private:
 	template <typename Entity>
 	void startComponents(std::vector<Entity>& v);
 
+	void updateBackground();
 	void updateTiles();
 	void updatePlayer();
 	void updatePlayerProjectiles();
@@ -74,6 +79,7 @@ private:
 	template <typename Entity>
 	void updateEntityVector(std::vector<Entity>& v); //isDead() and update() must be defined for Entity
 
+	void renderBackground();
 	void renderPlayer();
 	void renderTiles();
 	void renderEnemies();

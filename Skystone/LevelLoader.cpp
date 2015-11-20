@@ -1,10 +1,10 @@
 #include "LevelLoader.h"
 
 #include "Level.h"
+#include "LevelManager.h"
 #include "GameConstants.h"
 #include "Path.h"
 #include "Log.h"
-
 #include <fstream>
 
 const std::string LevelLoader::LEVEL_FILEPATH_PREFIX = "Levels/Level";
@@ -42,8 +42,10 @@ void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
 	level->setLevelManager(levelManager_);
+	level->setBackground(levelManager_->getBackground());
 	level->setTileBuilder(&tileBuilder_);
 	level->setEnemyBuilder(&enemyBuilder_);
+	
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
 	loadTiles(generateFilePath("Tiles", levelID), level.get());
 

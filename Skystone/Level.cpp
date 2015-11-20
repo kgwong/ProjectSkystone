@@ -7,14 +7,16 @@
 #include "TextureLoader.h"
 #include "EnemyBuilder.h"
 #include "TileBuilder.h"
-
+#include "Background.h"
 
 Level::Level(int levelID, TextureLoader* textureLoader)
 	:textureLoader_(textureLoader),
 	levelManager_(nullptr),
 	enemyBuilder_(nullptr),
+	background_(levelManager_->getBackground()),
 	levelID_(levelID)
 {
+
 }
 
 Level::~Level()
@@ -31,6 +33,11 @@ void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 	enemyBuilder_ = enemyBuilder;
 }
 
+void Level::setBackground(Background* background)
+{
+	background_ = background;
+}
+
 void Level::setTileBuilder(TileBuilder* tileBuilder)
 {
 	tileBuilder_ = tileBuilder;
@@ -45,6 +52,11 @@ void Level::setPlayer(Player* p, Point startPosition)
 Point Level::getPlayerPos()
 {
 	return player->getPos();
+}
+
+LevelManager * Level::getLevelManager()
+{
+	return levelManager_;
 }
 
 void Level::startEntityComponents()
@@ -93,11 +105,17 @@ void Level::addTileAtLocation(int tileType, Point position)
 
 void Level::update()
 {
+	updateBackground();
 	updateTiles();
 	updatePlayer();
 	updatePlayerProjectiles();
 	updateEnemies();
 	updatePickups();
+}
+
+void Level::updateBackground()
+{
+	//todo: be able to switch backgrounds
 }
 
 void Level::updateTiles()
@@ -133,6 +151,7 @@ void Level::updatePickups()
 void Level::render()
 {
 	//note order of rendering
+	renderBackground();
 	renderTiles();
 	renderEnemies();
 	renderPlayerProjectiles();
@@ -201,6 +220,11 @@ void Level::renderPlayerProjectiles()
 void Level::renderPickups()
 {
 	renderEntityVector(pickups);
+}
+
+void Level::renderBackground()
+{
+	background_->render(*this);
 }
 
 void Level::renderPlayer()
