@@ -142,6 +142,11 @@ void Level::updatePlayer()
 	oldPlayerBlock_ = Block::getBlock(player->getPos());
 	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
 		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
+
+	if (player->isDead())
+	{
+		player->onDeath(*this);
+	}
 }
 
 void Level::updatePlayerProjectiles()

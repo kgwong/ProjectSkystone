@@ -47,6 +47,8 @@ public:
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
+	virtual void onDeath(Level& level);
+	virtual bool isDead();
 
 public:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!

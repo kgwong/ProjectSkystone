@@ -11,6 +11,7 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
+#include "DamageComponent.h"
 #include "LevelChangeComponent.h"
 
 Player::Player(TextureLoader* textureLoader)
@@ -113,7 +114,7 @@ void Player::update(Level& level)
 	currState_->update(*this);
 	aim();
 
-	_colliderComponent->update(*this, level);
+	//_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 
 	if (shoot_)
@@ -157,8 +158,26 @@ EntityType Player::getType() const
 
 void Player::onCollision(CollisionInfo& collision)
 {
-	if (collision.other.getType() == EntityType::PICKUP)
+	switch (collision.other.getType())
 	{
+	case EntityType::PICKUP:
 		std::cout << "thing acquired! yay!" << std::endl;
+		break;
+	case EntityType::ENEMY:
+		DamageComponent* damage = collision.other.getComponent<DamageComponent>();
+		_healthComponent->takeDamage(damage->getDamage());
+		std::cout << "Hit by enemy! " << _healthComponent->getHealth() << "hp left" << std::endl;
+		break;
 	}
+
+}
+
+void Player::onDeath(Level& level)
+{
+	std::cout << "Player Died" << std::endl;
+}
+
+bool Player::isDead()
+{
+	return _healthComponent->isDead();
 }
