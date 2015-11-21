@@ -23,6 +23,16 @@ Level::~Level()
 {
 }
 
+void Level::onEnter()
+{
+	startEntityComponents();
+}
+
+void Level::onExit()
+{
+	playerProjectiles.clear();
+}
+
 void Level::setLevelManager(LevelManager* levelManager)
 {
 	levelManager_ = levelManager;
@@ -128,6 +138,7 @@ void Level::updateTiles()
 void Level::updatePlayer()
 {
 	player->update(*this);
+
 	oldPlayerBlock_ = Block::getBlock(player->getPos());
 	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
 		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
@@ -196,8 +207,6 @@ void Level::setNextLevel(Direction dir)
 								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosInBlock_.y};
 
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
-
-	playerProjectiles.clear();
 }
 
 void Level::renderTiles() 

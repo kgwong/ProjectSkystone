@@ -11,6 +11,7 @@
 #include "PhysicsComponent.h"
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
+#include "LevelChangeComponent.h"
 
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
@@ -18,6 +19,7 @@ Player::Player(TextureLoader* textureLoader)
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_healthComponent(new HealthComponent(100)),
 	_physicsComponent(new PhysicsComponent()),
+	levelChangeComponent_(new LevelChangeComponent()),
 	shoot_(false), 
 	currState_(&states::walkingState),
 	aimState_(AimState::RIGHT)
@@ -26,6 +28,7 @@ Player::Player(TextureLoader* textureLoader)
 	addComponent(_physicsComponent.get());
 	addComponent(_healthComponent.get());
 	addComponent(_colliderComponent.get());
+	addComponent(levelChangeComponent_.get());
 	//callStartOnComponents();
 }
 
@@ -113,23 +116,10 @@ void Player::update(Level& level)
 	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 
-
 	if (shoot_)
 		shoot(level);
 
-
-	if (_colliderComponent->getLeft() < 0)
-		level.setNextLevel(Direction::LEFT);
-	else if (_colliderComponent->getRight() > level.getLevelWidth())
-		level.setNextLevel(Direction::RIGHT);
-	else if (_colliderComponent->getTop() < 0)
-		level.setNextLevel(Direction::UP);
-	else if (_colliderComponent->getBottom() > level.getLevelHeight())
-		level.setNextLevel(Direction::DOWN);
-	
-	/*_oldBlock = Block::getBlock(getPos());
-	_oldPosInBlock = Point{ getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
-							getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };*/
+	levelChangeComponent_->update(*this, level);
 }
 
 void Player::render(Level& level)

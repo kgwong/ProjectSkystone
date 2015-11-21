@@ -17,9 +17,13 @@ class TileBuilder;
 
 class Level
 {
+
 public:
 	Level(int levelID, TextureLoader* textureLoader);
 	~Level();
+
+	void onEnter();
+	void onExit();
 
 	void setLevelManager(LevelManager* levelManager);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
