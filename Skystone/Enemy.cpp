@@ -73,10 +73,12 @@ void Enemy::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
 	//
 	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
 	_physicsComponent = std::make_shared<PhysicsComponent>();
+	damageComponent_ = std::make_shared<DamageComponent>(1);
 
 	addComponent(_renderComponent.get());
 	addComponent(_colliderComponent.get());
 	addComponent(_physicsComponent.get());
+	addComponent(damageComponent_.get());
 }
 
 void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)

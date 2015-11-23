@@ -17,6 +17,7 @@ class RenderComponent;
 class ColliderComponent;
 class DamageComponent;
 class HealthComponent;
+class LevelChangeComponent;
 
 enum class AimState
 {
@@ -46,6 +47,8 @@ public:
 	virtual std::string getName() const;
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
+	virtual void onDeath(Level& level);
+	virtual bool isDead();
 
 public:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
@@ -59,6 +62,7 @@ private:
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
+	std::shared_ptr<LevelChangeComponent> levelChangeComponent_;
 
 	AimState aimState_;
 	AimState prevAimState_;

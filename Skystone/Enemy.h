@@ -10,6 +10,7 @@ class HealthComponent;
 class ColliderComponent;
 class RenderComponent;
 class AIComponent;
+class DamageComponent;
 
 class Enemy : public GameObject
 {
@@ -35,6 +36,7 @@ private:
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
 	std::shared_ptr<AIComponent> _movementComponent;
+	std::shared_ptr<DamageComponent> damageComponent_;
 
 public:
 	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
