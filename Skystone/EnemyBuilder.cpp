@@ -10,7 +10,7 @@
 #include "FallingAIComponent.h"
 #include "HealthComponent.h"
 #include "FlyingAIComponent.h"
-
+#include "AIjump.h"
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
 {
@@ -30,8 +30,8 @@ Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(500)));
 		//enemyToBuild.setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent>(new BasicEnemyMovementComponent(0)));
 		//enemyToBuild.setMovementComponent(std::shared_ptr<TrackerComponent>(new TrackerComponent()));
-		enemyToBuild.setMovementComponent(std::shared_ptr<FallingAIComponent>(new FallingAIComponent()));
-
+		//enemyToBuild.setMovementComponent(std::shared_ptr<FallingAIComponent>(new FallingAIComponent()));
+		enemyToBuild.setMovementComponent(std::shared_ptr<AIjump>(new AIjump()));
 	}
 	else if (enemyName == "TestMob1")
 	{

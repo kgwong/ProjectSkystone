@@ -76,6 +76,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AIjump.cpp" />
     <ClCompile Include="AirborneState.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="WalkingState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIjump.h" />
     <ClInclude Include="AirborneState.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Background.h" />
