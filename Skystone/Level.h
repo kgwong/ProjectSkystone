@@ -14,6 +14,7 @@ class LevelManager;
 class TextureLoader;
 class EnemyBuilder;
 class TileBuilder;
+class SpriteRenderer;
 
 class Level
 {
@@ -27,7 +28,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
-	void setBackground(Background * background);
+	void setBackgroundFromSprite(SpriteRenderer* spriteRenderer);
 	void setTileBuilder(TileBuilder* tileBuilder);
 
 	void setPlayer(Player* player, Point startPosition);
@@ -63,7 +64,7 @@ private:
 	LevelManager* levelManager_;
 	EnemyBuilder* enemyBuilder_;
 	TileBuilder* tileBuilder_;
-	Background* background_;
+	std::shared_ptr<Background> background_;
 
 	Block oldPlayerBlock_;
 	Point oldPlayerPosInBlock_;

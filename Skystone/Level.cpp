@@ -13,7 +13,7 @@ Level::Level(int levelID, TextureLoader* textureLoader)
 	:textureLoader_(textureLoader),
 	levelManager_(nullptr),
 	enemyBuilder_(nullptr),
-	background_(levelManager_->getBackground()),
+	background_(nullptr),
 	levelID_(levelID)
 {
 
@@ -43,9 +43,9 @@ void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 	enemyBuilder_ = enemyBuilder;
 }
 
-void Level::setBackground(Background* background)
+void Level::setBackgroundFromSprite(SpriteRenderer* spriteRenderer)
 {
-	background_ = background;
+	background_ = std::make_shared<Background>(spriteRenderer);
 }
 
 void Level::setTileBuilder(TileBuilder* tileBuilder)

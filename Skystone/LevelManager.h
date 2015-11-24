@@ -3,7 +3,6 @@
 
 #include "LevelMap.h"
 #include "LevelLoader.h"
-#include "Background.h"
 
 class Player;
 
@@ -21,7 +20,6 @@ public:
 
 	LevelMap* getLevelMap();
 	Level* getCurrentLevel();
-	Background* getBackground();
 
 	void setNextLevel(int levelID, Point newPlayerPosition);
 	bool changeLevelIfNecessary();
@@ -33,7 +31,6 @@ private:
 	LevelMap levelMap_;
 	LevelLoader levelLoader_;
 	Level* currLevel_;
-	Background background_;
 
 	int nextLevelID_;
 	Point newPlayerPosition_;

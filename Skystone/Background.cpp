@@ -1,8 +1,8 @@
 #include "Background.h"
 #include "Path.h"
 
-Background::Background(TextureLoader* textureLoader)
-	: spriteRenderer_(new SpriteRenderer(textureLoader->getTextureSheet("Assets/backgroundTest.png")))
+Background::Background(SpriteRenderer* spriteRenderer)
+	: spriteRenderer_(spriteRenderer)
 {
 }
 

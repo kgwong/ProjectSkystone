@@ -30,7 +30,7 @@ public:
 	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
 
 private:
-	TileType _tileType;//
+	TileType _tileType;
 
 	std::shared_ptr<RenderComponent> renderComponent_;
 	std::shared_ptr<ColliderComponent> colliderComponent_;

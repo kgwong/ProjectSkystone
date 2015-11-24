@@ -25,6 +25,7 @@ public:
 	void setLevelManager(LevelManager* levelManager);
 	
 	Level* getLevelWithID(int levelID);
+	SpriteRenderer* loadSprite(TextureLoader* textureLoader_);
 
 private:
 	TextureLoader* textureLoader_;

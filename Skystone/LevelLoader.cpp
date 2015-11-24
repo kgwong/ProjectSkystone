@@ -2,6 +2,8 @@
 
 #include "Level.h"
 #include "LevelManager.h"
+#include "TextureLoader.h"
+#include "Background.h"
 #include "GameConstants.h"
 #include "Path.h"
 #include "Log.h"
@@ -42,7 +44,7 @@ void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
 	level->setLevelManager(levelManager_);
-	level->setBackground(levelManager_->getBackground());
+	level->setBackgroundFromSprite(loadSprite(textureLoader_));
 	level->setTileBuilder(&tileBuilder_);
 	level->setEnemyBuilder(&enemyBuilder_);
 	
@@ -50,6 +52,11 @@ void LevelLoader::load(const int levelID)
 	loadTiles(generateFilePath("Tiles", levelID), level.get());
 
 	loadedLevels_.insert({levelID, level});
+}
+
+SpriteRenderer* LevelLoader::loadSprite(TextureLoader* textureLoader_)
+{
+	return new SpriteRenderer(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
 }
 
 std::string LevelLoader::generateFilePath(const std::string & tag, int levelID)

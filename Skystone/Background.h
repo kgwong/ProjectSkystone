@@ -8,7 +8,7 @@
 class Background :	public GameObject
 {
 public:
-	Background(TextureLoader* textureLoader);
+	Background(SpriteRenderer* spriteRenderer);
 	virtual ~Background();
 	
 	void render(Level& level);
