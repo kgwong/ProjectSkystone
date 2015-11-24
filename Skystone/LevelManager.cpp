@@ -10,7 +10,7 @@ LevelManager::LevelManager(TextureLoader* tl)
 	levelMap_(10, 10),
 	levelLoader_(textureLoader_),
 	currLevel_(nullptr),
-	nextLevelID_(-1)
+	nextLevelID_(INVALID_LEVEL_ID)
 {
 	levelMap_.addLevel(1, 2, 2, 1, 1);
 	levelMap_.addLevel(2, 1, 2, 1, 3);
@@ -67,13 +67,13 @@ void LevelManager::setNextLevel(int levelID, Point newPlayerPosition)
 
 bool LevelManager::changeLevelIfNecessary()
 {
-	if (nextLevelID_ != -1)
+	if (nextLevelID_ != INVALID_LEVEL_ID)
 	{
 		currLevel_->onExit();
 		currLevel_ = levelLoader_.getLevelWithID(nextLevelID_);
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->onEnter();
-		nextLevelID_ = -1;
+		nextLevelID_ = INVALID_LEVEL_ID;
 		return true;
 	}
 	return false;

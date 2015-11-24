@@ -1,12 +1,14 @@
 #include "LevelMap.h"
 
 #include "Level.h"
+#include "LevelManager.h"
 #include <iostream>
+#include <iomanip>
 
 LevelMap::LevelMap(int rows, int cols)
-	:_levels(rows, std::vector<int>(cols, 0)),
-	_numRows(rows),
-	_numCols(cols)
+	:levels_(rows, std::vector<int>(cols, LevelManager::INVALID_LEVEL_ID)),
+	numRows_(rows),
+	numCols_(cols)
 {
 }
 
@@ -16,10 +18,10 @@ LevelMap::~LevelMap()
 
 void LevelMap::addLevel(int id, int blockWidth, int blockHeight, int row, int col)
 {
-	_levelBasePosition[id] = Block{ row, col };
+	levelBasePosition_[id] = Block{ row, col };
 	for (int r = row; r < row + blockHeight; ++r)
 		for (int c = col; c < col + blockWidth; ++c)
-			_levels[r][c] = id;
+			levels_[r][c] = id;
 }
 
 Block LevelMap::getAdjBlock(Block block, Direction dir) const
@@ -49,7 +51,11 @@ int LevelMap::getLevelID(Block block, Direction dir) const
 
 int LevelMap::getLevelID(Block block) const
 {
-	return _levels[block.r][block.c];
+	if (block.c < 0 || block.c >= numCols_ || block.r < 0 || block.r >= numRows_)
+	{
+		return LevelManager::INVALID_LEVEL_ID;
+	}
+	return levels_[block.r][block.c];
 }
 
 Block LevelMap::getBaseBlock(Level& level) const
@@ -59,15 +65,19 @@ Block LevelMap::getBaseBlock(Level& level) const
 
 Block LevelMap::getBaseBlock(int levelID) const
 {
-	return _levelBasePosition.at(levelID);
+	if (levelID == LevelManager::INVALID_LEVEL_ID)
+	{
+		return Block();
+	}
+	return levelBasePosition_.at(levelID);
 }
 
 void LevelMap::print()
 {
-	for (auto &v : _levels)
+	for (auto &v : levels_)
 	{
 		for (int i : v) 
-			std::cout << i << ' ';
+			std::cout << std::setw(2) << i << ' ';
 		std::cout << std::endl;
 	}
 }

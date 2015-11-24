@@ -161,12 +161,14 @@ void Player::onCollision(CollisionInfo& collision)
 	switch (collision.other.getType())
 	{
 	case EntityType::PICKUP:
-		std::cout << "thing acquired! yay!" << std::endl;
+		_healthComponent->heal(100);
+		std::cout << "Picked up a thing to heal 100hp!" << std::endl;
 		break;
 	case EntityType::ENEMY:
 		DamageComponent* damage = collision.other.getComponent<DamageComponent>();
 		_healthComponent->takeDamage(damage->getDamage());
 		std::cout << "Hit by enemy! " << _healthComponent->getHealth() << "hp left" << std::endl;
+		_physicsComponent->setVelY(-10);
 		break;
 	}
 

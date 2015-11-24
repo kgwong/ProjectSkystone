@@ -7,9 +7,9 @@
 #include <algorithm>
 
 PhysicsComponent::PhysicsComponent()
-	:_velX(0), _velY(0),
-	_accelX(0), _accelY(0),
-	_gravityEnabled(true), _falling(true),
+	:velX_(0), velY_(0),
+	accelX_(0), accelY_(0),
+	gravityEnabled_(true), falling_(true),
 	collider_(nullptr)
 {
 }
@@ -25,176 +25,207 @@ void PhysicsComponent::start(GameObject& owner, Level& level)
 
 void PhysicsComponent::update(GameObject& owner, Level& level)
 {
-	updatePosition(owner, Axis::X);
-	updatePositionAfterCollision(owner, level, Axis::X);
+	updatePosition(owner, level, Axis::X);
+	updatePosition(owner, level, Axis::Y);
 
-	updatePosition(owner, Axis::Y);
-	updatePositionAfterCollision(owner, level, Axis::Y);
+	if (collider_)
+	{
+		checkCollisions(owner, level);
+	}
 }
 
 void PhysicsComponent::enableGravity(bool gravity)
 {
-	_gravityEnabled = gravity;
+	gravityEnabled_ = gravity;
 }
 
 void PhysicsComponent::enactGravity()
 {
-	if (_gravityEnabled)
+	if (gravityEnabled_)
 	{
-		_velY += GRAVITY;
-		if (_velY > TERMINAL_VELOCITY)
-			_velY = TERMINAL_VELOCITY;
+		velY_ += GRAVITY;
+		if (velY_ > TERMINAL_VELOCITY)
+			velY_ = TERMINAL_VELOCITY;
 	}
 
-	_falling = true;
+	falling_ = true;
 }
 
 void PhysicsComponent::setVelX(int velX)
 {
-	_velX = velX;
+	velX_ = velX;
 }
 
 void PhysicsComponent::setVelY(int velY)
 {
-	_velY = velY;
+	velY_ = velY;
 }
 
 void PhysicsComponent::setAccelX(int accelX)
 {
-	_accelX = accelX;
+	accelX_ = accelX;
 }
 
 void PhysicsComponent::setAccelY(int accelY)
 {
-	_accelY = accelY;
+	accelY_ = accelY;
 }
 
 
 int PhysicsComponent::getVelX() const
 {
-	return _velX;
+	return velX_;
 }
 
 int PhysicsComponent::getVelY() const
 {
-	return _velY;
+	return velY_;
 }
 
 int PhysicsComponent::getAccelX() const
 {
-	return _accelX;
+	return accelX_;
 }
 
 int PhysicsComponent::getAccelY() const
 {
-	return _accelY;
+	return accelY_;
 }
 
 bool PhysicsComponent::isMovingUp() const
 {
-	return _velY < 0;
+	return velY_ < 0;
 }
 
 bool PhysicsComponent::isMovingDown() const
 {
-	return _velY > 0;
+	return velY_ > 0;
 }
 
 bool PhysicsComponent::isMovingLeft() const
 {
-	return _velX < 0;
+	return velX_ < 0;
 }
 
 bool PhysicsComponent::isMovingRight() const
 {
-	return _velX > 0;
+	return velX_ > 0;
 }
 
 bool PhysicsComponent::isFalling() const
 {
-	return _falling;
+	return falling_;
 }
 
-void PhysicsComponent::updatePosition(GameObject& owner, Axis axis)
+void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis)
 {
-	switch(axis)
+	switch (axis)
 	{
 		case Axis::X:
-			_velX += _accelX; 
-			owner.setPosX(owner.getPosX() + _velX);
+			velX_ += accelX_;
+			owner.setPosX(owner.getPosX() + velX_);
 			break;
 		case Axis::Y:
 			enactGravity();
-			_velY += _accelY; 
-			owner.setPosY(owner.getPosY() + _velY);
+			velY_ += accelY_;
+			owner.setPosY(owner.getPosY() + velY_);
 			break;
 		default:
 			break;
 	}
-}
-
-void PhysicsComponent::updatePositionAfterCollision(GameObject& owner, Level& level, Axis axis)
-{
+	
 	if (collider_)
 	{
 		collider_->update(owner, level);
-
-		if (owner.getType() != EntityType::ENVIRONMENT)
-		{
-			int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
-			int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
-			int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE);
-			int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE);
-
-			for (int c = startC; c <= endC; ++c)
-			{
-				for(int r = startR; r <= endR; ++r)
-				{
-					Tile& tile = level.tileArrangement.tiles[r][c];
-
-					if (collider_->checkCollision(tile))
-						handleCollision(owner, tile, level, axis);
-				}
-			}
-		}
-
-		if (owner.getType() == EntityType::PLAYER || owner.getType() == EntityType::PLAYER_PROJECTILE )
-		{
-			for (auto& enemy : level.enemies)
-				if (collider_->checkCollision(enemy))
-					handleCollision(owner, enemy, level, axis);
-		}
-
-		if (owner.getType() == EntityType::PLAYER) //only player has collision with pickups 
-		{
-			for (auto& pickup : level.pickups)
-				if (collider_->checkCollision(pickup))
-					handleCollision(owner, pickup, level, axis); //make this a non-physical collision!
-		}
+		correctPositionAfterCollision(owner, level, axis);
 	}
 
 }
 
-void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Level& level, Axis axis)
+void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis)
+{
+	if (owner.getType() != EntityType::ENVIRONMENT)
+	{
+		int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
+		int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
+		int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE);
+		int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE);
+
+		for (int c = startC; c <= endC; ++c)
+		{
+			for(int r = startR; r <= endR; ++r)
+			{
+				Tile& tile = level.tileArrangement.tiles[r][c];
+
+				if (collider_->checkCollision(tile))
+				{
+					callOnCollision(owner, tile, level);
+					correctPosition(owner, tile, level, axis);
+				}
+			}
+		}
+	}
+}
+
+void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
+{
+	if (owner.getType() == EntityType::PLAYER || owner.getType() == EntityType::PLAYER_PROJECTILE)
+	{
+		for (auto& enemy : level.enemies)
+		{
+			if (collider_->checkCollision(enemy))
+			{
+				callOnCollision(owner, enemy, level);
+			}
+		}
+	}
+
+	if (owner.getType() == EntityType::PLAYER)
+	{
+		for (auto& pickup : level.pickups)
+		{
+			if (collider_->checkCollision(pickup))
+			{
+				callOnCollision(owner, pickup, level);
+			}
+		}
+	}
+}
+
+void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Level& level)
+{
+	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>(); 
+	//is otherCollider necessary?
+	other.onCollision(CollisionInfo{ level, owner, *otherCollider });
+	owner.onCollision(CollisionInfo{ level, other, *otherCollider });
+}
+
+void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Level& level, Axis axis)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>();
 	switch(axis)
 	{
 		case Axis::X:
 			if (isMovingLeft())
+			{
 				owner.setPosX(otherCollider->getRight() - collider_->getOffsetX());
-			else //isMovingRight
+			}
+			else
+			{
 				owner.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
+			}
 			setVelX(0);
 			break;
 
 		case Axis::Y:
 			if (isMovingUp())
+			{
 				owner.setPosY(otherCollider->getBottom() - collider_->getOffsetY());
-			else //isMovingDown
+			}
+			else
 			{
 				owner.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
-				_falling = false;
+				falling_ = false;
 			}
 			setVelY(0);
 			break;
@@ -202,6 +233,5 @@ void PhysicsComponent::handleCollision(GameObject& owner, GameObject& other, Lev
 			break;
 	}
 	collider_->update(owner, level); 
-	other.onCollision(CollisionInfo{level, owner, *otherCollider});
-	owner.onCollision(CollisionInfo{level, other, *otherCollider});
 }
+

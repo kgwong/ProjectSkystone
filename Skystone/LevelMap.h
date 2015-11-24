@@ -27,9 +27,9 @@ public:
 	void print();
 
 private:
-	std::vector<std::vector<int>> _levels;
-	std::map<int, Block> _levelBasePosition;
-	int _numRows, _numCols;
+	std::vector<std::vector<int>> levels_;
+	std::map<int, Block> levelBasePosition_;
+	int numRows_, numCols_;
 };
 
 #endif //LEVEL_MAP_H

@@ -39,20 +39,22 @@ public:
 	void enableGravity(bool gravity);
 
 private:
-	int _velX, _velY;
-	int _accelX, _accelY;
+	int velX_, velY_;
+	int accelX_, accelY_;
 
-	bool _gravityEnabled;
-	bool _falling;
+	bool gravityEnabled_;
+	bool falling_;
 
 	ColliderComponent* collider_;
 
-	void updatePosition(GameObject& owner, Axis axis);
-	void updatePositionAfterCollision(GameObject& owner, Level& level, Axis axis);
-	void handleCollision(GameObject& owner, GameObject& other, Level& level, Axis axis);
-
 private:
 	void enactGravity();
+
+	void updatePosition(GameObject& owner, Level& level, Axis axis);
+	void correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis);
+	void checkCollisions(GameObject& owner, Level& level);
+	void callOnCollision(GameObject& owner, GameObject& other, Level& level);
+	void correctPosition(GameObject& owner, GameObject& other, Level& level, Axis axis);
 
 };
 

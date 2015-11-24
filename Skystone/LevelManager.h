@@ -9,6 +9,9 @@ class Player;
 class LevelManager
 {
 public:
+	static const int INVALID_LEVEL_ID = -1;
+
+public:
 	LevelManager(TextureLoader* tl);
 	~LevelManager();
 
