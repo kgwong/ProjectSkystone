@@ -54,9 +54,9 @@ void LevelLoader::load(const int levelID)
 	loadedLevels_.insert({levelID, level});
 }
 
-SpriteRenderer* LevelLoader::loadSprite(TextureLoader* textureLoader_)
+std::shared_ptr<SpriteRenderer> LevelLoader::loadSprite(TextureLoader* textureLoader_)
 {
-	return new SpriteRenderer(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
+	return std::make_shared<SpriteRenderer>(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
 }
 
 std::string LevelLoader::generateFilePath(const std::string & tag, int levelID)

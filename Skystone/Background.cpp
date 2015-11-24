@@ -1,7 +1,7 @@
 #include "Background.h"
 #include "Path.h"
 
-Background::Background(SpriteRenderer* spriteRenderer)
+Background::Background(std::shared_ptr<SpriteRenderer> spriteRenderer)
 	: spriteRenderer_(spriteRenderer)
 {
 }

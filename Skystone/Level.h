@@ -28,7 +28,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setEnemyBuilder(EnemyBuilder* enemyBuilder);
-	void setBackgroundFromSprite(SpriteRenderer* spriteRenderer);
+	void setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer);
 	void setTileBuilder(TileBuilder* tileBuilder);
 
 	void setPlayer(Player* player, Point startPosition);

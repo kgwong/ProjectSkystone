@@ -4,17 +4,18 @@
 #include "GameObject.h"
 #include "TextureLoader.h"
 #include "SpriteRenderer.h"
+#include <memory>
 
 class Background :	public GameObject
 {
 public:
-	Background(SpriteRenderer* spriteRenderer);
+	Background(std::shared_ptr<SpriteRenderer> spriteRenderer);
 	virtual ~Background();
 	
 	void render(Level& level);
 
 private:
-	SpriteRenderer* spriteRenderer_;
+	std::shared_ptr<SpriteRenderer> spriteRenderer_;
 };
 
 #endif //BACKGRAOUND_H

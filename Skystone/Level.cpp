@@ -43,7 +43,7 @@ void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
 	enemyBuilder_ = enemyBuilder;
 }
 
-void Level::setBackgroundFromSprite(SpriteRenderer* spriteRenderer)
+void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer)
 {
 	background_ = std::make_shared<Background>(spriteRenderer);
 }
