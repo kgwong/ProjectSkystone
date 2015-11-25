@@ -121,6 +121,7 @@ void Player::update(Level& level)
 		shoot(level);
 
 	levelChangeComponent_->update(*this, level);
+	_healthComponent->update(*this, level);
 }
 
 void Player::render(Level& level)
@@ -161,14 +162,15 @@ void Player::onCollision(CollisionInfo& collision)
 	switch (collision.other.getType())
 	{
 	case EntityType::PICKUP:
-		_healthComponent->heal(100);
-		std::cout << "Picked up a thing to heal 100hp!" << std::endl;
+		_healthComponent->heal(10);
+		std::cout << "Picked up a thing to heal 10hp!" << std::endl;
 		break;
 	case EntityType::ENEMY:
 		DamageComponent* damage = collision.other.getComponent<DamageComponent>();
-		_healthComponent->takeDamage(damage->getDamage());
-		std::cout << "Hit by enemy! " << _healthComponent->getHealth() << "hp left" << std::endl;
-		_physicsComponent->setVelY(-10);
+		if (_healthComponent->takeDamage(damage->getDamage()))
+		{
+			onDamageTaken(collision.level);
+		}
 		break;
 	}
 
@@ -182,4 +184,19 @@ void Player::onDeath(Level& level)
 bool Player::isDead()
 {
 	return _healthComponent->isDead();
+}
+
+void Player::onDamageTaken(Level& level)
+{
+	std::cout << "Hit by enemy! " << _healthComponent->getHealth() << "hp left" << std::endl;
+	_healthComponent->setInvincible(true);
+	if (_physicsComponent->isMovingLeft())
+	{
+		_physicsComponent->setVelX(10);
+	}
+	else
+	{
+		_physicsComponent->setVelX(-10);
+	}
+	_physicsComponent->setVelY(-15);
 }

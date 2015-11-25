@@ -38,15 +38,18 @@ void AirborneState::update(Player& player)
 		return;
 	}
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
-	player.getComponent<PhysicsComponent>()->setVelX(0);
 
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(-5);
 	}
-	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
+	else if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(5);
+	}
+	else
+	{
+		player.getComponent<PhysicsComponent>()->setVelX(0);
 	}
 
 	if (!keyStates[SDL_GetScancodeFromKey(controlMap[JUMP])])

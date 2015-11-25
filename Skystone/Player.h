@@ -50,6 +50,8 @@ public:
 	virtual void onDeath(Level& level);
 	virtual bool isDead();
 
+	virtual void onDamageTaken(Level& level);
+
 public:
 	static const int JUMP_VELOCITY = -20; //negative Y means up!
 	static const int WALK_VELOCITY = 5; 

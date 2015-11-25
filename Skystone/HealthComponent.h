@@ -6,21 +6,33 @@
 class HealthComponent : public Component
 {
 public:
+	static const int DEFAULT_HEALTH = 100;
+	static const int DEFAULT_INVINCIBILITY_TIME = 100;
+
+public:
 	HealthComponent();
 	HealthComponent(int initHealth);
 	virtual ~HealthComponent();
 
 	virtual void start(GameObject& owner, Level& level) {};
-	virtual void update(GameObject& owner, Level& level) {};
+	virtual void update(GameObject& owner, Level& level);
 
-	void takeDamage(int damage);
-	void heal(int addedHealth);
+	void setInvincibilityTime(int time);
+	void setInvincible(bool value);
+
+	bool takeDamage(int damage);
+	bool heal(int addedHealth);
 
 	int getHealth();
 	bool isDead();
 
 private:
-	int _health; 
+	int health_; 
+	bool invincible_;
+
+	int invincibilityTime_;
+	int remainingInvincibilityTime_;
+
 };
 
 
