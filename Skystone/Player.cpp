@@ -110,8 +110,8 @@ void Player::aim()
 
 void Player::update(Level& level)
 {
-	//LOG << "Current State: " << currState_->name();
 	currState_->update(*this);
+
 	aim();
 
 	//_colliderComponent->update(*this, level);
@@ -134,6 +134,7 @@ void Player::changeState(PlayerState* state)
 	currState_->onExit(*this);
 	currState_ = state;
 	currState_->onEnter(*this);
+	std::cout << "Current State: " << currState_->name() << std::endl;
 }
 
 void Player::jump()
@@ -190,6 +191,7 @@ void Player::onDamageTaken(Level& level)
 {
 	std::cout << "Hit by enemy! " << _healthComponent->getHealth() << "hp left" << std::endl;
 	_healthComponent->setInvincible(true);
+	changeState(&states::stunState);
 	if (_physicsComponent->isMovingLeft())
 	{
 		_physicsComponent->setVelX(10);
@@ -198,5 +200,5 @@ void Player::onDamageTaken(Level& level)
 	{
 		_physicsComponent->setVelX(-10);
 	}
-	_physicsComponent->setVelY(-15);
+	_physicsComponent->setVelY(-10);
 }

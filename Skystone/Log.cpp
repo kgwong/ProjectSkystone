@@ -13,11 +13,10 @@ Log::Log(std::ostream& os,
 
 Log::~Log()
 {
-	sstream_ << "\n" << "\t";
-	sstream_ << "[" << function_ << "]"
-				<< " [" << file_ << "] "
-				<< " (Line: " << line_ << ")";
-	sstream_ << "\n\n";
+	sstream_ << " [" << function_ << " | "
+				<< file_.substr(file_.rfind('\\')) << " | "
+				<< line_ << "]";
+	sstream_ << std::endl;
 	outstream_ << sstream_.rdbuf();
 	outstream_.flush();
 }

@@ -107,6 +107,7 @@
     <ClCompile Include="CircleMath.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
+    <ClCompile Include="StunState.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="StunState.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />
