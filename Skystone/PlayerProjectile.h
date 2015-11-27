@@ -15,8 +15,10 @@ class DamageComponent;
 class PlayerProjectile : public GameObject
 {
 public:
-	PlayerProjectile(Point position, int vel, TextureLoader* textureLoader, double degrees);
+	PlayerProjectile(Point position, int vel, double degrees);
 	~PlayerProjectile();
+
+	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 
 	bool isDead();
 	void update(Level& level);

@@ -11,6 +11,7 @@
 #include "HealthComponent.h"
 #include "FlyingAIComponent.h"
 #include "AIjump.h"
+
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
 {
@@ -21,7 +22,7 @@ EnemyBuilder::~EnemyBuilder()
 {
 }
 
-Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
+Enemy& EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 {
 	if (enemyName == "TestMobStrong")
 	{
@@ -42,6 +43,5 @@ Enemy* EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		//enemyToBuild.setMovementComponent(std::shared_ptr<FlyingAIComponent>(new FlyingAIComponent()));
 		enemyToBuild.setMovementComponent(std::shared_ptr<TrackerComponent>(new TrackerComponent()));
 	}
-	//enemyToBuild.callStartOnComponents(); //
-	return &enemyToBuild;
+	return enemyToBuild;
 }

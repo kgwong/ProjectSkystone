@@ -177,6 +177,15 @@
     <ClCompile Include="StunState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjectBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDropBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerProjectileBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -358,6 +367,15 @@
     </ClInclude>
     <ClInclude Include="StunState.h">
       <Filter>Header Files\Player State Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDropBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerProjectileBuilder.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,20 +9,25 @@
 #include "RenderComponent.h"
 
 
-Pickup::Pickup(TextureLoader* textureLoader)
-	:_alive(true), 
-	_renderComponent(new SpriteRenderer(textureLoader->getTextureSheet("Assets/Pickups/pickup.png"))),
-	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
+Pickup::Pickup(Point position)
+	:GameObject(position),
+	_alive(true),
 	_physicsComponent(new PhysicsComponent())
 {
-	addComponent(_renderComponent.get());
 	addComponent(_physicsComponent.get());
-	addComponent(_colliderComponent.get());
-	//callStartOnComponents();
 }
 
 Pickup::~Pickup()
 {
+}
+
+void Pickup::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
+{
+	_renderComponent = renderComponent;
+	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
+	addComponent(_renderComponent.get());
+	addComponent(_colliderComponent.get());
+
 }
 
 void Pickup::update(Level& level)

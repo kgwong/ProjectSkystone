@@ -3,11 +3,9 @@
 
 #include <string>
 #include <map>
-
-#include "EnemyBuilder.h"
-#include "TileBuilder.h"
 #include <memory>
 
+#include "GameObjectBuilder.h"
 #include "Level.h"
 
 class TextureLoader;
@@ -30,9 +28,7 @@ public:
 private:
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
-
-	EnemyBuilder enemyBuilder_;
-	TileBuilder tileBuilder_;
+	GameObjectBuilder gameObjectBuiler_;
 
 	std::map<int, std::shared_ptr<Level>> loadedLevels_;
 

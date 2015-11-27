@@ -23,7 +23,7 @@ struct TextureDestroyer
 class TextureLoader
 {
 public:
-	TextureLoader(GameWindow *gw);
+	TextureLoader(GameWindow* gameWindow);
 	~TextureLoader();
 
 	TextureSheet* getTextureSheet(const std::string& basename);
@@ -31,9 +31,9 @@ public:
 	std::shared_ptr<SDL_Texture> loadTexture(SDL_Renderer* renderer, const std::string& fullpath);
 
 private:
-	GameWindow* _gw;
+	GameWindow* gameWindow_;
 
-	std::unordered_map<std::string, TextureSheet> _textureSheets;
+	std::unordered_map<std::string, TextureSheet> textureSheets_;
 };
 
 #endif //TEXTURE_LOADER_H

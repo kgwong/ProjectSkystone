@@ -4,11 +4,10 @@
 #include <limits>
 
 Camera::Camera(int width, int height)
-	:maxX_(std::numeric_limits<int>::max()),
+	:width_(width), height_(height),
+	maxX_(std::numeric_limits<int>::max()),
 	maxY_(std::numeric_limits<int>::max())
 {
-	setWidth(width);
-	setHeight(height);
 }
 
 Camera::~Camera()
@@ -23,7 +22,9 @@ void Camera::setLevelBounds(int maxX, int maxY)
 
 void Camera::followObject(const GameObject& object)
 {
-	setCenterPos(object);
+	position_ = object.getPos();
+	position_.x -= width_ / 2;
+	position_.y -= height_ / 2;
 	stayInLevelBounds();
 }
 

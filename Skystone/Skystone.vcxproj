@@ -89,10 +89,12 @@
     <ClCompile Include="FallingAIComponent.cpp" />
     <ClCompile Include="FlyingAIComponent.cpp" />
     <ClCompile Include="FlyingState.cpp" />
+    <ClCompile Include="GameObjectBuilder.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
+    <ClCompile Include="ItemDropBuilder.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelChangeComponent.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -105,6 +107,7 @@
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
+    <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="StunState.cpp" />
@@ -132,7 +135,10 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
+    <ClInclude Include="GameObjectBuilder.h" />
+    <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="StunState.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />

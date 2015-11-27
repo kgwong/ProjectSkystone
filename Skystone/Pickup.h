@@ -5,7 +5,6 @@
 
 #include "GameObject.h"
 
-class TextureLoader;
 class RenderComponent;
 class PhysicsComponent;
 class ColliderComponent;
@@ -13,8 +12,10 @@ class ColliderComponent;
 class Pickup : public GameObject
 {
 public:
-	Pickup(TextureLoader* textureLoader);
+	Pickup(Point position);
 	virtual ~Pickup();
+
+	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 
 	void update(Level& level);
 	void render(Level& level);

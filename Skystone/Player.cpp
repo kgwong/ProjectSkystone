@@ -30,7 +30,6 @@ Player::Player(TextureLoader* textureLoader)
 	addComponent(_healthComponent.get());
 	addComponent(_colliderComponent.get());
 	addComponent(levelChangeComponent_.get());
-	//callStartOnComponents();
 }
 
 Player::~Player()
@@ -134,7 +133,7 @@ void Player::changeState(PlayerState* state)
 	currState_->onExit(*this);
 	currState_ = state;
 	currState_->onEnter(*this);
-	std::cout << "Current State: " << currState_->name() << std::endl;
+	LOG << "Current State: " << currState_->name(); 
 }
 
 void Player::jump()

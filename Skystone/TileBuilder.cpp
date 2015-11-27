@@ -17,7 +17,7 @@ TileBuilder::~TileBuilder()
 {
 }
 
-Tile* TileBuilder::build(int tileType, Tile& tileToBuild)
+Tile& TileBuilder::build(int tileType, Tile& tileToBuild)
 {
 	TextureSheet* tileSet = textureLoader_->getTextureSheet("Assets/TileSets/bw.png");
 	tileToBuild.setTileType(tileType);
@@ -28,5 +28,5 @@ Tile* TileBuilder::build(int tileType, Tile& tileToBuild)
 		tileToBuild.setColliderComponent(std::shared_ptr<ColliderComponent>(new ColliderComponent(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE)));
 	}
 
-	return &tileToBuild;
+	return tileToBuild;
 }

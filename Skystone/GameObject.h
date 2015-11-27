@@ -25,24 +25,9 @@ public:
 	void setPosX(int x);
 	void setPosY(int y);
 
-	void setWidth(int w);
-	void setHeight(int h);
-
 	Point getPos() const;
 	int getPosX() const;
 	int getPosY() const;
-
-	int getWidth() const; //remove later?
-	int getHeight() const;
-
-	void setCenterPos(const GameObject& other);
-	void setCenterPos(Point newCenterPos);
-	void setCenterPosX(int x);
-	void setCenterPosY(int y);
-
-	Point getCenterPos() const;
-	int getCenterPosX() const;
-	int getCenterPosY() const;
 
 	void addComponent(Component* component);
 	
@@ -58,8 +43,6 @@ public:
 
 protected:
 	Point position_;
-	int width_;
-	int height_;
 
 	std::unordered_map<const std::type_info*, Component*> components_;
 };

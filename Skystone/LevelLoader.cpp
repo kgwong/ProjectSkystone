@@ -13,8 +13,7 @@ const std::string LevelLoader::LEVEL_FILEPATH_PREFIX = "Levels/Level";
 
 LevelLoader::LevelLoader(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader),
-	enemyBuilder_(textureLoader),
-	tileBuilder_(textureLoader)
+	gameObjectBuiler_(textureLoader)
 {
 }
 
@@ -42,11 +41,10 @@ bool LevelLoader::levelLoaded(int levelID)
 
 void LevelLoader::load(const int levelID)
 {
-	std::shared_ptr<Level> level = std::make_shared<Level>(levelID, textureLoader_);
+	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
 	level->setBackgroundFromSprite(loadSprite(textureLoader_));
-	level->setTileBuilder(&tileBuilder_);
-	level->setEnemyBuilder(&enemyBuilder_);
+	level->setGameObjectBuilder(&gameObjectBuiler_);
 	
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
 	loadTiles(generateFilePath("Tiles", levelID), level.get());

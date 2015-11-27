@@ -44,7 +44,7 @@ void LevelManager::initStartingLevel()
 	}
 	else
 	{
-		LOG << "set Player and TextureLoader first";
+		LOG_COUT << "set Player and TextureLoader first";
 	}
 }
 

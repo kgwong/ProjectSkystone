@@ -9,14 +9,12 @@
 #include "TileBuilder.h"
 #include "Background.h"
 
-Level::Level(int levelID, TextureLoader* textureLoader)
-	:textureLoader_(textureLoader),
-	levelManager_(nullptr),
-	enemyBuilder_(nullptr),
+Level::Level(int levelID)
+	:levelManager_(nullptr),
+	gameObjectBuilder_(nullptr),
 	background_(nullptr),
 	levelID_(levelID)
 {
-
 }
 
 Level::~Level()
@@ -38,19 +36,14 @@ void Level::setLevelManager(LevelManager* levelManager)
 	levelManager_ = levelManager;
 }
 
-void Level::setEnemyBuilder(EnemyBuilder* enemyBuilder)
+void Level::setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder)
 {
-	enemyBuilder_ = enemyBuilder;
+	gameObjectBuilder_ = gameObjectBuilder;
 }
 
 void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer)
 {
 	background_ = std::make_shared<Background>(spriteRenderer);
-}
-
-void Level::setTileBuilder(TileBuilder* tileBuilder)
-{
-	tileBuilder_ = tileBuilder;
 }
 
 void Level::setPlayer(Player* p, Point startPosition)
@@ -82,35 +75,36 @@ void Level::startEntityComponents()
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	PlayerProjectile projectile(PlayerProjectile(position, vel, textureLoader_, degrees));
-	projectile.callStartOnComponents(*this); //call start
-	playerProjectiles.push_back(projectile);
+	playerProjectiles.push_back(PlayerProjectile(position, vel, degrees));
+	gameObjectBuilder_->buildPlayerProjectile("", playerProjectiles.back());
+	playerProjectiles.back().callStartOnComponents(*this); 
+
 }
 
 void Level::addPickupAtLocation(Point position)
 {
-	Pickup pickup(textureLoader_);
-	pickup.setPos(position);
-	pickup.callStartOnComponents(*this); //call start
-	pickups.push_back(pickup);
+	pickups.push_back(Pickup(position));
+	gameObjectBuilder_->buildItemDrop("", pickups.back());
+	pickups.back().callStartOnComponents(*this);
 }
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	Enemy enemy(position);
-
-	enemies.push_back(enemy);
-	enemyBuilder_->build(name, enemies.back());
-
+	enemies.push_back(Enemy(position));
+	gameObjectBuilder_->buildEnemy(name, enemies.back());
+	enemies.back().callStartOnComponents(*this);
 }
 
 void Level::addTileAtLocation(int tileType, Point position)
 {
 	int r = position.y / Constants::TILE_SIZE;
 	int c = position.x / Constants::TILE_SIZE;
-	Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
-	tileBuilder_->build(tileType, tile);
-	tileArrangement.tiles[r][c] = tile;
+	gameObjectBuilder_->buildTile(tileType, tileArrangement.tiles[r][c]);
+	tileArrangement.tiles[r][c].setPos(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
+	
+	//Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
+	//tileBuilder_->build(tileType, tile);
+	//tileArrangement.tiles[r][c] = tile;
 }
 
 void Level::update()

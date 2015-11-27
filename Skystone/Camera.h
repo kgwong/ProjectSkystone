@@ -18,8 +18,8 @@ public:
 	void stayInLevelBounds();
 
 private:
-	int maxX_;
-	int maxY_;
+	int width_, height_;
+	int maxX_, maxY_;
 };
 
 #endif //CAMERA_H

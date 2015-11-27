@@ -11,7 +11,7 @@ public:
 	TileBuilder(TextureLoader* textureLoader);
 	~TileBuilder();
 
-	Tile* build(int tileType, Tile& tileToBuild);
+	Tile& build(int tileType, Tile& tileToBuild);
 
 private:
 	TextureLoader* textureLoader_;
