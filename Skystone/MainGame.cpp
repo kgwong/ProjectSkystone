@@ -82,6 +82,8 @@ void MainGame::update()
 	{
 		while (true)
 		{
+			SDL_Event e;
+			while (SDL_PollEvent(&e) ) {}
 			TempGameOverScreen(&textureLoader_).render();
 			SDL_Delay(100);
 		}
