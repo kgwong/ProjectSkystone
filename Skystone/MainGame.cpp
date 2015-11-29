@@ -80,10 +80,10 @@ void MainGame::update()
 	}
 	catch (GameOverException& e)
 	{
-		while (true)
+		while (!quit_)
 		{
-			SDL_Event e;
-			while (SDL_PollEvent(&e) ) {}
+			SDL_Event event;
+			while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) quit_ = true; }
 			TempGameOverScreen(&textureLoader_).render();
 			SDL_Delay(100);
 		}
