@@ -186,6 +186,12 @@
     <ClCompile Include="PlayerProjectileBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TempGameOverScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -375,6 +381,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerProjectileBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TempGameOverScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

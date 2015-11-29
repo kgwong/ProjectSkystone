@@ -90,6 +90,7 @@
     <ClCompile Include="FlyingAIComponent.cpp" />
     <ClCompile Include="FlyingState.cpp" />
     <ClCompile Include="GameObjectBuilder.cpp" />
+    <ClCompile Include="GameOverException.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="StunState.cpp" />
+    <ClCompile Include="TempGameOverScreen.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -136,10 +138,12 @@
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
     <ClInclude Include="GameObjectBuilder.h" />
+    <ClInclude Include="GameOverException.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="StunState.h" />
+    <ClInclude Include="TempGameOverScreen.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />

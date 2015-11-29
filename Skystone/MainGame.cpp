@@ -4,6 +4,9 @@
 #include "Path.h"
 #include "Level.h"
 
+#include "GameOverException.h"
+#include "TempGameOverScreen.h"
+
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	textureLoader_(&window_),
@@ -69,10 +72,20 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
-	levelManager_.getCurrentLevel()->update();
-
-	if (levelManager_.changeLevelIfNecessary())
-		updateCameraBounds();
+	try
+	{
+		levelManager_.getCurrentLevel()->update();
+		if (levelManager_.changeLevelIfNecessary())
+			updateCameraBounds();
+	}
+	catch (GameOverException& e)
+	{
+		while (true)
+		{
+			TempGameOverScreen(&textureLoader_).render();
+			SDL_Delay(100);
+		}
+	}
 }
 
 void MainGame::render()

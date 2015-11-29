@@ -14,6 +14,8 @@
 #include "DamageComponent.h"
 #include "LevelChangeComponent.h"
 
+#include "GameOverException.h"
+
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
 	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
@@ -178,7 +180,7 @@ void Player::onCollision(CollisionInfo& collision)
 
 void Player::onDeath(Level& level)
 {
-	std::cout << "Player Died" << std::endl;
+	throw GameOverException();
 }
 
 bool Player::isDead()
