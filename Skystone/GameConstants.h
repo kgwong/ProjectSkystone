@@ -5,7 +5,7 @@
 
 namespace Constants
 {
-	const std::string GAME_TITLE = "Test Game!";
+	const std::string GAME_TITLE = "Unbound";
 
 	const int SCREEN_WIDTH = 640;
 	const int SCREEN_HEIGHT = 480;

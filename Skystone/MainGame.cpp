@@ -18,7 +18,7 @@ MainGame::MainGame()
 	levelManager_.setPlayer(&player_);
 	levelManager_.initStartingLevel();
 
-	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), levelManager_.getCurrentLevel()->getLevelHeight());
+	updateCameraBounds();
 
 	//musicPlayer_.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
 	//musicPlayer_.play();
@@ -93,7 +93,6 @@ void MainGame::update()
 void MainGame::render()
 {
 	SDL_RenderClear(window_.getRenderer());
-
 
 	window_.getCamera().followObject(player_);
 	levelManager_.getCurrentLevel()->render();
