@@ -15,6 +15,7 @@ Level::Level(int levelID)
 	background_(nullptr),
 	levelID_(levelID)
 {
+	pickups.reserve(100);
 }
 
 Level::~Level()
@@ -43,7 +44,8 @@ void Level::setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder)
 
 void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer)
 {
-	background_ = std::make_shared<Background>(spriteRenderer);
+	background_ = std::make_shared<Background>();
+	background_->addComponent(componentSystem_.getNewRenderer<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
 }
 
 void Level::setPlayer(Player* p, Point startPosition)
@@ -68,38 +70,34 @@ void Level::startEntityComponents()
 		for (int c = 0; c < tileArrangement.cols; ++c)
 			tileArrangement.tiles[r][c].callStartOnComponents(*this);
 	player->callStartOnComponents(*this);
-	startComponents(playerProjectiles);
-	startComponents(enemies);
-	startComponents(pickups);
 }
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	playerProjectiles.push_back(PlayerProjectile(position, vel, degrees));
-	gameObjectBuilder_->buildPlayerProjectile("", playerProjectiles.back());
-	playerProjectiles.back().callStartOnComponents(*this); 
-
+	playerProjectiles.push_back(std::make_shared<PlayerProjectile>(position, vel, degrees));
+	gameObjectBuilder_->buildPlayerProjectile(componentSystem_,"", *playerProjectiles.back());
+	playerProjectiles.back()->callStartOnComponents(*this); 
 }
 
 void Level::addPickupAtLocation(Point position)
 {
-	pickups.push_back(Pickup(position));
-	gameObjectBuilder_->buildItemDrop("", pickups.back());
-	pickups.back().callStartOnComponents(*this);
+	pickups.push_back(std::make_shared<Pickup>(position));
+	gameObjectBuilder_->buildItemDrop(componentSystem_, "", *pickups.back());
+	pickups.back()->callStartOnComponents(*this);
 }
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	enemies.push_back(Enemy(position));
-	gameObjectBuilder_->buildEnemy(name, enemies.back());
-	enemies.back().callStartOnComponents(*this);
+	enemies.push_back(std::make_shared<Enemy>(position));
+	gameObjectBuilder_->buildEnemy(componentSystem_, name, *enemies.back());
+	enemies.back()->callStartOnComponents(*this);
 }
 
 void Level::addTileAtLocation(int tileType, Point position)
 {
 	int r = position.y / Constants::TILE_SIZE;
 	int c = position.x / Constants::TILE_SIZE;
-	gameObjectBuilder_->buildTile(tileType, tileArrangement.tiles[r][c]);
+	gameObjectBuilder_->buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
 	tileArrangement.tiles[r][c].setPos(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
 	
 	//Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
@@ -126,7 +124,9 @@ void Level::updateTiles()
 {
 	for (int r = 0; r < tileArrangement.rows; ++r)
 		for (int c = 0; c < tileArrangement.cols; ++c)
+		{
 			tileArrangement.tiles[r][c].update(*this);
+		}
 }
 
 void Level::updatePlayer()
@@ -137,7 +137,7 @@ void Level::updatePlayer()
 	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
 		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 
-	if (player->isDead())
+	if (!player->alive())
 	{
 		player->onDeath(*this);
 	}
@@ -158,15 +158,11 @@ void Level::updatePickups()
 	updateEntityVector(pickups);
 }
 
-void Level::render()
+void Level::render(GameWindow& window)
 {
 	//note order of rendering
-	renderBackground();
-	renderTiles();
-	renderEnemies();
-	renderPlayerProjectiles();
+	componentSystem_.render(*this, window);
 	renderPlayer();
-	renderPickups();
 }
 
 int Level::getID()
@@ -206,33 +202,6 @@ void Level::setNextLevel(Direction dir)
 								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosInBlock_.y};
 
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
-}
-
-void Level::renderTiles() 
-{
-	for (int r = 0; r < tileArrangement.rows; ++r)
-		for (int c = 0; c < tileArrangement.cols; ++c)
-			tileArrangement.tiles[r][c].render(*this);
-}
-
-void Level::renderEnemies()
-{
-	renderEntityVector(enemies);
-}
-
-void Level::renderPlayerProjectiles()
-{
-	renderEntityVector(playerProjectiles);
-}
-
-void Level::renderPickups()
-{
-	renderEntityVector(pickups);
-}
-
-void Level::renderBackground()
-{
-	background_->render(*this);
 }
 
 void Level::renderPlayer()

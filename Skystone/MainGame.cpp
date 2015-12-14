@@ -95,7 +95,7 @@ void MainGame::render()
 	SDL_RenderClear(window_.getRenderer());
 
 	window_.getCamera().followObject(player_);
-	levelManager_.getCurrentLevel()->render();
+	levelManager_.getCurrentLevel()->render(window_);
 
 	SDL_RenderPresent(window_.getRenderer());
 }

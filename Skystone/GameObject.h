@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include "Point.h"
 #include "EntityType.h"
@@ -29,10 +30,15 @@ public:
 	int getPosX() const;
 	int getPosY() const;
 
-	void addComponent(Component* component);
+	void addComponent(std::shared_ptr<Component> component);
 	
 	template <typename ComponentT>
 	ComponentT* getComponent();
+
+	void clearComponents();
+
+	bool alive();
+	void kill();
 
 	virtual std::string getName() const; //???
 	virtual EntityType getType() const; //TypeComponents
@@ -43,8 +49,9 @@ public:
 
 protected:
 	Point position_;
+	std::unordered_map<const std::type_info*, std::shared_ptr<Component>> components_;
 
-	std::unordered_map<const std::type_info*, Component*> components_;
+	bool alive_;
 };
 
 //http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components
@@ -53,7 +60,7 @@ template<typename ComponentT>
 ComponentT* GameObject::getComponent()
 {
 	if (components_.count(&typeid(ComponentT)))
-		return static_cast<ComponentT*>(components_[&typeid(ComponentT)]);
+		return static_cast<ComponentT*>(components_[&typeid(ComponentT)].get());
 	else
 		return nullptr;
 }

@@ -1,8 +1,7 @@
 #include "Background.h"
 #include "Path.h"
 
-Background::Background(std::shared_ptr<SpriteRenderer> spriteRenderer)
-	: spriteRenderer_(spriteRenderer)
+Background::Background()
 {
 }
 
@@ -11,7 +10,8 @@ Background::~Background()
 {
 }
 
-void Background::render(Level& level)
+
+EntityType Background::getType() const
 {
-	spriteRenderer_->update(*this, level);
+	return EntityType::BACKGROUND;
 }

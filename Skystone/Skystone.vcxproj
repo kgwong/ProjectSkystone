@@ -60,7 +60,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -82,6 +82,7 @@
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBuilder.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="CircleMath.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="StunState.cpp" />
     <ClCompile Include="TempGameOverScreen.cpp" />
@@ -135,6 +137,7 @@
     <ClInclude Include="BasicEnemyMovementComponent.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
     <ClInclude Include="GameObjectBuilder.h" />
@@ -142,6 +145,7 @@
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />
     <ClInclude Include="TempGameOverScreen.h" />
     <ClInclude Include="TrackerComponent.h" />
@@ -193,10 +197,6 @@
     <ClInclude Include="TileBuilder.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="WalkingState.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,13 +9,13 @@
 class Background :	public GameObject
 {
 public:
-	Background(std::shared_ptr<SpriteRenderer> spriteRenderer);
+	Background();
 	virtual ~Background();
-	
-	void render(Level& level);
+
+	virtual EntityType getType() const; //TypeComponents
 
 private:
-	std::shared_ptr<SpriteRenderer> spriteRenderer_;
+
 };
 
 #endif //BACKGRAOUND_H

@@ -3,8 +3,6 @@
 
 #include "GameObject.h"
 #include "Level.h"
-//class GameObject;
-//class Level;
 
 class Component
 {
@@ -13,6 +11,11 @@ public:
 
 	virtual void start(GameObject& owner, Level& level) = 0;
 	virtual void update(GameObject& owner, Level& level) = 0;
+
+	bool owned() { return owned_; }
+	void disown() { owned_ = false; }
+protected:
+	bool owned_;
 };
 
 #endif //COMPONENT_H

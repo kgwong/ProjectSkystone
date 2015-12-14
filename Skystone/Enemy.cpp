@@ -8,6 +8,8 @@
 #include "AIComponent.h"
 #include "DamageComponent.h"
 
+#include <iostream> //
+
 Enemy::Enemy()
 {
 }
@@ -18,7 +20,7 @@ Enemy::Enemy(Point position)
 }
 
 Enemy::Enemy(int x, int y)
-	:GameObject(x, y)
+	: GameObject(x, y)
 {
 }
 
@@ -28,20 +30,11 @@ Enemy::~Enemy()
 
 void Enemy::update(Level& level)
 {
+	_healthComponent->update(*this, level);
 	_movementComponent->update(*this, level);
 	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 
-}
-
-void Enemy::render(Level& level)
-{
-	_renderComponent->update(*this, level);
-}
-
-bool Enemy::isDead()
-{
-	return _healthComponent->isDead();
 }
 
 void Enemy::onDeath(Level& level)
@@ -67,27 +60,24 @@ void Enemy::onCollision(CollisionInfo& collision)
 	}
 }
 
-void Enemy::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
+void Enemy::setColliderComponent(std::shared_ptr<ColliderComponent> component)
 {
-	_renderComponent = renderComponent;
-	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
-	_physicsComponent = std::make_shared<PhysicsComponent>();
-	damageComponent_ = std::make_shared<DamageComponent>(10);
-
-	addComponent(_renderComponent.get());
-	addComponent(_colliderComponent.get());
-	addComponent(_physicsComponent.get());
-	addComponent(damageComponent_.get());
+	_colliderComponent = component;
+	addComponent(_colliderComponent);
 }
 
 void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)
 {
 	_healthComponent = healthComponent;
-	addComponent(_healthComponent.get());
+	addComponent(_healthComponent);
 }
 
 void Enemy::setMovementComponent(std::shared_ptr<AIComponent> movementComponent)
 {
 	_movementComponent = movementComponent;
-	addComponent(_movementComponent.get());
+	addComponent(_movementComponent);
+	_physicsComponent = std::make_shared<PhysicsComponent>();
+	damageComponent_ = std::make_shared<DamageComponent>(10);
+	addComponent(_physicsComponent);
+	addComponent(damageComponent_);
 }

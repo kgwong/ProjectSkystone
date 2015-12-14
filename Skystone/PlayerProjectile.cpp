@@ -12,8 +12,7 @@
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, double degrees)
 	:GameObject(position),
-	_alive(true), 
-	_damageComponent(new DamageComponent(10)), 
+	_damageComponent(new DamageComponent(1000)), 
 	_physicsComponent(new PhysicsComponent())
 {
 	_physicsComponent->enableGravity(false);
@@ -23,8 +22,8 @@ PlayerProjectile::PlayerProjectile(Point position, int vel, double degrees)
 	_physicsComponent->setVelX(newVelX); //
 	_physicsComponent->setVelY(newVelY); //
 
-	addComponent(_physicsComponent.get());
-	addComponent(_damageComponent.get());
+	addComponent(_physicsComponent);
+	addComponent(_damageComponent);
 }
 
 
@@ -32,18 +31,19 @@ PlayerProjectile::~PlayerProjectile()
 {
 }
 
-void PlayerProjectile::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
+void PlayerProjectile::setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent)
+{
+	_colliderComponent = colliderComponent;
+	addComponent(_colliderComponent);
+}
+
+/*void PlayerProjectile::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
 {
 	_renderComponent = renderComponent;
 	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
-	addComponent(_renderComponent.get());
-	addComponent(_colliderComponent.get());
-}
-
-bool PlayerProjectile::isDead()
-{
-	return !_alive;
-}
+	addComponent(_renderComponent);
+	addComponent(_colliderComponent);
+}*/
 
 void PlayerProjectile::update(Level& level)
 {
@@ -51,14 +51,14 @@ void PlayerProjectile::update(Level& level)
 	_physicsComponent->update(*this, level);
 }
 
-void PlayerProjectile::render(Level& level)
+/*void PlayerProjectile::render(Level& level)
 {
 	_renderComponent->update(*this, level);
-}
+}*/
 
 void PlayerProjectile::onCollision(CollisionInfo& collision)
 {
-	_alive = false;
+	alive_ = false;
 }
 
 EntityType PlayerProjectile::getType() const

@@ -16,6 +16,7 @@ public:
 
 public:
 	ColliderComponent();
+	ColliderComponent(GameObject& owner);
 	ColliderComponent(int offsetX, int offsetY, int width, int height);
 	ColliderComponent(BoxCollider collider);
 	virtual ~ColliderComponent();

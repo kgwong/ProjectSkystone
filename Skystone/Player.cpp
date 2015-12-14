@@ -18,7 +18,7 @@
 
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
-	_renderComponent(new AnimationRenderer(textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
+	_renderComponent(new AnimationRenderer(*this, textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
 	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
 	_healthComponent(new HealthComponent(100)),
 	_physicsComponent(new PhysicsComponent()),
@@ -27,11 +27,11 @@ Player::Player(TextureLoader* textureLoader)
 	currState_(&states::walkingState),
 	aimState_(AimState::RIGHT)
 {
-	addComponent(_renderComponent.get());
-	addComponent(_physicsComponent.get());
-	addComponent(_healthComponent.get());
-	addComponent(_colliderComponent.get());
-	addComponent(levelChangeComponent_.get());
+	addComponent(_renderComponent);
+	addComponent(_physicsComponent);
+	addComponent(_healthComponent);
+	addComponent(_colliderComponent);
+	addComponent(levelChangeComponent_);
 }
 
 Player::~Player()
@@ -135,7 +135,7 @@ void Player::changeState(PlayerState* state)
 	currState_->onExit(*this);
 	currState_ = state;
 	currState_->onEnter(*this);
-	LOG << "Current State: " << currState_->name(); 
+	//LOG << "Current State: " << currState_->name(); 
 }
 
 void Player::jump()
@@ -181,11 +181,6 @@ void Player::onCollision(CollisionInfo& collision)
 void Player::onDeath(Level& level)
 {
 	throw GameOverException();
-}
-
-bool Player::isDead()
-{
-	return _healthComponent->isDead();
 }
 
 void Player::onDamageTaken(Level& level)

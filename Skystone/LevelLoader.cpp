@@ -43,8 +43,9 @@ void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
-	level->setBackgroundFromSprite(loadSprite(textureLoader_));
 	level->setGameObjectBuilder(&gameObjectBuiler_);
+	level->setBackgroundFromSprite(loadSprite(textureLoader_));
+
 	
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
 	loadTiles(generateFilePath("Tiles", levelID), level.get());
@@ -54,7 +55,8 @@ void LevelLoader::load(const int levelID)
 
 std::shared_ptr<SpriteRenderer> LevelLoader::loadSprite(TextureLoader* textureLoader_)
 {
-	return std::make_shared<SpriteRenderer>(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
+	//return std::make_shared<SpriteRenderer>(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
+	return nullptr;
 }
 
 std::string LevelLoader::generateFilePath(const std::string & tag, int levelID)

@@ -173,9 +173,10 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 	{
 		for (auto& enemy : level.enemies)
 		{
-			if (collider_->checkCollision(enemy))
+			auto& object = *enemy;
+			if (collider_->checkCollision(object))
 			{
-				callOnCollision(owner, enemy, level);
+				callOnCollision(owner, object, level);
 			}
 		}
 	}
@@ -184,9 +185,10 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 	{
 		for (auto& pickup : level.pickups)
 		{
-			if (collider_->checkCollision(pickup))
+			auto& object = *pickup;
+			if (collider_->checkCollision(object))
 			{
-				callOnCollision(owner, pickup, level);
+				callOnCollision(owner, object, level);
 			}
 		}
 	}

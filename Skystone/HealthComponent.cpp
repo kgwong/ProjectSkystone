@@ -34,6 +34,11 @@ void HealthComponent::update(GameObject& owner, Level& level)
 		remainingInvincibilityTime_--;
 		//std::cout << "Invincible " << remainingInvincibilityTime_ << std::endl;
 	}
+
+	if (health_ <= 0)
+	{
+		owner.kill();
+	}
 }
 
 void HealthComponent::setInvincibilityTime(int time)

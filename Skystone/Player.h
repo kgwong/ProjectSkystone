@@ -48,7 +48,6 @@ public:
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 	virtual void onDeath(Level& level);
-	virtual bool isDead();
 
 	virtual void onDamageTaken(Level& level);
 

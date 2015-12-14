@@ -12,23 +12,18 @@ class ColliderComponent;
 class Pickup : public GameObject
 {
 public:
+	Pickup();
 	Pickup(Point position);
 	virtual ~Pickup();
 
-	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
-
 	void update(Level& level);
-	void render(Level& level);
 
-	bool isDead();
+	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
 
 	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 
 private:
-	bool _alive;
-
-	std::shared_ptr<RenderComponent> _renderComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
 };
