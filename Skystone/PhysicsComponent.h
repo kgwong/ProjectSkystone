@@ -13,11 +13,11 @@ public:
 	static const int TERMINAL_VELOCITY = 20;
 
 public:
-	PhysicsComponent();
+	PhysicsComponent(GameObject& owner);
 	virtual ~PhysicsComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 	void setVelX(int velX);
 	void setVelY(int velY);

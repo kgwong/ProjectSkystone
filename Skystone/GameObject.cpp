@@ -95,6 +95,6 @@ void GameObject::callStartOnComponents(Level& level)
 {
 	for (auto& i : components_)
 	{
-		i.second->start(*this, level);
+		i.second->start(level);
 	}
 }

@@ -2,8 +2,9 @@
 
 
 
-LevelChangeComponent::LevelChangeComponent()
-	:collider_(nullptr)
+LevelChangeComponent::LevelChangeComponent(GameObject& owner)
+	: Component(owner),
+	collider_(nullptr)
 {
 }
 
@@ -12,12 +13,12 @@ LevelChangeComponent::~LevelChangeComponent()
 {
 }
 
-void LevelChangeComponent::start(GameObject& owner, Level& level)
+void LevelChangeComponent::start(Level& level)
 {
-	collider_ = owner.getComponent<ColliderComponent>();
+	collider_ = owner_.getComponent<ColliderComponent>();
 }
 
-void LevelChangeComponent::update(GameObject& owner, Level& level)
+void LevelChangeComponent::update(Level& level)
 {
 	if (collider_->getLeft() < 0)
 		level.setNextLevel(Direction::LEFT);

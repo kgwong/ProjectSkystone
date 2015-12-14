@@ -15,11 +15,11 @@ public:
 	static const int DEFAULT_Y_VELOCITY = -1;
 
 public:
-	FlyingAIComponent();
+	FlyingAIComponent(GameObject& owner);
 	virtual ~FlyingAIComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 private:
 	int xVelocity_;

@@ -23,14 +23,6 @@ SpriteRenderer::~SpriteRenderer()
 {
 }
 
-void SpriteRenderer::update(GameObject& owner, Level& level)
-{
-	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
-	drawDest_.x = owner.getPosX() - cameraPos.x;
-	drawDest_.y = owner.getPosY() -cameraPos.y;
-	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
-}
-
 void SpriteRenderer::update(Level& level)
 {
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();

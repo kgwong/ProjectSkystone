@@ -13,10 +13,12 @@ public:
 	static const int DEFAULT_X_VELOCITY = 5;
 
 public:
-	RandomJumperComponent();
+	RandomJumperComponent(GameObject& owner);
 	virtual ~RandomJumperComponent();
-	void start(GameObject& owner, Level& level);
-	void update(GameObject& owner, Level& level);
+
+	virtual void start(Level& level);
+	virtual void update(Level& level);
+
 private:
 	int timeInterval_;
 	PhysicsComponent* physics_;

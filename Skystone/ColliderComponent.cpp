@@ -4,14 +4,10 @@
 #include "SpriteRenderer.h"
 #include "AnimationRenderer.h"
 
-ColliderComponent::ColliderComponent()
-	:_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
-{
-}
-
-ColliderComponent::ColliderComponent(GameObject & owner)
-	:  _offsetX(0), _offsetY(0)
-{
+ColliderComponent::ColliderComponent(GameObject& owner)
+	: Component(owner),
+	_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
+{	
 	//this is a hack, have only one type of Renderer.	
 	RenderComponent* render = owner.getComponent<SpriteRenderer>();
 	if (render == nullptr)
@@ -19,14 +15,15 @@ ColliderComponent::ColliderComponent(GameObject & owner)
 	_collider = { 0, 0, render->getWidth(), render->getHeight() };
 }
 
-ColliderComponent::ColliderComponent(int offsetX, int offsetY, int width, int height)
-	: _collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
+ColliderComponent::ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height)
+	: Component(owner),
+	_collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
 {
 
 }
 
-ColliderComponent::ColliderComponent(BoxCollider collider)
-	:_offsetX(0), _offsetY(0)
+ColliderComponent::ColliderComponent(GameObject& owner, BoxCollider collider)
+	: Component(owner), _offsetX(0), _offsetY(0)
 {
 	_collider = collider;
 }
@@ -35,10 +32,10 @@ ColliderComponent::~ColliderComponent()
 {
 }
 
-void ColliderComponent::update(GameObject& owner, Level& level)
+void ColliderComponent::update(Level& level)
 {
-	_collider.x = owner.getPosX() + _offsetX;
-	_collider.y = owner.getPosY() + _offsetY;
+	_collider.x = owner_.getPosX() + _offsetX;
+	_collider.y = owner_.getPosY() + _offsetY;
 	//setCollider(BoxCollider{owner.getPosX() + _offsetX, owner.getPosY() + _offsetY,
 	//						owner.getWidth(), owner.getHeight()});
 }

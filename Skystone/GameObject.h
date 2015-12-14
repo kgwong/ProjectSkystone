@@ -47,6 +47,7 @@ public:
 
 	virtual void callStartOnComponents(Level& level);
 
+
 protected:
 	Point position_;
 	std::unordered_map<const std::type_info*, std::shared_ptr<Component>> components_;

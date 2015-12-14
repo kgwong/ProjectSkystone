@@ -15,7 +15,6 @@ Level::Level(int levelID)
 	background_(nullptr),
 	levelID_(levelID)
 {
-	pickups.reserve(100);
 }
 
 Level::~Level()

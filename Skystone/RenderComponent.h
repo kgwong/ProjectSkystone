@@ -7,7 +7,7 @@ class RenderComponent : public Component
 {
 public:
 	RenderComponent(GameObject& owner)
-		:owner_(owner)
+		:Component(owner)
 	{
 
 	}
@@ -16,8 +16,7 @@ public:
 	int x() { return owner_.getPosX(); }
 	int y() { return owner_.getPosY(); }
 
-	virtual void start(GameObject& owner, Level& level) = 0;
-	virtual void update(GameObject& owner, Level& level) = 0;
+	virtual void start(Level& level) = 0;
 	virtual void update(Level& level) = 0;
 
 	virtual int getWidth() { return 0; }
@@ -28,7 +27,7 @@ public:
 		switch (owner_.getType())
 		{
 		case EntityType::BACKGROUND:
-		case EntityType::ENVIRONMENT:
+		case EntityType::TILE:
 			return 0;
 		case EntityType::ENEMY:
 		case EntityType::PLAYER_PROJECTILE:
@@ -41,9 +40,6 @@ public:
 			return 2;
 		}
 	}
-
-protected:
-	GameObject& owner_;
 };
 
 #endif //RENDER_COMPONENT_H

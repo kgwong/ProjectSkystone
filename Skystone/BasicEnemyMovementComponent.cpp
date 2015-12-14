@@ -2,13 +2,15 @@
 
 #include "PhysicsComponent.h"
 
-BasicEnemyMovementComponent::BasicEnemyMovementComponent()
-	: speed_(DEFAULT_SPEED)
+BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner)
+	: AIComponent(owner),
+	speed_(DEFAULT_SPEED)
 {
 }
 
-BasicEnemyMovementComponent::BasicEnemyMovementComponent(int speed)
-	:speed_(speed)
+BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner, int speed)
+	: AIComponent(owner),
+	speed_(speed)
 {
 }
 
@@ -17,20 +19,20 @@ BasicEnemyMovementComponent::~BasicEnemyMovementComponent()
 }
 
 
-void BasicEnemyMovementComponent::start(GameObject& owner, Level& level)
+void BasicEnemyMovementComponent::start(Level& level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
-	oldEnemyPosition_ = owner.getPosX();
+	physics_ = owner_.getComponent<PhysicsComponent>();
+	oldEnemyPosition_ = owner_.getPosX();
 }
 
-void BasicEnemyMovementComponent::update(GameObject& owner, Level& level)
+void BasicEnemyMovementComponent::update(Level& level)
 {
 	int moveDistance = 300;
-	if (owner.getPosX() > oldEnemyPosition_ + moveDistance) //no magic numbers plz
+	if (owner_.getPosX() > oldEnemyPosition_ + moveDistance)
 	{
 		speed_ = -speed_;
 	}
-	else if (owner.getPosX() < oldEnemyPosition_ - moveDistance)
+	else if (owner_.getPosX() < oldEnemyPosition_ - moveDistance)
 	{
 		speed_ = -speed_;
 	}

@@ -78,6 +78,7 @@
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AIjump.cpp" />
     <ClCompile Include="AirborneState.cpp" />
+    <ClCompile Include="AISystem.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="AIjump.h" />
     <ClInclude Include="AirborneState.h" />
+    <ClInclude Include="AISystem.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BasicEnemyMovementComponent.h" />

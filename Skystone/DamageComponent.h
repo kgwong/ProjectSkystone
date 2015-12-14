@@ -6,12 +6,12 @@
 class DamageComponent :	public Component
 {
 public:
-	DamageComponent();
-	DamageComponent(int damage);
+	DamageComponent(GameObject& owner);
+	DamageComponent(GameObject& owner, int damage);
 	virtual ~DamageComponent();
 
-	virtual void start(GameObject& owner, Level& level) {};
-	virtual void update(GameObject& owner, Level& level) {};
+	virtual void start(Level& level) {};
+	virtual void update(Level& level) {};
 
 	int getDamage();
 

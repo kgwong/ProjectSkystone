@@ -21,12 +21,12 @@ public:
 	static const int DEFAULT_RADIUS = 150;
 
 public:
-	TrackerComponent();
+	TrackerComponent(GameObject& owner);
 	virtual ~TrackerComponent();
 
 	//NEED FOR EVERY AICOMPONENT
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 	EnemyState getEnemyState();
 	void setEnemyState(EnemyState state);

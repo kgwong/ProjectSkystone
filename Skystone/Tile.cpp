@@ -26,7 +26,7 @@ Tile::~Tile()
 void Tile::update(Level& level)
 {
 	if (colliderComponent_)
-		colliderComponent_->update(*this, level);
+		colliderComponent_->update(level);
 }
 
 void Tile::onCollision(CollisionInfo& collision)
@@ -45,7 +45,7 @@ void Tile::setTileType(int tileType)
 
 EntityType Tile::getType() const
 {
-	return EntityType::ENVIRONMENT;
+	return EntityType::TILE;
 }
 
 void Tile::setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent)

@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Player State Headers">
       <UniqueIdentifier>{56522169-f370-4fbd-b23c-e0247b49ff18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AIComponents">
+      <UniqueIdentifier>{b4f48d40-ab0b-4a9e-9206-a2b4324022a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AIComponents">
+      <UniqueIdentifier>{98037ba1-b8ce-4543-bfec-b3438a7850c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,40 +144,16 @@
     <ClCompile Include="CircleMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicEnemyMovementComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomJumperComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TileBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TrackerComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FallingAIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingAIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelChangeComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AIjump.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StunState.cpp">
@@ -197,6 +179,33 @@
     </ClCompile>
     <ClCompile Include="ComponentSystem.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AISystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="AIjump.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackerComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomJumperComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemyMovementComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelChangeComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,40 +350,16 @@
     <ClInclude Include="CircleMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicEnemyMovementComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AIComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="RNG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandomJumperComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="LevelManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FallingAIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingAIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelChangeComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AIjump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StunState.h">
@@ -400,6 +385,33 @@
     </ClInclude>
     <ClInclude Include="ComponentSystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AISystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIjump.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingAIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingAIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemyMovementComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomJumperComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackerComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelChangeComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

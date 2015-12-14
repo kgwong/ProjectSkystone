@@ -31,12 +31,10 @@ private:
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
-	std::shared_ptr<AIComponent> _movementComponent;
 	std::shared_ptr<DamageComponent> damageComponent_;
 
 public:
 	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
-	void setMovementComponent(std::shared_ptr<AIComponent> movementComponent);
 	void setColliderComponent(std::shared_ptr<ColliderComponent> component);
 
 

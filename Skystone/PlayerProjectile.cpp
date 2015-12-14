@@ -12,8 +12,8 @@
 
 PlayerProjectile::PlayerProjectile(Point position, int vel, double degrees)
 	:GameObject(position),
-	_damageComponent(new DamageComponent(1000)), 
-	_physicsComponent(new PhysicsComponent())
+	_damageComponent(new DamageComponent(*this, 1000)), 
+	_physicsComponent(new PhysicsComponent(*this))
 {
 	_physicsComponent->enableGravity(false);
 
@@ -37,24 +37,11 @@ void PlayerProjectile::setColliderComponent(std::shared_ptr<ColliderComponent> c
 	addComponent(_colliderComponent);
 }
 
-/*void PlayerProjectile::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
-{
-	_renderComponent = renderComponent;
-	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight());
-	addComponent(_renderComponent);
-	addComponent(_colliderComponent);
-}*/
-
 void PlayerProjectile::update(Level& level)
 {
-	_colliderComponent->update(*this, level);
-	_physicsComponent->update(*this, level);
+	_colliderComponent->update(level);
+	_physicsComponent->update(level);
 }
-
-/*void PlayerProjectile::render(Level& level)
-{
-	_renderComponent->update(*this, level);
-}*/
 
 void PlayerProjectile::onCollision(CollisionInfo& collision)
 {

@@ -30,10 +30,9 @@ Enemy::~Enemy()
 
 void Enemy::update(Level& level)
 {
-	_healthComponent->update(*this, level);
-	_movementComponent->update(*this, level);
-	_colliderComponent->update(*this, level);
-	_physicsComponent->update(*this, level);
+	_healthComponent->update(level);
+	_colliderComponent->update(level);
+	_physicsComponent->update(level);
 
 }
 
@@ -64,20 +63,14 @@ void Enemy::setColliderComponent(std::shared_ptr<ColliderComponent> component)
 {
 	_colliderComponent = component;
 	addComponent(_colliderComponent);
+	_physicsComponent = std::make_shared<PhysicsComponent>(*this);
+	damageComponent_ = std::make_shared<DamageComponent>(*this, 10);
+	addComponent(_physicsComponent);
+	addComponent(damageComponent_);
 }
 
 void Enemy::setHealthComponent(std::shared_ptr<HealthComponent> healthComponent)
 {
 	_healthComponent = healthComponent;
 	addComponent(_healthComponent);
-}
-
-void Enemy::setMovementComponent(std::shared_ptr<AIComponent> movementComponent)
-{
-	_movementComponent = movementComponent;
-	addComponent(_movementComponent);
-	_physicsComponent = std::make_shared<PhysicsComponent>();
-	damageComponent_ = std::make_shared<DamageComponent>(10);
-	addComponent(_physicsComponent);
-	addComponent(damageComponent_);
 }

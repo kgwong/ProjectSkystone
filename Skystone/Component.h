@@ -7,14 +7,21 @@
 class Component
 {
 public:
+	Component(GameObject& owner)
+		:owner_(owner)
+	{
+
+	}
 	virtual ~Component() {};
 
-	virtual void start(GameObject& owner, Level& level) = 0;
-	virtual void update(GameObject& owner, Level& level) = 0;
+	virtual void start(Level& level) = 0;
+	virtual void update(Level& level) = 0;
 
 	bool owned() { return owned_; }
 	void disown() { owned_ = false; }
+
 protected:
+	GameObject& owner_;
 	bool owned_;
 };
 
