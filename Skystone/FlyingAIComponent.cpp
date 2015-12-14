@@ -9,18 +9,25 @@ FlyingAIComponent::FlyingAIComponent()
 {
 }
 
+FlyingAIComponent::~FlyingAIComponent()
+{
+}
+
+
 void FlyingAIComponent::start(GameObject & owner, Level & level)
 {
 	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_->enableGravity(false);
+	physics_->setVelX(xVelocity_);
+
 }
 
 void FlyingAIComponent::update(GameObject & owner, Level & level)
 {
-	physics_->enableGravity(false);
 	timeInterval_++;
-	timeInterval_ = timeInterval_ % DEFAULT_CHANGE_DIRECTION_TIME;
+	timeInterval_ = timeInterval_ % DEFAULT_X_DIRECTION_TIME;
 
-	if (timeInterval_ % (DEFAULT_CHANGE_DIRECTION_TIME / 6) == 0)
+	if (timeInterval_ % (DEFAULT_X_DIRECTION_TIME / DEFAULT_Y_DIRECTION_CHANGES) == 0)
 	{
 		yVelocity_ = yVelocity_ * -1;
 		physics_->setVelY(yVelocity_);
@@ -33,7 +40,3 @@ void FlyingAIComponent::update(GameObject & owner, Level & level)
 	}
 }
 
-
-FlyingAIComponent::~FlyingAIComponent()
-{
-}

@@ -10,7 +10,8 @@ class FlyingAIComponent :
 
 
 public:
-	static const int DEFAULT_CHANGE_DIRECTION_TIME = 72;
+	static const int DEFAULT_X_DIRECTION_TIME = 72;
+	static const int DEFAULT_Y_DIRECTION_CHANGES = 6;
 	static const int DEFAULT_X_VELOCITY = 3;
 	static const int DEFAULT_Y_VELOCITY = -1;
 

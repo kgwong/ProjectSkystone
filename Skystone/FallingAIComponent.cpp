@@ -11,6 +11,11 @@ FallingAIComponent::FallingAIComponent()
 {
 }
 
+FallingAIComponent::~FallingAIComponent()
+{
+}
+
+
 void FallingAIComponent::start(GameObject & owner, Level & level)
 {
 	physics_ = owner.getComponent<PhysicsComponent>();
@@ -50,6 +55,3 @@ void FallingAIComponent::update(GameObject & owner, Level & level)
 
 }
 
-FallingAIComponent::~FallingAIComponent()
-{
-}
