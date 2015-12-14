@@ -81,7 +81,7 @@ private:
 	void updateBackground();
 	void updateTiles();
 	void updatePlayer();
-	void updatePlayerProjectiles();
+	void updatePlayerProjectiles();	
 	void updateEnemies();
 	void updatePickups();
 

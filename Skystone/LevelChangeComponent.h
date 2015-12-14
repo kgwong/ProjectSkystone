@@ -7,11 +7,11 @@
 class LevelChangeComponent : public Component
 {
 public:
-	LevelChangeComponent();
+	LevelChangeComponent(GameObject& owner);
 	virtual ~LevelChangeComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 private:
 	ColliderComponent* collider_;

@@ -15,14 +15,13 @@ public:
 	};
 
 public:
-	ColliderComponent();
 	ColliderComponent(GameObject& owner);
-	ColliderComponent(int offsetX, int offsetY, int width, int height);
-	ColliderComponent(BoxCollider collider);
+	ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height);
+	ColliderComponent(GameObject& owner, BoxCollider collider);
 	virtual ~ColliderComponent();
 
-	virtual void start(GameObject& owner, Level& level) {};
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level) {};
+	virtual void update(Level& level);
 
 	void setCollider(BoxCollider newCollider); 
 

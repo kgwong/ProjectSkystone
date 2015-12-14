@@ -2,6 +2,7 @@
 #define COMPONENT_SYSTEM_H
 
 #include "RenderSystem.h"
+#include "AISystem.h"
 
 class Level;
 class GameWindow;
@@ -18,6 +19,9 @@ public:
 	template <typename T, typename... Args>
 	std::shared_ptr<T> getNewRenderer(Args&& ...args);
 
+	template <typename T, typename... Args>
+	std::shared_ptr<T> getNewAI(Args&& ...args);
+
 	template <typename T>
 	static void vector_remove(std::vector<T>& v, int index);
 
@@ -25,6 +29,7 @@ public:
 	static void vector_remove(T& container, typename T::iterator it);
 
 public:
+	AISystem aiSystem_;
 	RenderSystem renderSystem_;
 };
 
@@ -34,6 +39,14 @@ std::shared_ptr<T> ComponentSystem::getNewRenderer(Args&& ...args)
 	std::shared_ptr<T> renderer = std::make_shared<T>(args...);
 	renderSystem_.addComponent(renderer);
 	return renderer;
+}
+
+template<typename T, typename ...Args>
+inline std::shared_ptr<T> ComponentSystem::getNewAI(Args&& ...args)
+{
+	std::shared_ptr<T> ai = std::make_shared<T>(args...);
+	aiSystem_.addComponent(ai);
+	return ai;
 }
 
 template <typename T>

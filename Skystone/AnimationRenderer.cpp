@@ -16,17 +16,6 @@ AnimationRenderer::~AnimationRenderer()
 {
 }
 
-void AnimationRenderer::update(GameObject& owner, Level& level)
-{
-	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
-	drawDest_.x = owner.getPosX() - cameraPos.x;
-	drawDest_.y = owner.getPosY() - cameraPos.y;
-	drawSrc_ = textureSheet_->getFrame(currFrame_);
-	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
-
-	incrementFrame();
-}
-
 void AnimationRenderer::update(Level& level)
 {
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();

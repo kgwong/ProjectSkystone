@@ -15,7 +15,7 @@ Pickup::Pickup()
 
 Pickup::Pickup(Point position)
 	:GameObject(position),
-	_physicsComponent(new PhysicsComponent())
+	_physicsComponent(new PhysicsComponent(*this))
 {
 	addComponent(_physicsComponent);
 }
@@ -26,7 +26,7 @@ Pickup::~Pickup()
 
 void Pickup::update(Level& level)
 {
-	_physicsComponent->update(*this, level);
+	_physicsComponent->update(level);
 }
 
 void Pickup::setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent)

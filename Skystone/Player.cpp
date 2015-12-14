@@ -19,10 +19,10 @@
 Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
 	_renderComponent(new AnimationRenderer(*this, textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
-	_colliderComponent(new ColliderComponent(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
-	_healthComponent(new HealthComponent(100)),
-	_physicsComponent(new PhysicsComponent()),
-	levelChangeComponent_(new LevelChangeComponent()),
+	_colliderComponent(new ColliderComponent(*this, 0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
+	_healthComponent(new HealthComponent(*this, 100)),
+	_physicsComponent(new PhysicsComponent(*this)),
+	levelChangeComponent_(new LevelChangeComponent(*this)),
 	shoot_(false), 
 	currState_(&states::walkingState),
 	aimState_(AimState::RIGHT)
@@ -116,18 +116,18 @@ void Player::update(Level& level)
 	aim();
 
 	//_colliderComponent->update(*this, level);
-	_physicsComponent->update(*this, level);
+	_physicsComponent->update(level);
 
 	if (shoot_)
 		shoot(level);
 
-	levelChangeComponent_->update(*this, level);
-	_healthComponent->update(*this, level);
+	levelChangeComponent_->update(level);
+	_healthComponent->update(level);
 }
 
 void Player::render(Level& level)
 {
-	_renderComponent->update(*this, level);
+	_renderComponent->update(level);
 }
 
 void Player::changeState(PlayerState* state)

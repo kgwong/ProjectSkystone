@@ -25,7 +25,7 @@ Tile& TileBuilder::build(ComponentSystem& componentSystem, int tileType, Tile& t
 	if (tileType == 1)
 	{
 		tileToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(tileToBuild, tileSet, tileType));
-		tileToBuild.setColliderComponent(std::shared_ptr<ColliderComponent>(new ColliderComponent(0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE)));
+		tileToBuild.setColliderComponent(std::shared_ptr<ColliderComponent>(new ColliderComponent(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE)));
 	}
 
 	return tileToBuild;

@@ -10,12 +10,12 @@ public:
 	static const int DEFAULT_INVINCIBILITY_TIME = 100;
 
 public:
-	HealthComponent();
-	HealthComponent(int initHealth);
+	HealthComponent(GameObject& owner);
+	HealthComponent(GameObject& owner, int initHealth);
 	virtual ~HealthComponent();
 
-	virtual void start(GameObject& owner, Level& level) {};
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level) {};
+	virtual void update(Level& level);
 
 	void setInvincibilityTime(int time);
 	void setInvincible(bool value);

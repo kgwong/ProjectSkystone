@@ -17,12 +17,11 @@ public:
 	static const int DEFAULT_TIME_INTERVAL = 100;
 
 public:
-	FallingAIComponent();
+	FallingAIComponent(GameObject& owner);
 	virtual ~FallingAIComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
-
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 private:
 	int yVelocity_;

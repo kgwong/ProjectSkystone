@@ -2,8 +2,9 @@
 #include "PhysicsComponent.h"
 
 
-FlyingAIComponent::FlyingAIComponent()
-	:xVelocity_(DEFAULT_X_VELOCITY),
+FlyingAIComponent::FlyingAIComponent(GameObject& owner)
+	:AIComponent(owner),
+	xVelocity_(DEFAULT_X_VELOCITY),
 	yVelocity_(DEFAULT_Y_VELOCITY),
 	timeInterval_(0)
 {
@@ -13,16 +14,14 @@ FlyingAIComponent::~FlyingAIComponent()
 {
 }
 
-
-void FlyingAIComponent::start(GameObject & owner, Level & level)
+void FlyingAIComponent::start(Level & level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
 	physics_->enableGravity(false);
 	physics_->setVelX(xVelocity_);
-
 }
 
-void FlyingAIComponent::update(GameObject & owner, Level & level)
+void FlyingAIComponent::update(Level& level)
 {
 	timeInterval_++;
 	timeInterval_ = timeInterval_ % DEFAULT_X_DIRECTION_TIME;
@@ -39,4 +38,3 @@ void FlyingAIComponent::update(GameObject & owner, Level & level)
 		physics_->setVelX(xVelocity_);
 	}
 }
-

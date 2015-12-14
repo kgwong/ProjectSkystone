@@ -2,17 +2,22 @@
 #include "PhysicsComponent.h"
 
 
-AIjump::AIjump():jumpvelocity_(DEFAULT_JUMP_VELOCITY),timer_(0)
-
+AIjump::AIjump(GameObject& owner)
+	:AIComponent(owner),
+	jumpvelocity_(DEFAULT_JUMP_VELOCITY),timer_(0)
 {
 }
 
-void AIjump::start(GameObject & owner, Level & level)
+AIjump::~AIjump()
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
 }
 
-void AIjump::update(GameObject & owner, Level & level)
+void AIjump::start(Level& level)
+{
+	physics_ = owner_.getComponent<PhysicsComponent>();
+}
+
+void AIjump::update(Level& level)
 {
 	if (timer_ == JUMP_INTERVAL)
 	{
@@ -32,9 +37,4 @@ void AIjump::update(GameObject & owner, Level & level)
 	timer_ += 1;
 
 	physics_->setVelY(jumpvelocity_);
-}
-
-
-AIjump::~AIjump()
-{
 }

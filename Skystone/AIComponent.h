@@ -7,11 +7,15 @@
 class AIComponent : public Component
 {
 public:
+	AIComponent(GameObject& owner)
+		:Component(owner)
+	{
+
+	}
 	virtual ~AIComponent() {};
 
-	virtual void start(GameObject& owner, Level& level) {};
-	virtual void update(GameObject& owner, Level& level) {};
-
+	virtual void start(Level& level) = 0;
+	virtual void update(Level& level) = 0;
 
 
 	static int getDistance(Point& a,Point& b);

@@ -2,8 +2,9 @@
 #include "PhysicsComponent.h"
 
 
-FallingAIComponent::FallingAIComponent()
-	:yVelocity_(DEFAULT_Y_VELOCITY),
+FallingAIComponent::FallingAIComponent(GameObject& owner)
+	: AIComponent(owner), 
+	yVelocity_(DEFAULT_Y_VELOCITY),
 	xRadius_(DEFAULT_X_RADIUS),
 	yRadius_(DEFAULT_Y_RADIUS),
 	timer_(0),
@@ -16,17 +17,17 @@ FallingAIComponent::~FallingAIComponent()
 }
 
 
-void FallingAIComponent::start(GameObject & owner, Level & level)
+void FallingAIComponent::start(Level& level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
 
-void FallingAIComponent::update(GameObject & owner, Level & level)
+void FallingAIComponent::update(Level& level)
 {
-	int dist = getDistance(owner.getPos(), level.getPlayerPos());
-	int yDist = getYDirection(owner.getPos(), level.getPlayerPos());
-	int xDist = getXDirection(owner.getPos(), level.getPlayerPos());
+	int dist = getDistance(owner_.getPos(), level.getPlayerPos());
+	int yDist = getYDirection(owner_.getPos(), level.getPlayerPos());
+	int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(yDist,DEFAULT_Y_RADIUS) && AIComponent::isNearby(xDist,DEFAULT_X_RADIUS))
 	{

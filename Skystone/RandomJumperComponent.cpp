@@ -3,8 +3,11 @@
 
 #include "RNG.h"
 
-RandomJumperComponent::RandomJumperComponent()
-	: timeInterval_(0),jumpVelocity_(DEFAULT_JUMP_VELOCITY),xVelocity_(DEFAULT_X_VELOCITY)
+RandomJumperComponent::RandomJumperComponent(GameObject& owner)
+	: AIComponent(owner),
+	timeInterval_(0),
+	jumpVelocity_(DEFAULT_JUMP_VELOCITY),
+	xVelocity_(DEFAULT_X_VELOCITY)
 {
 }
 
@@ -13,14 +16,13 @@ RandomJumperComponent::~RandomJumperComponent()
 {
 }
 
-void RandomJumperComponent::start(GameObject& owner, Level & level)
+void RandomJumperComponent::start(Level& level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
-void RandomJumperComponent::update(GameObject& owner, Level & level)
+void RandomJumperComponent::update(Level& level)
 {
-
 	xVelocity_ = RNG::getBool(0.5) ? xVelocity_ : -xVelocity_;
 	
 	timeInterval_++;

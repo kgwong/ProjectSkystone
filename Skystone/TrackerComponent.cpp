@@ -6,8 +6,9 @@
 
 //finished by Harvey and Aaron! :)
 
-TrackerComponent::TrackerComponent()
-	:xVelocity_(DEFAULT_X_VELOCITY),
+TrackerComponent::TrackerComponent(GameObject& owner)
+	: AIComponent(owner),
+	xVelocity_(DEFAULT_X_VELOCITY),
 	radius_(DEFAULT_RADIUS),
 	enemyState_(EnemyState::FOLLOWER)
 {
@@ -18,21 +19,20 @@ TrackerComponent::~TrackerComponent()
 {
 }
 
-void TrackerComponent::start(GameObject & owner, Level & level)
+void TrackerComponent::start(Level & level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
-
+	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
 
 //missing time and another player gameobject.
-void TrackerComponent::update(GameObject & owner, Level & level)
+void TrackerComponent::update(Level & level)
 {
-	int player_dist = AIComponent::getDistance(owner.getPos(), level.getPlayerPos());
+	int player_dist = AIComponent::getDistance(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(player_dist, radius_))
 	{
-		int player_direction = AIComponent::getXDirection(owner.getPos(), level.getPlayerPos());
+		int player_direction = AIComponent::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 		EnemyState currentState = enemyState_;
 			switch (currentState)

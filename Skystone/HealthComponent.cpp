@@ -2,16 +2,18 @@
 
 #include <iostream> //
 
-HealthComponent::HealthComponent()
-	:health_(DEFAULT_HEALTH),
+HealthComponent::HealthComponent(GameObject& owner)
+	:Component(owner),
+	health_(DEFAULT_HEALTH),
 	invincible_(false),
 	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
 	remainingInvincibilityTime_(0)
 {
 }
 
-HealthComponent::HealthComponent(int initHealth)
-	:health_(initHealth),
+HealthComponent::HealthComponent(GameObject& owner, int initHealth)
+	: Component(owner),
+	health_(initHealth),
 	invincible_(false),
 	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
 	remainingInvincibilityTime_(0)
@@ -23,7 +25,7 @@ HealthComponent::~HealthComponent()
 {
 }
 
-void HealthComponent::update(GameObject& owner, Level& level)
+void HealthComponent::update(Level& level)
 {
 	if (remainingInvincibilityTime_ <= 0)
 	{
@@ -37,7 +39,7 @@ void HealthComponent::update(GameObject& owner, Level& level)
 
 	if (health_ <= 0)
 	{
-		owner.kill();
+		owner_.kill();
 	}
 }
 

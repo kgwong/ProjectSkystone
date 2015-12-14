@@ -11,12 +11,12 @@ public:
 	static const int DEFAULT_SPEED = 1;
 
 public:
-	BasicEnemyMovementComponent();
-	BasicEnemyMovementComponent(int speed);
+	BasicEnemyMovementComponent(GameObject& owner);
+	BasicEnemyMovementComponent(GameObject& owner, int speed);
 	virtual ~BasicEnemyMovementComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 private:
 	int speed_; 

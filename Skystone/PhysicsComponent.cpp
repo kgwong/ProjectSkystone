@@ -6,8 +6,9 @@
 
 #include <algorithm>
 
-PhysicsComponent::PhysicsComponent()
-	:velX_(0), velY_(0),
+PhysicsComponent::PhysicsComponent(GameObject& owner)
+	: Component(owner),
+	velX_(0), velY_(0),
 	accelX_(0), accelY_(0),
 	gravityEnabled_(true), falling_(true),
 	collider_(nullptr)
@@ -18,19 +19,19 @@ PhysicsComponent::~PhysicsComponent()
 {
 }
 
-void PhysicsComponent::start(GameObject& owner, Level& level)
+void PhysicsComponent::start(Level& level)
 {
-	collider_ = owner.getComponent<ColliderComponent>();
+	collider_ = owner_.getComponent<ColliderComponent>();
 }
 
-void PhysicsComponent::update(GameObject& owner, Level& level)
+void PhysicsComponent::update(Level& level)
 {
-	updatePosition(owner, level, Axis::X);
-	updatePosition(owner, level, Axis::Y);
+	updatePosition(owner_, level, Axis::X);
+	updatePosition(owner_, level, Axis::Y);
 
 	if (collider_)
 	{
-		checkCollisions(owner, level);
+		checkCollisions(owner_, level);
 	}
 }
 
@@ -136,7 +137,7 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 	
 	if (collider_)
 	{
-		collider_->update(owner, level);
+		collider_->update(level);
 		correctPositionAfterCollision(owner, level, axis);
 	}
 
@@ -144,7 +145,7 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 
 void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis)
 {
-	if (owner.getType() != EntityType::ENVIRONMENT)
+	if (owner.getType() != EntityType::TILE)
 	{
 		int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
 		int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
@@ -234,6 +235,6 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 		default:
 			break;
 	}
-	collider_->update(owner, level); 
+	collider_->update(level); 
 }
 
