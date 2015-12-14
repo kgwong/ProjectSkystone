@@ -2,8 +2,9 @@
 
 #include "GameWindow.h"
 
-AnimationRenderer::AnimationRenderer(TextureSheet* textureSheet)
-	: textureSheet_(textureSheet), 
+AnimationRenderer::AnimationRenderer(GameObject& owner, TextureSheet* textureSheet)
+	: RenderComponent(owner),
+	textureSheet_(textureSheet), 
 	currFrame_(0),
 	drawSrc_(textureSheet->getFrame(currFrame_))
 {
@@ -23,6 +24,16 @@ void AnimationRenderer::update(GameObject& owner, Level& level)
 	drawSrc_ = textureSheet_->getFrame(currFrame_);
 	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
 
+	incrementFrame();
+}
+
+void AnimationRenderer::update(Level& level)
+{
+	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
+	drawDest_.x = owner_.getPosX() - cameraPos.x;
+	drawDest_.y = owner_.getPosY() - cameraPos.y;
+	drawSrc_ = textureSheet_->getFrame(currFrame_);
+	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
 	incrementFrame();
 }
 

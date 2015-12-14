@@ -18,17 +18,16 @@ public:
 	PlayerProjectile(Point position, int vel, double degrees);
 	~PlayerProjectile();
 
-	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
+	//oid setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
+	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
 
-	bool isDead();
 	void update(Level& level);
-	void render(Level& level);
+	//void render(Level& level);
 
 	virtual void onCollision(CollisionInfo& collision);
 	virtual EntityType getType() const;
 
 private:
-	bool _alive;
 	std::shared_ptr<RenderComponent> _renderComponent; 
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;

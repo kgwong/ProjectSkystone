@@ -5,6 +5,7 @@
 
 class TextureLoader;
 class Enemy;
+class ComponentSystem;
 
 class EnemyBuilder
 {
@@ -12,7 +13,7 @@ public:
 	EnemyBuilder(TextureLoader* textureLoader);
 	virtual ~EnemyBuilder();
 
-	Enemy& build(const std::string& enemyName, Enemy& enemyToBuild);
+	Enemy& build(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild);
 	
 private:
 	TextureLoader* textureLoader_;

@@ -1,9 +1,22 @@
 #include "ColliderComponent.h"
 
+#include "RenderComponent.h"
+#include "SpriteRenderer.h"
+#include "AnimationRenderer.h"
 
 ColliderComponent::ColliderComponent()
 	:_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
 {
+}
+
+ColliderComponent::ColliderComponent(GameObject & owner)
+	:  _offsetX(0), _offsetY(0)
+{
+	//this is a hack, have only one type of Renderer.	
+	RenderComponent* render = owner.getComponent<SpriteRenderer>();
+	if (render == nullptr)
+		render = owner.getComponent<AnimationRenderer>();
+	_collider = { 0, 0, render->getWidth(), render->getHeight() };
 }
 
 ColliderComponent::ColliderComponent(int offsetX, int offsetY, int width, int height)

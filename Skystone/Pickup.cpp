@@ -8,42 +8,31 @@
 #include "ColliderComponent.h"
 #include "RenderComponent.h"
 
+Pickup::Pickup()
+{
+
+}
 
 Pickup::Pickup(Point position)
 	:GameObject(position),
-	_alive(true),
 	_physicsComponent(new PhysicsComponent())
 {
-	addComponent(_physicsComponent.get());
+	addComponent(_physicsComponent);
 }
 
 Pickup::~Pickup()
 {
 }
 
-void Pickup::setRenderComponent(std::shared_ptr<RenderComponent> renderComponent)
-{
-	_renderComponent = renderComponent;
-	_colliderComponent = std::make_shared<ColliderComponent>(0, 0, _renderComponent->getWidth(), _renderComponent->getHeight()),
-	addComponent(_renderComponent.get());
-	addComponent(_colliderComponent.get());
-
-}
-
 void Pickup::update(Level& level)
 {
-	_colliderComponent->update(*this, level);
 	_physicsComponent->update(*this, level);
 }
 
-void Pickup::render(Level& level)
+void Pickup::setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent)
 {
-	_renderComponent->update(*this, level);
-}
-
-bool Pickup::isDead()
-{
-	return !_alive;
+	_colliderComponent = colliderComponent;
+	addComponent(_colliderComponent);
 }
 
 EntityType Pickup::getType() const
@@ -54,5 +43,5 @@ EntityType Pickup::getType() const
 void Pickup::onCollision(CollisionInfo& collision)
 {
 	if (collision.other.getType() == EntityType::PLAYER)
-		_alive = false;
+		alive_ = false;
 }

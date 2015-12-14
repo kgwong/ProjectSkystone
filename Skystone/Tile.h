@@ -18,7 +18,6 @@ public:
 	~Tile();
 
 	void update(Level& level);
-	void render(Level& level);
 
 	virtual EntityType getType() const;
 	void onCollision(CollisionInfo& collision);
@@ -26,13 +25,11 @@ public:
 	TileType getTileType();
 	void setTileType(int tileType);
 
-	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 	void setColliderComponent(std::shared_ptr<ColliderComponent> colliderComponent);
 
 private:
 	TileType _tileType;
 
-	std::shared_ptr<RenderComponent> renderComponent_;
 	std::shared_ptr<ColliderComponent> colliderComponent_;
 
 };

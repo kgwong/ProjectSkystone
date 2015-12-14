@@ -7,6 +7,11 @@
 #include "TileArrangement.h"
 #include "Pickup.h"
 
+#include "ComponentSystem.h"
+
+#include <iostream> //
+#include <memory>
+
 class Background;
 class LevelLoader;
 class LevelMap;
@@ -36,7 +41,7 @@ public:
 	void startEntityComponents();
 
 	void update();
-	void render();
+	void render(GameWindow& window);
 
 	int getID();
 
@@ -53,9 +58,9 @@ public:
 public:
 	Player* player;
 	TileArrangement tileArrangement;
-	std::vector<Enemy> enemies;
-	std::vector<PlayerProjectile> playerProjectiles;
-	std::vector<Pickup> pickups;
+	std::vector<std::shared_ptr<Enemy>> enemies;
+	std::vector<std::shared_ptr<PlayerProjectile>> playerProjectiles;
+	std::vector<std::shared_ptr<Pickup>> pickups;
 
 private:
 	TextureLoader* textureLoader_;
@@ -67,9 +72,11 @@ private:
 	Point oldPlayerPosInBlock_;
 	int levelID_;
 
+	ComponentSystem componentSystem_;
+
 private:
 	template <typename Entity>
-	void startComponents(std::vector<Entity>& v);
+	void startComponents(std::vector<std::shared_ptr<Entity>>& v);
 
 	void updateBackground();
 	void updateTiles();
@@ -79,50 +86,38 @@ private:
 	void updatePickups();
 
 	template <typename Entity>
-	void updateEntityVector(std::vector<Entity>& v); //isDead() and update() must be defined for Entity
-
-	void renderBackground();
+	void updateEntityVector(std::vector<std::shared_ptr<Entity>>& v); //isDead() and update() must be defined for Entity;
+	
 	void renderPlayer();
-	void renderTiles();
-	void renderEnemies();
-	void renderPlayerProjectiles();
-	void renderPickups();
 
-	template <typename Entity>
-	void renderEntityVector(std::vector<Entity>& v); //render() must be defined for Entity
 };
 
 template <typename Entity>
-void Level::startComponents(std::vector<Entity>& v)
+void Level::startComponents(std::vector<std::shared_ptr<Entity>>& v)
 {
 	for (auto& entity : v)
-		entity.callStartOnComponents(*this);
+		entity->callStartOnComponents(*this);
 }
 
 template <typename Entity>
-void Level::updateEntityVector(std::vector<Entity>& v)
+void Level::updateEntityVector(std::vector<std::shared_ptr<Entity>>& v)
 {
 	auto it = v.begin();
 	while (it != v.end())
 	{
-		if (it->isDead())
+		auto& obj = *it;
+		if (obj->alive())
 		{
-			it->onDeath(*this);
-			it = v.erase(it);
+			obj->update(*this);
+			++it;
 		}
 		else
 		{
-			it->update(*this);
-			++it;
+			obj->onDeath(*this);
+			obj->clearComponents();
+			it = v.erase(it);
 		}
 	}
-}
-
-template <typename Entity>
-void Level::renderEntityVector(std::vector<Entity>& v)
-{
-	for (auto& entity : v)
-		entity.render(*this);
 }
 
 #endif //LEVEL_H

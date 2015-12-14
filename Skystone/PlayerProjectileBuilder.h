@@ -5,6 +5,7 @@
 
 class PlayerProjectile;
 class TextureLoader;
+class ComponentSystem;
 
 class PlayerProjectileBuilder
 {
@@ -12,7 +13,7 @@ public:
 	PlayerProjectileBuilder(TextureLoader* textureLoader);
 	~PlayerProjectileBuilder();
 
-	PlayerProjectile& build(const std::string& name, PlayerProjectile& projectileToBuild);
+	PlayerProjectile& build(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild);
 
 private:
 	TextureLoader* textureLoader_;

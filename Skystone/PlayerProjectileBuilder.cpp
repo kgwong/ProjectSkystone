@@ -3,6 +3,7 @@
 #include "PlayerProjectile.h"
 #include "TextureLoader.h"
 #include "AnimationRenderer.h"
+#include "ColliderComponent.h"
 
 #include <memory>
 
@@ -16,8 +17,9 @@ PlayerProjectileBuilder::~PlayerProjectileBuilder()
 {
 }
 
-PlayerProjectile& PlayerProjectileBuilder::build(const std::string& name, PlayerProjectile& projectileToBuild)
+PlayerProjectile& PlayerProjectileBuilder::build(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild)
 {
-	projectileToBuild.setRenderComponent(std::make_shared<AnimationRenderer>(textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
+	projectileToBuild.addComponent(componentSystem.getNewRenderer<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
+	projectileToBuild.setColliderComponent(std::make_shared<ColliderComponent>(projectileToBuild));
 	return projectileToBuild;
 }

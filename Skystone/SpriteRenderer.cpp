@@ -2,16 +2,18 @@
 
 #include "GameWindow.h"
 
-SpriteRenderer::SpriteRenderer(TextureSheet* textureSheet)
-	:textureSheet_(textureSheet),
+SpriteRenderer::SpriteRenderer(GameObject& owner, TextureSheet* textureSheet)
+	:RenderComponent(owner),
+	textureSheet_(textureSheet),
 	drawSrc_(textureSheet->getFrame(0)),
 	drawDest_{0, 0, drawSrc_->w, drawSrc_->h}
 {
 }
 
-SpriteRenderer::SpriteRenderer(TextureSheet* textureSheet,
+SpriteRenderer::SpriteRenderer(GameObject& owner, TextureSheet* textureSheet,
 	int textureIndex)
-	:textureSheet_(textureSheet),
+	:RenderComponent(owner),
+	textureSheet_(textureSheet),
 	drawSrc_(textureSheet->getFrame(textureIndex)),
 	drawDest_{ 0, 0, drawSrc_->w, drawSrc_->h }
 {
@@ -26,6 +28,14 @@ void SpriteRenderer::update(GameObject& owner, Level& level)
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
 	drawDest_.x = owner.getPosX() - cameraPos.x;
 	drawDest_.y = owner.getPosY() -cameraPos.y;
+	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
+}
+
+void SpriteRenderer::update(Level& level)
+{
+	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
+	drawDest_.x = owner_.getPosX() - cameraPos.x;
+	drawDest_.y = owner_.getPosY() - cameraPos.y;
 	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), drawSrc_, &drawDest_);
 }
 

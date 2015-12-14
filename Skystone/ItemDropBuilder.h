@@ -5,15 +5,15 @@
 
 class Pickup;
 class TextureLoader;
+class ComponentSystem;
 
 class ItemDropBuilder
 {
 public:
-public:
 	ItemDropBuilder(TextureLoader* textureLoader);
 	~ItemDropBuilder();
 
-	Pickup& build(const std::string& itemName, Pickup& itemDropToBuild);
+	Pickup& build(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild);
 
 private:
 	TextureLoader* textureLoader_;

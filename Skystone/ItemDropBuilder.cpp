@@ -2,6 +2,7 @@
 
 #include "Pickup.h"
 #include "SpriteRenderer.h"
+#include "ColliderComponent.h"
 #include "TextureLoader.h"
 
 #include <memory>
@@ -15,8 +16,9 @@ ItemDropBuilder::~ItemDropBuilder()
 {
 }
 
-Pickup& ItemDropBuilder::build(const std::string& itemName, Pickup& itemDropToBuild)
+Pickup& ItemDropBuilder::build(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild)
 {
-	itemDropToBuild.setRenderComponent(std::make_shared<SpriteRenderer>(textureLoader_->getTextureSheet("Assets/Pickups/pickup.png")));
+	itemDropToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(itemDropToBuild, textureLoader_->getTextureSheet("Assets/Pickups/pickup.png")));
+	itemDropToBuild.setColliderComponent(std::make_shared<ColliderComponent>(itemDropToBuild));
 	return itemDropToBuild;
 }

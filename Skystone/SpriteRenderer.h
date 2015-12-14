@@ -7,19 +7,20 @@
 class SpriteRenderer : public RenderComponent
 {
 public:
-	SpriteRenderer(TextureSheet* textureSheet);
-	SpriteRenderer(TextureSheet* textureSheet,
+	SpriteRenderer(GameObject& owner, TextureSheet* textureSheet);
+	SpriteRenderer(GameObject& owner, TextureSheet* textureSheet,
 		int textureIndex);
 
 	virtual ~SpriteRenderer();
 
 	virtual void start(GameObject& owner, Level& level) {};
 	virtual void update(GameObject& owner, Level& level);
+	virtual void update(Level& level);
 
 	virtual int getWidth();
 	virtual int getHeight();
 
-private:
+public: ///
 	TextureSheet* textureSheet_;
 
 	SDL_Rect* drawSrc_;

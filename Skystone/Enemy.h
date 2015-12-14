@@ -21,9 +21,6 @@ public:
 	virtual ~Enemy();
 
 	void update(Level& level);
-	void render(Level& level); // temporary
-
-	bool isDead();
 
 	virtual std::string getName();
 	virtual EntityType getType() const;
@@ -31,7 +28,6 @@ public:
 	virtual void onDeath(Level& level);
 
 private:
-	std::shared_ptr<RenderComponent> _renderComponent;
 	std::shared_ptr<HealthComponent> _healthComponent;
 	std::shared_ptr<PhysicsComponent> _physicsComponent;
 	std::shared_ptr<ColliderComponent> _colliderComponent;
@@ -39,9 +35,10 @@ private:
 	std::shared_ptr<DamageComponent> damageComponent_;
 
 public:
-	void setRenderComponent(std::shared_ptr<RenderComponent> renderComponent);
 	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
 	void setMovementComponent(std::shared_ptr<AIComponent> movementComponent);
+	void setColliderComponent(std::shared_ptr<ColliderComponent> component);
+
 
 };
 

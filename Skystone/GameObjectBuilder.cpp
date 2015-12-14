@@ -17,7 +17,8 @@
 
 
 GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
-	:enemyBuilder_(textureLoader), 
+	:textureLoader_(textureLoader),
+	enemyBuilder_(textureLoader), 
 	tileBuilder_(textureLoader),
 	itemDropBuilder_(textureLoader),
 	playerProjectileBuilder_(textureLoader)
@@ -28,22 +29,27 @@ GameObjectBuilder::~GameObjectBuilder()
 {
 }
 
-Tile& GameObjectBuilder::buildTile(int tileType, Tile& tileToBuild)
+Tile& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, Tile& tileToBuild)
 {
-	return tileBuilder_.build(tileType, tileToBuild);
+	return tileBuilder_.build(componentSystem, tileType, tileToBuild);
 }
 
-Enemy& GameObjectBuilder::buildEnemy(const std::string& enemyName, Enemy& enemyToBuild)
+Enemy& GameObjectBuilder::buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild)
 {
-	return enemyBuilder_.build(enemyName, enemyToBuild);
+	return enemyBuilder_.build(componentSystem, enemyName, enemyToBuild);
 }
 
-Pickup& GameObjectBuilder::buildItemDrop(const std::string& itemName, Pickup& itemDropToBuild)
+Pickup& GameObjectBuilder::buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild)
 {
-	return itemDropBuilder_.build(itemName, itemDropToBuild);
+	return itemDropBuilder_.build(componentSystem, itemName, itemDropToBuild);
 }
 
-PlayerProjectile& GameObjectBuilder::buildPlayerProjectile(const std::string& name, PlayerProjectile& projectileToBuild)
+PlayerProjectile& GameObjectBuilder::buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild)
 {
-	return playerProjectileBuilder_.build(name, projectileToBuild);
+	return playerProjectileBuilder_.build(componentSystem, name, projectileToBuild);
+}
+
+TextureSheet* GameObjectBuilder::getTexture(const std::string & path)
+{
+	return textureLoader_->getTextureSheet(path);
 }

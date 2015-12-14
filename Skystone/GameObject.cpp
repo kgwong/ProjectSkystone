@@ -3,16 +3,17 @@
 #include "Component.h" //for CallStartOnComponents... 
 
 GameObject::GameObject()
+	:alive_(true)
 {
 }
 
 GameObject::GameObject(Point position)
-	:position_(position)
+	: position_(position), alive_(true)
 {
 }
 
 GameObject::GameObject(int x, int y)
-	:position_(Point(x, y))
+	:position_(Point(x, y)), alive_(true)
 {
 }
 
@@ -56,10 +57,28 @@ int GameObject::getPosY() const
 	return position_.y;
 }
 
-void GameObject::addComponent(Component* component)
+void GameObject::addComponent(std::shared_ptr<Component> component)
 {
 	if (component)
 		components_[&typeid(*component)] = component;
+}
+
+void GameObject::clearComponents()
+{
+	for (auto& c : components_)
+	{
+		c.second->disown();
+	}
+}
+
+bool GameObject::alive()
+{
+	return alive_;
+}
+
+void GameObject::kill()
+{
+	alive_ = false;
 }
 
 std::string GameObject::getName() const
