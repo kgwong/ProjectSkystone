@@ -22,6 +22,7 @@ public:
 
 	virtual void start(Level& level) {};
 	virtual void update(Level& level);
+	virtual void update();
 
 	void setCollider(BoxCollider newCollider); 
 

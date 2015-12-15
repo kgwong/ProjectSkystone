@@ -44,8 +44,6 @@ public:
 	void jump();
 	void shoot(Level& level);
 
-	virtual std::string getName() const;
-	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 	virtual void onDeath(Level& level);
 

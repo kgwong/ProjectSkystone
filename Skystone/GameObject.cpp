@@ -3,17 +3,22 @@
 #include "Component.h" //for CallStartOnComponents... 
 
 GameObject::GameObject()
-	:alive_(true)
+	:alive_(true), 
+	type_(ObjectType::UNKNOWN)
 {
 }
 
 GameObject::GameObject(Point position)
-	: position_(position), alive_(true)
+	: position_(position), 
+	alive_(true), 
+	type_(ObjectType::UNKNOWN)
 {
 }
 
 GameObject::GameObject(int x, int y)
-	:position_(Point(x, y)), alive_(true)
+	:position_(Point(x, y)), 
+	alive_(true), 
+	type_(ObjectType::UNKNOWN)
 {
 }
 
@@ -81,17 +86,17 @@ void GameObject::kill()
 	alive_ = false;
 }
 
-std::string GameObject::getName() const
+void GameObject::setType(ObjectType type)
 {
-	return ""; //intended to be overridden
+	type_ = type;
 }
 
-EntityType GameObject::getType() const
+ObjectType GameObject::getType() const
 {
-	return EntityType::NONE;
+	return type_;
 }
 
-void GameObject::callStartOnComponents(Level& level)
+void GameObject::startComponents(Level& level)
 {
 	for (auto& i : components_)
 	{

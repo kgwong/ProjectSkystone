@@ -22,22 +22,8 @@ public:
 
 	void update(Level& level);
 
-	virtual std::string getName();
-	virtual EntityType getType() const;
 	virtual void onCollision(CollisionInfo& collision);
 	virtual void onDeath(Level& level);
-
-private:
-	std::shared_ptr<HealthComponent> _healthComponent;
-	std::shared_ptr<PhysicsComponent> _physicsComponent;
-	std::shared_ptr<ColliderComponent> _colliderComponent;
-	std::shared_ptr<DamageComponent> damageComponent_;
-
-public:
-	void setHealthComponent(std::shared_ptr<HealthComponent> healthComponent);
-	void setColliderComponent(std::shared_ptr<ColliderComponent> component);
-
-
 };
 
 #endif //ENEMY_H

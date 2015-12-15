@@ -137,7 +137,6 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 	
 	if (collider_)
 	{
-		collider_->update(level);
 		correctPositionAfterCollision(owner, level, axis);
 	}
 
@@ -145,7 +144,7 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 
 void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis)
 {
-	if (owner.getType() != EntityType::TILE)
+	if (owner.getType() != ObjectType::TILE)
 	{
 		int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
 		int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
@@ -170,7 +169,7 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 
 void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 {
-	if (owner.getType() == EntityType::PLAYER || owner.getType() == EntityType::PLAYER_PROJECTILE)
+	if (owner.getType() == ObjectType::PLAYER || owner.getType() == ObjectType::PLAYER_PROJECTILE)
 	{
 		for (auto& enemy : level.enemies)
 		{
@@ -182,7 +181,7 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 		}
 	}
 
-	if (owner.getType() == EntityType::PLAYER)
+	if (owner.getType() == ObjectType::PLAYER)
 	{
 		for (auto& pickup : level.pickups)
 		{
@@ -235,6 +234,5 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 		default:
 			break;
 	}
-	collider_->update(level); 
 }
 

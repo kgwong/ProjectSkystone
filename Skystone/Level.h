@@ -83,7 +83,6 @@ private:
 	void updatePlayer();
 	void updatePlayerProjectiles();	
 	void updateEnemies();
-	void updatePickups();
 
 	template <typename Entity>
 	void updateEntityVector(std::vector<std::shared_ptr<Entity>>& v); //isDead() and update() must be defined for Entity;
@@ -96,7 +95,7 @@ template <typename Entity>
 void Level::startComponents(std::vector<std::shared_ptr<Entity>>& v)
 {
 	for (auto& entity : v)
-		entity->callStartOnComponents(*this);
+		entity->startComponents(*this);
 }
 
 template <typename Entity>

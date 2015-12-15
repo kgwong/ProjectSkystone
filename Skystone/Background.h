@@ -12,7 +12,7 @@ public:
 	Background();
 	virtual ~Background();
 
-	virtual EntityType getType() const; //TypeComponents
+	virtual ObjectType getType() const; //TypeComponents
 
 private:
 

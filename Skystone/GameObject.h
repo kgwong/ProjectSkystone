@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "Point.h"
-#include "EntityType.h"
+#include "ObjectType.h"
 
 #include "CollisionInfo.h"
 
@@ -40,12 +40,13 @@ public:
 	bool alive();
 	void kill();
 
-	virtual std::string getName() const; //???
-	virtual EntityType getType() const; //TypeComponents
+	virtual void setType(ObjectType type);
+	virtual ObjectType getType() const;
+
 	virtual void onCollision(CollisionInfo& collision) {}; //ColliderComponent
 	virtual void onDeath(Level& level) {}; //DeathComponent
 
-	virtual void callStartOnComponents(Level& level);
+	virtual void startComponents(Level& level);
 
 
 protected:
@@ -53,6 +54,7 @@ protected:
 	std::unordered_map<const std::type_info*, std::shared_ptr<Component>> components_;
 
 	bool alive_;
+	ObjectType type_;
 };
 
 //http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components

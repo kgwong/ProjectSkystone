@@ -60,10 +60,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -93,6 +94,7 @@
     <ClCompile Include="FlyingState.cpp" />
     <ClCompile Include="GameObjectBuilder.cpp" />
     <ClCompile Include="GameOverException.cpp" />
+    <ClCompile Include="GeneralComponentSystem.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -106,6 +108,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PlayerProjectile.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
@@ -142,12 +145,16 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentSystem.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
     <ClInclude Include="GameObjectBuilder.h" />
     <ClInclude Include="GameOverException.h" />
+    <ClInclude Include="GeneralComponentSystem.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="ObjectType.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -162,9 +169,7 @@
     <ClInclude Include="Controls.h" />
     <ClInclude Include="DamageComponent.h" />
     <ClInclude Include="Direction.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBuilder.h" />
-    <ClInclude Include="EntityType.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="FlyingState.h" />
     <ClInclude Include="GameConstants.h" />

@@ -40,6 +40,13 @@ void ColliderComponent::update(Level& level)
 	//						owner.getWidth(), owner.getHeight()});
 }
 
+void ColliderComponent::update()
+{
+	_collider.x = owner_.getPosX() + _offsetX;
+	_collider.y = owner_.getPosY() + _offsetY;
+}
+
+
 void ColliderComponent::setCollider(BoxCollider newCollider)
 {
 	_collider = newCollider;
@@ -57,21 +64,25 @@ int ColliderComponent::getWidth()
 
 int ColliderComponent::getTop()
 {
+	this->update();
 	return _collider.y;
 }
 
 int ColliderComponent::getBottom()
 {
+	this->update();
 	return _collider.y + _collider.height;
 }
 
 int ColliderComponent::getLeft()
 {
+	this->update();
 	return _collider.x;
 }
 
 int ColliderComponent::getRight()
 {
+	this->update();
 	return _collider.x + _collider.width;
 }
 
@@ -94,6 +105,10 @@ bool ColliderComponent::checkCollision(ColliderComponent* other)
 {
 	if (other == this) return false; //do not detect collision with itself
 	if (other == nullptr) return false; //no collision detected with nonexistant collider
+	
+	//Updating collider's position is only before checking collision
+	this->update();
+	other->update();
 
 	int topOther = other->getTop();
 	int topSelf = getTop(); 

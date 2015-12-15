@@ -27,6 +27,7 @@ Player::Player(TextureLoader* textureLoader)
 	currState_(&states::walkingState),
 	aimState_(AimState::RIGHT)
 {
+	setType(ObjectType::PLAYER);
 	addComponent(_renderComponent);
 	addComponent(_physicsComponent);
 	addComponent(_healthComponent);
@@ -114,8 +115,6 @@ void Player::update(Level& level)
 	currState_->update(*this);
 
 	aim();
-
-	//_colliderComponent->update(*this, level);
 	_physicsComponent->update(level);
 
 	if (shoot_)
@@ -149,25 +148,15 @@ void Player::shoot(Level& level)
 	shoot_ = false;
 }
 
-std::string Player::getName() const
-{
-	return "Player";
-}
-
-EntityType Player::getType() const
-{
-	return EntityType::PLAYER;
-}
-
 void Player::onCollision(CollisionInfo& collision)
 {
 	switch (collision.other.getType())
 	{
-	case EntityType::PICKUP:
+	case ObjectType::DROP:
 		_healthComponent->heal(10);
 		std::cout << "Picked up a thing to heal 10hp!" << std::endl;
 		break;
-	case EntityType::ENEMY:
+	case ObjectType::ENEMY:
 		DamageComponent* damage = collision.other.getComponent<DamageComponent>();
 		if (_healthComponent->takeDamage(damage->getDamage()))
 		{
