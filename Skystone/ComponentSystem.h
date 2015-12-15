@@ -1,8 +1,10 @@
 #ifndef COMPONENT_SYSTEM_H
 #define COMPONENT_SYSTEM_H
 
-#include "RenderSystem.h"
+#include "GeneralComponentSystem.h"
 #include "AISystem.h"
+#include "PhysicsSystem.h"
+#include "RenderSystem.h"
 
 class Level;
 class GameWindow;
@@ -22,6 +24,15 @@ public:
 	template <typename T, typename... Args>
 	std::shared_ptr<T> getNewAI(Args&& ...args);
 
+	template <typename T, typename... Args>
+	std::shared_ptr<T> getNewPhysics(Args&& ...args);
+
+	template <typename T, typename... Args>
+	std::shared_ptr<T> getNewNonUpdating(Args&& ...args);
+
+	template <typename T, typename... Args>
+	std::shared_ptr<T> getNewUpdating(Args&& ...args);
+
 	template <typename T>
 	static void vector_remove(std::vector<T>& v, int index);
 
@@ -29,12 +40,14 @@ public:
 	static void vector_remove(T& container, typename T::iterator it);
 
 public:
+	GeneralComponentSystem generalComponentSystem_;
 	AISystem aiSystem_;
+	PhysicsSystem physicsSystem_;
 	RenderSystem renderSystem_;
 };
 
 template<typename T, typename ...Args>
-std::shared_ptr<T> ComponentSystem::getNewRenderer(Args&& ...args)
+inline std::shared_ptr<T> ComponentSystem::getNewRenderer(Args&& ...args)
 {
 	std::shared_ptr<T> renderer = std::make_shared<T>(args...);
 	renderSystem_.addComponent(renderer);
@@ -47,6 +60,28 @@ inline std::shared_ptr<T> ComponentSystem::getNewAI(Args&& ...args)
 	std::shared_ptr<T> ai = std::make_shared<T>(args...);
 	aiSystem_.addComponent(ai);
 	return ai;
+}
+
+template<typename T, typename ...Args>
+inline std::shared_ptr<T> ComponentSystem::getNewPhysics(Args&& ...args)
+{
+	std::shared_ptr<T> physics = std::make_shared<T>(args...);
+	physicsSystem_.addComponent(physics);
+	return physics;
+}
+
+template<typename T, typename ...Args>
+inline std::shared_ptr<T> ComponentSystem::getNewNonUpdating(Args&& ...args)
+{
+	return std::make_shared<T>(args...);
+}
+
+template<typename T, typename ...Args>
+inline std::shared_ptr<T> ComponentSystem::getNewUpdating(Args && ...args)
+{
+	std::shared_ptr<T> physics = std::make_shared<T>(args...);
+	generalComponentSystem_.addComponent(physics);
+	return physics;
 }
 
 template <typename T>

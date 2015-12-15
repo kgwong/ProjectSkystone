@@ -11,7 +11,7 @@ Background::~Background()
 }
 
 
-EntityType Background::getType() const
+ObjectType Background::getType() const
 {
-	return EntityType::BACKGROUND;
+	return ObjectType::BACKGROUND;
 }

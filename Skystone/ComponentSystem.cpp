@@ -15,7 +15,9 @@ ComponentSystem::~ComponentSystem()
 
 void ComponentSystem::update(Level& level)
 {
+	generalComponentSystem_.update(level);
 	aiSystem_.update(level);
+	physicsSystem_.update(level);
 }
 
 void ComponentSystem::render(Level& level, GameWindow& window)
