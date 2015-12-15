@@ -11,6 +11,7 @@
 #include "HealthComponent.h"
 #include "FlyingAIComponent.h"
 #include "AIjump.h"
+#include "SwingingAIComponent.h"
 
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -29,18 +30,13 @@ Enemy& EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemyStrong.png");
 		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(500)));
-		//enemyToBuild.setMovementComponent(std::shared_ptr<BasicEnemyMovementComponent>(new BasicEnemyMovementComponent(0)));
-		//enemyToBuild.setMovementComponent(std::shared_ptr<TrackerComponent>(new TrackerComponent()));
 		enemyToBuild.setMovementComponent(std::shared_ptr<FallingAIComponent>(new FallingAIComponent()));
-		//enemyToBuild.setMovementComponent(std::shared_ptr<AIjump>(new AIjump()));
 	}
 	else if (enemyName == "TestMob1")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemy.png");
 		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
-		//enemyToBuild.setMovementComponent(std::shared_ptr<RandomJumperComponent>(new RandomJumperComponent()));
-		//enemyToBuild.setMovementComponent(std::shared_ptr<FlyingAIComponent>(new FlyingAIComponent()));
 		enemyToBuild.setMovementComponent(std::shared_ptr<TrackerComponent>(new TrackerComponent()));
 	}
 	else if (enemyName == "BasicEnemy")
@@ -79,6 +75,15 @@ Enemy& EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		std::shared_ptr<TrackerComponent> ai = std::make_shared<TrackerComponent>();
 		ai->setEnemyState(COWARD);
 		enemyToBuild.setMovementComponent(ai);
+	}
+	else if (enemyName == "swingmob")
+	{
+		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/swingmob.png");
+		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
+		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
+		enemyToBuild.setMovementComponent(std::make_shared<SwingingAIComponent>());
+		//enemyToBuild.onCollision()
+		
 	}
 	return enemyToBuild;
 }

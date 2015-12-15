@@ -112,6 +112,7 @@
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="StunState.cpp" />
+    <ClCompile Include="SwingingAIComponent.cpp" />
     <ClCompile Include="TempGameOverScreen.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="StunState.h" />
+    <ClInclude Include="SwingingAIComponent.h" />
     <ClInclude Include="TempGameOverScreen.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />

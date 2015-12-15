@@ -16,8 +16,12 @@ public:
 
 	static int getDistance(Point& a,Point& b);
 	static int getXDirection(Point& a, Point& b);
-	static bool isNearby(int dist, int radius);
 	static int getYDirection(Point& a, Point& b);
+	static bool isNearby(int dist, int radius);
+
+	static Point getMidPoint(Point& a, Point& b);
+	static int getXMidPoint(Point& a, Point& b);
+	static int getYMidPoint(Point& a, Point &b);
 };
 
 #endif //AI_COMPONENT_H

@@ -1,0 +1,37 @@
+Skystone Project C++
+
+To add new AI, add a new component class that inherits from component.h
+
+To get new repo do
+git clone <name of url here>
+
+git status
+views current state of the repo!
+
+Git shell
+upload new files/commit 
+git add .
+git status
+
+1. git commit -m "Add basic enemy movement"
+2. git pull origin master : downloads from git
+3. git push origin master : uploads to git
+
+//urls for fetch and push
+git remote -v
+
+//returns to previous pull/build. use only when I mess up
+git reset --hard
+
+//git diff for file conflicts fix the **vcxproj file
+
+
+********IDEAS********************
+THEME - SKY PIRATES / anti-hero
+
+-protagonist starts without any weapons
+-protaginst can pick up/drop environmental objects i.e. crates,weapons,boxes, etc.
+-2 level formats sky city/ flying steam punker ships
+
+
+AI - make enemy follow player within a radius of detection
