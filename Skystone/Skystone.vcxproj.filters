@@ -213,11 +213,11 @@
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpdatingComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentSubsystem.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdatingComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -419,11 +419,11 @@
     <ClInclude Include="NonUpdatingComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="UpdatingComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentSubsystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdatingComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

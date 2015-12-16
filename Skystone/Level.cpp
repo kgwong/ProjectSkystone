@@ -27,11 +27,13 @@ Level::~Level()
 
 void Level::onEnter()
 {
+//	player->registerComponents(componentSystem_);
 	startEntityComponents();
 }
 
 void Level::onExit()
 {
+//	player->disownComponents();
 	for (auto& p : playerProjectiles)
 		p->disownComponents();
 	playerProjectiles.clear();

@@ -20,7 +20,7 @@ Player::Player(TextureLoader* textureLoader)
 	: degrees_(0),
 	_renderComponent(new AnimationRenderer(*this, textureLoader->getTextureSheet("Assets/betterPlayer.png"))),
 	_colliderComponent(new ColliderComponent(*this, 0, 0, _renderComponent->getWidth(), _renderComponent->getHeight())),
-	_healthComponent(new HealthComponent(*this, 100)),
+	_healthComponent(new HealthComponent(*this, 777)),
 	_physicsComponent(new PhysicsComponent(*this)),
 	levelChangeComponent_(new LevelChangeComponent(*this)),
 	shoot_(false), 
