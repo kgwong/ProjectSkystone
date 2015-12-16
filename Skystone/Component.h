@@ -10,6 +10,17 @@
 class Component
 {
 public:
+	enum class Type {
+		UPDATING,
+		NON_UPDATING,
+		INPUT,
+		AI,
+		PHYSICS,
+		RENDER,
+		UNKNOWN
+	};
+
+public:
 	Component(GameObject& owner);
 	virtual ~Component() = 0;
 
@@ -18,6 +29,8 @@ public:
 
 	virtual void handleEvent(const CollisionEvent& e);
 	virtual void handleEvent(const ComponentEvent& e);
+
+	virtual Type getType();
 
 	bool owned();
 	void disown();

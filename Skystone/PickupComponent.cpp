@@ -3,7 +3,7 @@
 
 
 PickupComponent::PickupComponent(GameObject& owner)
-	:Component(owner)
+	:NonUpdatingComponent(owner)
 {
 }
 

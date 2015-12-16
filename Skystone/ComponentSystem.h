@@ -18,6 +18,8 @@ public:
 	void update(Level& level);
 	void render(Level& level, GameWindow& window);
 
+	void addComponent(std::shared_ptr<Component> component);
+
 	template <typename T, typename... Args>
 	std::shared_ptr<T> getNewRenderer(Args&& ...args);
 

@@ -1,9 +1,9 @@
 #ifndef DAMAGECOMPONENT_H
 #define DAMAGECOMPONENT_H
 
-#include "Component.h"
+#include "NonUpdatingComponent.h"
 
-class DamageComponent :	public Component
+class DamageComponent :	public NonUpdatingComponent
 {
 public:
 	DamageComponent(GameObject& owner);
@@ -11,7 +11,6 @@ public:
 	virtual ~DamageComponent();
 
 	virtual void start(Level& level) {};
-	virtual void update(Level& level) {};
 
 	int getDamage();
 

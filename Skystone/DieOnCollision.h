@@ -1,9 +1,9 @@
 #ifndef DIE_ON_COLLISION_H
 #define DIE_ON_COLLISION_H
 
-#include "Component.h"
+#include "NonUpdatingComponent.h"
 
-class DieOnCollision : public Component
+class DieOnCollision : public NonUpdatingComponent
 {
 public:
 	DieOnCollision(GameObject& owner);

@@ -12,7 +12,7 @@ PhysicsSystem::~PhysicsSystem()
 {
 }
 
-void PhysicsSystem::addComponent(std::shared_ptr<PhysicsComponent> component)
+void PhysicsSystem::addComponent(std::shared_ptr<Component> component)
 {
 	components_.push_back(component);
 }

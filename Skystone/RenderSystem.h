@@ -6,7 +6,7 @@
 
 class Level;
 class GameWindow;
-class RenderComponent;
+class Component;
 
 class RenderSystem
 {
@@ -17,11 +17,11 @@ public:
 	RenderSystem();
 	~RenderSystem();
 
-	void addComponent(std::shared_ptr<RenderComponent> component);
+	void addComponent(std::shared_ptr<Component> component);
 	void update(Level& level, GameWindow& window);
 
 private:
-	std::vector<std::vector<std::shared_ptr<RenderComponent>>> renderLayers_;
+	std::vector<std::vector<std::shared_ptr<Component>>> renderLayers_;
 };
 
 #endif //RENDER_SYSYEM_H

@@ -12,9 +12,10 @@ RenderSystem::~RenderSystem()
 {
 }
 
-void RenderSystem::addComponent(std::shared_ptr<RenderComponent> component)
+void RenderSystem::addComponent(std::shared_ptr<Component> component)
 {
-	renderLayers_[component->getRenderLayer()].push_back(component);
+	auto c = std::static_pointer_cast<RenderComponent>(component);
+	renderLayers_[c->getRenderLayer()].push_back(component);
 }
 
 void RenderSystem::update(Level& level, GameWindow& window)

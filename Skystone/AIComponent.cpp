@@ -3,6 +3,16 @@
 #include "HealthComponent.h"
 #include "DamageComponent.h"
 
+AIComponent::AIComponent(GameObject & owner)
+	:Component(owner)
+{
+
+}
+
+AIComponent::~AIComponent()
+{
+}
+
 void AIComponent::handleEvent(const CollisionEvent& e)
 {
 	GameObject& other = e.getOtherObject();
@@ -18,6 +28,11 @@ void AIComponent::handleEvent(const ComponentEvent& e)
 	{
 		e.getLevel().addPickupAtLocation(owner_.getPos());
 	}
+}
+
+Component::Type AIComponent::getType()
+{
+	return Component::Type::AI;
 }
 
 
