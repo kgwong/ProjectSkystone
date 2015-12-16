@@ -84,19 +84,7 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerProjectile.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pickup.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpritesheetInfoReader.cpp">
@@ -144,9 +132,6 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StunState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
@@ -189,9 +174,6 @@
     <ClCompile Include="PhysicsSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AIjump.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBuilder.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
     </ClCompile>
@@ -213,12 +195,30 @@
     <ClCompile Include="GeneralComponentSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DieOnCollision.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PickupComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIjump.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Errors.h">
@@ -269,15 +269,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerProjectile.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Pickup.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
     <ClInclude Include="SpritesheetInfo.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
@@ -323,9 +314,6 @@
     <ClInclude Include="CollisionInfo.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TileType.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
     <ClInclude Include="AirborneState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
@@ -351,9 +339,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StunState.h">
@@ -419,11 +404,23 @@
     <ClInclude Include="GeneralComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Entity Headers</Filter>
+    <ClInclude Include="ComponentEvent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectType.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
+    <ClInclude Include="CollisionEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PickupComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DieOnCollision.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

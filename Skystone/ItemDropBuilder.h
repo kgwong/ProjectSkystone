@@ -2,8 +2,9 @@
 #define ITEM_DROP_BUILDER_H
 
 #include <string>
+#include <memory>
 
-class Pickup;
+class GameObject;
 class TextureLoader;
 class ComponentSystem;
 
@@ -13,7 +14,7 @@ public:
 	ItemDropBuilder(TextureLoader* textureLoader);
 	~ItemDropBuilder();
 
-	Pickup& build(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild);
+	std::shared_ptr<GameObject> build(ComponentSystem& componentSystem, const std::string& itemName);
 
 private:
 	TextureLoader* textureLoader_;

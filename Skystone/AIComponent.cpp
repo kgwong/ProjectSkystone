@@ -1,5 +1,26 @@
 #include "AIComponent.h"
 
+#include "HealthComponent.h"
+#include "DamageComponent.h"
+
+void AIComponent::handleEvent(const CollisionEvent& e)
+{
+	GameObject& other = e.getOtherObject();
+	if (other.getType() == GameObject::Type::PLAYER_PROJECTILE)
+	{
+		owner_.getComponent<HealthComponent>()->takeDamage(other.getComponent<DamageComponent>()->getDamage());
+	}
+}
+
+void AIComponent::handleEvent(const ComponentEvent& e)
+{
+	if (e.getType() == ComponentEvent::Type::onDeath)
+	{
+		e.getLevel().addPickupAtLocation(owner_.getPos());
+	}
+}
+
+
 int AIComponent::getDistance(Point& a,Point& b)
 {
 	int x2 = a.x;

@@ -4,8 +4,7 @@
 #include "GameConstants.h"
 #include "ColliderComponent.h"
 #include "SpriteRenderer.h"
-
-#include "Tile.h"
+#include "TileComponent.h"
 
 TileBuilder::TileBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -17,12 +16,12 @@ TileBuilder::~TileBuilder()
 {
 }
 
-Tile& TileBuilder::build(ComponentSystem& componentSystem, int tileType, Tile& tileToBuild)
+GameObject& TileBuilder::build(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)
 {
-	tileToBuild.setType(ObjectType::TILE);
+	tileToBuild.setType(GameObject::Type::TILE);
 	TextureSheet* tileSet = textureLoader_->getTextureSheet("Assets/TileSets/bw.png");
-	tileToBuild.setTileType(tileType);
-
+	tileToBuild.addComponent(componentSystem.getNewNonUpdating<TileComponent>(tileToBuild, static_cast<TileComponent::Type>(tileType)));
+	
 	if (tileType == 1)
 	{
 		tileToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(tileToBuild, tileSet, tileType));

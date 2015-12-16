@@ -3,6 +3,7 @@
 #include "ColliderComponent.h"
 #include "GameConstants.h"
 #include "CollisionInfo.h"
+#include "CollisionEvent.h"
 
 #include <algorithm>
 
@@ -144,7 +145,7 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 
 void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis)
 {
-	if (owner.getType() != ObjectType::TILE)
+	if (owner.getType() != GameObject::Type::TILE)
 	{
 		int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
 		int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
@@ -155,7 +156,7 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 		{
 			for(int r = startR; r <= endR; ++r)
 			{
-				Tile& tile = level.tileArrangement.tiles[r][c];
+				GameObject& tile = level.tileArrangement.tiles[r][c];
 
 				if (collider_->checkCollision(tile))
 				{
@@ -169,7 +170,7 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 
 void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 {
-	if (owner.getType() == ObjectType::PLAYER || owner.getType() == ObjectType::PLAYER_PROJECTILE)
+	if (owner.getType() == GameObject::Type::PLAYER || owner.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
 		for (auto& enemy : level.enemies)
 		{
@@ -181,9 +182,9 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 		}
 	}
 
-	if (owner.getType() == ObjectType::PLAYER)
+	if (owner.getType() == GameObject::Type::PLAYER)
 	{
-		for (auto& pickup : level.pickups)
+		for (auto& pickup : level.drops)
 		{
 			auto& object = *pickup;
 			if (collider_->checkCollision(object))
@@ -197,7 +198,9 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Level& level)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>(); 
-	//is otherCollider necessary?
+	owner.broadcastEvent(CollisionEvent(level, other, *otherCollider));
+	other.broadcastEvent(CollisionEvent(level, owner, *collider_));
+	
 	other.onCollision(CollisionInfo{ level, owner, *otherCollider });
 	owner.onCollision(CollisionInfo{ level, other, *otherCollider });
 }

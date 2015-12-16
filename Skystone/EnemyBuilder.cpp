@@ -1,7 +1,7 @@
 #include "EnemyBuilder.h"
 
 #include "TextureLoader.h"
-#include "Enemy.h"
+#include "GameObject.h"
 
 #include "SpriteRenderer.h"
 #include "BasicEnemyMovementComponent.h"
@@ -25,9 +25,11 @@ EnemyBuilder::~EnemyBuilder()
 {
 }
 
-Enemy& EnemyBuilder::build(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild)
+std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem, const std::string& enemyName)
 {
-	enemyToBuild.setType(ObjectType::ENEMY);
+	auto newEnemy = std::make_shared<GameObject>();
+	auto& enemyToBuild = *newEnemy;
+	enemyToBuild.setType(GameObject::Type::ENEMY);
 	if (enemyName == "TestMobStrong")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemyStrong.png");
@@ -35,7 +37,7 @@ Enemy& EnemyBuilder::build(ComponentSystem& componentSystem, const std::string& 
 		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 500));
 		enemyToBuild.addComponent(componentSystem.getNewAI<FallingAIComponent>(enemyToBuild));
 	}
 	else if (enemyName == "TestMob1")
@@ -97,11 +99,10 @@ Enemy& EnemyBuilder::build(ComponentSystem& componentSystem, const std::string& 
 		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-	//	enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(enemyToBuild, 100)));
+		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 15));
 		auto ai = componentSystem.getNewAI<TrackerComponent>(enemyToBuild);
 		ai->setEnemyState(COWARD);
 		enemyToBuild.addComponent(ai);
 	}
-	return enemyToBuild;
+	return newEnemy;
 }

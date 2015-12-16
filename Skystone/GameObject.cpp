@@ -4,21 +4,21 @@
 
 GameObject::GameObject()
 	:alive_(true), 
-	type_(ObjectType::UNKNOWN)
+	type_(GameObject::Type::UNKNOWN)
 {
 }
 
 GameObject::GameObject(Point position)
 	: position_(position), 
 	alive_(true), 
-	type_(ObjectType::UNKNOWN)
+	type_(GameObject::Type::UNKNOWN)
 {
 }
 
 GameObject::GameObject(int x, int y)
 	:position_(Point(x, y)), 
 	alive_(true), 
-	type_(ObjectType::UNKNOWN)
+	type_(GameObject::Type::UNKNOWN)
 {
 }
 
@@ -68,7 +68,7 @@ void GameObject::addComponent(std::shared_ptr<Component> component)
 		components_[&typeid(*component)] = component;
 }
 
-void GameObject::clearComponents()
+void GameObject::disownComponents()
 {
 	for (auto& c : components_)
 	{
@@ -84,14 +84,15 @@ bool GameObject::alive()
 void GameObject::kill()
 {
 	alive_ = false;
+	this->disownComponents();
 }
 
-void GameObject::setType(ObjectType type)
+void GameObject::setType(GameObject::Type type)
 {
 	type_ = type;
 }
 
-ObjectType GameObject::getType() const
+GameObject::Type GameObject::getType() const
 {
 	return type_;
 }
@@ -101,5 +102,21 @@ void GameObject::startComponents(Level& level)
 	for (auto& i : components_)
 	{
 		i.second->start(level);
+	}
+}
+
+void GameObject::broadcastEvent(const ComponentEvent& e)
+{
+	for (auto& c : components_)
+	{
+		c.second->handleEvent(e);
+	}
+}
+
+void GameObject::broadcastEvent(const CollisionEvent & e)
+{
+	for (auto& c : components_)
+	{
+		c.second->handleEvent(e);
 	}
 }

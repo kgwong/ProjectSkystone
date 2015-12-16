@@ -1,13 +1,11 @@
 #include "PlayerProjectileBuilder.h"
 
-#include "PlayerProjectile.h"
 #include "TextureLoader.h"
 #include "AnimationRenderer.h"
 #include "ColliderComponent.h"
 #include "PhysicsComponent.h"
 #include "DamageComponent.h"
-
-#include <memory>
+#include "DieOnCollision.h"
 
 
 PlayerProjectileBuilder::PlayerProjectileBuilder(TextureLoader* textureLoader)
@@ -19,12 +17,16 @@ PlayerProjectileBuilder::~PlayerProjectileBuilder()
 {
 }
 
-PlayerProjectile& PlayerProjectileBuilder::build(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild)
+std::shared_ptr<GameObject> PlayerProjectileBuilder::build(ComponentSystem& componentSystem, const std::string& name)
 {
-	projectileToBuild.setType(ObjectType::PLAYER_PROJECTILE);
+	auto newProjectile = std::make_shared<GameObject>();
+	auto& projectileToBuild = *newProjectile;
+	projectileToBuild.setType(GameObject::Type::PLAYER_PROJECTILE);
 	projectileToBuild.addComponent(componentSystem.getNewRenderer<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
 	projectileToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(projectileToBuild, 10));
-	return projectileToBuild;
+	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<DieOnCollision>(projectileToBuild));
+
+	return newProjectile;
 }

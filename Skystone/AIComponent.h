@@ -17,6 +17,8 @@ public:
 	virtual void start(Level& level) = 0;
 	virtual void update(Level& level) = 0;
 
+	virtual void handleEvent(const CollisionEvent& e);
+	virtual void handleEvent(const ComponentEvent& e);
 
 	static int getDistance(Point& a,Point& b);
 	static int getXDirection(Point& a, Point& b);

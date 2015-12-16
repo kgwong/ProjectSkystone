@@ -1,11 +1,9 @@
 #ifndef TILE_ARRANGEMENT_H
 #define TILE_ARRANGEMENT_H	
 
-#include "Tile.h"
-
 struct TileArrangement
 {
-	std::vector<std::vector<Tile>> tiles;
+	std::vector<std::vector<GameObject>> tiles;
 	int rows;
 	int cols;
 };
