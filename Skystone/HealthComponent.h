@@ -1,9 +1,9 @@
 #ifndef HEALTHCOMPONENT_H
 #define HEALTHCOMPONENT_H
 
-#include "Component.h"
+#include "UpdatingComponent.h"
 
-class HealthComponent : public Component
+class HealthComponent : public UpdatingComponent
 {
 public:
 	static const int DEFAULT_HEALTH = 100;

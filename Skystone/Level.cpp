@@ -51,7 +51,7 @@ void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRender
 {
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
-	background_->addComponent(componentSystem_.getNewRenderer<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
+	background_->addComponent(componentSystem_.getNew<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
 }
 
 void Level::setPlayer(Player* p, Point startPosition)

@@ -1,17 +1,17 @@
-#ifndef PHYSICS_SYSTEM_H
-#define PHYSICS_SYSTEM_H
+#ifndef COMPONENT_SUBSYSTEM_H
+#define COMPONENT_SUBSYSTEM_H
 
 #include <memory>
 #include <vector>
 
-class Component;
 class Level;
+class Component;
 
-class PhysicsSystem
+class ComponentSubsystem
 {
 public:
-	PhysicsSystem();
-	~PhysicsSystem();
+	ComponentSubsystem();
+	~ComponentSubsystem();
 
 	void addComponent(std::shared_ptr<Component> component);
 	void update(Level& level);
@@ -20,4 +20,4 @@ private:
 	std::vector<std::shared_ptr<Component>> components_;
 };
 
-#endif //PHYSICS_SYSTEM_H
+#endif //COMPONENT_SYSTEM_H

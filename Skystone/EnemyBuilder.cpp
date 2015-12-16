@@ -35,74 +35,74 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	if (enemyName == "TestMobStrong")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemyStrong.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 500));
-		enemyToBuild.addComponent(componentSystem.getNewAI<FallingAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 500));
+		enemyToBuild.addComponent(componentSystem.getNew<FallingAIComponent>(enemyToBuild));
 	}
 	else if (enemyName == "TestMob1")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemy.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNewAI<TrackerComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<TrackerComponent>(enemyToBuild));
 	}
 	else if (enemyName == "BasicEnemy")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/BasicEnemy.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNewAI<BasicEnemyMovementComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<BasicEnemyMovementComponent>(enemyToBuild));
 
 	}
 	else if (enemyName == "RandomJumper")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/RandomJumper.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNewAI<RandomJumperComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<RandomJumperComponent>(enemyToBuild));
 
 	}
 	else if (enemyName == "AIJump")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/AIJump.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNewAI<AIjump>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<AIjump>(enemyToBuild));
 	}
 	else if (enemyName == "Flying")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/Flying.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNewAI<FlyingAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<FlyingAIComponent>(enemyToBuild));
 	}
 	else if (enemyName == "Coward")
 	{
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/Coward.png");
-		enemyToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(enemyToBuild, enemySprite));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNewUpdating<HealthComponent>(enemyToBuild, 15));
-		auto ai = componentSystem.getNewAI<TrackerComponent>(enemyToBuild);
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 15));
+		auto ai = componentSystem.getNew<TrackerComponent>(enemyToBuild);
 		ai->setEnemyState(COWARD);
 		enemyToBuild.addComponent(ai);
 	}

@@ -3,7 +3,7 @@
 #include <iostream> //
 
 HealthComponent::HealthComponent(GameObject& owner)
-	:Component(owner),
+	:UpdatingComponent(owner),
 	health_(DEFAULT_HEALTH),
 	invincible_(false),
 	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
@@ -12,7 +12,7 @@ HealthComponent::HealthComponent(GameObject& owner)
 }
 
 HealthComponent::HealthComponent(GameObject& owner, int initHealth)
-	: Component(owner),
+	: UpdatingComponent(owner),
 	health_(initHealth),
 	invincible_(false),
 	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
