@@ -1,9 +1,9 @@
 #ifndef PICKUP_COMPONENT_H
 #define PICKUP_COMPONENT_H
 
-#include "Component.h"
+#include "NonUpdatingComponent.h"
 
-class PickupComponent : public Component
+class PickupComponent : public NonUpdatingComponent
 {
 public:
 	PickupComponent(GameObject& owner);

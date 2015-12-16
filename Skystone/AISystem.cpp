@@ -11,7 +11,7 @@ AISystem::~AISystem()
 {
 }
 
-void AISystem::addComponent(std::shared_ptr<AIComponent> component)
+void AISystem::addComponent(std::shared_ptr<Component> component)
 {
 	components_.push_back(component);
 }

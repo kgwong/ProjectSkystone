@@ -36,6 +36,11 @@ void PhysicsComponent::update(Level& level)
 	}
 }
 
+Component::Type PhysicsComponent::getType()
+{
+	return Component::Type::PHYSICS;
+}
+
 void PhysicsComponent::enableGravity(bool gravity)
 {
 	gravityEnabled_ = gravity;

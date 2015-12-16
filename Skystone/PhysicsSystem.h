@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-class PhysicsComponent;
+class Component;
 class Level;
 
 class PhysicsSystem
@@ -13,11 +13,11 @@ public:
 	PhysicsSystem();
 	~PhysicsSystem();
 
-	void addComponent(std::shared_ptr<PhysicsComponent> component);
+	void addComponent(std::shared_ptr<Component> component);
 	void update(Level& level);
 
 private:
-	std::vector<std::shared_ptr<PhysicsComponent>> components_;
+	std::vector<std::shared_ptr<Component>> components_;
 };
 
 #endif //PHYSICS_SYSTEM_H

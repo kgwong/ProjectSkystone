@@ -5,7 +5,7 @@
 #include "AnimationRenderer.h"
 
 ColliderComponent::ColliderComponent(GameObject& owner)
-	: Component(owner),
+	: NonUpdatingComponent(owner),
 	_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
 {	
 	//this is a hack, have only one type of Renderer.	
@@ -16,28 +16,20 @@ ColliderComponent::ColliderComponent(GameObject& owner)
 }
 
 ColliderComponent::ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height)
-	: Component(owner),
+	: NonUpdatingComponent(owner),
 	_collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
 {
 
 }
 
 ColliderComponent::ColliderComponent(GameObject& owner, BoxCollider collider)
-	: Component(owner), _offsetX(0), _offsetY(0)
+	: NonUpdatingComponent(owner), _offsetX(0), _offsetY(0)
 {
 	_collider = collider;
 }
 
 ColliderComponent::~ColliderComponent()
 {
-}
-
-void ColliderComponent::update(Level& level)
-{
-	_collider.x = owner_.getPosX() + _offsetX;
-	_collider.y = owner_.getPosY() + _offsetY;
-	//setCollider(BoxCollider{owner.getPosX() + _offsetX, owner.getPosY() + _offsetY,
-	//						owner.getWidth(), owner.getHeight()});
 }
 
 void ColliderComponent::update()

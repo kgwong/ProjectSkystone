@@ -216,6 +216,12 @@
     <ClCompile Include="AIjump.cpp">
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
+    <ClCompile Include="NonUpdatingComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -421,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Entity Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="NonUpdatingComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

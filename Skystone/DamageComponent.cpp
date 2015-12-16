@@ -1,14 +1,14 @@
 #include "DamageComponent.h"
 
 DamageComponent::DamageComponent(GameObject& owner)
-	: Component(owner), 
+	: NonUpdatingComponent(owner),
 	_damage(0)
 {
 
 }
 
 DamageComponent::DamageComponent(GameObject& owner, int damage)
-	: Component(owner),
+	: NonUpdatingComponent(owner),
 	_damage(damage)
 {
 }

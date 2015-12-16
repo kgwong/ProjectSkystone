@@ -108,6 +108,7 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="NonUpdatingComponent.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="StunState.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="GeneralComponentSystem.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="NonUpdatingComponent.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />

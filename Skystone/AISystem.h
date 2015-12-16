@@ -5,7 +5,7 @@
 #include <vector>
 
 class Level;
-class AIComponent;
+class Component;
 
 class AISystem
 {
@@ -13,11 +13,11 @@ public:
 	AISystem();
 	~AISystem();
 
-	void addComponent(std::shared_ptr<AIComponent> component);
+	void addComponent(std::shared_ptr<Component> component);
 	void update(Level& level);
 
 private:
-	std::vector<std::shared_ptr<AIComponent>> components_;
+	std::vector<std::shared_ptr<Component>> components_;
 };
 
 #endif //AI_SYSTEM_H

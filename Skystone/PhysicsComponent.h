@@ -19,6 +19,8 @@ public:
 	virtual void start(Level& level);
 	virtual void update(Level& level);
 
+	virtual Component::Type getType() final;
+
 	void setVelX(int velX);
 	void setVelY(int velY);
 	void setAccelX(int accelX);

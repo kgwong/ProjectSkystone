@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
 #include "Component.h" //for CallStartOnComponents... 
+#include "ComponentSystem.h"
 
 GameObject::GameObject()
 	:alive_(true), 
@@ -73,6 +74,14 @@ void GameObject::disownComponents()
 	for (auto& c : components_)
 	{
 		c.second->disown();
+	}
+}
+
+void GameObject::registerComponents(ComponentSystem& system)
+{
+	for (auto& c : components_)
+	{
+		system.addComponent(c.second);
 	}
 }
 

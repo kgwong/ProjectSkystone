@@ -26,6 +26,11 @@ void Component::handleEvent(const ComponentEvent& e)
 {
 }
 
+Component::Type Component::getType()
+{
+	return Component::Type::UNKNOWN;
+}
+
 bool Component::owned()
 {
 	return owned_;

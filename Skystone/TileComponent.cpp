@@ -3,7 +3,7 @@
 
 
 TileComponent::TileComponent(GameObject& owner, Type type)
-	:Component(owner), type_(type)
+	:NonUpdatingComponent(owner), type_(type)
 {
 }
 
@@ -11,7 +11,7 @@ TileComponent::~TileComponent()
 {
 }
 
-TileComponent::Type TileComponent::getType()
+TileComponent::Type TileComponent::getTileType()
 {
 	return type_;
 }

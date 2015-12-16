@@ -3,7 +3,7 @@
 
 
 DieOnCollision::DieOnCollision(GameObject& owner)
-	: Component(owner)
+	: NonUpdatingComponent(owner)
 {
 }
 

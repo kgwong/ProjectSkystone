@@ -12,6 +12,7 @@ class Level;
 class Component;
 class ComponentEvent;
 class CollisionEvent;
+class ComponentSystem;
 
 class GameObject
 {
@@ -49,6 +50,8 @@ public:
 
 	void disownComponents();
 
+	void registerComponents(ComponentSystem& system);
+
 	bool alive();
 	void kill();
 
@@ -56,7 +59,6 @@ public:
 	virtual Type getType() const;
 
 	virtual void onCollision(CollisionInfo& collision) {}; //ColliderComponent
-	virtual void onDeath(Level& level) {}; //DeathComponent
 
 	virtual void startComponents(Level& level);
 

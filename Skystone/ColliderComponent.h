@@ -1,9 +1,9 @@
 #ifndef COLLIDERCOMPONENT_H
 #define COLLIDERCOMPONENT_H
 
-#include "Component.h"
+#include "NonUpdatingComponent.h"
 
-class ColliderComponent : public Component
+class ColliderComponent : public NonUpdatingComponent
 {
 public:
 	struct BoxCollider
@@ -21,7 +21,6 @@ public:
 	virtual ~ColliderComponent();
 
 	virtual void start(Level& level) {};
-	virtual void update(Level& level);
 	virtual void update();
 
 	void setCollider(BoxCollider newCollider); 

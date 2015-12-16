@@ -7,18 +7,13 @@
 class AIComponent : public Component
 {
 public:
-	AIComponent(GameObject& owner)
-		:Component(owner)
-	{
-
-	}
-	virtual ~AIComponent() {};
-
-	virtual void start(Level& level) = 0;
-	virtual void update(Level& level) = 0;
+	AIComponent(GameObject& owner);
+	virtual ~AIComponent();
 
 	virtual void handleEvent(const CollisionEvent& e);
 	virtual void handleEvent(const ComponentEvent& e);
+
+	virtual Component::Type getType() final;
 
 	static int getDistance(Point& a,Point& b);
 	static int getXDirection(Point& a, Point& b);

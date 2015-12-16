@@ -6,40 +6,24 @@
 class RenderComponent : public Component
 {
 public:
-	RenderComponent(GameObject& owner)
-		:Component(owner)
-	{
+	RenderComponent(GameObject& owner);
+	virtual ~RenderComponent() = 0;
 
+	virtual Component::Type getType() final;
+
+	int x() { 
+		std::cout << "this is actually getting used" << std::endl;
+		return owner_.getPosX(); 
 	}
-	virtual ~RenderComponent() {};
-
-	int x() { return owner_.getPosX(); }
-	int y() { return owner_.getPosY(); }
-
-	virtual void start(Level& level) = 0;
-	virtual void update(Level& level) = 0;
-
-	virtual int getWidth() { return 0; }
-	virtual int getHeight() { return 0; }
-
-	virtual int getRenderLayer() 
-	{ 
-		switch (owner_.getType())
-		{
-		case GameObject::Type::BACKGROUND:
-		case GameObject::Type::TILE:
-			return 0;
-		case GameObject::Type::ENEMY:
-		case GameObject::Type::PLAYER_PROJECTILE:
-		case GameObject::Type::ENEMY_PROJECTILE:
-		case GameObject::Type::DROP:
-			return 1;
-		case GameObject::Type::PLAYER:
-			return 2;
-		default:
-			return 2;
-		}
+	int y() { 
+		std::cout << "this is actualyl getting used" << std::endl;
+		return owner_.getPosY(); 
 	}
+
+	virtual int getWidth();
+	virtual int getHeight();
+
+	virtual int getRenderLayer();
 };
 
 #endif //RENDER_COMPONENT_H

@@ -1,9 +1,9 @@
 #ifndef TILE_COMPONENT_H
 #define TILE_COMPONENT_H
 
-#include "Component.h"
+#include "NonUpdatingComponent.h"
 
-class TileComponent : public Component
+class TileComponent : public NonUpdatingComponent
 {
 public:
 	enum Type
@@ -16,7 +16,7 @@ public:
 	TileComponent(GameObject& owner, Type type);
 	virtual ~TileComponent();
 
-	Type getType();
+	Type getTileType();
 
 private:
 	Type type_;
