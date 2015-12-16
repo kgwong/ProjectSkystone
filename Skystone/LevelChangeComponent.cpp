@@ -3,7 +3,7 @@
 
 
 LevelChangeComponent::LevelChangeComponent(GameObject& owner)
-	: Component(owner),
+	: UpdatingComponent(owner),
 	collider_(nullptr)
 {
 }

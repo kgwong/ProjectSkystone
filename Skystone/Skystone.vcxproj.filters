@@ -147,9 +147,6 @@
     <ClCompile Include="ComponentSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AISystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AIComponent.cpp">
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
@@ -171,9 +168,6 @@
     <ClCompile Include="LevelChangeComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBuilder.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
     </ClCompile>
@@ -191,9 +185,6 @@
     </ClCompile>
     <ClCompile Include="TileBuilder.cpp">
       <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneralComponentSystem.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComponentEvent.cpp">
       <Filter>Source Files</Filter>
@@ -221,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdatingComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSubsystem.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +359,6 @@
     <ClInclude Include="ComponentSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AISystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AIjump.h">
       <Filter>Header Files\AIComponents</Filter>
     </ClInclude>
@@ -389,9 +383,6 @@
     <ClInclude Include="LevelChangeComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TileBuilder.h">
       <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
@@ -406,9 +397,6 @@
     </ClInclude>
     <ClInclude Include="EnemyBuilder.h">
       <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneralComponentSystem.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ComponentEvent.h">
       <Filter>Header Files</Filter>
@@ -430,6 +418,12 @@
     </ClInclude>
     <ClInclude Include="NonUpdatingComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdatingComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSubsystem.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

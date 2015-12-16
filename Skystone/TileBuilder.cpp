@@ -20,13 +20,12 @@ GameObject& TileBuilder::build(ComponentSystem& componentSystem, int tileType, G
 {
 	tileToBuild.setType(GameObject::Type::TILE);
 	TextureSheet* tileSet = textureLoader_->getTextureSheet("Assets/TileSets/bw.png");
-	tileToBuild.addComponent(componentSystem.getNewNonUpdating<TileComponent>(tileToBuild, static_cast<TileComponent::Type>(tileType)));
+	tileToBuild.addComponent(componentSystem.getNew<TileComponent>(tileToBuild, static_cast<TileComponent::Type>(tileType)));
 	
 	if (tileType == 1)
 	{
-		tileToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(tileToBuild, tileSet, tileType));
-		tileToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
+		tileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(tileToBuild, tileSet, tileType));
+		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
 	}
-
 	return tileToBuild;
 }

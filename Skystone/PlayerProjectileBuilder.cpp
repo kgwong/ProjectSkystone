@@ -22,11 +22,10 @@ std::shared_ptr<GameObject> PlayerProjectileBuilder::build(ComponentSystem& comp
 	auto newProjectile = std::make_shared<GameObject>();
 	auto& projectileToBuild = *newProjectile;
 	projectileToBuild.setType(GameObject::Type::PLAYER_PROJECTILE);
-	projectileToBuild.addComponent(componentSystem.getNewRenderer<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
-	projectileToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(projectileToBuild));
-	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(projectileToBuild));
-	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<DamageComponent>(projectileToBuild, 10));
-	projectileToBuild.addComponent(componentSystem.getNewNonUpdating<DieOnCollision>(projectileToBuild));
-
+	projectileToBuild.addComponent(componentSystem.getNew<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
+	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
+	projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
+	projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 10));
+	projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
 	return newProjectile;
 }

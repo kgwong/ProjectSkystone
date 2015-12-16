@@ -22,9 +22,9 @@ std::shared_ptr<GameObject> ItemDropBuilder::build(ComponentSystem& componentSys
 	auto newDrop = std::make_shared<GameObject>();
 	auto& itemDropToBuild = *newDrop;
 	itemDropToBuild.setType(GameObject::Type::DROP);
-	itemDropToBuild.addComponent(componentSystem.getNewRenderer<SpriteRenderer>(itemDropToBuild, textureLoader_->getTextureSheet("Assets/Pickups/pickup.png")));
-	itemDropToBuild.addComponent(componentSystem.getNewPhysics<PhysicsComponent>(itemDropToBuild));
-	itemDropToBuild.addComponent(componentSystem.getNewNonUpdating<ColliderComponent>(itemDropToBuild));
-	itemDropToBuild.addComponent(componentSystem.getNewNonUpdating<PickupComponent>(itemDropToBuild));
+	itemDropToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(itemDropToBuild, textureLoader_->getTextureSheet("Assets/Pickups/pickup.png")));
+	itemDropToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(itemDropToBuild));
+	itemDropToBuild.addComponent(componentSystem.getNew<ColliderComponent>(itemDropToBuild));
+	itemDropToBuild.addComponent(componentSystem.getNew<PickupComponent>(itemDropToBuild));
 	return newDrop;
 }
