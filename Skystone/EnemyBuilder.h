@@ -2,9 +2,10 @@
 #define ENEMY_BUILDER_H
 
 #include <string>
+#include <memory> 
 
 class TextureLoader;
-class Enemy;
+class GameObject;
 class ComponentSystem;
 
 class EnemyBuilder
@@ -13,7 +14,7 @@ public:
 	EnemyBuilder(TextureLoader* textureLoader);
 	virtual ~EnemyBuilder();
 
-	Enemy& build(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild);
+	std::shared_ptr<GameObject> build(ComponentSystem& componentSystem, const std::string& enemyName);
 	
 private:
 	TextureLoader* textureLoader_;

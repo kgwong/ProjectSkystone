@@ -26,15 +26,15 @@ public:
 	{ 
 		switch (owner_.getType())
 		{
-		case ObjectType::BACKGROUND:
-		case ObjectType::TILE:
+		case GameObject::Type::BACKGROUND:
+		case GameObject::Type::TILE:
 			return 0;
-		case ObjectType::ENEMY:
-		case ObjectType::PLAYER_PROJECTILE:
-		case ObjectType::ENEMY_PROJECTILE:
-		case ObjectType::DROP:
+		case GameObject::Type::ENEMY:
+		case GameObject::Type::PLAYER_PROJECTILE:
+		case GameObject::Type::ENEMY_PROJECTILE:
+		case GameObject::Type::DROP:
 			return 1;
-		case ObjectType::PLAYER:
+		case GameObject::Type::PLAYER:
 			return 2;
 		default:
 			return 2;

@@ -15,11 +15,10 @@ public:
 	GameObjectBuilder(TextureLoader* textureLoader);
 	~GameObjectBuilder();
 
-	//test for possibility of RVO
-	Tile& buildTile(ComponentSystem& componentSystem, int tileType, Tile& tileToBuild);
-	Enemy& buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild);
-	Pickup& buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild);
-	PlayerProjectile& buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild);
+	GameObject& buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild);
+	std::shared_ptr<GameObject> buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName);
+	std::shared_ptr<GameObject> buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName);
+	std::shared_ptr<GameObject> buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name);
 
 	//temp
 	TextureSheet* getTexture(const std::string& path);

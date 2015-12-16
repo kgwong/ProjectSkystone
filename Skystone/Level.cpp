@@ -7,7 +7,8 @@
 #include "TextureLoader.h"
 #include "EnemyBuilder.h"
 #include "TileBuilder.h"
-#include "Background.h"
+
+#include "SpriteRenderer.h"
 
 #include "PhysicsComponent.h" //
 #include "CircleMath.h" //
@@ -32,7 +33,7 @@ void Level::onEnter()
 void Level::onExit()
 {
 	for (auto& p : playerProjectiles)
-		p->clearComponents();
+		p->disownComponents();
 	playerProjectiles.clear();
 }
 
@@ -48,8 +49,8 @@ void Level::setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder)
 
 void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer)
 {
-	background_ = std::make_shared<Background>();
-	background_->setType(ObjectType::BACKGROUND);
+	background_ = std::make_shared<GameObject>();
+	background_->setType(GameObject::Type::BACKGROUND);
 	background_->addComponent(componentSystem_.getNewRenderer<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
 }
 
@@ -79,8 +80,9 @@ void Level::startEntityComponents()
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	playerProjectiles.push_back(std::make_shared<PlayerProjectile>(position, vel, degrees));
-	gameObjectBuilder_->buildPlayerProjectile(componentSystem_,"", *playerProjectiles.back());
+	auto n = gameObjectBuilder_->buildPlayerProjectile(componentSystem_, "");
+	n->setPos(position);
+	playerProjectiles.push_back(n);
 	auto physics = playerProjectiles.back()->getComponent<PhysicsComponent>();
 	physics->enableGravity(false);
 
@@ -93,15 +95,17 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 
 void Level::addPickupAtLocation(Point position)
 {
-	pickups.push_back(std::make_shared<Pickup>(position));
-	gameObjectBuilder_->buildItemDrop(componentSystem_, "", *pickups.back());
-	pickups.back()->startComponents(*this);
+	auto n = gameObjectBuilder_->buildItemDrop(componentSystem_, "");
+	n->setPos(position);
+	drops.push_back(n);
+	drops.back()->startComponents(*this);
 }
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	enemies.push_back(std::make_shared<Enemy>(position));
-	gameObjectBuilder_->buildEnemy(componentSystem_, name, *enemies.back());
+	auto n = gameObjectBuilder_->buildEnemy(componentSystem_, name);
+	n->setPos(position);
+	enemies.push_back(n);
 	enemies.back()->startComponents(*this);
 }
 
@@ -119,26 +123,34 @@ void Level::addTileAtLocation(int tileType, Point position)
 
 void Level::update()
 {
-	updateBackground();
-	updateTiles();
 	updatePlayer();
-	updatePlayerProjectiles();
-	updateEnemies();
 	componentSystem_.update(*this);
+	removeDeadObjects(drops);
+	removeDeadObjects(enemies);
+	removeDeadObjects(playerProjectiles);
 }
 
-void Level::updateBackground()
+void Level::startComponents(std::vector<std::shared_ptr<GameObject>>& v)
 {
-	//todo: be able to switch backgrounds
+	for (auto& obj : v)
+		obj->startComponents(*this);
 }
 
-void Level::updateTiles()
+void Level::removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v)
 {
-	for (int r = 0; r < tileArrangement.rows; ++r)
-		for (int c = 0; c < tileArrangement.cols; ++c)
+	for (size_t i = 0; i < v.size(); /*empty*/)
+	{
+		auto& obj = v[i];
+		if (!obj->alive())
 		{
-			tileArrangement.tiles[r][c].update(*this);
+			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
+			ComponentSystem::vector_remove(v, i);
 		}
+		else
+		{
+			++i;
+		}
+	}
 }
 
 void Level::updatePlayer()
@@ -153,16 +165,6 @@ void Level::updatePlayer()
 	{
 		player->onDeath(*this);
 	}
-}
-
-void Level::updatePlayerProjectiles()
-{
-	updateEntityVector(playerProjectiles);
-}
-
-void Level::updateEnemies()
-{
-	updateEntityVector(enemies);
 }
 
 void Level::render(GameWindow& window)

@@ -4,21 +4,23 @@
 #include "GameObject.h"
 #include "Level.h"
 
+#include "ComponentEvent.h"
+#include "CollisionEvent.h"
+
 class Component
 {
 public:
-	Component(GameObject& owner)
-		:owner_(owner)
-	{
+	Component(GameObject& owner);
+	virtual ~Component() = 0;
 
-	}
-	virtual ~Component() {};
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
-	virtual void start(Level& level) = 0;
-	virtual void update(Level& level) = 0;
+	virtual void handleEvent(const CollisionEvent& e);
+	virtual void handleEvent(const ComponentEvent& e);
 
-	bool owned() { return owned_; }
-	void disown() { owned_ = false; }
+	bool owned();
+	void disown();
 
 protected:
 	GameObject& owner_;

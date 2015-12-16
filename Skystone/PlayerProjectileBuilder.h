@@ -2,8 +2,9 @@
 #define PLAYER_PROJECTILE_BUILDER_H
 
 #include <string>
+#include <memory>
 
-class PlayerProjectile;
+class GameObject;
 class TextureLoader;
 class ComponentSystem;
 
@@ -13,10 +14,10 @@ public:
 	PlayerProjectileBuilder(TextureLoader* textureLoader);
 	~PlayerProjectileBuilder();
 
-	PlayerProjectile& build(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild);
+	std::shared_ptr<GameObject> build(ComponentSystem& componentSystem, const std::string& name);
 
 private:
 	TextureLoader* textureLoader_;
 };
 
-#endif PLAYER_PROJECTILE_BUILDER_H
+#endif //PLAYER_PROJECTILE_BUILDER_H

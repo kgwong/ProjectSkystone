@@ -2,8 +2,6 @@
 
 #include "GameConstants.h"
 #include "TextureLoader.h"
-#include "Enemy.h"
-#include "Tile.h"
 
 #include "SpriteRenderer.h"
 #include "BasicEnemyMovementComponent.h"
@@ -29,24 +27,24 @@ GameObjectBuilder::~GameObjectBuilder()
 {
 }
 
-Tile& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, Tile& tileToBuild)
+GameObject& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)
 {
 	return tileBuilder_.build(componentSystem, tileType, tileToBuild);
 }
 
-Enemy& GameObjectBuilder::buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName, Enemy& enemyToBuild)
+std::shared_ptr<GameObject> GameObjectBuilder::buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName)
 {
-	return enemyBuilder_.build(componentSystem, enemyName, enemyToBuild);
+	return enemyBuilder_.build(componentSystem, enemyName);
 }
 
-Pickup& GameObjectBuilder::buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName, Pickup& itemDropToBuild)
+std::shared_ptr<GameObject> GameObjectBuilder::buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName)
 {
-	return itemDropBuilder_.build(componentSystem, itemName, itemDropToBuild);
+	return itemDropBuilder_.build(componentSystem, itemName);
 }
 
-PlayerProjectile& GameObjectBuilder::buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name, PlayerProjectile& projectileToBuild)
+std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name)
 {
-	return playerProjectileBuilder_.build(componentSystem, name, projectileToBuild);
+	return playerProjectileBuilder_.build(componentSystem, name);
 }
 
 TextureSheet* GameObjectBuilder::getTexture(const std::string & path)

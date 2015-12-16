@@ -3,7 +3,6 @@
 #include "PhysicsComponent.h"
 
 
-#include <iostream> //
 PhysicsSystem::PhysicsSystem()
 {
 }
@@ -16,7 +15,6 @@ PhysicsSystem::~PhysicsSystem()
 void PhysicsSystem::addComponent(std::shared_ptr<PhysicsComponent> component)
 {
 	components_.push_back(component);
-	std::cout << "test" << std::endl;
 }
 
 void PhysicsSystem::update(Level& level)

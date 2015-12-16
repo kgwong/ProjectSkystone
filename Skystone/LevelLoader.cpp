@@ -3,7 +3,6 @@
 #include "Level.h"
 #include "LevelManager.h"
 #include "TextureLoader.h"
-#include "Background.h"
 #include "GameConstants.h"
 #include "Path.h"
 #include "Log.h"
@@ -79,7 +78,7 @@ void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 
 	level->tileArrangement.rows = numRows;
 	level->tileArrangement.cols = numCols;
-	level->tileArrangement.tiles = std::vector<std::vector<Tile>>(numRows, std::vector<Tile>(numCols));
+	level->tileArrangement.tiles = std::vector<std::vector<GameObject>>(numRows, std::vector<GameObject>(numCols));
 
 	for (int r = 0; r < numRows; ++r)
 	{

@@ -2,17 +2,12 @@
 #define LEVEL_H
 
 #include "Player.h"
-#include "Enemy.h"
-#include "PlayerProjectile.h"
 #include "TileArrangement.h"
-#include "Pickup.h"
-
 #include "ComponentSystem.h"
 
 #include <iostream> //
 #include <memory>
 
-class Background;
 class LevelLoader;
 class LevelMap;
 class LevelManager;
@@ -22,7 +17,6 @@ class SpriteRenderer;
 
 class Level
 {
-
 public:
 	Level(int levelID);
 	~Level();
@@ -58,15 +52,15 @@ public:
 public:
 	Player* player;
 	TileArrangement tileArrangement;
-	std::vector<std::shared_ptr<Enemy>> enemies;
-	std::vector<std::shared_ptr<PlayerProjectile>> playerProjectiles;
-	std::vector<std::shared_ptr<Pickup>> pickups;
+	std::vector<std::shared_ptr<GameObject>> enemies;
+	std::vector<std::shared_ptr<GameObject>> playerProjectiles;
+	std::vector<std::shared_ptr<GameObject>> drops;
 
 private:
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	GameObjectBuilder* gameObjectBuilder_;
-	std::shared_ptr<Background> background_;
+	std::shared_ptr<GameObject> background_;
 
 	Block oldPlayerBlock_;
 	Point oldPlayerPosInBlock_;
@@ -75,49 +69,14 @@ private:
 	ComponentSystem componentSystem_;
 
 private:
-	template <typename Entity>
-	void startComponents(std::vector<std::shared_ptr<Entity>>& v);
+	void startComponents(std::vector<std::shared_ptr<GameObject>>& v);
+	void removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v);
 
-	void updateBackground();
-	void updateTiles();
 	void updatePlayer();
-	void updatePlayerProjectiles();	
-	void updateEnemies();
 
-	template <typename Entity>
-	void updateEntityVector(std::vector<std::shared_ptr<Entity>>& v); //isDead() and update() must be defined for Entity;
-	
 	void renderPlayer();
 
 };
-
-template <typename Entity>
-void Level::startComponents(std::vector<std::shared_ptr<Entity>>& v)
-{
-	for (auto& entity : v)
-		entity->startComponents(*this);
-}
-
-template <typename Entity>
-void Level::updateEntityVector(std::vector<std::shared_ptr<Entity>>& v)
-{
-	auto it = v.begin();
-	while (it != v.end())
-	{
-		auto& obj = *it;
-		if (obj->alive())
-		{
-			obj->update(*this);
-			++it;
-		}
-		else
-		{
-			obj->onDeath(*this);
-			obj->clearComponents();
-			it = v.erase(it);
-		}
-	}
-}
 
 #endif //LEVEL_H
 

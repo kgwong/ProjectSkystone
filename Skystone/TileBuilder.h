@@ -1,7 +1,7 @@
 #ifndef TILE_BUILDER_H
 #define TILE_BUILDER_H
 
-class Tile;
+class GameObject;
 
 class TextureLoader;
 class ComponentSystem;
@@ -12,7 +12,7 @@ public:
 	TileBuilder(TextureLoader* textureLoader);
 	~TileBuilder();
 
-	Tile& build(ComponentSystem& componentSystem, int tileType, Tile& tileToBuild);
+	GameObject& build(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild);
 
 private:
 	TextureLoader* textureLoader_;

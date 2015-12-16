@@ -6,15 +6,27 @@
 #include <memory>
 
 #include "Point.h"
-#include "ObjectType.h"
-
 #include "CollisionInfo.h"
 
 class Level;
 class Component;
+class ComponentEvent;
+class CollisionEvent;
 
 class GameObject
 {
+public:
+	enum class Type
+	{
+		PLAYER,
+		PLAYER_PROJECTILE,
+		ENEMY,
+		ENEMY_PROJECTILE,
+		TILE,
+		DROP,
+		BACKGROUND,
+		UNKNOWN
+	};
 public:
 	GameObject();
 	GameObject(Point position);
@@ -35,26 +47,30 @@ public:
 	template <typename ComponentT>
 	ComponentT* getComponent();
 
-	void clearComponents();
+	void disownComponents();
 
 	bool alive();
 	void kill();
 
-	virtual void setType(ObjectType type);
-	virtual ObjectType getType() const;
+	virtual void setType(Type type);
+	virtual Type getType() const;
 
 	virtual void onCollision(CollisionInfo& collision) {}; //ColliderComponent
 	virtual void onDeath(Level& level) {}; //DeathComponent
 
 	virtual void startComponents(Level& level);
 
+	void broadcastEvent(const ComponentEvent& e);
+	//FIX THIS LATER!!
+	//http://stackoverflow.com/questions/6897662/matching-an-overloaded-function-to-its-polymorphic-argument
+	void broadcastEvent(const CollisionEvent& e);
 
 protected:
 	Point position_;
 	std::unordered_map<const std::type_info*, std::shared_ptr<Component>> components_;
 
 	bool alive_;
-	ObjectType type_;
+	Type type_;
 };
 
 //http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components
