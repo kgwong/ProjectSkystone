@@ -25,7 +25,6 @@ public:
 private:
 	int xVelocity_;
 	PhysicsComponent* physics_;
-	int timer_;
 	int timeInterval_;
 	int yVelocity_;
 

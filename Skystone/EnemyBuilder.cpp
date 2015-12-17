@@ -12,6 +12,7 @@
 #include "FlyingAIComponent.h"
 #include "AIjump.h"
 #include "SwingingAIComponent.h"
+#include "SnakeAIComponent.h"
 
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -65,7 +66,7 @@ Enemy& EnemyBuilder::build(const std::string& enemyName, Enemy& enemyToBuild)
 		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/Flying.png");
 		enemyToBuild.setRenderComponent(std::shared_ptr<RenderComponent>(new SpriteRenderer(enemySprite)));
 		enemyToBuild.setHealthComponent(std::shared_ptr<HealthComponent>(new HealthComponent(100)));
-		enemyToBuild.setMovementComponent(std::make_shared<FlyingAIComponent>());
+		enemyToBuild.setMovementComponent(std::make_shared<SnakeAIComponent>());
 	}
 	else if (enemyName == "Coward")
 	{

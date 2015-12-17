@@ -111,6 +111,7 @@
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RNG.cpp" />
+    <ClCompile Include="SnakeAIComponent.cpp" />
     <ClCompile Include="StunState.cpp" />
     <ClCompile Include="SwingingAIComponent.cpp" />
     <ClCompile Include="TempGameOverScreen.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
+    <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="StunState.h" />
     <ClInclude Include="SwingingAIComponent.h" />
     <ClInclude Include="TempGameOverScreen.h" />
