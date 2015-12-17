@@ -36,6 +36,9 @@ void SwingingAIComponent::update(GameObject& owner, Level& level)
 		currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
 		currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
 
+
+		std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
+
 		//boundary coniditions
 		if (currentAngle_ > maxAngle_)
 		{
