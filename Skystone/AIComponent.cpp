@@ -10,6 +10,16 @@ int AIComponent::getDistance(Point& a,Point& b)
 	return dist;
 }
 
+int AIComponent::getXDistance(Point& a, Point& b)
+{
+	return abs(a.x - b.x);
+}
+
+int AIComponent::getYDistance(Point& a, Point& b)
+{
+	return abs(a.y - b.y);
+}
+
 int AIComponent::getXDirection(Point & a, Point & b)
 {
 	return a.x - b.x;
@@ -25,6 +35,10 @@ bool AIComponent::isNearby(int dist,int radius)
 	return std::abs(dist) <= radius;
 }
 
+bool AIComponent::isDistance(Point&a, Point&b, int dist)
+{
+	return getDistance(a, b) == dist;
+}
 
 Point AIComponent::getMidPoint(Point& a, Point& b)
 {
