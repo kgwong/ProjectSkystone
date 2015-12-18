@@ -14,7 +14,8 @@
 #include "CircleMath.h" //
 
 Level::Level(int levelID)
-	:levelManager_(nullptr),
+	:player(nullptr),
+	levelManager_(nullptr),
 	gameObjectBuilder_(nullptr),
 	background_(nullptr),
 	levelID_(levelID)
@@ -27,16 +28,17 @@ Level::~Level()
 
 void Level::onEnter()
 {
-//	player->registerComponents(componentSystem_);
+	player->registerComponents(componentSystem_);
 	startEntityComponents();
 }
 
 void Level::onExit()
 {
-//	player->disownComponents();
+	player->disownComponents();
 	for (auto& p : playerProjectiles)
 		p->disownComponents();
 	playerProjectiles.clear();
+	componentSystem_.cleanup();
 }
 
 void Level::setLevelManager(LevelManager* levelManager)
@@ -56,7 +58,7 @@ void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRender
 	background_->addComponent(componentSystem_.getNew<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
 }
 
-void Level::setPlayer(Player* p, Point startPosition)
+void Level::setPlayer(GameObject* p, Point startPosition)
 {
 	player = p;
 	player->setPos(startPosition);
@@ -123,6 +125,11 @@ void Level::addTileAtLocation(int tileType, Point position)
 	//tileArrangement.tiles[r][c] = tile;
 }
 
+void Level::handleInput(SDL_Event& e)
+{
+	componentSystem_.handleInput(e);
+}
+
 void Level::update()
 {
 	updatePlayer();
@@ -157,23 +164,19 @@ void Level::removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v)
 
 void Level::updatePlayer()
 {
-	player->update(*this);
-
 	oldPlayerBlock_ = Block::getBlock(player->getPos());
 	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
 		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 
 	if (!player->alive())
 	{
-		player->onDeath(*this);
+		player->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
 	}
 }
 
 void Level::render(GameWindow& window)
 {
-	//note order of rendering
 	componentSystem_.render(*this, window);
-	renderPlayer();
 }
 
 int Level::getID()
@@ -213,11 +216,6 @@ void Level::setNextLevel(Direction dir)
 								newRelativeBlock.r * Constants::BLOCK_HEIGHT_IN_PIXELS + oldPlayerPosInBlock_.y};
 
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
-}
-
-void Level::renderPlayer()
-{
-	player->render(*this);
 }
 
 int Level::getLevelWidth() const

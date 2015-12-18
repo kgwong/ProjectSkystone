@@ -1,9 +1,12 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "Player.h"
+#include "GameObject.h"
+#include "Block.h"
+#include "Direction.h"
 #include "TileArrangement.h"
 #include "ComponentSystem.h"
+#include "SDL\SDL.h"
 
 #include <iostream> //
 #include <memory>
@@ -28,12 +31,13 @@ public:
 	void setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder);
 	void setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer);
 
-	void setPlayer(Player* player, Point startPosition);
+	void setPlayer(GameObject* player, Point startPosition);
 	Point getPlayerPos();
 
 	LevelManager* getLevelManager();
 	void startEntityComponents();
 
+	void handleInput(SDL_Event& e);
 	void update();
 	void render(GameWindow& window);
 
@@ -50,7 +54,7 @@ public:
 	void addTileAtLocation(int tileType, Point position);
 
 public:
-	Player* player;
+	GameObject* player;
 	TileArrangement tileArrangement;
 	std::vector<std::shared_ptr<GameObject>> enemies;
 	std::vector<std::shared_ptr<GameObject>> playerProjectiles;
@@ -73,9 +77,6 @@ private:
 	void removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v);
 
 	void updatePlayer();
-
-	void renderPlayer();
-
 };
 
 #endif //LEVEL_H

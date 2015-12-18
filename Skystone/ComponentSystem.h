@@ -3,6 +3,8 @@
 
 #include "RenderSystem.h"
 #include "ComponentSubsystem.h"
+#include "InputSystem.h"
+#include "SDL\SDL.h"
 
 class Level;
 class GameWindow;
@@ -13,8 +15,11 @@ public:
 	ComponentSystem();
 	~ComponentSystem();
 
+	void handleInput(SDL_Event& e);
 	void update(Level& level);
 	void render(Level& level, GameWindow& window);
+
+	void cleanup();
 
 	void addComponent(std::shared_ptr<Component> component);
 
@@ -25,6 +30,7 @@ public:
 	static void vector_remove(std::vector<T>& v, int index);
 
 public:
+	InputSystem inputSystem_;
 	ComponentSubsystem generalComponentSystem_;
 	ComponentSubsystem aiSystem_;
 	ComponentSubsystem physicsSystem_;

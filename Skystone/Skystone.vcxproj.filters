@@ -84,9 +84,6 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SpritesheetInfoReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -224,6 +221,21 @@
     <ClCompile Include="UpdatingComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovementState.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -273,9 +285,6 @@
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
     <ClInclude Include="SpritesheetInfo.h">
       <Filter>Header Files\Struct Headers</Filter>
@@ -329,9 +338,6 @@
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPlayerStates.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="FlyingState.h">
@@ -438,6 +444,21 @@
     </ClInclude>
     <ClInclude Include="UpdatingComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovementState.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

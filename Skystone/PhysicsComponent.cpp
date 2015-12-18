@@ -2,7 +2,6 @@
 
 #include "ColliderComponent.h"
 #include "GameConstants.h"
-#include "CollisionInfo.h"
 #include "CollisionEvent.h"
 
 #include <algorithm>
@@ -205,9 +204,6 @@ void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Lev
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>(); 
 	owner.broadcastEvent(CollisionEvent(level, other, *otherCollider));
 	other.broadcastEvent(CollisionEvent(level, owner, *collider_));
-	
-	other.onCollision(CollisionInfo{ level, owner, *otherCollider });
-	owner.onCollision(CollisionInfo{ level, other, *otherCollider });
 }
 
 void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Level& level, Axis axis)

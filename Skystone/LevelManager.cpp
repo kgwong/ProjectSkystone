@@ -29,7 +29,7 @@ void LevelManager::setTextureLoader(TextureLoader* textureLoader)
 	textureLoader_ = textureLoader;
 }
 
-void LevelManager::setPlayer(Player* player)
+void LevelManager::setPlayer(GameObject* player)
 {
 	player_ = player;
 }

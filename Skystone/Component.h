@@ -33,7 +33,7 @@ public:
 	virtual Type getType();
 
 	bool owned();
-	void disown();
+	void setOwned(bool owned);
 
 protected:
 	GameObject& owner_;

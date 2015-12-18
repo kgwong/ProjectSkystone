@@ -5,16 +5,16 @@
 #include <string>
 #include "Controls.h"
 
-#include "Player.h"
+#include "GameObject.h"
 #include "PhysicsComponent.h"
 
 class PlayerState
 {
 public:
-	virtual void onEnter(Player& player) = 0;
-	virtual void onExit(Player& player) = 0;
-	virtual void handleInput(Player& player, SDL_Event& e) = 0;
-	virtual void update(Player& player) = 0;
+	virtual void onEnter(GameObject& player) = 0;
+	virtual void onExit(GameObject& player) = 0;
+	virtual void handleInput(GameObject& player, SDL_Event& e) = 0;
+	virtual void update(GameObject& player) = 0;
 
 	virtual std::string name() = 0;
 

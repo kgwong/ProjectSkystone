@@ -19,7 +19,6 @@ public:
 	virtual int getHeight();
 
 private:
-	GameWindow* window_;
 	TextureSheet* textureSheet_;
 
 	int currFrame_;
