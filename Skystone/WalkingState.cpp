@@ -1,7 +1,7 @@
 #include "WalkingState.h"
 
-#include "Player.h"
-#include "TestPlayerStates.h"
+#include "GameObject.h"
+#include "PlayerMovementState.h"
 
 WalkingState::WalkingState()
 {
@@ -11,29 +11,29 @@ WalkingState::~WalkingState()
 {
 }
 
-void WalkingState::onEnter(Player& player)
+void WalkingState::onEnter(GameObject& player)
 {
 }
 
-void WalkingState::onExit(Player& player)
+void WalkingState::onExit(GameObject& player)
 {
 }
 
-void WalkingState::handleInput(Player& player, SDL_Event& e)
+void WalkingState::handleInput(GameObject& player, SDL_Event& e)
 {
 	if (e.type == SDL_KEYDOWN)
 	{
 		if (e.key.keysym.sym == controlMap[JUMP])
-			player.getComponent<PhysicsComponent>()->setVelY(Player::JUMP_VELOCITY);
+			player.getComponent<PhysicsComponent>()->setVelY(JUMP_VELOCITY);
 
 	}
 }
 
-void WalkingState::update(Player& player)
+void WalkingState::update(GameObject& player)
 {
 	if (player.getComponent<PhysicsComponent>()->isFalling())
 	{
-		player.changeState(&states::airborneState);
+		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
 		return;
 	}
 
@@ -42,10 +42,10 @@ void WalkingState::update(Player& player)
 
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-Player::WALK_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelX(-WALK_VELOCITY);
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(Player::WALK_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelX(WALK_VELOCITY);
 	}
 }

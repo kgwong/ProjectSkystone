@@ -100,6 +100,8 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="ItemDropBuilder.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelChangeComponent.cpp" />
@@ -113,6 +115,9 @@
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
+    <ClCompile Include="PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
@@ -126,7 +131,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpritesheetInfoReader.cpp" />
     <ClCompile Include="TextureSheet.cpp" />
     <ClCompile Include="TileBuilder.cpp" />
@@ -151,10 +155,15 @@
     <ClInclude Include="FlyingAIComponent.h" />
     <ClInclude Include="GameObjectBuilder.h" />
     <ClInclude Include="GameOverException.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="NonUpdatingComponent.h" />
     <ClInclude Include="PickupComponent.h" />
+    <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />
@@ -189,13 +198,11 @@
     <ClInclude Include="RandomJumperComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RNG.h" />
-    <ClInclude Include="TestPlayerStates.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MusicPlayer.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="SpritesheetInfo.h" />
     <ClInclude Include="SpritesheetInfoReader.h" />

@@ -1,9 +1,12 @@
 #include "GameObjectBuilder.h"
 
+#include <memory>
+
 #include "GameConstants.h"
 #include "TextureLoader.h"
 
 #include "SpriteRenderer.h"
+#include "AnimationRenderer.h"
 #include "BasicEnemyMovementComponent.h"
 #include "RandomJumperComponent.h"
 #include "TrackerComponent.h"
@@ -12,6 +15,10 @@
 #include "ColliderComponent.h"
 #include "FlyingAIComponent.h"
 #include "AIjump.h"
+#include "PlayerAttackState.h"
+#include "PlayerComponent.h"
+#include "PlayerMovementState.h"
+#include "LevelChangeComponent.h"
 
 
 GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
@@ -25,6 +32,19 @@ GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
 
 GameObjectBuilder::~GameObjectBuilder()
 {
+}
+
+void GameObjectBuilder::buildPlayer(TextureLoader* textureLoader, GameObject& player)
+{
+	player.setType(GameObject::Type::PLAYER);
+	player.addComponent(std::make_shared<AnimationRenderer>(player, textureLoader->getTextureSheet("Assets/betterPlayer.png")));
+	player.addComponent(std::make_shared<PhysicsComponent>(player));
+	player.addComponent(std::make_shared<HealthComponent>(player, 100));
+	player.addComponent(std::make_shared<ColliderComponent>(player));
+	player.addComponent(std::make_shared<LevelChangeComponent>(player));
+	player.addComponent(std::make_shared<PlayerComponent>(player));
+	player.addComponent(std::make_shared<PlayerMovementState>(player));
+	player.addComponent(std::make_shared<PlayerAttackState>(player));
 }
 
 GameObject& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)

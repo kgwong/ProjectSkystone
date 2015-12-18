@@ -22,12 +22,31 @@ void RenderSystem::update(Level& level, GameWindow& window)
 {
 	for (auto& layer : renderLayers_)
 	{
-		for (int i = 0; i < layer.size(); /*empty*/ )
+		for (size_t i = 0; i < layer.size(); /*empty*/ )
 		{
 			auto& component = layer[i];
 			if (component->owned())
 			{
 				component->update(level);
+				++i;
+			}
+			else
+			{
+				ComponentSystem::vector_remove(layer, i);
+			}
+		}
+	}
+}
+
+void RenderSystem::cleanup()
+{
+	for (auto& layer : renderLayers_)
+	{
+		for (size_t i = 0; i < layer.size(); /*empty*/)
+		{
+			auto& component = layer[i];
+			if (component->owned())
+			{
 				++i;
 			}
 			else

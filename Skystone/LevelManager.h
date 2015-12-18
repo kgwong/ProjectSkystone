@@ -17,7 +17,7 @@ public:
 
 	void setTextureLoader(TextureLoader* textureLoader);
 
-	void setPlayer(Player* player);
+	void setPlayer(GameObject* player);
 
 	void initStartingLevel();
 
@@ -29,7 +29,7 @@ public:
 
 private:
 	TextureLoader* textureLoader_;
-	Player* player_;
+	GameObject* player_;
 
 	LevelMap levelMap_;
 	LevelLoader levelLoader_;

@@ -1,7 +1,7 @@
 #include "FlyingState.h"
 
-#include "Player.h"
-#include "TestPlayerStates.h"
+#include "GameObject.h"
+#include "PlayerMovementState.h"
 
 FlyingState::FlyingState()
 {
@@ -12,26 +12,26 @@ FlyingState::~FlyingState()
 {
 }
 
-void FlyingState::onEnter(Player& player)
+void FlyingState::onEnter(GameObject& player)
 {
-	player.getComponent<PhysicsComponent>()->setVelY(-Player::FLIGHT_VELOCITY);
+	player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
 }
 
-void FlyingState::onExit(Player& player)
+void FlyingState::onExit(GameObject& player)
 {
 }
 
-void FlyingState::handleInput(Player& player, SDL_Event& e)
+void FlyingState::handleInput(GameObject& player, SDL_Event& e)
 {
 	if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[JUMP])
-		player.changeState(&states::airborneState);
+		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
 }
 
-void FlyingState::update(Player& player)
+void FlyingState::update(GameObject& player)
 {
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
-		player.changeState(&states::walkingState);
+		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
 		return;
 	}
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
@@ -39,11 +39,11 @@ void FlyingState::update(Player& player)
 
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-Player::FLIGHT_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelX(-FLIGHT_VELOCITY);
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(Player::FLIGHT_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelX(FLIGHT_VELOCITY);
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[JUMP])])
 	{
@@ -51,10 +51,10 @@ void FlyingState::update(Player& player)
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[UP])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(-Player::FLIGHT_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[DOWN])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(Player::FLIGHT_VELOCITY);
+		player.getComponent<PhysicsComponent>()->setVelY(FLIGHT_VELOCITY);
 	}
 }

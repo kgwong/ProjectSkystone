@@ -7,7 +7,9 @@ class ComponentEvent
 {
 public:
 	enum class Type {
-		onDeath, onCollision
+		onDeath, 
+		onCollision,
+		onDamageTaken
 	};
 
 public:

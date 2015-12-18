@@ -16,6 +16,11 @@ ComponentSystem::~ComponentSystem()
 {
 }
 
+void ComponentSystem::handleInput(SDL_Event& e)
+{
+	inputSystem_.handleInput(e);
+}
+
 void ComponentSystem::update(Level& level)
 {
 	generalComponentSystem_.update(level);
@@ -28,12 +33,21 @@ void ComponentSystem::render(Level& level, GameWindow& window)
 	renderSystem_.update(level, window);
 }
 
+void ComponentSystem::cleanup()
+{
+	generalComponentSystem_.cleanup();
+	aiSystem_.cleanup();
+	physicsSystem_.cleanup();
+	renderSystem_.cleanup();
+}
+
 void ComponentSystem::addComponent(std::shared_ptr<Component> component)
 {
 	switch (component->getType())
 	{
 	case Component::Type::INPUT:
-		LOG_COUT << "Warning: nothing should be here yet";
+		inputSystem_.addComponent(component);
+		generalComponentSystem_.addComponent(component);
 		break;
 	case Component::Type::AI:
 		aiSystem_.addComponent(component);

@@ -6,7 +6,6 @@
 #include <memory>
 
 #include "Point.h"
-#include "CollisionInfo.h"
 
 class Level;
 class Component;
@@ -57,8 +56,6 @@ public:
 
 	virtual void setType(Type type);
 	virtual Type getType() const;
-
-	virtual void onCollision(CollisionInfo& collision) {}; //ColliderComponent
 
 	virtual void startComponents(Level& level);
 

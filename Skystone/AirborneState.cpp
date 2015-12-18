@@ -1,7 +1,8 @@
 #include "AirborneState.h"
 
-#include "Player.h"
-#include "TestPlayerStates.h"	
+#include "GameObject.h"
+#include "PlayerMovementState.h"
+//#include "TestPlayerStates.h"	
 
 AirborneState::AirborneState()
 {
@@ -12,29 +13,29 @@ AirborneState::~AirborneState()
 {
 }
 
-void AirborneState::onEnter(Player& player)
+void AirborneState::onEnter(GameObject& player)
 {
 	jumpHeld_ = true;
 }
 
-void AirborneState::onExit(Player& player)
+void AirborneState::onExit(GameObject& player)
 {
 }
 
-void AirborneState::handleInput(Player& player, SDL_Event& e)
+void AirborneState::handleInput(GameObject& player, SDL_Event& e)
 {
 	if (!jumpHeld_)
 	{
 		if (e.key.keysym.sym == controlMap[JUMP])
-			player.changeState(&states::flyingState);
+			player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::flyingState);
 	}
 }
 
-void AirborneState::update(Player& player)
+void AirborneState::update(GameObject& player)
 {
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
-		player.changeState(&states::walkingState);
+		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
 		return;
 	}
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);

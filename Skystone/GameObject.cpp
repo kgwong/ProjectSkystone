@@ -73,7 +73,7 @@ void GameObject::disownComponents()
 {
 	for (auto& c : components_)
 	{
-		c.second->disown();
+		c.second->setOwned(false);
 	}
 }
 
@@ -82,6 +82,7 @@ void GameObject::registerComponents(ComponentSystem& system)
 	for (auto& c : components_)
 	{
 		system.addComponent(c.second);
+		c.second->setOwned(true);
 	}
 }
 

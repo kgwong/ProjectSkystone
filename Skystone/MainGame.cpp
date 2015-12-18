@@ -10,10 +10,10 @@
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	textureLoader_(&window_),
-	player_(&textureLoader_),
 	quit_(false),
 	levelManager_(&textureLoader_)
 {
+	GameObjectBuilder::buildPlayer(&textureLoader_, player_);
 	levelManager_.setTextureLoader(&textureLoader_);
 	levelManager_.setPlayer(&player_);
 	levelManager_.initStartingLevel();
@@ -50,12 +50,11 @@ void MainGame::processInput()
 				quit_ = true;
 			case SDL_KEYDOWN:
 				//std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
-				player_.handleInput(e);
 				if (e.key.keysym.sym == SDLK_p)
 					levelManager_.getLevelMap()->print();
 				break;
 			case SDL_KEYUP:
-				player_.handleInput(e);
+				break;
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
 				break;
@@ -66,8 +65,8 @@ void MainGame::processInput()
 			default:
 				break;
 		}
+		levelManager_.getCurrentLevel()->handleInput(e);
 	}
-	player_.handleInput2();
 }
 
 void MainGame::update()

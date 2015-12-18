@@ -1,6 +1,7 @@
 #include "StunState.h"
 
-#include "TestPlayerStates.h"
+#include "PlayerMovementState.h"
+#include "GameObject.h"
 
 #include <iostream>
 
@@ -14,26 +15,26 @@ StunState::~StunState()
 {
 }
 
-void StunState::onEnter(Player& player)
+void StunState::onEnter(GameObject& player)
 {
 	firstUpdate_ = true;
 }
 
-void StunState::onExit(Player& player)
+void StunState::onExit(GameObject& player)
 {
 }
 
-void StunState::handleInput(Player& player, SDL_Event& e)
+void StunState::handleInput(GameObject& player, SDL_Event& e)
 {
 }
 
-void StunState::update(Player& player)
+void StunState::update(GameObject& player)
 {
 	if (!firstUpdate_)
 	{
 		if (!player.getComponent<PhysicsComponent>()->isFalling())
 		{
-			player.changeState(&states::airborneState);
+			player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
 			return;
 		}
 	}

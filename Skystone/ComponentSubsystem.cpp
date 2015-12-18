@@ -32,3 +32,19 @@ void ComponentSubsystem::update(Level& level)
 		}
 	}
 }
+
+void ComponentSubsystem::cleanup()
+{
+	for (size_t i = 0; i < components_.size(); /*EMPTY*/)
+	{
+		auto& component = components_[i];
+		if (component->owned())
+		{
+			++i;
+		}
+		else
+		{
+			ComponentSystem::vector_remove(components_, i);
+		}
+	}
+}

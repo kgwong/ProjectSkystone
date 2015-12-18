@@ -15,10 +15,13 @@ public:
 	GameObjectBuilder(TextureLoader* textureLoader);
 	~GameObjectBuilder();
 
+	static void buildPlayer(TextureLoader* textureLoader, GameObject& player);
+
 	GameObject& buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild);
 	std::shared_ptr<GameObject> buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName);
 	std::shared_ptr<GameObject> buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName);
 	std::shared_ptr<GameObject> buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name);
+
 
 	//temp
 	TextureSheet* getTexture(const std::string& path);

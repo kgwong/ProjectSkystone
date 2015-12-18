@@ -20,6 +20,8 @@ public:
 	void addComponent(std::shared_ptr<Component> component);
 	void update(Level& level, GameWindow& window);
 
+	void cleanup();
+
 private:
 	std::vector<std::vector<std::shared_ptr<Component>>> renderLayers_;
 };

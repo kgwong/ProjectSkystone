@@ -36,7 +36,7 @@ bool Component::owned()
 	return owned_;
 }
 
-void Component::disown()
+void Component::setOwned(bool owned)
 {
-	owned_ = false;
+	owned_ = owned;
 }
