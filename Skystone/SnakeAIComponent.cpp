@@ -2,8 +2,10 @@
 #include "PhysicsComponent.h"
 #include <iostream>
 using namespace std;
-SnakeAIComponent::SnakeAIComponent()
-	:velocity_(DEFAULT_VELOCITY)
+
+SnakeAIComponent::SnakeAIComponent(GameObject& owner)
+	:AIComponent(owner), 
+	velocity_(DEFAULT_VELOCITY)
 {
 }
 
@@ -12,18 +14,18 @@ SnakeAIComponent::~SnakeAIComponent()
 {
 }
 
-void SnakeAIComponent::start(GameObject & owner, Level & level)
+void SnakeAIComponent::start(Level& level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
 	physics_->enableGravity(false);
 	physics_->setVelX(velocity_);
-	cornerPosition_ = owner.getPos();
+	cornerPosition_ = owner_.getPos();
 }
 
-void SnakeAIComponent::update(GameObject & owner, Level & level)
+void SnakeAIComponent::update(Level& level)
 {
-	cout << std::to_string(getXDistance(owner.getPos(), cornerPosition_)) + " ";
-	if (getXDistance(owner.getPos(), cornerPosition_) > DEFAULT_X_DIST)
+	cout << std::to_string(getXDistance(owner_.getPos(), cornerPosition_)) + " ";
+	if (getXDistance(owner_.getPos(), cornerPosition_) > DEFAULT_X_DIST)
 	{
 		
 		if (physics_->getVelX() > 0)
@@ -37,11 +39,11 @@ void SnakeAIComponent::update(GameObject & owner, Level & level)
 		}
 
 		physics_->setVelX(0);
-		cornerPosition_ = owner.getPos();
+		cornerPosition_ = owner_.getPos();
 
 	}
 
-	if (getYDistance(owner.getPos(), cornerPosition_) > DEFAULT_Y_DIST)
+	if (getYDistance(owner_.getPos(), cornerPosition_) > DEFAULT_Y_DIST)
 	{
 		if (physics_->getVelY() > 0)
 		{
@@ -54,7 +56,7 @@ void SnakeAIComponent::update(GameObject & owner, Level & level)
 		}
 
 		physics_->setVelY(0);
-		cornerPosition_ = owner.getPos();
+		cornerPosition_ = owner_.getPos();
 
 	}
 

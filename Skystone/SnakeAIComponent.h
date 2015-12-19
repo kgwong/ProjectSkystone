@@ -1,7 +1,9 @@
 #ifndef SNAKE_AI_COMPONENT_H
 #define SNAKE_AI_COMPONENT_H
+
 #include "AIComponent.h"
 
+class PhysicsComponent;
 
 class SnakeAIComponent :
 	public AIComponent
@@ -16,11 +18,11 @@ public:
 
 public:
 
-	SnakeAIComponent();
+	SnakeAIComponent(GameObject& owner);
 	virtual ~SnakeAIComponent();
 
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 
 private:
 

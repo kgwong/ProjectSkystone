@@ -16,10 +16,10 @@ public:
 	static const int DEFAULT_MAX_ANGLE = 80;
 	static const int ANGULAR_VELOCITY = 3;
 public:
-	SwingingAIComponent();
+	SwingingAIComponent(GameObject& owner);
 	virtual ~SwingingAIComponent();
-	virtual void start(GameObject& owner, Level& level);
-	virtual void update(GameObject& owner, Level& level);
+	virtual void start(Level& level);
+	virtual void update(Level& level);
 private:
 	PhysicsComponent * physics_;
 	int radius_;//rope length

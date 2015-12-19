@@ -3,7 +3,8 @@
 #include "CircleMath.h"
 #include <iostream>
 
-SwingingAIComponent::SwingingAIComponent() :
+SwingingAIComponent::SwingingAIComponent(GameObject& owner) :
+	AIComponent(owner),
 	radius_(168),stepRadius_(1), center_(Point{ 350,32 }), originalPosition_(Point{ 350,200 }),
 	currentPosition_(originalPosition_), direction_(1),
 	minAngle_(DEFAULT_MIN_ANGLE),maxAngle_(DEFAULT_MAX_ANGLE),
@@ -15,17 +16,17 @@ SwingingAIComponent::~SwingingAIComponent()
 {	
 }
 
-void SwingingAIComponent::start(GameObject& owner,Level& level)
+void SwingingAIComponent::start(Level& level)
 {
-	physics_ = owner.getComponent<PhysicsComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
 	
 	//setpoints here
-	owner.setPos(currentPosition_);
+	owner_.setPos(currentPosition_);
 	physics_->enableGravity(false);
 
 }
 
-void SwingingAIComponent::update(GameObject& owner, Level& level)
+void SwingingAIComponent::update(Level& level)
 {
 	//increase length of rope
 	//radius_ += stepRadius_;
@@ -58,7 +59,7 @@ void SwingingAIComponent::update(GameObject& owner, Level& level)
 			currentAngle_ -= angleVelocity_;
 
 
-		owner.setPos(currentPosition_);
+		owner_.setPos(currentPosition_);
 	}
 }
 
