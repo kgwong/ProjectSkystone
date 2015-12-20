@@ -37,7 +37,7 @@ void SwingingAIComponent::update(Level& level)
 	if (isHit_)
 	{
 		++timer_;
-		if (timer_ >= TIME_TO_SWING && maxAngle_ != 0 && minAngle_ != 0)
+		if (timer_ % 10 == 0 && maxAngle_ > 0 && minAngle_ < 0)
 		{
 			--maxAngle_;
 			++minAngle_;
@@ -46,19 +46,22 @@ void SwingingAIComponent::update(Level& level)
 		{
 			--angleVelocity_;
 		}
-		if (angleVelocity_ == 1 && timer_ >= TIME_TO_SWING * 2)
+		if (angleVelocity_ == 1 && timer_ >= TIME_TO_SWING * 4)
 		{
 			isHit_ = false;
 			angleVelocity_ = ANGULAR_VELOCITY;
 			maxAngle_ = DEFAULT_MAX_ANGLE;
 			minAngle_ = DEFAULT_MIN_ANGLE;
 			timer_ = 0;
-			owner_.setPos(originalPosition_);
+			currentPosition_ = originalPosition_;	
 		}
-
-		currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
-		currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
-	//	std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
+		else
+		{
+			currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
+			currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
+		}
+		
+		//std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 
 		//boundary coniditions
 		if (currentAngle_ > maxAngle_)
