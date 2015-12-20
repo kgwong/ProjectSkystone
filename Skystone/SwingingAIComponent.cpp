@@ -5,10 +5,11 @@
 
 SwingingAIComponent::SwingingAIComponent(GameObject& owner) :
 	AIComponent(owner),
-	radius_(168),stepRadius_(1), center_(Point{ 350,32 }), originalPosition_(Point{ 350,200 }),
+	radius_(168), stepRadius_(1), center_(Point{ 350,32 }), originalPosition_(Point{ 350,200 }),
 	currentPosition_(originalPosition_), direction_(1),
-	minAngle_(DEFAULT_MIN_ANGLE),maxAngle_(DEFAULT_MAX_ANGLE),
-	currentAngle_(0),angleVelocity_(ANGULAR_VELOCITY)
+	minAngle_(DEFAULT_MIN_ANGLE), maxAngle_(DEFAULT_MAX_ANGLE),
+	currentAngle_(0), angleVelocity_(ANGULAR_VELOCITY),
+	isHit_(false), timer_(0)
 {
 }
 
@@ -32,13 +33,19 @@ void SwingingAIComponent::update(Level& level)
 	//radius_ += stepRadius_;
 
 	//trial 3
-	if (!onHit)
+	if (isHit_)
 	{
+		++timer_;
+
+		if (timer_ >= TIME_TO_SWING)
+		{
+			isHit_ = false;
+			timer_ = 0;
+		}
+
 		currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
 		currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
-
-
-		std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
+		//	std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 
 		//boundary coniditions
 		if (currentAngle_ > maxAngle_)
@@ -58,9 +65,20 @@ void SwingingAIComponent::update(Level& level)
 		if (direction_ < 0)
 			currentAngle_ -= angleVelocity_;
 
-
 		owner_.setPos(currentPosition_);
 	}
+}
+
+//handles collision events.
+void SwingingAIComponent::handleEvent(const CollisionEvent & e)
+{
+	//in java I'm trying to make a super call.
+	AIComponent::handleEvent(e);
+	GameObject &other = e.getOtherObject();
+
+	//if player shoots a projectile at me, i will swing crazy.
+	if (other.getType() == GameObject::Type::PLAYER_PROJECTILE)
+		isHit_ = true;
 }
 
 
