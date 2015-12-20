@@ -25,6 +25,7 @@ void SwingingAIComponent::start(Level& level)
 	owner_.setPos(currentPosition_);
 	physics_->enableGravity(false);
 
+	//std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 }
 
 void SwingingAIComponent::update(Level& level)
@@ -36,16 +37,28 @@ void SwingingAIComponent::update(Level& level)
 	if (isHit_)
 	{
 		++timer_;
-
-		if (timer_ >= TIME_TO_SWING)
+		if (timer_ >= TIME_TO_SWING && maxAngle_ != 0 && minAngle_ != 0)
+		{
+			--maxAngle_;
+			++minAngle_;
+		}
+		if (timer_ % TIME_TO_SWING == 0 && angleVelocity_ > 1)
+		{
+			--angleVelocity_;
+		}
+		if (angleVelocity_ == 1 && timer_ >= TIME_TO_SWING * 2)
 		{
 			isHit_ = false;
+			angleVelocity_ = ANGULAR_VELOCITY;
+			maxAngle_ = DEFAULT_MAX_ANGLE;
+			minAngle_ = DEFAULT_MIN_ANGLE;
 			timer_ = 0;
+			owner_.setPos(originalPosition_);
 		}
 
 		currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
 		currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
-		//	std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
+	//	std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 
 		//boundary coniditions
 		if (currentAngle_ > maxAngle_)
@@ -78,7 +91,16 @@ void SwingingAIComponent::handleEvent(const CollisionEvent & e)
 
 	//if player shoots a projectile at me, i will swing crazy.
 	if (other.getType() == GameObject::Type::PLAYER_PROJECTILE)
+	{
 		isHit_ = true;
+		Point bulletPoint = other.getPos();
+		Point ownerPoint = owner_.getPos();
+		//if bullet shot from the left, mob swings to the right, otherwise mob swings to the left
+		if (AIComponent::getXDirection(ownerPoint, bulletPoint) > 0)
+			direction_ = 1;
+		else
+			direction_ = -1;
+	}
 }
 
 

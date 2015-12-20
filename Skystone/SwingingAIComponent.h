@@ -13,7 +13,7 @@ public:
 	static const int DEFAULT_MIN_ANGLE = -80;
 	static const int DEFAULT_MAX_ANGLE = 80;
 	static const int ANGULAR_VELOCITY = 3;
-	static const int TIME_TO_SWING = 120;
+	static const int TIME_TO_SWING = 180;
 public:
 	SwingingAIComponent(GameObject& owner);
 	virtual ~SwingingAIComponent();
