@@ -19,6 +19,8 @@ public:
 	virtual int getWidth();
 	virtual int getHeight();
 
+	void changeSprite(TextureSheet* textureSheet);
+
 public: ///
 	TextureSheet* textureSheet_;
 

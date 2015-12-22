@@ -142,7 +142,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SnakeAIComponent.cpp">
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -234,6 +234,18 @@
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAttackState.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultAimState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAimState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AimUpState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControlComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -328,9 +340,6 @@
     <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionInfo.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
     <ClInclude Include="AirborneState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
@@ -374,9 +383,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ComponentSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AIjump.h">
@@ -458,6 +464,18 @@
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAttackState.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultAimState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAimState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AimUpState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControlComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

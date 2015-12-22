@@ -3,6 +3,10 @@
 
 #include "InputComponent.h"
 
+#include "PlayerAimState.h"
+#include "DefaultAimState.h"
+#include "AimUpState.h"
+
 class PlayerAttackState : public InputComponent
 {
 public:
@@ -13,15 +17,20 @@ public:
 
 	static const int PROJECTILE_VELOCITY = 20;
 
+	static DefaultAimState defaultAimState;
+	static AimUpState aimUpState;
+
 public:
 	PlayerAttackState(GameObject& owner);
 	virtual ~PlayerAttackState();
 
 	virtual void handleInput(SDL_Event& e);
-
 	virtual void update(Level& level);
 
+	void changeState(PlayerAimState* state);
+
 private:
+	PlayerAimState* currentState_;
 	AimState aimState_;
 	AimState prevAimState_;
 	double degrees_;

@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "PlayerMovementState.h"
+#include "PlayerControlComponent.h"
 
 FlyingState::FlyingState()
 {
@@ -24,14 +25,18 @@ void FlyingState::onExit(GameObject& player)
 void FlyingState::handleInput(GameObject& player, SDL_Event& e)
 {
 	if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[JUMP])
-		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
+	{
+		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+	}
 }
 
 void FlyingState::update(GameObject& player)
 {
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
-		player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
+		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::walkingState);
 		return;
 	}
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);

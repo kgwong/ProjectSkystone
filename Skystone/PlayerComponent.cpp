@@ -5,6 +5,7 @@
 #include "DamageComponent.h"
 #include "PhysicsComponent.h"
 #include "PlayerMovementState.h"
+#include "PlayerControlComponent.h"
 
 #include "Direction.h"
 
@@ -34,7 +35,9 @@ void PlayerComponent::handleEvent(const ComponentEvent& e)
 	case ComponentEvent::Type::onDamageTaken:
 		std::cout << "Hit by enemy! " << health_->getHealth() << "hp left" << std::endl;
 		health_->setInvincible(true);
-		owner_.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::stunState);
+		//owner_.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::stunState);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::stunState);
+
 		if (physics_->isMovingLeft())
 		{
 			physics_->setVelX(10);

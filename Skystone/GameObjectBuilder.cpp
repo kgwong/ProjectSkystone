@@ -19,6 +19,7 @@
 #include "PlayerComponent.h"
 #include "PlayerMovementState.h"
 #include "LevelChangeComponent.h"
+#include "PlayerControlComponent.h"
 
 
 GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
@@ -43,8 +44,9 @@ void GameObjectBuilder::buildPlayer(TextureLoader* textureLoader, GameObject& pl
 	player.addComponent(std::make_shared<ColliderComponent>(player));
 	player.addComponent(std::make_shared<LevelChangeComponent>(player));
 	player.addComponent(std::make_shared<PlayerComponent>(player));
-	player.addComponent(std::make_shared<PlayerMovementState>(player));
-	player.addComponent(std::make_shared<PlayerAttackState>(player));
+	//player.addComponent(std::make_shared<PlayerMovementState>(player));
+	//player.addComponent(std::make_shared<PlayerAttackState>(player));
+	player.addComponent(std::make_shared<PlayerControlComponent>(player));
 }
 
 GameObject& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)

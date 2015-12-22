@@ -1,6 +1,7 @@
 #include "PlayerMovementState.h"
 
 #include "PlayerState.h"
+#include "Log.h"
 
 WalkingState PlayerMovementState::walkingState;
 FlyingState PlayerMovementState::flyingState;
@@ -24,6 +25,7 @@ void PlayerMovementState::handleInput(SDL_Event& e)
 
 void PlayerMovementState::update(Level& level)
 {
+	LOG << "Movement";
 	currentState_->update(owner_);
 }
 

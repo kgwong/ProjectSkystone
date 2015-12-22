@@ -1,11 +1,19 @@
 #include "PlayerAttackState.h"
 
 #include "PhysicsComponent.h"
+#include "PlayerState.h"
 
+#include "PlayerMovementState.h" //
 #include "Controls.h"
+
+#include "Log.h"
+
+DefaultAimState PlayerAttackState::defaultAimState;
+AimUpState PlayerAttackState::aimUpState;
 
 PlayerAttackState::PlayerAttackState(GameObject& owner)
 	:InputComponent(owner),
+	currentState_(&defaultAimState),
 	aimState_(AimState::RIGHT),
 	degrees_(0),
 	shoot_(false)
@@ -17,12 +25,13 @@ PlayerAttackState::~PlayerAttackState()
 {
 }
 
-void PlayerAttackState::handleInput(SDL_Event & e)
+void PlayerAttackState::handleInput(SDL_Event& e)
 {
+	currentState_->handleInput(owner_, e);
 	if (e.key.keysym.sym == controlMap[ATTACK])
 		shoot_ = true;
 
-	if (aimState_ == AimState::UP)
+	/*if (aimState_ == AimState::UP)
 	{
 		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
 		{
@@ -55,12 +64,12 @@ void PlayerAttackState::handleInput(SDL_Event & e)
 			}
 			aimState_ = AimState::UP;
 		}
-	}
+	}*/
 }
 
 void PlayerAttackState::update(Level& level)
 {
-	switch (aimState_)
+	/*switch (aimState_)
 	{
 	case AimState::UP:
 		degrees_ = 270;
@@ -79,11 +88,20 @@ void PlayerAttackState::update(Level& level)
 	case AimState::RIGHT:
 		degrees_ = 0;
 		break;
-	}
-
+	}*/
+	LOG << "Attack";
+	currentState_->update(owner_);
+	degrees_ = currentState_->getAngle();
 	if (shoot_)
 	{
 		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
 		shoot_ = false;
 	}
+}
+
+void PlayerAttackState::changeState(PlayerAimState* state)
+{
+	currentState_->onExit(owner_);
+	currentState_ = state;
+	currentState_->onEnter(owner_);
 }

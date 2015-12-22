@@ -21,7 +21,6 @@ public:
 	virtual ~PlayerMovementState();
 
 	virtual void handleInput(SDL_Event& e);
-
 	virtual void update(Level& level);
 
 	void changeState(PlayerState* state);

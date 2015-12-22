@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AIjump.cpp" />
+    <ClCompile Include="AimUpState.cpp" />
     <ClCompile Include="AirborneState.cpp" />
     <ClCompile Include="BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="ComponentSubsystem.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
+    <ClCompile Include="DefaultAimState.cpp" />
     <ClCompile Include="DieOnCollision.cpp" />
     <ClCompile Include="EnemyBuilder.cpp" />
     <ClCompile Include="Errors.cpp" />
@@ -115,8 +117,10 @@
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
+    <ClCompile Include="PlayerAimState.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PlayerControlComponent.cpp" />
     <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
@@ -143,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIjump.h" />
+    <ClInclude Include="AimUpState.h" />
     <ClInclude Include="AirborneState.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="BasicEnemyMovementComponent.h" />
@@ -152,6 +157,7 @@
     <ClInclude Include="ComponentEvent.h" />
     <ClInclude Include="ComponentSubsystem.h" />
     <ClInclude Include="ComponentSystem.h" />
+    <ClInclude Include="DefaultAimState.h" />
     <ClInclude Include="DieOnCollision.h" />
     <ClInclude Include="FallingAIComponent.h" />
     <ClInclude Include="FlyingAIComponent.h" />
@@ -163,8 +169,10 @@
     <ClInclude Include="LevelChangeComponent.h" />
     <ClInclude Include="NonUpdatingComponent.h" />
     <ClInclude Include="PickupComponent.h" />
+    <ClInclude Include="PlayerAimState.h" />
     <ClInclude Include="PlayerAttackState.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PlayerControlComponent.h" />
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="SnakeAIComponent.h" />
@@ -176,7 +184,6 @@
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="CollisionInfo.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="DamageComponent.h" />

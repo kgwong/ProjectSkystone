@@ -2,8 +2,7 @@
 
 #include "PlayerMovementState.h"
 #include "GameObject.h"
-
-#include <iostream>
+#include "PlayerControlComponent.h"
 
 StunState::StunState()
 	:firstUpdate_(true)
@@ -34,7 +33,8 @@ void StunState::update(GameObject& player)
 	{
 		if (!player.getComponent<PhysicsComponent>()->isFalling())
 		{
-			player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
+			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
+			player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
 			return;
 		}
 	}

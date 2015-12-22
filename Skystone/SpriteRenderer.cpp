@@ -40,3 +40,8 @@ int SpriteRenderer::getHeight()
 {
 	return drawSrc_->h;
 }
+
+void SpriteRenderer::changeSprite(TextureSheet* textureSheet)
+{
+
+}
