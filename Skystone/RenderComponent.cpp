@@ -41,6 +41,6 @@ int RenderComponent::getRenderLayer()
 	case GameObject::Type::PLAYER:
 		return 2;
 	default:
-		return 10;
+		return 9;
 	}
 }

@@ -32,18 +32,18 @@ std::shared_ptr<GameObject> PlayerHookBuilder::build(ComponentSystem& componentS
 
 
 	//crash occurs at SPRITERENDERER HERE!!! ~~~~~~~~~~~~~~~~~~~~~~
-	//std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, sheet);
+	std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, sheet);
 	std::shared_ptr<PhysicsComponent> physics_ptr = componentSystem.getNew<PhysicsComponent>(hookToBuild);
 	///------------------------------------------------------------
-	
+	hookToBuild.addComponent(spriteRenderer_ptr);
 	//error here too
-	//std::shared_ptr<ColliderComponent> collider_ptr = componentSystem.getNew<ColliderComponent>(hookToBuild);
+	std::shared_ptr<ColliderComponent> collider_ptr = componentSystem.getNew<ColliderComponent>(hookToBuild);
 
 	//adding gameobject type and components
 	hookToBuild.setType(GameObject::Type::PLAYER_HOOK);
-	//hookToBuild.addComponent(spriteRenderer_ptr);
+
 	hookToBuild.addComponent(physics_ptr);
-	//hookToBuild.addComponent(collider_ptr);
+	hookToBuild.addComponent(collider_ptr);
 
 	return someHook;
 }
