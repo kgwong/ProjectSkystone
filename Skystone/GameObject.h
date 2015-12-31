@@ -25,7 +25,8 @@ public:
 		TILE,
 		DROP,
 		BACKGROUND,
-		UNKNOWN
+		UNKNOWN,
+		PLAYER_HOOK
 	};
 public:
 	GameObject();

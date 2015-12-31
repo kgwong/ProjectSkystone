@@ -6,6 +6,8 @@
 #include "ItemDropBuilder.h"
 #include "PlayerProjectileBuilder.h"
 
+#include "PlayerHookBuilder.h"
+
 class TextureSheet;
 class ComponentSystem;
 
@@ -23,6 +25,9 @@ public:
 	std::shared_ptr<GameObject> buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name);
 
 
+	//the hooks
+	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
+
 	//temp
 	TextureSheet* getTexture(const std::string& path);
 
@@ -32,6 +37,9 @@ private:
 	TileBuilder tileBuilder_;
 	ItemDropBuilder itemDropBuilder_;
 	PlayerProjectileBuilder playerProjectileBuilder_;
+	/////////////////////////////////////////////////
+	PlayerHookBuilder playerHookBuilder_;
+
 };
 
 #endif GAME_OBJECT_BUILDER_H

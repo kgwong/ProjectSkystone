@@ -25,6 +25,14 @@ void SwingingAIComponent::start(Level& level)
 	owner_.setPos(currentPosition_);
 	physics_->enableGravity(false);
 
+
+	//testing bullet capabilities here.
+	Point location;
+	location.x = 375;
+	location.y = 100;
+	level.addPlayerProjectileAtLocation(location, 2, 45);
+
+
 	//std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 }
 

@@ -97,6 +97,24 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 	playerProjectiles.back()->startComponents(*this); 
 }
 
+//---//
+void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
+{
+	//code breaks here....
+	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
+	hookToFling->setPos(position);
+	playerHook.push_back(hookToFling);
+	auto physics = playerHook.back()->getComponent<PhysicsComponent>();
+	physics->enableGravity(false);
+
+	int newVelX = (int)(velocity * cos(toRadians(degrees)));
+	int newVelY = (int)(velocity * sin(toRadians(degrees)));
+	physics->setVelX(newVelX);
+	physics->setVelY(newVelY);
+	playerHook.back()->startComponents(*this);
+	std::cout << "DONE";
+}
+
 void Level::addPickupAtLocation(Point position)
 {
 	auto n = gameObjectBuilder_->buildItemDrop(componentSystem_, "");
