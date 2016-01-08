@@ -8,7 +8,7 @@
 #include "EnemyBuilder.h"
 #include "TileBuilder.h"
 
-#include "SpriteRenderer.h"
+#include "ScrollingSpriteRenderer.h"
 
 #include "PhysicsComponent.h" //
 #include "CircleMath.h" //
@@ -55,7 +55,8 @@ void Level::setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRender
 {
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
-	background_->addComponent(componentSystem_.getNew<SpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTest.png")));
+	int layer = 3;
+	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTestSmall.png"), layer));
 }
 
 void Level::setPlayer(GameObject* p, Point startPosition)

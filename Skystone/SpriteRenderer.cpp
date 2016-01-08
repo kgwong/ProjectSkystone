@@ -1,6 +1,7 @@
 #include "SpriteRenderer.h"
 
 #include "GameWindow.h"
+#include "Log.h"
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, TextureSheet* textureSheet)
 	:RenderComponent(owner),

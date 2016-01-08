@@ -248,6 +248,9 @@
     <ClCompile Include="PlayerControlComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScrollingSpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -477,6 +480,9 @@
     </ClInclude>
     <ClInclude Include="PlayerControlComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollingSpriteRenderer.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
