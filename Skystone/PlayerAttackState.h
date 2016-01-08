@@ -36,6 +36,8 @@ private:
 	double degrees_;
 	bool shoot_;
 
+	bool launch_;
+
 };
 
 #endif //PLAYER_ATTACK_STATE_H

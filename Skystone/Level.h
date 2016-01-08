@@ -53,6 +53,8 @@ public:
 	void addEnemyAtLocation(const std::string& name, Point position);
 	void addTileAtLocation(int tileType, Point position);
 
+	void addPlayerHookAtLocation(Point position, int velocity, double degrees);
+
 public:
 	GameObject* player;
 	TileArrangement tileArrangement;
@@ -60,6 +62,8 @@ public:
 	std::vector<std::shared_ptr<GameObject>> playerProjectiles;
 	std::vector<std::shared_ptr<GameObject>> drops;
 
+	//there should only be one hook per cast.
+	std::vector<std::shared_ptr<GameObject>> playerHook;
 private:
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;

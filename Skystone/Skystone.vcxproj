@@ -121,6 +121,7 @@
     <ClCompile Include="PlayerAttackState.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="PlayerControlComponent.cpp" />
+    <ClCompile Include="PlayerHookBuilder.cpp" />
     <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="PlayerAttackState.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayerControlComponent.h" />
+    <ClInclude Include="PlayerHookBuilder.h" />
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="ScrollingSpriteRenderer.h" />

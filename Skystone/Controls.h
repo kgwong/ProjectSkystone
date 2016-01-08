@@ -5,6 +5,9 @@
 
 #include <SDL\SDL.h>
 
+
+//added hook controls d to launch hook.
+
 enum Controls
 {
 	UP = 0,
@@ -12,8 +15,8 @@ enum Controls
 	LEFT = 2,
 	RIGHT = 3,
 	JUMP = 4,
-	ATTACK = 5
-
+	ATTACK = 5,
+	LAUNCH_HOOK = 6
 };
 
 static std::vector<SDL_Keycode> controlMap{
@@ -22,7 +25,8 @@ static std::vector<SDL_Keycode> controlMap{
 	SDLK_LEFT,
 	SDLK_RIGHT,
 	SDLK_a,
-	SDLK_s
+	SDLK_s,
+	SDLK_d
 };
 
 #endif //CONTROLS_H

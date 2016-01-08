@@ -27,7 +27,8 @@ GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
 	enemyBuilder_(textureLoader), 
 	tileBuilder_(textureLoader),
 	itemDropBuilder_(textureLoader),
-	playerProjectileBuilder_(textureLoader)
+	playerProjectileBuilder_(textureLoader),
+	playerHookBuilder_(textureLoader)
 {
 }
 
@@ -67,6 +68,11 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildItemDrop(ComponentSystem& co
 std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name)
 {
 	return playerProjectileBuilder_.build(componentSystem, name);
+}
+
+std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
+{
+	return playerHookBuilder_.build(componentSystem, name);
 }
 
 TextureSheet* GameObjectBuilder::getTexture(const std::string & path)
