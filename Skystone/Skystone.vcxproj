@@ -129,6 +129,7 @@
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RNG.cpp" />
+    <ClCompile Include="ScrollingSpriteRenderer.cpp" />
     <ClCompile Include="SnakeAIComponent.cpp" />
     <ClCompile Include="StunState.cpp" />
     <ClCompile Include="SwingingAIComponent.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="PlayerHookState.h" />
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
+    <ClInclude Include="ScrollingSpriteRenderer.h" />
     <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />
