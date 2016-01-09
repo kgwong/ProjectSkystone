@@ -36,7 +36,8 @@ private:
 	double degrees_;
 	bool shoot_;
 
-	bool launch_;
+	//for hook ~ move to a different state
+	//bool launch_;
 
 };
 

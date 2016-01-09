@@ -18,7 +18,8 @@ Level::Level(int levelID)
 	levelManager_(nullptr),
 	gameObjectBuilder_(nullptr),
 	background_(nullptr),
-	levelID_(levelID)
+	levelID_(levelID),
+	numHook_(0)
 {
 }
 
@@ -97,21 +98,27 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 	playerProjectiles.back()->startComponents(*this); 
 }
 
-//---//
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
 {
-	//code breaks here....
 	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
 	hookToFling->setPos(position);
-	playerHook.push_back(hookToFling);
-	auto physics = playerHook.back()->getComponent<PhysicsComponent>();
+	
+	//only one hook should exist per cast.
+	if (playerHook == nullptr && numHook_ == 0)
+	{
+		playerHook = hookToFling;
+		++numHook_;
+	}
+	//playerHook.push_back(hookToFling);
+	
+	auto physics = playerHook->getComponent<PhysicsComponent>();
 	physics->enableGravity(false);
 
 	int newVelX = (int)(velocity * cos(toRadians(degrees)));
 	int newVelY = (int)(velocity * sin(toRadians(degrees)));
 	physics->setVelX(newVelX);
 	physics->setVelY(newVelY);
-	playerHook.back()->startComponents(*this);
+	playerHook->startComponents(*this);
 	std::cout << "DONE";
 }
 

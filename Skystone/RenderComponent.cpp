@@ -35,6 +35,7 @@ int RenderComponent::getRenderLayer()
 		return 0;
 	case GameObject::Type::ENEMY:
 	case GameObject::Type::PLAYER_PROJECTILE:
+	case GameObject::Type::PLAYER_HOOK:
 	case GameObject::Type::ENEMY_PROJECTILE:
 	case GameObject::Type::DROP:
 		return 1;

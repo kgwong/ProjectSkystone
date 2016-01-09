@@ -63,7 +63,9 @@ public:
 	std::vector<std::shared_ptr<GameObject>> drops;
 
 	//there should only be one hook per cast.
-	std::vector<std::shared_ptr<GameObject>> playerHook;
+	std::shared_ptr<GameObject> playerHook;
+	int numHook_;
+
 private:
 	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
