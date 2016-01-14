@@ -249,10 +249,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScrollingSpriteRenderer.cpp">
-	  <Filter>Source Files</Filter>
-    </ClCompile>   
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerHookBuilder.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PounceAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -486,9 +489,12 @@
     </ClInclude>
     <ClInclude Include="ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="PlayerHookBuilder.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PounceAIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

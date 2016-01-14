@@ -124,6 +124,7 @@
     <ClCompile Include="PlayerHookBuilder.cpp" />
     <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
+    <ClCompile Include="PounceAIComponent.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="ScrollingSpriteRenderer.h" />
+    <ClInclude Include="PounceAIComponent.h" />
     <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />

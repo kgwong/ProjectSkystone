@@ -24,7 +24,7 @@ void SnakeAIComponent::start(Level& level)
 
 void SnakeAIComponent::update(Level& level)
 {
-	cout << std::to_string(getXDistance(owner_.getPos(), cornerPosition_)) + " ";
+
 	if (getXDistance(owner_.getPos(), cornerPosition_) > DEFAULT_X_DIST)
 	{
 		
