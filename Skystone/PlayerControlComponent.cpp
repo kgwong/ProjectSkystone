@@ -22,6 +22,7 @@ void PlayerControlComponent::update(Level& level)
 {
 	movement_.update(level);
 	attack_.update(level);
+	//.....add hook_state here.
 }
 
 void PlayerControlComponent::changeMovementState(PlayerState* state)

@@ -16,8 +16,8 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	currentState_(&defaultAimState),
 	aimState_(AimState::RIGHT),
 	degrees_(0),
-	shoot_(false),
-	launch_(false)
+	shoot_(false)
+	//launch_(false)
 {
 }
 
@@ -31,15 +31,14 @@ void PlayerAttackState::handleInput(SDL_Event& e)
 	currentState_->handleInput(owner_, e);
 	if (e.key.keysym.sym == controlMap[ATTACK])
 		shoot_ = true;
-
+	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
+		shoot_ = false;
 
 	//------hook launching----//
-	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
+	/*if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
 	{
-		LOG << "launch: " << controlMap[LAUNCH_HOOK];
-		LOG << LAUNCH_HOOK;
 		launch_ = true;
-	}
+	}*/
 
 
 
@@ -114,12 +113,12 @@ void PlayerAttackState::update(Level& level)
 	}
 
 
-	if (launch_)
+	/*if (launch_)
 	{
 		int testVelocity = 5;
 		level.addPlayerHookAtLocation(owner_.getPos(), testVelocity, degrees_);
 		launch_ = false;
-	}
+	}*/
 }
 
 void PlayerAttackState::changeState(PlayerAimState* state)

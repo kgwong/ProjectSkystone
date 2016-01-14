@@ -257,6 +257,9 @@
     <ClCompile Include="PounceAIComponent.cpp">
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHookState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -495,6 +498,12 @@
     </ClInclude>
     <ClInclude Include="PounceAIComponent.h">
       <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHookState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AimState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

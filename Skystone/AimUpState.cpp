@@ -43,6 +43,7 @@ void AimUpState::handleInput(GameObject& player, SDL_Event& e)
 	{
 		dir_ = AimUpState::Direction::NONE;
 	}
+
 }
 
 void AimUpState::update(GameObject& player)

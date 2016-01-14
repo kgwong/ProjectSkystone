@@ -22,9 +22,6 @@ std::shared_ptr<GameObject> PlayerProjectileBuilder::build(ComponentSystem& comp
 	auto newProjectile = std::make_shared<GameObject>();
 	auto& projectileToBuild = *newProjectile;
 
-	TextureSheet *sheet = textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png");
-	std::cout << "number of frames: " << sheet->getNumFrames() << std::endl;
-
 	projectileToBuild.setType(GameObject::Type::PLAYER_PROJECTILE);
 	projectileToBuild.addComponent(componentSystem.getNew<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
 	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));

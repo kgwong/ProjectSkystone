@@ -122,6 +122,7 @@
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="PlayerControlComponent.cpp" />
     <ClCompile Include="PlayerHookBuilder.cpp" />
+    <ClCompile Include="PlayerHookState.cpp" />
     <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="PounceAIComponent.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIjump.h" />
+    <ClInclude Include="AimState.h" />
     <ClInclude Include="AimUpState.h" />
     <ClInclude Include="AirborneState.h" />
     <ClInclude Include="Axis.h" />
@@ -177,6 +179,7 @@
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayerControlComponent.h" />
     <ClInclude Include="PlayerHookBuilder.h" />
+    <ClInclude Include="PlayerHookState.h" />
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="ScrollingSpriteRenderer.h" />
