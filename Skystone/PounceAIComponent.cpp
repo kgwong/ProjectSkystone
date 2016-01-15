@@ -34,12 +34,22 @@ void PounceAIComponent::update(Level& level)
 		cooldown_ = false;
 	}
 
-	cout << cooldown_ << endl;
 
 	if (!cooldown_)
 	{
 		int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
-		int playerSide = -xDist/getXDistance(owner_.getPos(), level.getPlayerPos());
+		int playerSide;
+
+		if (getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
+		{
+			playerSide = 0;
+		}
+
+		else
+		{
+			playerSide = -xDist / getXDistance(owner_.getPos(), level.getPlayerPos());
+		}
+
 
 		if (AIComponent::isNearby(xDist, radius_))
 		{
