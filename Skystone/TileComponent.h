@@ -9,7 +9,8 @@ public:
 	enum Type
 	{
 		EMPTY = 0,
-		SOLID = 1	
+		SOLID = 1,
+		FLOAT = 2
 	};
 
 public:
