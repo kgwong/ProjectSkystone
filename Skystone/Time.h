@@ -9,6 +9,8 @@ public:
 	static uint32_t getCurrentTime();
 	static uint32_t getElapsedUpdateTime();
 	static uint32_t getElapsedRenderTime();
+	static void updateLastUpdateTime();
+	static void updateLastRenderTime();
 private:
 	Time()  = delete;
 	~Time() = delete;

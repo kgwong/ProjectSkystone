@@ -10,17 +10,20 @@ uint32_t Time::getCurrentTime()
 
 uint32_t Time::getElapsedUpdateTime()
 {
-	uint32_t current = Time::getCurrentTime();
-	uint32_t elapsed = current - lastUpdate_;
-	lastUpdate_ = current;
-	return elapsed;
+	return Time::getCurrentTime() - lastUpdate_;
 }
 
 uint32_t Time::getElapsedRenderTime()
 {
+	return Time::getCurrentTime() - lastRender_;
+}
 
-	uint32_t current = Time::getCurrentTime();
-	uint32_t elapsed = current - lastRender_;
-	lastRender_ = current;
-	return elapsed;
+void Time::updateLastUpdateTime()
+{
+	lastUpdate_ = Time::getCurrentTime();
+}
+
+void Time::updateLastRenderTime()
+{
+	lastRender_ = Time::getCurrentTime();
 }
