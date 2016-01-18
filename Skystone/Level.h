@@ -29,7 +29,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder);
-	void setBackgroundFromSprite(std::shared_ptr<SpriteRenderer> spriteRenderer);
+	void setBackground();
 
 	void setPlayer(GameObject* player, Point startPosition);
 	Point getPlayerPos();
