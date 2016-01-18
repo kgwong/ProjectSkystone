@@ -69,10 +69,10 @@ void ScrollingSpriteRenderer::update(Level& level)
 void ScrollingSpriteRenderer::setInitialRects()
 {
 	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
-
+	// uses the camera value from the last level
 	int overflow = drawSrc1_.w % Constants::SCREEN_WIDTH;
 	// overflow is how far too left it is
-
+	
 	setRect(&drawSrc1_,
 		-overflow,
 		0,
@@ -147,6 +147,6 @@ bool ScrollingSpriteRenderer::rectAtEdge(int dx)
 	int maxW = drawSrc_->w;
 
 	bool firstRect = (drawSrc1_.x - dx) < 0 || (drawSrc1_.x + dx < 0);
-	bool secondRect = (drawSrc2_.x - dx) < 0 || (drawSrc1_.x + dx) < 0;
+	bool secondRect = (drawSrc2_.x - dx) < 0 || (drawSrc2_.x + dx) < 0;
 	return firstRect || secondRect;
 }
