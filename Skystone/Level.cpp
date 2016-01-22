@@ -56,9 +56,9 @@ void Level::setBackground()
 {
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
-	int layer = 3;
-	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTestSmall.png"), layer));
-	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTestSmall.png"), layer));
+	int layer = 2;
+	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/background.png"), layer));
+	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/swamp.png"), layer));
 }
 
 void Level::setPlayer(GameObject* p, Point startPosition)
