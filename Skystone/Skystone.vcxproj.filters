@@ -237,6 +237,11 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Resources.cpp">
+    </ClCompile>
+    <ClCompile Include="LiftComponent.cpp">
+	   <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\TextureLoader.cpp">
@@ -479,6 +484,11 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Resources.h">
+    </ClInclude>
+    <ClInclude Include="LiftComponent.h">
+	  <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources\TextureLoader.h">

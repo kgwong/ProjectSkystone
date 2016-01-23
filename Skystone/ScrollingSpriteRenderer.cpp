@@ -7,6 +7,15 @@
 /*
 namespace
 {
+	void updateRectWithCam(SDL_Rect* rect, Point pos)
+	{
+		if (pos.x <= rect->w)
+		{
+			rect->x = pos.x;
+			rect->y = pos.y;
+		}
+	}
+
 	void setRect(SDL_Rect* rect, int x_, int y_, int w_, int h_)
 	{
 		rect->x = x_;
@@ -24,34 +33,17 @@ namespace
 		else
 			return val + changeBy;
 	}
-
-	void modDrawRect(SDL_Rect* rect, int x_, int y_, int w_, int h_, int maxW)
-	{
-		rect->x = incWithinBound(rect->x, x_, maxW);
-		rect->y = incWithinBound(rect->y, y_, Constants::SCREEN_HEIGHT);
-		rect->w = incWithinBound(rect->w, w_, maxW); 
-		rect->h = incWithinBound(rect->h, h_, Constants::SCREEN_HEIGHT);	
-	}
-
-	void modNonZeroDrawRect(SDL_Rect* rect, int x_, int y_, int w_, int h_, int maxW)
-	{
-		if (rect->w != 0 && rect->h != 0)
-			modDrawRect(rect, x_, y_, w_, h_, maxW);
-	}
-
 }
 
 ScrollingSpriteRenderer::ScrollingSpriteRenderer(GameObject& owner, TextureSheet* textureSheet, int layerNum)
 	: SpriteRenderer(owner, textureSheet),
 	drawSrc1_(*drawSrc_),
-	drawSrc2_{ 0,0,0,0 },
-	drawDest2_{ 0, 0,0,0 },
+	drawSrc2_{0,0,0,0},
+	drawDest2_{0,0,0,0},
 	oldCameraPos_{textureSheet_->getWindow()->getCamera().getPos()},
-	layerNum_{layerNum},
-	scale_{2}
+	layerNum_{layerNum}
 {
 	checkDims();
-	setInitialRects();
 }
 
 ScrollingSpriteRenderer::~ScrollingSpriteRenderer()
@@ -60,40 +52,11 @@ ScrollingSpriteRenderer::~ScrollingSpriteRenderer()
 
 void ScrollingSpriteRenderer::update(Level& level)
 {
-	Point currCamera = textureSheet_->getWindow()->getCamera().getPos();
 	advanceRects();
 	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), &drawSrc1_, &drawDest_);
 	MySDL_RenderCopy(textureSheet_->getWindow()->getRenderer(), textureSheet_->getTexture(), &drawSrc2_, &drawDest2_);
 	updateCamPos();
 }
-
-void ScrollingSpriteRenderer::setInitialRects()
-{
-	Point cameraPos = textureSheet_->getWindow()->getCamera().getPos();
-	// uses the camera value from the last level
-	int overflow = drawSrc1_.w % Constants::SCREEN_WIDTH;
-	// overflow is how far too left it is
-	
-	setRect(&drawSrc1_,
-		-overflow,
-		0,
-		Constants::SCREEN_WIDTH + overflow,
-		std::min<int>(textureSheet_->getFull()->h, Constants::SCREEN_HEIGHT));
-
-	setRect(&drawDest_, 0, 0, drawSrc1_.w, drawSrc1_.h);
-
-	setRect(&drawSrc2_,
-		drawSrc_->w,
-		0,
-		-overflow,
-		std::min<int>(textureSheet_->getFull()->h, Constants::SCREEN_HEIGHT));
-	setRect(&drawDest2_,
-		0,
-		0,
-		drawSrc2_.w,
-		drawSrc2_.h);
-}
-
 
 void ScrollingSpriteRenderer::checkDims()
 {
@@ -107,47 +70,51 @@ void ScrollingSpriteRenderer::checkDims()
 
 void ScrollingSpriteRenderer::advanceRects()
 {
-	int delx = findDelX();
-	int maxW = drawSrc_->w;
+	Point currCam = textureSheet_->getWindow()->getCamera().getPos();
 
-	if (rectAtEdge(delx)) 
+	if (findDelX() != 0)
 	{
-    	modDrawRect(&drawSrc1_, 0, 0, -delx, 0, maxW);
-		modDrawRect(&drawDest_, delx, 0, -delx, 0, maxW);
-
-		modDrawRect(&drawSrc2_, -delx, 0, delx, 0, maxW);
-		modDrawRect(&drawDest2_, 0, 0, delx, 0, maxW);
+		if (currCam.x <= drawSrc_->w)
+			scrollBoth();
+		else
+			scrollNonZero();
 	}
+}
+
+void ScrollingSpriteRenderer::scrollNonZero()
+{
+	Point currCam = textureSheet_->getWindow()->getCamera().getPos();
+	if (drawSrc1_.w != 0)
+		updateRectWithCam(&drawSrc1_, currCam);
 	else
-	{
-		modNonZeroDrawRect(&drawSrc1_, -delx, 0, 0, 0, maxW);
-		modNonZeroDrawRect(&drawDest_, 0, 0, 0, 0, maxW);
+		updateRectWithCam(&drawSrc2_, currCam);
+}
 
-		modNonZeroDrawRect(&drawSrc2_, -delx, 0, 0, 0, maxW);
-		modNonZeroDrawRect(&drawDest2_, 0, 0, 0, 0, maxW);
-	}
+void ScrollingSpriteRenderer::scrollBoth()
+{
+	Point currCam = textureSheet_->getWindow()->getCamera().getPos();
+	
+	int xBound = currCam.x / layerNum_;//(currCam.x / drawSrc_->w) * layerNum_;
+	
+	setRect(&drawSrc1_, xBound, 0, drawSrc_->w - xBound, Constants::SCREEN_HEIGHT);
+	setRect(&drawDest_, 0, 0, drawSrc1_.w, Constants::SCREEN_HEIGHT);
+	setRect(&drawSrc2_, 0 , 0, xBound, Constants::SCREEN_HEIGHT);
+	setRect(&drawDest2_, drawSrc_->w - xBound, 0, xBound, Constants::SCREEN_HEIGHT);
 }
 
 int ScrollingSpriteRenderer::findDelX()
 {
 	Point currCamera = textureSheet_->getWindow()->getCamera().getPos();
 	int change = oldCameraPos_.x - currCamera.x;
-	if (std::abs(change) > 0)
+
+	if (change != 0)
 		return (change > 0) ? layerNum_ : -layerNum_;
 	else
-		return change;
+		return 0;
 }
 
 void ScrollingSpriteRenderer::updateCamPos()
 {
 	oldCameraPos_ = textureSheet_->getWindow()->getCamera().getPos();
 }
-
-bool ScrollingSpriteRenderer::rectAtEdge(int dx)
-{
-	int maxW = drawSrc_->w;
-
-	bool firstRect = (drawSrc1_.x - dx) < 0 || (drawSrc1_.x + dx < 0);
-	bool secondRect = (drawSrc2_.x - dx) < 0 || (drawSrc2_.x + dx) < 0;
-	return firstRect || secondRect;
-} */
+*/

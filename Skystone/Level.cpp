@@ -17,8 +17,7 @@ Level::Level(int levelID)
 	levelManager_(nullptr),
 	gameObjectBuilder_(nullptr),
 	background_(nullptr),
-	levelID_(levelID),
-	numHook_(0)
+	levelID_(levelID)
 {
 }
 
@@ -55,8 +54,9 @@ void Level::setBackground()
 {
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
-	int layer = 3;
-	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTestSmall.png"), layer));
+	//int layer = 2;
+	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/background.png"), layer));
+	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/swamp.png"), layer));
 	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, gameObjectBuilder_->getTexture("Assets/backgroundTestSmall.png"), layer));
 }
 
@@ -104,12 +104,17 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
 	hookToFling->setPos(position);
 	
-	//only one hook should exist per cast.
-	if (playerHook == nullptr && numHook_ == 0)
+	//TODO --- FIX glitch with hook rendering on projectile when projectile shot.
+	if (playerHook != nullptr && playerHook.get()->alive())
 	{
-		playerHook = hookToFling;
-		++numHook_;
+		std::cout << "I am alive" << std::endl;
+		//make mark to kill!
+		//playerHook.get()->kill();
+	//	return;
 	}
+	//only one hook should exist per cast.
+	if (playerHook == nullptr)
+		playerHook = hookToFling;
 	//playerHook.push_back(hookToFling);
 	
 	auto physics = playerHook->getComponent<PhysicsComponent>();

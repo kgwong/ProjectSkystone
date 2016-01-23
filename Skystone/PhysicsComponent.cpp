@@ -45,6 +45,11 @@ void PhysicsComponent::enableGravity(bool gravity)
 	gravityEnabled_ = gravity;
 }
 
+bool PhysicsComponent::gravityEnabled()
+{
+	return gravityEnabled_;
+}
+
 void PhysicsComponent::enactGravity()
 {
 	if (gravityEnabled_)

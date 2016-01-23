@@ -34,6 +34,10 @@ void PlayerAttackState::handleInput(SDL_Event& e)
 	//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
 	//	shoot_ = false;
 
+	//NON SPAMMABLE SHOTS.
+	/*if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
+		shoot_ = false;*/
+
 	//------hook launching----//
 	/*if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
 	{
