@@ -254,10 +254,16 @@
     <ClCompile Include="PlayerHookBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PounceAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerHookState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LiftComponent.cpp">
+	   <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -496,6 +502,9 @@
     <ClInclude Include="PlayerHookBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PounceAIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerHookState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -503,6 +512,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LiftComponent.h">
+	  <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

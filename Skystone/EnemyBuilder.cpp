@@ -16,6 +16,7 @@
 #include "SnakeAIComponent.h"
 #include "PhysicsComponent.h"
 #include "DamageComponent.h"
+#include "PounceAIComponent.h"
 
 EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -50,7 +51,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNew<TrackerComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PounceAIComponent>(enemyToBuild));
 	}
 	else if (enemyName == "BasicEnemy")
 	{

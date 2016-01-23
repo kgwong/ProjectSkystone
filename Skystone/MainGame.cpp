@@ -6,6 +6,7 @@
 
 #include "GameOverException.h"
 #include "TempGameOverScreen.h"
+#include "Time.h"
 
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
@@ -31,10 +32,18 @@ MainGame::~MainGame()
 
 void MainGame::run()
 {
+	uint32_t prev = Time::getCurrentTime();
+	uint32_t msecBehind = 0;
 	while (!quit_)
 	{
+		uint32_t current = Time::getCurrentTime();
+		uint32_t elapsed = current - prev;
+		prev = current;
+		msecBehind += elapsed;
 		processInput();
+		// while (lag >= step) {update; msecBehind -= step;}
 		update();
+		// render(msecBehind/step);
 		render();
 	}
 }

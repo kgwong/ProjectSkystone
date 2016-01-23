@@ -126,6 +126,7 @@
     <ClCompile Include="PlayerHookState.cpp" />
     <ClCompile Include="PlayerMovementState.cpp" />
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
+    <ClCompile Include="PounceAIComponent.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="TextureSheet.cpp" />
     <ClCompile Include="TileBuilder.cpp" />
     <ClCompile Include="TileComponent.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="TrackerComponent.cpp" />
     <ClCompile Include="UpdatingComponent.cpp" />
     <ClCompile Include="WalkingState.cpp" />
@@ -184,12 +186,14 @@
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
     <ClInclude Include="ScrollingSpriteRenderer.h" />
+    <ClInclude Include="PounceAIComponent.h" />
     <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />
     <ClInclude Include="SwingingAIComponent.h" />
     <ClInclude Include="TempGameOverScreen.h" />
     <ClInclude Include="TileComponent.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />

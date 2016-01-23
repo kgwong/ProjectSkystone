@@ -29,7 +29,7 @@ void FallingAIComponent::update(Level& level)
 	int yDist = getYDirection(owner_.getPos(), level.getPlayerPos());
 	int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
 
-	if (AIComponent::isNearby(yDist,DEFAULT_Y_RADIUS) && AIComponent::isNearby(xDist,DEFAULT_X_RADIUS))
+	if (AIComponent::isNearby(yDist, yRadius_) && AIComponent::isNearby(xDist, xRadius_))
 	{
 		physics_->enableGravity(true);
 		isFalling_ = true;
