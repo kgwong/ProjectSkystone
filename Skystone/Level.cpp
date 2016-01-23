@@ -18,8 +18,7 @@ Level::Level(int levelID)
 	levelManager_(nullptr),
 	gameObjectBuilder_(nullptr),
 	background_(nullptr),
-	levelID_(levelID),
-	numHook_(0)
+	levelID_(levelID)
 {
 }
 
@@ -104,12 +103,17 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
 	hookToFling->setPos(position);
 	
-	//only one hook should exist per cast.
-	if (playerHook == nullptr && numHook_ == 0)
+	//TODO --- FIX glitch with hook rendering on projectile when projectile shot.
+	if (playerHook != nullptr && playerHook.get()->alive())
 	{
-		playerHook = hookToFling;
-		++numHook_;
+		std::cout << "I am alive" << std::endl;
+		//make mark to kill!
+		//playerHook.get()->kill();
+	//	return;
 	}
+	//only one hook should exist per cast.
+	if (playerHook == nullptr)
+		playerHook = hookToFling;
 	//playerHook.push_back(hookToFling);
 	
 	auto physics = playerHook->getComponent<PhysicsComponent>();

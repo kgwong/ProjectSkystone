@@ -249,12 +249,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScrollingSpriteRenderer.cpp">
-	  <Filter>Source Files</Filter>
-    </ClCompile>   
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerHookBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHookState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LiftComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -489,7 +492,7 @@
     </ClInclude>
     <ClInclude Include="ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="PlayerHookBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -497,6 +500,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AimState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LiftComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

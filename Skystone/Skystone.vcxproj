@@ -110,6 +110,7 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="LiftComponent.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NonUpdatingComponent.cpp" />
     <ClCompile Include="Path.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="LiftComponent.h" />
     <ClInclude Include="NonUpdatingComponent.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerAimState.h" />

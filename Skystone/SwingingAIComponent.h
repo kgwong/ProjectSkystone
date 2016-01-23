@@ -19,7 +19,7 @@ public:
 	virtual ~SwingingAIComponent();
 	virtual void start(Level& level);
 	virtual void update(Level& level);
-	virtual void handleEvent(const CollisionEvent &e);
+	virtual void handleEvent(const CollisionEvent& e);
 private:
 	PhysicsComponent * physics_;
 	int radius_;//rope length
