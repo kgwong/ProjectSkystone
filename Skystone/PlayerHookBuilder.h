@@ -9,18 +9,16 @@
 
 //forward declarations ar fum.
 class GameObject;
-class TextureLoader;
 class ComponentSystem;
 
 class PlayerHookBuilder
 {
 public:
-	PlayerHookBuilder(TextureLoader* textureLoader);
+	PlayerHookBuilder();
 	~PlayerHookBuilder();
+
 	std::shared_ptr<GameObject> build(ComponentSystem& componentSystem, const std::string& name);
 
-private:
-	TextureLoader* textureLoader_;//_ after the name cuz idk wut im doing
 };
 
 #endif

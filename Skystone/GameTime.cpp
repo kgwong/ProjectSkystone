@@ -1,4 +1,4 @@
-#include "Time.h"
+#include "GameTime.h"
 
 uint32_t Time::lastUpdate_{SDL_GetTicks()};
 uint32_t Time::lastRender_{SDL_GetTicks()};

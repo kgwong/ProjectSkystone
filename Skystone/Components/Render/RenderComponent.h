@@ -3,12 +3,16 @@
 
 #include "Component.h"
 
+class GameWindow;
+
 class RenderComponent : public Component
 {
 public:
 	RenderComponent(GameObject& owner);
 	virtual ~RenderComponent() = 0;
 
+	virtual void render(GameWindow& window) = 0;
+	
 	virtual Component::Type getType() final;
 
 	virtual int getWidth();

@@ -3,10 +3,9 @@
 #include <memory>
 
 #include "GameConstants.h"
-#include "TextureLoader.h"
+#include "Resources/Resources.h"
 
-#include "SpriteRenderer.h"
-#include "AnimationRenderer.h"
+#include "Components/Render/SpriteRenderer.h"
 #include "BasicEnemyMovementComponent.h"
 #include "RandomJumperComponent.h"
 #include "TrackerComponent.h"
@@ -22,13 +21,7 @@
 #include "PlayerControlComponent.h"
 
 
-GameObjectBuilder::GameObjectBuilder(TextureLoader* textureLoader)
-	:textureLoader_(textureLoader),
-	enemyBuilder_(textureLoader), 
-	tileBuilder_(textureLoader),
-	itemDropBuilder_(textureLoader),
-	playerProjectileBuilder_(textureLoader),
-	playerHookBuilder_(textureLoader)
+GameObjectBuilder::GameObjectBuilder()
 {
 }
 
@@ -36,10 +29,10 @@ GameObjectBuilder::~GameObjectBuilder()
 {
 }
 
-void GameObjectBuilder::buildPlayer(TextureLoader* textureLoader, GameObject& player)
+void GameObjectBuilder::buildPlayer(GameObject& player)
 {
 	player.setType(GameObject::Type::PLAYER);
-	player.addComponent(std::make_shared<AnimationRenderer>(player, textureLoader->getTextureSheet("Assets/betterPlayer.png")));
+	player.addComponent(std::make_shared<SpriteRenderer>(player, Resources::getSpriteSheet("Assets/betterPlayer.png")));
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
 	player.addComponent(std::make_shared<ColliderComponent>(player));
@@ -73,9 +66,4 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerProjectile(ComponentSy
 std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
 {
 	return playerHookBuilder_.build(componentSystem, name);
-}
-
-TextureSheet* GameObjectBuilder::getTexture(const std::string & path)
-{
-	return textureLoader_->getTextureSheet(path);
 }

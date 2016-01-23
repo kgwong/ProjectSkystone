@@ -4,6 +4,7 @@
 #include "Log.h"
 #include <algorithm>
 
+/*
 namespace
 {
 	void setRect(SDL_Rect* rect, int x_, int y_, int w_, int h_)
@@ -149,4 +150,4 @@ bool ScrollingSpriteRenderer::rectAtEdge(int dx)
 	bool firstRect = (drawSrc1_.x - dx) < 0 || (drawSrc1_.x + dx < 0);
 	bool secondRect = (drawSrc2_.x - dx) < 0 || (drawSrc2_.x + dx) < 0;
 	return firstRect || secondRect;
-}
+} */

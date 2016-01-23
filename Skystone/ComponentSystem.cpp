@@ -2,7 +2,7 @@
 
 #include "Level.h"
 
-#include "RenderComponent.h"
+#include "Components\Render\RenderComponent.h"
 
 #include "Log.h"
 #include <memory>

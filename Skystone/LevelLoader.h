@@ -8,7 +8,6 @@
 #include "GameObjectBuilder.h"
 #include "Level.h"
 
-class TextureLoader;
 class LevelManager;
 
 class LevelLoader
@@ -17,16 +16,14 @@ public:
 	static const std::string LEVEL_FILEPATH_PREFIX;
 
 public:
-	LevelLoader(TextureLoader* textureLoader);
+	LevelLoader();
 	~LevelLoader();
 
 	void setLevelManager(LevelManager* levelManager);
 	
 	Level* getLevelWithID(int levelID);
-	std::shared_ptr<SpriteRenderer> loadSprite(TextureLoader* textureLoader_);
 
 private:
-	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	GameObjectBuilder gameObjectBuiler_;
 

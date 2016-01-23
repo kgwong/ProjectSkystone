@@ -14,7 +14,6 @@
 class LevelLoader;
 class LevelMap;
 class LevelManager;
-class TextureLoader;
 class GameObjectBuilder;
 class SpriteRenderer;
 
@@ -67,7 +66,6 @@ public:
 	int numHook_;
 
 private:
-	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	GameObjectBuilder* gameObjectBuilder_;
 	std::shared_ptr<GameObject> background_;

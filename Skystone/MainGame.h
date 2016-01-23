@@ -11,7 +11,6 @@
 #include "Errors.h"
 #include "GameWindow.h"
 #include "MusicPlayer.h"
-#include "TextureLoader.h"
 #include "LevelManager.h"
 
 class MainGame
@@ -24,7 +23,6 @@ public:
 
 private:
 	GameWindow window_;
-	TextureLoader textureLoader_;
 
 	MusicPlayer musicPlayer_;
 

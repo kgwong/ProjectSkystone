@@ -66,9 +66,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,28 +81,13 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpritesheetInfoReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationRenderer.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Log.cpp">
@@ -133,9 +115,6 @@
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameOverException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TempGameOverScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SwingingAIComponent.cpp">
@@ -212,9 +191,6 @@
     <ClCompile Include="NonUpdatingComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentSubsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -260,8 +236,29 @@
     <ClCompile Include="PlayerHookState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="Resources\Resources.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\TextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\SpriteSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Render\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Render\TileRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\SpritesheetInfoReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Render\RenderComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +278,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
@@ -313,23 +307,11 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SpritesheetInfo.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="SpritesheetInfoReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileArrangement.h">
       <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationRenderer.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>Header Files\Struct Headers</Filter>
@@ -340,16 +322,7 @@
     <ClInclude Include="GameConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
@@ -383,9 +356,6 @@
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="GameOverException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TempGameOverScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SwingingAIComponent.h">
@@ -508,8 +478,32 @@
     <ClInclude Include="AimState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="Resources\Resources.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\TextureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\SpriteSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\TileRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\SpritesheetInfoReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\SpritesheetInfo.h">
+      <Filter>Header Files\Struct Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\RenderComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

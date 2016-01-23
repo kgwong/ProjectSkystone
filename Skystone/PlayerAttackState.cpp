@@ -31,8 +31,8 @@ void PlayerAttackState::handleInput(SDL_Event& e)
 	currentState_->handleInput(owner_, e);
 	if (e.key.keysym.sym == controlMap[ATTACK])
 		shoot_ = true;
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
-		shoot_ = false;
+	//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
+	//	shoot_ = false;
 
 	//------hook launching----//
 	/*if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
@@ -101,7 +101,6 @@ void PlayerAttackState::update(Level& level)
 		break;
 	}*/
 	
-	LOG << "Attack";
 	currentState_->update(owner_);
 	degrees_ = currentState_->getAngle();
 	//LOG << "degrees: " << degrees_;

@@ -38,6 +38,12 @@ public:
 	int getWidth() const;
 	int getHeight() const;
 
+	void render(SDL_Texture* texture, const SDL_Rect* srcrect, SDL_Rect* dstrect, const double angle,
+		const SDL_Point* center, const SDL_RendererFlip flip);
+
+	void render(SDL_Texture* texture, const SDL_Rect* srcrect, SDL_Rect* dstrect);
+	void renderOnCamera(SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect);
+
 private:
 	std::unique_ptr<SDL_Window, SDL_WindowDestroyer> window_;
 	std::unique_ptr<SDL_Renderer, SDL_RendererDestroyer> renderer_;

@@ -8,16 +8,15 @@
 
 #include "PlayerHookBuilder.h"
 
-class TextureSheet;
 class ComponentSystem;
 
 class GameObjectBuilder
 {
 public:
-	GameObjectBuilder(TextureLoader* textureLoader);
+	GameObjectBuilder();
 	~GameObjectBuilder();
 
-	static void buildPlayer(TextureLoader* textureLoader, GameObject& player);
+	static void buildPlayer(GameObject& player);
 
 	GameObject& buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild);
 	std::shared_ptr<GameObject> buildEnemy(ComponentSystem& componentSystem, const std::string& enemyName);
@@ -28,11 +27,7 @@ public:
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
 
-	//temp
-	TextureSheet* getTexture(const std::string& path);
-
 private:
-	TextureLoader* textureLoader_;
 	EnemyBuilder enemyBuilder_;
 	TileBuilder tileBuilder_;
 	ItemDropBuilder itemDropBuilder_;

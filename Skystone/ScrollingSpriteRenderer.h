@@ -1,8 +1,9 @@
 #ifndef SCROLLING_SPRITE_RENDERER_H
 #define SCROLLING_SPRITE_RENDERER_H
 
-#include "SpriteRenderer.h"
+//#include "SpriteRenderer.h"
 
+/*
 class ScrollingSpriteRenderer : public SpriteRenderer
 {
 public:
@@ -28,6 +29,6 @@ private:
 	void advanceRects();
 	void updateCamPos();
 	bool rectAtEdge(int dx);
-};
+};*/
 
 #endif //SCROLLING_SPRITE_RENDERER_H

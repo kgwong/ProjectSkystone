@@ -24,7 +24,7 @@ SpritesheetInfoReader::SpritesheetInfoReader(const std::string& fullPath)
 {
 }
 
-SpritesheetInfo* SpritesheetInfoReader::info()
+SpriteSheetInfo* SpritesheetInfoReader::info()
 {
 	std::ifstream fileInfo(_infoPath);
 	if (!fileInfo)
@@ -37,9 +37,16 @@ SpritesheetInfo* SpritesheetInfoReader::info()
 
 	try
 	{
-		while (fileInfo >> parameterName >> parameterValue)
+		for (int i = 0; i < 6; ++i)
 		{
+			fileInfo >> parameterName >> parameterValue;
 			loadedValues.insert(std::make_pair(parameterName, parameterValue));
+		}
+
+		int frameTime;
+		while (fileInfo >> frameTime)
+		{
+			info_.frameTimes.push_back(frameTime);
 		}
 	}
 	catch (...)
@@ -60,12 +67,12 @@ SpritesheetInfo* SpritesheetInfoReader::info()
 		return nullptr;
 	else
 	{
-		info_ =	SpritesheetInfo{ loadedValues["numSprites"],
-				loadedValues["spriteWidth"],
-				loadedValues["spriteHeight"],
-				loadedValues["numRows"],
-				loadedValues["numCols"],
-				loadedValues["padding"] };
+		info_.num = loadedValues["numSprites"];
+		info_.width = loadedValues["spriteWidth"];
+		info_.height = loadedValues["spriteHeight"];
+		info_.numRows = loadedValues["numRows"];
+		info_.numCols = loadedValues["numCols"];
+		info_.padding = loadedValues["padding"];
 
 		return &info_;
 	}

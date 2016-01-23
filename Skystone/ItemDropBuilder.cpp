@@ -1,15 +1,14 @@
 #include "ItemDropBuilder.h"
 
-#include "SpriteRenderer.h"
+#include "Components/Render/SpriteRenderer.h"
 #include "ColliderComponent.h"
 #include "PhysicsComponent.h"
-#include "TextureLoader.h"
+#include "Resources/Resources.h"
 #include "PickupComponent.h"
 
 #include <memory>
 
-ItemDropBuilder::ItemDropBuilder(TextureLoader* textureLoader)
-	:textureLoader_(textureLoader)
+ItemDropBuilder::ItemDropBuilder()
 {
 }
 
@@ -22,7 +21,7 @@ std::shared_ptr<GameObject> ItemDropBuilder::build(ComponentSystem& componentSys
 	auto newDrop = std::make_shared<GameObject>();
 	auto& itemDropToBuild = *newDrop;
 	itemDropToBuild.setType(GameObject::Type::DROP);
-	itemDropToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(itemDropToBuild, textureLoader_->getTextureSheet("Assets/Pickups/pickup.png")));
+	itemDropToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(itemDropToBuild, Resources::getSpriteSheet("Assets/Pickups/pickup.png")));
 	itemDropToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(itemDropToBuild));
 	itemDropToBuild.addComponent(componentSystem.getNew<ColliderComponent>(itemDropToBuild));
 	itemDropToBuild.addComponent(componentSystem.getNew<PickupComponent>(itemDropToBuild));

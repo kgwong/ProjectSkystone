@@ -9,8 +9,11 @@
 #include <memory>
 
 #include "Errors.h"
+
 #include "GameWindow.h"
-#include "TextureSheet.h"
+
+#include "AIComponent.h"
+#include "SpriteSheet.h"
 
 struct TextureDestroyer
 {
@@ -23,17 +26,15 @@ struct TextureDestroyer
 class TextureLoader
 {
 public:
-	TextureLoader(GameWindow* gameWindow);
+	TextureLoader();
 	~TextureLoader();
 
-	TextureSheet* getTextureSheet(const std::string& basename);
+	void initGameWindow(GameWindow* gameWindow);
 
-	std::shared_ptr<SDL_Texture> loadTexture(SDL_Renderer* renderer, const std::string& fullpath);
+	std::shared_ptr<SDL_Texture> loadTexture(const std::string& fullpath);
 
 private:
 	GameWindow* gameWindow_;
-
-	std::unordered_map<std::string, TextureSheet> textureSheets_;
 };
 
 #endif //TEXTURE_LOADER_H

@@ -2,7 +2,7 @@
 
 #include "Level.h"
 #include "LevelManager.h"
-#include "TextureLoader.h"
+#include "Resources/Resources.h"
 #include "GameConstants.h"
 #include "Path.h"
 #include "Log.h"
@@ -10,9 +10,7 @@
 
 const std::string LevelLoader::LEVEL_FILEPATH_PREFIX = "Levels/Level";
 
-LevelLoader::LevelLoader(TextureLoader* textureLoader)
-	:textureLoader_(textureLoader),
-	gameObjectBuiler_(textureLoader)
+LevelLoader::LevelLoader()
 {
 }
 
@@ -50,12 +48,6 @@ void LevelLoader::load(const int levelID)
 	loadTiles(generateFilePath("Tiles", levelID), level.get());
 
 	loadedLevels_.insert({levelID, level});
-}
-
-std::shared_ptr<SpriteRenderer> LevelLoader::loadSprite(TextureLoader* textureLoader_)
-{
-	//return std::make_shared<SpriteRenderer>(textureLoader_->getTextureSheet("Assets/backgroundTest.png"));
-	return nullptr;
 }
 
 std::string LevelLoader::generateFilePath(const std::string & tag, int levelID)

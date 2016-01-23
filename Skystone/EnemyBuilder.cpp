@@ -1,9 +1,9 @@
 #include "EnemyBuilder.h"
 
-#include "TextureLoader.h"
+#include "Resources/Resources.h"
 #include "GameObject.h"
 
-#include "SpriteRenderer.h"
+#include "Components/Render/SpriteRenderer.h"
 #include "BasicEnemyMovementComponent.h"
 #include "RandomJumperComponent.h"
 #include "TrackerComponent.h"
@@ -18,8 +18,7 @@
 #include "DamageComponent.h"
 #include "PounceAIComponent.h"
 
-EnemyBuilder::EnemyBuilder(TextureLoader* textureLoader)
-	:textureLoader_(textureLoader)
+EnemyBuilder::EnemyBuilder()
 {
 }
 
@@ -35,7 +34,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	enemyToBuild.setType(GameObject::Type::ENEMY);
 	if (enemyName == "TestMobStrong")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemyStrong.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemyStrong.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -45,7 +44,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "TestMob1")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/enemy.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemy.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -55,7 +54,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "BasicEnemy")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/BasicEnemy.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/BasicEnemy.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -66,7 +65,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "RandomJumper")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/RandomJumper.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -77,7 +76,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "AIJump")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/AIJump.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/AIJump.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -87,7 +86,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Flying")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/Flying.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Flying.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -97,7 +96,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Coward")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/Coward.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Coward.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -109,7 +108,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "swingmob")
 	{
-		TextureSheet* enemySprite = textureLoader_->getTextureSheet("Assets/Enemies/swingmob.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/swingmob.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));

@@ -1,18 +1,16 @@
 #include "ColliderComponent.h"
 
-#include "RenderComponent.h"
-#include "SpriteRenderer.h"
-#include "AnimationRenderer.h"
+#include "Components/Render/RenderComponent.h"
+#include "Components/Render/SpriteRenderer.h"
 
 ColliderComponent::ColliderComponent(GameObject& owner)
 	: NonUpdatingComponent(owner),
 	_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
-{	
-	//this is a hack, have only one type of Renderer.	
+{
+	//by default, use the size of the sprite
 	RenderComponent* render = owner.getComponent<SpriteRenderer>();
-	if (render == nullptr)
-		render = owner.getComponent<AnimationRenderer>();
-	_collider = { 0, 0, render->getWidth(), render->getHeight() };
+	if (render != nullptr)
+		_collider = { 0, 0, render->getWidth(), render->getHeight() };
 }
 
 ColliderComponent::ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height)
