@@ -1,6 +1,6 @@
 #include "LiftComponent.h"
 #include "PhysicsComponent.h"
-
+#include "ColliderComponent.h"
 #include <iostream>
 using namespace std;
 
