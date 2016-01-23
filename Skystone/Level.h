@@ -64,7 +64,7 @@ public:
 
 	//there should only be one hook per cast.
 	std::shared_ptr<GameObject> playerHook;
-	int numHook_;
+	//int numHook_;
 
 private:
 	TextureLoader* textureLoader_;

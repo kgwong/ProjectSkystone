@@ -260,6 +260,9 @@
     <ClCompile Include="PlayerHookState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LiftComponent.cpp">
+	   <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -507,6 +510,9 @@
     </ClInclude>
     <ClInclude Include="AimState.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LiftComponent.h">
+	  <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>

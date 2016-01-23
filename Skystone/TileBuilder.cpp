@@ -5,6 +5,7 @@
 #include "ColliderComponent.h"
 #include "SpriteRenderer.h"
 #include "TileComponent.h"
+#include "Liftcomponent.h"
 
 TileBuilder::TileBuilder(TextureLoader* textureLoader)
 	:textureLoader_(textureLoader)
@@ -26,6 +27,12 @@ GameObject& TileBuilder::build(ComponentSystem& componentSystem, int tileType, G
 	{
 		tileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(tileToBuild, tileSet, tileType));
 		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
+	}
+	else if (tileType == 2)
+	{
+		tileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(tileToBuild, tileSet, 1));
+		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
+		tileToBuild.addComponent(componentSystem.getNew<LiftComponent>(tileToBuild));
 	}
 	return tileToBuild;
 }
