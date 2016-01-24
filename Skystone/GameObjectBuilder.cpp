@@ -32,7 +32,7 @@ GameObjectBuilder::~GameObjectBuilder()
 void GameObjectBuilder::buildPlayer(GameObject& player)
 {
 	player.setType(GameObject::Type::PLAYER);
-	player.addComponent(std::make_shared<SpriteRenderer>(player, Resources::getSpriteSheet("Assets/betterPlayer.png")));
+	player.addComponent(std::make_shared<SpriteRenderer>(player, Resources::getSpriteSheet("Images/run_cycle.png")));
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
 	player.addComponent(std::make_shared<ColliderComponent>(player));
