@@ -12,10 +12,8 @@ public:
 	static const int INVALID_LEVEL_ID = -1;
 
 public:
-	LevelManager(TextureLoader* tl);
+	LevelManager();
 	~LevelManager();
-
-	void setTextureLoader(TextureLoader* textureLoader);
 
 	void setPlayer(GameObject* player);
 
@@ -28,7 +26,6 @@ public:
 	bool changeLevelIfNecessary();
 
 private:
-	TextureLoader* textureLoader_;
 	GameObject* player_;
 
 	LevelMap levelMap_;

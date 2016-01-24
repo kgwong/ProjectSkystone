@@ -5,6 +5,9 @@
 #include "PlayerMovementState.h"
 #include "PlayerAttackState.h"
 
+//-------Harvey's include-----///
+#include "PlayerHookState.h"
+
 class PlayerControlComponent : public InputComponent
 {
 public:
@@ -17,9 +20,16 @@ public:
 	void changeMovementState(PlayerState* state);
 	void changeAttackState(PlayerAimState* state);
 
+	//----harvey function----///
+	//void changeHookState(PlayerHookState*)
+
+
 private:
 	PlayerMovementState movement_;
 	PlayerAttackState attack_;
+
+	//--harvey hook--//
+	PlayerHookState hooker_;
 };
 
 #endif //PLAYER_CONTROL_COMPONENT_H

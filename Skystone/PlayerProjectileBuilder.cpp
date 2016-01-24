@@ -1,15 +1,14 @@
 #include "PlayerProjectileBuilder.h"
 
-#include "TextureLoader.h"
-#include "AnimationRenderer.h"
+#include "Resources/Resources.h"
+#include "Components\Render\SpriteRenderer.h"
 #include "ColliderComponent.h"
 #include "PhysicsComponent.h"
 #include "DamageComponent.h"
 #include "DieOnCollision.h"
 
 
-PlayerProjectileBuilder::PlayerProjectileBuilder(TextureLoader* textureLoader)
-	:textureLoader_(textureLoader)
+PlayerProjectileBuilder::PlayerProjectileBuilder()
 {
 }
 
@@ -23,7 +22,7 @@ std::shared_ptr<GameObject> PlayerProjectileBuilder::build(ComponentSystem& comp
 	auto& projectileToBuild = *newProjectile;
 
 	projectileToBuild.setType(GameObject::Type::PLAYER_PROJECTILE);
-	projectileToBuild.addComponent(componentSystem.getNew<AnimationRenderer>(projectileToBuild, textureLoader_->getTextureSheet("Assets/Animations/playerProjectile.png")));
+	projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/playerProjectile.png")));
 	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 10));

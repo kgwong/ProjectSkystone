@@ -7,6 +7,7 @@
 class Level;
 class GameWindow;
 class Component;
+class RenderComponent;
 
 class RenderSystem
 {
@@ -23,7 +24,7 @@ public:
 	void cleanup();
 
 private:
-	std::vector<std::vector<std::shared_ptr<Component>>> renderLayers_;
+	std::vector<std::vector<std::shared_ptr<RenderComponent>>> renderLayers_;
 };
 
 #endif //RENDER_SYSYEM_H

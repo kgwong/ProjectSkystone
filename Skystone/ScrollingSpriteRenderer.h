@@ -1,7 +1,7 @@
 #ifndef SCROLLING_SPRITE_RENDERER_H
 #define SCROLLING_SPRITE_RENDERER_H
 
-#include "SpriteRenderer.h"
+/*#include "SpriteRenderer.h"
 
 class ScrollingSpriteRenderer : public SpriteRenderer
 {
@@ -20,14 +20,13 @@ private:
 	SDL_Rect drawDest2_;
 	Point oldCameraPos_;
 	int layerNum_;
-	int scale_;
 
-	void setInitialRects();
 	void checkDims();
 	int findDelX();
 	void advanceRects();
+	void scrollNonZero();
+	void scrollBoth();
 	void updateCamPos();
-	bool rectAtEdge(int dx);
 };
-
+*/
 #endif //SCROLLING_SPRITE_RENDERER_H

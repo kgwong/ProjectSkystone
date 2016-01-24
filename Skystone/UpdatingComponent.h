@@ -2,6 +2,7 @@
 #define UPDATING_COMPONENT_H
 
 #include "Component.h"
+#include "CollisionEvent.h"
 
 class UpdatingComponent : public Component
 {
@@ -10,6 +11,7 @@ public:
 	virtual ~UpdatingComponent() = 0;
 
 	virtual void update(Level& level) = 0;
+	virtual void handleEvent(const CollisionEvent& other);
 
 	virtual Component::Type getType();
 };

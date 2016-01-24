@@ -4,11 +4,9 @@
 
 #include "Log.h"
 
-LevelManager::LevelManager(TextureLoader* tl)
-	:textureLoader_(tl),
-	player_(nullptr),
+LevelManager::LevelManager()
+	:player_(nullptr),
 	levelMap_(10, 10),
-	levelLoader_(textureLoader_),
 	currLevel_(nullptr),
 	nextLevelID_(INVALID_LEVEL_ID)
 {
@@ -24,11 +22,6 @@ LevelManager::~LevelManager()
 {
 }
 
-void LevelManager::setTextureLoader(TextureLoader* textureLoader)
-{
-	textureLoader_ = textureLoader;
-}
-
 void LevelManager::setPlayer(GameObject* player)
 {
 	player_ = player;
@@ -36,7 +29,7 @@ void LevelManager::setPlayer(GameObject* player)
 
 void LevelManager::initStartingLevel()
 {
-	if (player_ != nullptr && textureLoader_ != nullptr)
+	if (player_ != nullptr)
 	{
 		currLevel_ = levelLoader_.getLevelWithID(4);
 		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
@@ -44,7 +37,7 @@ void LevelManager::initStartingLevel()
 	}
 	else
 	{
-		LOG_COUT << "set Player and TextureLoader first";
+		LOG_COUT << "set Player first";
 	}
 }
 

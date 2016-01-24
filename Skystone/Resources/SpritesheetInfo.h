@@ -1,7 +1,9 @@
 #ifndef SPRITESHEET_INFO_H
 #define SPRITESHEET_INFO_H
 
-struct SpritesheetInfo
+#include <vector>
+
+struct SpriteSheetInfo
 {
 	int num;
 	int width;
@@ -9,6 +11,8 @@ struct SpritesheetInfo
 	int numRows;
 	int numCols;
 	int padding;
+
+	std::vector<int> frameTimes;
 };
 
 #endif //SPRITESHEET_INFO_H

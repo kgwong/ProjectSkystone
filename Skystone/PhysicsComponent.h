@@ -39,6 +39,7 @@ public:
 	bool isFalling() const; 
 
 	void enableGravity(bool gravity);
+	bool gravityEnabled();
 
 private:
 	int velX_, velY_;

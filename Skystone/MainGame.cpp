@@ -5,17 +5,13 @@
 #include "Level.h"
 
 #include "GameOverException.h"
-#include "TempGameOverScreen.h"
-#include "Time.h"
+#include "GameTime.h"
 
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
-	textureLoader_(&window_),
-	quit_(false),
-	levelManager_(&textureLoader_)
+	quit_(false)
 {
-	GameObjectBuilder::buildPlayer(&textureLoader_, player_);
-	levelManager_.setTextureLoader(&textureLoader_);
+	GameObjectBuilder::buildPlayer(player_);
 	levelManager_.setPlayer(&player_);
 	levelManager_.initStartingLevel();
 
@@ -92,7 +88,7 @@ void MainGame::update()
 		{
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) quit_ = true; }
-			TempGameOverScreen(&textureLoader_).render();
+			std::cout << "GAME OVER" << std::endl;
 			SDL_Delay(100);
 		}
 	}

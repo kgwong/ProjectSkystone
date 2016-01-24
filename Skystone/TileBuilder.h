@@ -3,19 +3,15 @@
 
 class GameObject;
 
-class TextureLoader;
 class ComponentSystem;
 
 class TileBuilder
 {
 public:
-	TileBuilder(TextureLoader* textureLoader);
+	TileBuilder();
 	~TileBuilder();
 
 	GameObject& build(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild);
-
-private:
-	TextureLoader* textureLoader_;
 };
 
 #endif //TILE_BUILDER_H

@@ -46,7 +46,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
@@ -63,7 +63,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -88,6 +88,7 @@
     <ClCompile Include="ComponentEvent.cpp" />
     <ClCompile Include="ComponentSubsystem.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
+    <ClCompile Include="Components\Render\SpriteRenderer.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
     <ClCompile Include="DefaultAimState.cpp" />
     <ClCompile Include="DieOnCollision.cpp" />
@@ -110,11 +111,11 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="LiftComponent.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="NonUpdatingComponent.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
-    <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="CircleMath.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerAimState.cpp" />
@@ -127,25 +128,24 @@
     <ClCompile Include="PlayerProjectileBuilder.cpp" />
     <ClCompile Include="PounceAIComponent.cpp" />
     <ClCompile Include="RandomJumperComponent.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="Components\Render\RenderComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="Resources\Resources.cpp" />
+    <ClCompile Include="Resources\SpriteSheet.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="ScrollingSpriteRenderer.cpp" />
     <ClCompile Include="SnakeAIComponent.cpp" />
     <ClCompile Include="StunState.cpp" />
     <ClCompile Include="SwingingAIComponent.cpp" />
-    <ClCompile Include="TempGameOverScreen.cpp" />
-    <ClCompile Include="TextureLoader.cpp" />
-    <ClCompile Include="SpriteRenderer.cpp" />
-    <ClCompile Include="SpriteSheet.cpp" />
+    <ClCompile Include="Resources\TextureLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
-    <ClCompile Include="SpritesheetInfoReader.cpp" />
-    <ClCompile Include="TextureSheet.cpp" />
+    <ClCompile Include="Resources\SpritesheetInfoReader.cpp" />
     <ClCompile Include="TileBuilder.cpp" />
     <ClCompile Include="TileComponent.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Components\Render\TileRenderer.cpp" />
     <ClCompile Include="TrackerComponent.cpp" />
     <ClCompile Include="UpdatingComponent.cpp" />
     <ClCompile Include="WalkingState.cpp" />
@@ -163,6 +163,7 @@
     <ClInclude Include="ComponentEvent.h" />
     <ClInclude Include="ComponentSubsystem.h" />
     <ClInclude Include="ComponentSystem.h" />
+    <ClInclude Include="Components\Render\SpriteRenderer.h" />
     <ClInclude Include="DefaultAimState.h" />
     <ClInclude Include="DieOnCollision.h" />
     <ClInclude Include="FallingAIComponent.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ItemDropBuilder.h" />
     <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="LiftComponent.h" />
     <ClInclude Include="NonUpdatingComponent.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerAimState.h" />
@@ -183,15 +185,17 @@
     <ClInclude Include="PlayerHookState.h" />
     <ClInclude Include="PlayerMovementState.h" />
     <ClInclude Include="PlayerProjectileBuilder.h" />
+    <ClInclude Include="Resources\Resources.h" />
+    <ClInclude Include="Resources\SpriteSheet.h" />
     <ClInclude Include="ScrollingSpriteRenderer.h" />
     <ClInclude Include="PounceAIComponent.h" />
     <ClInclude Include="SnakeAIComponent.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="StunState.h" />
     <ClInclude Include="SwingingAIComponent.h" />
-    <ClInclude Include="TempGameOverScreen.h" />
     <ClInclude Include="TileComponent.h" />
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Components\Render\TileRenderer.h" />
     <ClInclude Include="TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -215,20 +219,16 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="RandomJumperComponent.h" />
-    <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="Components\Render\RenderComponent.h" />
     <ClInclude Include="RNG.h" />
-    <ClInclude Include="TextureLoader.h" />
-    <ClInclude Include="SpriteRenderer.h" />
-    <ClInclude Include="SpriteSheet.h" />
+    <ClInclude Include="Resources\TextureLoader.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="SpritesheetInfo.h" />
-    <ClInclude Include="SpritesheetInfoReader.h" />
-    <ClInclude Include="TextureSheet.h" />
+    <ClInclude Include="Resources\SpritesheetInfo.h" />
+    <ClInclude Include="Resources\SpritesheetInfoReader.h" />
     <ClInclude Include="TileArrangement.h" />
     <ClInclude Include="TileBuilder.h" />
     <ClInclude Include="UpdatingComponent.h" />

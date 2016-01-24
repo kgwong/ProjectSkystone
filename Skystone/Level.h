@@ -14,7 +14,6 @@
 class LevelLoader;
 class LevelMap;
 class LevelManager;
-class TextureLoader;
 class GameObjectBuilder;
 class SpriteRenderer;
 
@@ -64,10 +63,9 @@ public:
 
 	//there should only be one hook per cast.
 	std::shared_ptr<GameObject> playerHook;
-	int numHook_;
+	//int numHook_;
 
 private:
-	TextureLoader* textureLoader_;
 	LevelManager* levelManager_;
 	GameObjectBuilder* gameObjectBuilder_;
 	std::shared_ptr<GameObject> background_;

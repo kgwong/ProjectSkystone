@@ -14,6 +14,7 @@ public:
 
 	virtual void handleInput(SDL_Event& e);
 	void update(Level& level);
+	double getDegrees();
 
 private:
 	double _degrees;

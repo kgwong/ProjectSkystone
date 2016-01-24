@@ -25,7 +25,6 @@ void PlayerMovementState::handleInput(SDL_Event& e)
 
 void PlayerMovementState::update(Level& level)
 {
-	LOG << "Movement";
 	currentState_->update(owner_);
 }
 

@@ -4,6 +4,8 @@
 #include "PlayerMovementState.h"
 #include "PlayerControlComponent.h"
 
+#include "Components\Render\SpriteRenderer.h"
+
 WalkingState::WalkingState()
 {
 }
@@ -48,9 +50,13 @@ void WalkingState::update(GameObject& player)
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(-WALK_VELOCITY);
+		player.getComponent<SpriteRenderer>()->setFlipHorz(true);
+		//player.getComponent<SpriteRenderer>()->flip(Axis::X);
 	}
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(WALK_VELOCITY);
+		player.getComponent<SpriteRenderer>()->setFlipHorz(false);
+	//	player.getComponent<SpriteRenderer>()->flip(Axis::X);
 	}
 }
