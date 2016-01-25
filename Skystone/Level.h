@@ -16,6 +16,7 @@ class LevelMap;
 class LevelManager;
 class GameObjectBuilder;
 class SpriteRenderer;
+class SpriteSheet;
 
 class Level
 {
@@ -28,7 +29,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder);
-	void setBackground();
+	void setBackgroundFromSprite(SpriteSheet* backgroundSprite);
 
 	void setPlayer(GameObject* player, Point startPosition);
 	Point getPlayerPos();
