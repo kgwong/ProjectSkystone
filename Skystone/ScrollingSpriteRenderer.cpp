@@ -32,7 +32,8 @@ ScrollingSpriteRenderer::ScrollingSpriteRenderer(GameObject& owner, SpriteSheet*
 	drawDest1_{ 0,0,Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT },
 	drawDest2_{ 0,0,0,0 },
 	oldCameraPos_{ 0,0 },
-	layerNum_{ layerNum }
+	layerNum_{ layerNum },
+	moveFreq_{5}
 {
 	checkDims();
 }
@@ -86,8 +87,11 @@ void ScrollingSpriteRenderer::scrollNonZero(GameWindow& gameWindow)
 void ScrollingSpriteRenderer::scrollBoth(GameWindow& gameWindow)
 {
 	Point currCam = gameWindow.getCamera().getPos();
-	int xBound = currCam.x / layerNum_;
+
+	// every moveFreq_ steps the player takes, advance by layerNum_
 	int maxW = spriteSheet_->getFrameRect(0)->w;
+	int distTraveled = (currCam.x * layerNum_) / moveFreq_;
+	int xBound = distTraveled % maxW;
 
 	setRect(&drawSrc1_, xBound, 0, maxW - xBound, Constants::SCREEN_HEIGHT);
 	setRect(&drawDest1_, 0, 0, drawSrc1_.w, Constants::SCREEN_HEIGHT);

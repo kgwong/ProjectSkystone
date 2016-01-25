@@ -23,6 +23,7 @@ private:
 	SDL_Rect drawDest2_;
 	Point oldCameraPos_;
 	int layerNum_;
+	int moveFreq_;
 
 	void checkDims();
 	int findDelX(GameWindow& gameWindow);

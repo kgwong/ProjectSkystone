@@ -54,7 +54,7 @@ void Level::setBackgroundFromSprite(SpriteSheet* backgroundSprite)
 {
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
-	int layer = 2;
+	int layer = 1;
 	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer));
 }
 
