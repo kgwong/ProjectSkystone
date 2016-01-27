@@ -41,7 +41,7 @@ void LevelLoader::load(const int levelID)
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
 	level->setGameObjectBuilder(&gameObjectBuiler_);
-	level->setBackground();
+	level->setBackgroundFromSprite(Resources::getSpriteSheet("Assets/swamp.png"));
 
 	
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
