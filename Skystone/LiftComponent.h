@@ -11,6 +11,7 @@ class LiftComponent : public UpdatingComponent
 {
 public:
 	static const int DEFAULT_X_RADIUS = 25;
+	static const int DEFAULT_DELAY = 7;
 
 
 	LiftComponent(GameObject& owner);
@@ -31,7 +32,8 @@ private:
 	PhysicsComponent* physics_;
 	int xRadius_;
 
-	int delay;
+	int delay_;
+	int time_;
 	
 
 };

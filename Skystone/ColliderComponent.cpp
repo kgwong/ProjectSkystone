@@ -42,6 +42,8 @@ void ColliderComponent::setCollider(BoxCollider newCollider)
 	_collider = newCollider;
 }
 
+
+
 int ColliderComponent::getHeight()
 {
 	return _collider.height;
