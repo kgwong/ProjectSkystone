@@ -12,7 +12,6 @@
 
 #include "GameWindow.h"
 
-#include "AIComponent.h"
 #include "SpriteSheet.h"
 
 struct TextureDestroyer

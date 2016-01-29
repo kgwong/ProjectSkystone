@@ -1,9 +1,8 @@
 #ifndef LIFT_COMPONENT_H
 #define LIFT_COMPONENT_H
 
-#include "UpdatingComponent.h"
+#include "Components/UpdatingComponent.h"
 #include "Point.h"
-#include "CollisionEvent.h"
 
 class PhysicsComponent;
 

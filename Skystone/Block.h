@@ -1,7 +1,7 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include "GameConstants.h"
+#include "Game/GameConstants.h"
 #include "Point.h"
 
 struct Block

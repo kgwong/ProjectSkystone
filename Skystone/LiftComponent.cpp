@@ -1,5 +1,5 @@
 #include "LiftComponent.h"
-#include "PhysicsComponent.h"
+#include "Components/Physics/PhysicsComponent.h"
 #include <iostream>
 using namespace std;
 

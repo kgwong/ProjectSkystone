@@ -1,6 +1,6 @@
 #include "ScrollingSpriteRenderer.h"
 #include "GameWindow.h"
-#include "GameConstants.h"
+#include "Game/GameConstants.h"
 #include "Log.h"
 
 namespace

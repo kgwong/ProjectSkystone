@@ -2,10 +2,10 @@
 
 #include "Log.h"
 #include "Path.h"
-#include "Level.h"
+#include "Level/Level.h"
 
 #include "GameOverException.h"
-#include "GameTime.h"
+#include "Game/GameTime.h"
 
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
