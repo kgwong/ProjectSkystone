@@ -3,6 +3,9 @@
 #include "GameObject/GameObject.h"
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Render/SpriteRenderer.h"
+
+#include "Resources/Resources.h"
 
 AirborneState::AirborneState()
 {
@@ -16,6 +19,7 @@ AirborneState::~AirborneState()
 void AirborneState::onEnter(GameObject& player)
 {
 	jumpHeld_ = true;
+	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jump cycle.png"));
 }
 
 void AirborneState::onExit(GameObject& player)

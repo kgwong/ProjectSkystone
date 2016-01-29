@@ -6,6 +6,8 @@
 
 #include "Components/Render/SpriteRenderer.h"
 
+#include "Resources/Resources.h"
+
 WalkingState::WalkingState()
 {
 }
@@ -16,6 +18,7 @@ WalkingState::~WalkingState()
 
 void WalkingState::onEnter(GameObject& player)
 {
+	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
 }
 
 void WalkingState::onExit(GameObject& player)
@@ -50,13 +53,19 @@ void WalkingState::update(GameObject& player)
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(-WALK_VELOCITY);
+		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
 		player.getComponent<SpriteRenderer>()->setFlipHorz(true);
 		//player.getComponent<SpriteRenderer>()->flip(Axis::X);
 	}
-	if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
+	else if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(WALK_VELOCITY);
+		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
 		player.getComponent<SpriteRenderer>()->setFlipHorz(false);
 	//	player.getComponent<SpriteRenderer>()->flip(Axis::X);
+	}
+	else
+	{
+		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
 	}
 }
