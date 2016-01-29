@@ -13,6 +13,7 @@ public:
 	static const int TERMINAL_VELOCITY = 20;
 
 public:
+
 	PhysicsComponent(GameObject& owner);
 	virtual ~PhysicsComponent();
 
