@@ -1,7 +1,7 @@
 #ifndef DAMAGECOMPONENT_H
 #define DAMAGECOMPONENT_H
 
-#include "NonUpdatingComponent.h"
+#include "Components/NonUpdatingComponent.h"
 
 class DamageComponent :	public NonUpdatingComponent
 {

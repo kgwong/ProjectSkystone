@@ -1,14 +1,14 @@
 #include "LiftComponent.h"
-#include "PhysicsComponent.h"
-#include "ColliderComponent.h"
+#include "Components/Physics/PhysicsComponent.h"
 #include <iostream>
 using namespace std;
 
 LiftComponent::LiftComponent(GameObject & owner)
 	: UpdatingComponent(owner),
-	xRadius_(DEFAULT_X_RADIUS)
+	xRadius_(DEFAULT_X_RADIUS),
+	time_(0),
+	delay_(DEFAULT_DELAY)
 {
-	delay = 0;
 }
 
 
@@ -25,15 +25,15 @@ void LiftComponent::update(Level & level)
 {
 	PhysicsComponent *playerPhysics = level.player->getComponent<PhysicsComponent>();
 
-	if (!playerPhysics->gravityEnabled() && delay >= 50)
+	if (!playerPhysics->gravityEnabled() && time_ >= delay_)
 	{
-		playerPhysics->setVelY(0);
+		playerPhysics->setAccelY(0);
 		playerPhysics->enableGravity(true);
-		delay = 0;
+		time_ = 0;
 
 	}
 	else
-		delay++;
+		time_++;
 }
 
 void LiftComponent::handleEvent(const CollisionEvent & other)
@@ -41,11 +41,10 @@ void LiftComponent::handleEvent(const CollisionEvent & other)
 
 	if (other.getOtherObject().getType() == GameObject::Type::PLAYER)
 	{
-		ColliderComponent *playerCollider = other.getOtherObject().getComponent<ColliderComponent>();
+		GameObject player = other.getOtherObject();
 		PhysicsComponent *playerPhysics = other.getOtherObject().getComponent<PhysicsComponent>();
-		playerCollider->getTop();
 		playerPhysics->enableGravity(false);
-		playerPhysics->setVelY(-20);
+		playerPhysics->setAccelY(-2);
 	}
 }
 
