@@ -133,7 +133,7 @@
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\SpriteSheet.cpp" />
     <ClCompile Include="RNG.cpp" />
-    <ClCompile Include="ScrollingSpriteRenderer.cpp" />
+    <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp" />
     <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\StunState.cpp" />
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp" />
@@ -187,7 +187,7 @@
     <ClInclude Include="GameObject\Builders\PlayerProjectileBuilder.h" />
     <ClInclude Include="Resources\Resources.h" />
     <ClInclude Include="Resources\SpriteSheet.h" />
-    <ClInclude Include="ScrollingSpriteRenderer.h" />
+    <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h" />
     <ClInclude Include="Components\AI\PounceAIComponent.h" />
     <ClInclude Include="Components\AI\SnakeAIComponent.h" />
     <ClInclude Include="ComponentSystem\RenderSystem.h" />

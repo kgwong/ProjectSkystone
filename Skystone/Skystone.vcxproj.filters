@@ -90,9 +90,6 @@
     <ClCompile Include="DieOnCollision.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScrollingSpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Resources\Resources.cpp">
     </ClCompile>
     <ClCompile Include="LiftComponent.cpp">
@@ -261,6 +258,9 @@
     <ClCompile Include="Components\ItemDrop\PickupComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameWindow.h">
@@ -315,9 +315,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DieOnCollision.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Resources.h">
@@ -506,6 +503,9 @@
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Components\ItemDrop\PickupComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
   </ItemGroup>

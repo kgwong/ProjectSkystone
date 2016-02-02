@@ -7,7 +7,7 @@
 class ScrollingSpriteRenderer : public RenderComponent
 {
 public:
-	ScrollingSpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet, int layerNum);
+	ScrollingSpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet, int layerNum, bool scrollX=true, bool scrollY=false);
 	virtual ~ScrollingSpriteRenderer();
 
 	virtual void start(Level& level) {};
@@ -17,19 +17,22 @@ public:
 
 private:
 	SpriteSheet* spriteSheet_;
-	SDL_Rect drawSrc1_;
-	SDL_Rect drawSrc2_;
-	SDL_Rect drawDest1_;
-	SDL_Rect drawDest2_;
+	bool sx_, sy_;
+	SDL_Rect tlS_, tlD_, trS_, trD_, blS_, blD_, brS_, brD_;
 	Point oldCameraPos_;
 	int layerNum_;
 	int moveFreq_;
 
 	void checkDims();
-	int findDelX(GameWindow& gameWindow);
 	void advanceRects(GameWindow& gameWindow);
-	void scrollNonZero(GameWindow& gameWindow);
-	void scrollBoth(GameWindow& gameWindow);
+	void scrollNonZeroRect(GameWindow& gameWindow);
+	void scrollQuads(GameWindow& gameWindow);
+	int findXBound(Point currCam);
+	int findYBound(Point currCam);
+	void advanceQuadrant(SDL_Rect* src, SDL_Rect* dest, int xBound, int yBound, bool left, bool top);
+	bool cameraChanged(GameWindow& gameWindow);
+	int findDelX(GameWindow& gameWindow);
+	int findDelY(GameWindow& gameWindow);
 	void updateCamPos(GameWindow& gameWindow);
 };
 
