@@ -41,12 +41,10 @@ void LevelLoader::load(const int levelID)
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
 	level->setGameObjectBuilder(&gameObjectBuiler_);
-	level->setBackgroundFromSprite(Resources::getSpriteSheet("Assets/swamp.png"));
 
-	
+	loadBackground(generateFilePath("BackgroundLayers", levelID), level.get());
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
 	loadTiles(generateFilePath("Tiles", levelID), level.get());
-
 	loadedLevels_.insert({levelID, level});
 }
 
@@ -95,5 +93,21 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level* level)
 	while (ifs >> enemyName >> pos.x >> pos.y)
 	{
 		level->addEnemyAtLocation(enemyName, pos);
+	}
+}
+
+void LevelLoader::loadBackground(const std::string& filepath, Level* level)
+{
+	std::ifstream ifs(filepath);
+	if (!ifs)
+		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
+
+	int layer = 1;
+	std::string name;
+	bool scrollx, scrolly;
+	
+	while (ifs >> name >> std::boolalpha >> scrollx >> scrolly)
+	{
+		level->setBackgroundLayerFromSprite(Resources::getSpriteSheet(name), layer++, scrollx, scrolly);
 	}
 }

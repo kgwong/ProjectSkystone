@@ -60,11 +60,11 @@ void ScrollingSpriteRenderer::advanceRects(GameWindow& gameWindow)
 
 	if (cameraChanged(gameWindow)) 
 	{
-		if (currCam.x <= spriteSheet_->getFrameRect(0)->w ||
-			currCam.y <= spriteSheet_->getFrameRect(0)->h)
+		//if (currCam.x <= spriteSheet_->getFrameRect(0)->w ||
+		//	currCam.y <= spriteSheet_->getFrameRect(0)->h)
 			scrollQuads(gameWindow);
-		else
-			scrollNonZeroRect(gameWindow);
+		//else
+		//	scrollNonZeroRect(gameWindow);
 	}
 }
 
@@ -123,14 +123,14 @@ int ScrollingSpriteRenderer::findXBound(Point currCam)
 {
 	int maxW = spriteSheet_->getFrameRect(0)->w;
 	int distTraveled = (currCam.x * layerNum_) / moveFreq_;
-	return distTraveled % maxW;
+	return (sx_) ? distTraveled % maxW : 0;
 }
 
 int ScrollingSpriteRenderer::findYBound(Point currCam)
 {
 	int maxH = spriteSheet_->getFrameRect(0)->h;
 	int distTraveled = (currCam.y * layerNum_) / moveFreq_;
-	return distTraveled % maxH;
+	return (sy_) ? distTraveled % maxH : 0;
 }
 
 void ScrollingSpriteRenderer::updateCamPos(GameWindow& gameWindow)

@@ -37,7 +37,7 @@ private:
 
 	void loadEnemies(const std::string& filepath, Level* level);
 	void loadTiles(const std::string& filepath, Level* level);
-
+	void loadBackground(const std::string& filepath, Level* level);
 
 };
 

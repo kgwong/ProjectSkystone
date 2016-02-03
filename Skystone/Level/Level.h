@@ -29,7 +29,7 @@ public:
 
 	void setLevelManager(LevelManager* levelManager);
 	void setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder);
-	void setBackgroundFromSprite(SpriteSheet* backgroundSprite);
+	void setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly);
 
 	void setPlayer(GameObject* player, Point startPosition);
 	Point getPlayerPos();
