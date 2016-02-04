@@ -11,7 +11,7 @@
 #include "Errors.h"
 #include "GameWindow.h"
 #include "MusicPlayer.h"
-#include "LevelManager.h"
+#include "Level/LevelManager.h"
 
 class MainGame
 {

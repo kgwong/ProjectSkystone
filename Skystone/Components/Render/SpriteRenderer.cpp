@@ -1,7 +1,7 @@
 #include "SpriteRenderer.h"
 
 #include "GameWindow.h"
-#include "GameTime.h"
+#include "Game/GameTime.h"
 
 #include "Log.h"
 

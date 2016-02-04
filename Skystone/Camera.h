@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "GameObject.h"
+#include "GameObject/GameObject.h"
 
 //only render what is visible by camera!
 //create a collider for camera and only render objects colliding with camera

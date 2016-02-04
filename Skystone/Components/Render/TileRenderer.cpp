@@ -1,6 +1,6 @@
 #include "TileRenderer.h"
 
-#include "GameConstants.h"
+#include "Game/GameConstants.h"
 
 TileRenderer::TileRenderer(GameObject& owner, SpriteSheet* spriteSheet, int tileNum)
 	:RenderComponent(owner), spriteSheet_(spriteSheet), tileNum_(tileNum)

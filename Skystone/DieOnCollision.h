@@ -1,7 +1,7 @@
 #ifndef DIE_ON_COLLISION_H
 #define DIE_ON_COLLISION_H
 
-#include "NonUpdatingComponent.h"
+#include "Components/NonUpdatingComponent.h"
 
 class DieOnCollision : public NonUpdatingComponent
 {

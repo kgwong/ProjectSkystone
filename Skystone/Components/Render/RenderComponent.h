@@ -1,7 +1,7 @@
 #ifndef RENDER_COMPONENT_H
 #define RENDER_COMPONENT_H
 
-#include "Component.h"
+#include "Components/Component.h"
 
 class GameWindow;
 
