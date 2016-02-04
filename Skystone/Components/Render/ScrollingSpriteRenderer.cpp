@@ -50,7 +50,7 @@ ScrollingSpriteRenderer::ScrollingSpriteRenderer(GameObject& owner, SpriteSheet*
 	brS_{0,0,0,0}, brD_{0,0,0,0},
 	oldCameraPos_{0,0},
 	layerNum_{layerNum},
-	moveFreq_{5}
+	moveFreq_{10}
 {
 	checkDims();
 }
