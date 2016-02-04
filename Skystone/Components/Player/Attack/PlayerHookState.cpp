@@ -11,7 +11,7 @@ PlayerHookState::PlayerHookState(GameObject& owner)
 	_launched(false),
 	_currentAimState(DEFAULT_AIM_STATE)
 {
-
+	
 }
 PlayerHookState::~PlayerHookState()
 {
@@ -79,6 +79,14 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	//_currentAimState->handleInput(owner_, e);
 	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
 		_launched = true;
+
+	//audio testing stuff
+	//if (e.key.keysym.sym == SDL_KEYDOWN && e.key.keysym.sym == SDLK_1)
+	//{
+	//	_audio.PlayClip(AudioPlayer::ClipName::LASER);
+	//}
+	//if (e.key.keysym.sym == SDL_KEYDOWN  && e.key.keysym.sym == SDLK_2)
+	//	_audio.Pause();
 }
 
 double PlayerHookState::getDegrees()

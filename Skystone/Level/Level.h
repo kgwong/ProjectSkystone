@@ -76,6 +76,7 @@ private:
 	int levelID_;
 
 	ComponentSystem componentSystem_;
+	//AudioPlayer audio_;
 
 private:
 	void startComponents(std::vector<std::shared_ptr<GameObject>>& v);

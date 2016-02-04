@@ -3,6 +3,7 @@
 
 #include "Components/InputComponent.h"
 #include "AimState.h"
+#include "AudioPlayer.h"
 class PlayerHookState :
 	public InputComponent
 {
@@ -20,6 +21,7 @@ private:
 	double _degrees;
 	bool _launched;
 	AimState _currentAimState;
+	//AudioPlayer _audio;
 
 };
 

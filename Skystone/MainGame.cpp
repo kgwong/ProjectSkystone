@@ -17,8 +17,11 @@ MainGame::MainGame()
 
 	updateCameraBounds();
 
-	//musicPlayer_.loadSong(Path::getFullPath("Assets/Music/tempSong.wav"));
+	//musicPlayer_.loadSong(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
 	//musicPlayer_.play();
+	
+	audio_.LoadClip(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
+	//audio_.PlayClip();
 }
 
 
@@ -59,6 +62,8 @@ void MainGame::processInput()
 					levelManager_.getLevelMap()->print();
 				break;
 			case SDL_KEYUP:
+		     	if (e.key.keysym.sym == SDLK_1)
+					audio_.PlayClip();
 				break;
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
