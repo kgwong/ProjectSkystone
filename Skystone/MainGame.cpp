@@ -62,7 +62,7 @@ void MainGame::processInput()
 					levelManager_.getLevelMap()->print();
 				break;
 			case SDL_KEYUP:
-		     	if (e.key.keysym.sym == SDLK_1)
+		     	if (e.key.keysym.sym == SDLK_1)//audio test ~ may use shared_ptrs now.
 					audio_.PlayClip();
 				break;
 			case SDL_MOUSEMOTION:
