@@ -18,6 +18,9 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	shoot_(false)
 	//launch_(false)
 {
+
+	audio_.SetFilePaths();
+	audio_.LoadAllClips();
 }
 
 
@@ -112,6 +115,9 @@ void PlayerAttackState::update(Level& level)
 	{
 		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
 		shoot_ = false;
+
+		//play sound here!
+		audio_.PlayClip("laser1");
 	}
 
 

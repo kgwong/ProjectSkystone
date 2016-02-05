@@ -6,6 +6,7 @@
 #include "PlayerAimState.h"
 #include "DefaultAimState.h"
 #include "AimUpState.h"
+#include "AudioPlayer.h"
 
 class PlayerAttackState : public InputComponent
 {
@@ -38,6 +39,8 @@ private:
 
 	//for hook ~ move to a different state
 	//bool launch_;
+
+	AudioPlayer audio_;
 
 };
 
