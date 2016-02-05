@@ -10,7 +10,8 @@ public:
 	{
 		EMPTY = 0,
 		SOLID = 1,
-		FLOAT = 2
+		LIFT = 2,
+		BURN = 3
 	};
 
 public:

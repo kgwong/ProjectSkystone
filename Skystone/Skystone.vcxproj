@@ -76,12 +76,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
     <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp" />
     <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp" />
+=======
+    <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AIjump.cpp" />
+    <ClCompile Include="AimUpState.cpp" />
+    <ClCompile Include="AirborneState.cpp" />
+    <ClCompile Include="BasicEnemyMovementComponent.cpp" />
+    <ClCompile Include="BurnTileComponent.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Components\Collider\ColliderComponent.cpp" />
     <ClCompile Include="Components\Events\CollisionEvent.cpp" />
@@ -104,6 +113,7 @@
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InitSystems.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="Components\InputComponent.cpp" />
     <ClCompile Include="ComponentSystem\InputSystem.cpp" />
     <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp" />
@@ -113,6 +123,17 @@
     <ClCompile Include="Level\LevelManager.cpp" />
     <ClCompile Include="Level\LevelMap.cpp" />
     <ClCompile Include="LiftComponent.cpp" />
+=======
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="ItemDropBuilder.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelChangeComponent.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="LiftTileComponent.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Components\NonUpdatingComponent.cpp" />
     <ClCompile Include="Path.cpp" />
@@ -134,10 +155,18 @@
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\SpriteSheet.cpp" />
     <ClCompile Include="RNG.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp" />
     <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\StunState.cpp" />
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp" />
+=======
+    <ClCompile Include="ScrollingSpriteRenderer.cpp" />
+    <ClCompile Include="SnakeAIComponent.cpp" />
+    <ClCompile Include="SpecialTileComponent.cpp" />
+    <ClCompile Include="StunState.cpp" />
+    <ClCompile Include="SwingingAIComponent.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Resources\TextureLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -159,6 +188,7 @@
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="BurnTileComponent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Components\Events\CollisionEvent.h" />
     <ClInclude Include="Components\Events\ComponentEvent.h" />
@@ -171,6 +201,7 @@
     <ClInclude Include="Components\AI\FlyingAIComponent.h" />
     <ClInclude Include="GameObject\Builders\GameObjectBuilder.h" />
     <ClInclude Include="GameOverException.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Components\InputComponent.h" />
     <ClInclude Include="ComponentSystem\InputSystem.h" />
     <ClInclude Include="GameObject\Builders\ItemDropBuilder.h" />
@@ -196,6 +227,34 @@
     <ClInclude Include="Components\AI\SwingingAIComponent.h" />
     <ClInclude Include="Components\Tile\TileComponent.h" />
     <ClInclude Include="Game\GameTime.h" />
+=======
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="ItemDropBuilder.h" />
+    <ClInclude Include="LevelChangeComponent.h" />
+    <ClInclude Include="LiftTileComponent.h" />
+    <ClInclude Include="NonUpdatingComponent.h" />
+    <ClInclude Include="PickupComponent.h" />
+    <ClInclude Include="PlayerAimState.h" />
+    <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PlayerControlComponent.h" />
+    <ClInclude Include="PlayerHookBuilder.h" />
+    <ClInclude Include="PlayerHookState.h" />
+    <ClInclude Include="PlayerMovementState.h" />
+    <ClInclude Include="PlayerProjectileBuilder.h" />
+    <ClInclude Include="Resources\Resources.h" />
+    <ClInclude Include="Resources\SpriteSheet.h" />
+    <ClInclude Include="ScrollingSpriteRenderer.h" />
+    <ClInclude Include="PounceAIComponent.h" />
+    <ClInclude Include="SnakeAIComponent.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="SpecialTileComponent.h" />
+    <ClInclude Include="StunState.h" />
+    <ClInclude Include="SwingingAIComponent.h" />
+    <ClInclude Include="TileComponent.h" />
+    <ClInclude Include="GameTime.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Components\Render\TileRenderer.h" />
     <ClInclude Include="Components\AI\TrackerComponent.h" />
     <ClInclude Include="CircleMath.h" />
