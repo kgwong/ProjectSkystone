@@ -261,7 +261,7 @@
     <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioPlayer.cpp">
+    <ClCompile Include="Resources\AudioPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -511,7 +511,7 @@
     <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-    <ClInclude Include="AudioPlayer.h">
+    <ClInclude Include="Resources\AudioPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

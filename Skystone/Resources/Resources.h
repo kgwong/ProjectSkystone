@@ -1,6 +1,7 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 
+#include "AudioPlayer.h"
 #include "TextureLoader.h"
 #include "SpriteSheet.h"
 #include "Path.h"
@@ -12,6 +13,7 @@ class Resources
 {
 public:
 	static TextureLoader textureLoader;
+	static AudioPlayer audioPlayer;
 
 public:
 	static SpriteSheet* getSpriteSheet(const std::string& basepath);

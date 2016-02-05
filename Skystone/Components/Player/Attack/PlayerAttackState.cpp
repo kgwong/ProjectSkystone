@@ -7,6 +7,8 @@
 
 #include "Log.h"
 
+#include "Resources/Resources.h"
+
 DefaultAimState PlayerAttackState::defaultAimState;
 AimUpState PlayerAttackState::aimUpState;
 
@@ -19,8 +21,8 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	//launch_(false)
 {
 
-	audio_.SetFilePaths();
-	audio_.LoadAllClips();
+	//audio_.SetFilePaths();
+	//audio_.LoadAllClips();
 }
 
 
@@ -117,7 +119,8 @@ void PlayerAttackState::update(Level& level)
 		shoot_ = false;
 
 		//play sound here!
-		audio_.PlayClip("laser1");
+		//audio_.PlayClip("laser1");
+		Resources::audioPlayer.PlayClip("laser1");
 	}
 
 
