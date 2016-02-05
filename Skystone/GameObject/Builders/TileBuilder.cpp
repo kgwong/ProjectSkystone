@@ -14,7 +14,6 @@
 #include "BurnTileComponent.h"
 #include "DamageComponent.h"
 
-
 TileBuilder::TileBuilder()
 {
 }
