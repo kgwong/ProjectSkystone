@@ -1,7 +1,7 @@
 #include "MainGame.h"
 
-#include "Log.h"
-#include "Path.h"
+#include "Application/Log.h"
+#include "Application/Path.h"
 #include "Level/Level.h"
 
 #include "GameOverException.h"

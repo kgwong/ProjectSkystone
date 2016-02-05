@@ -2,7 +2,7 @@
 #define LIFT_COMPONENT_H
 
 #include "Components/UpdatingComponent.h"
-#include "Point.h"
+#include "GameTypes/Point.h"
 
 class PhysicsComponent;
 

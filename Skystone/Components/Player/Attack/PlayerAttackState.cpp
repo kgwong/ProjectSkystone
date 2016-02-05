@@ -5,7 +5,7 @@
 
 #include "Game/Controls.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 
 #include "Resources/Resources.h"
 

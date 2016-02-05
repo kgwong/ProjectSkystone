@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 #include "Block.h"
 
 class Level;

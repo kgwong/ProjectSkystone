@@ -4,7 +4,7 @@
 #include "Resources/SpriteSheet.h"
 
 #include "RenderComponent.h"
-#include "Axis.h"
+#include "GameTypes/Axis.h"
 
 class SpriteRenderer : public RenderComponent
 {

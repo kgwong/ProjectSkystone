@@ -8,8 +8,8 @@
 #include <iostream>
 #include <string>
 
-#include "Errors.h"
-#include "GameWindow.h"
+#include "Application/Errors.h"
+#include "Application/GameWindow.h"
 #include "Level/LevelManager.h"
 
 class MainGame

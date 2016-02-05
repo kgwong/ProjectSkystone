@@ -1,10 +1,9 @@
 #include "SpriteSheet.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 #include <limits>
 
 #include "SpriteSheetInfoReader.h"
-#include <SDL\SDL.h>
 
 SpriteSheet::SpriteSheet(std::shared_ptr<SDL_Texture> texture, const std::string& fullpath)
 	: texture_(texture)

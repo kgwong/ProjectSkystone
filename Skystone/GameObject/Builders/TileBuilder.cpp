@@ -6,7 +6,7 @@
 #include "Resources/Resources.h"
 #include "Components/Render/TileRenderer.h"
 #include "Components/Tile/TileComponent.h"
-#include "Liftcomponent.h"
+#include "Components/Tile/Liftcomponent.h"
 
 TileBuilder::TileBuilder()
 {
