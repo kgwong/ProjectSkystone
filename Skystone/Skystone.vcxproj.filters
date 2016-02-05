@@ -228,7 +228,7 @@
     </ClCompile>
     <ClCompile Include="Components\Player\Movement\FlyingState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
+	</ClCompile>
     <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
@@ -254,6 +254,7 @@
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
+    </ClCompile>
     <ClCompile Include="Resources\AudioPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -478,6 +479,9 @@
     <ClInclude Include="Components\Player\Movement\PlayerState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
+    <ClInclude Include="AimState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Resources\Resources.h">
     </ClInclude>
     <ClInclude Include="Resources\TextureLoader.h">
@@ -506,10 +510,10 @@
     </ClInclude>
     <ClInclude Include="Resources\AudioPlayer.h">
     </ClInclude>
-    <ClInclude Include="SpecialTileComponent.h">
+    <ClInclude Include="LiftTileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LiftTileComponent.h">
+    <ClInclude Include="SpecialTileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BurnTileComponent.h">
