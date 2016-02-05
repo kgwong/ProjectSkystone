@@ -222,13 +222,11 @@
     <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
-=======
+	</ClCompile>
     <ClCompile Include="ScrollingSpriteRenderer.cpp">
       <Filter>Source Files</Filter>
->>>>>>> Stashed changes
     </ClCompile>
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
@@ -236,7 +234,6 @@
     <ClCompile Include="Components\Player\Movement\FlyingState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
@@ -245,7 +242,7 @@
     </ClCompile>
     <ClCompile Include="Components\Player\Movement\StunState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
-=======
+    </ClCompile>
     <ClCompile Include="PlayerHookState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -253,7 +250,6 @@
     </ClCompile>
     <ClCompile Include="Resources\TextureLoader.cpp">
       <Filter>Source Files</Filter>
->>>>>>> Stashed changes
     </ClCompile>
     <ClCompile Include="Components\Player\Attack\PlayerHookState.cpp">
       <Filter>Source Files</Filter>
@@ -490,24 +486,21 @@
     <ClInclude Include="Components\Player\Attack\PlayerAttackState.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\AirborneState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\FlyingState.h">
       <Filter>Header Files\Player State Headers</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="PlayerHookBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PounceAIComponent.h">
       <Filter>Header Files\AIComponents</Filter>
->>>>>>> Stashed changes
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerMovementState.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\WalkingState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
@@ -516,7 +509,7 @@
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerState.h">
       <Filter>Header Files\Player State Headers</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="AimState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -524,7 +517,6 @@
     </ClInclude>
     <ClInclude Include="Resources\TextureLoader.h">
       <Filter>Header Files</Filter>
->>>>>>> Stashed changes
     </ClInclude>
     <ClInclude Include="Components\Player\Attack\PlayerHookState.h">
       <Filter>Header Files</Filter>
@@ -547,9 +539,8 @@
     <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Resources\AudioPlayer.h">
-=======
+    </ClInclude>
     <ClInclude Include="SpecialTileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -557,7 +548,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BurnTileComponent.h">
->>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
