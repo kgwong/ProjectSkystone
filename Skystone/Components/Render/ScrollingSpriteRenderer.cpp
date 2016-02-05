@@ -49,8 +49,8 @@ ScrollingSpriteRenderer::ScrollingSpriteRenderer(GameObject& owner, SpriteSheet*
 	blS_{0,0,0,0}, blD_{0,0,0,0},
 	brS_{0,0,0,0}, brD_{0,0,0,0},
 	oldCameraPos_{0,0},
-	layerNum_{layerNum},
-	moveFreq_{10}
+	layerNum_{layerNum}, 
+	moveFreq_{8}
 {
 	checkDims();
 }
@@ -175,14 +175,14 @@ int ScrollingSpriteRenderer::findDelY(GameWindow& gameWindow)
 int ScrollingSpriteRenderer::findXBound(Point currCam)
 {
 	int maxW = spriteSheet_->getFrameRect(0)->w;
-	int distTraveled = (currCam.x * layerNum_) / moveFreq_;
+	int distTraveled = (currCam.x * std::pow(2,layerNum_)) / moveFreq_;
 	return (sx_) ? distTraveled % maxW : 0;
 }
 
 int ScrollingSpriteRenderer::findYBound(Point currCam)
 {
 	int maxH = spriteSheet_->getFrameRect(0)->h;
-	int distTraveled = (currCam.y * layerNum_) / moveFreq_;
+	int distTraveled = (currCam.y * std::pow(2,layerNum_)) / moveFreq_;
 	return (sy_) ? distTraveled % maxH : 0;
 }
 
