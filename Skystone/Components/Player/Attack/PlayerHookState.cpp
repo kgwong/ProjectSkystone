@@ -3,7 +3,7 @@
 #include "Game/Controls.h"
 
 
-#include "Log.h"
+#include "Application/Log.h"
 
 PlayerHookState::PlayerHookState(GameObject& owner)
 	:InputComponent(owner),

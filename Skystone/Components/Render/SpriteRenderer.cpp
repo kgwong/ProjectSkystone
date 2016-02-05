@@ -1,9 +1,9 @@
 #include "SpriteRenderer.h"
 
-#include "GameWindow.h"
+#include "Application/GameWindow.h"
 #include "Game/GameTime.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
 	:RenderComponent(owner), spriteSheet_(spriteSheet),

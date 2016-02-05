@@ -6,6 +6,8 @@
 class Time
 {
 public:
+	static const int msPerRender = 20;
+
 	static uint32_t getCurrentTime();
 	static uint32_t getElapsedUpdateTime();
 	static uint32_t getElapsedRenderTime();

@@ -8,9 +8,8 @@
 #include <string>
 #include <memory>
 
-#include "Errors.h"
-
-#include "GameWindow.h"
+#include "Application/Errors.h"
+#include "Application/GameWindow.h"
 
 #include "SpriteSheet.h"
 

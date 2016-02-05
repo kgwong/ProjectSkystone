@@ -48,44 +48,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InitSystems.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverException.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DieOnCollision.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Resources.cpp">
     </ClCompile>
@@ -129,6 +93,7 @@
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
+	  <Filter>Source Files\AIComponents</Filter>
     </ClCompile>	
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp">
       <Filter>Source Files</Filter>
@@ -266,60 +231,56 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpecialTileComponent.cpp">
+	  <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Common\DamageComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Common\DieOnCollision.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Common\HealthComponent.cpp">
+      <Filter>Source Files\Component Class Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Errors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\InitSystems.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\MainGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMath\CircleMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMath\RNG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Tile\LiftComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InitSystems.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Axis.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DieOnCollision.h">
-      <Filter>Header Files\Component Class Headers</Filter>
+    <ClInclude Include="Resources\Resources.h">
+    </ClInclude>
+    <ClInclude Include="Resources\TextureLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources\SpriteSheet.h">
       <Filter>Header Files</Filter>
@@ -465,16 +426,8 @@
     <ClInclude Include="Components\Player\Movement\AirborneState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\FlyingState.h">
       <Filter>Header Files\Player State Headers</Filter>
-=======
-    <ClInclude Include="PlayerHookBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PounceAIComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
->>>>>>> Stashed changes
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerMovementState.h">
       <Filter>Header Files\Component Class Headers</Filter>
@@ -482,22 +435,11 @@
     <ClInclude Include="Components\Player\Movement\WalkingState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\StunState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerState.h">
       <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-=======
->>>>>>> Stashed changes
-    <ClInclude Include="AimState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Resources.h">
-    </ClInclude>
-    <ClInclude Include="Resources\TextureLoader.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Player\Attack\PlayerHookState.h">
       <Filter>Header Files</Filter>
@@ -530,6 +472,54 @@
     </ClInclude>
     <ClInclude Include="BurnTileComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Common\DamageComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Common\DieOnCollision.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Common\HealthComponent.h">
+      <Filter>Header Files\Component Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\InitSystems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MainGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Block.h">
+      <Filter>Header Files\Struct Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMath\CircleMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMath\RNG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTypes\Direction.h">
+      <Filter>Header Files\Enum Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTypes\Axis.h">
+      <Filter>Header Files\Enum Class Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTypes\Point.h">
+      <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

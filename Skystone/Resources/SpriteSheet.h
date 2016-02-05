@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-#include "Path.h"
+#include "Application/Path.h"
 
 #include "SpritesheetInfo.h"
 

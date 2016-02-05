@@ -4,8 +4,8 @@
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Collider/ColliderComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
-#include "DamageComponent.h"
-#include "DieOnCollision.h"
+#include "Components/Common/DamageComponent.h"
+#include "Components/Common/DieOnCollision.h"
 
 
 PlayerProjectileBuilder::PlayerProjectileBuilder()

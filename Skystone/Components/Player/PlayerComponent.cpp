@@ -1,13 +1,13 @@
 #include "PlayerComponent.h"
 
 #include "GameOverException.h"
-#include "HealthComponent.h"
-#include "DamageComponent.h"
+#include "Components/Common/HealthComponent.h"
+#include "Components/Common/DamageComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
 #include "Movement/PlayerMovementState.h"
 #include "PlayerControlComponent.h"
 
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 
 PlayerComponent::PlayerComponent(GameObject& owner)
 	:NonUpdatingComponent(owner)

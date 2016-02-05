@@ -1,7 +1,7 @@
 #include "MainGame.h"
 
-#include "Log.h"
-#include "Path.h"
+#include "Application/Log.h"
+#include "Application/Path.h"
 #include "Level/Level.h"
 
 #include "GameOverException.h"
@@ -30,19 +30,24 @@ MainGame::~MainGame()
 
 void MainGame::run()
 {
-	uint32_t prev = Time::getCurrentTime();
-	uint32_t msecBehind = 0;
+	Time::updateLastUpdateTime();
+	Time::updateLastRenderTime();
+	uint32_t msecBehind = Time::msPerRender;
 	while (!quit_)
 	{
-		uint32_t current = Time::getCurrentTime();
-		uint32_t elapsed = current - prev;
-		prev = current;
+		uint32_t elapsed = Time::getElapsedRenderTime();
+		Time::updateLastRenderTime();
 		msecBehind += elapsed;
 		processInput();
-		// while (lag >= step) {update; msecBehind -= step;}
 		update();
-		// render(msecBehind/step);
+		//while (msecBehind >= Time::msPerRender) 
+		//{
+		//	update();
+		//	msecBehind -= Time::msPerRender;
+		//}
+		//render(msecBehind/msPerRender)
 		render();
+		//std::cout << 1000/Time::getElapsedRenderTime() << std::endl;
 	}
 }
 

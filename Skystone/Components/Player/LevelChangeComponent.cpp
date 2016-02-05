@@ -1,6 +1,6 @@
 #include "LevelChangeComponent.h"
 
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 
 LevelChangeComponent::LevelChangeComponent(GameObject& owner)
 	: UpdatingComponent(owner),
