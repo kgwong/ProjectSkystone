@@ -129,6 +129,7 @@
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
+    </ClCompile>	
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -219,13 +220,9 @@
     <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
 	</ClCompile>
-
-=======
->>>>>>> Stashed changes
     <ClCompile Include="ScrollingSpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -271,6 +268,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\AudioPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LiftTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BurnTileComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpecialTileComponent.cpp">

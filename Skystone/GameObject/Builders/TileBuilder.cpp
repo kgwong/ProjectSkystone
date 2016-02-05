@@ -3,25 +3,17 @@
 #include "Game/GameConstants.h"
 #include "Components/Collider/ColliderComponent.h"
 
-<<<<<<< Updated upstream:Skystone/GameObject/Builders/TileBuilder.cpp
 #include "Resources/Resources.h"
 #include "Components/Render/TileRenderer.h"
 #include "Components/Tile/TileComponent.h"
 #include "Liftcomponent.h"
-=======
 #include "Resources\Resources.h"
 #include "Components\Render\TileRenderer.h"
 #include "TileComponent.h"
 #include "LiftTileComponent.h"
 #include "BurnTileComponent.h"
 #include "DamageComponent.h"
-<<<<<<< Updated upstream:Skystone/GameObject/Builders/TileBuilder.cpp
-<<<<<<< Updated upstream:Skystone/GameObject/Builders/TileBuilder.cpp
->>>>>>> Stashed changes:Skystone/TileBuilder.cpp
-=======
->>>>>>> Stashed changes:Skystone/TileBuilder.cpp
-=======
->>>>>>> Stashed changes:Skystone/TileBuilder.cpp
+
 
 TileBuilder::TileBuilder()
 {
