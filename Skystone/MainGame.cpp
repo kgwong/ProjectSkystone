@@ -20,7 +20,9 @@ MainGame::MainGame()
 	//musicPlayer_.loadSong(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
 	//musicPlayer_.play();
 	
-	audio_.LoadClip(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
+	audio_.LoadAllClips();
+
+	//audio_.LoadClip(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"),true);
 	//audio_.PlayClip();
 }
 
@@ -63,7 +65,11 @@ void MainGame::processInput()
 				break;
 			case SDL_KEYUP:
 		     	if (e.key.keysym.sym == SDLK_1)//audio test ~ may use shared_ptrs now.
-					audio_.PlayClip();
+					audio_.PlayClip("laser1");
+				if (e.key.keysym.sym == SDLK_2)
+					audio_.PlayClip("laser2");
+				if (e.key.keysym.sym == SDLK_3)
+					audio_.PlayMusic();
 				break;
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
