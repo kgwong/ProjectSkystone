@@ -223,9 +223,6 @@
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
 	</ClCompile>
-    <ClCompile Include="ScrollingSpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
@@ -240,11 +237,6 @@
     </ClCompile>
     <ClCompile Include="Components\Player\Movement\StunState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\Resources.cpp">
-    </ClCompile>
-    <ClCompile Include="Resources\TextureLoader.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Player\Attack\PlayerHookState.cpp">
       <Filter>Source Files</Filter>
@@ -262,20 +254,10 @@
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Resources\AudioPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LiftTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHookState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\Resources.cpp">
-    </ClCompile>
-    <ClCompile Include="Resources\TextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BurnTileComponent.cpp">
@@ -484,9 +466,6 @@
     <ClInclude Include="Components\Player\Movement\FlyingState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHookBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerMovementState.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
@@ -498,9 +477,6 @@
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerState.h">
       <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AimState.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Resources.h">
     </ClInclude>
