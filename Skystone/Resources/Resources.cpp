@@ -1,6 +1,7 @@
 #include "Resources.h"
 
 TextureLoader Resources::textureLoader;
+AudioPlayer Resources::audioPlayer;
 std::unordered_map<std::string, SpriteSheet> Resources::spriteSheets_;
 
 SpriteSheet* Resources::getSpriteSheet(const std::string & relPath)

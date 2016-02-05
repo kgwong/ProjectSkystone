@@ -76,7 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioPlayer.cpp" />
+    <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
     <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
@@ -152,7 +152,7 @@
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioPlayer.h" />
+    <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
     <ClInclude Include="Components\Player\Attack\AimUpState.h" />

@@ -10,7 +10,7 @@
 
 #include "Errors.h"
 #include "GameWindow.h"
-#include "AudioPlayer.h"
+//#include "AudioPlayer.h"
 #include "MusicPlayer.h"
 #include "Level/LevelManager.h"
 
@@ -30,7 +30,7 @@ private:
 	GameObject player_;
 	LevelManager levelManager_;
 
-	AudioPlayer audio_;
+	//AudioPlayer audio_;
 
 	bool quit_;
 

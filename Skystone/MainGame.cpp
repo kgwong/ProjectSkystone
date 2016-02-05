@@ -7,6 +7,8 @@
 #include "GameOverException.h"
 #include "Game/GameTime.h"
 
+#include "Resources/Resources.h"
+
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	quit_(false)
@@ -17,11 +19,9 @@ MainGame::MainGame()
 
 	updateCameraBounds();
 
-	//musicPlayer_.loadSong(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
-	//musicPlayer_.play();
-
-	audio_.init();
-	audio_.PlayMusic();
+	Resources::audioPlayer.SetFilePaths();
+	Resources::audioPlayer.LoadAllClips();
+	Resources::audioPlayer.PlayMusic();
 }
 
 
@@ -63,9 +63,9 @@ void MainGame::processInput()
 				break;
 			case SDL_KEYUP:
 		     	if (e.key.keysym.sym == SDLK_1)//audio test ~ may use shared_ptrs now.
-					audio_.PlayClip("laser1");
+					Resources::audioPlayer.PlayClip("laser1");
 				if (e.key.keysym.sym == SDLK_2)
-					audio_.PlayClip("laser2");
+					Resources::audioPlayer.PlayClip("laser2");
 				break;
 			case SDL_MOUSEMOTION:
 				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
