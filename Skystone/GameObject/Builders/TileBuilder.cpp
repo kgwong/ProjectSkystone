@@ -15,6 +15,9 @@
 #include "LiftTileComponent.h"
 #include "BurnTileComponent.h"
 #include "DamageComponent.h"
+<<<<<<< Updated upstream:Skystone/GameObject/Builders/TileBuilder.cpp
+>>>>>>> Stashed changes:Skystone/TileBuilder.cpp
+=======
 >>>>>>> Stashed changes:Skystone/TileBuilder.cpp
 
 TileBuilder::TileBuilder()
