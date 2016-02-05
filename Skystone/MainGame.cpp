@@ -19,8 +19,7 @@ MainGame::MainGame()
 
 	updateCameraBounds();
 
-	Resources::audioPlayer.SetFilePaths();
-	Resources::audioPlayer.LoadAllClips();
+	Resources::audioPlayer.init();
 	Resources::audioPlayer.PlayMusic();
 }
 

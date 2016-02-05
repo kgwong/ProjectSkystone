@@ -141,7 +141,6 @@
     <ClCompile Include="Resources\TextureLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
-    <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Resources\SpritesheetInfoReader.cpp" />
     <ClCompile Include="GameObject\Builders\TileBuilder.cpp" />
     <ClCompile Include="Components\Tile\TileComponent.cpp" />
@@ -227,7 +226,6 @@
     <ClInclude Include="RNG.h" />
     <ClInclude Include="Resources\TextureLoader.h" />
     <ClInclude Include="MainGame.h" />
-    <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Resources\SpritesheetInfo.h" />
     <ClInclude Include="Resources\SpritesheetInfoReader.h" />
