@@ -19,7 +19,8 @@ MainGame::MainGame()
 
 	//musicPlayer_.loadSong(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"));
 	//musicPlayer_.play();
-	
+	audio_.SetFilePaths();
+
 	audio_.LoadAllClips();
 
 	//audio_.LoadClip(Path::getFullPath("Audio/Clips/Laser_Shoot1.wav"),true);

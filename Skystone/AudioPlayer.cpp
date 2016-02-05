@@ -19,13 +19,13 @@ struct FileNames
 	static std::string laser2;// = "Laser_Shoot2.wav";
 };
 
-std::string FileNames::laser1 = "Laser1_Shoot.wav";
-std::string FileNames::laser2 = "Laser2_Shoot.wav";
+std::string FileNames::laser1 = "Laser_Shoot1.wav";
+std::string FileNames::laser2 = "Laser_Shoot2.wav";
 
 AudioPlayer::AudioPlayer()
 	:clip_(nullptr)
 {
-	Mix_AllocateChannels(2);
+	Mix_AllocateChannels(8);
 }
 
 AudioPlayer::~AudioPlayer()
@@ -52,8 +52,8 @@ void AudioPlayer::SetFilePaths(std::string audiofilepath, std::string musicfilep
 {
 	audioFilePath_ = audiofilepath;
 	musicFilePath_ = musicfilepath;
-	audioFiles_[MusicTags::laser1] = Path::getFullPath(audiofilepath + FileNames::laser1);
-	audioFiles_[MusicTags::laser2] = Path::getFullPath(audiofilepath + FileNames::laser2);
+	audioFiles_[MusicTags::laser1] = audiofilepath + FileNames::laser1;
+	audioFiles_[MusicTags::laser2] = audiofilepath + FileNames::laser2;
 }
 
 //should load actual music .mp3 files.
@@ -63,7 +63,7 @@ Music_Ptr AudioPlayer::LoadMusic()
 	temp_music = Mix_LoadMUS(audioFiles_[MusicTags::laser1].c_str());
 	if (!temp_music)
 	{
-		printf("LoadMusic: %s", Mix_GetError());
+		printf("LoadMusic12: %s", Mix_GetError());
 		return nullptr;
 	}
 
@@ -84,9 +84,15 @@ AudioClip_Ptr AudioPlayer::LoadClip(std::string clipname)
 
 void AudioPlayer::LoadAllClips()
 {
+	if (LoadClip("laser1") == nullptr || LoadClip("laser2") == nullptr)
+	{
+		std::cout << "this stupid loader doesnt work" << std::endl;
+	}
+	else
+		std::cout << "loader works" << std::endl;
 	//make them here
-	audioClips_["laser1"] = LoadClip("laser1");
-	audioClips_["laser2"] = LoadClip("laser2");
+	audioClips_["laser1"] = std::move(LoadClip("laser1"));
+	audioClips_["laser2"] = std::move(LoadClip("laser2"));
 }
 
 std::shared_ptr<Mix_Chunk> SelectClip(std::string clipname)
@@ -98,11 +104,11 @@ std::shared_ptr<Mix_Chunk> SelectClip(std::string clipname)
 void AudioPlayer::PlayMusic()
 {
 
-	if (!music_)
+	if (music_ == nullptr)
 	{
+		std::cout << "I am empty!" << std::endl;
 		music_ = std::move(LoadMusic());
 	}
-
 	//-1 in second argument means play music forever
 	if (Mix_PlayMusic(music_.get(),-1) == -1)
 	{
@@ -116,7 +122,7 @@ void AudioPlayer::PlayClip(std::string clipname)
 	int numTimesRepeat = 5;
 	//-1 in first argument means play the first unused channel
 	//audioClips_[clipname].get()
-	if (Mix_PlayChannel(-1, LoadClip(clipname).get(), numTimesRepeat) == -1)
+	if (Mix_PlayChannel(-1, audioClips_[clipname].get(), numTimesRepeat) == -1)
 	{
 		printf("PlayClip: %s", Mix_GetError());
 	}
