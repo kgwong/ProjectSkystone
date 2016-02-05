@@ -10,7 +10,7 @@ views current state of the repo!
 
 Git shell
 upload new files/commit 
-git add .
+git add . use git add --all
 git status
 
 1. git commit -m "Add basic enemy movement"
@@ -35,3 +35,4 @@ THEME - SKY PIRATES / anti-hero
 
 
 AI - make enemy follow player within a radius of detection
+
