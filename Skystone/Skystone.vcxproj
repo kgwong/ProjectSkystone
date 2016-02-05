@@ -118,7 +118,6 @@
     <ClCompile Include="Level\LevelLoader.cpp" />
     <ClCompile Include="Level\LevelManager.cpp" />
     <ClCompile Include="Level\LevelMap.cpp" />
-    <ClCompile Include="LiftComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="ItemDropBuilder.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="ComponentSystem\InputSystem.h" />
     <ClInclude Include="GameObject\Builders\ItemDropBuilder.h" />
     <ClInclude Include="Components\Player\LevelChangeComponent.h" />
-    <ClInclude Include="LiftComponent.h" />
     <ClInclude Include="Components\NonUpdatingComponent.h" />
     <ClInclude Include="Components\ItemDrop\PickupComponent.h" />
     <ClInclude Include="Components\Player\Attack\PlayerAimState.h" />
