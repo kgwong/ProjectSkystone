@@ -231,7 +231,7 @@
 	</ClCompile>
     <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
+	</ClCompile>
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
@@ -250,6 +250,7 @@
     <ClCompile Include="Components\Tile\TileComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="Components\ItemDrop\PickupComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
@@ -464,8 +465,16 @@
     <ClInclude Include="Components\Player\Movement\AirborneState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\FlyingState.h">
       <Filter>Header Files\Player State Headers</Filter>
+=======
+    <ClInclude Include="PlayerHookBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PounceAIComponent.h">
+      <Filter>Header Files\AIComponents</Filter>
+>>>>>>> Stashed changes
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerMovementState.h">
       <Filter>Header Files\Component Class Headers</Filter>
@@ -473,12 +482,15 @@
     <ClInclude Include="Components\Player\Movement\WalkingState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Components\Player\Movement\StunState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
     <ClInclude Include="Components\Player\Movement\PlayerState.h">
       <Filter>Header Files\Player State Headers</Filter>
     </ClInclude>
+=======
+>>>>>>> Stashed changes
     <ClInclude Include="AimState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
