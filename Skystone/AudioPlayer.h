@@ -64,9 +64,7 @@ public:
 	Music_Ptr LoadMusic();
 	AudioClip_Ptr LoadClip(std::string clipname);
 	void LoadAllClips();
-
-	//AudioClip picker ???
-	std::shared_ptr<Mix_Chunk> SelectClip(std::string clipname);
+	void init();
 
 	//Audio players
 	void PlayMusic();

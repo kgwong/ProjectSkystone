@@ -19,8 +19,7 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	//launch_(false)
 {
 
-	audio_.SetFilePaths();
-	audio_.LoadAllClips();
+	audio_.init();
 }
 
 

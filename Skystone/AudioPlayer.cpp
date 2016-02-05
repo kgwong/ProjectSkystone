@@ -89,22 +89,16 @@ AudioClip_Ptr AudioPlayer::LoadClip(std::string clipname)
 
 void AudioPlayer::LoadAllClips()
 {
-	if (LoadClip("laser1") == nullptr || LoadClip("laser2") == nullptr)
-	{
-		std::cout << "this stupid loader doesnt work" << std::endl;
-	}
-	else
-		std::cout << "loader works" << std::endl;
 	//make them here
 	audioClips_["laser1"] = std::move(LoadClip("laser1"));
 	audioClips_["laser2"] = std::move(LoadClip("laser2"));
 	music_ = std::move(LoadMusic());
 }
 
-std::shared_ptr<Mix_Chunk> SelectClip(std::string clipname)
+void AudioPlayer::init()
 {
-	//make later or not!
-	return nullptr;
+	SetFilePaths();
+	LoadAllClips();
 }
 
 void AudioPlayer::PlayMusic()
