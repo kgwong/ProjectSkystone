@@ -20,13 +20,6 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	shoot_(false)
 	//launch_(false)
 {
-
-<<<<<<< HEAD
-	audio_.init();
-=======
-	//audio_.SetFilePaths();
-	//audio_.LoadAllClips();
->>>>>>> 16240cf12febd2d154a7b4d172ceb2d86ec8fea0
 }
 
 
