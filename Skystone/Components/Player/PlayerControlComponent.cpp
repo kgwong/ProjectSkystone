@@ -36,3 +36,4 @@ void PlayerControlComponent::changeAttackState(PlayerAimState* state)
 {
 	attack_.changeState(state);
 }
+

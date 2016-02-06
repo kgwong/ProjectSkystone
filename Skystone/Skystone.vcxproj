@@ -149,6 +149,7 @@
     <ClCompile Include="Components\AI\TrackerComponent.cpp" />
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
+    <ClCompile Include="StickOnCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\AudioPlayer.h" />
@@ -233,6 +234,7 @@
     <ClInclude Include="GameObject\Builders\TileBuilder.h" />
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
+    <ClInclude Include="StickOnCollision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

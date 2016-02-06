@@ -4,6 +4,7 @@
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Collider/ColliderComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
+#include "StickOnCollision.h"
 
 
 PlayerHookBuilder::PlayerHookBuilder()
@@ -25,12 +26,15 @@ std::shared_ptr<GameObject> PlayerHookBuilder::build(ComponentSystem& componentS
 
 	//setting components to add ~ are smart pointers
 	hookToBuild.setType(GameObject::Type::PLAYER_HOOK);
-	//std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, Resources::getSpriteSheet("Assets/Animations/playerHook.png"));
-	//hookToBuild.addComponent(spriteRenderer_ptr);
+	std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, Resources::getSpriteSheet("Assets/Animations/playerHook.png"));
+	hookToBuild.addComponent(spriteRenderer_ptr);
 	std::shared_ptr<PhysicsComponent> physics_ptr = componentSystem.getNew<PhysicsComponent>(hookToBuild);
 	hookToBuild.addComponent(physics_ptr);
 	std::shared_ptr<ColliderComponent> collider_ptr = componentSystem.getNew<ColliderComponent>(hookToBuild);
 	hookToBuild.addComponent(collider_ptr);
+	//hook stickiness.
+	std::shared_ptr<StickOnCollision> stickler = componentSystem.getNew<StickOnCollision>(hookToBuild);
+	hookToBuild.addComponent(stickler);
 
 	return someHook;
 }

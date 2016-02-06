@@ -21,7 +21,7 @@ public:
 	void changeAttackState(PlayerAimState* state);
 
 	//----harvey function----///
-	//void changeHookState(PlayerHookState*)
+	//void changeHookState(PlayerHookState*);
 
 
 private:

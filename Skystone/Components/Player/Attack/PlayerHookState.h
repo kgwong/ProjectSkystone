@@ -15,12 +15,12 @@ public:
 	virtual void handleInput(SDL_Event& e);
 	void update(Level& level);
 	double getDegrees();
+	void setLaunched(bool b);
 
 private:
 	double _degrees;
 	bool _launched;
 	AimState _currentAimState;
-
 };
 
 #endif

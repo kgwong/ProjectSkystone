@@ -95,31 +95,22 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
 {
-	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
-	hookToFling->setPos(position);
-	
-	//TODO --- FIX glitch with hook rendering on projectile when projectile shot.
-	if (playerHook != nullptr && playerHook.get()->alive())
-	{
-		std::cout << "I am alive" << std::endl;
-		//make mark to kill!
-		//playerHook.get()->kill();
-	//	return;
-	}
-	//only one hook should exist per cast.
-	if (playerHook == nullptr)
-		playerHook = hookToFling;
-	//playerHook.push_back(hookToFling);
-	
-	auto physics = playerHook->getComponent<PhysicsComponent>();
-	physics->enableGravity(false);
 
-	int newVelX = (int)(velocity * cos(toRadians(degrees)));
-	int newVelY = (int)(velocity * sin(toRadians(degrees)));
-	physics->setVelX(newVelX);
-	physics->setVelY(newVelY);
-	playerHook->startComponents(*this);
-	std::cout << "DONE";
+	if (playerHook == nullptr)
+	{
+		auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
+		hookToFling->setPos(position);
+
+		auto physics = playerHook->getComponent<PhysicsComponent>();
+		physics->enableGravity(false);
+
+		int newVelX = (int)(velocity * cos(toRadians(degrees)));
+		int newVelY = (int)(velocity * sin(toRadians(degrees)));
+		physics->setVelX(newVelX);
+		physics->setVelY(newVelY);
+		playerHook->startComponents(*this);
+	}
+
 }
 
 void Level::addPickupAtLocation(Point position)
