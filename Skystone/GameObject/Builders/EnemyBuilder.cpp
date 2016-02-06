@@ -8,13 +8,14 @@
 #include "Components/AI/RandomJumperComponent.h"
 #include "Components/AI/TrackerComponent.h"
 #include "Components/AI/FallingAIComponent.h"
-#include "HealthComponent.h"
 #include "Components/AI/FlyingAIComponent.h"
 #include "Components/AI/AIjump.h"
 #include "Components/AI/SwingingAIComponent.h"
 #include "Components/AI/SnakeAIComponent.h"
-#include "DamageComponent.h"
 #include "Components/AI/PounceAIComponent.h"
+
+#include "Components/Common/DamageComponent.h"
+#include "Components/Common/HealthComponent.h"
 
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Collider/ColliderComponent.h"

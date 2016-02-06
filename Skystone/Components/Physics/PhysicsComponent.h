@@ -1,7 +1,7 @@
 #ifndef PHYSICSCOMPONENT_H
 #define PHYSICSCOMPONENT_H
 
-#include "Axis.h"
+#include "GameTypes/Axis.h"
 #include "Components/Component.h"
 
 class ColliderComponent;

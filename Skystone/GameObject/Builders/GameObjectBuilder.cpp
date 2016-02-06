@@ -6,7 +6,7 @@
 #include "Resources/Resources.h"
 
 #include "Components/Render/SpriteRenderer.h"
-#include "HealthComponent.h"
+#include "Components/Common/HealthComponent.h"
 #include "Components/Player/Attack/PlayerAttackState.h"
 #include "Components/Player/PlayerComponent.h"
 #include "Components/Player/Movement/PlayerMovementState.h"

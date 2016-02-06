@@ -8,7 +8,7 @@
 #include "Components/Render/ScrollingSpriteRenderer.h"
 
 #include "Components/Physics/PhysicsComponent.h" //
-#include "CircleMath.h" //
+#include "GameMath/CircleMath.h" //
 
 Level::Level(int levelID)
 	:player(nullptr),

@@ -4,8 +4,9 @@
 #include "LevelManager.h"
 #include "Resources/Resources.h"
 #include "Game/GameConstants.h"
-#include "Path.h"
-#include "Log.h"
+#include "Application/Path.h"
+#include "Application/Log.h"
+
 #include <fstream>
 
 const std::string LevelLoader::LEVEL_FILEPATH_PREFIX = "Levels/Level";

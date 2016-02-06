@@ -2,7 +2,7 @@
 #define BLOCK_H
 
 #include "Game/GameConstants.h"
-#include "Point.h"
+#include "GameTypes/Point.h"
 
 struct Block
 {

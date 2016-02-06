@@ -1,6 +1,6 @@
 #include "PlayerControlComponent.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 
 PlayerControlComponent::PlayerControlComponent(GameObject& owner)
 	:InputComponent(owner), movement_(owner), attack_(owner), hooker_(owner)

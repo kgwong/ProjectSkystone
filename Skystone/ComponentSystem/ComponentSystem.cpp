@@ -4,7 +4,7 @@
 
 #include "Components\Render\RenderComponent.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 #include <memory>
 
 ComponentSystem::ComponentSystem()

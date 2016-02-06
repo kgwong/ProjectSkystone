@@ -1,6 +1,5 @@
 #include "GameTime.h"
 
-uint32_t Time::lastUpdate_{SDL_GetTicks()};
 uint32_t Time::lastRender_{SDL_GetTicks()};
 
 uint32_t Time::getCurrentTime()
@@ -10,20 +9,15 @@ uint32_t Time::getCurrentTime()
 
 uint32_t Time::getElapsedUpdateTime()
 {
-	return Time::getCurrentTime() - lastUpdate_;
+	return Time::timeStep;
 }
 
 uint32_t Time::getElapsedRenderTime()
 {
-	return Time::getCurrentTime() - lastRender_;
+	return lastRender_;
 }
 
-void Time::updateLastUpdateTime()
+void Time::setElapsedRenderTime(uint32_t time)
 {
-	lastUpdate_ = Time::getCurrentTime();
-}
-
-void Time::updateLastRenderTime()
-{
-	lastRender_ = Time::getCurrentTime();
+	lastRender_ = time;
 }

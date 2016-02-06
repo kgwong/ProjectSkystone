@@ -6,9 +6,9 @@
 #include <memory>
 #include <map>
 
-#include "Log.h"
-#include "Errors.h"
-#include "Path.h"
+#include "Application/Log.h"
+#include "Application/Errors.h"
+#include "Application/Path.h"
 
 /* DESCRIPTION ------------------- from MSDN
 

@@ -3,7 +3,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Block.h"
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 #include "GameObject/TileArrangement.h"
 #include "ComponentSystem/ComponentSystem.h"
 #include "SDL/SDL.h"
@@ -76,7 +76,6 @@ private:
 	int levelID_;
 
 	ComponentSystem componentSystem_;
-	//AudioPlayer audio_;
 
 private:
 	void startComponents(std::vector<std::shared_ptr<GameObject>>& v);

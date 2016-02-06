@@ -1,7 +1,7 @@
 #include "AIComponent.h"
 
-#include "HealthComponent.h"
-#include "DamageComponent.h"
+#include "Components/Common/HealthComponent.h"
+#include "Components/Common/DamageComponent.h"
 
 AIComponent::AIComponent(GameObject & owner)
 	:Component(owner)

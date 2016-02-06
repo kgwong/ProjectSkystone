@@ -1,7 +1,7 @@
 #include "RandomJumperComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
 
-#include "RNG.h"
+#include "GameMath/RNG.h"
 
 RandomJumperComponent::RandomJumperComponent(GameObject& owner)
 	: AIComponent(owner),

@@ -6,16 +6,16 @@
 class Time
 {
 public:
+	static const int timeStep = 20;
+
 	static uint32_t getCurrentTime();
 	static uint32_t getElapsedUpdateTime();
 	static uint32_t getElapsedRenderTime();
-	static void updateLastUpdateTime();
-	static void updateLastRenderTime();
+	static void setElapsedRenderTime(uint32_t time);
 private:
 	Time()  = delete;
 	~Time() = delete;
 
-    static uint32_t lastUpdate_;
 	static uint32_t lastRender_;
 	
 };

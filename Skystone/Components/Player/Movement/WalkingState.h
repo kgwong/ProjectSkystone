@@ -2,7 +2,7 @@
 #define WALKING_STATE_H
 
 #include "PlayerState.h"
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 
 class WalkingState : public PlayerState
 {

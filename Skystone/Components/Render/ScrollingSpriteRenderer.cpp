@@ -1,7 +1,7 @@
 #include "Components/Render/ScrollingSpriteRenderer.h"
-#include "GameWindow.h"
+#include "Application/GameWindow.h"
 #include "Game/GameConstants.h"
-#include "Log.h"
+#include "Application/Log.h"
 
 namespace
 {

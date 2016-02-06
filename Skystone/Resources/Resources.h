@@ -4,7 +4,7 @@
 #include "AudioPlayer.h"
 #include "TextureLoader.h"
 #include "SpriteSheet.h"
-#include "Path.h"
+#include "Application/Path.h"
 
 #include <string>
 #include <unordered_map>
