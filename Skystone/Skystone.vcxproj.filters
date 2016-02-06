@@ -92,9 +92,9 @@
     <ClCompile Include="Components\AI\RandomJumperComponent.cpp">
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
-	  <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>	
+    <ClCompile Include="Components\AI\SnakeAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -187,16 +187,16 @@
     </ClCompile>
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Player\Movement\FlyingState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp">
       <Filter>Source Files\Player State Source Files</Filter>
     </ClCompile>
@@ -215,7 +215,6 @@
     <ClCompile Include="Components\Tile\TileComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
-
     <ClCompile Include="Components\ItemDrop\PickupComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
@@ -223,15 +222,6 @@
     </ClCompile>
     <ClCompile Include="Resources\AudioPlayer.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LiftTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BurnTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpecialTileComponent.cpp">
-	  <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Common\DamageComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
@@ -269,7 +259,13 @@
     <ClCompile Include="GameMath\RNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Tile\LiftComponent.cpp">
+    <ClCompile Include="Components\Tile\BurnTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Tile\SpecialTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Tile\LiftTileComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -464,15 +460,6 @@
     </ClInclude>
     <ClInclude Include="Resources\AudioPlayer.h">
     </ClInclude>
-    <ClInclude Include="LiftTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpecialTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BurnTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Common\DamageComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
@@ -520,6 +507,18 @@
     </ClInclude>
     <ClInclude Include="GameTypes\Point.h">
       <Filter>Header Files\Struct Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\BurnTileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\SpecialTileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\LiftTileComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

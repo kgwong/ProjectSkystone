@@ -1,7 +1,7 @@
 #include "BurnTileComponent.h"
-#include "PhysicsComponent.h"
-#include "DamageComponent.h"
-#include "HealthComponent.h"
+#include "Components/Physics/PhysicsComponent.h"
+#include "Components/Common/DamageComponent.h"
+#include "Components/Common/HealthComponent.h"
 #include <iostream>
 using namespace std;
 

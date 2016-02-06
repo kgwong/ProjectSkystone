@@ -1,5 +1,5 @@
 #include "SpecialTileComponent.h"
-#include "PhysicsComponent.h"
+#include "Components/Physics/PhysicsComponent.h"
 
 
 

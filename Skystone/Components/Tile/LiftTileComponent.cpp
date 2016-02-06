@@ -1,5 +1,5 @@
 #include "LiftTileComponent.h"
-#include "PhysicsComponent.h"
+#include "Components/Physics/PhysicsComponent.h"
 
 
 LiftTileComponent::LiftTileComponent(GameObject & owner)

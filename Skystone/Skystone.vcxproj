@@ -82,7 +82,7 @@
     <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp" />
     <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp" />
-    <ClCompile Include="BurnTileComponent.cpp" />
+    <ClCompile Include="Components\Tile\BurnTileComponent.cpp" />
     <ClCompile Include="Application\Camera.cpp" />
     <ClCompile Include="Components\Collider\ColliderComponent.cpp" />
     <ClCompile Include="Components\Events\CollisionEvent.cpp" />
@@ -113,8 +113,7 @@
     <ClCompile Include="Level\LevelLoader.cpp" />
     <ClCompile Include="Level\LevelManager.cpp" />
     <ClCompile Include="Level\LevelMap.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="LiftTileComponent.cpp" />
+    <ClCompile Include="Components\Tile\LiftTileComponent.cpp" />
     <ClCompile Include="Application\Log.cpp" />
     <ClCompile Include="Components\NonUpdatingComponent.cpp" />
     <ClCompile Include="Application\Path.cpp" />
@@ -140,7 +139,7 @@
     <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\StunState.cpp" />
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp" />
-    <ClCompile Include="SpecialTileComponent.cpp" />
+    <ClCompile Include="Components\Tile\SpecialTileComponent.cpp" />
     <ClCompile Include="Resources\TextureLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game\MainGame.cpp" />
@@ -154,6 +153,7 @@
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
@@ -161,7 +161,7 @@
     <ClInclude Include="Components\Player\Movement\AirborneState.h" />
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
-    <ClInclude Include="BurnTileComponent.h" />
+    <ClInclude Include="Components\Tile\BurnTileComponent.h" />
     <ClInclude Include="Level\Block.h" />
     <ClInclude Include="Application\Camera.h" />
     <ClInclude Include="Components\Events\CollisionEvent.h" />
@@ -199,7 +199,7 @@
     <ClInclude Include="Components\AI\SwingingAIComponent.h" />
     <ClInclude Include="Components\Tile\TileComponent.h" />
     <ClInclude Include="Game\GameTime.h" />
-    <ClInclude Include="SpecialTileComponent.h" />
+    <ClInclude Include="Components\Tile\SpecialTileComponent.h" />
     <ClInclude Include="Components\Render\TileRenderer.h" />
     <ClInclude Include="Components\AI\TrackerComponent.h" />
     <ClInclude Include="GameMath\CircleMath.h" />

@@ -6,9 +6,9 @@
 #include "Resources/Resources.h"
 #include "Components/Render/TileRenderer.h"
 #include "Components/Tile/TileComponent.h"
-#include "LiftTileComponent.h"
-#include "BurnTileComponent.h"
-#include "DamageComponent.h"
+#include "Components/Tile/LiftTileComponent.h"
+#include "Components/Tile/BurnTileComponent.h"
+#include "Components/Common/DamageComponent.h"
 
 TileBuilder::TileBuilder()
 {

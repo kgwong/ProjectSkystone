@@ -1,7 +1,7 @@
 #ifndef LIFT_TILE_COMPONENT_H
 #define LIFT_TILE_COMPONENT_H
 
-#include "Point.h"
+#include "GameTypes/Point.h"
 #include "SpecialTileComponent.h"
 
 class PhysicsComponent;

@@ -1,9 +1,9 @@
 #ifndef SPECIAL_TILE_COMPONENT_H
 #define SPECIAL_TILE_COMPONENT_H
 
-#include "UpdatingComponent.h"
-#include "Point.h"
-#include "CollisionEvent.h"
+#include "Components/UpdatingComponent.h"
+#include "GameTypes/Point.h"
+#include "Components/Events/CollisionEvent.h"
 
 class PhysicsComponent;
 
