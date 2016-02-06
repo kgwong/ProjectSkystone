@@ -96,11 +96,13 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
 {
 
+	std::cout << "Player refCount: " << playerHook.use_count() << std::endl;
+
 	if (playerHook == nullptr)
 	{
 		auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
 		hookToFling->setPos(position);
-
+		playerHook = std::move(hookToFling);
 		auto physics = playerHook->getComponent<PhysicsComponent>();
 		physics->enableGravity(false);
 

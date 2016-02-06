@@ -61,8 +61,7 @@ void PlayerHookState::update(Level& level)
 	{
 		int test_velocity = 5;
 		_degrees = getDegrees();
-		//BROKEN BS CODE
-		//level.addPlayerHookAtLocation(owner_.getPos(), test_velocity, _degrees);
+		level.addPlayerHookAtLocation(owner_.getPos(), test_velocity, _degrees);
 		_launched = false;
 		_degrees = 0;
 	}
