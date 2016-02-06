@@ -6,7 +6,9 @@
 #include "Resources/Resources.h"
 #include "Components/Render/TileRenderer.h"
 #include "Components/Tile/TileComponent.h"
-#include "Components/Tile/Liftcomponent.h"
+#include "Components/Tile/LiftTileComponent.h"
+#include "Components/Tile/BurnTileComponent.h"
+#include "Components/Common/DamageComponent.h"
 
 TileBuilder::TileBuilder()
 {
@@ -32,7 +34,15 @@ GameObject& TileBuilder::build(ComponentSystem& componentSystem, int tileType, G
 	{
 		tileToBuild.addComponent(componentSystem.getNew<TileRenderer>(tileToBuild, tileSet, 1));
 		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
-		tileToBuild.addComponent(componentSystem.getNew<LiftComponent>(tileToBuild));
+		tileToBuild.addComponent(componentSystem.getNew<LiftTileComponent>(tileToBuild));
 	}
+	else if (tileType == 3)
+	{
+		tileToBuild.addComponent(componentSystem.getNew<TileRenderer>(tileToBuild, tileSet, 1));
+		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0, 0, Constants::TILE_SIZE, Constants::TILE_SIZE));
+		tileToBuild.addComponent(componentSystem.getNew<BurnTileComponent>(tileToBuild));
+		tileToBuild.addComponent(componentSystem.getNew<DamageComponent>(tileToBuild, 2));
+	}
+
 	return tileToBuild;
 }

@@ -92,7 +92,9 @@
     <ClCompile Include="Components\AI\RandomJumperComponent.cpp">
       <Filter>Source Files\AIComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
+    <ClCompile Include="Components\AI\SnakeAIComponent.cpp">
+      <Filter>Source Files\AIComponents</Filter>
+    </ClCompile>
     <ClCompile Include="Components\AI\SwingingAIComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -217,7 +219,6 @@
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\AudioPlayer.cpp">
       <Filter>Source Files</Filter>
@@ -258,7 +259,13 @@
     <ClCompile Include="GameMath\RNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Tile\LiftComponent.cpp">
+    <ClCompile Include="Components\Tile\BurnTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Tile\SpecialTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Tile\LiftTileComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -272,9 +279,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources\SpriteSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\SpriteRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Render\TileRenderer.h">
@@ -455,7 +459,6 @@
       <Filter>Header Files\Component Class Headers</Filter>
     </ClInclude>
     <ClInclude Include="Resources\AudioPlayer.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Common\DamageComponent.h">
       <Filter>Header Files\Component Class Headers</Filter>
@@ -505,7 +508,16 @@
     <ClInclude Include="GameTypes\Point.h">
       <Filter>Header Files\Struct Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Tile\LiftComponent.h">
+    <ClInclude Include="Components\Render\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\BurnTileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\SpecialTileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tile\LiftTileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
