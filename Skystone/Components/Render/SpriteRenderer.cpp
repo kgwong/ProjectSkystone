@@ -48,9 +48,8 @@ void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
 
 void SpriteRenderer::render(GameWindow& gameWindow)
 {
-	msOnFrame += 20;
-		//Time::getElapsedRenderTime();
-
+	msOnFrame += Time::getElapsedRenderTime();
+	
 	int currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
 	while (msOnFrame >= currFrameDuration)
 	{

@@ -30,24 +30,25 @@ MainGame::~MainGame()
 
 void MainGame::run()
 {
-	Time::updateLastUpdateTime();
-	Time::updateLastRenderTime();
-	uint32_t msecBehind = Time::msPerRender;
+	uint32_t msecBehind = Time::timeStep;
+	uint32_t elapsed = 0;
+	uint32_t prev = Time::getCurrentTime();
 	while (!quit_)
 	{
-		uint32_t elapsed = Time::getElapsedRenderTime();
-		Time::updateLastRenderTime();
 		msecBehind += elapsed;
 		processInput();
-		update();
-		//while (msecBehind >= Time::msPerRender) 
-		//{
-		//	update();
-		//	msecBehind -= Time::msPerRender;
-		//}
-		//render(msecBehind/msPerRender)
-		render();
 		//std::cout << 1000/Time::getElapsedRenderTime() << std::endl;
+		//update();
+		while (msecBehind >= Time::timeStep) 
+		{
+			update();
+			msecBehind -= Time::timeStep;
+		}
+		//render(msecBehind/timeStep)
+		render();
+		elapsed = Time::getCurrentTime() - prev;
+		Time::setElapsedRenderTime(elapsed);
+		prev = Time::getCurrentTime();
 	}
 }
 
