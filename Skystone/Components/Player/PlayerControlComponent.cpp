@@ -4,7 +4,7 @@
 
 PlayerControlComponent::PlayerControlComponent(GameObject& owner)
 	:InputComponent(owner), movement_(owner), attack_(owner), hooker_(owner)
-{
+{	
 }
 
 
@@ -17,13 +17,13 @@ void PlayerControlComponent::handleInput(SDL_Event& e)
 	movement_.handleInput(e);
 	attack_.handleInput(e);
 	hooker_.handleInput(e);
+	HookKeyInput = e.key.keysym.sym;
 }
 
 void PlayerControlComponent::update(Level& level)
 {
 	movement_.update(level);
 	attack_.update(level);
-	//.....add hook_state here.
 	hooker_.update(level);
 }
 
@@ -36,4 +36,5 @@ void PlayerControlComponent::changeAttackState(PlayerAimState* state)
 {
 	attack_.changeState(state);
 }
+
 

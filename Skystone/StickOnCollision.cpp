@@ -18,5 +18,6 @@ void StickOnCollision::handleEvent(const CollisionEvent& e)
 		PhysicsComponent * hookPhysics = owner_.getComponent<PhysicsComponent>();
 		hookPhysics->setVelX(0);
 		hookPhysics->setVelY(0);
+		isConnected = true;
 	}
 }

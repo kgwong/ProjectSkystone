@@ -9,6 +9,8 @@
 
 #include "Components/Physics/PhysicsComponent.h" //
 #include "GameMath/CircleMath.h" //
+#include "Components/Player/PlayerControlComponent.h"
+#include "StickOnCollision.h";
 
 Level::Level(int levelID)
 	:player(nullptr),
@@ -113,6 +115,18 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 		playerHook->startComponents(*this);
 	}
 
+	if (playerHook != nullptr)
+	{
+		PlayerControlComponent * playerControls = player->getComponent<PlayerControlComponent>();
+		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
+		if (playerControls != nullptr && hookState != nullptr
+			&& hookState->isConnected == true
+			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
+		{
+			playerHook->kill();
+			playerHook = nullptr;
+		}
+	}
 }
 
 void Level::addPickupAtLocation(Point position)

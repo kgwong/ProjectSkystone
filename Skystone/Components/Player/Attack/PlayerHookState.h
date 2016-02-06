@@ -16,11 +16,16 @@ public:
 	void update(Level& level);
 	double getDegrees();
 	void setLaunched(bool b);
+	bool hasLaunched();
+	bool isActiveHook();
+	SDL_Keycode getKeyInput();
 
 private:
 	double _degrees;
 	bool _launched;
+	bool _hookActive;
 	AimState _currentAimState;
+	SDL_Keycode _keyInput;
 };
 
 #endif

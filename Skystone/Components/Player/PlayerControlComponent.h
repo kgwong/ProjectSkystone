@@ -22,6 +22,8 @@ public:
 
 	//----harvey function----///
 	//void changeHookState(PlayerHookState*);
+	bool isHookActive();
+	SDL_Keycode HookKeyInput;
 
 
 private:

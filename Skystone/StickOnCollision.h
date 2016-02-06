@@ -8,6 +8,7 @@ public:
 	virtual ~StickOnCollision();
 
 	virtual void handleEvent(const CollisionEvent& e);
+	bool isConnected;
 };
 
 #endif

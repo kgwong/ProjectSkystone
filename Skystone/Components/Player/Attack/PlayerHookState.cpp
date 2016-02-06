@@ -9,6 +9,7 @@ PlayerHookState::PlayerHookState(GameObject& owner)
 	:InputComponent(owner),
 	_degrees(0),
 	_launched(false),
+	_hookActive(false),
 	_currentAimState(DEFAULT_AIM_STATE)
 {
 	
@@ -19,6 +20,9 @@ PlayerHookState::~PlayerHookState()
 
 void PlayerHookState::handleInput(SDL_Event& e)
 {
+
+	_keyInput = e.key.keysym.sym;
+
 	//key pressed
 	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[UP])
 	{
@@ -33,8 +37,9 @@ void PlayerHookState::handleInput(SDL_Event& e)
 		_currentAimState = AimState::RIGHT;
 	}
 	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
+	{
 		_launched = true;
-
+	}
 }
 
 double PlayerHookState::getDegrees()
@@ -63,7 +68,13 @@ void PlayerHookState::update(Level& level)
 		_degrees = getDegrees();
 		level.addPlayerHookAtLocation(owner_.getPos(), test_velocity, _degrees);
 		_launched = false;
+		_hookActive = true;
 		_degrees = 0;
+	}
+
+	if (_hookActive)
+	{
+		
 	}
 	
 
@@ -72,5 +83,20 @@ void PlayerHookState::update(Level& level)
 void PlayerHookState::setLaunched(bool b)
 {
 	_launched = b;
+}
+
+bool PlayerHookState::hasLaunched()
+{
+	return _launched;
+}
+
+bool PlayerHookState::isActiveHook()
+{
+	return _hookActive;
+}
+
+SDL_Keycode PlayerHookState::getKeyInput()
+{
+	return _keyInput;
 }
 
