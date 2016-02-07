@@ -1,9 +1,7 @@
 #include "TextureLoader.h"
 
-#include "GameWindow.h"
-
-#include "Path.h"
-#include "Log.h"
+#include "Application/Path.h"
+#include "Application/Log.h"
 
 TextureLoader::TextureLoader()
 {

@@ -1,5 +1,5 @@
-#include "InitSystems.h"
-#include "MainGame.h"
+#include "Application/InitSystems.h"
+#include "Game/MainGame.h"
 
 int main(int argc, char* argv[])
 {

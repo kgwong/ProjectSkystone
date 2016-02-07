@@ -39,6 +39,7 @@ private:
 	//for hook ~ move to a different state
 	//bool launch_;
 
+
 };
 
 #endif //PLAYER_ATTACK_STATE_H

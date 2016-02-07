@@ -8,7 +8,9 @@
 #include "Components/Render/ScrollingSpriteRenderer.h"
 
 #include "Components/Physics/PhysicsComponent.h" //
-#include "CircleMath.h" //
+#include "GameMath/CircleMath.h" //
+#include "Components/Player/PlayerControlComponent.h"
+#include "StickOnCollision.h";
 
 Level::Level(int levelID)
 	:player(nullptr),
@@ -95,31 +97,36 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
 {
-	auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
-	hookToFling->setPos(position);
-	
-	//TODO --- FIX glitch with hook rendering on projectile when projectile shot.
-	if (playerHook != nullptr && playerHook.get()->alive())
-	{
-		std::cout << "I am alive" << std::endl;
-		//make mark to kill!
-		//playerHook.get()->kill();
-	//	return;
-	}
-	//only one hook should exist per cast.
-	if (playerHook == nullptr)
-		playerHook = hookToFling;
-	//playerHook.push_back(hookToFling);
-	
-	auto physics = playerHook->getComponent<PhysicsComponent>();
-	physics->enableGravity(false);
 
-	int newVelX = (int)(velocity * cos(toRadians(degrees)));
-	int newVelY = (int)(velocity * sin(toRadians(degrees)));
-	physics->setVelX(newVelX);
-	physics->setVelY(newVelY);
-	playerHook->startComponents(*this);
-	std::cout << "DONE";
+	std::cout << "Player refCount: " << playerHook.use_count() << std::endl;
+
+	if (playerHook == nullptr)
+	{
+		auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
+		hookToFling->setPos(position);
+		playerHook = std::move(hookToFling);
+		auto physics = playerHook->getComponent<PhysicsComponent>();
+		physics->enableGravity(false);
+
+		int newVelX = (int)(velocity * cos(toRadians(degrees)));
+		int newVelY = (int)(velocity * sin(toRadians(degrees)));
+		physics->setVelX(newVelX);
+		physics->setVelY(newVelY);
+		playerHook->startComponents(*this);
+	}
+
+	if (playerHook != nullptr)
+	{
+		PlayerControlComponent * playerControls = player->getComponent<PlayerControlComponent>();
+		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
+		if (playerControls != nullptr && hookState != nullptr
+			&& hookState->isConnected == true
+			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
+		{
+			playerHook->kill();
+			playerHook = nullptr;
+		}
+	}
 }
 
 void Level::addPickupAtLocation(Point position)

@@ -3,15 +3,16 @@
 #include "Game/Controls.h"
 
 
-#include "Log.h"
+#include "Application/Log.h"
 
 PlayerHookState::PlayerHookState(GameObject& owner)
 	:InputComponent(owner),
 	_degrees(0),
 	_launched(false),
+	_hookActive(false),
 	_currentAimState(DEFAULT_AIM_STATE)
 {
-
+	
 }
 PlayerHookState::~PlayerHookState()
 {
@@ -20,53 +21,13 @@ PlayerHookState::~PlayerHookState()
 void PlayerHookState::handleInput(SDL_Event& e)
 {
 
-
-	//------ shooting hook at a direction -------//
-	//key released
-	//if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[UP])
-	//{
-	//	_currentAimState = AimState::NONE;
-	//}
-	////if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[DOWN])
-	////{
-	////	_currentAimState = AimState::NONE;
-	////}
-	//if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[LEFT])
-	//{
-	//	_currentAimState = AimState::NONE;
-	//}
-	//if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[RIGHT])
-	//{
-	//	_currentAimState = AimState::NONE;
-	//}
-	//
+	_keyInput = e.key.keysym.sym;
 
 	//key pressed
 	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[UP])
 	{
 		_currentAimState = AimState::UP;
 	}
-	
-	if (_currentAimState == AimState::UP)
-	{
-		//UP LEFT SHOT
-
-		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
-		{
-			_currentAimState = AimState::UP_LEFT;
-		}
-		//UP RIGHT SHOT
-		else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
-		{
-			_currentAimState = AimState::UP_RIGHT;
-		}
-		else
-			_currentAimState = AimState::UP;
-	}
-	//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[DOWN])
-	//{
-	//	_currentAimState = AimState::DOWN;
-	//}
 	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
 	{
 		_currentAimState = AimState::LEFT;
@@ -75,10 +36,10 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	{
 		_currentAimState = AimState::RIGHT;
 	}
-
-	//_currentAimState->handleInput(owner_, e);
 	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
+	{
 		_launched = true;
+	}
 }
 
 double PlayerHookState::getDegrees()
@@ -89,15 +50,9 @@ double PlayerHookState::getDegrees()
 		return 270;
 		break;
 	case AimState::LEFT:
-		return 180;
-		break;
-	case AimState::RIGHT:
-		return 0;
-		break;
-	case AimState::UP_LEFT:
 		return 225;
 		break;
-	case AimState::UP_RIGHT:
+	case AimState::RIGHT:
 		return 315;
 		break;
 	default:
@@ -113,6 +68,35 @@ void PlayerHookState::update(Level& level)
 		_degrees = getDegrees();
 		level.addPlayerHookAtLocation(owner_.getPos(), test_velocity, _degrees);
 		_launched = false;
+		_hookActive = true;
+		_degrees = 0;
 	}
+
+	if (_hookActive)
+	{
+		
+	}
+	
+
+}
+
+void PlayerHookState::setLaunched(bool b)
+{
+	_launched = b;
+}
+
+bool PlayerHookState::hasLaunched()
+{
+	return _launched;
+}
+
+bool PlayerHookState::isActiveHook()
+{
+	return _hookActive;
+}
+
+SDL_Keycode PlayerHookState::getKeyInput()
+{
+	return _keyInput;
 }
 

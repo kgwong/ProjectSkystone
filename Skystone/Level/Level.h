@@ -3,7 +3,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Block.h"
-#include "Direction.h"
+#include "GameTypes/Direction.h"
 #include "GameObject/TileArrangement.h"
 #include "ComponentSystem/ComponentSystem.h"
 #include "SDL/SDL.h"

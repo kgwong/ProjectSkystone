@@ -5,7 +5,9 @@
 
 #include "Game/Controls.h"
 
-#include "Log.h"
+#include "Application/Log.h"
+
+#include "Resources/Resources.h"
 
 DefaultAimState PlayerAttackState::defaultAimState;
 AimUpState PlayerAttackState::aimUpState;
@@ -112,6 +114,10 @@ void PlayerAttackState::update(Level& level)
 	{
 		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
 		shoot_ = false;
+
+		//play sound here!
+		//audio_.PlayClip("laser1");
+		Resources::audioPlayer.PlayClip("laser1");
 	}
 
 

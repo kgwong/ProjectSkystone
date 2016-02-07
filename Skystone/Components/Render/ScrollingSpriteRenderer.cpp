@@ -1,7 +1,7 @@
 #include "Components/Render/ScrollingSpriteRenderer.h"
-#include "GameWindow.h"
+#include "Application/GameWindow.h"
 #include "Game/GameConstants.h"
-#include "Log.h"
+#include "Application/Log.h"
 
 namespace
 {
@@ -11,6 +11,33 @@ namespace
 		rect->y = y_;
 		rect->w = w_;
 		rect->h = h_;
+	}
+	void setRectZero(SDL_Rect* rect)
+	{
+		setRect(rect, 0, 0, 0, 0);
+	}
+
+	void setMaxHoriz(SDL_Rect* src, SDL_Rect* dst)
+	{
+		src->x = dst->x = 0;
+		src->w = dst->w = Constants::SCREEN_WIDTH;
+	}
+	void setMaxVert(SDL_Rect* src, SDL_Rect* dst)
+	{
+		src->y = dst->y = 0;
+		src->h = dst->h = Constants::SCREEN_HEIGHT;
+	}
+
+	void setXToBound(SDL_Rect* src, SDL_Rect* dst, int xBound)
+	{
+		src->x = xBound; 
+		src->w = dst->w = Constants::SCREEN_WIDTH;
+	}
+
+	void setYToBound(SDL_Rect* src, SDL_Rect* dst, int yBound)
+	{
+		src->y = yBound; 
+		src->h = dst->h = Constants::SCREEN_HEIGHT;
 	}
 }
 
@@ -22,8 +49,8 @@ ScrollingSpriteRenderer::ScrollingSpriteRenderer(GameObject& owner, SpriteSheet*
 	blS_{0,0,0,0}, blD_{0,0,0,0},
 	brS_{0,0,0,0}, brD_{0,0,0,0},
 	oldCameraPos_{0,0},
-	layerNum_{layerNum},
-	moveFreq_{5}
+	layerNum_{layerNum}, 
+	moveFreq_{8}
 {
 	checkDims();
 }
@@ -57,21 +84,47 @@ void ScrollingSpriteRenderer::checkDims()
 void ScrollingSpriteRenderer::advanceRects(GameWindow& gameWindow)
 {
 	Point currCam = gameWindow.getCamera().getPos();
-
+	SDL_Rect* frame = spriteSheet_->getFrameRect(0);
+	int endx = currCam.x + Constants::SCREEN_WIDTH;
+	int endy = currCam.y + Constants::SCREEN_HEIGHT;
 	if (cameraChanged(gameWindow)) 
 	{
-		//if (currCam.x <= spriteSheet_->getFrameRect(0)->w ||
-		//	currCam.y <= spriteSheet_->getFrameRect(0)->h)
+		if ( endx >= frame->w  && endy >= frame->h)
 			scrollQuads(gameWindow);
-		//else
-		//	scrollNonZeroRect(gameWindow);
+		else
+			scrollLargeSprite(gameWindow);
 	}
 }
 
-void ScrollingSpriteRenderer::scrollNonZeroRect(GameWindow& gameWindow)
+void ScrollingSpriteRenderer::scrollLargeSprite(GameWindow& gameWindow)
 {
 	Point currCam = gameWindow.getCamera().getPos();
-	// todo: add support for pictures > screen size
+	int xBound = findXBound(currCam);
+	int yBound = findYBound(currCam);
+
+	setRectZero(&trD_);
+	setRectZero(&brD_);
+	setRectZero(&blD_);
+
+	if (sx_)
+	{
+		if (currCam.x + xBound <= spriteSheet_->getFrameRect(0)->w)
+			setXToBound(&tlS_, &tlD_, xBound);
+		else
+			scrollHorizToBound(xBound);
+	}
+	else
+		setMaxHoriz(&tlS_, &tlD_);
+
+	if (sy_)
+	{
+		if (currCam.y + yBound <= spriteSheet_->getFrameRect(0)->h)
+			setYToBound(&tlS_, &tlD_, yBound);
+		else
+			scrollVertToBound(yBound);
+	}
+	else
+		setMaxVert(&tlS_, &tlD_);
 }
 
 void ScrollingSpriteRenderer::scrollQuads(GameWindow& gameWindow)
@@ -122,18 +175,34 @@ int ScrollingSpriteRenderer::findDelY(GameWindow& gameWindow)
 int ScrollingSpriteRenderer::findXBound(Point currCam)
 {
 	int maxW = spriteSheet_->getFrameRect(0)->w;
-	int distTraveled = (currCam.x * layerNum_) / moveFreq_;
+	int distTraveled = (currCam.x * std::pow(2,layerNum_)) / moveFreq_;
 	return (sx_) ? distTraveled % maxW : 0;
 }
 
 int ScrollingSpriteRenderer::findYBound(Point currCam)
 {
 	int maxH = spriteSheet_->getFrameRect(0)->h;
-	int distTraveled = (currCam.y * layerNum_) / moveFreq_;
+	int distTraveled = (currCam.y * std::pow(2,layerNum_)) / moveFreq_;
 	return (sy_) ? distTraveled % maxH : 0;
 }
 
 void ScrollingSpriteRenderer::updateCamPos(GameWindow& gameWindow)
 {
 	oldCameraPos_ = gameWindow.getCamera().getPos();
+}
+
+void ScrollingSpriteRenderer::scrollHorizToBound(int xBound)
+{
+	tlS_.x = tlD_.x = 0;
+	tlS_.w = tlD_.w = xBound;
+	trS_.x = trD_.x = xBound;
+	trS_.w = trD_.w = Constants::SCREEN_WIDTH - xBound;
+}
+
+void ScrollingSpriteRenderer::scrollVertToBound(int yBound)
+{
+	tlS_.y = tlD_.y = 0;
+	tlS_.h = tlD_.w = yBound;
+	blS_.x = blD_.x = yBound;
+	blS_.w = blD_.w = Constants::SCREEN_HEIGHT - yBound; 
 }

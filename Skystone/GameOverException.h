@@ -3,6 +3,8 @@
 
 #include <exception>
 
+//TEMPORARY
+
 class GameOverException :
 	public std::exception
 {

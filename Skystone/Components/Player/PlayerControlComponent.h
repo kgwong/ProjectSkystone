@@ -21,7 +21,9 @@ public:
 	void changeAttackState(PlayerAimState* state);
 
 	//----harvey function----///
-	//void changeHookState(PlayerHookState*)
+	//void changeHookState(PlayerHookState*);
+	bool isHookActive();
+	SDL_Keycode HookKeyInput;
 
 
 private:

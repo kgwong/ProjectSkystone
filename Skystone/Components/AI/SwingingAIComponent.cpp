@@ -1,6 +1,6 @@
 #include "SwingingAIComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
-#include "CircleMath.h"
+#include "GameMath/CircleMath.h"
 #include <iostream>
 
 SwingingAIComponent::SwingingAIComponent(GameObject& owner) :

@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <memory>
 
-#include "Point.h"
+#include "GameTypes/Point.h"
 
 class Level;
 class Component;

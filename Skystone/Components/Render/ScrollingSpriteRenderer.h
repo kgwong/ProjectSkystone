@@ -25,7 +25,7 @@ private:
 
 	void checkDims();
 	void advanceRects(GameWindow& gameWindow);
-	void scrollNonZeroRect(GameWindow& gameWindow);
+	void scrollLargeSprite(GameWindow& gameWindow);
 	void scrollQuads(GameWindow& gameWindow);
 	int findXBound(Point currCam);
 	int findYBound(Point currCam);
@@ -34,6 +34,8 @@ private:
 	int findDelX(GameWindow& gameWindow);
 	int findDelY(GameWindow& gameWindow);
 	void updateCamPos(GameWindow& gameWindow);
+	void scrollHorizToBound(int xBound);
+	void scrollVertToBound(int yBound);
 };
 
 #endif //SCROLLING_SPRITE_RENDERER_H

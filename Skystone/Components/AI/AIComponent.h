@@ -2,7 +2,7 @@
 #define AI_COMPONENT_H
 
 #include "Components/Component.h"
-#include "Point.h"
+#include "GameTypes/Point.h"
 
 class AIComponent : public Component
 {

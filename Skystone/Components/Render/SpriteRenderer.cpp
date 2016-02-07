@@ -1,9 +1,9 @@
 #include "SpriteRenderer.h"
 
-#include "GameWindow.h"
+#include "Application/GameWindow.h"
 #include "Game/GameTime.h"
 
-#include "Log.h"
+#include "Application/Log.h"
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
 	:RenderComponent(owner), spriteSheet_(spriteSheet),
@@ -48,9 +48,8 @@ void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
 
 void SpriteRenderer::render(GameWindow& gameWindow)
 {
-	msOnFrame += 20;
-		//Time::getElapsedRenderTime();
-
+	msOnFrame += Time::getElapsedRenderTime();
+	
 	int currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
 	while (msOnFrame >= currFrameDuration)
 	{
