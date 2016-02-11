@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />

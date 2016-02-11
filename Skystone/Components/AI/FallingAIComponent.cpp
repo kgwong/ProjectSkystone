@@ -1,6 +1,6 @@
 #include "FallingAIComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
-
+#include "GameTypes/Point.h"
 
 FallingAIComponent::FallingAIComponent(GameObject& owner)
 	: AIComponent(owner), 
@@ -25,9 +25,9 @@ void FallingAIComponent::start(Level& level)
 
 void FallingAIComponent::update(Level& level)
 {
-	int dist = getDistance(owner_.getPos(), level.getPlayerPos());
-	int yDist = getYDirection(owner_.getPos(), level.getPlayerPos());
-	int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
+	int dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
+	int yDist = Point::getYDirection(owner_.getPos(), level.getPlayerPos());
+	int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(yDist, yRadius_) && AIComponent::isNearby(xDist, xRadius_))
 	{

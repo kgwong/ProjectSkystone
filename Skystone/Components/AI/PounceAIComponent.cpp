@@ -1,6 +1,7 @@
 #include "PounceAIComponent.h"
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
+#include "GameTypes/Point.h"
 #define PI 3.14159265
 #include <iostream>
 using namespace std;
@@ -37,17 +38,17 @@ void PounceAIComponent::update(Level& level)
 
 	if (!cooldown_)
 	{
-		int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
+		int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 		int playerSide;
 
-		if (getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
+		if (Point::getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
 		{
 			playerSide = 0;
 		}
 
 		else
 		{
-			playerSide = -xDist / getXDistance(owner_.getPos(), level.getPlayerPos());
+			playerSide = -xDist / Point::getXDistance(owner_.getPos(), level.getPlayerPos());
 		}
 
 

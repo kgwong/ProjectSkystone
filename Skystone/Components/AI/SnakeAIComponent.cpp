@@ -25,7 +25,7 @@ void SnakeAIComponent::start(Level& level)
 void SnakeAIComponent::update(Level& level)
 {
 
-	if (getXDistance(owner_.getPos(), cornerPosition_) > DEFAULT_X_DIST)
+	if (Point::getXDistance(owner_.getPos(), cornerPosition_) > DEFAULT_X_DIST)
 	{
 		
 		if (physics_->getVelX() > 0)
@@ -43,7 +43,7 @@ void SnakeAIComponent::update(Level& level)
 
 	}
 
-	if (getYDistance(owner_.getPos(), cornerPosition_) > DEFAULT_Y_DIST)
+	if (Point::getYDistance(owner_.getPos(), cornerPosition_) > DEFAULT_Y_DIST)
 	{
 		if (physics_->getVelY() > 0)
 		{
@@ -60,9 +60,4 @@ void SnakeAIComponent::update(Level& level)
 
 	}
 
-	
-
-
-			
-	
 }

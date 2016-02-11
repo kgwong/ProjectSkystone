@@ -15,17 +15,9 @@ public:
 
 	virtual Component::Type getType() final;
 
-	static int getDistance(Point& a,Point& b);
-	static int getXDistance(Point& a, Point& b);
-	static int getYDistance(Point& a, Point& b);
-	static int getXDirection(Point& a, Point& b);
-	static int getYDirection(Point& a, Point& b);
 	static bool isNearby(int dist, int radius);
-	static bool isDistance(Point& a, Point& b, int dist);
 
-	static Point getMidPoint(Point& a, Point& b);
-	static int getXMidPoint(Point& a, Point& b);
-	static int getYMidPoint(Point& a, Point &b);
+
 };
 
 #endif //AI_COMPONENT_H

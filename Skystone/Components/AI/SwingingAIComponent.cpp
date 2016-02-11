@@ -107,7 +107,7 @@ void SwingingAIComponent::handleEvent(const CollisionEvent & e)
 		Point bulletPoint = other.getPos();
 		Point ownerPoint = owner_.getPos();
 		//if bullet shot from the left, mob swings to the right, otherwise mob swings to the left
-		if (AIComponent::getXDirection(ownerPoint, bulletPoint) > 0)
+		if (Point::getXDirection(ownerPoint, bulletPoint) > 0)
 			direction_ = 1;
 		else
 			direction_ = -1;

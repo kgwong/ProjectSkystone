@@ -28,11 +28,11 @@ void TrackerComponent::start(Level & level)
 //missing time and another player gameobject.
 void TrackerComponent::update(Level & level)
 {
-	int player_dist = AIComponent::getDistance(owner_.getPos(), level.getPlayerPos());
+	int player_dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(player_dist, radius_))
 	{
-		int player_direction = AIComponent::getXDirection(owner_.getPos(), level.getPlayerPos());
+		int player_direction = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 		EnemyState currentState = enemyState_;
 			switch (currentState)
