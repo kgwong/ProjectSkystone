@@ -274,6 +274,9 @@
     <ClCompile Include="GameTypes\Point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Render\TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameOverException.h">
@@ -527,6 +530,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StickOnCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\TextRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

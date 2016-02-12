@@ -14,7 +14,8 @@ void initAllSystems()
 
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0) 
 		MySDL_Error("Mixer failed to initialize");
-
+	if (TTF_Init() == -1)
+		MySDL_Error("Text failed to initialize");
 	Path::initBasePath();
 	Log::init();
 }
@@ -23,5 +24,6 @@ void quitAllSystems()
 {
 	Mix_CloseAudio();
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }

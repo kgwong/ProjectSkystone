@@ -52,7 +52,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\dependencies\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <Profile>true</Profile>
     </Link>
@@ -153,6 +153,7 @@
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
     <ClCompile Include="StickOnCollision.cpp" />
+    <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
@@ -240,6 +241,7 @@
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
     <ClInclude Include="StickOnCollision.h" />
+    <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,6 +20,8 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Collider/ColliderComponent.h"
 
+
+#include "Components/Render/TextRenderer.h"
 EnemyBuilder::EnemyBuilder()
 {
 }
@@ -53,6 +55,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
 		enemyToBuild.addComponent(componentSystem.getNew<PounceAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<TextRenderer>(enemyToBuild)); ///
 	}
 	else if (enemyName == "BasicEnemy")
 	{
