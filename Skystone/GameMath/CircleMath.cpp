@@ -1,6 +1,6 @@
 #include "CircleMath.h"
 
-#define PI 3.14159265359
+
 
 double toRadians(double degrees)
 {
