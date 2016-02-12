@@ -9,6 +9,8 @@
 
 #include "Resources/Resources.h"
 
+#include "Application/Log.h"
+
 MainGame::MainGame()
 	:window_(Constants::GAME_TITLE, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT),
 	quit_(false)
@@ -59,7 +61,7 @@ void MainGame::processInput()
 			case SDL_QUIT:
 				quit_ = true;
 			case SDL_KEYDOWN:
-				//std::cout << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
+				//LOG("INPUT") << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
 				if (e.key.keysym.sym == SDLK_p)
 					levelManager_.getLevelMap()->print();
 				break;
@@ -70,11 +72,11 @@ void MainGame::processInput()
 					Resources::audioPlayer.PlayClip("laser2");
 				break;
 			case SDL_MOUSEMOTION:
-				//std::cout << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
+				//LOG("INPUT") << "MOUSE MOVED!!!! pos (x: " << e.motion.x << ", y: " << e.motion.y << ")" << std::endl;
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				std::cout << "MousePressed(x = " << e.button.x + window_.getCamera().getPosX() << 
-								", y = " << e.button.y + window_.getCamera().getPosY() << ")" << std::endl;
+				LOG("INPUT") << "MousePressed(x = " << e.button.x + window_.getCamera().getPosX() <<
+					", y = " << e.button.y + window_.getCamera().getPosY() << ")";
 				break;
 			default:
 				break;
@@ -85,6 +87,7 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
+	LOG("Kevin") << "wtf";
 	try
 	{
 		levelManager_.getCurrentLevel()->update();
@@ -97,7 +100,7 @@ void MainGame::update()
 		{
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) quit_ = true; }
-			std::cout << "GAME OVER" << std::endl;
+			LOG("GAME") << "GAME OVER";
 			SDL_Delay(100);
 		}
 	}

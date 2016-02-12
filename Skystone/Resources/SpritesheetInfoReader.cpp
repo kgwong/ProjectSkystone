@@ -12,7 +12,7 @@ namespace
 	{
 		if (map.find(index) == map.end())
 		{
-			LOG_COUT << "Missing " << index;
+			LOG("WARNING") << "Missing " << index;
 			fail = true;
 		}
 	};

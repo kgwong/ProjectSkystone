@@ -75,7 +75,7 @@ void ScrollingSpriteRenderer::checkDims()
 	if (spriteSheet_->getFrameRect(0)->w < Constants::SCREEN_WIDTH ||
 		spriteSheet_->getFrameRect(0)->h < Constants::SCREEN_HEIGHT)
 	{
-		LOG << "Warning: ScrollingSpriteRenderer behavior undefined for \
+		LOG("") << "Warning: ScrollingSpriteRenderer behavior undefined for \
 			sprites < screen size";
 	}
 }
