@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <limits>
 
+#include "Components/Render/SpriteRenderer.h"
+
 Camera::Camera(int width, int height)
 	:width_(width), height_(height),
 	maxX_(std::numeric_limits<int>::max()),
@@ -20,9 +22,11 @@ void Camera::setLevelBounds(int maxX, int maxY)
 	maxY_ = maxY;
 }
 
-void Camera::followObject(const GameObject& object)
+void Camera::followObject(GameObject& object, float percBehind)
 {
-	position_ = object.getPos();
+	auto t = object.getComponent<SpriteRenderer>();
+
+	position_ = t->getRenderPosition(percBehind);
 	position_.x -= width_ / 2;
 	position_.y -= height_ / 2;
 	stayInLevelBounds();

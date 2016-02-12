@@ -22,7 +22,7 @@ public:
 
 	virtual int getRenderLayer();
 
-protected:
+public: //protected
 	Point getRenderPosition(float percBehind);
 
 private:

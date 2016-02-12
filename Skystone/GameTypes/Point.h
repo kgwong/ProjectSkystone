@@ -3,8 +3,13 @@
 
 struct Point
 {
-	Point(): x(0), y(0) {}
-	Point(int x, int y): x(x), y(y) {} 
+	Point();
+	Point(int posX, int posY);
+
+	Point operator+(const Point& rhs) const;
+	Point operator-(const Point& rhs) const;
+	bool operator==(const Point& rhs) const;
+
 	int x;
 	int y;
 	static int getDistance(Point& a, Point& b);

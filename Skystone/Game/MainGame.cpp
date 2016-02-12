@@ -37,15 +37,12 @@ void MainGame::run()
 	{
 		msecBehind += elapsed;
 		processInput();
-		//std::cout << 1000/Time::getElapsedRenderTime() << std::endl;
-		//update();
 		while (msecBehind >= Time::timeStep) 
 		{
 			update();
 			msecBehind -= Time::timeStep;
 		}
 		render(msecBehind / (float) Time::timeStep);
-		//render();
 		elapsed = Time::getCurrentTime() - prev;
 		Time::setElapsedRenderTime(elapsed);
 		prev = Time::getCurrentTime();
@@ -110,7 +107,7 @@ void MainGame::render(float percBehind)
 {
 	SDL_RenderClear(window_.getRenderer());
 
-	window_.getCamera().followObject(player_);
+	window_.getCamera().followObject(player_, percBehind);
 	levelManager_.getCurrentLevel()->render(window_, percBehind);
 
 	SDL_RenderPresent(window_.getRenderer());

@@ -1,6 +1,34 @@
 #include "Point.h"
 #include <math.h>
 
+Point::Point()
+	:x(0), y(0)
+{
+
+}
+
+Point::Point(int posX, int posY)
+	:x(posX), y(posY)
+{
+
+}
+
+
+Point Point::operator+(const Point & rhs) const
+{
+	return Point(this->x + rhs.x, this->y + rhs.y);
+}
+
+Point Point::operator-(const Point & rhs) const
+{
+	return Point(this->x - rhs.x, this->y - rhs.y);
+}
+
+bool Point::operator==(const Point & rhs) const
+{
+	return this->x == rhs.x && this->y == rhs.y;
+}
+
 int Point::getDistance(Point& a, Point& b)
 {
 	int x2 = a.x;

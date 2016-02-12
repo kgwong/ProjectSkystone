@@ -64,12 +64,7 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 
 	//cleaner way to incorporate this?
 	Point adjPos = RenderComponent::getRenderPosition(percBehind); 
-	//SDL_Rect drawDest = SDL_Rect{ adjPos.x, adjPos.y, frameWidth, frameHeight };
-	if (adjPos.x != owner_.getPosX() || adjPos.y != owner_.getPosY())
-	{
-		//std::cout << "Adj(" << adjPos.x << "," << adjPos.y << ") " << "Curr(" << owner_.getPosX() << "," << owner_.getPosY() << ")" << std::endl;
-	}
-	SDL_Rect drawDest = SDL_Rect{ owner_.getPosX(), owner_.getPosY(), frameWidth, frameHeight };
+	SDL_Rect drawDest = SDL_Rect{ adjPos.x, adjPos.y, frameWidth, frameHeight };
 
 	SDL_RendererFlip finalFlip;
 	if (flipHorz_ && flipVert_)
