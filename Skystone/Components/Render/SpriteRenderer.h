@@ -18,7 +18,7 @@ public:
 
 	void setSprite(SpriteSheet* newSpriteSheet);
 
-	void render(GameWindow& gameWindow);
+	void render(GameWindow& gameWindow, float percBehind);
 
 	virtual int getWidth();
 	virtual int getHeight();

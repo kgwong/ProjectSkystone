@@ -10,7 +10,7 @@
 #include "Components/Physics/PhysicsComponent.h" //
 #include "GameMath/CircleMath.h" //
 #include "Components/Player/PlayerControlComponent.h"
-#include "StickOnCollision.h";
+#include "StickOnCollision.h"
 
 Level::Level(int levelID)
 	:player(nullptr),
@@ -52,9 +52,9 @@ void Level::setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder)
 
 void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly)
 {
-	background_ = std::make_shared<GameObject>();
-	background_->setType(GameObject::Type::BACKGROUND);
-	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
+	//background_ = std::make_shared<GameObject>();
+	//background_->setType(GameObject::Type::BACKGROUND);
+	//background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
 }
 
 void Level::setPlayer(GameObject* p, Point startPosition)
@@ -206,9 +206,9 @@ void Level::updatePlayer()
 	}
 }
 
-void Level::render(GameWindow& window)
+void Level::render(GameWindow& window, float percBehind)
 {
-	componentSystem_.render(*this, window);
+	componentSystem_.render(*this, window, percBehind);
 }
 
 int Level::getID()

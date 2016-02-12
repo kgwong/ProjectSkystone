@@ -59,7 +59,7 @@ ScrollingSpriteRenderer::~ScrollingSpriteRenderer()
 {
 }
 
-void ScrollingSpriteRenderer::render(GameWindow& gameWindow)
+void ScrollingSpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
 	advanceRects(gameWindow);
 	gameWindow.renderOnCamera(spriteSheet_->getTexture(), &tlS_, &tlD_);

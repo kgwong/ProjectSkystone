@@ -66,6 +66,3 @@ void GameWindow::renderOnCamera(SDL_Texture * texture, const SDL_Rect * srcrect,
 	MySDL_RenderCopy(getRenderer(), texture, srcrect, dstrect);
 }
 
-
-
-

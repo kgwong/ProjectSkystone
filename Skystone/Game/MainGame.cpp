@@ -44,8 +44,8 @@ void MainGame::run()
 			update();
 			msecBehind -= Time::timeStep;
 		}
-		//render(msecBehind/timeStep)
-		render();
+		render(msecBehind / (float) Time::timeStep);
+		//render();
 		elapsed = Time::getCurrentTime() - prev;
 		Time::setElapsedRenderTime(elapsed);
 		prev = Time::getCurrentTime();
@@ -106,12 +106,12 @@ void MainGame::update()
 	}
 }
 
-void MainGame::render()
+void MainGame::render(float percBehind)
 {
 	SDL_RenderClear(window_.getRenderer());
 
 	window_.getCamera().followObject(player_);
-	levelManager_.getCurrentLevel()->render(window_);
+	levelManager_.getCurrentLevel()->render(window_, percBehind);
 
 	SDL_RenderPresent(window_.getRenderer());
 }

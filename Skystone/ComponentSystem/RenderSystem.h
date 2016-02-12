@@ -19,7 +19,8 @@ public:
 	~RenderSystem();
 
 	void addComponent(std::shared_ptr<Component> component);
-	void update(Level& level, GameWindow& window);
+	void update(Level& level);
+	void update(Level& level, GameWindow& window, float percBehind);
 
 	void cleanup();
 

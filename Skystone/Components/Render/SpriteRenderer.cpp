@@ -46,7 +46,7 @@ void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
 	msOnFrame = 0;
 }
 
-void SpriteRenderer::render(GameWindow& gameWindow)
+void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
 	msOnFrame += Time::getElapsedRenderTime();
 	
@@ -62,9 +62,14 @@ void SpriteRenderer::render(GameWindow& gameWindow)
 	int frameWidth = spriteSheet_->getFrameRect(currFrameIndex)->w;
 	int frameHeight = spriteSheet_->getFrameRect(currFrameIndex)->h;
 
-	SDL_Rect drawDest = SDL_Rect{ owner_.getPosX(),
-									owner_.getPosY(),
-									frameWidth, frameHeight };
+	//cleaner way to incorporate this?
+	Point adjPos = RenderComponent::getRenderPosition(percBehind); 
+	//SDL_Rect drawDest = SDL_Rect{ adjPos.x, adjPos.y, frameWidth, frameHeight };
+	if (adjPos.x != owner_.getPosX() || adjPos.y != owner_.getPosY())
+	{
+		//std::cout << "Adj(" << adjPos.x << "," << adjPos.y << ") " << "Curr(" << owner_.getPosX() << "," << owner_.getPosY() << ")" << std::endl;
+	}
+	SDL_Rect drawDest = SDL_Rect{ owner_.getPosX(), owner_.getPosY(), frameWidth, frameHeight };
 
 	SDL_RendererFlip finalFlip;
 	if (flipHorz_ && flipVert_)

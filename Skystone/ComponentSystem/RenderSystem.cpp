@@ -19,7 +19,27 @@ void RenderSystem::addComponent(std::shared_ptr<Component> component)
 	renderLayers_[c->getRenderLayer()].push_back(c);
 }
 
-void RenderSystem::update(Level& level, GameWindow& window)
+void RenderSystem::update(Level & level)
+{
+	for (auto& layer : renderLayers_)
+	{
+		for (size_t i = 0; i < layer.size(); /*EMPTY*/)
+		{
+			auto& component = layer[i];
+			if (component->owned())
+			{
+				component->update(level);
+				++i;
+			}
+			else
+			{
+				ComponentSystem::vector_remove(layer, i);
+			}
+		}
+	}
+}
+
+void RenderSystem::update(Level& level, GameWindow& window, float percBehind)
 {
 	for (auto& layer : renderLayers_)
 	{
@@ -28,8 +48,7 @@ void RenderSystem::update(Level& level, GameWindow& window)
 			auto& component = layer[i];
 			if (component->owned())
 			{
-				component->update(level);
-				component->render(window);
+				component->render(window, percBehind);
 				++i;
 			}
 			else

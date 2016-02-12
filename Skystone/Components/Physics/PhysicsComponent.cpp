@@ -168,8 +168,8 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 
 				if (collider_->checkCollision(tile))
 				{
-					callOnCollision(owner, tile, level);
 					correctPosition(owner, tile, level, axis);
+					callOnCollision(owner, tile, level);
 				}
 			}
 		}
@@ -224,7 +224,7 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 			{
 				owner.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
 			}
-			setVelX(0);
+			//setVelX(0);
 			break;
 
 		case Axis::Y:
@@ -237,7 +237,7 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 				owner.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
 				falling_ = false;
 			}
-			setVelY(0);
+			//setVelY(0);
 			break;
 		default:
 			break;

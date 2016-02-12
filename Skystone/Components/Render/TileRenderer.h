@@ -12,7 +12,7 @@ public:
 	TileRenderer(GameObject& owner, SpriteSheet* spriteSheet, int tileNum);
 	virtual ~TileRenderer();
 
-	void render(GameWindow& gameWindow);
+	void render(GameWindow& gameWindow, float percBehind);
 
 	virtual int getWidth();
 	virtual int getHeight();

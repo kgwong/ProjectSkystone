@@ -17,7 +17,7 @@ public:
 
 	void handleInput(SDL_Event& e);
 	void update(Level& level);
-	void render(Level& level, GameWindow& window);
+	void render(Level& level, GameWindow& window, float percBehind);
 
 	void cleanup();
 

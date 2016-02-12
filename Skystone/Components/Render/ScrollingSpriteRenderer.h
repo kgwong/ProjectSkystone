@@ -11,7 +11,7 @@ public:
 	virtual ~ScrollingSpriteRenderer();
 
 	virtual void start(Level& level) {};
-	virtual void render(GameWindow& gameWindow);
+	virtual void render(GameWindow& gameWindow, float percBehind);
 
 
 

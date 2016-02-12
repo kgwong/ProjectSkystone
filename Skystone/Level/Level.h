@@ -39,7 +39,7 @@ public:
 
 	void handleInput(SDL_Event& e);
 	void update();
-	void render(GameWindow& window);
+	void render(GameWindow& window, float percBehind);
 
 	int getID();
 
