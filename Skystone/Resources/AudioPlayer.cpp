@@ -24,7 +24,8 @@ struct FileNames
 
 std::string FileNames::laser1 = "Laser_Shoot1.wav";
 std::string FileNames::laser2 = "Laser_Shoot2.wav";
-std::string FileNames::bgMusic = "canton_Benbient-160.mp3";
+//std::string FileNames::bgMusic = "canton_Benbient-160.mp3";
+std::string FileNames::bgMusic = "junior85_-_03_-_As_It_Happens_pt_4.mp3";
 
 AudioPlayer::AudioPlayer()
 	:clip_(nullptr)
@@ -109,7 +110,7 @@ void AudioPlayer::PlayMusic()
 		std::cout << "I am empty!" << std::endl;
 		music_ = std::move(LoadMusic());
 	}
-	Mix_VolumeMusic(MIX_MAX_VOLUME);
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 	//-1 in second argument means play music forever
 	if (Mix_PlayMusic(music_.get(),-1) == -1)
 	{
