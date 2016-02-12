@@ -114,11 +114,12 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 		physics->setVelY(newVelY);
 		playerHook->startComponents(*this);
 	}
-
+	//if the hook is rendered on the map
 	if (playerHook != nullptr)
 	{
 		PlayerControlComponent * playerControls = player->getComponent<PlayerControlComponent>();
 		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
+		//if hook is attached to a tile and player pressed D to launch hook..
 		if (playerControls != nullptr && hookState != nullptr
 			&& hookState->isConnected == true
 			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
