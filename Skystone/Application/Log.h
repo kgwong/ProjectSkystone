@@ -4,18 +4,26 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <set>
 
-#define LOG											\
-	Log(std::cout)
+#define LOG(tag)											\
+	if (Log::TAGS.find(tag) != Log::TAGS.end())			\
+	LogDetail(tag, std::cout, __FUNCTION__, __FILE__, __LINE__)
 
 #define LOG_COUT									\
-	LogDetail(std::cout, __FUNCTION__, __FILE__, __LINE__)   
+	LogDetail("", std::cout, __FUNCTION__, __FILE__, __LINE__)   
 
 #define LOG_STREAM(os)								\
-	LogDetail(os, __FUNCTION__, __FILE__, __LINE__)   
+	LogDetail("", os, __FUNCTION__, __FILE__, __LINE__)   
 
 class Log
 {
+public:
+	static void init();
+
+public:
+	static std::set<std::string> TAGS;
+
 public:
 	Log(std::ostream& os);
 	virtual ~Log();
@@ -39,13 +47,15 @@ inline Log& Log::operator<<(const T& t)
 class LogDetail : public Log
 {
 public:
-	LogDetail(std::ostream& os,
+	LogDetail(const std::string& tag,
+		std::ostream& os,
 		const std::string& function,
 		const std::string& file,
 		int line);
 	virtual ~LogDetail();
 
 protected:
+	const std::string& tag_;
 	const std::string& function_;
 	const std::string& file_;
 	int line_;

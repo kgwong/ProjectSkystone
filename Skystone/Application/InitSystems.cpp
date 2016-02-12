@@ -1,6 +1,7 @@
 #include "InitSystems.h"
 
 #include "Path.h"
+#include "Log.h"
 
 void initAllSystems()
 {
@@ -15,6 +16,7 @@ void initAllSystems()
 		MySDL_Error("Mixer failed to initialize");
 
 	Path::initBasePath();
+	Log::init();
 }
 
 void quitAllSystems()

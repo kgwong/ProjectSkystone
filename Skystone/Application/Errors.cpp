@@ -10,7 +10,7 @@ class FailureException : public std::exception
 
 void MySDL_Error(const std::string& message)
 {
-	LOG_STREAM(std::cerr) << message << " error: " << SDL_GetError();
+	LOG("ERROR") << message << " error: " << SDL_GetError();
 	SDL_Quit();
 	std::cin.ignore();
 	throw FailureException();
@@ -46,11 +46,5 @@ void MySDL_RenderCopy(SDL_Renderer* renderer,
 						const SDL_Rect* dstrect)
 {
 	if (SDL_RenderCopy(renderer, texture, srcrect, dstrect) == -1)
-		LOG_STREAM(std::cerr) << "SDL_RenderCopy: " << SDL_GetError();
-}
-
-
-void printCoord(int x, int y)
-{
-	std::cout << "(" << x << ", " << y << ")" << std::endl;
+		LOG("ERROR") << "SDL_RenderCopy: " << SDL_GetError();
 }

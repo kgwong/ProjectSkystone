@@ -58,12 +58,9 @@ int RenderComponent::getRenderLayer()
 
 Point RenderComponent::getRenderPosition(float percBehind)
 {
-	//+, - overload?
 	Point currPos = owner_.getPos();
 	int estVelX = currPos.x - prevPosition.x;
 	int estVelY = currPos.y - prevPosition.y;
-
-	//std::cout << "estVel(" << estVelX << "," << estVelY << ")" << std::endl;
 
 	return Point(currPos.x + estVelX * percBehind, currPos.y + estVelY * percBehind);
 }

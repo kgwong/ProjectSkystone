@@ -112,6 +112,7 @@ void PlayerAttackState::update(Level& level)
 	//LOG << "owner pos: " << owner_.getPos().x << ", " << owner_.getPos().y;
 	if (shoot_)
 	{
+		LOG("testTag") << "Shoot";
 		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
 		shoot_ = false;
 

@@ -65,7 +65,7 @@ void ComponentSystem::addComponent(std::shared_ptr<Component> component)
 		generalComponentSystem_.addComponent(component);
 		break;
 	default:
-		LOG_COUT << "Warning: unknown component!";
+		LOG("WARNING") << "Warning: unknown component!";
 		break;
 	}
 }

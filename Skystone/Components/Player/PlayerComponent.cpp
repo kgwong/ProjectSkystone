@@ -9,6 +9,8 @@
 
 #include "GameTypes/Direction.h"
 
+#include "Application/Log.h"
+
 PlayerComponent::PlayerComponent(GameObject& owner)
 	:NonUpdatingComponent(owner)
 {
@@ -33,7 +35,7 @@ void PlayerComponent::handleEvent(const ComponentEvent& e)
 		throw GameOverException();
 		break;
 	case ComponentEvent::Type::onDamageTaken:
-		std::cout << "Hit by enemy! " << health_->getHealth() << "hp left" << std::endl;
+		LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
 		health_->setInvincible(true);
 		//owner_.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::stunState);
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::stunState);
@@ -59,7 +61,7 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 	{
 	case GameObject::Type::DROP:
 		health_->heal(10);
-		std::cout << "Picked up a thing to heal 10hp!" << std::endl;
+		LOG("GAME") << "Picked up a thing to heal 10hp!";
 		break;
 	case GameObject::Type::ENEMY:
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
