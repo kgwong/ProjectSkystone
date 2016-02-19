@@ -45,8 +45,8 @@ public:
 
 	void setNextLevel(Direction dir);
 
-	int getLevelWidth() const; //pixels
-	int getLevelHeight() const;
+	float getLevelWidth() const; //pixels
+	float getLevelHeight() const;
 
 	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);
 	void addPickupAtLocation(Point position);

@@ -1,6 +1,8 @@
 #include "FlyingAIComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
 
+const float FlyingAIComponent::DEFAULT_X_VELOCITY = 3 * 60.0f;
+const float FlyingAIComponent::DEFAULT_Y_VELOCITY = -1 * 60.0f;
 
 FlyingAIComponent::FlyingAIComponent(GameObject& owner)
 	:AIComponent(owner),

@@ -4,6 +4,8 @@
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
 
+const float FlyingState::FLIGHT_VELOCITY = 5 * 60.0f;
+
 FlyingState::FlyingState()
 {
 }

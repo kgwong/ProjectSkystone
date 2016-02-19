@@ -87,11 +87,11 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 	n->setPos(position);
 	playerProjectiles.push_back(n);
 	auto physics = playerProjectiles.back()->getComponent<PhysicsComponent>();
-
+	//use float here instead of casting
 	int newVelX = (int)(vel * cos(toRadians(degrees)));
 	int newVelY = (int)(vel * sin(toRadians(degrees)));
-	physics->setVelX(newVelX); 
-	physics->setVelY(newVelY); 
+	physics->setVelX(newVelX * 60.0f); 
+	physics->setVelY(newVelY * 60.0f); 
 	playerProjectiles.back()->startComponents(*this); 
 }
 
@@ -108,10 +108,11 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 		auto physics = playerHook->getComponent<PhysicsComponent>();
 		physics->enableGravity(false);
 
+		//use float here
 		int newVelX = (int)(velocity * cos(toRadians(degrees)));
 		int newVelY = (int)(velocity * sin(toRadians(degrees)));
-		physics->setVelX(newVelX);
-		physics->setVelY(newVelY);
+		physics->setVelX(newVelX * 60.0f);
+		physics->setVelY(newVelY * 60.0f);
 		playerHook->startComponents(*this);
 	}
 	//if the hook is rendered on the map
@@ -251,12 +252,12 @@ void Level::setNextLevel(Direction dir)
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
-int Level::getLevelWidth() const
+float Level::getLevelWidth() const
 {
 	return tileArrangement.cols * Constants::TILE_SIZE;
 }
 
-int Level::getLevelHeight() const
+float Level::getLevelHeight() const
 {
 	return tileArrangement.rows * Constants::TILE_SIZE;
 }

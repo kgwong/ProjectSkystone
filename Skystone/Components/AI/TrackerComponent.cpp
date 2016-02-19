@@ -4,7 +4,11 @@
 
 //all AICOMPONENTS get called in EnemyBuilder.cpp
 
-//finished by Harvey and Aaron! :)
+//finished by Harvey and Aaron! :) 
+
+const float TrackerComponent::DEFAULT_X_VELOCITY = 0 * 60.0f;
+const float TrackerComponent::RUNNING_X_VELOCITY = 2 * 60.0f;
+const float TrackerComponent::DEFAULT_RADIUS = 150.0f;
 
 TrackerComponent::TrackerComponent(GameObject& owner)
 	: AIComponent(owner),

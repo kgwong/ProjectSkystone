@@ -8,9 +8,9 @@ class PhysicsComponent;
 class RandomJumperComponent : public AIComponent
 {
 public:
-	static const int DEFAULT_TIME_INTERVAL = 100;
-	static const int DEFAULT_JUMP_VELOCITY = -15;
-	static const int DEFAULT_X_VELOCITY = 5;
+	static const int DEFAULT_TIME_INTERVAL = 100; // use Time::
+	static const float DEFAULT_JUMP_VELOCITY;
+	static const float DEFAULT_X_VELOCITY;
 
 public:
 	RandomJumperComponent(GameObject& owner);
@@ -22,8 +22,8 @@ public:
 private:
 	int timeInterval_;
 	PhysicsComponent* physics_;
-	int jumpVelocity_;
-	int xVelocity_;
+	float jumpVelocity_;
+	float xVelocity_;
 };
 
 #endif //RANDOM_JUMPER_COMPONENT_H

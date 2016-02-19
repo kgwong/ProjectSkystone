@@ -11,13 +11,12 @@ class PounceAIComponent :
 {
 
 public:
-	const static int DEFAULT_RADIUS = 175;
+	//use Time::
+	const static float DEFAULT_RADIUS;
 	const static int DEFAULT_COOLDOWN_TIME = 100;
 
 
 public:
-
-
 	PounceAIComponent(GameObject& owner);
 	virtual ~PounceAIComponent();
 
@@ -25,9 +24,8 @@ public:
 	virtual void update(Level& level);
 
 private:
-
 	PhysicsComponent* physics_;
-	int radius_;
+	float radius_;
 	int timeInterval_;
 	int cooldown_time_;
 	bool cooldown_;

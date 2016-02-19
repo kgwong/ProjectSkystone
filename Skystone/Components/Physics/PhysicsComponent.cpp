@@ -2,8 +2,13 @@
 
 #include "Components/Collider/ColliderComponent.h"
 #include "Game/GameConstants.h"
+#include "Game/GameTime.h"
+#include "Application/Log.h"
 
 #include <algorithm>
+
+const float PhysicsComponent::GRAVITY = 60.0f;
+const float PhysicsComponent::TERMINAL_VELOCITY = 1200.0f;
 
 PhysicsComponent::PhysicsComponent(GameObject& owner)
 	: Component(owner),
@@ -53,51 +58,52 @@ void PhysicsComponent::enactGravity()
 {
 	if (gravityEnabled_)
 	{
-		velY_ += GRAVITY;
+		velY_ += GRAVITY * Time::getElapsedUpdateTimeSeconds() * 60;
 		if (velY_ > TERMINAL_VELOCITY)
+		{
 			velY_ = TERMINAL_VELOCITY;
+		}
 	}
 
 	falling_ = true;
 }
 
-void PhysicsComponent::setVelX(int velX)
+void PhysicsComponent::setVelX(float velX)
 {
 	velX_ = velX;
 }
 
-void PhysicsComponent::setVelY(int velY)
+void PhysicsComponent::setVelY(float velY)
 {
 	velY_ = velY;
 }
 
-void PhysicsComponent::setAccelX(int accelX)
+void PhysicsComponent::setAccelX(float accelX)
 {
 	accelX_ = accelX;
 }
 
-void PhysicsComponent::setAccelY(int accelY)
+void PhysicsComponent::setAccelY(float accelY)
 {
 	accelY_ = accelY;
 }
 
-
-int PhysicsComponent::getVelX() const
+float PhysicsComponent::getVelX() const
 {
 	return velX_;
 }
 
-int PhysicsComponent::getVelY() const
+float PhysicsComponent::getVelY() const
 {
 	return velY_;
 }
 
-int PhysicsComponent::getAccelX() const
+float PhysicsComponent::getAccelX() const
 {
 	return accelX_;
 }
 
-int PhysicsComponent::getAccelY() const
+float PhysicsComponent::getAccelY() const
 {
 	return accelY_;
 }
@@ -132,13 +138,13 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 	switch (axis)
 	{
 		case Axis::X:
-			velX_ += accelX_;
-			owner.setPosX(owner.getPosX() + velX_);
+			velX_ += accelX_ * Time::getElapsedUpdateTimeSeconds();
+			owner.setPosX(owner.getPosX() + velX_ * Time::getElapsedUpdateTimeSeconds());
 			break;
 		case Axis::Y:
 			enactGravity();
-			velY_ += accelY_;
-			owner.setPosY(owner.getPosY() + velY_);
+			velY_ += accelY_ * Time::getElapsedUpdateTimeSeconds();
+			owner.setPosY(owner.getPosY() + velY_ * Time::getElapsedUpdateTimeSeconds());
 			break;
 		default:
 			break;

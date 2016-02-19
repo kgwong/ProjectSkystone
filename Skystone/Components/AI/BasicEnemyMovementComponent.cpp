@@ -2,6 +2,8 @@
 
 #include "Components/Physics/PhysicsComponent.h"
 
+const float BasicEnemyMovementComponent::DEFAULT_SPEED = 1 * 60.0f;
+
 BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner)
 	: AIComponent(owner),
 	speed_(DEFAULT_SPEED)
@@ -27,7 +29,7 @@ void BasicEnemyMovementComponent::start(Level& level)
 
 void BasicEnemyMovementComponent::update(Level& level)
 {
-	int moveDistance = 300;
+	float moveDistance = 300;
 	if (owner_.getPosX() > oldEnemyPosition_ + moveDistance)
 	{
 		speed_ = -speed_;

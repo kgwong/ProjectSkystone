@@ -42,13 +42,13 @@ void PlayerComponent::handleEvent(const ComponentEvent& e)
 
 		if (physics_->isMovingLeft())
 		{
-			physics_->setVelX(10);
+			physics_->setVelX(10 * 60.0f);
 		}
 		else
 		{
-			physics_->setVelX(-10);
+			physics_->setVelX(-10 * 60.0f);
 		}
-		physics_->setVelY(-10);
+		physics_->setVelY(-10 * 60.0f);
 		break;
 	default:
 		break;

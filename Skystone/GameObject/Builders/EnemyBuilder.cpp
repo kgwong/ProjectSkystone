@@ -128,7 +128,9 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 1000));
+
+		enemyToBuild.addComponent(componentSystem.getNew<SwingingAIComponent>(enemyToBuild));
 		
 	}
 	return newEnemy;

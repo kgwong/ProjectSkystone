@@ -2,6 +2,11 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "GameTypes/Point.h"
 
+const float FallingAIComponent::DEFAULT_Y_VELOCITY = 0 * 60.0f;
+const float FallingAIComponent::DEFAULT_RISE_VELOCITY = -3 * 60.0f;
+const float FallingAIComponent::DEFAULT_X_RADIUS = 25;
+const float FallingAIComponent::DEFAULT_Y_RADIUS = 100;
+
 FallingAIComponent::FallingAIComponent(GameObject& owner)
 	: AIComponent(owner), 
 	yVelocity_(DEFAULT_Y_VELOCITY),

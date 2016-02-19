@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+const float PounceAIComponent::DEFAULT_RADIUS = 175.0f;
+
 PounceAIComponent::PounceAIComponent(GameObject& owner)
 	:AIComponent(owner),
 	radius_(DEFAULT_RADIUS),
@@ -54,8 +56,8 @@ void PounceAIComponent::update(Level& level)
 
 		if (AIComponent::isNearby(xDist, radius_))
 		{
-			physics_->setVelY(-10);
-			physics_->setVelX(playerSide * 7);
+			physics_->setVelY(-10 * 60.0f);
+			physics_->setVelX(playerSide * 7 * 60.0f);
 			cooldown_ = true;
 		}
 

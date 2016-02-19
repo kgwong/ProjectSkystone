@@ -16,9 +16,9 @@ class TrackerComponent :
 {
 
 public:
-	static const int DEFAULT_X_VELOCITY = 0;
-	static const int RUNNING_X_VELOCITY = 2;
-	static const int DEFAULT_RADIUS = 150;
+	static const float DEFAULT_X_VELOCITY;
+	static const float RUNNING_X_VELOCITY;
+	static const float DEFAULT_RADIUS;
 
 public:
 	TrackerComponent(GameObject& owner);
@@ -35,7 +35,7 @@ public:
 	void fleeCommand(int player_direction);
 
 private:
-	int xVelocity_;
+	float xVelocity_;
 	int radius_;
 	EnemyState enemyState_;
 	//need it this always ~ maybe put it the base class.
