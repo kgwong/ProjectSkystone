@@ -87,7 +87,6 @@ void MainGame::processInput()
 
 void MainGame::update()
 {
-	LOG("Kevin") << "wtf";
 	try
 	{
 		levelManager_.getCurrentLevel()->update();
