@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 
 TextRenderer::TextRenderer(GameObject& owner)
-	: RenderComponent(owner), font(nullptr)
+	: RenderComponent(owner), font(nullptr), text("")
 {
 	font = TTF_OpenFont("../Assets/Fonts/LDFComicSans.ttf", 28);
 	//font = TTF_OpenFont("LDFComicSans.ttf", 28);
@@ -19,8 +19,6 @@ TextRenderer::~TextRenderer()
 
 void TextRenderer::render(GameWindow& window, float percentBehind)
 {
-	std::string text = "";
-
 	if (text != "")
 	{
 		SDL_Color color = { 255, 255, 255 };
@@ -34,4 +32,14 @@ void TextRenderer::render(GameWindow& window, float percentBehind)
 		SDL_Rect dest = { 0, 0, w, h };
 		window.render(text_texture, &src, &dest);
 	}
+}
+
+std::string TextRenderer::getText()
+{
+	return text;
+}
+
+void TextRenderer::setText(std::string newText)
+{
+	text = newText;
 }
