@@ -14,7 +14,7 @@ public:
 	virtual void render(GameWindow& window, float percentBehind);
 
 	std::string getText();
-	void setText(std::string newText);
+	void setText(const std::string& newText);
 private:
 	TTF_Font* font;
 	std::string text;

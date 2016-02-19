@@ -9,7 +9,7 @@ TextRenderer::TextRenderer(GameObject& owner)
 	font = TTF_OpenFont("../Assets/Fonts/LDFComicSans.ttf", 28);
 	//font = TTF_OpenFont("LDFComicSans.ttf", 28);
 	if (font == nullptr)
-		std::cout << TTF_GetError() << std::endl;;
+		std::cout << TTF_GetError() << std::endl;
 }
 
 
@@ -39,7 +39,7 @@ std::string TextRenderer::getText()
 	return text;
 }
 
-void TextRenderer::setText(std::string newText)
+void TextRenderer::setText(const std::string& newText)
 {
 	text = newText;
 }
