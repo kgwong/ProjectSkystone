@@ -6,6 +6,9 @@
 
 #include "Path.h"
 
+#include <iostream>
+using namespace std;
+
 std::set<std::string> Log::TAGS;
 
 void Log::init()

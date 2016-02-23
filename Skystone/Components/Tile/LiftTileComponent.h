@@ -11,6 +11,7 @@ class LiftTileComponent : public SpecialTileComponent
 public:
 	static const int DEFAULT_X_RADIUS = 25;
 	static const int DEFAULT_DELAY = 7;
+	static const int DEFAULT_LIFT = 3;
 
 
 	LiftTileComponent(GameObject& owner);
@@ -31,6 +32,7 @@ private:
 
 	int delay_;
 	int time_;
+	int lift_;
 	
 
 };
