@@ -5,6 +5,7 @@
 
 void initAllSystems()
 {
+	Path::initBasePath();
 	Log::init();
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		MySDL_Error("SDL_Init");
@@ -17,7 +18,6 @@ void initAllSystems()
 		MySDL_Error("Mixer failed to initialize");
 	if (TTF_Init() == -1)
 		MySDL_Error("Text failed to initialize");
-	Path::initBasePath();
 }
 
 void quitAllSystems()
