@@ -48,15 +48,15 @@ int GameWindow::getHeight() const
 
 void GameWindow::render(SDL_Texture* texture, const SDL_Rect* srcrect, SDL_Rect* dstrect, const double angle, const SDL_Point* center, const SDL_RendererFlip flip)
 {
-	dstrect->x = dstrect->x - camera_.getPosX();
-	dstrect->y = dstrect->y - camera_.getPosY();
+	dstrect->x = dstrect->x - (int)camera_.getPosX();
+	dstrect->y = dstrect->y - (int)camera_.getPosY();
 	SDL_RenderCopyEx(getRenderer(), texture, srcrect, dstrect, angle, center, flip);
 }
 
 void GameWindow::render(SDL_Texture* texture, const SDL_Rect* srcrect, SDL_Rect* dstrect)
 {
-	dstrect->x = dstrect->x - camera_.getPosX();
-	dstrect->y = dstrect->y - camera_.getPosY();
+	dstrect->x = dstrect->x - (int)camera_.getPosX();
+	dstrect->y = dstrect->y - (int)camera_.getPosY();
 	MySDL_RenderCopy(getRenderer(), texture, srcrect, dstrect);
 
 }

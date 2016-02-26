@@ -6,7 +6,6 @@
 using namespace std;
 
 
-
 LiftTileComponent::LiftTileComponent(GameObject & owner)
 	: SpecialTileComponent(owner),
 	xRadius_(DEFAULT_X_RADIUS),
@@ -29,18 +28,15 @@ void LiftTileComponent::start(Level & level)
 	playerPhysics_ = level.player->getComponent<PhysicsComponent>();
 	playerCollider_ = level.player->getComponent<ColliderComponent>();
 
-
 }
 
 void LiftTileComponent::update(Level & level)
 {
-
 	if (!playerPhysics_->gravityEnabled() && time_ >= delay_)
 	{
 		playerPhysics_->setAccelY(0);
 		playerPhysics_->enableGravity(true);
 		time_ = 0;
-
 	}
 	else
 		time_++;

@@ -40,7 +40,7 @@ void PounceAIComponent::update(Level& level)
 
 	if (!cooldown_)
 	{
-		int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
+		float xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 		int playerSide;
 
 		if (Point::getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
@@ -50,7 +50,7 @@ void PounceAIComponent::update(Level& level)
 
 		else
 		{
-			playerSide = -xDist / Point::getXDistance(owner_.getPos(), level.getPlayerPos());
+			playerSide = (int) (-xDist / Point::getXDistance(owner_.getPos(), level.getPlayerPos()));
 		}
 
 

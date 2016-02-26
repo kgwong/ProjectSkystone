@@ -2,6 +2,7 @@
 
 #include "Components/Component.h" //for CallStartOnComponents... 
 
+
 GameObject::GameObject()
 	:alive_(true), 
 	type_(GameObject::Type::UNKNOWN)
@@ -26,7 +27,7 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::setPos(int x, int y)
+void GameObject::setPos(float x, float y)
 {
 	position_.x = x;
 	position_.y = y;
@@ -37,12 +38,12 @@ void GameObject::setPos(Point newPosition)
 	position_ = newPosition;
 }
 
-void GameObject::setPosX(int x)
+void GameObject::setPosX(float x)
 {
 	position_.x = x;
 }
 
-void GameObject::setPosY(int y)
+void GameObject::setPosY(float y)
 {
 	position_.y = y;
 }
@@ -52,12 +53,12 @@ Point GameObject::getPos() const
 	return position_;
 }
 
-int GameObject::getPosX() const
+float GameObject::getPosX() const
 {
 	return position_.x;
 }
 
-int GameObject::getPosY() const
+float GameObject::getPosY() const
 {
 	return position_.y;
 }

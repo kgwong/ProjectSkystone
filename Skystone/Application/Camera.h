@@ -10,16 +10,16 @@
 class Camera : public GameObject
 {
 public:
-	Camera(float width, float height);
+	Camera(int width, int height);
 	virtual ~Camera();
 
-	void setLevelBounds(float maxX, float maxY);
+	void setLevelBounds(int maxX, int maxY);
 	void followObject(GameObject& object, float percBehind);
 	void stayInLevelBounds();
 
 private:
-	float width_, height_;
-	float maxX_, maxY_;
+	int width_, height_;
+	int maxX_, maxY_;
 };
 
 #endif //CAMERA_H

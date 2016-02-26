@@ -22,8 +22,8 @@ public:
 	virtual void handleEvent(const CollisionEvent& e);
 private:
 	PhysicsComponent * physics_;
-	int radius_;//rope length = original - current position.
-	int stepRadius_;//how much the length of the rope can change by.
+	float radius_;//rope length = original - current position.
+	float stepRadius_;//how much the length of the rope can change by.
 	Point center_;//pivot point
 
 	Point originalPosition_;//equilibrium point

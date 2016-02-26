@@ -40,7 +40,7 @@ float Point::getDistance(Point& a, Point& b)
 	float x1 = b.x;
 	float y2 = a.y;
 	float y1 = b.y;
-	float dist = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+	float dist = (float) sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	return dist;
 }
 

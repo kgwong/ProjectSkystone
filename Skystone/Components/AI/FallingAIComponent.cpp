@@ -30,9 +30,9 @@ void FallingAIComponent::start(Level& level)
 
 void FallingAIComponent::update(Level& level)
 {
-	int dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
-	int yDist = Point::getYDirection(owner_.getPos(), level.getPlayerPos());
-	int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
+	float dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
+	float yDist = Point::getYDirection(owner_.getPos(), level.getPlayerPos());
+	float xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(yDist, yRadius_) && AIComponent::isNearby(xDist, xRadius_))
 	{

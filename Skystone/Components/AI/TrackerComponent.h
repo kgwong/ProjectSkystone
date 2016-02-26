@@ -36,7 +36,7 @@ public:
 
 private:
 	float xVelocity_;
-	int radius_;
+	float radius_;
 	EnemyState enemyState_;
 	//need it this always ~ maybe put it the base class.
 	PhysicsComponent* physics_;

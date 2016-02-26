@@ -15,7 +15,7 @@ public:
 
 	virtual Component::Type getType() final;
 
-	static bool isNearby(int dist, int radius);
+	static bool isNearby(float dist, float radius);
 
 
 };

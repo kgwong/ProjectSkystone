@@ -34,14 +34,14 @@ public:
 	GameObject(int x, int y);
 	virtual ~GameObject();
 	
-	void setPos(int x, int y);
+	void setPos(float x, float y);
 	void setPos(Point newPosition);
-	void setPosX(int x);
-	void setPosY(int y);
+	void setPosX(float x);
+	void setPosY(float y);
 
 	Point getPos() const;
-	int getPosX() const;
-	int getPosY() const;
+	float getPosX() const;
+	float getPosY() const;
 
 	void addComponent(std::shared_ptr<Component> component);
 	

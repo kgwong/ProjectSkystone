@@ -149,10 +149,11 @@ void Level::addEnemyAtLocation(const std::string& name, Point position)
 
 void Level::addTileAtLocation(int tileType, Point position)
 {
-	int r = position.y / Constants::TILE_SIZE;
-	int c = position.x / Constants::TILE_SIZE;
-	gameObjectBuilder_->buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
-	tileArrangement.tiles[r][c].setPos(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
+	int r = (int) position.y / Constants::TILE_SIZE;
+	int c = (int) position.x / Constants::TILE_SIZE;
+	auto& ret = gameObjectBuilder_->buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
+	
+	tileArrangement.tiles[r][c].setPos((float)c * Constants::TILE_SIZE, (float)r * Constants::TILE_SIZE);
 	
 	//Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
 	//tileBuilder_->build(tileType, tile);
@@ -199,8 +200,8 @@ void Level::removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v)
 void Level::updatePlayer()
 {
 	oldPlayerBlock_ = Block::getBlock(player->getPos());
-	oldPlayerPosInBlock_ = Point{ player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
-		player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
+	oldPlayerPosInBlock_ = Point{ (int)player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
+		(int)player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 
 	if (!player->alive())
 	{
@@ -252,12 +253,12 @@ void Level::setNextLevel(Direction dir)
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
-float Level::getLevelWidth() const
+int Level::getLevelWidth() const
 {
 	return tileArrangement.cols * Constants::TILE_SIZE;
 }
 
-float Level::getLevelHeight() const
+int Level::getLevelHeight() const
 {
 	return tileArrangement.rows * Constants::TILE_SIZE;
 }
