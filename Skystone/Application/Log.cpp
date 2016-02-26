@@ -7,13 +7,16 @@
 #include "Path.h"
 
 #include <iostream>
-using namespace std;
 
 std::set<std::string> Log::TAGS;
 
 void Log::init()
 {
 	std::ifstream ifs(Path::getFullPath("log.config"));
+	if (!ifs.good())
+	{
+		std::cerr << "WARNING: log.config file missing from " << Path::getBasePath();
+	}
 
 	std::string token;
 	while (ifs >> token)
