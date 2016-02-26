@@ -12,7 +12,7 @@ public:
 
 public:
 	BasicEnemyMovementComponent(GameObject& owner);
-	BasicEnemyMovementComponent(GameObject& owner, int speed);
+	BasicEnemyMovementComponent(GameObject& owner, float speed);
 	virtual ~BasicEnemyMovementComponent();
 
 	virtual void start(Level& level);

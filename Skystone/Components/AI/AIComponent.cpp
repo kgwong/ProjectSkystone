@@ -37,7 +37,7 @@ Component::Type AIComponent::getType()
 
 
 
-bool AIComponent::isNearby(int dist,int radius)
+bool AIComponent::isNearby(float dist, float radius)
 {
 	return std::abs(dist) <= radius;
 }

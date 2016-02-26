@@ -161,10 +161,11 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 {
 	if (owner.getType() != GameObject::Type::TILE)
 	{
-		int startC = std::max(0, owner.getPosX() / Constants::TILE_SIZE);
-		int startR = std::max(0, owner.getPosY() / Constants::TILE_SIZE);
-		int endC = std::min(level.tileArrangement.cols - 1, (owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE);
-		int endR = std::min(level.tileArrangement.rows - 1, (owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE);
+		int startC = std::max(0, (int) (owner.getPosX() / Constants::TILE_SIZE));
+		int startR = std::max(0, (int) (owner.getPosY() / Constants::TILE_SIZE));
+		int endC = std::min(level.tileArrangement.cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
+		int endR = std::min(level.tileArrangement.rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
+
 
 		for (int c = startC; c <= endC; ++c)
 		{
@@ -230,7 +231,7 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 			{
 				owner.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
 			}
-			//setVelX(0);
+			setVelX(0.0f);
 			break;
 
 		case Axis::Y:
@@ -243,7 +244,7 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Lev
 				owner.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
 				falling_ = false;
 			}
-			//setVelY(0);
+			setVelY(0.0f);
 			break;
 		default:
 			break;

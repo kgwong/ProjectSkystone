@@ -1,7 +1,6 @@
 #include "LiftTileComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
 
-
 LiftTileComponent::LiftTileComponent(GameObject & owner)
 	: SpecialTileComponent(owner),
 	xRadius_(DEFAULT_X_RADIUS),
@@ -20,12 +19,10 @@ void LiftTileComponent::start(Level & level)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	playerPhysics_ = level.player->getComponent<PhysicsComponent>();
-
 }
 
 void LiftTileComponent::update(Level & level)
 {
-
 	if (!playerPhysics_->gravityEnabled() && time_ >= delay_)
 	{
 		playerPhysics_->setAccelY(0);

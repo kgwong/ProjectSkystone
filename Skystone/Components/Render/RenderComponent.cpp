@@ -59,8 +59,8 @@ int RenderComponent::getRenderLayer()
 Point RenderComponent::getRenderPosition(float percBehind)
 {
 	Point currPos = owner_.getPos();
-	int estVelX = currPos.x - prevPosition.x;
-	int estVelY = currPos.y - prevPosition.y;
+	float estVelX = currPos.x - prevPosition.x;
+	float estVelY = currPos.y - prevPosition.y;
 
 	return Point(currPos.x + estVelX * percBehind, currPos.y + estVelY * percBehind);
 }

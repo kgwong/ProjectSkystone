@@ -8,15 +8,15 @@ class ColliderComponent : public NonUpdatingComponent
 public:
 	struct BoxCollider
 	{
-		int x;
-		int y;
-		int width;
-		int height;
+		float x;
+		float y;
+		float width;
+		float height;
 	};
 
 public:
 	ColliderComponent(GameObject& owner);
-	ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height);
+	ColliderComponent(GameObject& owner, float offsetX, float offsetY, float width, float height);
 	ColliderComponent(GameObject& owner, BoxCollider collider);
 	virtual ~ColliderComponent();
 
@@ -25,23 +25,23 @@ public:
 
 	void setCollider(BoxCollider newCollider); 
 
-	int getHeight();
-	int getWidth();
+	float getHeight();
+	float getWidth();
 
-	int getTop();
-	int getBottom();
-	int getLeft();
-	int getRight();
+	float getTop();
+	float getBottom();
+	float getLeft();
+	float getRight();
 
-	int getOffsetX();
-	int getOffsetY();
+	float getOffsetX();
+	float getOffsetY();
 
 	bool checkCollision(GameObject& other);
 	bool checkCollision(ColliderComponent* other);
 
 private:
 	BoxCollider _collider;
-	int _offsetX, _offsetY;
+	float _offsetX, _offsetY;
 };
 
 #endif //COLLIDERCOMPONENT_H

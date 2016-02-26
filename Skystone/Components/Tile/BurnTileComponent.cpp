@@ -43,7 +43,7 @@ void BurnTileComponent::handleEvent(const CollisionEvent & other)
 {
 	if (other.getOtherObject().getType() == GameObject::Type::PLAYER)
 	{
-		int currentSpeed = playerPhysics_->getVelX();
+		float currentSpeed = playerPhysics_->getVelX();
 		int direction = 1;
 		if (playerPhysics_->isMovingRight()) //determine which direction to slow you
 		{
@@ -54,9 +54,9 @@ void BurnTileComponent::handleEvent(const CollisionEvent & other)
 		if (playerPhysics_->getVelX() != 0 && playerPhysics_->getAccelX() == 0)
 		{
 
-			playerPhysics_->setAccelX(slow_ * direction * 3600);
+			playerPhysics_->setAccelX(slow_ * direction * 3600.0f);
 
-			int something = playerPhysics_->getAccelX();
+			float something = playerPhysics_->getAccelX();
 			LOG("INFO") << "hey:" << something;
 
 			time_++;
