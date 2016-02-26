@@ -11,6 +11,16 @@ RenderComponent::~RenderComponent()
 
 }
 
+void RenderComponent::start(Level& level)
+{
+	prevPosition = owner_.getPos();
+}
+
+void RenderComponent::update(Level& level)
+{
+	prevPosition = owner_.getPos();
+}
+
 Component::Type RenderComponent::getType()
 {
 	return Component::Type::RENDER;
@@ -45,3 +55,13 @@ int RenderComponent::getRenderLayer()
 		return 9;
 	}
 }
+
+Point RenderComponent::getRenderPosition(float percBehind)
+{
+	Point currPos = owner_.getPos();
+	int estVelX = currPos.x - prevPosition.x;
+	int estVelY = currPos.y - prevPosition.y;
+
+	return Point(currPos.x + estVelX * percBehind, currPos.y + estVelY * percBehind);
+}
+

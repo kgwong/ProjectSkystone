@@ -23,14 +23,15 @@ void ComponentSystem::handleInput(SDL_Event& e)
 
 void ComponentSystem::update(Level& level)
 {
+	renderSystem_.update(level);
 	generalComponentSystem_.update(level);
 	aiSystem_.update(level);
 	physicsSystem_.update(level);
 }
 
-void ComponentSystem::render(Level& level, GameWindow& window)
+void ComponentSystem::render(Level& level, GameWindow& window, float percBehind)
 {
-	renderSystem_.update(level, window);
+	renderSystem_.update(level, window, percBehind);
 }
 
 void ComponentSystem::cleanup()
@@ -64,7 +65,7 @@ void ComponentSystem::addComponent(std::shared_ptr<Component> component)
 		generalComponentSystem_.addComponent(component);
 		break;
 	default:
-		LOG_COUT << "Warning: unknown component!";
+		LOG("WARNING") << "Warning: unknown component!";
 		break;
 	}
 }

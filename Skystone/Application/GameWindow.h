@@ -50,7 +50,6 @@ private:
 	Camera camera_;
 	int width_;
 	int height_;
-
 };
 
 #endif //GAME_WINDOW_H

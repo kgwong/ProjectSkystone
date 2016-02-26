@@ -11,7 +11,7 @@ StickOnCollision::~StickOnCollision()
 }
 
 void StickOnCollision::handleEvent(const CollisionEvent& e)
-{
+ {
 	GameObject obj = e.getOtherObject();
 	if (obj.getType() == GameObject::Type::TILE)
 	{

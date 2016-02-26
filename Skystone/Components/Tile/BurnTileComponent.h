@@ -13,7 +13,7 @@ class BurnTileComponent :
 public:
 	static const int DEFAULT_DAMAGE = 2;
 	static const int DEFAULT_DELAY = 25;
-	static const int DEFAULT_SLOW = 1;
+	static const int DEFAULT_SLOW = 4;
 
 
 

@@ -39,14 +39,14 @@ public:
 
 	void handleInput(SDL_Event& e);
 	void update();
-	void render(GameWindow& window);
+	void render(GameWindow& window, float percBehind);
 
 	int getID();
 
 	void setNextLevel(Direction dir);
 
-	int getLevelWidth() const; //pixels
-	int getLevelHeight() const;
+	float getLevelWidth() const; //pixels
+	float getLevelHeight() const;
 
 	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);
 	void addPickupAtLocation(Point position);

@@ -10,10 +10,10 @@ class FallingAIComponent :
 
 
 public:
-	static const int DEFAULT_Y_VELOCITY = 0;
-	static const int DEFAULT_RISE_VELOCITY = -3;
-	static const int DEFAULT_X_RADIUS = 25;
-	static const int DEFAULT_Y_RADIUS = 100;
+	static const float DEFAULT_Y_VELOCITY;
+	static const float DEFAULT_RISE_VELOCITY;
+	static const float DEFAULT_X_RADIUS;
+	static const float DEFAULT_Y_RADIUS;
 	static const int DEFAULT_TIME_INTERVAL = 100;
 
 public:
@@ -24,9 +24,9 @@ public:
 	virtual void update(Level& level);
 
 private:
-	int yVelocity_;
-	int xRadius_;
-	int yRadius_;
+	float yVelocity_;
+	float xRadius_;
+	float yRadius_;
 	PhysicsComponent* physics_;
 
 	int timer_;

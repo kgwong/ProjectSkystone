@@ -10,10 +10,10 @@ class FlyingAIComponent :
 
 
 public:
-	static const int DEFAULT_X_DIRECTION_TIME = 72;
+	static const int DEFAULT_X_DIRECTION_TIME = 72; //use Time::
 	static const int DEFAULT_Y_DIRECTION_CHANGES = 6;
-	static const int DEFAULT_X_VELOCITY = 3;
-	static const int DEFAULT_Y_VELOCITY = -1;
+	static const float DEFAULT_X_VELOCITY;
+	static const float DEFAULT_Y_VELOCITY;
 
 public:
 	FlyingAIComponent(GameObject& owner);
@@ -23,12 +23,9 @@ public:
 	virtual void update(Level& level);
 
 private:
-	int xVelocity_;
+	float xVelocity_, yVelocity_;
 	PhysicsComponent* physics_;
 	int timeInterval_;
-	int yVelocity_;
-
-
 };
 
 #endif 

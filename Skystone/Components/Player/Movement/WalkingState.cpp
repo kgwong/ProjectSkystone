@@ -8,6 +8,9 @@
 
 #include "Resources/Resources.h"
 
+const float WalkingState::JUMP_VELOCITY = -1200;
+const float WalkingState::WALK_VELOCITY = 300;
+
 WalkingState::WalkingState()
 {
 }

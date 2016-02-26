@@ -18,7 +18,7 @@ void TextureLoader::initGameWindow(GameWindow* gameWindow)
 
 std::shared_ptr<SDL_Texture> TextureLoader::loadTexture(const std::string& fullpath)
 {
-	LOG_COUT << "Loading Texture: " << fullpath;
+	LOG("INFO") << "Loading Texture: " << fullpath;
 
 	SDL_Texture* texture = IMG_LoadTexture(gameWindow_->getRenderer(), fullpath.c_str());
 

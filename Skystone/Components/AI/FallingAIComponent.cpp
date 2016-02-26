@@ -1,6 +1,11 @@
 #include "FallingAIComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
+#include "GameTypes/Point.h"
 
+const float FallingAIComponent::DEFAULT_Y_VELOCITY = 0 * 60.0f;
+const float FallingAIComponent::DEFAULT_RISE_VELOCITY = -3 * 60.0f;
+const float FallingAIComponent::DEFAULT_X_RADIUS = 25;
+const float FallingAIComponent::DEFAULT_Y_RADIUS = 100;
 
 FallingAIComponent::FallingAIComponent(GameObject& owner)
 	: AIComponent(owner), 
@@ -25,9 +30,9 @@ void FallingAIComponent::start(Level& level)
 
 void FallingAIComponent::update(Level& level)
 {
-	int dist = getDistance(owner_.getPos(), level.getPlayerPos());
-	int yDist = getYDirection(owner_.getPos(), level.getPlayerPos());
-	int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
+	int dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
+	int yDist = Point::getYDirection(owner_.getPos(), level.getPlayerPos());
+	int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(yDist, yRadius_) && AIComponent::isNearby(xDist, xRadius_))
 	{

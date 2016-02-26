@@ -31,7 +31,7 @@ private:
 private: 
 	void processInput();
 	void update();
-	void render();
+	void render(float percBehind);
 
 	void updateCameraBounds();
 

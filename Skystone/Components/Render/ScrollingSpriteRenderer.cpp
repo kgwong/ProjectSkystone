@@ -59,7 +59,7 @@ ScrollingSpriteRenderer::~ScrollingSpriteRenderer()
 {
 }
 
-void ScrollingSpriteRenderer::render(GameWindow& gameWindow)
+void ScrollingSpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
 	advanceRects(gameWindow);
 	gameWindow.renderOnCamera(spriteSheet_->getTexture(), &tlS_, &tlD_);
@@ -75,7 +75,7 @@ void ScrollingSpriteRenderer::checkDims()
 	if (spriteSheet_->getFrameRect(0)->w < Constants::SCREEN_WIDTH ||
 		spriteSheet_->getFrameRect(0)->h < Constants::SCREEN_HEIGHT)
 	{
-		LOG << "Warning: ScrollingSpriteRenderer behavior undefined for \
+		LOG("") << "Warning: ScrollingSpriteRenderer behavior undefined for \
 			sprites < screen size";
 	}
 }
@@ -85,8 +85,8 @@ void ScrollingSpriteRenderer::advanceRects(GameWindow& gameWindow)
 {
 	Point currCam = gameWindow.getCamera().getPos();
 	SDL_Rect* frame = spriteSheet_->getFrameRect(0);
-	int endx = currCam.x + Constants::SCREEN_WIDTH;
-	int endy = currCam.y + Constants::SCREEN_HEIGHT;
+	int endx = (int)currCam.x + Constants::SCREEN_WIDTH;
+	int endy = (int)currCam.y + Constants::SCREEN_HEIGHT;
 	if (cameraChanged(gameWindow)) 
 	{
 		if ( endx >= frame->w  && endy >= frame->h)
@@ -165,24 +165,24 @@ bool ScrollingSpriteRenderer::cameraChanged(GameWindow& gameWindow)
 
 int ScrollingSpriteRenderer::findDelX(GameWindow& gameWindow)
 {
-	return oldCameraPos_.x - gameWindow.getCamera().getPos().x;
+	return (int)oldCameraPos_.x - (int)gameWindow.getCamera().getPos().x;
 }
 
 int ScrollingSpriteRenderer::findDelY(GameWindow& gameWindow)
 {
-	return oldCameraPos_.y - gameWindow.getCamera().getPos().y;
+	return (int)oldCameraPos_.y - (int)gameWindow.getCamera().getPos().y;
 }
 int ScrollingSpriteRenderer::findXBound(Point currCam)
 {
 	int maxW = spriteSheet_->getFrameRect(0)->w;
-	int distTraveled = (currCam.x * std::pow(2,layerNum_)) / moveFreq_;
+	int distTraveled = ((int)currCam.x * (int)std::pow(2,layerNum_)) / moveFreq_;
 	return (sx_) ? distTraveled % maxW : 0;
 }
 
 int ScrollingSpriteRenderer::findYBound(Point currCam)
 {
 	int maxH = spriteSheet_->getFrameRect(0)->h;
-	int distTraveled = (currCam.y * std::pow(2,layerNum_)) / moveFreq_;
+	int distTraveled = ((int)currCam.y * (int)std::pow(2,layerNum_)) / moveFreq_;
 	return (sy_) ? distTraveled % maxH : 0;
 }
 

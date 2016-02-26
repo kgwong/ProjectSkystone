@@ -224,8 +224,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StickOnCollision.cpp">
-		<Filter>Source Files</Filter>
-	</ClCompile>
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Components\Common\DamageComponent.cpp">
       <Filter>Source Files\Component Class Source Files</Filter>
     </ClCompile>
@@ -269,6 +269,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\Tile\LiftTileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTypes\Point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Render\TextRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -524,6 +530,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StickOnCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Render\TextRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

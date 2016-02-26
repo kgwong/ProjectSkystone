@@ -3,6 +3,7 @@
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/HealthComponent.h"
 #include <iostream>
+#include "Application/Log.h"
 using namespace std;
 
 
@@ -52,7 +53,12 @@ void BurnTileComponent::handleEvent(const CollisionEvent & other)
 		//slow/push them if they're moving and aren't being slowed already
 		if (playerPhysics_->getVelX() != 0 && playerPhysics_->getAccelX() == 0)
 		{
-			playerPhysics_->setAccelX(5 * direction);
+
+			playerPhysics_->setAccelX(slow_ * direction * 3600);
+
+			int something = playerPhysics_->getAccelX();
+			LOG("INFO") << "hey:" << something;
+
 			time_++;
 		}
 		//don't push them if they're just standing on it

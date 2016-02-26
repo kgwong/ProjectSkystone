@@ -6,6 +6,7 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/DieOnCollision.h"
+#include "StickOnCollision.h"
 
 
 PlayerProjectileBuilder::PlayerProjectileBuilder()

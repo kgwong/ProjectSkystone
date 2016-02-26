@@ -8,7 +8,7 @@ class PhysicsComponent;
 class BasicEnemyMovementComponent :	public AIComponent
 {
 public:
-	static const int DEFAULT_SPEED = 1;
+	static const float DEFAULT_SPEED;
 
 public:
 	BasicEnemyMovementComponent(GameObject& owner);
@@ -19,8 +19,8 @@ public:
 	virtual void update(Level& level);
 
 private:
-	int speed_; 
-	int oldEnemyPosition_;
+	float speed_; 
+	float oldEnemyPosition_;
 
 	PhysicsComponent* physics_;
 };

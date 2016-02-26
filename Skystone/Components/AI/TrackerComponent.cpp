@@ -4,7 +4,11 @@
 
 //all AICOMPONENTS get called in EnemyBuilder.cpp
 
-//finished by Harvey and Aaron! :)
+//finished by Harvey and Aaron! :) 
+
+const float TrackerComponent::DEFAULT_X_VELOCITY = 0 * 60.0f;
+const float TrackerComponent::RUNNING_X_VELOCITY = 2 * 60.0f;
+const float TrackerComponent::DEFAULT_RADIUS = 150.0f;
 
 TrackerComponent::TrackerComponent(GameObject& owner)
 	: AIComponent(owner),
@@ -28,11 +32,11 @@ void TrackerComponent::start(Level & level)
 //missing time and another player gameobject.
 void TrackerComponent::update(Level & level)
 {
-	int player_dist = AIComponent::getDistance(owner_.getPos(), level.getPlayerPos());
+	int player_dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
 
 	if (AIComponent::isNearby(player_dist, radius_))
 	{
-		int player_direction = AIComponent::getXDirection(owner_.getPos(), level.getPlayerPos());
+		int player_direction = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 
 		EnemyState currentState = enemyState_;
 			switch (currentState)

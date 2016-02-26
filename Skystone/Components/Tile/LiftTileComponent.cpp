@@ -6,7 +6,8 @@ LiftTileComponent::LiftTileComponent(GameObject & owner)
 	: SpecialTileComponent(owner),
 	xRadius_(DEFAULT_X_RADIUS),
 	time_(0),
-	delay_(DEFAULT_DELAY)
+	delay_(DEFAULT_DELAY),
+	lift_(DEFAULT_LIFT)
 {
 }
 
@@ -42,7 +43,7 @@ void LiftTileComponent::handleEvent(const CollisionEvent & other)
 	if (other.getOtherObject().getType() == GameObject::Type::PLAYER)
 	{
 		playerPhysics_->enableGravity(false);
-		playerPhysics_->setAccelY(-2);
+		playerPhysics_->setVelY(-DEFAULT_LIFT * 360);
 	}
 }
 

@@ -6,7 +6,7 @@
 class FlyingState : public PlayerState
 {
 public:
-	static const int FLIGHT_VELOCITY = 5;
+	static const float FLIGHT_VELOCITY;
 
 public:
 	FlyingState();

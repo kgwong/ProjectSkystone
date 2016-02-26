@@ -3,10 +3,26 @@
 
 struct Point
 {
-	Point(): x(0), y(0) {}
-	Point(int x, int y): x(x), y(y) {} 
-	int x;
-	int y;
+	Point();
+	Point(float posX, float posY);
+	Point(int posX, int posY);
+
+	Point operator+(const Point& rhs) const;
+	Point operator-(const Point& rhs) const;
+	bool operator==(const Point& rhs) const;
+
+	float x;
+	float y;
+	static float getDistance(Point& a, Point& b);
+	static float getXDistance(Point& a, Point& b);
+	static float getYDistance(Point& a, Point& b);
+	static float getXDirection(Point& a, Point& b);
+	static float getYDirection(Point& a, Point& b);
+	static bool isDistance(Point& a, Point& b, float dist);
+	static Point getMidPoint(Point& a, Point& b);
+	static float getXMidPoint(Point& a, Point& b);
+	static float getYMidPoint(Point& a, Point &b);
+
 };
 
 #endif //POINT_H

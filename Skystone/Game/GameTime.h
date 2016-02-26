@@ -10,6 +10,7 @@ public:
 
 	static uint32_t getCurrentTime();
 	static uint32_t getElapsedUpdateTime();
+	static float getElapsedUpdateTimeSeconds();
 	static uint32_t getElapsedRenderTime();
 	static void setElapsedRenderTime(uint32_t time);
 private:

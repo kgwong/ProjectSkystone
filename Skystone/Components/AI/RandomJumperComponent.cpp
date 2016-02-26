@@ -3,6 +3,9 @@
 
 #include "GameMath/RNG.h"
 
+const float RandomJumperComponent::DEFAULT_JUMP_VELOCITY = -15 * 60;
+const float RandomJumperComponent::DEFAULT_X_VELOCITY = 5 * 60;
+
 RandomJumperComponent::RandomJumperComponent(GameObject& owner)
 	: AIComponent(owner),
 	timeInterval_(0),

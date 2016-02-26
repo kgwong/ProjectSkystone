@@ -51,11 +51,11 @@ void AirborneState::update(GameObject& player)
 
 	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-5);
+		player.getComponent<PhysicsComponent>()->setVelX(-5 * 60.0f);
 	}
 	else if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(5);
+		player.getComponent<PhysicsComponent>()->setVelX(5 * 60.0f);
 	}
 	else
 	{

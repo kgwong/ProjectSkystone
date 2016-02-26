@@ -7,8 +7,8 @@
 class WalkingState : public PlayerState
 {
 public:
-	static const int JUMP_VELOCITY = -20;
-	static const int WALK_VELOCITY = 5;
+	static const float JUMP_VELOCITY;
+	static const float WALK_VELOCITY;
 
 public:
 	WalkingState();

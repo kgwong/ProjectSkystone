@@ -1,9 +1,12 @@
 #include "PounceAIComponent.h"
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
+#include "GameTypes/Point.h"
 #define PI 3.14159265
 #include <iostream>
 using namespace std;
+
+const float PounceAIComponent::DEFAULT_RADIUS = 175.0f;
 
 PounceAIComponent::PounceAIComponent(GameObject& owner)
 	:AIComponent(owner),
@@ -37,24 +40,24 @@ void PounceAIComponent::update(Level& level)
 
 	if (!cooldown_)
 	{
-		int xDist = getXDirection(owner_.getPos(), level.getPlayerPos());
+		int xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
 		int playerSide;
 
-		if (getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
+		if (Point::getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
 		{
 			playerSide = 0;
 		}
 
 		else
 		{
-			playerSide = -xDist / getXDistance(owner_.getPos(), level.getPlayerPos());
+			playerSide = -xDist / Point::getXDistance(owner_.getPos(), level.getPlayerPos());
 		}
 
 
 		if (AIComponent::isNearby(xDist, radius_))
 		{
-			physics_->setVelY(-10);
-			physics_->setVelX(playerSide * 7);
+			physics_->setVelY(-10 * 60.0f);
+			physics_->setVelX(playerSide * 7 * 60.0f);
 			cooldown_ = true;
 		}
 

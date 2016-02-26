@@ -10,7 +10,7 @@
 #include "Components/Physics/PhysicsComponent.h" //
 #include "GameMath/CircleMath.h" //
 #include "Components/Player/PlayerControlComponent.h"
-#include "StickOnCollision.h";
+#include "StickOnCollision.h"
 
 Level::Level(int levelID)
 	:player(nullptr),
@@ -87,11 +87,11 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 	n->setPos(position);
 	playerProjectiles.push_back(n);
 	auto physics = playerProjectiles.back()->getComponent<PhysicsComponent>();
-
+	//use float here instead of casting
 	int newVelX = (int)(vel * cos(toRadians(degrees)));
 	int newVelY = (int)(vel * sin(toRadians(degrees)));
-	physics->setVelX(newVelX); 
-	physics->setVelY(newVelY); 
+	physics->setVelX(newVelX * 60.0f); 
+	physics->setVelY(newVelY * 60.0f); 
 	playerProjectiles.back()->startComponents(*this); 
 }
 
@@ -108,17 +108,19 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 		auto physics = playerHook->getComponent<PhysicsComponent>();
 		physics->enableGravity(false);
 
+		//use float here
 		int newVelX = (int)(velocity * cos(toRadians(degrees)));
 		int newVelY = (int)(velocity * sin(toRadians(degrees)));
-		physics->setVelX(newVelX);
-		physics->setVelY(newVelY);
+		physics->setVelX(newVelX * 60.0f);
+		physics->setVelY(newVelY * 60.0f);
 		playerHook->startComponents(*this);
 	}
-
+	//if the hook is rendered on the map
 	if (playerHook != nullptr)
 	{
 		PlayerControlComponent * playerControls = player->getComponent<PlayerControlComponent>();
 		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
+		//if hook is attached to a tile and player pressed D to launch hook..
 		if (playerControls != nullptr && hookState != nullptr
 			&& hookState->isConnected == true
 			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
@@ -206,9 +208,9 @@ void Level::updatePlayer()
 	}
 }
 
-void Level::render(GameWindow& window)
+void Level::render(GameWindow& window, float percBehind)
 {
-	componentSystem_.render(*this, window);
+	componentSystem_.render(*this, window, percBehind);
 }
 
 int Level::getID()
@@ -250,12 +252,12 @@ void Level::setNextLevel(Direction dir)
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
-int Level::getLevelWidth() const
+float Level::getLevelWidth() const
 {
 	return tileArrangement.cols * Constants::TILE_SIZE;
 }
 
-int Level::getLevelHeight() const
+float Level::getLevelHeight() const
 {
 	return tileArrangement.rows * Constants::TILE_SIZE;
 }

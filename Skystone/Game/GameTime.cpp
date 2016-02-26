@@ -12,6 +12,11 @@ uint32_t Time::getElapsedUpdateTime()
 	return Time::timeStep;
 }
 
+float Time::getElapsedUpdateTimeSeconds()
+{
+	return Time::timeStep / 1000.0f;
+}
+
 uint32_t Time::getElapsedRenderTime()
 {
 	return lastRender_;

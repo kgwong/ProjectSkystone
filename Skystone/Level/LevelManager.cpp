@@ -37,7 +37,7 @@ void LevelManager::initStartingLevel()
 	}
 	else
 	{
-		LOG_COUT << "set Player first";
+		LOG("WARNING") << "set Player first";
 	}
 }
 

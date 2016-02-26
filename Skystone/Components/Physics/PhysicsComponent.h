@@ -9,8 +9,8 @@ class ColliderComponent;
 class PhysicsComponent : public Component
 {
 public:
-	static const int GRAVITY = 1;
-	static const int TERMINAL_VELOCITY = 20;
+	static const float GRAVITY;
+	static const float TERMINAL_VELOCITY;
 
 public:
 
@@ -21,16 +21,16 @@ public:
 	virtual void update(Level& level);
 
 	virtual Component::Type getType() final;
+	
+	void setVelX(float velX);
+	void setVelY(float velY);
+	void setAccelX(float accelX);
+	void setAccelY(float accelY);
 
-	void setVelX(int velX);
-	void setVelY(int velY);
-	void setAccelX(int accelX);
-	void setAccelY(int accelY);
-
-	int getVelX() const;
-	int getVelY() const;
-	int getAccelX() const;
-	int getAccelY() const;
+	float getVelX() const;
+	float getVelY() const;
+	float getAccelX() const;
+	float getAccelY() const;
 
 	bool isMovingUp() const;
 	bool isMovingDown() const;
@@ -43,8 +43,8 @@ public:
 	bool gravityEnabled();
 
 private:
-	int velX_, velY_;
-	int accelX_, accelY_;
+	float velX_, velY_;
+	float accelX_, accelY_;
 
 	bool gravityEnabled_;
 	bool falling_;
