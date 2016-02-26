@@ -28,11 +28,15 @@ public:
 private:
 	PhysicsComponent* physics_;
 	PhysicsComponent* playerPhysics_;
+	ColliderComponent* playerCollider_;
+	ColliderComponent* collider_;
 	int xRadius_;
 
 	int delay_;
 	int time_;
 	int lift_;
+	float tileLeft_;
+	float tileRight_;
 	
 
 };
