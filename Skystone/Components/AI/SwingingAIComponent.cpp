@@ -11,7 +11,7 @@ SwingingAIComponent::SwingingAIComponent(GameObject& owner) :
 	radius_(168), stepRadius_(1), center_(Point{ 350,32 }), originalPosition_(Point{ 350,200 }),
 	currentPosition_(originalPosition_), direction_(1),
 	maxAngle_(DEFAULT_MAX_ANGLE),
-	currentAngle_(0), angleVelocity_(2.634),
+	currentAngle_(0), angleVelocity_(3.141),
 	isHit_(false), timer_(0)
 {
 }
@@ -36,6 +36,9 @@ void SwingingAIComponent::start(Level& level)
 
 	//initial angle.
 	currentAngle_ = maxAngle_ * sinf(sqrt(physics_->GRAVITY / radius_) * swingTime_);
+
+	//damp coeficcient
+	damp = .075;
 
 
 	//testing bullet capabilities here.
@@ -88,10 +91,20 @@ void SwingingAIComponent::update(Level& level)
 		currentPosition_.x = center_.x + sin(toRadians(currentAngle_)) * radius_;
 		currentPosition_.y = center_.y + cos(toRadians(currentAngle_)) * radius_;
 
-		if (timer_ >= swingTime_ * 4)
+		if (timer_ >= swingTime_ * 8)
 		{
 			timer_ = 0;
 			//isHit_ = false;
+			maxAngle_ -= maxAngle_ * damp;
+			angleVelocity_ -= angleVelocity_ * damp;
+		}
+
+		//resets
+		if (maxAngle_ < 5)
+		{
+			isHit_ = false;
+			maxAngle_ = DEFAULT_MAX_ANGLE;
+			angleVelocity_ = 3.141;
 		}
 
 		timer_ += 2.5;

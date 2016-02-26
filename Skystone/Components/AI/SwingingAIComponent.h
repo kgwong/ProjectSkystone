@@ -29,8 +29,8 @@ private:
 	Point originalPosition_;//equilibrium point
 	Point currentPosition_;
 
-	int maxAngle_;//max theta
-	int currentAngle_;//current theta
+	float maxAngle_;//max theta
+	float currentAngle_;//current theta
 	float angleVelocity_;//angular velocity ~ can change to float
 	int direction_;
 	bool isHit_;
@@ -38,6 +38,7 @@ private:
 
 
 	float swingTime_;//period of oscilation, time it takes for one full swing.
+	float damp;//air friciton.
 };
 
 #endif //SWINGING_AI_COMPONENT
