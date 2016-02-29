@@ -10,7 +10,7 @@ BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner)
 {
 }
 
-BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner, int speed)
+BasicEnemyMovementComponent::BasicEnemyMovementComponent(GameObject& owner, float speed)
 	: AIComponent(owner),
 	speed_(speed)
 {

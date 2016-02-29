@@ -10,10 +10,10 @@ ColliderComponent::ColliderComponent(GameObject& owner)
 	//by default, use the size of the sprite
 	RenderComponent* render = owner.getComponent<SpriteRenderer>();
 	if (render != nullptr)
-		_collider = { 0, 0, render->getWidth(), render->getHeight() };
+		_collider = { 0, 0, (float)render->getWidth(), (float)render->getHeight() };
 }
 
-ColliderComponent::ColliderComponent(GameObject& owner, int offsetX, int offsetY, int width, int height)
+ColliderComponent::ColliderComponent(GameObject& owner, float offsetX, float offsetY, float width, float height)
 	: NonUpdatingComponent(owner),
 	_collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
 {
@@ -44,46 +44,46 @@ void ColliderComponent::setCollider(BoxCollider newCollider)
 
 
 
-int ColliderComponent::getHeight()
+float ColliderComponent::getHeight()
 {
 	return _collider.height;
 }
 
-int ColliderComponent::getWidth()
+float ColliderComponent::getWidth()
 {
 	return _collider.width;
 }
 
-int ColliderComponent::getTop()
+float ColliderComponent::getTop()
 {
 	this->update();
 	return _collider.y;
 }
 
-int ColliderComponent::getBottom()
+float ColliderComponent::getBottom()
 {
 	this->update();
 	return _collider.y + _collider.height;
 }
 
-int ColliderComponent::getLeft()
+float ColliderComponent::getLeft()
 {
 	this->update();
 	return _collider.x;
 }
 
-int ColliderComponent::getRight()
+float ColliderComponent::getRight()
 {
 	this->update();
 	return _collider.x + _collider.width;
 }
 
-int ColliderComponent::getOffsetX()
+float ColliderComponent::getOffsetX()
 {
 	return _offsetX;
 }
 
-int ColliderComponent::getOffsetY()
+float ColliderComponent::getOffsetY()
 {
 	return _offsetY;
 }
@@ -102,17 +102,17 @@ bool ColliderComponent::checkCollision(ColliderComponent* other)
 	this->update();
 	other->update();
 
-	int topOther = other->getTop();
-	int topSelf = getTop(); 
+	float topOther = other->getTop();
+	float topSelf = getTop(); 
 
-	int bottomOther = other->getBottom();
-	int bottomSelf = getBottom();
+	float bottomOther = other->getBottom();
+	float bottomSelf = getBottom();
 
-	int leftOther = other->getLeft();
-	int leftSelf = getLeft(); 
+	float leftOther = other->getLeft();
+	float leftSelf = getLeft(); 
 
-	int rightOther = other->getRight();
-	int rightSelf = getRight(); 
+	float rightOther = other->getRight();
+	float rightSelf = getRight(); 
 
 	if (topSelf >= bottomOther)
 		return false;

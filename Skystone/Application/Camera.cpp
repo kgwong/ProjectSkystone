@@ -5,10 +5,10 @@
 
 #include "Components/Render/SpriteRenderer.h"
 
-Camera::Camera(float width, float height)
+Camera::Camera(int width, int height)
 	:width_(width), height_(height),
-	maxX_(std::numeric_limits<float>::max()),
-	maxY_(std::numeric_limits<float>::max())
+	maxX_(std::numeric_limits<int>::max()),
+	maxY_(std::numeric_limits<int>::max())
 {
 }
 
@@ -16,7 +16,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::setLevelBounds(float maxX, float maxY)
+void Camera::setLevelBounds(int maxX, int maxY)
 {
 	maxX_ = maxX;
 	maxY_ = maxY;
@@ -35,8 +35,8 @@ void Camera::followObject(GameObject& object, float percBehind)
 void Camera::stayInLevelBounds()
 {
 	position_.x = std::max(0.0f, position_.x);
-	position_.x = std::min(position_.x, maxX_ - width_);
+	position_.x = std::min(position_.x, (float) maxX_ - width_);
 
 	position_.y = std::max(0.0f, position_.y);
-	position_.y = std::min(position_.y, maxY_ - height_);
+	position_.y = std::min(position_.y, (float) maxY_ - height_);
 }

@@ -8,7 +8,7 @@ struct Block
 {
 	static Block getBlock(Point position)
 	{
-		return getBlock(position.x, position.y);
+		return getBlock((int)position.x, (int)position.y);
 	};
 
 	static Block getBlock(int x, int y)

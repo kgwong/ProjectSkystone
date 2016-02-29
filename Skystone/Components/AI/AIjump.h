@@ -2,6 +2,8 @@
 #define AI_JUMP_H
 #include "AIComponent.h"
 
+//use floats for position/dist/vel/accel! Delete this comment after adapting change
+
 class PhysicsComponent;
 
 class AIjump :

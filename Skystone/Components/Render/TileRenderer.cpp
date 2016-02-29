@@ -14,7 +14,8 @@ TileRenderer::~TileRenderer()
 void TileRenderer::render(GameWindow& gameWindow, float percBehind)
 {
 	Point adjPos = RenderComponent::getRenderPosition(percBehind);
-	SDL_Rect dst = { adjPos.x, adjPos.y, Constants::TILE_SIZE, Constants::TILE_SIZE };
+	//explicitly converting to int
+	SDL_Rect dst = { (int)adjPos.x, (int)adjPos.y, Constants::TILE_SIZE, Constants::TILE_SIZE };
 	gameWindow.render(spriteSheet_->getTexture(), spriteSheet_->getFrameRect(tileNum_), &dst);
 }
 
