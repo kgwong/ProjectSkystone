@@ -11,11 +11,14 @@
 #include "GameMath/CircleMath.h" //
 #include "Components/Player/PlayerControlComponent.h"
 #include "StickOnCollision.h"
+#include "Application/Log.h"
+#include "GameObject/Builders/GameObjectBuilder.h"
+
+GameObjectBuilder Level::gameObjectBuilder_;
 
 Level::Level(int levelID)
 	:player(nullptr),
 	levelManager_(nullptr),
-	gameObjectBuilder_(nullptr),
 	background_(nullptr),
 	levelID_(levelID)
 {
@@ -43,11 +46,6 @@ void Level::onExit()
 void Level::setLevelManager(LevelManager* levelManager)
 {
 	levelManager_ = levelManager;
-}
-
-void Level::setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder)
-{
-	gameObjectBuilder_ = gameObjectBuilder;
 }
 
 void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly)
@@ -83,13 +81,12 @@ void Level::startEntityComponents()
 
 void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
 {
-	auto n = gameObjectBuilder_->buildPlayerProjectile(componentSystem_, "");
+	auto n = gameObjectBuilder_.buildPlayerProjectile(componentSystem_, "");
 	n->setPos(position);
 	playerProjectiles.push_back(n);
 	auto physics = playerProjectiles.back()->getComponent<PhysicsComponent>();
-	//use float here instead of casting
-	int newVelX = (int)(vel * cos(toRadians(degrees)));
-	int newVelY = (int)(vel * sin(toRadians(degrees)));
+	float newVelX = (float)vel * cos(toRadians(degrees));
+	float newVelY = (float)vel * sin(toRadians(degrees));
 	physics->setVelX(newVelX * 60.0f); 
 	physics->setVelY(newVelY * 60.0f); 
 	playerProjectiles.back()->startComponents(*this); 
@@ -97,12 +94,11 @@ void Level::addPlayerProjectileAtLocation(Point position, int vel, double degree
 
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
 {
-
 	std::cout << "Player refCount: " << playerHook.use_count() << std::endl;
 
 	if (playerHook == nullptr)
 	{
-		auto hookToFling = gameObjectBuilder_->buildPlayerHook(componentSystem_, "");
+		auto hookToFling = gameObjectBuilder_.buildPlayerHook(componentSystem_, "");
 		hookToFling->setPos(position);
 		playerHook = std::move(hookToFling);
 		auto physics = playerHook->getComponent<PhysicsComponent>();
@@ -133,7 +129,7 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 
 void Level::addPickupAtLocation(Point position)
 {
-	auto n = gameObjectBuilder_->buildItemDrop(componentSystem_, "");
+	auto n = gameObjectBuilder_.buildItemDrop(componentSystem_, "");
 	n->setPos(position);
 	drops.push_back(n);
 	drops.back()->startComponents(*this);
@@ -141,7 +137,7 @@ void Level::addPickupAtLocation(Point position)
 
 void Level::addEnemyAtLocation(const std::string& name, Point position)
 {
-	auto n = gameObjectBuilder_->buildEnemy(componentSystem_, name);
+	auto n = gameObjectBuilder_.buildEnemy(componentSystem_, name);
 	n->setPos(position);
 	enemies.push_back(n);
 	enemies.back()->startComponents(*this);
@@ -151,7 +147,7 @@ void Level::addTileAtLocation(int tileType, Point position)
 {
 	int r = (int) position.y / Constants::TILE_SIZE;
 	int c = (int) position.x / Constants::TILE_SIZE;
-	auto& ret = gameObjectBuilder_->buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
+	auto& ret = gameObjectBuilder_.buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
 	
 	tileArrangement.tiles[r][c].setPos((float)c * Constants::TILE_SIZE, (float)r * Constants::TILE_SIZE);
 	

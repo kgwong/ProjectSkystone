@@ -3,6 +3,7 @@
 #include "Application/Log.h"
 #include "Application/Path.h"
 #include "Level/Level.h"
+#include "GameObject/Builders/GameObjectBuilder.h"
 
 #include "GameOverException.h"
 #include "Game/GameTime.h"

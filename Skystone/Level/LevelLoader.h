@@ -5,7 +5,6 @@
 #include <map>
 #include <memory>
 
-#include "GameObject/Builders/GameObjectBuilder.h"
 #include "Level.h"
 
 class LevelManager;
@@ -25,7 +24,6 @@ public:
 
 private:
 	LevelManager* levelManager_;
-	GameObjectBuilder gameObjectBuiler_;
 
 	std::map<int, std::shared_ptr<Level>> loadedLevels_;
 

@@ -101,19 +101,19 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Coward")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Coward.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 15));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 150));
 		auto ai = componentSystem.getNew<TrackerComponent>(enemyToBuild);
 		ai->setEnemyState(COWARD);
 		enemyToBuild.addComponent(ai);
 	}
 	else if (enemyName == "swingmob")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/swingmob.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/spooder.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));

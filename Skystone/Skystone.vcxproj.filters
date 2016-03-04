@@ -278,6 +278,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp">
+    </ClCompile>
+    <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -539,6 +541,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h">
+    </ClCompile>
+    <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
