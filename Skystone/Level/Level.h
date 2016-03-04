@@ -8,7 +8,6 @@
 #include "ComponentSystem/ComponentSystem.h"
 #include "SDL/SDL.h"
 
-#include <iostream> //
 #include <memory>
 
 class LevelLoader;
@@ -20,6 +19,9 @@ class SpriteSheet;
 
 class Level
 {
+private:
+	static GameObjectBuilder gameObjectBuilder_;
+
 public:
 	Level(int levelID);
 	~Level();
@@ -28,7 +30,6 @@ public:
 	void onExit();
 
 	void setLevelManager(LevelManager* levelManager);
-	void setGameObjectBuilder(GameObjectBuilder* gameObjectBuilder);
 	void setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly);
 
 	void setPlayer(GameObject* player, Point startPosition);
@@ -68,7 +69,6 @@ public:
 
 private:
 	LevelManager* levelManager_;
-	GameObjectBuilder* gameObjectBuilder_;
 	std::shared_ptr<GameObject> background_;
 
 	Block oldPlayerBlock_;

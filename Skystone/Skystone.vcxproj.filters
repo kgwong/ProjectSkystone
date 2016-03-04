@@ -277,6 +277,9 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameOverException.h">
@@ -533,6 +536,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Render\TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

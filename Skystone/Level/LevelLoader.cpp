@@ -1,6 +1,5 @@
 #include "LevelLoader.h"
 
-#include "Level.h"
 #include "LevelManager.h"
 #include "Resources/Resources.h"
 #include "Game/GameConstants.h"
@@ -41,7 +40,6 @@ void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
-	level->setGameObjectBuilder(&gameObjectBuiler_);
 
 	loadBackground(generateFilePath("BackgroundLayers", levelID), level.get());
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
