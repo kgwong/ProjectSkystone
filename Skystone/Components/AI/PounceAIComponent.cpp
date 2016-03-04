@@ -2,11 +2,13 @@
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
 #include "GameTypes/Point.h"
+#include "Game/GameTime.h"
+
 #define PI 3.14159265
-#include <iostream>
-using namespace std;
+
 
 const float PounceAIComponent::DEFAULT_RADIUS = 175.0f;
+const float PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.2;
 
 PounceAIComponent::PounceAIComponent(GameObject& owner)
 	:AIComponent(owner),
@@ -30,10 +32,11 @@ void PounceAIComponent::start(Level& level)
 
 void PounceAIComponent::update(Level& level)
 {
-	timeInterval_++;
-	timeInterval_ %= cooldown_time_;
-	if (timeInterval_ == 0)
+	timeInterval_ += Time::getElapsedUpdateTimeSeconds();
+	//UNTESTED
+	if (timeInterval_ > cooldown_time_)
 	{
+		timeInterval_ = 0;
 		cooldown_ = false;
 	}
 

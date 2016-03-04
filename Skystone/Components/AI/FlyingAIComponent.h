@@ -1,6 +1,7 @@
 #ifndef FLYING_AI_COMPONENT_H
 #define FLYING_AI_COMPONENT_H
 #include "AIComponent.h"
+#include "Game/GameTime.h"
 
 class PhysicsComponent;
 
@@ -10,8 +11,8 @@ class FlyingAIComponent :
 
 
 public:
-	static const int DEFAULT_X_DIRECTION_TIME = 72; //use Time::
-	static const int DEFAULT_Y_DIRECTION_CHANGES = 6;
+	static const float DEFAULT_X_DIRECTION_CHANGE; //use Time::
+	static const float DEFAULT_Y_DIRECTION_CHANGE; 
 	static const float DEFAULT_X_VELOCITY;
 	static const float DEFAULT_Y_VELOCITY;
 
@@ -25,7 +26,9 @@ public:
 private:
 	float xVelocity_, yVelocity_;
 	PhysicsComponent* physics_;
-	int timeInterval_;
+	float xchange_;
+	float ychange_;
+
 };
 
 #endif 

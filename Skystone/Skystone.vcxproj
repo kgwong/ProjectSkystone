@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />

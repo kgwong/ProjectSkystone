@@ -13,7 +13,7 @@ class PounceAIComponent :
 public:
 	//use Time::
 	const static float DEFAULT_RADIUS;
-	const static int DEFAULT_COOLDOWN_TIME = 100;
+	const static float DEFAULT_COOLDOWN_TIME;
 
 
 public:
