@@ -30,13 +30,9 @@ void WalkingState::onExit(GameObject& player)
 
 void WalkingState::handleInput(GameObject& player, SDL_Event& e)
 {
-	if (e.type == SDL_KEYDOWN)
+	if (GameInputs::keyDown(e, JUMP))
 	{
-		if (e.key.keysym.sym == controlMap[JUMP])
-		{
-			player.getComponent<PhysicsComponent>()->setVelY(JUMP_VELOCITY);
-		}
-
+		player.getComponent<PhysicsComponent>()->setVelY(JUMP_VELOCITY);
 	}
 }
 
@@ -53,14 +49,14 @@ void WalkingState::update(GameObject& player)
 	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
 	player.getComponent<PhysicsComponent>()->setVelX(0);
 
-	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
+	if (GameInputs::keyHeld(LEFT))
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(-WALK_VELOCITY);
 		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
 		player.getComponent<SpriteRenderer>()->setFlipHorz(true);
 		//player.getComponent<SpriteRenderer>()->flip(Axis::X);
 	}
-	else if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
+	else if (GameInputs::keyHeld(RIGHT))
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(WALK_VELOCITY);
 		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));

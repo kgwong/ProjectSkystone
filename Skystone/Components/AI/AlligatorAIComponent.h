@@ -1,4 +1,4 @@
-#include "C:\Users\User\Desktop\ProjectSkystone\Skystone\Components\AI\AIComponent.h"
+#include "AIComponent.h"
 
 
 class AlligatorAIComponent :

@@ -119,7 +119,7 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 		//if hook is attached to a tile and player pressed D to launch hook..
 		if (playerControls != nullptr && hookState != nullptr
 			&& hookState->isConnected == true
-			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
+			&& playerControls->HookKeyInput == GameInputs::getKeycode(LAUNCH_HOOK))
 		{
 			playerHook->kill();
 			playerHook = nullptr;

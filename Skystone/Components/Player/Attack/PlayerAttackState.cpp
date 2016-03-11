@@ -3,7 +3,7 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Player/Movement/PlayerState.h"
 
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
 
 #include "Application/Log.h"
 
@@ -30,8 +30,10 @@ PlayerAttackState::~PlayerAttackState()
 void PlayerAttackState::handleInput(SDL_Event& e)
 {
 	currentState_->handleInput(owner_, e);
-	if (e.key.keysym.sym == controlMap[ATTACK])
+	if (GameInputs::keyDown(e, ATTACK))
+	{
 		shoot_ = true;
+	}
 	//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
 	//	shoot_ = false;
 

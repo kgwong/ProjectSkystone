@@ -16,6 +16,7 @@ void Log::init()
 	if (!ifs.good())
 	{
 		std::cerr << "WARNING: log.config file missing from " << Path::getBasePath();
+		return;
 	}
 
 	std::string token;

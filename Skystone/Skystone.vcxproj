@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
+    <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
@@ -212,7 +213,7 @@
     <ClInclude Include="GameMath\CircleMath.h" />
     <ClInclude Include="Components\Collider\ColliderComponent.h" />
     <ClInclude Include="Components\Component.h" />
-    <ClInclude Include="Game\Controls.h" />
+    <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="Components\Common\DamageComponent.h" />
     <ClInclude Include="GameTypes\Direction.h" />
     <ClInclude Include="GameObject\Builders\EnemyBuilder.h" />

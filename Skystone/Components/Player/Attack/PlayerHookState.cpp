@@ -1,6 +1,6 @@
 #include "PlayerHookState.h"
 
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
 
 
 #include "Application/Log.h"
@@ -24,19 +24,19 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	_keyInput = e.key.keysym.sym;
 
 	//key pressed
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[UP])
+	if (GameInputs::keyDown(e, UP))
 	{
 		_currentAimState = AimState::UP;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+	else if (GameInputs::keyDown(e, LEFT))
 	{
 		_currentAimState = AimState::LEFT;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+	else if (GameInputs::keyDown(e, RIGHT))
 	{
 		_currentAimState = AimState::RIGHT;
 	}
-	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
+	if (e.key.keysym.sym == GameInputs::getKeycode(LAUNCH_HOOK))
 	{
 		_launched = true;
 	}

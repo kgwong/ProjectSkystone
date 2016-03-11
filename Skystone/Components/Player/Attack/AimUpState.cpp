@@ -22,24 +22,24 @@ void AimUpState::onEnter(GameObject & player)
 
 void AimUpState::handleInput(GameObject& player, SDL_Event& e)
 {
-	if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[UP])
+	if (GameInputs::keyUp(e, UP))
 	{
 		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::defaultAimState);
 		player.getComponent<PlayerControlComponent>()->changeAttackState(&PlayerAttackState::defaultAimState);
 	}
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+	if (GameInputs::keyDown(e, LEFT))
 	{
 		dir_ = AimUpState::Direction::LEFT;
 	}
-	if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[LEFT])
+	if (GameInputs::keyUp(e, LEFT))
 	{
 		dir_ = AimUpState::Direction::NONE;
 	}
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+	if (GameInputs::keyDown(e, RIGHT))
 	{
 		dir_ = AimUpState::Direction::RIGHT;
 	}
-	if (e.type == SDL_KEYUP && e.key.keysym.sym == controlMap[RIGHT])
+	if (GameInputs::keyUp(e, RIGHT))
 	{
 		dir_ = AimUpState::Direction::NONE;
 	}
