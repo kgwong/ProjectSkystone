@@ -6,6 +6,7 @@ SceneManager::SceneManager()
 	:nextSceneID_(SceneID::INVALID)
 {
 	currentScene_ = &levelManager_;
+	currentScene_->setSceneManager(this);
 }
 
 
@@ -13,9 +14,9 @@ SceneManager::~SceneManager()
 {
 }
 
-GameObject* SceneManager::cameraFollowObject()
+GameObject* SceneManager::getCameraFollowObject()
 {
-	return currentScene_->cameraFollowObject();
+	return currentScene_->getCameraFollowObject();
 }
 
 void SceneManager::setPlayer(GameObject* player)
@@ -38,10 +39,23 @@ void SceneManager::handleInput(SDL_Event& e)
 void SceneManager::update()
 {
 	currentScene_->update();
-	if (nextSceneID_ != SceneID::INVALID)
+	/*if (nextSceneID_ != SceneID::INVALID)
 	{
 		currentScene_->onExit();
 		//currentScene_ = levelLoader_.getLevelWithID(nextLevelID_);
+		currentScene_->setSceneManager(this);
+		currentScene_->setPlayer(player_);
+		currentScene_->onEnter();
+		nextSceneID_ = SceneID::INVALID;
+	}*/
+	
+	//fix later
+	if (nextSceneID_ == SceneID::GAME_OVER)
+	{
+		currentScene_->onExit();
+		currentScene_ = &gameOverScene_;
+		auto obj = currentScene_->gameObjects.add("Background", "GameOver");
+		currentScene_->setCameraFollowObject(obj.get());
 		currentScene_->setSceneManager(this);
 		currentScene_->setPlayer(player_);
 		currentScene_->onEnter();

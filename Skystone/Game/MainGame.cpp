@@ -4,7 +4,6 @@
 #include "Application/Path.h"
 #include "GameObject/Builders/GameObjectBuilder.h"
 
-#include "GameOverException.h"
 #include "Game/GameTime.h"
 
 #include "Resources/Resources.h"
@@ -94,7 +93,7 @@ void MainGame::render(float percBehind)
 {
 	SDL_RenderClear(window_.getRenderer());
 
-	window_.getCamera().followObject(*sceneManager_.cameraFollowObject(), percBehind);
+	window_.getCamera().followObject(*sceneManager_.getCameraFollowObject(), percBehind);
 	sceneManager_.render(window_, percBehind);
 
 	SDL_RenderPresent(window_.getRenderer());

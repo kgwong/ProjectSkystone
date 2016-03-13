@@ -24,15 +24,13 @@ public:
 	Level(int levelID);
 	~Level();
 
-	virtual GameObject* cameraFollowObject();
+	virtual GameObject* getCameraFollowObject();
 
 	virtual void onEnter();
 	virtual void onExit();
 
 	void setLevelManager(LevelManager* levelManager);
 	void setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly);
-
-	Point getPlayerPos();
 
 	LevelManager* getLevelManager();
 
@@ -48,8 +46,6 @@ public:
 	void addPlayerHookAtLocation(Point position, int velocity, double degrees);
 
 public:
-	//GameObjectContainer gameObjects;
-
 	//there should only be one hook per cast.
 	std::shared_ptr<GameObject> playerHook;
 	//int numHook_;
@@ -61,8 +57,6 @@ private:
 	Block oldPlayerBlock_;
 	Point oldPlayerPosInBlock_;
 	int levelID_;
-
-	//ComponentSystem componentSystem_;
 
 private:
 	void updatePlayer();

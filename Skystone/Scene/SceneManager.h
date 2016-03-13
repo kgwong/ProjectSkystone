@@ -12,7 +12,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	GameObject* cameraFollowObject();
+	GameObject* getCameraFollowObject();
 	void setPlayer(GameObject* player);
 	void setNextScene(SceneID sceneID);
 
@@ -28,6 +28,8 @@ private:
 	GameObject* player_;
 
 	LevelManager levelManager_;
+	Scene gameOverScene_;
+
 
 	SceneID nextSceneID_;
 };

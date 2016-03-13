@@ -109,7 +109,6 @@
     <ClCompile Include="Components\AI\FlyingAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\FlyingState.cpp" />
     <ClCompile Include="GameObject\Builders\GameObjectBuilder.cpp" />
-    <ClCompile Include="GameOverException.cpp" />
     <ClCompile Include="Components\Common\HealthComponent.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Application\GameWindow.cpp" />
@@ -190,7 +189,6 @@
     <ClInclude Include="Components\AI\FallingAIComponent.h" />
     <ClInclude Include="Components\AI\FlyingAIComponent.h" />
     <ClInclude Include="GameObject\Builders\GameObjectBuilder.h" />
-    <ClInclude Include="GameOverException.h" />
     <ClInclude Include="Components\InputComponent.h" />
     <ClInclude Include="ComponentSystem\InputSystem.h" />
     <ClInclude Include="GameObject\Builders\ItemDropBuilder.h" />

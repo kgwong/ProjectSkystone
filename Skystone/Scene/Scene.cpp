@@ -1,9 +1,11 @@
 #include "Scene.h"
 
 #include "SceneManager.h"
+#include "Game/GameConstants.h"
 
 Scene::Scene()
-	: gameObjects(*this, componentSystem_)
+	: gameObjects(*this, componentSystem_),
+	cameraFollowObject_(nullptr)
 {
 }
 
@@ -12,9 +14,14 @@ Scene::~Scene()
 {
 }
 
-GameObject* Scene::cameraFollowObject()
+void Scene::setCameraFollowObject(GameObject* object)
 {
-	return nullptr;
+	cameraFollowObject_ = object;
+}
+
+GameObject* Scene::getCameraFollowObject()
+{
+	return cameraFollowObject_;
 }
 
 void Scene::setNextScene(SceneID sceneID)
@@ -66,10 +73,10 @@ void Scene::render(GameWindow& window, float percBehind)
 
 int Scene::getWidth()
 {
-	return 0;
+	return Constants::SCREEN_WIDTH;
 }
 
 int Scene::getHeight()
 {
-	return 0;
+	return Constants::SCREEN_WIDTH;
 }

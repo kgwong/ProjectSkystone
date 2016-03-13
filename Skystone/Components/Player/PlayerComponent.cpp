@@ -1,6 +1,5 @@
 #include "PlayerComponent.h"
 
-#include "GameOverException.h"
 #include "Components/Common/HealthComponent.h"
 #include "Components/Common/DamageComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
@@ -32,7 +31,7 @@ void PlayerComponent::handleEvent(const ComponentEvent& e)
 	switch (e.getType())
 	{
 	case ComponentEvent::Type::onDeath:
-		throw GameOverException();
+		e.getScene().setNextScene(SceneID::GAME_OVER);
 		break;
 	case ComponentEvent::Type::onDamageTaken:
 		LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";

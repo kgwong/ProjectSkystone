@@ -27,7 +27,7 @@ Level::~Level()
 {
 }
 
-GameObject* Level::cameraFollowObject()
+GameObject* Level::getCameraFollowObject()
 {
 	return &gameObjects.getPlayer();
 }
@@ -58,11 +58,6 @@ void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int laye
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
 	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
-}
-
-Point Level::getPlayerPos()
-{
-	return gameObjects.getPlayer().getPos();
 }
 
 LevelManager* Level::getLevelManager()

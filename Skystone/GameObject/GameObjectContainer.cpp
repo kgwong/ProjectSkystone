@@ -3,6 +3,10 @@
 #include "Components/Events/ComponentEvent.h"
 #include "Application/Log.h"
 
+// duct taping code together
+#include "Components/Render/SpriteRenderer.h"
+#include "Resources/Resources.h"
+
 GameObjectBuilder GameObjectContainer::builder_;
 
 GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) : scene_(scene),
@@ -71,6 +75,15 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	{
 		newObject = builder_.buildEnemy(componentSystem_, name);
 		objects_[GameObject::Type::ENEMY].push_back(newObject);
+	}
+	//duct taping code together
+	else if (type == "Background")
+	{
+		newObject = std::make_shared<GameObject>();
+		newObject->setType(GameObject::Type::BACKGROUND);
+		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
+		SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
+		newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
 	}
 	else
 	{

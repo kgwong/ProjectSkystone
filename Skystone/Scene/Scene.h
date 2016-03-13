@@ -22,7 +22,8 @@ public:
 	GameObjectContainer gameObjects;
 
 public:
-	virtual GameObject* cameraFollowObject();
+	void setCameraFollowObject(GameObject* object);
+	virtual GameObject* getCameraFollowObject();
 	void setNextScene(SceneID sceneID);
 
 	void setSceneManager(SceneManager* sceneManager);
@@ -42,9 +43,8 @@ public:
 
 protected:
 	ComponentSystem componentSystem_;
-
-private:
 	SceneManager* sceneManager_;
+	GameObject* cameraFollowObject_;
 };
 
 #endif //SCENE_H
