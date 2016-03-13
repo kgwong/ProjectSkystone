@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-
+#include "SceneManager.h"
 
 Scene::Scene()
 	: gameObjects(*this, componentSystem_)
@@ -19,7 +19,12 @@ GameObject* Scene::cameraFollowObject()
 
 void Scene::setNextScene(SceneID sceneID)
 {
+	sceneManager_->setNextScene(sceneID);
+}
 
+void Scene::setSceneManager(SceneManager* sceneManager)
+{
+	sceneManager_ = sceneManager;
 }
 
 void Scene::onEnter()

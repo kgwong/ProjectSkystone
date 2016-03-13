@@ -4,7 +4,10 @@
 #include "GameObject/GameObjectContainer.h"
 #include "ComponentSystem/ComponentSystem.h"
 
+class SceneManager;
+
 enum class SceneID {
+	INVALID,
 	LEVEL,
 	GAME_OVER
 };
@@ -19,8 +22,10 @@ public:
 	GameObjectContainer gameObjects;
 
 public:
-	GameObject* cameraFollowObject();
+	virtual GameObject* cameraFollowObject();
 	void setNextScene(SceneID sceneID);
+
+	void setSceneManager(SceneManager* sceneManager);
 
 	virtual void onEnter();
 	virtual void onExit(); 
@@ -37,6 +42,9 @@ public:
 
 protected:
 	ComponentSystem componentSystem_;
+
+private:
+	SceneManager* sceneManager_;
 };
 
 #endif //SCENE_H
