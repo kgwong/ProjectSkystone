@@ -22,8 +22,8 @@ public:
 	BurnTileComponent(GameObject& owner);
 	virtual ~BurnTileComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 	virtual void handleEvent(const CollisionEvent& other);
 
 private:

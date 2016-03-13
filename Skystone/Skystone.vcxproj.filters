@@ -83,6 +83,8 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -174,5 +176,7 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
 </Project>

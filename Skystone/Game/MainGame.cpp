@@ -118,6 +118,6 @@ void MainGame::render(float percBehind)
 
 void MainGame::updateCameraBounds()
 {
-	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), 
-										levelManager_.getCurrentLevel()->getLevelHeight());
+	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getWidth(), 
+										levelManager_.getCurrentLevel()->getHeight());
 }

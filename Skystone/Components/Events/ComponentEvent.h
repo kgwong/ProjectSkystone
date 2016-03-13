@@ -1,7 +1,7 @@
 #ifndef COMPONENT_EVENT_H
 #define COMPONENT_EVENT_H
 
-class Level;
+class Scene;
 
 class ComponentEvent
 {
@@ -13,15 +13,15 @@ public:
 	};
 
 public:
-	ComponentEvent(Type type, Level& level);
+	ComponentEvent(Type type, Scene& scene);
 	virtual ~ComponentEvent();
 
-	Level& getLevel() const;
+	Scene& getScene() const;
 	Type getType() const;
 
 private:
 	Type type_;
-	Level& level_;
+	Scene& scene_;
 };
 
 #endif //COMPONENT_EVENT_H

@@ -14,8 +14,8 @@ public:
 	HealthComponent(GameObject& owner, int initHealth);
 	virtual ~HealthComponent();
 
-	virtual void start(Level& level) {};
-	virtual void update(Level& level);
+	virtual void start(Scene& scene) {};
+	virtual void update(Scene& scene);
 
 	void setInvincibilityTime(int time);
 	void setInvincible(bool value);

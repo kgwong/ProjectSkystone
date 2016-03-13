@@ -87,7 +87,7 @@ void PlayerAttackState::handleInput(SDL_Event& e)
 	}*/
 }
 
-void PlayerAttackState::update(Level& level)
+void PlayerAttackState::update(Scene& scene)
 {
 	/*switch (aimState_)
 	{
@@ -117,7 +117,7 @@ void PlayerAttackState::update(Level& level)
 	if (shoot_)
 	{
 		//level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
-		auto bullet = level.gameObjects.add("PlayerProjectile", "", owner_.getPos());
+		auto bullet = scene.gameObjects.add("PlayerProjectile", "", owner_.getPos());
 		auto physics = bullet->getComponent<PhysicsComponent>();
 		float newVelX = (float)PROJECTILE_VELOCITY * cos(toRadians(degrees_));
 		float newVelY = (float)PROJECTILE_VELOCITY * sin(toRadians(degrees_));

@@ -5,10 +5,9 @@
 
 #include <SDL/SDL.h>
 
-#include "GameObject/GameObjectContainer.h"
+#include "Scene.h"
 #include "Block.h"
 #include "GameTypes/Direction.h"
-#include "ComponentSystem/ComponentSystem.h"
 
 class LevelLoader;
 class LevelMap;
@@ -16,7 +15,7 @@ class LevelManager;
 class SpriteRenderer;
 class SpriteSheet;
 
-class Level
+class Level : public Scene
 {
 private:
 	static GameObjectBuilder gameObjectBuilder_;
@@ -25,32 +24,31 @@ public:
 	Level(int levelID);
 	~Level();
 
-	void onEnter();
-	void onExit();
+	virtual GameObject* cameraFollowObject();
+
+	virtual void onEnter();
+	virtual void onExit();
 
 	void setLevelManager(LevelManager* levelManager);
 	void setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly);
 
-	void setPlayer(GameObject* player, Point startPosition);
 	Point getPlayerPos();
 
 	LevelManager* getLevelManager();
 
-	void handleInput(SDL_Event& e);
-	void update();
-	void render(GameWindow& window, float percBehind);
+	virtual void update();
 
 	int getID();
 
 	void setNextLevel(Direction dir);
 
-	int getLevelWidth(); //pixels
-	int getLevelHeight();
+	virtual int getWidth(); 
+	virtual int getHeight();
 
 	void addPlayerHookAtLocation(Point position, int velocity, double degrees);
 
 public:
-	GameObjectContainer gameObjects;
+	//GameObjectContainer gameObjects;
 
 	//there should only be one hook per cast.
 	std::shared_ptr<GameObject> playerHook;
@@ -64,7 +62,7 @@ private:
 	Point oldPlayerPosInBlock_;
 	int levelID_;
 
-	ComponentSystem componentSystem_;
+	//ComponentSystem componentSystem_;
 
 private:
 	void updatePlayer();

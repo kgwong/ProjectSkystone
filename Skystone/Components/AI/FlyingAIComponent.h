@@ -20,8 +20,8 @@ public:
 	FlyingAIComponent(GameObject& owner);
 	virtual ~FlyingAIComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 private:
 	float xVelocity_, yVelocity_;

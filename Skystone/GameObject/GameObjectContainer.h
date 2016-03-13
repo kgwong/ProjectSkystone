@@ -18,7 +18,7 @@ public:
 	static GameObjectBuilder builder_;
 
 public:	
-	GameObjectContainer(Level& level, ComponentSystem& componentSystem);
+	GameObjectContainer(Scene& scene, ComponentSystem& componentSystem);
 	~GameObjectContainer();
 
 	void start();
@@ -35,7 +35,7 @@ public:
 	ObjectVector& get(GameObject::Type type);
 
 private:
-	Level& level_;
+	Scene& scene_;
 	ComponentSystem& componentSystem_;
 
 	GameObject* player_;
@@ -43,7 +43,7 @@ private:
 	ObjectMap objects_;
 
 public: //should be private
-	void removeDeadObjects(ObjectVector& vector, Level& level);
+	void removeDeadObjects(ObjectVector& vector, Scene& scene);
 };
 
 

@@ -10,8 +10,8 @@ public:
 	LevelChangeComponent(GameObject& owner);
 	virtual ~LevelChangeComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 private:
 	ColliderComponent* collider_;

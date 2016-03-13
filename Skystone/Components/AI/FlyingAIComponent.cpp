@@ -26,14 +26,14 @@ FlyingAIComponent::~FlyingAIComponent()
 {
 }
 
-void FlyingAIComponent::start(Level & level)
+void FlyingAIComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	physics_->enableGravity(false);
 	physics_->setVelX(xVelocity_);
 }
 
-void FlyingAIComponent::update(Level& level)
+void FlyingAIComponent::update(Scene& scene)
 {
 	xchange_ += Time::getElapsedUpdateTimeSeconds();
 	ychange_ += Time::getElapsedUpdateTimeSeconds();

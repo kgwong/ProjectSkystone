@@ -19,12 +19,12 @@ RandomJumperComponent::~RandomJumperComponent()
 {
 }
 
-void RandomJumperComponent::start(Level& level)
+void RandomJumperComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
-void RandomJumperComponent::update(Level& level)
+void RandomJumperComponent::update(Scene& scene)
 {
 	xVelocity_ = RNG::getBool(0.5) ? xVelocity_ : -xVelocity_;
 	

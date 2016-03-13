@@ -1,6 +1,6 @@
 #include "ComponentSystem.h"
 
-#include "Level/Level.h"
+#include "Scene.h"
 
 #include "Components\Render\RenderComponent.h"
 
@@ -21,17 +21,17 @@ void ComponentSystem::handleInput(SDL_Event& e)
 	inputSystem_.handleInput(e);
 }
 
-void ComponentSystem::update(Level& level)
+void ComponentSystem::update(Scene& scene)
 {
-	renderSystem_.update(level);
-	generalComponentSystem_.update(level);
-	aiSystem_.update(level);
-	physicsSystem_.update(level);
+	renderSystem_.update(scene);
+	generalComponentSystem_.update(scene);
+	aiSystem_.update(scene);
+	physicsSystem_.update(scene);
 }
 
-void ComponentSystem::render(Level& level, GameWindow& window, float percBehind)
+void ComponentSystem::render(Scene& scene, GameWindow& window, float percBehind)
 {
-	renderSystem_.update(level, window, percBehind);
+	renderSystem_.update(scene, window, percBehind);
 }
 
 void ComponentSystem::cleanup()

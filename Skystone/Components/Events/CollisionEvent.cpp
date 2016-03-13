@@ -2,8 +2,8 @@
 
 
 
-CollisionEvent::CollisionEvent(Level& level, GameObject& other, ColliderComponent& otherCollider)
-	:ComponentEvent(ComponentEvent::Type::onCollision, level),
+CollisionEvent::CollisionEvent(Scene& scene, GameObject& other, ColliderComponent& otherCollider)
+	:ComponentEvent(ComponentEvent::Type::onCollision, scene),
 	other_(other),
 	otherCollider_(otherCollider)
 {

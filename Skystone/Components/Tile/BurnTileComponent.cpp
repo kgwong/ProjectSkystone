@@ -21,16 +21,16 @@ BurnTileComponent::~BurnTileComponent()
 {
 }
 
-void BurnTileComponent::start(Level & level)
+void BurnTileComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
-	playerPhysics_ = level.gameObjects.getPlayer().getComponent<PhysicsComponent>();
-	health_ = level.gameObjects.getPlayer().getComponent<HealthComponent>();
+	playerPhysics_ = scene.gameObjects.getPlayer().getComponent<PhysicsComponent>();
+	health_ = scene.gameObjects.getPlayer().getComponent<HealthComponent>();
 	damage_ = owner_.getComponent<DamageComponent>();
 
 }
 
-void BurnTileComponent::update(Level & level)
+void BurnTileComponent::update(Scene& scene)
 {
 	if (playerPhysics_->isFalling()) //if you jumped off the tile, stop the slowing accel
 	{

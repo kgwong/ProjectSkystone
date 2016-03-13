@@ -24,13 +24,13 @@ PounceAIComponent::~PounceAIComponent()
 }
 
 
-void PounceAIComponent::start(Level& level)
+void PounceAIComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	cooldown_ = true;
 }
 
-void PounceAIComponent::update(Level& level)
+void PounceAIComponent::update(Scene& scene)
 {
 	timeInterval_ += Time::getElapsedUpdateTimeSeconds();
 	//UNTESTED
@@ -43,17 +43,17 @@ void PounceAIComponent::update(Level& level)
 
 	if (!cooldown_)
 	{
-		float xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
+		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 		int playerSide;
 
-		if (Point::getXDistance(owner_.getPos(), level.getPlayerPos()) == 0)
+		if (Point::getXDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos()) == 0)
 		{
 			playerSide = 0;
 		}
 
 		else
 		{
-			playerSide = (int) (-xDist / Point::getXDistance(owner_.getPos(), level.getPlayerPos()));
+			playerSide = (int) (-xDist / Point::getXDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos()));
 		}
 
 

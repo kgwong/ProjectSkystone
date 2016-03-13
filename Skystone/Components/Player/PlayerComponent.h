@@ -12,7 +12,7 @@ public:
 	PlayerComponent(GameObject& owner);
 	virtual ~PlayerComponent();
 
-	virtual void start(Level& level);
+	virtual void start(Scene& scene);
 
 	virtual void handleEvent(const ComponentEvent& e);
 	virtual void handleEvent(const CollisionEvent& e);

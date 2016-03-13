@@ -13,7 +13,7 @@ public:
 	~PlayerHookState();
 
 	virtual void handleInput(SDL_Event& e);
-	void update(Level& level);
+	void update(Scene& scene);
 	double getDegrees();
 	void setLaunched(bool b);
 	bool hasLaunched();

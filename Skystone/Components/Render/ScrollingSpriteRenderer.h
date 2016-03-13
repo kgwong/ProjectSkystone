@@ -10,7 +10,7 @@ public:
 	ScrollingSpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet, int layerNum, bool scrollX=true, bool scrollY=false);
 	virtual ~ScrollingSpriteRenderer();
 
-	virtual void start(Level& level) {};
+	virtual void start(Scene& scene) {};
 	virtual void render(GameWindow& gameWindow, float percBehind);
 
 

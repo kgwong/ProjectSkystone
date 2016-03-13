@@ -21,7 +21,7 @@ PlayerComponent::~PlayerComponent()
 {
 }
 
-void PlayerComponent::start(Level & level)
+void PlayerComponent::start(Scene& scene)
 {
 	health_ = owner_.getComponent<HealthComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
@@ -67,7 +67,7 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
 		if (health_->takeDamage(damage->getDamage()))
 		{
-			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getLevel()));
+			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getScene()));
 		}
 		break;
 	}

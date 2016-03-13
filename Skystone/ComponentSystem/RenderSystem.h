@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-class Level;
+class Scene;
 class GameWindow;
 class Component;
 class RenderComponent;
@@ -19,8 +19,8 @@ public:
 	~RenderSystem();
 
 	void addComponent(std::shared_ptr<Component> component);
-	void update(Level& level);
-	void update(Level& level, GameWindow& window, float percBehind);
+	void update(Scene& scene);
+	void update(Scene& level, GameWindow& window, float percBehind);
 
 	void cleanup();
 

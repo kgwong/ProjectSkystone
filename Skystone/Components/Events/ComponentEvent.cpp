@@ -2,8 +2,8 @@
 
 
 
-ComponentEvent::ComponentEvent(Type type, Level& level)
-	:type_(type), level_(level)
+ComponentEvent::ComponentEvent(Type type, Scene& scene)
+	:type_(type), scene_(scene)
 {
 }
 
@@ -11,9 +11,9 @@ ComponentEvent::~ComponentEvent()
 {
 }
 
-Level& ComponentEvent::getLevel() const
+Scene& ComponentEvent::getScene() const
 {
-	return level_;
+	return scene_;
 }
 
 ComponentEvent::Type ComponentEvent::getType() const

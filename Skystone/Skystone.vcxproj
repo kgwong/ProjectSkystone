@@ -48,6 +48,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -56,6 +57,9 @@
       <SubSystem>Console</SubSystem>
       <Profile>true</Profile>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -156,6 +160,8 @@
     <ClCompile Include="Components\AI\TrackerComponent.cpp" />
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
@@ -247,6 +253,8 @@
     <ClInclude Include="GameObject\Builders\TileBuilder.h" />
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>

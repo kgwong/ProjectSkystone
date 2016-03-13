@@ -2,7 +2,7 @@
 #define COMPONENT_H
 
 #include "GameObject/GameObject.h"
-#include "Level/Level.h"
+#include "Scene.h"
 
 #include "Events/ComponentEvent.h"
 #include "Events/CollisionEvent.h"
@@ -24,8 +24,8 @@ public:
 	Component(GameObject& owner);
 	virtual ~Component() = 0;
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 	virtual void handleEvent(const CollisionEvent& e);
 	virtual void handleEvent(const ComponentEvent& e);

@@ -6,7 +6,7 @@
 #include "InputSystem.h"
 #include "SDL\SDL.h"
 
-class Level;
+class Scene;
 class GameWindow;
 
 class ComponentSystem
@@ -16,8 +16,8 @@ public:
 	~ComponentSystem();
 
 	void handleInput(SDL_Event& e);
-	void update(Level& level);
-	void render(Level& level, GameWindow& window, float percBehind);
+	void update(Scene& scene);
+	void render(Scene& scene, GameWindow& window, float percBehind);
 
 	void cleanup();
 

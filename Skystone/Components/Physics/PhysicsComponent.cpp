@@ -23,19 +23,19 @@ PhysicsComponent::~PhysicsComponent()
 {
 }
 
-void PhysicsComponent::start(Level& level)
+void PhysicsComponent::start(Scene& scene)
 {
 	collider_ = owner_.getComponent<ColliderComponent>();
 }
 
-void PhysicsComponent::update(Level& level)
+void PhysicsComponent::update(Scene& scene)
 {
-	updatePosition(owner_, level, Axis::X);
-	updatePosition(owner_, level, Axis::Y);
+	updatePosition(owner_, scene, Axis::X);
+	updatePosition(owner_, scene, Axis::Y);
 
 	if (collider_)
 	{
-		checkCollisions(owner_, level);
+		checkCollisions(owner_, scene);
 	}
 }
 
@@ -133,7 +133,7 @@ bool PhysicsComponent::isFalling() const
 	return falling_;
 }
 
-void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis)
+void PhysicsComponent::updatePosition(GameObject& owner, Scene& scene, Axis axis)
 {
 	switch (axis)
 	{
@@ -152,72 +152,72 @@ void PhysicsComponent::updatePosition(GameObject& owner, Level& level, Axis axis
 	
 	if (collider_)
 	{
-		correctPositionAfterCollision(owner, level, axis);
+		correctPositionAfterCollision(owner, scene, axis);
 	}
 
 }
 
-void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis)
+void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Scene& scene, Axis axis)
 {
 	if (owner.getType() != GameObject::Type::TILE)
 	{
 		int startC = std::max(0, (int) (owner.getPosX() / Constants::TILE_SIZE));
 		int startR = std::max(0, (int) (owner.getPosY() / Constants::TILE_SIZE));
-		int endC = std::min(level.gameObjects.getTiles().cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
-		int endR = std::min(level.gameObjects.getTiles().rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
+		int endC = std::min(scene.gameObjects.getTiles().cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
+		int endR = std::min(scene.gameObjects.getTiles().rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
 
 
 		for (int c = startC; c <= endC; ++c)
 		{
 			for(int r = startR; r <= endR; ++r)
 			{
-				GameObject& tile = level.gameObjects.getTiles().tiles[r][c];
+				GameObject& tile = scene.gameObjects.getTiles().tiles[r][c];
 
 				if (collider_->checkCollision(tile))
 				{
-					correctPosition(owner, tile, level, axis);
-					callOnCollision(owner, tile, level);
+					correctPosition(owner, tile, scene, axis);
+					callOnCollision(owner, tile, scene);
 				}
 			}
 		}
 	}
 }
 
-void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
+void PhysicsComponent::checkCollisions(GameObject& owner, Scene& scene)
 {
 	if (owner.getType() == GameObject::Type::PLAYER || owner.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
-		for (auto& enemy : level.gameObjects.get(GameObject::Type::ENEMY))
+		for (auto& enemy : scene.gameObjects.get(GameObject::Type::ENEMY))
 		{
 			auto& object = *enemy;
 			if (collider_->checkCollision(object))
 			{
-				callOnCollision(owner, object, level);
+				callOnCollision(owner, object, scene);
 			}
 		}
 	}
 
 	if (owner.getType() == GameObject::Type::PLAYER)
 	{
-		for (auto& pickup : level.gameObjects.get(GameObject::Type::DROP))
+		for (auto& pickup : scene.gameObjects.get(GameObject::Type::DROP))
 		{
 			auto& object = *pickup;
 			if (collider_->checkCollision(object))
 			{
-				callOnCollision(owner, object, level);
+				callOnCollision(owner, object, scene);
 			}
 		}
 	}
 }
 
-void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Level& level)
+void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Scene& scene)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>(); 
-	owner.broadcastEvent(CollisionEvent(level, other, *otherCollider));
-	other.broadcastEvent(CollisionEvent(level, owner, *collider_));
+	owner.broadcastEvent(CollisionEvent(scene, other, *otherCollider));
+	other.broadcastEvent(CollisionEvent(scene, owner, *collider_));
 }
 
-void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Level& level, Axis axis)
+void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Scene& scene, Axis axis)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>();
 	switch(axis)

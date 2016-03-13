@@ -17,8 +17,7 @@
 GameObjectBuilder Level::gameObjectBuilder_;
 
 Level::Level(int levelID)
-	: gameObjects(*this, componentSystem_),
-	levelManager_(nullptr),
+	: levelManager_(nullptr),
 	background_(nullptr),
 	levelID_(levelID)
 {
@@ -26,6 +25,11 @@ Level::Level(int levelID)
 
 Level::~Level()
 {
+}
+
+GameObject* Level::cameraFollowObject()
+{
+	return &gameObjects.getPlayer();
 }
 
 void Level::onEnter()
@@ -54,12 +58,6 @@ void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int laye
 	background_ = std::make_shared<GameObject>();
 	background_->setType(GameObject::Type::BACKGROUND);
 	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
-}
-
-void Level::setPlayer(GameObject* p, Point startPosition)
-{
-	gameObjects.setPlayer(p);
-	p->setPos(startPosition);
 }
 
 Point Level::getPlayerPos()
@@ -107,16 +105,10 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 	}
 }
 
-void Level::handleInput(SDL_Event& e)
-{
-	componentSystem_.handleInput(e);
-}
-
 void Level::update()
 {
 	updatePlayer();
-	componentSystem_.update(*this);
-	gameObjects.update();
+	Scene::update();
 }
 
 void Level::updatePlayer()
@@ -130,11 +122,6 @@ void Level::updatePlayer()
 	{
 		player.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
 	}
-}
-
-void Level::render(GameWindow& window, float percBehind)
-{
-	componentSystem_.render(*this, window, percBehind);
 }
 
 int Level::getID()
@@ -176,12 +163,12 @@ void Level::setNextLevel(Direction dir)
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
-int Level::getLevelWidth()
+int Level::getWidth()
 {
 	return gameObjects.getTiles().cols * Constants::TILE_SIZE;
 }
 
-int Level::getLevelHeight()
+int Level::getHeight()
 {
 	return gameObjects.getTiles().rows * Constants::TILE_SIZE;
 }

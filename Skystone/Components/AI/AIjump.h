@@ -18,8 +18,8 @@ public:
 	AIjump(GameObject& owner);
 	virtual ~AIjump();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 private:
 	PhysicsComponent* physics_;

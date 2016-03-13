@@ -12,7 +12,7 @@ NonUpdatingComponent::~NonUpdatingComponent()
 {
 }
 
-void NonUpdatingComponent::update(Level & level)
+void NonUpdatingComponent::update(Scene& scene)
 {
 }
 

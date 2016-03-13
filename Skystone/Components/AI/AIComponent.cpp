@@ -26,7 +26,7 @@ void AIComponent::handleEvent(const ComponentEvent& e)
 {
 	if (e.getType() == ComponentEvent::Type::onDeath)
 	{
-		auto drop = e.getLevel().gameObjects.add("Drop", "", owner_.getPos());
+		auto drop = e.getScene().gameObjects.add("Drop", "", owner_.getPos());
 	}
 }
 

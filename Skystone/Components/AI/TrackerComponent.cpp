@@ -23,20 +23,20 @@ TrackerComponent::~TrackerComponent()
 {
 }
 
-void TrackerComponent::start(Level & level)
+void TrackerComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
 
 //missing time and another player gameobject.
-void TrackerComponent::update(Level & level)
+void TrackerComponent::update(Scene& scene)
 {
-	float player_dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
+	float player_dist = Point::getDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 
 	if (AIComponent::isNearby(player_dist, radius_))
 	{
-		float player_direction = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
+		float player_direction = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 
 		EnemyState currentState = enemyState_;
 			switch (currentState)

@@ -9,7 +9,7 @@ public:
 	NonUpdatingComponent(GameObject& owner);
 	virtual ~NonUpdatingComponent() = 0;
 
-	virtual void update(Level& level) final;
+	virtual void update(Scene& scene);
 
 	virtual Component::Type getType() final;
 };

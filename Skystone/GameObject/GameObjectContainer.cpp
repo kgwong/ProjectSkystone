@@ -5,8 +5,7 @@
 
 GameObjectBuilder GameObjectContainer::builder_;
 
-GameObjectContainer::GameObjectContainer(Level& level, ComponentSystem& componentSystem)
-	: level_(level),
+GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) : scene_(scene),
 	componentSystem_(componentSystem),
 	player_(nullptr)
 {
@@ -23,17 +22,17 @@ void GameObjectContainer::start()
 	{
 		for (int c = 0; c < tileArrangement_.cols; ++c)
 		{
-			tileArrangement_.tiles[r][c].startComponents(level_);
+			tileArrangement_.tiles[r][c].startComponents(scene_);
 		}
 	}
-	player_->startComponents(level_);
+	player_->startComponents(scene_);
 }
 
 void GameObjectContainer::update()
 {
 	for (auto& objVector : objects_)
 	{
-		removeDeadObjects(objVector.second, level_);
+		removeDeadObjects(objVector.second, scene_);
 	}
 }
 
@@ -79,7 +78,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		return nullptr;
 	}
 	newObject->setPos(startPos);
-	newObject->startComponents(level_);
+	newObject->startComponents(scene_);
 	return newObject;
 }
 
@@ -103,14 +102,14 @@ ObjectVector& GameObjectContainer::get(GameObject::Type type)
 	return objects_[type];
 }
 
-void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Level& level)
+void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 {
 	for (size_t i = 0; i < vector.size(); /*empty*/)
 	{
 		auto& obj = vector[i];
 		if (!obj->alive())
 		{
-			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, level));
+			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, scene));
 			ComponentSystem::vector_remove(vector, i);
 		}
 		else

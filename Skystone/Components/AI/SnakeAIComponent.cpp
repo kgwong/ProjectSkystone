@@ -14,7 +14,7 @@ SnakeAIComponent::~SnakeAIComponent()
 {
 }
 
-void SnakeAIComponent::start(Level& level)
+void SnakeAIComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	physics_->enableGravity(false);
@@ -22,7 +22,7 @@ void SnakeAIComponent::start(Level& level)
 	cornerPosition_ = owner_.getPos();
 }
 
-void SnakeAIComponent::update(Level& level)
+void SnakeAIComponent::update(Scene& scene)
 {
 
 	if (Point::getXDistance(owner_.getPos(), cornerPosition_) > DEFAULT_X_DIST)

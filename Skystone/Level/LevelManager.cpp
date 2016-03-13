@@ -32,7 +32,7 @@ void LevelManager::initStartingLevel()
 	if (player_ != nullptr)
 	{
 		currLevel_ = levelLoader_.getLevelWithID(4);
-		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
+		currLevel_->setPlayer(player_, Point{ currLevel_->getWidth() / 2, currLevel_->getHeight() / 2 });
 		currLevel_->onEnter();
 	}
 	else

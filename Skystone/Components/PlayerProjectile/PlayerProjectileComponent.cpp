@@ -13,7 +13,7 @@ PlayerProjectileComponent::~PlayerProjectileComponent()
 {
 }
 
-void PlayerProjectileComponent::start(Level& level)
+void PlayerProjectileComponent::start(Scene& scene)
 {
 	PhysicsComponent* physics = owner_.getComponent<PhysicsComponent>();
 	physics->enableGravity(false);

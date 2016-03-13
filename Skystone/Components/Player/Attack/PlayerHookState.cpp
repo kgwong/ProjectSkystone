@@ -2,7 +2,7 @@
 
 #include "Game/GameInputs.h"
 
-
+#include "Level/Level.h"
 #include "Application/Log.h"
 
 PlayerHookState::PlayerHookState(GameObject& owner)
@@ -60,8 +60,9 @@ double PlayerHookState::getDegrees()
 	}
 }
 
-void PlayerHookState::update(Level& level)
+void PlayerHookState::update(Scene& scene)
 {
+	Level& level = static_cast<Level&>(scene);
 	if (_launched)
 	{
 		int test_velocity = 5;
