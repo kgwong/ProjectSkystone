@@ -2,7 +2,7 @@
 #define COMPONENT_H
 
 #include "GameObject/GameObject.h"
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 #include "Events/ComponentEvent.h"
 #include "Events/CollisionEvent.h"

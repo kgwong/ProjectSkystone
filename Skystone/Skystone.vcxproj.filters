@@ -36,11 +36,7 @@
     <ClCompile Include="Components\InputComponent.cpp" />
     <ClCompile Include="ComponentSystem\InputSystem.cpp" />
     <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp" />
-    <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Components\Player\LevelChangeComponent.cpp" />
-    <ClCompile Include="Level\LevelLoader.cpp" />
-    <ClCompile Include="Level\LevelManager.cpp" />
-    <ClCompile Include="Level\LevelMap.cpp" />
     <ClCompile Include="Components\Tile\LiftTileComponent.cpp" />
     <ClCompile Include="Application\Log.cpp" />
     <ClCompile Include="Components\NonUpdatingComponent.cpp" />
@@ -83,8 +79,12 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\Level\Level.cpp" />
+    <ClCompile Include="Scene\Level\LevelLoader.cpp" />
+    <ClCompile Include="Scene\Level\LevelManager.cpp" />
+    <ClCompile Include="Scene\Level\LevelMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -98,7 +98,6 @@
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
     <ClInclude Include="Components\Tile\BurnTileComponent.h" />
-    <ClInclude Include="Level\Block.h" />
     <ClInclude Include="Application\Camera.h" />
     <ClInclude Include="Components\Events\CollisionEvent.h" />
     <ClInclude Include="Components\Events\ComponentEvent.h" />
@@ -152,10 +151,6 @@
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Application\GameWindow.h" />
     <ClInclude Include="Application\InitSystems.h" />
-    <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Level\LevelLoader.h" />
-    <ClInclude Include="Level\LevelManager.h" />
-    <ClInclude Include="Level\LevelMap.h" />
     <ClInclude Include="Application\Log.h" />
     <ClInclude Include="Application\Path.h" />
     <ClInclude Include="Components\Physics\PhysicsComponent.h" />
@@ -176,7 +171,12 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\Level\Block.h" />
+    <ClInclude Include="Scene\Level\Level.h" />
+    <ClInclude Include="Scene\Level\LevelLoader.h" />
+    <ClInclude Include="Scene\Level\LevelManager.h" />
+    <ClInclude Include="Scene\Level\LevelMap.h" />
   </ItemGroup>
 </Project>

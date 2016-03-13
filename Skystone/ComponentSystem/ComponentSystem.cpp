@@ -1,6 +1,6 @@
 #include "ComponentSystem.h"
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 #include "Components\Render\RenderComponent.h"
 

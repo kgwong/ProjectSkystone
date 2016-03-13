@@ -5,7 +5,7 @@
 
 #include <SDL/SDL.h>
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 #include "Block.h"
 #include "GameTypes/Direction.h"
 

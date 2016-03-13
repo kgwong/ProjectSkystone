@@ -4,7 +4,7 @@
 #include "LevelMap.h"
 #include "LevelLoader.h"
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 class LevelManager : public Scene
 {

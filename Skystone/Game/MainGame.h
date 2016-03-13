@@ -10,7 +10,7 @@
 
 #include "Application/Errors.h"
 #include "Application/GameWindow.h"
-#include "SceneManager.h"
+#include "Scene/SceneManager.h"
 
 class MainGame
 {
