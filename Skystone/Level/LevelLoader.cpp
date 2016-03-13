@@ -65,9 +65,10 @@ void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 	int numRows = blockHeight * Constants::TILES_PER_BLOCK_HEIGHT;
 	int numCols = blockWidth * Constants::TILES_PER_BLOCK_WIDTH;
 
-	level->tileArrangement.rows = numRows;
-	level->tileArrangement.cols = numCols;
-	level->tileArrangement.tiles = std::vector<std::vector<GameObject>>(numRows, std::vector<GameObject>(numCols));
+	TileArrangement& levelTiles = level->gameObjects.getTiles();
+	levelTiles.rows = numRows;
+	levelTiles.cols = numCols;
+	levelTiles.tiles = std::vector<std::vector<GameObject>>(numRows, std::vector<GameObject>(numCols));
 
 	for (int r = 0; r < numRows; ++r)
 	{
@@ -75,7 +76,9 @@ void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 		{
 			int tileNum;
 			ifs >> tileNum;
-			level->addTileAtLocation(tileNum, Point{ c * Constants::TILE_SIZE, r * Constants::TILE_SIZE });
+			GameObject& tileToBuild = levelTiles.tiles[r][c];
+			level->gameObjects.buildTile(tileNum, tileToBuild);
+			tileToBuild.setPos((float)c * Constants::TILE_SIZE, (float)r * Constants::TILE_SIZE);
 		}
 	}
 }
@@ -91,7 +94,7 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level* level)
 
 	while (ifs >> enemyName >> pos.x >> pos.y)
 	{
-		level->addEnemyAtLocation(enemyName, pos);
+		level->gameObjects.add("Enemy", enemyName, pos);
 	}
 }
 

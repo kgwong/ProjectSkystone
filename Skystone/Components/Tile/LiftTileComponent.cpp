@@ -25,8 +25,8 @@ LiftTileComponent::~LiftTileComponent()
 
 void LiftTileComponent::start(Level & level)
 {
-	playerPhysics_ = level.player->getComponent<PhysicsComponent>();
-	playerCollider_ = level.player->getComponent<ColliderComponent>();
+	playerPhysics_ = level.gameObjects.getPlayer().getComponent<PhysicsComponent>();
+	playerCollider_ = level.gameObjects.getPlayer().getComponent<ColliderComponent>();
 
 }
 

@@ -82,6 +82,7 @@
     <ClCompile Include="StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
+    <ClCompile Include="GameObject\GameObjectContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -172,5 +173,6 @@
     <ClInclude Include="StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Game\GameInputs.h" />
+    <ClInclude Include="GameObject\GameObjectContainer.h" />
   </ItemGroup>
 </Project>

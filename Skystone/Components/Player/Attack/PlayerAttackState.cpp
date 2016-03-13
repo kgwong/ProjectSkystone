@@ -9,6 +9,8 @@
 
 #include "Resources/Resources.h"
 
+#include "GameMath/CircleMath.h"
+
 DefaultAimState PlayerAttackState::defaultAimState;
 AimUpState PlayerAttackState::aimUpState;
 
@@ -114,11 +116,15 @@ void PlayerAttackState::update(Level& level)
 	//LOG << "owner pos: " << owner_.getPos().x << ", " << owner_.getPos().y;
 	if (shoot_)
 	{
-		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
+		//level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
+		auto bullet = level.gameObjects.add("PlayerProjectile", "", owner_.getPos());
+		auto physics = bullet->getComponent<PhysicsComponent>();
+		float newVelX = (float)PROJECTILE_VELOCITY * cos(toRadians(degrees_));
+		float newVelY = (float)PROJECTILE_VELOCITY * sin(toRadians(degrees_));
+		physics->setVelX(newVelX * 60.0f);
+		physics->setVelY(newVelY * 60.0f);
 		shoot_ = false;
 
-		//play sound here!
-		//audio_.PlayClip("laser1");
 		Resources::audioPlayer.PlayClip("laser1");
 	}
 

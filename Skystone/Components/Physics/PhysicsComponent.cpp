@@ -163,15 +163,15 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Level& l
 	{
 		int startC = std::max(0, (int) (owner.getPosX() / Constants::TILE_SIZE));
 		int startR = std::max(0, (int) (owner.getPosY() / Constants::TILE_SIZE));
-		int endC = std::min(level.tileArrangement.cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
-		int endR = std::min(level.tileArrangement.rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
+		int endC = std::min(level.gameObjects.getTiles().cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
+		int endR = std::min(level.gameObjects.getTiles().rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
 
 
 		for (int c = startC; c <= endC; ++c)
 		{
 			for(int r = startR; r <= endR; ++r)
 			{
-				GameObject& tile = level.tileArrangement.tiles[r][c];
+				GameObject& tile = level.gameObjects.getTiles().tiles[r][c];
 
 				if (collider_->checkCollision(tile))
 				{
@@ -187,7 +187,7 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 {
 	if (owner.getType() == GameObject::Type::PLAYER || owner.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
-		for (auto& enemy : level.enemies)
+		for (auto& enemy : level.gameObjects.get(GameObject::Type::ENEMY))
 		{
 			auto& object = *enemy;
 			if (collider_->checkCollision(object))
@@ -199,7 +199,7 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Level& level)
 
 	if (owner.getType() == GameObject::Type::PLAYER)
 	{
-		for (auto& pickup : level.drops)
+		for (auto& pickup : level.gameObjects.get(GameObject::Type::DROP))
 		{
 			auto& object = *pickup;
 			if (collider_->checkCollision(object))

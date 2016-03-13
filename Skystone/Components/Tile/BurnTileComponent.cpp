@@ -24,8 +24,8 @@ BurnTileComponent::~BurnTileComponent()
 void BurnTileComponent::start(Level & level)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
-	playerPhysics_ = level.player->getComponent<PhysicsComponent>();
-	health_ = level.player->getComponent<HealthComponent>();
+	playerPhysics_ = level.gameObjects.getPlayer().getComponent<PhysicsComponent>();
+	health_ = level.gameObjects.getPlayer().getComponent<HealthComponent>();
 	damage_ = owner_.getComponent<DamageComponent>();
 
 }

@@ -1,19 +1,18 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "GameObject/GameObject.h"
+#include <memory>
+
+#include <SDL/SDL.h>
+
+#include "GameObject/GameObjectContainer.h"
 #include "Block.h"
 #include "GameTypes/Direction.h"
-#include "GameObject/TileArrangement.h"
 #include "ComponentSystem/ComponentSystem.h"
-#include "SDL/SDL.h"
-
-#include <memory>
 
 class LevelLoader;
 class LevelMap;
 class LevelManager;
-class GameObjectBuilder;
 class SpriteRenderer;
 class SpriteSheet;
 
@@ -36,7 +35,6 @@ public:
 	Point getPlayerPos();
 
 	LevelManager* getLevelManager();
-	void startEntityComponents();
 
 	void handleInput(SDL_Event& e);
 	void update();
@@ -46,22 +44,13 @@ public:
 
 	void setNextLevel(Direction dir);
 
-	int getLevelWidth() const; //pixels
-	int getLevelHeight() const;
-
-	void addPlayerProjectileAtLocation(Point position, int vel, double degrees);
-	void addPickupAtLocation(Point position);
-	void addEnemyAtLocation(const std::string& name, Point position);
-	void addTileAtLocation(int tileType, Point position);
+	int getLevelWidth(); //pixels
+	int getLevelHeight();
 
 	void addPlayerHookAtLocation(Point position, int velocity, double degrees);
 
 public:
-	GameObject* player;
-	TileArrangement tileArrangement;
-	std::vector<std::shared_ptr<GameObject>> enemies;
-	std::vector<std::shared_ptr<GameObject>> playerProjectiles;
-	std::vector<std::shared_ptr<GameObject>> drops;
+	GameObjectContainer gameObjects;
 
 	//there should only be one hook per cast.
 	std::shared_ptr<GameObject> playerHook;
@@ -78,9 +67,6 @@ private:
 	ComponentSystem componentSystem_;
 
 private:
-	void startComponents(std::vector<std::shared_ptr<GameObject>>& v);
-	void removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v);
-
 	void updatePlayer();
 };
 
