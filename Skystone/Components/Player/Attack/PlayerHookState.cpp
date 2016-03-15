@@ -1,6 +1,8 @@
 #include "PlayerHookState.h"
 
 #include "Game/GameInputs.h"
+#include "StickOnCollision.h"
+#include "Components/Physics/PhysicsComponent.h"
 
 #include "Scene/Level/Level.h"
 #include "Application/Log.h"
@@ -72,11 +74,35 @@ void PlayerHookState::update(Scene& scene)
 		_hookActive = true;
 		_degrees = 0;
 	}
+	
+	//StickOnCollision* hook_collision = nullptr;
+	//if (level.playerHook)
+	//	hook_collision = level.playerHook->getComponent<StickOnCollision>();
 
-	if (_hookActive)
-	{
-		
-	}
+	//if (_hookActive)
+	//{
+	//	if (hook_collision && hook_collision->isConnected)
+	//	{
+	//		LOG("INFO") << "Hook Position" << level.playerHook->getPos();
+	//		Point hookPoint = level.playerHook->getPos();
+	//		Point playerPoint = scene.gameObjects.getPlayer().getPos();
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(false);
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelX(0.1);
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelY(0.1);
+	//	}
+	//	else
+	//	{
+	//		_hookActive = false;
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+	//	}
+	//	
+	//}
+	//else
+	//{
+	//	_hookActive = false;
+	//	scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+	//}
+
 	
 
 }

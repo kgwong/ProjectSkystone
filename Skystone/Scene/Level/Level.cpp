@@ -40,6 +40,12 @@ void Level::onEnter()
 
 void Level::onExit()
 {
+	if (playerHook)
+	{
+		this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+		playerHook->kill();
+		playerHook = nullptr;
+	}
 	gameObjects.getPlayer().disownComponents();
 	ObjectVector& playerProjectiles = gameObjects.get(GameObject::Type::PLAYER_PROJECTILE);
 	for (auto& p : playerProjectiles)
@@ -94,6 +100,7 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 			&& hookState->isConnected == true
 			&& playerControls->HookKeyInput == GameInputs::getKeycode(LAUNCH_HOOK))
 		{
+			this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
 			playerHook->kill();
 			playerHook = nullptr;
 		}
