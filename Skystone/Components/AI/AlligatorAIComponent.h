@@ -1,4 +1,6 @@
-#include "C:\Users\User\Desktop\ProjectSkystone\Skystone\Components\AI\AIComponent.h"
+#ifndef ALLIGATOR_AI_COMPONENT_H
+#define ALLIGATOR_AI_COMPONENT_H
+#include "AIComponent.h"
 
 
 class AlligatorAIComponent :
@@ -28,3 +30,4 @@ private:
 
 };
 
+#endif
