@@ -1,6 +1,6 @@
 #include "DefaultAimState.h"
 
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
 #include "PlayerAttackState.h"
 #include "Components/Player/PlayerControlComponent.h"
 
@@ -24,15 +24,15 @@ void DefaultAimState::onExit(GameObject& player)
 
 void DefaultAimState::handleInput(GameObject& player, SDL_Event& e)
 {
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+	if (GameInputs::keyDown(e, RIGHT))
 	{
 		facingRight_ = true;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+	else if (GameInputs::keyDown(e, LEFT))
 	{
 		facingRight_ = false;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[UP])
+	else if (GameInputs::keyDown(e, UP))
 	{
 		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::aimUpState);
 		player.getComponent<PlayerControlComponent>()->changeAttackState(&PlayerAttackState::aimUpState);

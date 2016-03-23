@@ -17,8 +17,7 @@
 GameObjectBuilder Level::gameObjectBuilder_;
 
 Level::Level(int levelID)
-	:player(nullptr),
-	levelManager_(nullptr),
+	: levelManager_(nullptr),
 	background_(nullptr),
 	levelID_(levelID)
 {
@@ -28,15 +27,27 @@ Level::~Level()
 {
 }
 
+GameObject* Level::getCameraFollowObject()
+{
+	return &gameObjects.getPlayer();
+}
+
 void Level::onEnter()
 {
-	player->registerComponents(componentSystem_);
-	startEntityComponents();
+	gameObjects.getPlayer().registerComponents(componentSystem_);
+	gameObjects.start();
 }
 
 void Level::onExit()
 {
-	player->disownComponents();
+	if (playerHook)
+	{
+		this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+		playerHook->kill();
+		playerHook = nullptr;
+	}
+	gameObjects.getPlayer().disownComponents();
+	ObjectVector& playerProjectiles = gameObjects.get(GameObject::Type::PLAYER_PROJECTILE);
 	for (auto& p : playerProjectiles)
 		p->disownComponents();
 	playerProjectiles.clear();
@@ -55,41 +66,9 @@ void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int laye
 	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
 }
 
-void Level::setPlayer(GameObject* p, Point startPosition)
-{
-	player = p;
-	player->setPos(startPosition);
-}
-
-Point Level::getPlayerPos()
-{
-	return player->getPos();
-}
-
-LevelManager * Level::getLevelManager()
+LevelManager* Level::getLevelManager()
 {
 	return levelManager_;
-}
-
-void Level::startEntityComponents()
-{
-	for (int r = 0; r < tileArrangement.rows; ++r)
-		for (int c = 0; c < tileArrangement.cols; ++c)
-			tileArrangement.tiles[r][c].startComponents(*this);
-	player->startComponents(*this);
-}
-
-void Level::addPlayerProjectileAtLocation(Point position, int vel, double degrees)
-{
-	auto n = gameObjectBuilder_.buildPlayerProjectile(componentSystem_, "");
-	n->setPos(position);
-	playerProjectiles.push_back(n);
-	auto physics = playerProjectiles.back()->getComponent<PhysicsComponent>();
-	float newVelX = (float)vel * cos(toRadians(degrees));
-	float newVelY = (float)vel * sin(toRadians(degrees));
-	physics->setVelX(newVelX * 60.0f); 
-	physics->setVelY(newVelY * 60.0f); 
-	playerProjectiles.back()->startComponents(*this); 
 }
 
 void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
@@ -114,100 +93,37 @@ void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees
 	//if the hook is rendered on the map
 	if (playerHook != nullptr)
 	{
-		PlayerControlComponent * playerControls = player->getComponent<PlayerControlComponent>();
+		PlayerControlComponent * playerControls = gameObjects.getPlayer().getComponent<PlayerControlComponent>();
 		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
 		//if hook is attached to a tile and player pressed D to launch hook..
 		if (playerControls != nullptr && hookState != nullptr
 			&& hookState->isConnected == true
-			&& playerControls->HookKeyInput == controlMap[LAUNCH_HOOK])
+			&& playerControls->HookKeyInput == GameInputs::getKeycode(LAUNCH_HOOK))
 		{
+			this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
 			playerHook->kill();
 			playerHook = nullptr;
 		}
 	}
 }
 
-void Level::addPickupAtLocation(Point position)
-{
-	auto n = gameObjectBuilder_.buildItemDrop(componentSystem_, "");
-	n->setPos(position);
-	drops.push_back(n);
-	drops.back()->startComponents(*this);
-}
-
-void Level::addEnemyAtLocation(const std::string& name, Point position)
-{
-	auto n = gameObjectBuilder_.buildEnemy(componentSystem_, name);
-	n->setPos(position);
-	enemies.push_back(n);
-	enemies.back()->startComponents(*this);
-}
-
-void Level::addTileAtLocation(int tileType, Point position)
-{
-	int r = (int) position.y / Constants::TILE_SIZE;
-	int c = (int) position.x / Constants::TILE_SIZE;
-	auto& ret = gameObjectBuilder_.buildTile(componentSystem_, tileType, tileArrangement.tiles[r][c]);
-	
-	tileArrangement.tiles[r][c].setPos((float)c * Constants::TILE_SIZE, (float)r * Constants::TILE_SIZE);
-	
-	//Tile tile(c * Constants::TILE_SIZE, r * Constants::TILE_SIZE);
-	//tileBuilder_->build(tileType, tile);
-	//tileArrangement.tiles[r][c] = tile;
-}
-
-void Level::handleInput(SDL_Event& e)
-{
-	componentSystem_.handleInput(e);
-}
-
 void Level::update()
 {
 	updatePlayer();
-	componentSystem_.update(*this);
-	removeDeadObjects(drops);
-	removeDeadObjects(enemies);
-	removeDeadObjects(playerProjectiles);
-}
-
-void Level::startComponents(std::vector<std::shared_ptr<GameObject>>& v)
-{
-	for (auto& obj : v)
-		obj->startComponents(*this);
-}
-
-void Level::removeDeadObjects(std::vector<std::shared_ptr<GameObject>>& v)
-{
-	for (size_t i = 0; i < v.size(); /*empty*/)
-	{
-		auto& obj = v[i];
-		if (!obj->alive())
-		{
-			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
-			ComponentSystem::vector_remove(v, i);
-		}
-		else
-		{
-			++i;
-		}
-	}
+	Scene::update();
 }
 
 void Level::updatePlayer()
 {
-	oldPlayerBlock_ = Block::getBlock(player->getPos());
-	oldPlayerPosInBlock_ = Point{ (int)player->getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
-		(int)player->getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
+	GameObject& player = gameObjects.getPlayer();
+	oldPlayerBlock_ = Block::getBlock(player.getPos());
+	oldPlayerPosInBlock_ = Point{ (int)player.getPosX() % Constants::BLOCK_WIDTH_IN_PIXELS,
+		(int)player.getPosY() % Constants::BLOCK_HEIGHT_IN_PIXELS };
 
-	if (!player->alive())
+	if (!player.alive())
 	{
-		player->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
+		player.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
 	}
-}
-
-void Level::render(GameWindow& window, float percBehind)
-{
-	componentSystem_.render(*this, window, percBehind);
 }
 
 int Level::getID()
@@ -249,12 +165,12 @@ void Level::setNextLevel(Direction dir)
 	levelManager_->setNextLevel(nextLevelID, newPlayerPosition);
 }
 
-int Level::getLevelWidth() const
+int Level::getWidth()
 {
-	return tileArrangement.cols * Constants::TILE_SIZE;
+	return gameObjects.getTiles().cols * Constants::TILE_SIZE;
 }
 
-int Level::getLevelHeight() const
+int Level::getHeight()
 {
-	return tileArrangement.rows * Constants::TILE_SIZE;
+	return gameObjects.getTiles().rows * Constants::TILE_SIZE;
 }

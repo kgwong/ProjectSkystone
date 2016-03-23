@@ -23,7 +23,7 @@ void PlayerMovementState::handleInput(SDL_Event& e)
 	currentState_->handleInput(owner_, e);
 }
 
-void PlayerMovementState::update(Level& level)
+void PlayerMovementState::update(Scene& scene)
 {
 	currentState_->update(owner_);
 }

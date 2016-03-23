@@ -23,8 +23,8 @@ public:
 	SnakeAIComponent(GameObject& owner);
 	virtual ~SnakeAIComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 private:
 

@@ -2,11 +2,14 @@
 
 #include "Path.h"
 #include "Log.h"
+#include "Game/GameInputs.h"
 
 void initAllSystems()
 {
 	Path::initBasePath();
 	Log::init();
+	GameInputs::init();
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		MySDL_Error("SDL_Init");
 

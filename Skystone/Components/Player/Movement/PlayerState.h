@@ -3,7 +3,7 @@
 
 #include <SDL/SDL.h>
 #include <string>
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
 
 #include "GameObject/GameObject.h"
 #include "Components/Physics/PhysicsComponent.h"

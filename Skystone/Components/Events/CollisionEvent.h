@@ -9,7 +9,7 @@ class ColliderComponent;
 class CollisionEvent : public ComponentEvent
 {
 public:
-	CollisionEvent(Level& level, GameObject& other, ColliderComponent& otherCollider);
+	CollisionEvent(Scene& scene, GameObject& other, ColliderComponent& otherCollider);
 	virtual ~CollisionEvent();
 
 	GameObject& getOtherObject() const;

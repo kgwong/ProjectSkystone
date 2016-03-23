@@ -1,549 +1,180 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Enum Class Headers">
-      <UniqueIdentifier>{69fe6b12-d944-4f5c-ad69-18d0923edc3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Struct Headers">
-      <UniqueIdentifier>{3200687a-8136-4710-a174-4e5ed2b4083f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Component Class Headers">
-      <UniqueIdentifier>{2b753da4-946f-4b9d-9265-863f92f1610f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Component Class Source Files">
-      <UniqueIdentifier>{a2754add-91d5-4d1e-9020-65550444c583}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Entity Headers">
-      <UniqueIdentifier>{64589366-34b4-45b7-a165-38a00dbb1e86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entity Source Files">
-      <UniqueIdentifier>{31ac2075-344b-4bc5-83da-1f18e87ef026}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Player State Source Files">
-      <UniqueIdentifier>{b7873fdf-0ddc-46bf-af76-beb1a9f1d048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Player State Headers">
-      <UniqueIdentifier>{56522169-f370-4fbd-b23c-e0247b49ff18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\AIComponents">
-      <UniqueIdentifier>{b4f48d40-ab0b-4a9e-9206-a2b4324022a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\AIComponents">
-      <UniqueIdentifier>{98037ba1-b8ce-4543-bfec-b3438a7850c9}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
+    <ClCompile Include="GameTypes\Point.cpp" />
+    <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
+    <ClCompile Include="Resources\AudioPlayer.cpp" />
+    <ClCompile Include="Components\AI\AIComponent.cpp" />
+    <ClCompile Include="Components\AI\AIjump.cpp" />
+    <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
+    <ClCompile Include="Components\Player\Movement\AirborneState.cpp" />
+    <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp" />
+    <ClCompile Include="Components\Tile\BurnTileComponent.cpp" />
+    <ClCompile Include="Application\Camera.cpp" />
+    <ClCompile Include="Components\Collider\ColliderComponent.cpp" />
+    <ClCompile Include="Components\Events\CollisionEvent.cpp" />
+    <ClCompile Include="Components\Component.cpp" />
+    <ClCompile Include="Components\Events\ComponentEvent.cpp" />
+    <ClCompile Include="ComponentSystem\ComponentSubsystem.cpp" />
+    <ClCompile Include="ComponentSystem\ComponentSystem.cpp" />
+    <ClCompile Include="Components\Render\SpriteRenderer.cpp" />
+    <ClCompile Include="Components\Common\DamageComponent.cpp" />
+    <ClCompile Include="Components\Player\Attack\DefaultAimState.cpp" />
+    <ClCompile Include="Components\Common\DieOnCollision.cpp" />
+    <ClCompile Include="GameObject\Builders\EnemyBuilder.cpp" />
+    <ClCompile Include="Application\Errors.cpp" />
+    <ClCompile Include="Components\AI\FallingAIComponent.cpp" />
+    <ClCompile Include="Components\AI\FlyingAIComponent.cpp" />
+    <ClCompile Include="Components\Player\Movement\FlyingState.cpp" />
+    <ClCompile Include="GameObject\Builders\GameObjectBuilder.cpp" />
+    <ClCompile Include="Components\Common\HealthComponent.cpp" />
+    <ClCompile Include="GameObject\GameObject.cpp" />
+    <ClCompile Include="Application\GameWindow.cpp" />
+    <ClCompile Include="Application\InitSystems.cpp" />
+    <ClCompile Include="Components\InputComponent.cpp" />
+    <ClCompile Include="ComponentSystem\InputSystem.cpp" />
+    <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp" />
+    <ClCompile Include="Components\Player\LevelChangeComponent.cpp" />
+    <ClCompile Include="Components\Tile\LiftTileComponent.cpp" />
+    <ClCompile Include="Application\Log.cpp" />
+    <ClCompile Include="Components\NonUpdatingComponent.cpp" />
+    <ClCompile Include="Application\Path.cpp" />
+    <ClCompile Include="Components\Physics\PhysicsComponent.cpp" />
+    <ClCompile Include="GameMath\CircleMath.cpp" />
+    <ClCompile Include="Components\ItemDrop\PickupComponent.cpp" />
+    <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp" />
+    <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp" />
+    <ClCompile Include="Components\Player\PlayerComponent.cpp" />
+    <ClCompile Include="Components\Player\PlayerControlComponent.cpp" />
+    <ClCompile Include="GameObject\Builders\PlayerHookBuilder.cpp" />
+    <ClCompile Include="Components\Player\Attack\PlayerHookState.cpp" />
+    <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp" />
+    <ClCompile Include="GameObject\Builders\PlayerProjectileBuilder.cpp" />
+    <ClCompile Include="Components\AI\PounceAIComponent.cpp" />
+    <ClCompile Include="Components\AI\RandomJumperComponent.cpp" />
+    <ClCompile Include="Components\Render\RenderComponent.cpp" />
+    <ClCompile Include="ComponentSystem\RenderSystem.cpp" />
+    <ClCompile Include="Resources\Resources.cpp" />
+    <ClCompile Include="Resources\SpriteSheet.cpp" />
+    <ClCompile Include="GameMath\RNG.cpp" />
+    <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp" />
+    <ClCompile Include="Components\AI\SnakeAIComponent.cpp" />
+    <ClCompile Include="Components\Player\Movement\StunState.cpp" />
+    <ClCompile Include="Components\AI\SwingingAIComponent.cpp" />
+    <ClCompile Include="Components\Tile\SpecialTileComponent.cpp" />
+    <ClCompile Include="Resources\TextureLoader.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game\MainGame.cpp" />
+    <ClCompile Include="Resources\SpritesheetInfoReader.cpp" />
+    <ClCompile Include="GameObject\Builders\TileBuilder.cpp" />
+    <ClCompile Include="Components\Tile\TileComponent.cpp" />
+    <ClCompile Include="Game\GameTime.cpp" />
+    <ClCompile Include="Components\Render\TileRenderer.cpp" />
+    <ClCompile Include="Components\AI\TrackerComponent.cpp" />
+    <ClCompile Include="Components\UpdatingComponent.cpp" />
+    <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
+    <ClCompile Include="StickOnCollision.cpp" />
+    <ClCompile Include="Components\Render\TextRenderer.cpp" />
+    <ClCompile Include="Game\GameInputs.cpp" />
+    <ClCompile Include="GameObject\GameObjectContainer.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\Level\Level.cpp" />
+    <ClCompile Include="Scene\Level\LevelLoader.cpp" />
+    <ClCompile Include="Scene\Level\LevelManager.cpp" />
+    <ClCompile Include="Scene\Level\LevelMap.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\Resources.cpp">
-    </ClCompile>
-    <ClCompile Include="Resources\TextureLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\SpriteSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Render\SpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Render\TileRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\SpritesheetInfoReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Render\RenderComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\AIComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\AIjump.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\FallingAIComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\FlyingAIComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\PounceAIComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\RandomJumperComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\SnakeAIComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\SwingingAIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\TrackerComponent.cpp">
-      <Filter>Source Files\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\EnemyBuilder.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\GameObjectBuilder.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\PlayerHookBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\PlayerProjectileBuilder.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\Builders\TileBuilder.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\GameObject.cpp">
-      <Filter>Source Files\Entity Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameTime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\LevelMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\LevelManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\LevelLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Events\ComponentEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Events\CollisionEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Component.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\UpdatingComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\NonUpdatingComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\InputComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentSystem\ComponentSubsystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentSystem\ComponentSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentSystem\InputSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentSystem\RenderSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\LevelChangeComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\PlayerComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\PlayerControlComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Attack\AimUpState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Attack\DefaultAimState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Movement\AirborneState.cpp">
-      <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Movement\FlyingState.cpp">
-      <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Movement\PlayerMovementState.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Movement\WalkingState.cpp">
-      <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Movement\StunState.cpp">
-      <Filter>Source Files\Player State Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Player\Attack\PlayerHookState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Physics\PhysicsComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Collider\ColliderComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Tile\TileComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ItemDrop\PickupComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Render\ScrollingSpriteRenderer.cpp">
-    </ClCompile>
-    <ClCompile Include="Resources\AudioPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StickOnCollision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Common\DamageComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Common\DieOnCollision.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Common\HealthComponent.cpp">
-      <Filter>Source Files\Component Class Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\InitSystems.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\MainGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMath\CircleMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMath\RNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Tile\BurnTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Tile\SpecialTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Tile\LiftTileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTypes\Point.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Render\TextRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AI\AlligatorAIComponent.cpp">
-    </ClCompile>
-    <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameOverException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Resources.h">
-    </ClInclude>
-    <ClInclude Include="Resources\TextureLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\SpriteSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\TileRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\SpritesheetInfoReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\SpritesheetInfo.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\RenderComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\AIComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\AIjump.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\FallingAIComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\FlyingAIComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\PounceAIComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\RandomJumperComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\SnakeAIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\SwingingAIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\TrackerComponent.h">
-      <Filter>Header Files\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\EnemyBuilder.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\GameObjectBuilder.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\ItemDropBuilder.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\PlayerHookBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\PlayerProjectileBuilder.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\Builders\TileBuilder.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\GameObject.h">
-      <Filter>Header Files\Entity Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Controls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameTime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\LevelMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\LevelManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\LevelLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Events\CollisionEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Component.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\UpdatingComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\NonUpdatingComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\InputComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Events\ComponentEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem\ComponentSubsystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem\ComponentSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem\InputSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem\RenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\LevelChangeComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\PlayerComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\PlayerControlComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\AimState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\AimUpState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\DefaultAimState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\PlayerAimState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\PlayerAttackState.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\AirborneState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\FlyingState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\PlayerMovementState.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\WalkingState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\StunState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Movement\PlayerState.h">
-      <Filter>Header Files\Player State Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Player\Attack\PlayerHookState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Physics\PhysicsComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Collider\ColliderComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\TileArrangement.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Tile\TileComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ItemDrop\PickupComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\AudioPlayer.h">
-    </ClInclude>
-    <ClInclude Include="Components\Common\DamageComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Common\DieOnCollision.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Common\HealthComponent.h">
-      <Filter>Header Files\Component Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\InitSystems.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\MainGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\Block.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMath\CircleMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMath\RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTypes\Direction.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTypes\Axis.h">
-      <Filter>Header Files\Enum Class Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTypes\Point.h">
-      <Filter>Header Files\Struct Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\SpriteRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Tile\BurnTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Tile\SpecialTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Tile\LiftTileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StickOnCollision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Render\TextRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AI\AlligatorAIComponent.h">
-    </ClCompile>
-    <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
+    <ClInclude Include="Components\Tile\LiftTileComponent.h" />
+    <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
+    <ClInclude Include="Resources\AudioPlayer.h" />
+    <ClInclude Include="Components\AI\AIjump.h" />
+    <ClInclude Include="Components\Player\Attack\AimState.h" />
+    <ClInclude Include="Components\Player\Attack\AimUpState.h" />
+    <ClInclude Include="Components\Player\Movement\AirborneState.h" />
+    <ClInclude Include="GameTypes\Axis.h" />
+    <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
+    <ClInclude Include="Components\Tile\BurnTileComponent.h" />
+    <ClInclude Include="Application\Camera.h" />
+    <ClInclude Include="Components\Events\CollisionEvent.h" />
+    <ClInclude Include="Components\Events\ComponentEvent.h" />
+    <ClInclude Include="ComponentSystem\ComponentSubsystem.h" />
+    <ClInclude Include="ComponentSystem\ComponentSystem.h" />
+    <ClInclude Include="Components\Render\SpriteRenderer.h" />
+    <ClInclude Include="Components\Player\Attack\DefaultAimState.h" />
+    <ClInclude Include="Components\Common\DieOnCollision.h" />
+    <ClInclude Include="Components\AI\FallingAIComponent.h" />
+    <ClInclude Include="Components\AI\FlyingAIComponent.h" />
+    <ClInclude Include="GameObject\Builders\GameObjectBuilder.h" />
+    <ClInclude Include="Components\InputComponent.h" />
+    <ClInclude Include="ComponentSystem\InputSystem.h" />
+    <ClInclude Include="GameObject\Builders\ItemDropBuilder.h" />
+    <ClInclude Include="Components\Player\LevelChangeComponent.h" />
+    <ClInclude Include="Components\NonUpdatingComponent.h" />
+    <ClInclude Include="Components\ItemDrop\PickupComponent.h" />
+    <ClInclude Include="Components\Player\Attack\PlayerAimState.h" />
+    <ClInclude Include="Components\Player\Attack\PlayerAttackState.h" />
+    <ClInclude Include="Components\Player\PlayerComponent.h" />
+    <ClInclude Include="Components\Player\PlayerControlComponent.h" />
+    <ClInclude Include="GameObject\Builders\PlayerHookBuilder.h" />
+    <ClInclude Include="Components\Player\Attack\PlayerHookState.h" />
+    <ClInclude Include="Components\Player\Movement\PlayerMovementState.h" />
+    <ClInclude Include="GameObject\Builders\PlayerProjectileBuilder.h" />
+    <ClInclude Include="Resources\Resources.h" />
+    <ClInclude Include="Resources\SpriteSheet.h" />
+    <ClInclude Include="Components\Render\ScrollingSpriteRenderer.h" />
+    <ClInclude Include="Components\AI\PounceAIComponent.h" />
+    <ClInclude Include="Components\AI\SnakeAIComponent.h" />
+    <ClInclude Include="ComponentSystem\RenderSystem.h" />
+    <ClInclude Include="Components\Player\Movement\StunState.h" />
+    <ClInclude Include="Components\AI\SwingingAIComponent.h" />
+    <ClInclude Include="Components\Tile\TileComponent.h" />
+    <ClInclude Include="Game\GameTime.h" />
+    <ClInclude Include="Components\Tile\SpecialTileComponent.h" />
+    <ClInclude Include="Components\Render\TileRenderer.h" />
+    <ClInclude Include="Components\AI\TrackerComponent.h" />
+    <ClInclude Include="GameMath\CircleMath.h" />
+    <ClInclude Include="Components\Collider\ColliderComponent.h" />
+    <ClInclude Include="Components\Component.h" />
+    <ClInclude Include="Components\Common\DamageComponent.h" />
+    <ClInclude Include="GameTypes\Direction.h" />
+    <ClInclude Include="GameObject\Builders\EnemyBuilder.h" />
+    <ClInclude Include="Application\Errors.h" />
+    <ClInclude Include="Components\Player\Movement\FlyingState.h" />
+    <ClInclude Include="Game\GameConstants.h" />
+    <ClInclude Include="Components\AI\AIComponent.h" />
+    <ClInclude Include="Components\Common\HealthComponent.h" />
+    <ClInclude Include="GameObject\GameObject.h" />
+    <ClInclude Include="Application\GameWindow.h" />
+    <ClInclude Include="Application\InitSystems.h" />
+    <ClInclude Include="Application\Log.h" />
+    <ClInclude Include="Application\Path.h" />
+    <ClInclude Include="Components\Physics\PhysicsComponent.h" />
+    <ClInclude Include="Components\Player\Movement\PlayerState.h" />
+    <ClInclude Include="Components\AI\RandomJumperComponent.h" />
+    <ClInclude Include="Components\Render\RenderComponent.h" />
+    <ClInclude Include="GameMath\RNG.h" />
+    <ClInclude Include="Resources\TextureLoader.h" />
+    <ClInclude Include="Game\MainGame.h" />
+    <ClInclude Include="GameTypes\Point.h" />
+    <ClInclude Include="Resources\SpritesheetInfo.h" />
+    <ClInclude Include="Resources\SpritesheetInfoReader.h" />
+    <ClInclude Include="GameObject\TileArrangement.h" />
+    <ClInclude Include="GameObject\Builders\TileBuilder.h" />
+    <ClInclude Include="Components\UpdatingComponent.h" />
+    <ClInclude Include="Components\Player\Movement\WalkingState.h" />
+    <ClInclude Include="StickOnCollision.h" />
+    <ClInclude Include="Components\Render\TextRenderer.h" />
+    <ClInclude Include="Game\GameInputs.h" />
+    <ClInclude Include="GameObject\GameObjectContainer.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\Level\Block.h" />
+    <ClInclude Include="Scene\Level\Level.h" />
+    <ClInclude Include="Scene\Level\LevelLoader.h" />
+    <ClInclude Include="Scene\Level\LevelManager.h" />
+    <ClInclude Include="Scene\Level\LevelMap.h" />
   </ItemGroup>
 </Project>

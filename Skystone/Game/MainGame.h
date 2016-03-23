@@ -10,7 +10,7 @@
 
 #include "Application/Errors.h"
 #include "Application/GameWindow.h"
-#include "Level/LevelManager.h"
+#include "Scene/SceneManager.h"
 
 class MainGame
 {
@@ -24,7 +24,8 @@ private:
 	GameWindow window_;
 
 	GameObject player_;
-	LevelManager levelManager_;
+	SceneManager sceneManager_;
+	//LevelManager levelManager_;
 
 	bool quit_;
 

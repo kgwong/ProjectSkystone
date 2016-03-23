@@ -20,8 +20,8 @@ public:
 	ColliderComponent(GameObject& owner, BoxCollider collider);
 	virtual ~ColliderComponent();
 
-	virtual void start(Level& level) {};
-	virtual void update();
+	virtual void start(Scene& scene) {};
+	void update();
 
 	void setCollider(BoxCollider newCollider); 
 

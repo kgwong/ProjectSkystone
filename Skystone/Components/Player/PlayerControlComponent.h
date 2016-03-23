@@ -15,7 +15,7 @@ public:
 	virtual ~PlayerControlComponent();
 
 	virtual void handleInput(SDL_Event& e);
-	virtual void update(Level& level);
+	virtual void update(Scene& scene);
 
 	void changeMovementState(PlayerState* state);
 	void changeAttackState(PlayerAimState* state);

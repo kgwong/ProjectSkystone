@@ -11,12 +11,12 @@ AIjump::~AIjump()
 {
 }
 
-void AIjump::start(Level& level)
+void AIjump::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
-void AIjump::update(Level& level)
+void AIjump::update(Scene& scene)
 {
 	if (timer_ == JUMP_INTERVAL)
 	{

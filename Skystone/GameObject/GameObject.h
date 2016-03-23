@@ -7,7 +7,7 @@
 
 #include "GameTypes/Point.h"
 
-class Level;
+class Scene;
 class Component;
 class ComponentEvent;
 class CollisionEvent;
@@ -58,7 +58,7 @@ public:
 	virtual void setType(Type type);
 	virtual Type getType() const;
 
-	virtual void startComponents(Level& level);
+	virtual void startComponents(Scene& scene);
 
 	void broadcastEvent(const ComponentEvent& e);
 	//FIX THIS LATER!!

@@ -84,3 +84,9 @@ float Point::getYMidPoint(Point& a, Point &b)
 {
 	return fabsf(a.y + b.y) / 2;
 }
+
+std::ostream& operator<<(std::ostream& out, const Point& f)
+{
+	out << "(" << f.x << ", " << f.y << ")";
+	return out;
+}

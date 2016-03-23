@@ -1,8 +1,10 @@
 #include "PlayerHookState.h"
 
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
+#include "StickOnCollision.h"
+#include "Components/Physics/PhysicsComponent.h"
 
-
+#include "Scene/Level/Level.h"
 #include "Application/Log.h"
 
 PlayerHookState::PlayerHookState(GameObject& owner)
@@ -24,19 +26,19 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	_keyInput = e.key.keysym.sym;
 
 	//key pressed
-	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[UP])
+	if (GameInputs::keyDown(e, UP))
 	{
 		_currentAimState = AimState::UP;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[LEFT])
+	else if (GameInputs::keyDown(e, LEFT))
 	{
 		_currentAimState = AimState::LEFT;
 	}
-	else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[RIGHT])
+	else if (GameInputs::keyDown(e, RIGHT))
 	{
 		_currentAimState = AimState::RIGHT;
 	}
-	if (e.key.keysym.sym == controlMap[LAUNCH_HOOK])
+	if (e.key.keysym.sym == GameInputs::getKeycode(LAUNCH_HOOK))
 	{
 		_launched = true;
 	}
@@ -60,8 +62,9 @@ double PlayerHookState::getDegrees()
 	}
 }
 
-void PlayerHookState::update(Level& level)
+void PlayerHookState::update(Scene& scene)
 {
+	Level& level = static_cast<Level&>(scene);
 	if (_launched)
 	{
 		int test_velocity = 5;
@@ -71,11 +74,35 @@ void PlayerHookState::update(Level& level)
 		_hookActive = true;
 		_degrees = 0;
 	}
+	
+	//StickOnCollision* hook_collision = nullptr;
+	//if (level.playerHook)
+	//	hook_collision = level.playerHook->getComponent<StickOnCollision>();
 
-	if (_hookActive)
-	{
-		
-	}
+	//if (_hookActive)
+	//{
+	//	if (hook_collision && hook_collision->isConnected)
+	//	{
+	//		LOG("INFO") << "Hook Position" << level.playerHook->getPos();
+	//		Point hookPoint = level.playerHook->getPos();
+	//		Point playerPoint = scene.gameObjects.getPlayer().getPos();
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(false);
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelX(0.1);
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelY(0.1);
+	//	}
+	//	else
+	//	{
+	//		_hookActive = false;
+	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+	//	}
+	//	
+	//}
+	//else
+	//{
+	//	_hookActive = false;
+	//	scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
+	//}
+
 	
 
 }

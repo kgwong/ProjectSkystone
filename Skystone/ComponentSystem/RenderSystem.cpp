@@ -19,7 +19,7 @@ void RenderSystem::addComponent(std::shared_ptr<Component> component)
 	renderLayers_[c->getRenderLayer()].push_back(c);
 }
 
-void RenderSystem::update(Level & level)
+void RenderSystem::update(Scene& scene)
 {
 	for (auto& layer : renderLayers_)
 	{
@@ -28,7 +28,7 @@ void RenderSystem::update(Level & level)
 			auto& component = layer[i];
 			if (component->owned())
 			{
-				component->update(level);
+				component->update(scene);
 				++i;
 			}
 			else
@@ -39,7 +39,7 @@ void RenderSystem::update(Level & level)
 	}
 }
 
-void RenderSystem::update(Level& level, GameWindow& window, float percBehind)
+void RenderSystem::update(Scene& scene, GameWindow& window, float percBehind)
 {
 	for (auto& layer : renderLayers_)
 	{

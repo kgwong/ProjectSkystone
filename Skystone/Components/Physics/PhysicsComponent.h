@@ -17,8 +17,8 @@ public:
 	PhysicsComponent(GameObject& owner);
 	virtual ~PhysicsComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 	virtual Component::Type getType() final;
 	
@@ -54,11 +54,11 @@ private:
 private:
 	void enactGravity();
 
-	void updatePosition(GameObject& owner, Level& level, Axis axis);
-	void correctPositionAfterCollision(GameObject& owner, Level& level, Axis axis);
-	void checkCollisions(GameObject& owner, Level& level);
-	void callOnCollision(GameObject& owner, GameObject& other, Level& level);
-	void correctPosition(GameObject& owner, GameObject& other, Level& level, Axis axis);
+	void updatePosition(GameObject& owner, Scene& scene, Axis axis);
+	void correctPositionAfterCollision(GameObject& owner, Scene& scene, Axis axis);
+	void checkCollisions(GameObject& owner, Scene& scene);
+	void callOnCollision(GameObject& owner, GameObject& other, Scene& scene);
+	void correctPosition(GameObject& owner, GameObject& other, Scene& scene, Axis axis);
 
 };
 

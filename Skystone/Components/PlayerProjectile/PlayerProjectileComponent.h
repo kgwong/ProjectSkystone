@@ -10,7 +10,7 @@ public:
 	PlayerProjectileComponent(GameObject& owner);
 	virtual ~PlayerProjectileComponent();
 
-	virtual void start(Level& level);
+	virtual void start(Scene& scene);
 };
 
 

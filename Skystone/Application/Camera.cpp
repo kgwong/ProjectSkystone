@@ -26,7 +26,10 @@ void Camera::followObject(GameObject& object, float percBehind)
 {
 	auto t = object.getComponent<SpriteRenderer>();
 
-	position_ = t->getRenderPosition(percBehind);
+	if (t != nullptr)
+	{
+		position_ = t->getRenderPosition(percBehind);
+	}
 	position_.x -= width_ / 2;
 	position_.y -= height_ / 2;
 	stayInLevelBounds();

@@ -23,14 +23,14 @@ LiftTileComponent::~LiftTileComponent()
 {
 }
 
-void LiftTileComponent::start(Level & level)
+void LiftTileComponent::start(Scene& scene)
 {
-	playerPhysics_ = level.player->getComponent<PhysicsComponent>();
-	playerCollider_ = level.player->getComponent<ColliderComponent>();
+	playerPhysics_ = scene.gameObjects.getPlayer().getComponent<PhysicsComponent>();
+	playerCollider_ = scene.gameObjects.getPlayer().getComponent<ColliderComponent>();
 
 }
 
-void LiftTileComponent::update(Level & level)
+void LiftTileComponent::update(Scene& scene)
 {
 	if (!playerPhysics_->gravityEnabled() && time_ >= delay_)
 	{

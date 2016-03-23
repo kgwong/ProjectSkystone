@@ -22,6 +22,11 @@ LevelManager::~LevelManager()
 {
 }
 
+GameObject* LevelManager::getCameraFollowObject()
+{
+	return currLevel_->getCameraFollowObject();
+}
+
 void LevelManager::setPlayer(GameObject* player)
 {
 	player_ = player;
@@ -32,7 +37,8 @@ void LevelManager::initStartingLevel()
 	if (player_ != nullptr)
 	{
 		currLevel_ = levelLoader_.getLevelWithID(4);
-		currLevel_->setPlayer(player_, Point{ currLevel_->getLevelWidth() / 2, currLevel_->getLevelHeight() / 2 });
+		currLevel_->setSceneManager(sceneManager_); //
+		currLevel_->setPlayer(player_, Point{ currLevel_->getWidth() / 2, currLevel_->getHeight() / 2 });
 		currLevel_->onEnter();
 	}
 	else
@@ -51,7 +57,6 @@ Level* LevelManager::getCurrentLevel()
 	return currLevel_;
 }
 
-
 void LevelManager::setNextLevel(int levelID, Point newPlayerPosition)
 {
 	nextLevelID_ = levelID;
@@ -64,11 +69,39 @@ bool LevelManager::changeLevelIfNecessary()
 	{
 		currLevel_->onExit();
 		currLevel_ = levelLoader_.getLevelWithID(nextLevelID_);
+		currLevel_->setLevelManager(this);
+		currLevel_->setSceneManager(sceneManager_); //
 		currLevel_->setPlayer(player_, newPlayerPosition_);
 		currLevel_->onEnter();
 		nextLevelID_ = INVALID_LEVEL_ID;
 		return true;
 	}
 	return false;
+}
+
+void LevelManager::handleInput(SDL_Event& e)
+{
+	currLevel_->handleInput(e);
+}
+
+void LevelManager::update()
+{
+	currLevel_->update();
+	changeLevelIfNecessary();
+}
+
+void LevelManager::render(GameWindow& window, float percBehind)
+{
+	currLevel_->render(window, percBehind);
+}
+
+int LevelManager::getWidth()
+{
+	return currLevel_->getWidth();
+}
+
+int LevelManager::getHeight()
+{
+	return currLevel_->getHeight();
 }
 

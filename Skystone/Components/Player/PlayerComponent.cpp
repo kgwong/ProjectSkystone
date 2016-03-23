@@ -1,6 +1,5 @@
 #include "PlayerComponent.h"
 
-#include "GameOverException.h"
 #include "Components/Common/HealthComponent.h"
 #include "Components/Common/DamageComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
@@ -21,7 +20,7 @@ PlayerComponent::~PlayerComponent()
 {
 }
 
-void PlayerComponent::start(Level & level)
+void PlayerComponent::start(Scene& scene)
 {
 	health_ = owner_.getComponent<HealthComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
@@ -32,7 +31,7 @@ void PlayerComponent::handleEvent(const ComponentEvent& e)
 	switch (e.getType())
 	{
 	case ComponentEvent::Type::onDeath:
-		throw GameOverException();
+		e.getScene().setNextScene(SceneID::GAME_OVER);
 		break;
 	case ComponentEvent::Type::onDamageTaken:
 		LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
@@ -67,7 +66,7 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
 		if (health_->takeDamage(damage->getDamage()))
 		{
-			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getLevel()));
+			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getScene()));
 		}
 		break;
 	}

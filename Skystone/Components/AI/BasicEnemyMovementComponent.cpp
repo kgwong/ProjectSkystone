@@ -21,13 +21,13 @@ BasicEnemyMovementComponent::~BasicEnemyMovementComponent()
 }
 
 
-void BasicEnemyMovementComponent::start(Level& level)
+void BasicEnemyMovementComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	oldEnemyPosition_ = owner_.getPosX();
 }
 
-void BasicEnemyMovementComponent::update(Level& level)
+void BasicEnemyMovementComponent::update(Scene& scene)
 {
 	float moveDistance = 300;
 	if (owner_.getPosX() > oldEnemyPosition_ + moveDistance)

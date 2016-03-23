@@ -11,8 +11,8 @@ public:
 	RenderComponent(GameObject& owner);
 	virtual ~RenderComponent() = 0;
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 	virtual void render(GameWindow& window, float percBehind) = 0;
 	
 	virtual Component::Type getType() final;

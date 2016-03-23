@@ -48,6 +48,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -56,6 +57,9 @@
       <SubSystem>Console</SubSystem>
       <Profile>true</Profile>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -77,6 +81,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
+    <ClCompile Include="GameObject\GameObjectContainer.cpp" />
+    <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
@@ -103,7 +109,6 @@
     <ClCompile Include="Components\AI\FlyingAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\FlyingState.cpp" />
     <ClCompile Include="GameObject\Builders\GameObjectBuilder.cpp" />
-    <ClCompile Include="GameOverException.cpp" />
     <ClCompile Include="Components\Common\HealthComponent.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Application\GameWindow.cpp" />
@@ -111,11 +116,11 @@
     <ClCompile Include="Components\InputComponent.cpp" />
     <ClCompile Include="ComponentSystem\InputSystem.cpp" />
     <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp" />
-    <ClCompile Include="Level\Level.cpp" />
+    <ClCompile Include="Scene\Level\Level.cpp" />
     <ClCompile Include="Components\Player\LevelChangeComponent.cpp" />
-    <ClCompile Include="Level\LevelLoader.cpp" />
-    <ClCompile Include="Level\LevelManager.cpp" />
-    <ClCompile Include="Level\LevelMap.cpp" />
+    <ClCompile Include="Scene\Level\LevelLoader.cpp" />
+    <ClCompile Include="Scene\Level\LevelManager.cpp" />
+    <ClCompile Include="Scene\Level\LevelMap.cpp" />
     <ClCompile Include="Components\Tile\LiftTileComponent.cpp" />
     <ClCompile Include="Application\Log.cpp" />
     <ClCompile Include="Components\NonUpdatingComponent.cpp" />
@@ -154,6 +159,8 @@
     <ClCompile Include="Components\AI\TrackerComponent.cpp" />
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
@@ -161,6 +168,7 @@
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
+    <ClInclude Include="GameObject\GameObjectContainer.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
@@ -169,7 +177,7 @@
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
     <ClInclude Include="Components\Tile\BurnTileComponent.h" />
-    <ClInclude Include="Level\Block.h" />
+    <ClInclude Include="Scene\Level\Block.h" />
     <ClInclude Include="Application\Camera.h" />
     <ClInclude Include="Components\Events\CollisionEvent.h" />
     <ClInclude Include="Components\Events\ComponentEvent.h" />
@@ -181,7 +189,6 @@
     <ClInclude Include="Components\AI\FallingAIComponent.h" />
     <ClInclude Include="Components\AI\FlyingAIComponent.h" />
     <ClInclude Include="GameObject\Builders\GameObjectBuilder.h" />
-    <ClInclude Include="GameOverException.h" />
     <ClInclude Include="Components\InputComponent.h" />
     <ClInclude Include="ComponentSystem\InputSystem.h" />
     <ClInclude Include="GameObject\Builders\ItemDropBuilder.h" />
@@ -212,7 +219,7 @@
     <ClInclude Include="GameMath\CircleMath.h" />
     <ClInclude Include="Components\Collider\ColliderComponent.h" />
     <ClInclude Include="Components\Component.h" />
-    <ClInclude Include="Game\Controls.h" />
+    <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="Components\Common\DamageComponent.h" />
     <ClInclude Include="GameTypes\Direction.h" />
     <ClInclude Include="GameObject\Builders\EnemyBuilder.h" />
@@ -224,10 +231,10 @@
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Application\GameWindow.h" />
     <ClInclude Include="Application\InitSystems.h" />
-    <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Level\LevelLoader.h" />
-    <ClInclude Include="Level\LevelManager.h" />
-    <ClInclude Include="Level\LevelMap.h" />
+    <ClInclude Include="Scene\Level\Level.h" />
+    <ClInclude Include="Scene\Level\LevelLoader.h" />
+    <ClInclude Include="Scene\Level\LevelManager.h" />
+    <ClInclude Include="Scene\Level\LevelMap.h" />
     <ClInclude Include="Application\Log.h" />
     <ClInclude Include="Application\Path.h" />
     <ClInclude Include="Components\Physics\PhysicsComponent.h" />
@@ -244,6 +251,8 @@
     <ClInclude Include="GameObject\Builders\TileBuilder.h" />
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>

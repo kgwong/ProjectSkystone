@@ -16,14 +16,14 @@ void ComponentSubsystem::addComponent(std::shared_ptr<Component> component)
 	components_.push_back(component);
 }
 
-void ComponentSubsystem::update(Level& level)
+void ComponentSubsystem::update(Scene& scene)
 {
 	for (size_t i = 0; i < components_.size(); /*EMPTY*/)
 	{
 		auto& component = components_[i];
 		if (component->owned())
 		{
-			component->update(level);
+			component->update(scene);
 			++i;
 		}
 		else
