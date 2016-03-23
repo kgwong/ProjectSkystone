@@ -34,6 +34,18 @@ bool Point::operator==(const Point & rhs) const
 	return this->x == rhs.x && this->y == rhs.y;
 }
 
+bool Point::operator!=(const Point & rhs) const
+{
+	return !(*this == rhs);
+}
+
+Point& Point::operator=(const Point & rhs)
+{
+	x = rhs.x;
+	y = rhs.y;
+	return *this;
+}
+
 float Point::getDistance(Point& a, Point& b)
 {
 	float x2 = a.x;
