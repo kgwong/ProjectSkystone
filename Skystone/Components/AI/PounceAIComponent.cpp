@@ -3,18 +3,20 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "GameTypes/Point.h"
 #include "Game/GameTime.h"
+#include "Application/Log.h"
+
 
 #define PI 3.14159265
 
 
 const float PounceAIComponent::DEFAULT_RADIUS = 175.0f;
-const float PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.2;
+const double PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.5;
 
 PounceAIComponent::PounceAIComponent(GameObject& owner)
 	:AIComponent(owner),
 	radius_(DEFAULT_RADIUS),
 	cooldown_time_(DEFAULT_COOLDOWN_TIME),
-	timeInterval_(0)
+	timer_(0)
 {
 }
 
@@ -32,11 +34,13 @@ void PounceAIComponent::start(Scene& scene)
 
 void PounceAIComponent::update(Scene& scene)
 {
-	timeInterval_ += Time::getElapsedUpdateTimeSeconds();
-	//UNTESTED
-	if (timeInterval_ > cooldown_time_)
+	//check if we're on cooldown; if not, check if we're on top of the pounce
+	//if not, check which direction to jump, then jump
+	//the cooldown timer only continues when not jumping (sorta)
+
+	if (timer_ > cooldown_time_)
 	{
-		timeInterval_ = 0;
+		timer_ = 0;
 		cooldown_ = false;
 	}
 
@@ -67,6 +71,8 @@ void PounceAIComponent::update(Scene& scene)
 	}
 	else
 	{
+		timer_ += Time::getElapsedUpdateTimeSeconds();
+
 		if (!physics_->isFalling())
 		{
 			physics_->setVelX(0);
