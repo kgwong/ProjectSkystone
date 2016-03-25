@@ -111,6 +111,6 @@ void LevelLoader::loadBackground(const std::string& filepath, Level* level)
 	while (ifs >> name >> scrollx >> scrolly)
 	{
 		level->setBackgroundLayerFromSprite(Resources::getSpriteSheet(name), layer++, scrollx, scrolly);
-		level->gameObjects.add("Background", name + scrollx + scrolly);
+		//level->gameObjects.add("Background", name + scrollx + scrolly);
 	}
 }
