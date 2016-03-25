@@ -84,6 +84,7 @@
     <ClCompile Include="Scene\Level\LevelLoader.cpp" />
     <ClCompile Include="Scene\Level\LevelManager.cpp" />
     <ClCompile Include="Scene\Level\LevelMap.cpp" />
+    <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -176,5 +177,7 @@
     <ClInclude Include="Scene\Level\LevelLoader.h" />
     <ClInclude Include="Scene\Level\LevelManager.h" />
     <ClInclude Include="Scene\Level\LevelMap.h" />
+    <ClInclude Include="GameTypes\Quadrant.h" />
+    <ClInclude Include="Components\Render\ScrollingQuad.h" />
   </ItemGroup>
 </Project>
