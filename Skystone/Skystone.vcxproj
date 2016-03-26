@@ -176,14 +176,11 @@
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
     <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
-<<<<<<< HEAD
     <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
     <ClInclude Include="HangState.h" />
     <ClInclude Include="HookStateManager.h" />
-=======
     <ClInclude Include="GameTypes\Quadrant.h" />
->>>>>>> 2f58e13ff718475c15dab6632a6766c022121f16
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
