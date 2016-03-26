@@ -18,6 +18,12 @@ public:
 
 	virtual std::string name() = 0;
 
+	//adding these!!! ~ make these their own components.
+	//virtual void onEnter(Scene& scene) = 0;
+	//virtual void onExit(Scene& scene) = 0;
+	//virtual void handleInput(Scene& scene, SDL_Event& e) = 0;
+	//virtual void update(Scene& scene) = 0;
+
 };
 
 #endif //PLAYER_STATE_H

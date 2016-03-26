@@ -7,6 +7,7 @@
 #include "DefaultAimState.h"
 #include "AimUpState.h"
 
+#include "PlayerHookState.h"
 class PlayerAttackState : public InputComponent
 {
 public:
@@ -19,6 +20,11 @@ public:
 
 	static DefaultAimState defaultAimState;
 	static AimUpState aimUpState;
+
+	//the hook states
+	//static LaunchHookState launchstate;
+	//static ConnectHookState connectState;
+	//static DisconnectHookState disconnectState;
 
 public:
 	PlayerAttackState(GameObject& owner);

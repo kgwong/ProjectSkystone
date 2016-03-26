@@ -7,6 +7,7 @@
 
 //-------Harvey's include-----///
 #include "Attack/PlayerHookState.h"
+#include "HookStateManager.h"
 
 class PlayerControlComponent : public InputComponent
 {
@@ -21,10 +22,12 @@ public:
 	void changeAttackState(PlayerAimState* state);
 
 	//----harvey function----///
-	//void changeHookState(PlayerHookState*);
+	void changeHookState(HookStateManager* state);
+	PlayerHookState HookState();
+
+	//will delete later.
 	bool isHookActive();
 	SDL_Keycode HookKeyInput;
-
 
 private:
 	PlayerMovementState movement_;

@@ -8,6 +8,7 @@
 #include "FlyingState.h"
 #include "StunState.h"
 
+#include "HangState.h"
 
 class PlayerMovementState : public InputComponent
 {
@@ -16,6 +17,7 @@ public:
 	static FlyingState flyingState;
 	static AirborneState airborneState;
 	static StunState stunState;
+	static HangState hangState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();

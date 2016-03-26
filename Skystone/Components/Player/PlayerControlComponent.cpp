@@ -37,4 +37,16 @@ void PlayerControlComponent::changeAttackState(PlayerAimState* state)
 	attack_.changeState(state);
 }
 
+void PlayerControlComponent::changeHookState(HookStateManager* state)
+{
+	hooker_.changeState(state);
+}
+
+PlayerHookState PlayerControlComponent::HookState()
+{
+	return hooker_;
+}
+
+
+
 

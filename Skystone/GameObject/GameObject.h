@@ -71,6 +71,10 @@ protected:
 
 	bool alive_;
 	Type type_;
+
+//gets reference to its scene.
+public:
+
 };
 
 //http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components

@@ -84,6 +84,11 @@
     <ClCompile Include="Scene\Level\LevelLoader.cpp" />
     <ClCompile Include="Scene\Level\LevelManager.cpp" />
     <ClCompile Include="Scene\Level\LevelMap.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookConnectState.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
+    <ClCompile Include="HookStateManager.cpp" />
+    <ClCompile Include="HangState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -176,5 +181,10 @@
     <ClInclude Include="Scene\Level\LevelLoader.h" />
     <ClInclude Include="Scene\Level\LevelManager.h" />
     <ClInclude Include="Scene\Level\LevelMap.h" />
+    <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
+    <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
+    <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
+    <ClInclude Include="HookStateManager.h" />
+    <ClInclude Include="HangState.h" />
   </ItemGroup>
 </Project>

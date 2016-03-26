@@ -43,11 +43,11 @@ public:
 	virtual int getWidth(); 
 	virtual int getHeight();
 
-	void addPlayerHookAtLocation(Point position, int velocity, double degrees);
+	//void addPlayerHookAtLocation(Point position, int velocity, double degrees);
 
 public:
 	//there should only be one hook per cast.
-	std::shared_ptr<GameObject> playerHook;
+	//std::shared_ptr<GameObject> playerHook;
 	//int numHook_;
 
 private:

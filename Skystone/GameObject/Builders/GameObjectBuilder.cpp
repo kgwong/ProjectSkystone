@@ -35,6 +35,8 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	//player.addComponent(std::make_shared<PlayerMovementState>(player));
 	//player.addComponent(std::make_shared<PlayerAttackState>(player));
 	player.addComponent(std::make_shared<PlayerControlComponent>(player));
+
+	//player.addComponent(std::make_shared<HookComponent>(player));
 }
 
 GameObject& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)

@@ -81,10 +81,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookConnectState.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
+    <ClCompile Include="HangState.cpp" />
+    <ClCompile Include="HookStateManager.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -168,7 +173,12 @@
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
+    <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
+    <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
+    <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
+    <ClInclude Include="HangState.h" />
+    <ClInclude Include="HookStateManager.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />

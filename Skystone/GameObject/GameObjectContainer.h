@@ -34,6 +34,11 @@ public:
 	TileArrangement& getTiles();
 	ObjectVector& get(GameObject::Type type);
 
+	std::shared_ptr<GameObject> playerHook;
+
+	GameObject& getHook();
+	void setHook(GameObject* hook);
+
 private:
 	Scene& scene_;
 	ComponentSystem& componentSystem_;
@@ -41,6 +46,8 @@ private:
 	GameObject* player_;
 	TileArrangement tileArrangement_;
 	ObjectMap objects_;
+
+	GameObject* hook_;
 
 public: //should be private
 	void removeDeadObjects(ObjectVector& vector, Scene& scene);

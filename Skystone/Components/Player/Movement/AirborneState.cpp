@@ -41,6 +41,12 @@ void AirborneState::handleInput(GameObject& player, SDL_Event& e)
 
 void AirborneState::update(GameObject& player)
 {
+	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	{
+		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::hangState);
+		return;
+	}
+
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);

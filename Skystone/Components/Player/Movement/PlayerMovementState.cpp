@@ -7,6 +7,7 @@ WalkingState PlayerMovementState::walkingState;
 FlyingState PlayerMovementState::flyingState;
 AirborneState PlayerMovementState::airborneState;
 StunState PlayerMovementState::stunState;
+HangState PlayerMovementState::hangState;
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner), 
@@ -26,6 +27,7 @@ void PlayerMovementState::handleInput(SDL_Event& e)
 void PlayerMovementState::update(Scene& scene)
 {
 	currentState_->update(owner_);
+	//LOG("INFO") << currentState_->name();
 }
 
 void PlayerMovementState::changeState(PlayerState* state)

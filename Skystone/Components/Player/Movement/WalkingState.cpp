@@ -8,6 +8,7 @@
 
 #include "Resources/Resources.h"
 
+
 const float WalkingState::JUMP_VELOCITY = -1200;
 const float WalkingState::WALK_VELOCITY = 300;
 
@@ -38,11 +39,11 @@ void WalkingState::handleInput(GameObject& player, SDL_Event& e)
 
 void WalkingState::update(GameObject& player)
 {
+
 	if (player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
 		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
-
 		return;
 	}
 

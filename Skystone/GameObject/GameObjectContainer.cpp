@@ -64,7 +64,11 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "PlayerHook")
 	{
-
+		if (playerHook == nullptr)
+		{
+			newObject = builder_.buildPlayerHook(componentSystem_, name);
+			playerHook = newObject;
+		}
 	}
 	else if (type == "Drop")
 	{
@@ -131,3 +135,15 @@ void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 		}
 	}
 }
+
+GameObject& GameObjectContainer::getHook()
+{
+	return *hook_;
+}
+void GameObjectContainer::setHook(GameObject* hook)
+{
+	hook_ = hook;
+}
+
+
+
