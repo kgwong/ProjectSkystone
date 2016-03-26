@@ -13,7 +13,7 @@ class PounceAIComponent :
 public:
 	//use Time::
 	const static float DEFAULT_RADIUS;
-	const static float DEFAULT_COOLDOWN_TIME;
+	const static double DEFAULT_COOLDOWN_TIME;
 
 
 public:
@@ -26,8 +26,8 @@ public:
 private:
 	PhysicsComponent* physics_;
 	float radius_;
-	int timeInterval_;
-	int cooldown_time_;
+	double timer_;
+	double cooldown_time_;
 	bool cooldown_;
 
 };

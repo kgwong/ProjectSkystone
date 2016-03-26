@@ -166,6 +166,7 @@
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
     <ClCompile Include="StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
@@ -175,10 +176,14 @@
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
     <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
+<<<<<<< HEAD
     <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
     <ClInclude Include="HangState.h" />
     <ClInclude Include="HookStateManager.h" />
+=======
+    <ClInclude Include="GameTypes\Quadrant.h" />
+>>>>>>> 2f58e13ff718475c15dab6632a6766c022121f16
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
@@ -263,6 +268,7 @@
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Components\Render\ScrollingQuad.h" />
     <ClInclude Include="StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>
