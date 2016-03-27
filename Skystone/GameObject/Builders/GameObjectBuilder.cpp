@@ -59,6 +59,11 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerProjectile(ComponentSy
 	return playerProjectileBuilder_.build(componentSystem, name);
 }
 
+std::shared_ptr<GameObject> GameObjectBuilder::buildBackground(ComponentSystem& componentSystem, const std::string backgroundName)
+{
+	return backgroundBuilder_.build(componentSystem, backgroundName);
+}
+
 std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
 {
 	return playerHookBuilder_.build(componentSystem, name);

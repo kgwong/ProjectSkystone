@@ -104,13 +104,12 @@ void LevelLoader::loadBackground(const std::string& filepath, Level* level)
 	if (!ifs)
 		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
 
-	int layer = 0;
-	std::string name;
-	std::string scrollx, scrolly;
-	
-	while (ifs >> name >> scrollx >> scrolly)
+	int layer = 0;		
+	std::string line;
+
+	while (getline(ifs, line))
 	{
-	//	level->setBackgroundLayerFromSprite(Resources::getSpriteSheet(name), layer++, scrollx, scrolly);
-		//level->gameObjects.add("Background", name + scrollx + scrolly);
+		level->gameObjects.add("Background", line + " " + std::to_string(layer));
+		layer++;
 	}
 }

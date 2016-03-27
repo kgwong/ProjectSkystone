@@ -72,13 +72,6 @@ void Level::setLevelManager(LevelManager* levelManager)
 	levelManager_ = levelManager;
 }
 
-void Level::setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly)
-{
-	background_ = std::make_shared<GameObject>();
-	background_->setType(GameObject::Type::BACKGROUND);
-	background_->addComponent(componentSystem_.getNew<ScrollingSpriteRenderer>(*background_, backgroundSprite, layer, scrollx, scrolly));
-}
-
 LevelManager* Level::getLevelManager()
 {
 	return levelManager_;

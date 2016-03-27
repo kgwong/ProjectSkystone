@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
     <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundBuilder.h" />
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />

@@ -29,6 +29,11 @@ void ScrollingSpriteRenderer::initQuads()
 	}
 }
 
+void ScrollingSpriteRenderer::setLayer(int layer)
+{
+	layerNum_ = layer;
+}
+
 void ScrollingSpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
 	if(oldCamPos_ != gameWindow.getCamera().getPos())

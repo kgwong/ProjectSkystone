@@ -12,6 +12,7 @@ public:
 	virtual ~ScrollingSpriteRenderer();
 
 	void initQuads();
+	void setLayer(int layer);
 	virtual void start(Scene& scene) {};
 	virtual void render(GameWindow& gameWindow, float percBehind);
 

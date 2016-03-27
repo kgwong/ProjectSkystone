@@ -30,7 +30,6 @@ public:
 	virtual void onExit();
 
 	void setLevelManager(LevelManager* levelManager);
-	void setBackgroundLayerFromSprite(SpriteSheet* backgroundSprite, int layer, bool scrollx, bool scrolly);
 
 	LevelManager* getLevelManager();
 

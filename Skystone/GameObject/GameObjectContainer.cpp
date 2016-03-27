@@ -83,11 +83,13 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	//duct taping code together
 	else if (type == "Background")
 	{
-		newObject = std::make_shared<GameObject>();
-		newObject->setType(GameObject::Type::BACKGROUND);
+		//newObject = std::make_shared<GameObject>();
+		//newObject->setType(GameObject::Type::BACKGROUND);
+		//objects_[GameObject::Type::BACKGROUND].push_back(newObject);
+		//SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
+		//newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
+		newObject = builder_.buildBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
-		SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
-		newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
 	}
 	else
 	{
