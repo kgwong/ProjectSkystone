@@ -5,20 +5,12 @@
 #include "LevelMap.h"
 #include "LevelManager.h"
 
-#include "Components/Render/ScrollingSpriteRenderer.h"
-
-#include "Components/Physics/PhysicsComponent.h" //
-#include "GameMath/CircleMath.h" //
-#include "Components/Player/PlayerControlComponent.h"
-#include "StickOnCollision.h"
 #include "Application/Log.h"
-#include "GameObject/Builders/GameObjectBuilder.h"
 
-GameObjectBuilder Level::gameObjectBuilder_;
+#include "Components\Events\ComponentEvent.h"
 
 Level::Level(int levelID)
 	: levelManager_(nullptr),
-	background_(nullptr),
 	levelID_(levelID)
 {
 }
@@ -40,25 +32,6 @@ void Level::onEnter()
 
 void Level::onExit()
 {
-	/*if (playerHook)
-	{
-		this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
-		playerHook->kill();
-		playerHook = nullptr;
-	}*/
-	
-	//should be one game object not a vector.
-	//ObjectVector& playerHook = gameObjects.get(GameObject::Type::PLAYER_HOOK);
-	//for (auto& p : playerHook)
-	//	p->disownComponents();
-	//shared ptr.
-	if (gameObjects.playerHook != nullptr)
-	{
-		gameObjects.playerHook->kill();
-		gameObjects.playerHook = nullptr;
-	}
-	//raw pointer.
-	//gameObjects.getHook().disownComponents();
 	gameObjects.getPlayer().disownComponents();
 	ObjectVector& playerProjectiles = gameObjects.get(GameObject::Type::PLAYER_PROJECTILE);
 	for (auto& p : playerProjectiles)
@@ -76,42 +49,6 @@ LevelManager* Level::getLevelManager()
 {
 	return levelManager_;
 }
-
-//void Level::addPlayerHookAtLocation(Point position, int velocity, double degrees)
-//{
-//	std::cout << "Player refCount: " << playerHook.use_count() << std::endl;
-//
-//	if (playerHook == nullptr)
-//	{
-//		auto hookToFling = gameObjectBuilder_.buildPlayerHook(componentSystem_, "");
-//		hookToFling->setPos(position);
-//		playerHook = std::move(hookToFling);
-//		auto physics = playerHook->getComponent<PhysicsComponent>();
-//		physics->enableGravity(false);
-//
-//		//use float here
-//		int newVelX = (int)(velocity * cos(toRadians(degrees)));
-//		int newVelY = (int)(velocity * sin(toRadians(degrees)));
-//		physics->setVelX(newVelX * 60.0f);
-//		physics->setVelY(newVelY * 60.0f);
-//		playerHook->startComponents(*this);
-//	}
-//	//if the hook is rendered on the map
-//	if (playerHook != nullptr)
-//	{
-//		PlayerControlComponent * playerControls = gameObjects.getPlayer().getComponent<PlayerControlComponent>();
-//		StickOnCollision * hookState = playerHook->getComponent<StickOnCollision>();
-//		//if hook is attached to a tile and player pressed D to launch hook..
-//		if (playerControls != nullptr && hookState != nullptr
-//			&& hookState->isConnected == true
-//			&& playerControls->HookKeyInput == GameInputs::getKeycode(LAUNCH_HOOK))
-//		{
-//			this->gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
-//			playerHook->kill();
-//			playerHook = nullptr;
-//		}
-//	}
-//}
 
 void Level::update()
 {
