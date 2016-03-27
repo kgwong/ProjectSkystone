@@ -109,7 +109,7 @@ void LevelLoader::loadBackground(const std::string& filepath, Level* level)
 
 	while (getline(ifs, line))
 	{
-		level->gameObjects.add("Background", line + " " + std::to_string(layer));
+		level->gameObjects.add("Background", "Scrolling " + line + " " + std::to_string(layer));
 		layer++;
 	}
 }
