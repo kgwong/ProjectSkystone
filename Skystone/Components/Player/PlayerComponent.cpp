@@ -63,10 +63,19 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 		LOG("GAME") << "Picked up a thing to heal 10hp!";
 		break;
 	case GameObject::Type::ENEMY:
+	{
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
 		if (health_->takeDamage(damage->getDamage()))
 		{
 			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getScene()));
+		}
+		break;
+	}
+	case GameObject::Type::ENEMY_PROJECTILE:
+		DamageComponent* projectileDamage = e.getOtherObject().getComponent<DamageComponent>();
+		if (health_->takeDamage(projectileDamage->getDamage()))
+		{
+			LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
 		}
 		break;
 	}
