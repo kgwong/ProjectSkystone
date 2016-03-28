@@ -48,18 +48,10 @@ void PounceAIComponent::update(Scene& scene)
 	if (!cooldown_)
 	{
 		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-		int playerSide;
+		float playerSide;
 
-		if (Point::getXDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos()) == 0)
-		{
-			playerSide = 0;
-		}
 
-		else
-		{
-			playerSide = (int) (-xDist / Point::getXDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos()));
-		}
-
+		playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 
 		if (AIComponent::isNearby(xDist, radius_))
 		{

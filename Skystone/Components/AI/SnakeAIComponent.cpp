@@ -3,6 +3,10 @@
 #include <iostream>
 using namespace std;
 
+const float DEFAULT_X_DIST = 100;
+const float DEFAULT_Y_DIST = 100;
+const float DEFAULT_VELOCITY = 3;
+
 SnakeAIComponent::SnakeAIComponent(GameObject& owner)
 	:AIComponent(owner), 
 	velocity_(DEFAULT_VELOCITY)

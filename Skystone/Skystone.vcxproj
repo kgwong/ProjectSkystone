@@ -83,6 +83,7 @@
     <ClCompile Include="BackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
     <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
+    <ClCompile Include="EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Components\Tile\LiftTileComponent.h" />
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
     <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
+    <ClInclude Include="EnemyProjectileComponent.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
     <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />

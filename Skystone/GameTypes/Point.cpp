@@ -97,6 +97,21 @@ float Point::getYMidPoint(Point& a, Point &b)
 	return fabsf(a.y + b.y) / 2;
 }
 
+float Point::getFacingDirection(float distance, Point&a, Point&b)
+{
+	float playerSide = 0;
+	if (getXDistance(a, b) == 0)
+	{
+		playerSide = 0;
+	}
+	
+	else
+	{
+		playerSide = (float)(-distance / getXDistance(a, b));
+	}
+	return playerSide;
+}
+
 std::ostream& operator<<(std::ostream& out, const Point& f)
 {
 	out << "(" << f.x << ", " << f.y << ")";

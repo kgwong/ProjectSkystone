@@ -91,6 +91,7 @@
     <ClCompile Include="HangState.cpp" />
     <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
     <ClCompile Include="BackgroundBuilder.cpp" />
+    <ClCompile Include="EnemyProjectileComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -191,5 +192,6 @@
     <ClInclude Include="GameTypes\Quadrant.h" />
     <ClInclude Include="Components\Render\ScrollingQuad.h" />
     <ClInclude Include="BackgroundBuilder.h" />
+    <ClInclude Include="EnemyProjectileComponent.h" />
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ struct Point
 	static Point getMidPoint(Point& a, Point& b);
 	static float getXMidPoint(Point& a, Point& b);
 	static float getYMidPoint(Point& a, Point &b);
+	static float getFacingDirection(float distance, Point&a, Point&b);
 };
 
 std::ostream& operator<<(std::ostream& out, const Point& f);
