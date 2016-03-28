@@ -24,13 +24,11 @@ public:
 	virtual void onEnter();
 	virtual void onExit();
 
-	void setLevelManager(LevelManager* levelManager);
-
-	LevelManager* getLevelManager();
-
 	virtual void update();
 
 	int getID();
+
+	void setLevelManager(LevelManager* levelManager);
 
 	void setNextLevel(Direction dir);
 

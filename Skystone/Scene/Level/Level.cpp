@@ -45,11 +45,6 @@ void Level::setLevelManager(LevelManager* levelManager)
 	levelManager_ = levelManager;
 }
 
-LevelManager* Level::getLevelManager()
-{
-	return levelManager_;
-}
-
 void Level::update()
 {
 	updatePlayer();
