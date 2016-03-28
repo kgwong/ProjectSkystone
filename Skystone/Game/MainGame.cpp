@@ -93,7 +93,12 @@ void MainGame::render(float percBehind)
 {
 	SDL_RenderClear(window_.getRenderer());
 
-	window_.getCamera().followObject(*sceneManager_.getCameraFollowObject(), percBehind);
+	auto followObj = sceneManager_.getCameraFollowObject();
+	if (followObj != nullptr) 
+	{
+		window_.getCamera().followObject(*sceneManager_.getCameraFollowObject(), percBehind);
+	}
+
 	sceneManager_.render(window_, percBehind);
 
 	SDL_RenderPresent(window_.getRenderer());
