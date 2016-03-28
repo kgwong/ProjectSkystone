@@ -1,6 +1,7 @@
 #include "LevelChangeComponent.h"
 
 #include "GameTypes/Direction.h"
+#include "Scene/Level/Level.h"
 
 LevelChangeComponent::LevelChangeComponent(GameObject& owner)
 	: UpdatingComponent(owner),
@@ -13,19 +14,21 @@ LevelChangeComponent::~LevelChangeComponent()
 {
 }
 
-void LevelChangeComponent::start(Level& level)
+void LevelChangeComponent::start(Scene& scene)
 {
 	collider_ = owner_.getComponent<ColliderComponent>();
 }
 
-void LevelChangeComponent::update(Level& level)
+void LevelChangeComponent::update(Scene& scene)
 {
+	//
+	Level& level = static_cast<Level&>(scene);
 	if (collider_->getLeft() < 0)
 		level.setNextLevel(Direction::LEFT);
-	else if (collider_->getRight() > level.getLevelWidth())
+	else if (collider_->getRight() > level.getWidth())
 		level.setNextLevel(Direction::RIGHT);
 	else if (collider_->getTop() < 0)
 		level.setNextLevel(Direction::UP);
-	else if (collider_->getBottom() > level.getLevelHeight())
+	else if (collider_->getBottom() > level.getHeight())
 		level.setNextLevel(Direction::DOWN);
 }

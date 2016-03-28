@@ -3,11 +3,13 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Player/Movement/PlayerState.h"
 
-#include "Game/Controls.h"
+#include "Game/GameInputs.h"
 
 #include "Application/Log.h"
 
 #include "Resources/Resources.h"
+
+#include "GameMath/CircleMath.h"
 
 DefaultAimState PlayerAttackState::defaultAimState;
 AimUpState PlayerAttackState::aimUpState;
@@ -30,8 +32,10 @@ PlayerAttackState::~PlayerAttackState()
 void PlayerAttackState::handleInput(SDL_Event& e)
 {
 	currentState_->handleInput(owner_, e);
-	if (e.key.keysym.sym == controlMap[ATTACK])
+	if (GameInputs::keyDown(e, ATTACK))
+	{
 		shoot_ = true;
+	}
 	//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == controlMap[ATTACK])
 	//	shoot_ = false;
 
@@ -83,7 +87,7 @@ void PlayerAttackState::handleInput(SDL_Event& e)
 	}*/
 }
 
-void PlayerAttackState::update(Level& level)
+void PlayerAttackState::update(Scene& scene)
 {
 	/*switch (aimState_)
 	{
@@ -112,11 +116,15 @@ void PlayerAttackState::update(Level& level)
 	//LOG << "owner pos: " << owner_.getPos().x << ", " << owner_.getPos().y;
 	if (shoot_)
 	{
-		level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
+		//level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
+		auto bullet = scene.gameObjects.add("PlayerProjectile", "", owner_.getPos());
+		auto physics = bullet->getComponent<PhysicsComponent>();
+		float newVelX = (float)PROJECTILE_VELOCITY * cos(toRadians(degrees_));
+		float newVelY = (float)PROJECTILE_VELOCITY * sin(toRadians(degrees_));
+		physics->setVelX(newVelX * 60.0f);
+		physics->setVelY(newVelY * 60.0f);
 		shoot_ = false;
 
-		//play sound here!
-		//audio_.PlayClip("laser1");
 		Resources::audioPlayer.PlayClip("laser1");
 	}
 

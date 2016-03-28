@@ -7,6 +7,7 @@
 #include "DefaultAimState.h"
 #include "AimUpState.h"
 
+#include "PlayerHookState.h"
 class PlayerAttackState : public InputComponent
 {
 public:
@@ -20,12 +21,17 @@ public:
 	static DefaultAimState defaultAimState;
 	static AimUpState aimUpState;
 
+	//the hook states
+	//static LaunchHookState launchstate;
+	//static ConnectHookState connectState;
+	//static DisconnectHookState disconnectState;
+
 public:
 	PlayerAttackState(GameObject& owner);
 	virtual ~PlayerAttackState();
 
 	virtual void handleInput(SDL_Event& e);
-	virtual void update(Level& level);
+	virtual void update(Scene& scene);
 
 	void changeState(PlayerAimState* state);
 

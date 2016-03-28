@@ -22,17 +22,17 @@ FallingAIComponent::~FallingAIComponent()
 }
 
 
-void FallingAIComponent::start(Level& level)
+void FallingAIComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
 
-void FallingAIComponent::update(Level& level)
+void FallingAIComponent::update(Scene& scene)
 {
-	float dist = Point::getDistance(owner_.getPos(), level.getPlayerPos());
-	float yDist = Point::getYDirection(owner_.getPos(), level.getPlayerPos());
-	float xDist = Point::getXDirection(owner_.getPos(), level.getPlayerPos());
+	float dist = Point::getDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+	float yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+	float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 
 	if (AIComponent::isNearby(yDist, yRadius_) && AIComponent::isNearby(xDist, xRadius_))
 	{

@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-class Level;
+class Scene;
 class Component;
 
 class ComponentSubsystem
@@ -14,7 +14,7 @@ public:
 	~ComponentSubsystem();
 
 	void addComponent(std::shared_ptr<Component> component);
-	void update(Level& level);
+	void update(Scene& scene);
 
 	void cleanup();
 

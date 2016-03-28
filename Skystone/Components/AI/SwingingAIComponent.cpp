@@ -20,7 +20,7 @@ SwingingAIComponent::~SwingingAIComponent()
 {	
 }
 
-void SwingingAIComponent::start(Level& level)
+void SwingingAIComponent::start(Scene& scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	
@@ -56,7 +56,7 @@ void SwingingAIComponent::start(Level& level)
 	//std::cout << currentPosition_.x << ", " << currentPosition_.y << std::endl;
 }
 
-void SwingingAIComponent::update(Level& level)
+void SwingingAIComponent::update(Scene& scene)
 {
 	//increase length of rope
 	//radius_ += stepRadius_;

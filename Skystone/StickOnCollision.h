@@ -9,6 +9,8 @@ public:
 
 	virtual void handleEvent(const CollisionEvent& e);
 	bool isConnected;
+private:
+	Point hookPoint;//where the hook lands dummy.
 };
 
 #endif

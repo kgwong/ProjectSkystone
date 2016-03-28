@@ -1,5 +1,6 @@
 #ifndef POINT_H
 #define POINT_H
+#include <iostream>
 
 struct Point
 {
@@ -10,6 +11,8 @@ struct Point
 	Point operator+(const Point& rhs) const;
 	Point operator-(const Point& rhs) const;
 	bool operator==(const Point& rhs) const;
+	bool operator!=(const Point& rhs) const;
+	Point& operator=(const Point& rhs);
 
 	float x;
 	float y;
@@ -22,7 +25,9 @@ struct Point
 	static Point getMidPoint(Point& a, Point& b);
 	static float getXMidPoint(Point& a, Point& b);
 	static float getYMidPoint(Point& a, Point &b);
-
+	static float getFacingDirection(float distance, Point&a, Point&b);
 };
+
+std::ostream& operator<<(std::ostream& out, const Point& f);
 
 #endif //POINT_H

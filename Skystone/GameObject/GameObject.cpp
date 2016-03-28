@@ -107,11 +107,11 @@ GameObject::Type GameObject::getType() const
 	return type_;
 }
 
-void GameObject::startComponents(Level& level)
+void GameObject::startComponents(Scene& scene)
 {
 	for (auto& i : components_)
 	{
-		i.second->start(level);
+		i.second->start(scene);
 	}
 }
 

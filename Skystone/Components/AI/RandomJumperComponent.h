@@ -16,8 +16,8 @@ public:
 	RandomJumperComponent(GameObject& owner);
 	virtual ~RandomJumperComponent();
 
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 private:
 	int timeInterval_;

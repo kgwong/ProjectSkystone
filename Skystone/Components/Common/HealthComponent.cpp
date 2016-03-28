@@ -25,7 +25,7 @@ HealthComponent::~HealthComponent()
 {
 }
 
-void HealthComponent::update(Level& level)
+void HealthComponent::update(Scene& scene)
 {
 	if (remainingInvincibilityTime_ <= 0)
 	{

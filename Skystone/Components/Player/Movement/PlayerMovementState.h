@@ -8,6 +8,7 @@
 #include "FlyingState.h"
 #include "StunState.h"
 
+#include "HangState.h"
 
 class PlayerMovementState : public InputComponent
 {
@@ -16,12 +17,13 @@ public:
 	static FlyingState flyingState;
 	static AirborneState airborneState;
 	static StunState stunState;
+	static HangState hangState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
 
 	virtual void handleInput(SDL_Event& e);
-	virtual void update(Level& level);
+	virtual void update(Scene& scene);
 
 	void changeState(PlayerState* state);
 

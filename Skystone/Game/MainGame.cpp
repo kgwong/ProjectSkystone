@@ -2,9 +2,8 @@
 
 #include "Application/Log.h"
 #include "Application/Path.h"
-#include "Level/Level.h"
+#include "GameObject/Builders/GameObjectBuilder.h"
 
-#include "GameOverException.h"
 #include "Game/GameTime.h"
 
 #include "Resources/Resources.h"
@@ -16,8 +15,7 @@ MainGame::MainGame()
 	quit_(false)
 {
 	GameObjectBuilder::buildPlayer(player_);
-	levelManager_.setPlayer(&player_);
-	levelManager_.initStartingLevel();
+	sceneManager_.setPlayer(&player_);
 
 	updateCameraBounds();
 
@@ -62,8 +60,8 @@ void MainGame::processInput()
 				quit_ = true;
 			case SDL_KEYDOWN:
 				//LOG("INPUT") << "KEY PRESSED!!!!! key: " << e.key.keysym.sym << std::endl;
-				if (e.key.keysym.sym == SDLK_p)
-					levelManager_.getLevelMap()->print();
+				//if (e.key.keysym.sym == SDLK_p)
+				//	levelManager_.getLevelMap()->print();
 				break;
 			case SDL_KEYUP:
 		     	if (e.key.keysym.sym == SDLK_1)//audio test ~ may use shared_ptrs now.
@@ -81,42 +79,32 @@ void MainGame::processInput()
 			default:
 				break;
 		}
-		levelManager_.getCurrentLevel()->handleInput(e);
+		sceneManager_.handleInput(e);
 	}
 }
 
 void MainGame::update()
 {
-	try
-	{
-		levelManager_.getCurrentLevel()->update();
-		if (levelManager_.changeLevelIfNecessary())
-			updateCameraBounds();
-	}
-	catch (GameOverException& e)
-	{
-		while (!quit_)
-		{
-			SDL_Event event;
-			while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) quit_ = true; }
-			LOG("GAME") << "GAME OVER";
-			SDL_Delay(100);
-		}
-	}
+	sceneManager_.update();
+	updateCameraBounds();
 }
 
 void MainGame::render(float percBehind)
 {
 	SDL_RenderClear(window_.getRenderer());
 
-	window_.getCamera().followObject(player_, percBehind);
-	levelManager_.getCurrentLevel()->render(window_, percBehind);
+	auto followObj = sceneManager_.getCameraFollowObject();
+	if (followObj != nullptr) 
+	{
+		window_.getCamera().followObject(*sceneManager_.getCameraFollowObject(), percBehind);
+	}
+
+	sceneManager_.render(window_, percBehind);
 
 	SDL_RenderPresent(window_.getRenderer());
 }
 
 void MainGame::updateCameraBounds()
 {
-	window_.getCamera().setLevelBounds(levelManager_.getCurrentLevel()->getLevelWidth(), 
-										levelManager_.getCurrentLevel()->getLevelHeight());
+	window_.getCamera().setLevelBounds(sceneManager_.getWidth(), sceneManager_.getHeight());
 }

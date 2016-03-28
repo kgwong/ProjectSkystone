@@ -10,11 +10,11 @@ Component::~Component()
 {
 }
 
-void Component::start(Level& level)
+void Component::start(Scene& scene)
 {
 }
 
-void Component::update(Level& level)
+void Component::update(Scene& scene)
 {
 }
 

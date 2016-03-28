@@ -35,6 +35,8 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	//player.addComponent(std::make_shared<PlayerMovementState>(player));
 	//player.addComponent(std::make_shared<PlayerAttackState>(player));
 	player.addComponent(std::make_shared<PlayerControlComponent>(player));
+
+	//player.addComponent(std::make_shared<HookComponent>(player));
 }
 
 GameObject& GameObjectBuilder::buildTile(ComponentSystem& componentSystem, int tileType, GameObject& tileToBuild)
@@ -57,7 +59,17 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerProjectile(ComponentSy
 	return playerProjectileBuilder_.build(componentSystem, name);
 }
 
+std::shared_ptr<GameObject> GameObjectBuilder::buildBackground(ComponentSystem& componentSystem, const std::string backgroundName)
+{
+	return backgroundBuilder_.build(componentSystem, backgroundName);
+}
+
 std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
 {
 	return playerHookBuilder_.build(componentSystem, name);
+}
+
+std::shared_ptr<GameObject> GameObjectBuilder::buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name)
+{
+	return enemyProjectileBuilder_.build(componentSystem, name);
 }

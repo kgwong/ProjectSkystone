@@ -6,6 +6,7 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/DieOnCollision.h"
+#include "Components/PlayerProjectile/PlayerProjectileComponent.h"
 #include "StickOnCollision.h"
 
 
@@ -24,11 +25,11 @@ std::shared_ptr<GameObject> PlayerProjectileBuilder::build(ComponentSystem& comp
 
 	projectileToBuild.setType(GameObject::Type::PLAYER_PROJECTILE);
 	projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/playerProjectile.png")));
-	auto physics = componentSystem.getNew<PhysicsComponent>(projectileToBuild);
-	physics->enableGravity(false);
-	projectileToBuild.addComponent(physics);
+	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 10));
 	projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
+	projectileToBuild.addComponent(componentSystem.getNew<PlayerProjectileComponent>(projectileToBuild));
+
 	return newProjectile;
 }

@@ -25,8 +25,8 @@ public:
 	virtual ~TrackerComponent();
 
 	//NEED FOR EVERY AICOMPONENT
-	virtual void start(Level& level);
-	virtual void update(Level& level);
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
 	EnemyState getEnemyState();
 	void setEnemyState(EnemyState state);

@@ -1,6 +1,5 @@
 #include "LevelLoader.h"
 
-#include "Level.h"
 #include "LevelManager.h"
 #include "Resources/Resources.h"
 #include "Game/GameConstants.h"
@@ -41,7 +40,6 @@ void LevelLoader::load(const int levelID)
 {
 	std::shared_ptr<Level> level = std::make_shared<Level>(levelID);
 	level->setLevelManager(levelManager_);
-	level->setGameObjectBuilder(&gameObjectBuiler_);
 
 	loadBackground(generateFilePath("BackgroundLayers", levelID), level.get());
 	loadEnemies(generateFilePath("Enemies", levelID), level.get());
@@ -67,9 +65,10 @@ void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 	int numRows = blockHeight * Constants::TILES_PER_BLOCK_HEIGHT;
 	int numCols = blockWidth * Constants::TILES_PER_BLOCK_WIDTH;
 
-	level->tileArrangement.rows = numRows;
-	level->tileArrangement.cols = numCols;
-	level->tileArrangement.tiles = std::vector<std::vector<GameObject>>(numRows, std::vector<GameObject>(numCols));
+	TileArrangement& levelTiles = level->gameObjects.getTiles();
+	levelTiles.rows = numRows;
+	levelTiles.cols = numCols;
+	levelTiles.tiles = std::vector<std::vector<GameObject>>(numRows, std::vector<GameObject>(numCols));
 
 	for (int r = 0; r < numRows; ++r)
 	{
@@ -77,7 +76,9 @@ void LevelLoader::loadTiles(const std::string& filepath, Level* level)
 		{
 			int tileNum;
 			ifs >> tileNum;
-			level->addTileAtLocation(tileNum, Point{ c * Constants::TILE_SIZE, r * Constants::TILE_SIZE });
+			GameObject& tileToBuild = levelTiles.tiles[r][c];
+			level->gameObjects.buildTile(tileNum, tileToBuild);
+			tileToBuild.setPos((float)c * Constants::TILE_SIZE, (float)r * Constants::TILE_SIZE);
 		}
 	}
 }
@@ -93,7 +94,7 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level* level)
 
 	while (ifs >> enemyName >> pos.x >> pos.y)
 	{
-		level->addEnemyAtLocation(enemyName, pos);
+		level->gameObjects.add("Enemy", enemyName, pos);
 	}
 }
 
@@ -103,12 +104,12 @@ void LevelLoader::loadBackground(const std::string& filepath, Level* level)
 	if (!ifs)
 		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
 
-	int layer = 0;
-	std::string name;
-	bool scrollx, scrolly;
-	
-	while (ifs >> name >> std::boolalpha >> scrollx >> scrolly)
+	int layer = 0;		
+	std::string line;
+
+	while (getline(ifs, line))
 	{
-		level->setBackgroundLayerFromSprite(Resources::getSpriteSheet(name), layer++, scrollx, scrolly);
+		level->gameObjects.add("Background", "Scrolling " + line + " " + std::to_string(layer));
+		layer++;
 	}
 }

@@ -11,12 +11,12 @@ RenderComponent::~RenderComponent()
 
 }
 
-void RenderComponent::start(Level& level)
+void RenderComponent::start(Scene& scene)
 {
 	prevPosition = owner_.getPos();
 }
 
-void RenderComponent::update(Level& level)
+void RenderComponent::update(Scene& scene)
 {
 	prevPosition = owner_.getPos();
 }

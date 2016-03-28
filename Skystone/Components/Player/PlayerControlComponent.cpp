@@ -20,11 +20,11 @@ void PlayerControlComponent::handleInput(SDL_Event& e)
 	HookKeyInput = e.key.keysym.sym;
 }
 
-void PlayerControlComponent::update(Level& level)
+void PlayerControlComponent::update(Scene& scene)
 {
-	movement_.update(level);
-	attack_.update(level);
-	hooker_.update(level);
+	movement_.update(scene);
+	attack_.update(scene);
+	hooker_.update(scene);
 }
 
 void PlayerControlComponent::changeMovementState(PlayerState* state)
@@ -36,5 +36,17 @@ void PlayerControlComponent::changeAttackState(PlayerAimState* state)
 {
 	attack_.changeState(state);
 }
+
+void PlayerControlComponent::changeHookState(HookStateManager* state)
+{
+	hooker_.changeState(state);
+}
+
+PlayerHookState PlayerControlComponent::HookState()
+{
+	return hooker_;
+}
+
+
 
 

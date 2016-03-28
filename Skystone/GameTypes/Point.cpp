@@ -34,6 +34,18 @@ bool Point::operator==(const Point & rhs) const
 	return this->x == rhs.x && this->y == rhs.y;
 }
 
+bool Point::operator!=(const Point & rhs) const
+{
+	return !(*this == rhs);
+}
+
+Point& Point::operator=(const Point & rhs)
+{
+	x = rhs.x;
+	y = rhs.y;
+	return *this;
+}
+
 float Point::getDistance(Point& a, Point& b)
 {
 	float x2 = a.x;
@@ -83,4 +95,25 @@ float Point::getXMidPoint(Point& a, Point& b)
 float Point::getYMidPoint(Point& a, Point &b)
 {
 	return fabsf(a.y + b.y) / 2;
+}
+
+float Point::getFacingDirection(float distance, Point&a, Point&b)
+{
+	float playerSide = 0;
+	if (getXDistance(a, b) == 0)
+	{
+		playerSide = 0;
+	}
+	
+	else
+	{
+		playerSide = (float)(-distance / getXDistance(a, b));
+	}
+	return playerSide;
+}
+
+std::ostream& operator<<(std::ostream& out, const Point& f)
+{
+	out << "(" << f.x << ", " << f.y << ")";
+	return out;
 }

@@ -30,7 +30,7 @@ void AirborneState::handleInput(GameObject& player, SDL_Event& e)
 {
 	if (!jumpHeld_)
 	{
-		if (e.key.keysym.sym == controlMap[JUMP])
+		if (GameInputs::keyDown(e, JUMP))
 		{
 			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::flyingState);
 			player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::flyingState);
@@ -41,19 +41,24 @@ void AirborneState::handleInput(GameObject& player, SDL_Event& e)
 
 void AirborneState::update(GameObject& player)
 {
+	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	{
+		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::hangState);
+		return;
+	}
+
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
 		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::walkingState);
 		return;
 	}
-	const Uint8* keyStates = SDL_GetKeyboardState(NULL);
 
-	if (keyStates[SDL_GetScancodeFromKey(controlMap[LEFT])])
+	if (GameInputs::keyHeld(LEFT))
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(-5 * 60.0f);
 	}
-	else if (keyStates[SDL_GetScancodeFromKey(controlMap[RIGHT])])
+	else if (GameInputs::keyHeld(RIGHT))
 	{
 		player.getComponent<PhysicsComponent>()->setVelX(5 * 60.0f);
 	}
@@ -62,8 +67,5 @@ void AirborneState::update(GameObject& player)
 		player.getComponent<PhysicsComponent>()->setVelX(0);
 	}
 
-	if (!keyStates[SDL_GetScancodeFromKey(controlMap[JUMP])])
-	{
-		jumpHeld_ = false;
-	}
+	jumpHeld_ = GameInputs::keyHeld(JUMP);
 }

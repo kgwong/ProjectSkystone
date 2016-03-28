@@ -13,6 +13,7 @@
 #include "Components/AI/SwingingAIComponent.h"
 #include "Components/AI/SnakeAIComponent.h"
 #include "Components/AI/PounceAIComponent.h"
+#include "Components/AI/AlligatorAIComponent.h"
 
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/HealthComponent.h"
@@ -46,14 +47,14 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 500));
 		enemyToBuild.addComponent(componentSystem.getNew<FallingAIComponent>(enemyToBuild));
 	}
-	else if (enemyName == "TestMob1")
+	else if (enemyName == "TestMob1") //in first room, currently alligators
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemy.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<PounceAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<AlligatorAIComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
 		enemyToBuild.addComponent(componentSystem.getNew<TextRenderer>(enemyToBuild)); 
 	}
@@ -101,19 +102,19 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Coward")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Coward.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 15));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 150));
 		auto ai = componentSystem.getNew<TrackerComponent>(enemyToBuild);
 		ai->setEnemyState(COWARD);
 		enemyToBuild.addComponent(ai);
 	}
 	else if (enemyName == "swingmob")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/swingmob.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/spooder.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
