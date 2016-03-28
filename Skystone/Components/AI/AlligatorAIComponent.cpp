@@ -17,8 +17,9 @@ AlligatorAIComponent::AlligatorAIComponent(GameObject & owner)
 	moving_(false),
 	move_time_(0),
 	timer_(0),
-	move_timer_(0)
-
+	move_timer_(0),
+	shot_ready_(true),
+	shot_timer_(0)
 	
 {
 }
@@ -43,6 +44,29 @@ void AlligatorAIComponent::start(Scene & scene)
 void AlligatorAIComponent::update(Scene & scene)
 {
 	timer_ += Time::getElapsedUpdateTimeSeconds();
+	float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+	float playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+	if (owner_.getPosY() <= scene.gameObjects.getPlayer().getPosY() +32 && shot_ready_)
+	{
+		timer_ = 0;
+		moving_ = false;
+		physics_->setVelX(playerSide);
+		physics_->setVelX(0);
+		shot_ready_ = false;
+		shot_timer_ = 0;
+		//auto bullet = scene.gameObjects.add("EnemyProjectile", "", owner_.getPos());
+		//auto physics = bullet->getComponent<PhysicsComponent>();
+		//float newVelX = (float)PROJECTILE_VELOCITY * playerSide);
+		//physics->setVelX(newVelX * 60.0f);
+	}
+	if (!shot_ready_)
+	{
+		shot_timer_ += Time::getElapsedUpdateTimeSeconds();
+		if (shot_timer_ >= 1)
+		{
+			shot_ready_ = true;
+		}
+	}
 	if (timer_ > action_time_)
 	{
 		int generate_action = rand() % 3;
@@ -64,4 +88,5 @@ void AlligatorAIComponent::update(Scene & scene)
 			moving_ = false;
 		}
 	}
+
 }

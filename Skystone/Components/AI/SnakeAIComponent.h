@@ -12,9 +12,9 @@ class SnakeAIComponent :
 {
 
 public:
-	static const int DEFAULT_X_DIST = 100;
-	static const int DEFAULT_Y_DIST = 100;
-	static const int DEFAULT_VELOCITY = 3;
+	const float DEFAULT_X_DIST = 100;
+	const float DEFAULT_Y_DIST = 100;
+	const float DEFAULT_VELOCITY = 3;
 
 
 
@@ -28,7 +28,7 @@ public:
 
 private:
 
-	int velocity_;
+	float velocity_;
 	PhysicsComponent* physics_;
 	Point cornerPosition_;
 };

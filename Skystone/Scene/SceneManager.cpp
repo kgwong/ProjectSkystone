@@ -54,7 +54,7 @@ void SceneManager::update()
 	{
 		currentScene_->onExit();
 		currentScene_ = &gameOverScene_;
-		auto obj = currentScene_->gameObjects.add("Background", "GameOver");
+		auto obj = currentScene_->gameObjects.add("Background", "GameOverScreen");
 		currentScene_->setCameraFollowObject(obj.get());
 		currentScene_->setSceneManager(this);
 		currentScene_->setPlayer(player_);

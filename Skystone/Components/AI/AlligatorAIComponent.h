@@ -10,9 +10,9 @@ class AlligatorAIComponent :
 {
 
 public:
-	const double DEFAULT_SHORT_WALK = 0.4;
-	const double DEFAULT_LONG_WALK = 0.8;
-	const float DEFAULT_ACTION_TIME = 2;
+	const double DEFAULT_SHORT_WALK = 0.3;
+	const double DEFAULT_LONG_WALK = 0.6;
+	const float DEFAULT_ACTION_TIME = 1.7;
 	const double DEFAULT_MOVE_SPEED = 3;
 
 
@@ -32,6 +32,8 @@ private:
 	bool moving_;
 	double move_time_;
 	double move_timer_;
+	bool shot_ready_;
+	double shot_timer_;
 
 
 
