@@ -187,25 +187,24 @@ void PhysicsComponent::checkCollisions(GameObject& owner, Scene& scene)
 {
 	if (owner.getType() == GameObject::Type::PLAYER || owner.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
-		for (auto& enemy : scene.gameObjects.get(GameObject::Type::ENEMY))
-		{
-			auto& object = *enemy;
-			if (collider_->checkCollision(object))
-			{
-				callOnCollision(owner, object, scene);
-			}
-		}
+		checkCollisionsWith(owner, scene, GameObject::Type::ENEMY);
 	}
 
 	if (owner.getType() == GameObject::Type::PLAYER)
 	{
-		for (auto& pickup : scene.gameObjects.get(GameObject::Type::DROP))
+		checkCollisionsWith(owner, scene, GameObject::Type::DROP);
+		checkCollisionsWith(owner, scene, GameObject::Type::ENEMY_PROJECTILE);
+	}
+}
+
+void PhysicsComponent::checkCollisionsWith(GameObject& owner, Scene& scene, GameObject::Type objType)
+{
+	for (auto& objPtr : scene.gameObjects.get(objType))
+	{
+		auto& object = *objPtr;
+		if (collider_->checkCollision(object))
 		{
-			auto& object = *pickup;
-			if (collider_->checkCollision(object))
-			{
-				callOnCollision(owner, object, scene);
-			}
+			callOnCollision(owner, object, scene);
 		}
 	}
 }

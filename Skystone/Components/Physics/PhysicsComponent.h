@@ -57,6 +57,7 @@ private:
 	void updatePosition(GameObject& owner, Scene& scene, Axis axis);
 	void correctPositionAfterCollision(GameObject& owner, Scene& scene, Axis axis);
 	void checkCollisions(GameObject& owner, Scene& scene);
+	void checkCollisionsWith(GameObject& owner, Scene& scene, GameObject::Type objType);
 	void callOnCollision(GameObject& owner, GameObject& other, Scene& scene);
 	void correctPosition(GameObject& owner, GameObject& other, Scene& scene, Axis axis);
 
