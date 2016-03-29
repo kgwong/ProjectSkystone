@@ -54,11 +54,12 @@ private:
 private:
 	void enactGravity();
 
-	void updatePosition(GameObject& owner, Scene& scene, Axis axis);
-	void correctPositionAfterCollision(GameObject& owner, Scene& scene, Axis axis);
-	void checkCollisions(GameObject& owner, Scene& scene);
-	void callOnCollision(GameObject& owner, GameObject& other, Scene& scene);
-	void correctPosition(GameObject& owner, GameObject& other, Scene& scene, Axis axis);
+	void updatePosition(Scene& scene, Axis axis);
+	void correctPositionAfterCollision(Scene& scene, Axis axis);
+	void checkCollisions(Scene& scene);
+	void checkCollisionsWith(Scene& scene, GameObject::Type objType);
+	void callOnCollision(GameObject& other, Scene& scene);
+	void correctPosition(GameObject& other, Scene& scene, Axis axis);
 
 };
 

@@ -90,8 +90,9 @@
     <ClCompile Include="HookStateManager.cpp" />
     <ClCompile Include="HangState.cpp" />
     <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
-    <ClCompile Include="EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
+    <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
+    <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -191,7 +192,8 @@
     <ClInclude Include="HangState.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
     <ClInclude Include="Components\Render\ScrollingQuad.h" />
-    <ClInclude Include="EnemyProjectileComponent.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
+    <ClInclude Include="Components\EnemyProjectile\EnemyProjectileComponent.h" />
+    <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
   </ItemGroup>
 </Project>

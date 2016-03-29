@@ -30,12 +30,12 @@ void PhysicsComponent::start(Scene& scene)
 
 void PhysicsComponent::update(Scene& scene)
 {
-	updatePosition(owner_, scene, Axis::X);
-	updatePosition(owner_, scene, Axis::Y);
+	updatePosition(scene, Axis::X);
+	updatePosition(scene, Axis::Y);
 
 	if (collider_)
 	{
-		checkCollisions(owner_, scene);
+		checkCollisions(scene);
 	}
 }
 
@@ -133,18 +133,18 @@ bool PhysicsComponent::isFalling() const
 	return falling_;
 }
 
-void PhysicsComponent::updatePosition(GameObject& owner, Scene& scene, Axis axis)
+void PhysicsComponent::updatePosition(Scene& scene, Axis axis)
 {
 	switch (axis)
 	{
 		case Axis::X:
 			velX_ += accelX_ * Time::getElapsedUpdateTimeSeconds();
-			owner.setPosX(owner.getPosX() + velX_ * Time::getElapsedUpdateTimeSeconds());
+			owner_.setPosX(owner_.getPosX() + velX_ * Time::getElapsedUpdateTimeSeconds());
 			break;
 		case Axis::Y:
 			enactGravity();
 			velY_ += accelY_ * Time::getElapsedUpdateTimeSeconds();
-			owner.setPosY(owner.getPosY() + velY_ * Time::getElapsedUpdateTimeSeconds());
+			owner_.setPosY(owner_.getPosY() + velY_ * Time::getElapsedUpdateTimeSeconds());
 			break;
 		default:
 			break;
@@ -152,19 +152,18 @@ void PhysicsComponent::updatePosition(GameObject& owner, Scene& scene, Axis axis
 	
 	if (collider_)
 	{
-		correctPositionAfterCollision(owner, scene, axis);
+		correctPositionAfterCollision(scene, axis);
 	}
-
 }
 
-void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Scene& scene, Axis axis)
+void PhysicsComponent::correctPositionAfterCollision(Scene& scene, Axis axis)
 {
-	if (owner.getType() != GameObject::Type::TILE)
+	if (owner_.getType() != GameObject::Type::TILE)
 	{
-		int startC = std::max(0, (int) (owner.getPosX() / Constants::TILE_SIZE));
-		int startR = std::max(0, (int) (owner.getPosY() / Constants::TILE_SIZE));
-		int endC = std::min(scene.gameObjects.getTiles().cols - 1, (int)((owner.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
-		int endR = std::min(scene.gameObjects.getTiles().rows - 1, (int)((owner.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
+		int startC = std::max(0, (int) (owner_.getPosX() / Constants::TILE_SIZE));
+		int startR = std::max(0, (int) (owner_.getPosY() / Constants::TILE_SIZE));
+		int endC = std::min(scene.gameObjects.getTiles().cols - 1, (int)((owner_.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
+		int endR = std::min(scene.gameObjects.getTiles().rows - 1, (int)((owner_.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
 
 
 		for (int c = startC; c <= endC; ++c)
@@ -175,49 +174,48 @@ void PhysicsComponent::correctPositionAfterCollision(GameObject& owner, Scene& s
 
 				if (collider_->checkCollision(tile))
 				{
-					correctPosition(owner, tile, scene, axis);
-					callOnCollision(owner, tile, scene);
+					correctPosition(tile, scene, axis);
+					callOnCollision(tile, scene);
 				}
 			}
 		}
 	}
 }
 
-void PhysicsComponent::checkCollisions(GameObject& owner, Scene& scene)
+void PhysicsComponent::checkCollisions(Scene& scene)
 {
-	if (owner.getType() == GameObject::Type::PLAYER || owner.getType() == GameObject::Type::PLAYER_PROJECTILE)
+	if (owner_.getType() == GameObject::Type::PLAYER || owner_.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
-		for (auto& enemy : scene.gameObjects.get(GameObject::Type::ENEMY))
-		{
-			auto& object = *enemy;
-			if (collider_->checkCollision(object))
-			{
-				callOnCollision(owner, object, scene);
-			}
-		}
+		checkCollisionsWith(scene, GameObject::Type::ENEMY);
 	}
 
-	if (owner.getType() == GameObject::Type::PLAYER)
+	if (owner_.getType() == GameObject::Type::PLAYER)
 	{
-		for (auto& pickup : scene.gameObjects.get(GameObject::Type::DROP))
+		checkCollisionsWith(scene, GameObject::Type::DROP);
+		checkCollisionsWith(scene, GameObject::Type::ENEMY_PROJECTILE);
+	}
+}
+
+void PhysicsComponent::checkCollisionsWith(Scene& scene, GameObject::Type objType)
+{
+	for (auto& objPtr : scene.gameObjects.get(objType))
+	{
+		auto& object = *objPtr;
+		if (collider_->checkCollision(object))
 		{
-			auto& object = *pickup;
-			if (collider_->checkCollision(object))
-			{
-				callOnCollision(owner, object, scene);
-			}
+			callOnCollision(object, scene);
 		}
 	}
 }
 
-void PhysicsComponent::callOnCollision(GameObject& owner, GameObject& other, Scene& scene)
+void PhysicsComponent::callOnCollision(GameObject& other, Scene& scene)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>(); 
-	owner.broadcastEvent(CollisionEvent(scene, other, *otherCollider));
-	other.broadcastEvent(CollisionEvent(scene, owner, *collider_));
+	owner_.broadcastEvent(CollisionEvent(scene, other, *otherCollider));
+	other.broadcastEvent(CollisionEvent(scene, owner_, *collider_));
 }
 
-void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Scene& scene, Axis axis)
+void PhysicsComponent::correctPosition(GameObject& other, Scene& scene, Axis axis)
 {
 	ColliderComponent* otherCollider = other.getComponent<ColliderComponent>();
 	switch(axis)
@@ -225,11 +223,11 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Sce
 		case Axis::X:
 			if (isMovingLeft())
 			{
-				owner.setPosX(otherCollider->getRight() - collider_->getOffsetX());
+				owner_.setPosX(otherCollider->getRight() - collider_->getOffsetX());
 			}
 			else
 			{
-				owner.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
+				owner_.setPosX(otherCollider->getLeft() - collider_->getWidth() - collider_->getOffsetX());
 			}
 			setVelX(0.0f);
 			break;
@@ -237,11 +235,11 @@ void PhysicsComponent::correctPosition(GameObject& owner, GameObject& other, Sce
 		case Axis::Y:
 			if (isMovingUp())
 			{
-				owner.setPosY(otherCollider->getBottom() - collider_->getOffsetY());
+				owner_.setPosY(otherCollider->getBottom() - collider_->getOffsetY());
 			}
 			else
 			{
-				owner.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
+				owner_.setPosY(otherCollider->getTop() - collider_->getHeight() - collider_->getOffsetY());
 				falling_ = false;
 			}
 			setVelY(0.0f);

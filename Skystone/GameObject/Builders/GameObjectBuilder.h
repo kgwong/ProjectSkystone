@@ -7,6 +7,7 @@
 #include "PlayerProjectileBuilder.h"
 #include "BackgroundBuilder.h"
 #include "PlayerHookBuilder.h"
+#include "EnemyProjectileBuilder.h"
 
 class ComponentSystem;
 
@@ -23,9 +24,10 @@ public:
 	std::shared_ptr<GameObject> buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName);
 	std::shared_ptr<GameObject> buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name);
 	std::shared_ptr<GameObject> buildBackground(ComponentSystem& componentSystem, const std::string backgroundName);
-
+	std::shared_ptr<GameObject> buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name);
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
+	
 
 private:
 	EnemyBuilder enemyBuilder_;
@@ -35,7 +37,7 @@ private:
 	BackgroundBuilder backgroundBuilder_;
 	/////////////////////////////////////////////////
 	PlayerHookBuilder playerHookBuilder_;
-
+	EnemyProjectileBuilder enemyProjectileBuilder_;
 };
 
 #endif GAME_OBJECT_BUILDER_H
