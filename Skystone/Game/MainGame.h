@@ -5,9 +5,6 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 
-#include <iostream>
-#include <string>
-
 #include "Application/Errors.h"
 #include "Application/GameWindow.h"
 #include "Scene/SceneManager.h"
@@ -25,7 +22,6 @@ private:
 
 	GameObject player_;
 	SceneManager sceneManager_;
-	//LevelManager levelManager_;
 
 	bool quit_;
 
