@@ -33,24 +33,19 @@ public:
 	void connectHook(Scene& scene);
 	void disconnectHook(Scene& scene);
 	void resetState();
+
 	HookStateManager* getState();
 	Point getPosition();
+	void setHanging(bool h);
 	bool hanging;
 
-	//delete these.. later.
-	void setLaunched(bool b);
-	bool hasLaunched();
-	bool isActiveHook();
-	SDL_Keycode getKeyInput();
+	virtual void handleEvent(const CollisionEvent& e);
+
 private:
 	HookStateManager* hookStateManager_;
 	double _degrees;
-
-	//delete these useless variables later.
-	bool _launched;
-	bool _hookActive;
 	AimState _currentAimState;
-	SDL_Keycode _keyInput;
+
 };
 
 #endif

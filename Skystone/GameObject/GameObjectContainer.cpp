@@ -69,11 +69,14 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "PlayerHook")
 	{
-		if (playerHook == nullptr)
+		if (playerHook != nullptr)
 		{
-			newObject = builder_.buildPlayerHook(componentSystem_, name);
-			playerHook = newObject;
+			playerHook->kill();
+			playerHook = nullptr;
 		}
+		
+		newObject = builder_.buildPlayerHook(componentSystem_, name);
+		playerHook = newObject;
 	}
 	else if (type == "Drop")
 	{

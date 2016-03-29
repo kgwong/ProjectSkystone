@@ -26,6 +26,7 @@ public:
 	virtual void update(Scene& scene);
 
 	void changeState(PlayerState* state);
+	PlayerState* getState();
 
 private:
 	PlayerState* currentState_;

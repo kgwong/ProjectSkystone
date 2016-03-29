@@ -25,6 +25,7 @@ void PlayerControlComponent::update(Scene& scene)
 	movement_.update(scene);
 	attack_.update(scene);
 	hooker_.update(scene);
+
 }
 
 void PlayerControlComponent::changeMovementState(PlayerState* state)
@@ -45,6 +46,21 @@ void PlayerControlComponent::changeHookState(HookStateManager* state)
 PlayerHookState PlayerControlComponent::HookState()
 {
 	return hooker_;
+}
+
+PlayerMovementState PlayerControlComponent::MovementState()
+{
+	return movement_;
+}
+
+PlayerAttackState PlayerControlComponent::AttackState()
+{
+	return attack_;
+}
+
+void PlayerControlComponent::handleEvent(const CollisionEvent& e)
+{
+	hooker_.handleEvent(e);
 }
 
 

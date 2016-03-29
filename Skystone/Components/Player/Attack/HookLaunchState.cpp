@@ -3,7 +3,7 @@
 #include "PlayerAttackState.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 
 HookLaunchState::HookLaunchState()
 {
@@ -43,16 +43,28 @@ void HookLaunchState::handleInput(GameObject & player, SDL_Event & e)
 //change player to hook.
 void HookLaunchState::update(GameObject & player)
 {
+	//hook shots can be interrupted by enemy touching u
+	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::stunState)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().changeState(&PlayerHookState::disconnectState);
+		return;
+	}
 
-	//using hook's stickOnCollision.... if it is connected 
-	//change state to connectedState. ~ hacky stuff right now.
-	//change into a raw ptr. hookRef
-	//if (player.getComponent<PlayerHookState>()->hookRef != nullptr)
+	//StickOnCollision* hook_collision = nullptr;
+	//auto control = player.getComponent<PlayerControlComponent>();
+	//if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	//	hook_collision = control->HookState().hookRef->getComponent<StickOnCollision>();
+
+	//if (hook_collision != nullptr)
 	//{
-	//	std::shared_ptr<GameObject> localHookRef = player.getComponent<PlayerHookState>()->hookRef;
-	//	StickOnCollision* stick_collision = localHookRef->getComponent<StickOnCollision>();
-	//	if (stick_collision->isConnected)
-	//		player.getComponent<PlayerControlComponent>()->changeHookState(&PlayerHookState::connectState);
+	//	if (hook_collision->isConnected)
+	//	{
+	//		auto localref = control->HookState().hookRef;
+	//		localref->getComponent<PhysicsComponent>()->setVelX(0.0f);
+	//		localref->getComponent<PhysicsComponent>()->setVelY(0.0f);
+	//		control->HookState().setHanging(true);
+	//	}
+
 	//}
 }
 

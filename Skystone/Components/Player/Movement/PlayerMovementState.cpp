@@ -36,3 +36,10 @@ void PlayerMovementState::changeState(PlayerState* state)
 	currentState_ = state;
 	currentState_->onEnter(owner_);
 }
+
+PlayerState* PlayerMovementState::getState()
+{
+	return currentState_;
+}
+
+

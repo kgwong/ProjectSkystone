@@ -7,7 +7,7 @@
 
 //-------Harvey's include-----///
 #include "Attack/PlayerHookState.h"
-#include "HookStateManager.h"
+#include "ATtack/HookStateManager.h"
 
 class PlayerControlComponent : public InputComponent
 {
@@ -24,6 +24,9 @@ public:
 	//----harvey function----///
 	void changeHookState(HookStateManager* state);
 	PlayerHookState HookState();
+	PlayerMovementState MovementState();
+	PlayerAttackState AttackState();
+	virtual void handleEvent(const CollisionEvent& e);
 
 	//will delete later.
 	bool isHookActive();

@@ -1,7 +1,7 @@
 #include "PlayerHookState.h"
 
 #include "Game/GameInputs.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Player/PlayerControlComponent.h"
 
@@ -18,8 +18,6 @@ HookDisconnectState PlayerHookState::disconnectState;
 PlayerHookState::PlayerHookState(GameObject& owner)
 	:InputComponent(owner),
 	_degrees(0),
-	_launched(false),
-	_hookActive(false),
 	_currentAimState(DEFAULT_AIM_STATE),
 	hookStateManager_(&disconnectState)
 {
@@ -36,8 +34,6 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	//POLYMORPHISM
 	hookStateManager_->handleInput(owner_, e);
 
-	//remove later.
-	_keyInput = e.key.keysym.sym;
 
 	//key pressed
 	if (GameInputs::keyDown(e, UP))
@@ -52,10 +48,6 @@ void PlayerHookState::handleInput(SDL_Event& e)
 	{
 		_currentAimState = AimState::RIGHT;
 	}
-	//if (e.key.keysym.sym == GameInputs::getKeycode(LAUNCH_HOOK))
-	//{
-	//	_launched = true;
-	//}
 }
 
 double PlayerHookState::getDegrees()
@@ -72,7 +64,7 @@ double PlayerHookState::getDegrees()
 		_degrees = 315;
 		break;
 	default:
-		_degrees = 0;//shouldnt go to this default.
+		_degrees = 270;
 	}
 
 	return _degrees;
@@ -87,7 +79,6 @@ void PlayerHookState::changeState(HookStateManager * state)
 
 void PlayerHookState::instantiateHook(Scene& scene)
 {
-	_hookActive = true;
 	int test_velocity = 5;
 	_degrees = getDegrees();
 	float leftSideDegree = 225;
@@ -112,7 +103,6 @@ void PlayerHookState::instantiateHook(Scene& scene)
 	hookRef->getComponent<PhysicsComponent>()->enableGravity(false);
 	hookRef->getComponent<PhysicsComponent>()->setVelX(newVelX * 60.0f);
 	hookRef->getComponent<PhysicsComponent>()->setVelY(newVelY * 60.0f);
-	//scene.gameObjects.setHook(hookRef.get());
 }
 
 void PlayerHookState::connectHook(Scene& scene)
@@ -127,9 +117,6 @@ void PlayerHookState::connectHook(Scene& scene)
 		{
 			hookRef->getComponent<PhysicsComponent>()->setVelX(0.0f);
 			hookRef->getComponent<PhysicsComponent>()->setVelY(0.0f);
-		/*	auto playerPhysics = owner_.getComponent<PhysicsComponent>();
-			playerPhysics->setVelY(0);
-			playerPhysics->enableGravity(false);*/
 			hanging = true;
 		}
 
@@ -139,11 +126,15 @@ void PlayerHookState::connectHook(Scene& scene)
 void PlayerHookState::disconnectHook(Scene& scene)
 {
 	hanging = false;
-	_hookActive = false;
 	if (scene.gameObjects.playerHook != nullptr)
 	{
 		scene.gameObjects.playerHook->kill();
 		scene.gameObjects.playerHook = nullptr;
+	}
+
+	if (hookRef != nullptr)
+	{
+		hookRef->kill();
 		hookRef = nullptr;
 	}
 }
@@ -168,7 +159,7 @@ void PlayerHookState::update(Scene& scene)
 	
 	//polymorphism
 	hookStateManager_->update(owner_);
-	if (scene.gameObjects.playerHook == nullptr && hookStateManager_->name() == launchState.name())
+	if (hookRef == nullptr && hookStateManager_->name() == launchState.name())
 	{
 		instantiateHook(scene);
 	}
@@ -181,65 +172,7 @@ void PlayerHookState::update(Scene& scene)
 		disconnectHook(scene);
 	}
 
-	//LOG("INFO") << hookStateManager_->name();
-
-	//if (_launched && !_hookActive)
-	//{
-	//	int test_velocity = 5;
-	//	_degrees = getDegrees();
-	//	float leftSideDegree = 225;
-	//	float rightSideDegree = 315;
-	//	float upSideDegree = 270;
-
-	//	Point hookPosition = scene.gameObjects.getPlayer().getPos();		
-
-	//	//offset.
-	//	if (_degrees == leftSideDegree)
-	//		hookPosition.x -= 10;
-	//	else if (_degrees == rightSideDegree)
-	//		hookPosition.x += 10;
-	//	else if (_degrees == upSideDegree)
-	//		hookPosition.y -= 10;
-
-	//	auto playerHook = scene.gameObjects.add("PlayerHook", "Player Hook",hookPosition);
-	//	auto physics = playerHook->getComponent<PhysicsComponent>();
-	//	float newVelX = (float)(test_velocity * cos(toRadians(_degrees)));
-	//	float newVelY = (float)(test_velocity * sin(toRadians(_degrees)));
-	//	physics->enableGravity(false);
-	//	physics->setVelX(newVelX * 60.0f);
-	//	physics->setVelY(newVelY * 60.0f);
-	//	_launched = false;
-	//	_hookActive = true;
-	//	_degrees = 0;	
-	//}
-	
-	//StickOnCollision* hook_collision = nullptr;
-	//if (level.playerHook)
-	//	hook_collision = level.playerHook->getComponent<StickOnCollision>();
-
-	//if (_hookActive)
-	//{
-	//	if (hook_collision && hook_collision->isConnected)
-	//	{
-	//		LOG("INFO") << "Hook Position" << level.playerHook->getPos();
-	//		Point hookPoint = level.playerHook->getPos();
-	//		Point playerPoint = scene.gameObjects.getPlayer().getPos();
-	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(false);
-	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelX(0.1);
-	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->setAccelY(0.1);
-	//	}
-	//	else
-	//	{
-	//		_hookActive = false;
-	//		scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
-	//	}
-	//	
-	//}
-	//else
-	//{
-	//	_hookActive = false;
-	//	scene.gameObjects.getPlayer().getComponent<PhysicsComponent>()->enableGravity(true);
-	//}	
+//	LOG("INFO") << scene.gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 
 }
 
@@ -248,26 +181,20 @@ Point PlayerHookState::getPosition()
 	return hookRef->getPos();
 }
 
-
-//delete
-void PlayerHookState::setLaunched(bool b)
+void PlayerHookState::setHanging(bool h)
 {
-	_launched = b;
+	hanging = h;
 }
 
-bool PlayerHookState::hasLaunched()
+void PlayerHookState::handleEvent(const CollisionEvent& e)
 {
-	return _launched;
+	//hook can only be connected if the player is not on a tile.
+	if (e.getOtherObject().getType() == GameObject::Type::TILE 
+		&& hookStateManager_ == &connectState)
+	{
+		this->changeState(&disconnectState);
+	}
 }
 
-bool PlayerHookState::isActiveHook()
-{
-	return _hookActive;
-}
-
-SDL_Keycode PlayerHookState::getKeyInput()
-{
-	return _keyInput;
-}
 
 

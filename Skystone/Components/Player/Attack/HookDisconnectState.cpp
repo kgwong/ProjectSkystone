@@ -1,5 +1,5 @@
 #include "HookDisconnectState.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 
@@ -14,14 +14,11 @@ HookDisconnectState::~HookDisconnectState()
 
 void HookDisconnectState::onEnter(GameObject& player)
 {
-	//default state. ~ problem shared_ptr is empty.
-	//if hook not deleted or gravity not restored.. do it here.
-	//player.getComponent<PlayerHookState>()->hookRef;
-	//if (player.getComponent<PlayerHookState>()->hookRef != nullptr)
-	//{
-	//	player.getComponent<PlayerHookState>()->hookRef->disownComponents();
-	//	player.getComponent<PlayerHookState>()->hookRef = nullptr;
-	//}
+	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
+	}
 }
 void HookDisconnectState::onExit(GameObject& player)
 {
@@ -38,9 +35,13 @@ void HookDisconnectState::handleInput(GameObject& player, SDL_Event& e)
 		
 	}
 }
-void HookDisconnectState::update(GameObject& player) 
+void HookDisconnectState::update(GameObject& player)
 {
-	//check here when to switch to launch state.
+	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
+	}
 }
 
 double HookDisconnectState::getAngle() 

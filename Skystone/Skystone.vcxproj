@@ -91,8 +91,8 @@
     <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
     <ClCompile Include="Components\Player\Attack\HookConnectState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
-    <ClCompile Include="HangState.cpp" />
-    <ClCompile Include="HookStateManager.cpp" />
+    <ClCompile Include="Components\Player\Movement\HangState.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -170,7 +170,7 @@
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
-    <ClCompile Include="StickOnCollision.cpp" />
+    <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,8 +184,8 @@
     <ClInclude Include="GameObject\GameObjectContainer.h" />
     <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
-    <ClInclude Include="HangState.h" />
-    <ClInclude Include="HookStateManager.h" />
+    <ClInclude Include="Components\Player\Movement\HangState.h" />
+    <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
@@ -272,7 +272,7 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Components\Render\ScrollingQuad.h" />
-    <ClInclude Include="StickOnCollision.h" />
+    <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

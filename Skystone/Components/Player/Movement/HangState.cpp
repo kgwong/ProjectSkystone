@@ -25,6 +25,7 @@ HangState::~HangState()
 {
 }
 
+
 void HangState::onEnter(GameObject& player)
 {
 	//CANNOT change physics here....must do in update.
@@ -44,17 +45,9 @@ void HangState::onExit(GameObject& player)
 	hookPosition_.y = 0.0f;
 	radius_ = 0.0f;
 
-	//player.getComponent<PhysicsComponent>()->setVelY(oldPlayerYVelocity);
 }
 void HangState::handleInput(GameObject& player, SDL_Event& e)
 {
-	//currentdegrees
-	//max degrees
-	//velx, vely
-
-	//if still velY = 0.
-	//if inMotion velY changes over time.
-
 	//controls swinging motion only. 
 	//Look in PlayerHookState's connectState to see how hook gets created/destroyed.
 	if (GameInputs::keyDown(e, ControlType::LEFT))
@@ -64,12 +57,6 @@ void HangState::handleInput(GameObject& player, SDL_Event& e)
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
 		direction_ = 1;
-	}
-	else
-	{
-		//direction_ = 0;
-		//swingVector_.x = 0.0f;
-		//swingVector_.y = 0.0f;
 	}
 }
 void HangState::update(GameObject& player)
