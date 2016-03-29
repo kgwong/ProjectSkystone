@@ -39,6 +39,10 @@ void WalkingState::handleInput(GameObject& player, SDL_Event& e)
 
 void WalkingState::update(GameObject& player)
 {
+	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	{
+		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::hangState);
+	}
 
 	if (player.getComponent<PhysicsComponent>()->isFalling())
 	{

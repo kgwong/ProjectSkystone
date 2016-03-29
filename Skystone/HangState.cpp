@@ -44,7 +44,7 @@ void HangState::onExit(GameObject& player)
 	hookPosition_.y = 0.0f;
 	radius_ = 0.0f;
 
-	player.getComponent<PhysicsComponent>()->setVelY(oldPlayerYVelocity);
+	//player.getComponent<PhysicsComponent>()->setVelY(oldPlayerYVelocity);
 }
 void HangState::handleInput(GameObject& player, SDL_Event& e)
 {
@@ -75,13 +75,16 @@ void HangState::handleInput(GameObject& player, SDL_Event& e)
 void HangState::update(GameObject& player)
 {
 	if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
+	{
 		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+		player.getComponent<PhysicsComponent>()->enableGravity(true);
+	}
 	else
 	{
 		auto playerPhysics = player.getComponent<PhysicsComponent>();
 		playerPhysics->enableGravity(false);
-		playerPhysics->setVelY(0);
 		
+		playerPhysics->setVelY(0);
 		if (currentAngle_ > MAX_ANGLE)
 		{
 			direction_ = -direction_;
@@ -94,9 +97,9 @@ void HangState::update(GameObject& player)
 		}
 
 		if (direction_ > 0)
-			currentAngle_ += DEFAULT_SPEED;
+			currentAngle_ += 3.14f;
 		if (direction_ < 0)
-			currentAngle_ -= DEFAULT_SPEED;
+			currentAngle_ -= 3.14f;
 
 		swingVector_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 		swingVector_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;

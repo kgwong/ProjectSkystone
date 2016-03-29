@@ -47,6 +47,8 @@ void AirborneState::update(GameObject& player)
 		return;
 	}
 
+	LOG("INFO") << player.getComponent <PlayerControlComponent>()->HookState().getState()->name();
+	
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
