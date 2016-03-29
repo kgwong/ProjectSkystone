@@ -29,6 +29,7 @@ GameObject* LevelManager::getCameraFollowObject()
 
 void LevelManager::setPlayer(GameObject* player)
 {
+	Scene::setPlayer(player);
 	player_ = player;
 }
 

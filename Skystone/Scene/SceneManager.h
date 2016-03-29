@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Level/LevelManager.h"
+#include "SceneLoader.h"
 
 class Player;
 
@@ -26,12 +27,14 @@ public:
 private:
 	Scene* currentScene_;
 	GameObject* player_;
+	SceneLoader sceneLoader_;
 
 	LevelManager levelManager_;
 	Scene gameOverScene_;
 
 
 	SceneID nextSceneID_;
+ 
 };
 
 #endif //SCENE_MANAGER_H

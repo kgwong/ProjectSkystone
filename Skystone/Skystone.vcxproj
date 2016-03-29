@@ -124,6 +124,7 @@
     <ClCompile Include="Components\InputComponent.cpp" />
     <ClCompile Include="ComponentSystem\InputSystem.cpp" />
     <ClCompile Include="GameObject\Builders\ItemDropBuilder.cpp" />
+    <ClCompile Include="Scene\SceneLoader.cpp" />
     <ClCompile Include="Scene\Level\Level.cpp" />
     <ClCompile Include="Components\Player\LevelChangeComponent.cpp" />
     <ClCompile Include="Scene\Level\LevelLoader.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
     <ClInclude Include="Components\Tile\BurnTileComponent.h" />
+    <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="Scene\Level\Block.h" />
     <ClInclude Include="Application\Camera.h" />
     <ClInclude Include="Components\Events\CollisionEvent.h" />
