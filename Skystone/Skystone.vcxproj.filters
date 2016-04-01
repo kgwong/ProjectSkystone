@@ -94,6 +94,7 @@
     <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Scene\SceneLoader.cpp" />
+    <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -197,5 +198,6 @@
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Scene\SceneLoader.h" />
+    <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
   </ItemGroup>
 </Project>

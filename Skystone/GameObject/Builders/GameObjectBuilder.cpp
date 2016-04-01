@@ -64,6 +64,11 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildBackground(ComponentSystem& 
 	return backgroundBuilder_.build(componentSystem, backgroundName);
 }
 
+std::shared_ptr<GameObject> GameObjectBuilder::buildScrollingBackground(ComponentSystem& componentSystem, const std::string backgroundName)
+{
+	return scrollingBackgroundBuilder_.build(componentSystem, backgroundName);
+}
+
 std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
 {
 	return playerHookBuilder_.build(componentSystem, name);

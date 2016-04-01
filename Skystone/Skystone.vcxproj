@@ -173,6 +173,7 @@
     <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
+    <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
@@ -276,6 +277,7 @@
     <ClInclude Include="Components\Render\ScrollingQuad.h" />
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
+    <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
