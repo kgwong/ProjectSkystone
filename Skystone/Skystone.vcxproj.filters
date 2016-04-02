@@ -93,6 +93,7 @@
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
+    <ClCompile Include="Components\AI\BossAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -195,5 +196,6 @@
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\EnemyProjectile\EnemyProjectileComponent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
+    <ClInclude Include="Components\AI\BossAIComponent.h" />
   </ItemGroup>
 </Project>
