@@ -32,7 +32,7 @@ void PlayerHookState::handleInput(Scene& scene, SDL_Event& e)
 {
 
 	//POLYMORPHISM
-	hookStateManager_->handleInput(owner_, e);
+	hookStateManager_->handleInput(scene, owner_, e);
 
 
 	//key pressed
@@ -70,11 +70,11 @@ double PlayerHookState::getDegrees()
 	return _degrees;
 }
 
-void PlayerHookState::changeState(HookStateManager * state)
+void PlayerHookState::changeState(Scene& scene, HookStateManager* state)
 {
-	hookStateManager_->onExit(owner_);
+	hookStateManager_->onExit(scene,owner_);
 	hookStateManager_ = state;
-	hookStateManager_->onEnter(owner_);
+	hookStateManager_->onEnter(scene, owner_);
 }
 
 void PlayerHookState::instantiateHook(Scene& scene)
@@ -155,10 +155,10 @@ void PlayerHookState::update(Scene& scene)
 	if (hookRef != nullptr && hookStateManager_->name() == disconnectState.name())
 		disconnectHook(scene);
 	else if (hookRef != nullptr && hookRef->getComponent<StickOnCollision>()->isConnected)
-		this->changeState(&connectState);
+		this->changeState(scene, &connectState);
 	
 	//polymorphism
-	hookStateManager_->update(owner_);
+	hookStateManager_->update(scene, owner_);
 	if (hookRef == nullptr && hookStateManager_->name() == launchState.name())
 	{
 		instantiateHook(scene);
@@ -192,7 +192,7 @@ void PlayerHookState::handleEvent(const CollisionEvent& e)
 	if (e.getOtherObject().getType() == GameObject::Type::TILE 
 		&& hookStateManager_ == &connectState)
 	{
-		this->changeState(&disconnectState);
+		this->changeState(e.getScene(), &disconnectState);
 	}
 }
 

@@ -13,7 +13,7 @@ HookLaunchState::~HookLaunchState()
 {
 }
 
-void HookLaunchState::onEnter(GameObject & player)
+void HookLaunchState::onEnter(Scene& scene, GameObject& player)
 {
 	//player.getComponent<PlayerHookState>()->instantiateHook();
 	//float testvel = 5.0f;
@@ -22,31 +22,31 @@ void HookLaunchState::onEnter(GameObject & player)
 	//physics->setVelY(testvel * 60.0f);
 }
 
-void HookLaunchState::onExit(GameObject & player)
+void HookLaunchState::onExit(Scene& scene, GameObject& player)
 {
 	//set hook's x and y velocity to zero
 	//if connectstate.. do not destroy hook
 	//if disconnect state destroy hook.
 }
 
-void HookLaunchState::handleInput(GameObject & player, SDL_Event & e)
+void HookLaunchState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	//if hook is launched already, and key is pressed again, switch to disconnect state.
 	if (GameInputs::keyDown(e, LAUNCH_HOOK))
 	{
-		player.getComponent<PlayerControlComponent>()->changeHookState(&PlayerHookState::disconnectState);
+		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
 	}
 
 	//or to be simple do nothing.
 }
 
 //change player to hook.
-void HookLaunchState::update(GameObject & player)
+void HookLaunchState::update(Scene& scene, GameObject& player)
 {
 	//hook shots can be interrupted by enemy touching u
 	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::stunState)
 	{
-		player.getComponent<PlayerControlComponent>()->HookState().changeState(&PlayerHookState::disconnectState);
+		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
 		return;
 	}
 

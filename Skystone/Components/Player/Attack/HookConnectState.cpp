@@ -12,27 +12,27 @@ HookConnectState::~HookConnectState()
 {
 }
 
-void HookConnectState::onEnter(GameObject& player)
+void HookConnectState::onEnter(Scene& scene, GameObject& player)
 {
 	//player.getComponent<PlayerControlComponent>()->MovementState().changeState(&PlayerMovementState::hangState);
 }
-void HookConnectState::onExit(GameObject& player) 
+void HookConnectState::onExit(Scene& scene, GameObject& player) 
 {
 	//player
 	//set gravity to true
 
 	//hook is killed after exit.
 }
-void HookConnectState::handleInput(GameObject& player, SDL_Event& e)
+void HookConnectState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, LAUNCH_HOOK))
 	{
-		player.getComponent<PlayerControlComponent>()->changeHookState(&PlayerHookState::disconnectState);
+		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
 		//player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 	}
 
 }
-void HookConnectState::update(GameObject& player)
+void HookConnectState::update(Scene& scene, GameObject& player)
 {
 	//if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
 	//{

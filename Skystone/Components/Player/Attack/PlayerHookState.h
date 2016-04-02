@@ -26,7 +26,7 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	void update(Scene& scene);
 	double getDegrees();
-	void changeState(HookStateManager* state);
+	void changeState(Scene& scene, HookStateManager* state);
 
 	std::shared_ptr<GameObject> hookRef;
 	void instantiateHook(Scene& scene);

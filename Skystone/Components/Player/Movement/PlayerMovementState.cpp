@@ -21,20 +21,20 @@ PlayerMovementState::~PlayerMovementState()
 
 void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 {
-	currentState_->handleInput(owner_, e);
+	currentState_->handleInput(scene, owner_, e);
 }
 
 void PlayerMovementState::update(Scene& scene)
 {
-	currentState_->update(owner_);
+	currentState_->update(scene,owner_);
 	//LOG("INFO") << currentState_->name();
 }
 
-void PlayerMovementState::changeState(PlayerState* state)
+void PlayerMovementState::changeState(Scene& scene, PlayerState* state)
 {
-	currentState_->onExit(owner_);
+	currentState_->onExit(scene, owner_);
 	currentState_ = state;
-	currentState_->onEnter(owner_);
+	currentState_->onEnter(scene, owner_);
 }
 
 PlayerState* PlayerMovementState::getState()

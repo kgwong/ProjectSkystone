@@ -9,7 +9,7 @@ PlayerControlComponent::PlayerControlComponent(GameObject& owner)
 
 
 PlayerControlComponent::~PlayerControlComponent()
-{
+{ 
 }
 
 void PlayerControlComponent::handleInput(Scene& scene, SDL_Event& e)
@@ -28,19 +28,19 @@ void PlayerControlComponent::update(Scene& scene)
 
 }
 
-void PlayerControlComponent::changeMovementState(PlayerState* state)
+void PlayerControlComponent::changeMovementState(Scene& scene, PlayerState* state)
 {
-	movement_.changeState(state);
+	movement_.changeState(scene, state);
 }
 
-void PlayerControlComponent::changeAttackState(PlayerAimState* state)
+void PlayerControlComponent::changeAttackState(Scene& scene, PlayerAimState* state)
 {
-	attack_.changeState(state);
+	attack_.changeState(scene, state);
 }
 
-void PlayerControlComponent::changeHookState(HookStateManager* state)
+void PlayerControlComponent::changeHookState(Scene& scene, HookStateManager* state)
 {
-	hooker_.changeState(state);
+	hooker_.changeState(scene, state);
 }
 
 PlayerHookState PlayerControlComponent::HookState()

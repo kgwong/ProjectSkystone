@@ -26,7 +26,7 @@ HangState::~HangState()
 }
 
 
-void HangState::onEnter(GameObject& player)
+void HangState::onEnter(Scene& scene, GameObject& player)
 {
 	//CANNOT change physics here....must do in update.
 	hookPosition_ = player.getComponent<PlayerControlComponent>()->HookState().getPosition();
@@ -34,7 +34,7 @@ void HangState::onEnter(GameObject& player)
 	oldPlayerYVelocity = player.getComponent<PhysicsComponent>()->getVelY();
 
 }
-void HangState::onExit(GameObject& player)
+void HangState::onExit(Scene& scene, GameObject& player)
 {
 	//reset everything
 	swingVector_.x = 0.0f;
@@ -46,7 +46,7 @@ void HangState::onExit(GameObject& player)
 	radius_ = 0.0f;
 
 }
-void HangState::handleInput(GameObject& player, SDL_Event& e)
+void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	//controls swinging motion only. 
 	//Look in PlayerHookState's connectState to see how hook gets created/destroyed.
@@ -59,11 +59,11 @@ void HangState::handleInput(GameObject& player, SDL_Event& e)
 		direction_ = 1;
 	}
 }
-void HangState::update(GameObject& player)
+void HangState::update(Scene& scene, GameObject& player)
 {
 	if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
 		player.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 	else

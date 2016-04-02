@@ -18,11 +18,11 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
-	void changeMovementState(PlayerState* state);
-	void changeAttackState(PlayerAimState* state);
+	void changeMovementState(Scene& scene, PlayerState* state);
+	void changeAttackState(Scene& scene, PlayerAimState* state);
 
 	//----harvey function----///
-	void changeHookState(HookStateManager* state);
+	void changeHookState(Scene& scene, HookStateManager* state);
 	PlayerHookState HookState();
 	PlayerMovementState MovementState();
 	PlayerAttackState AttackState();

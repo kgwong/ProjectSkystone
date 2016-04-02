@@ -31,7 +31,7 @@ PlayerAttackState::~PlayerAttackState()
 
 void PlayerAttackState::handleInput(Scene& scene, SDL_Event& e)
 {
-	currentState_->handleInput(owner_, e);
+	currentState_->handleInput(scene, owner_, e);
 	if (GameInputs::keyDown(e, ATTACK))
 	{
 		shoot_ = true;
@@ -110,7 +110,7 @@ void PlayerAttackState::update(Scene& scene)
 		break;
 	}*/
 	
-	currentState_->update(owner_);
+	currentState_->update(scene, owner_);
 	degrees_ = currentState_->getAngle();
 	//LOG << "degrees: " << degrees_;
 	//LOG << "owner pos: " << owner_.getPos().x << ", " << owner_.getPos().y;
@@ -137,9 +137,9 @@ void PlayerAttackState::update(Scene& scene)
 	}*/
 }
 
-void PlayerAttackState::changeState(PlayerAimState* state)
+void PlayerAttackState::changeState(Scene& scene, PlayerAimState* state)
 {
-	currentState_->onExit(owner_);
+	currentState_->onExit(scene, owner_);
 	currentState_ = state;
-	currentState_->onEnter(owner_);
+	currentState_->onEnter(scene, owner_);
 }
