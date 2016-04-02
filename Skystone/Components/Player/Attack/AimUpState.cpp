@@ -15,17 +15,17 @@ AimUpState::~AimUpState()
 {
 }
 
-void AimUpState::onEnter(GameObject & player)
+void AimUpState::onEnter(Scene& scene, GameObject& player)
 {
 	dir_ = AimUpState::Direction::NONE;
 }
 
-void AimUpState::handleInput(GameObject& player, SDL_Event& e)
+void AimUpState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, UP))
 	{
 		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::defaultAimState);
-		player.getComponent<PlayerControlComponent>()->changeAttackState(&PlayerAttackState::defaultAimState);
+		player.getComponent<PlayerControlComponent>()->changeAttackState(scene, &PlayerAttackState::defaultAimState);
 	}
 	if (GameInputs::keyDown(e, LEFT))
 	{
@@ -46,7 +46,7 @@ void AimUpState::handleInput(GameObject& player, SDL_Event& e)
 
 }
 
-void AimUpState::update(GameObject& player)
+void AimUpState::update(Scene& scene, GameObject& player)
 {
 	if (dir_ != AimUpState::Direction::NONE)
 	{

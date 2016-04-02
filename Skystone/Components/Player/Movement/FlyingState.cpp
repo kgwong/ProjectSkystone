@@ -15,30 +15,30 @@ FlyingState::~FlyingState()
 {
 }
 
-void FlyingState::onEnter(GameObject& player)
+void FlyingState::onEnter(Scene& scene, GameObject& player)
 {
 	player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
 }
 
-void FlyingState::onExit(GameObject& player)
+void FlyingState::onExit(Scene& scene, GameObject& player)
 {
 }
 
-void FlyingState::handleInput(GameObject& player, SDL_Event& e)
+void FlyingState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, JUMP))
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
 	}
 }
 
-void FlyingState::update(GameObject& player)
+void FlyingState::update(Scene& scene, GameObject& player)
 {
 	if (!player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::walkingState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::walkingState);
 		return;
 	}
 	player.getComponent<PhysicsComponent>()->setVelX(0);

@@ -32,6 +32,11 @@ void Level::onEnter()
 
 void Level::onExit()
 {
+	if (gameObjects.playerHook != nullptr)
+	{
+		gameObjects.playerHook->kill();
+		gameObjects.playerHook = nullptr;
+	}
 	gameObjects.getPlayer().disownComponents();
 	ObjectVector& playerProjectiles = gameObjects.get(GameObject::Type::PLAYER_PROJECTILE);
 	for (auto& p : playerProjectiles)

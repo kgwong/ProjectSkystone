@@ -9,14 +9,14 @@ PlayerControlComponent::PlayerControlComponent(GameObject& owner)
 
 
 PlayerControlComponent::~PlayerControlComponent()
-{
+{ 
 }
 
-void PlayerControlComponent::handleInput(SDL_Event& e)
+void PlayerControlComponent::handleInput(Scene& scene, SDL_Event& e)
 {
-	movement_.handleInput(e);
-	attack_.handleInput(e);
-	hooker_.handleInput(e);
+	movement_.handleInput(scene, e);
+	attack_.handleInput(scene, e);
+	hooker_.handleInput(scene, e);
 	HookKeyInput = e.key.keysym.sym;
 }
 
@@ -25,26 +25,42 @@ void PlayerControlComponent::update(Scene& scene)
 	movement_.update(scene);
 	attack_.update(scene);
 	hooker_.update(scene);
+
 }
 
-void PlayerControlComponent::changeMovementState(PlayerState* state)
+void PlayerControlComponent::changeMovementState(Scene& scene, PlayerState* state)
 {
-	movement_.changeState(state);
+	movement_.changeState(scene, state);
 }
 
-void PlayerControlComponent::changeAttackState(PlayerAimState* state)
+void PlayerControlComponent::changeAttackState(Scene& scene, PlayerAimState* state)
 {
-	attack_.changeState(state);
+	attack_.changeState(scene, state);
 }
 
-void PlayerControlComponent::changeHookState(HookStateManager* state)
+void PlayerControlComponent::changeHookState(Scene& scene, HookStateManager* state)
 {
-	hooker_.changeState(state);
+	hooker_.changeState(scene, state);
 }
 
 PlayerHookState PlayerControlComponent::HookState()
 {
 	return hooker_;
+}
+
+PlayerMovementState PlayerControlComponent::MovementState()
+{
+	return movement_;
+}
+
+PlayerAttackState PlayerControlComponent::AttackState()
+{
+	return attack_;
+}
+
+void PlayerControlComponent::handleEvent(const CollisionEvent& e)
+{
+	hooker_.handleEvent(e);
 }
 
 

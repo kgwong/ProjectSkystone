@@ -1,5 +1,5 @@
 #include "HookDisconnectState.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 
@@ -12,35 +12,36 @@ HookDisconnectState::~HookDisconnectState()
 {
 }
 
-void HookDisconnectState::onEnter(GameObject& player)
+void HookDisconnectState::onEnter(Scene& scene, GameObject& player)
 {
-	//default state. ~ problem shared_ptr is empty.
-	//if hook not deleted or gravity not restored.. do it here.
-	//player.getComponent<PlayerHookState>()->hookRef;
-	//if (player.getComponent<PlayerHookState>()->hookRef != nullptr)
-	//{
-	//	player.getComponent<PlayerHookState>()->hookRef->disownComponents();
-	//	player.getComponent<PlayerHookState>()->hookRef = nullptr;
-	//}
+	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
+	}
 }
-void HookDisconnectState::onExit(GameObject& player)
+void HookDisconnectState::onExit(Scene& scene, GameObject& player)
 {
 	//goes to launch state... prepare for that. do nothing.
 }
-void HookDisconnectState::handleInput(GameObject& player, SDL_Event& e)
+void HookDisconnectState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	//if LAUNCH_HOOK button is released
 	//switch state to LAUNCH STATE.
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
 		//states need to also pass the reference to the hook here.
-		player.getComponent<PlayerControlComponent>()->changeHookState(&PlayerHookState::launchState);
+		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::launchState);
 		
 	}
 }
-void HookDisconnectState::update(GameObject& player) 
+void HookDisconnectState::update(Scene& scene, GameObject& player)
 {
-	//check here when to switch to launch state.
+	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
+		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
+	}
 }
 
 double HookDisconnectState::getAngle() 

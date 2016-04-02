@@ -11,10 +11,10 @@
 class PlayerState
 {
 public:
-	virtual void onEnter(GameObject& player) = 0;
-	virtual void onExit(GameObject& player) = 0;
-	virtual void handleInput(GameObject& player, SDL_Event& e) = 0;
-	virtual void update(GameObject& player) = 0;
+	virtual void onEnter(Scene& scene, GameObject& player) = 0;
+	virtual void onExit(Scene& scene, GameObject& player) = 0;
+	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e) = 0;
+	virtual void update(Scene& scene, GameObject& player) = 0;
 
 	virtual std::string name() = 0;
 

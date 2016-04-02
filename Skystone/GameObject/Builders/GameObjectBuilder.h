@@ -6,6 +6,7 @@
 #include "ItemDropBuilder.h"
 #include "PlayerProjectileBuilder.h"
 #include "BackgroundBuilder.h"
+#include "ScrollingBackgroundBuilder.h"
 #include "PlayerHookBuilder.h"
 #include "EnemyProjectileBuilder.h"
 
@@ -24,6 +25,7 @@ public:
 	std::shared_ptr<GameObject> buildItemDrop(ComponentSystem& componentSystem, const std::string& itemName);
 	std::shared_ptr<GameObject> buildPlayerProjectile(ComponentSystem& componentSystem, const std::string& name);
 	std::shared_ptr<GameObject> buildBackground(ComponentSystem& componentSystem, const std::string backgroundName);
+	std::shared_ptr<GameObject> buildScrollingBackground(ComponentSystem& componentSystem, const std::string backgroundName);
 	std::shared_ptr<GameObject> buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name);
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
@@ -35,6 +37,7 @@ private:
 	ItemDropBuilder itemDropBuilder_;
 	PlayerProjectileBuilder playerProjectileBuilder_;
 	BackgroundBuilder backgroundBuilder_;
+	ScrollingBackgroundBuilder scrollingBackgroundBuilder_;
 	/////////////////////////////////////////////////
 	PlayerHookBuilder playerHookBuilder_;
 	EnemyProjectileBuilder enemyProjectileBuilder_;

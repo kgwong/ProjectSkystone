@@ -74,7 +74,6 @@
     <ClCompile Include="Components\AI\TrackerComponent.cpp" />
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
-    <ClCompile Include="StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
@@ -87,13 +86,16 @@
     <ClCompile Include="Components\Player\Attack\HookConnectState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
-    <ClCompile Include="HookStateManager.cpp" />
-    <ClCompile Include="HangState.cpp" />
     <ClCompile Include="Components\Render\ScrollingQuad.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
+    <ClCompile Include="Components\Player\Movement\HangState.cpp" />
+    <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
+    <ClCompile Include="Components\Common\StickOnCollision.cpp" />
+    <ClCompile Include="Scene\SceneLoader.cpp" />
+    <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -175,7 +177,6 @@
     <ClInclude Include="GameObject\Builders\TileBuilder.h" />
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
-    <ClInclude Include="StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
@@ -189,13 +190,16 @@
     <ClInclude Include="Components\Player\Attack\HookConnectState.h" />
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
     <ClInclude Include="Components\Player\Attack\HookDisconnectState.h" />
-    <ClInclude Include="HookStateManager.h" />
-    <ClInclude Include="HangState.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
     <ClInclude Include="Components\Render\ScrollingQuad.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\EnemyProjectile\EnemyProjectileComponent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
+    <ClInclude Include="Components\Player\Movement\HangState.h" />
+    <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
+    <ClInclude Include="Components\Common\StickOnCollision.h" />
+    <ClInclude Include="Scene\SceneLoader.h" />
+    <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
   </ItemGroup>
 </Project>

@@ -57,7 +57,7 @@ void Scene::setPlayer(GameObject* player, const Point& startPos)
 
 void Scene::handleInput(SDL_Event& e)
 {
-	componentSystem_.handleInput(e);
+	componentSystem_.handleInput(*this, e);
 }
 
 void Scene::update()

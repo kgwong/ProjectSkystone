@@ -9,6 +9,7 @@ class SceneManager;
 enum class SceneID {
 	INVALID,
 	LEVEL,
+	MAIN_MENU,
 	GAME_OVER
 };
 
@@ -31,8 +32,8 @@ public:
 	virtual void onEnter();
 	virtual void onExit(); 
 
-	void setPlayer(GameObject* player);
-	void setPlayer(GameObject* player, const Point& startPos);
+	virtual void setPlayer(GameObject* player);
+	virtual void setPlayer(GameObject* player, const Point& startPos);
 
 	virtual void handleInput(SDL_Event& e);
 	virtual void update();

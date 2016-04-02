@@ -16,9 +16,9 @@ ComponentSystem::~ComponentSystem()
 {
 }
 
-void ComponentSystem::handleInput(SDL_Event& e)
+void ComponentSystem::handleInput(Scene& scene, SDL_Event& e)
 {
-	inputSystem_.handleInput(e);
+	inputSystem_.handleInput(scene, e);
 }
 
 void ComponentSystem::update(Scene& scene)

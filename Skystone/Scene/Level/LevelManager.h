@@ -16,7 +16,7 @@ public:
 	~LevelManager();
 
 	virtual GameObject* getCameraFollowObject();
-	void setPlayer(GameObject* player);
+	virtual void setPlayer(GameObject* player);
 
 	void initStartingLevel();
 

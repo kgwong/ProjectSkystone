@@ -14,7 +14,9 @@ public:
 	virtual ~Camera();
 
 	void setLevelBounds(int maxX, int maxY);
-	void followObject(GameObject& object, float percBehind);
+
+	void useDefaultLocation();
+	void followObject(GameObject* object, float percBehind);
 	void stayInLevelBounds();
 
 private:
