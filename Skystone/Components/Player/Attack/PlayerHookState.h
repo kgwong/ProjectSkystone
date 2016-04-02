@@ -23,7 +23,7 @@ public:
 	PlayerHookState(GameObject& owner);
 	~PlayerHookState();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	void update(Scene& scene);
 	double getDegrees();
 	void changeState(HookStateManager* state);

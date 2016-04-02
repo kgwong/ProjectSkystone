@@ -28,7 +28,7 @@ PlayerHookState::~PlayerHookState()
 }
 
 //directional input.
-void PlayerHookState::handleInput(SDL_Event& e)
+void PlayerHookState::handleInput(Scene& scene, SDL_Event& e)
 {
 
 	//POLYMORPHISM

@@ -19,7 +19,7 @@ PlayerMovementState::~PlayerMovementState()
 {
 }
 
-void PlayerMovementState::handleInput(SDL_Event& e)
+void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 {
 	currentState_->handleInput(owner_, e);
 }

@@ -10,7 +10,7 @@ public:
 	InputComponent(GameObject& owner);
 	virtual ~InputComponent();
 
-	virtual void handleInput(SDL_Event& e) = 0;
+	virtual void handleInput(Scene& scene, SDL_Event& e) = 0;
 
 	virtual Component::Type getType();
 };
