@@ -15,7 +15,7 @@ public:
 	ComponentSystem();
 	~ComponentSystem();
 
-	void handleInput(SDL_Event& e);
+	void handleInput(Scene& scene, SDL_Event& e);
 	void update(Scene& scene);
 	void render(Scene& scene, GameWindow& window, float percBehind);
 

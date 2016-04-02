@@ -12,11 +12,11 @@ PlayerControlComponent::~PlayerControlComponent()
 {
 }
 
-void PlayerControlComponent::handleInput(SDL_Event& e)
+void PlayerControlComponent::handleInput(Scene& scene, SDL_Event& e)
 {
-	movement_.handleInput(e);
-	attack_.handleInput(e);
-	hooker_.handleInput(e);
+	movement_.handleInput(scene, e);
+	attack_.handleInput(scene, e);
+	hooker_.handleInput(scene, e);
 	HookKeyInput = e.key.keysym.sym;
 }
 

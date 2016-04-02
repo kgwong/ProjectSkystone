@@ -22,7 +22,7 @@ public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
 	void changeState(PlayerState* state);

@@ -30,7 +30,7 @@ public:
 	PlayerAttackState(GameObject& owner);
 	virtual ~PlayerAttackState();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
 	void changeState(PlayerAimState* state);

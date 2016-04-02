@@ -15,7 +15,7 @@ public:
 	PlayerControlComponent(GameObject& owner);
 	virtual ~PlayerControlComponent();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
 	void changeMovementState(PlayerState* state);

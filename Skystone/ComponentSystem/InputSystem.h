@@ -6,6 +6,7 @@
 
 #include <SDL\SDL.h>
 
+class Scene;
 class Component;
 class InputComponent;
 
@@ -15,7 +16,7 @@ public:
 	InputSystem();
 	~InputSystem();
 
-	void handleInput(SDL_Event& e);
+	void handleInput(Scene& scene, SDL_Event& e);
 
 	void addComponent(std::shared_ptr<Component> component);
 

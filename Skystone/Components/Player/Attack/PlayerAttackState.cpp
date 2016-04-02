@@ -29,7 +29,7 @@ PlayerAttackState::~PlayerAttackState()
 {
 }
 
-void PlayerAttackState::handleInput(SDL_Event& e)
+void PlayerAttackState::handleInput(Scene& scene, SDL_Event& e)
 {
 	currentState_->handleInput(owner_, e);
 	if (GameInputs::keyDown(e, ATTACK))
