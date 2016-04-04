@@ -14,6 +14,7 @@
 #include "Components/AI/SnakeAIComponent.h"
 #include "Components/AI/PounceAIComponent.h"
 #include "Components/AI/AlligatorAIComponent.h"
+#include "Components/AI/BossAIComponent.h"
 
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/HealthComponent.h"
@@ -46,14 +47,17 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 500));
 		enemyToBuild.addComponent(componentSystem.getNew<FallingAIComponent>(enemyToBuild));
 	}
-	else if (enemyName == "TestMob1") //in first room, currently alligators
+	else if (enemyName == "TestMob1") 
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
+		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
+		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
+
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<AlligatorAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<BossAIComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
 	}
 	else if (enemyName == "TestMob2")
