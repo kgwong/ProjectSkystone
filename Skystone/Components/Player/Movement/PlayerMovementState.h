@@ -27,6 +27,9 @@ public:
 
 	void changeState(Scene& scene, PlayerState* state);
 	PlayerState* getState();
+	virtual void handleEvent(const CollisionEvent& e);
+	void setCanSwing(bool swing);
+	bool canSwing;
 
 private:
 	PlayerState* currentState_;

@@ -8,6 +8,7 @@
 #include "Application/Log.h"
 
 #include "Components\Events\ComponentEvent.h"
+#include "Components/Player/PlayerControlComponent.h"
 
 Level::Level(int levelID)
 	: levelManager_(nullptr),
@@ -28,10 +29,16 @@ void Level::onEnter()
 {
 	gameObjects.getPlayer().registerComponents(componentSystem_);
 	gameObjects.start();
+	LOG("INFO") << "enter level";
+	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
+//	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
+	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 }
+
 
 void Level::onExit()
 {
+	LOG("INFO") << "EXIT LEVEL";
 	if (gameObjects.playerHook != nullptr)
 	{
 		gameObjects.playerHook->kill();

@@ -32,10 +32,10 @@ void HookLaunchState::onExit(Scene& scene, GameObject& player)
 void HookLaunchState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	//if hook is launched already, and key is pressed again, switch to disconnect state.
-	if (GameInputs::keyDown(e, LAUNCH_HOOK))
-	{
-		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
-	}
+	//if (GameInputs::keyDown(e, LAUNCH_HOOK))
+	//{
+	//	player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
+	//}
 
 	//or to be simple do nothing.
 }
@@ -48,6 +48,17 @@ void HookLaunchState::update(Scene& scene, GameObject& player)
 	{
 		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
 		return;
+	}
+
+	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef == nullptr)
+	{
+		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
+		return;
+	}
+
+	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
+	{
+		player.getComponent<PlayerControlComponent>()->MovementState().changeState(scene,&PlayerMovementState::airborneState);
 	}
 
 	//StickOnCollision* hook_collision = nullptr;

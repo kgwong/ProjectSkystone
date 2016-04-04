@@ -61,6 +61,7 @@ PlayerAttackState PlayerControlComponent::AttackState()
 void PlayerControlComponent::handleEvent(const CollisionEvent& e)
 {
 	hooker_.handleEvent(e);
+	movement_.handleEvent(e);
 }
 
 
