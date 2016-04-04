@@ -32,7 +32,8 @@ void HangState::onEnter(Scene& scene, GameObject& player)
 	hookPosition_ = player.getComponent<PlayerControlComponent>()->HookState().getPosition();
 	radius_ = fabsf(hookPosition_.y - player.getPosY());
 	oldPlayerYVelocity = player.getComponent<PhysicsComponent>()->getVelY();
-
+	oldPlayerPos_ = player.getPos();
+	player.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
 }
 void HangState::onExit(Scene& scene, GameObject& player)
 {
@@ -61,6 +62,14 @@ void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 }
 void HangState::update(Scene& scene, GameObject& player)
 {
+	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::launchState)
+	{
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+		player.getComponent<PhysicsComponent>()->enableGravity(true);
+		return;
+	}
+
 	if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
 	{
 		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
@@ -70,7 +79,7 @@ void HangState::update(Scene& scene, GameObject& player)
 	{
 		auto playerPhysics = player.getComponent<PhysicsComponent>();
 		playerPhysics->enableGravity(false);
-		
+
 		playerPhysics->setVelY(0);
 		if (currentAngle_ > MAX_ANGLE)
 		{
@@ -90,10 +99,24 @@ void HangState::update(Scene& scene, GameObject& player)
 
 		swingVector_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 		swingVector_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
-		//LOG("INFO") << swingVector_;
-		//LOG("INFO") << "ANGLE: " << currentAngle_;
-		//LOG("INFO") << "RADIUS: " << radius_;
-		player.setPos(swingVector_);
+		
+		//player.getComponent<PhysicsComponent>()->setVelX(swingVector_.x);
+		//player.getComponent<PhysicsComponent>()->setVelY(swingVector_.y);
+		if (player.getComponent<PlayerControlComponent>()->MovementState().canSwing)
+		{
+			oldPlayerPos_ = swingVector_;
+			player.setPos(swingVector_);
+		}
 	}
 	
+}
+
+Point HangState::SwingVector()
+{
+	return swingVector_;
+}
+
+Point HangState::OldPlayerPos()
+{
+	return oldPlayerPos_;
 }

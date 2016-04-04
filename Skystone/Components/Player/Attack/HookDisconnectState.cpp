@@ -32,16 +32,16 @@ void HookDisconnectState::handleInput(Scene& scene, GameObject& player, SDL_Even
 	{
 		//states need to also pass the reference to the hook here.
 		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::launchState);
-		
+		LOG("INFO") << player.getComponent<PlayerControlComponent>()->HookState().getState()->name();
 	}
 }
 void HookDisconnectState::update(Scene& scene, GameObject& player)
 {
-	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	/*if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
 	{
 		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
 		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
-	}
+	}*/
 }
 
 double HookDisconnectState::getAngle() 

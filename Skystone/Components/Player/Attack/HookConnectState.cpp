@@ -28,7 +28,7 @@ void HookConnectState::handleInput(Scene& scene, GameObject& player, SDL_Event& 
 	if (GameInputs::keyDown(e, LAUNCH_HOOK))
 	{
 		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
-		//player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+		player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 	}
 
 }

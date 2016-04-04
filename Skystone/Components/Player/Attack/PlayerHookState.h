@@ -38,6 +38,7 @@ public:
 	Point getPosition();
 	void setHanging(bool h);
 	bool hanging;
+	bool enterOtherLevel;
 
 	virtual void handleEvent(const CollisionEvent& e);
 

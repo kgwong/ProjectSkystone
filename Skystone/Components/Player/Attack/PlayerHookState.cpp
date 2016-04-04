@@ -22,6 +22,7 @@ PlayerHookState::PlayerHookState(GameObject& owner)
 	hookStateManager_(&disconnectState)
 {
 	hanging = false;
+	enterOtherLevel = false;
 }
 PlayerHookState::~PlayerHookState()
 {
@@ -141,6 +142,7 @@ void PlayerHookState::disconnectHook(Scene& scene)
 
 void PlayerHookState::resetState()
 {
+	//this->changeState()
 	hookStateManager_ = &disconnectState;
 }
 
@@ -172,7 +174,7 @@ void PlayerHookState::update(Scene& scene)
 		disconnectHook(scene);
 	}
 
-//	LOG("INFO") << scene.gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
+	//LOG("INFO") << scene.gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 
 }
 
