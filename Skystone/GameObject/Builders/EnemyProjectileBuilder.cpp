@@ -7,7 +7,7 @@
 #include "Components/Common/DamageComponent.h"
 #include "Components/Common/DieOnCollision.h"
 #include "Components/EnemyProjectile/EnemyProjectileComponent.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 
 EnemyProjectileBuilder::EnemyProjectileBuilder()
 {

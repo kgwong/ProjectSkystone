@@ -22,10 +22,14 @@ public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
-	void changeState(PlayerState* state);
+	void changeState(Scene& scene, PlayerState* state);
+	PlayerState* getState();
+	virtual void handleEvent(const CollisionEvent& e);
+	void setCanSwing(bool swing);
+	bool canSwing;
 
 private:
 	PlayerState* currentState_;

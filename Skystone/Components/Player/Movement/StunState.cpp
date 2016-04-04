@@ -14,27 +14,40 @@ StunState::~StunState()
 {
 }
 
-void StunState::onEnter(GameObject& player)
+void StunState::onEnter(Scene& scene, GameObject& player)
 {
 	firstUpdate_ = true;
 }
 
-void StunState::onExit(GameObject& player)
+void StunState::onExit(Scene& scene, GameObject& player)
 {
 }
 
-void StunState::handleInput(GameObject& player, SDL_Event& e)
+void StunState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 }
 
-void StunState::update(GameObject& player)
+void StunState::update(Scene& scene, GameObject& player)
 {
 	if (!firstUpdate_)
 	{
 		if (!player.getComponent<PhysicsComponent>()->isFalling())
 		{
 			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-			player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+			return;
+		}
+
+		if (player.getComponent<PlayerControlComponent>()->HookState().hanging)
+		{
+			player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+			return;
+		}
+
+		if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
+		{
+			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+			player.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;
 		}
 	}

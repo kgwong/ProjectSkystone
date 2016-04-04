@@ -14,15 +14,15 @@ DefaultAimState::~DefaultAimState()
 {
 }
 
-void DefaultAimState::onEnter(GameObject& player)
+void DefaultAimState::onEnter(Scene& scene, GameObject& player)
 {
 }
 
-void DefaultAimState::onExit(GameObject& player)
+void DefaultAimState::onExit(Scene& scene, GameObject& player)
 {
 }
 
-void DefaultAimState::handleInput(GameObject& player, SDL_Event& e)
+void DefaultAimState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, RIGHT))
 	{
@@ -35,11 +35,11 @@ void DefaultAimState::handleInput(GameObject& player, SDL_Event& e)
 	else if (GameInputs::keyDown(e, UP))
 	{
 		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::aimUpState);
-		player.getComponent<PlayerControlComponent>()->changeAttackState(&PlayerAttackState::aimUpState);
+		player.getComponent<PlayerControlComponent>()->changeAttackState(scene, &PlayerAttackState::aimUpState);
 	}
 }
 
-void DefaultAimState::update(GameObject& player)
+void DefaultAimState::update(Scene& scene, GameObject& player)
 {
 }
 

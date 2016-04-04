@@ -13,14 +13,17 @@ public:
 	HangState();
 	virtual ~HangState();
 
-	virtual void onEnter(GameObject& player);
-	virtual void onExit(GameObject& player);
-	virtual void handleInput(GameObject& player, SDL_Event& e);
-	virtual void update(GameObject& player);
+	virtual void onEnter(Scene& scene, GameObject& player);
+	virtual void onExit(Scene& scene, GameObject& player);
+	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
+	virtual void update(Scene& scene, GameObject& player);
+	Point SwingVector();
+	Point OldPlayerPos();
 
 	virtual std::string name() { return "Hang"; }
 private:
 	Point swingVector_;
+	Point oldPlayerPos_;
 	int direction_;
 	float currentAngle_;
 

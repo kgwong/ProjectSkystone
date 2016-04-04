@@ -23,34 +23,30 @@ public:
 	PlayerHookState(GameObject& owner);
 	~PlayerHookState();
 
-	virtual void handleInput(SDL_Event& e);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 	void update(Scene& scene);
 	double getDegrees();
-	void changeState(HookStateManager* state);
+	void changeState(Scene& scene, HookStateManager* state);
 
 	std::shared_ptr<GameObject> hookRef;
 	void instantiateHook(Scene& scene);
 	void connectHook(Scene& scene);
 	void disconnectHook(Scene& scene);
 	void resetState();
+
 	HookStateManager* getState();
 	Point getPosition();
+	void setHanging(bool h);
 	bool hanging;
+	bool enterOtherLevel;
 
-	//delete these.. later.
-	void setLaunched(bool b);
-	bool hasLaunched();
-	bool isActiveHook();
-	SDL_Keycode getKeyInput();
+	virtual void handleEvent(const CollisionEvent& e);
+
 private:
 	HookStateManager* hookStateManager_;
 	double _degrees;
-
-	//delete these useless variables later.
-	bool _launched;
-	bool _hookActive;
 	AimState _currentAimState;
-	SDL_Keycode _keyInput;
+
 };
 
 #endif

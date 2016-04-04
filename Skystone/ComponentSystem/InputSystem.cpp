@@ -11,14 +11,14 @@ InputSystem::~InputSystem()
 {
 }
 
-void InputSystem::handleInput(SDL_Event& e)
+void InputSystem::handleInput(Scene& scene, SDL_Event& e)
 {
 	for (size_t i = 0; i < components_.size(); /*EMPTY*/)
 	{
 		auto& component = components_[i];
 		if (component->owned())
 		{
-			component->handleInput(e);
+			component->handleInput(scene, e);
 			++i;
 		}
 		else

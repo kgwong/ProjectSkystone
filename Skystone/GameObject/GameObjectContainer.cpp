@@ -69,11 +69,14 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "PlayerHook")
 	{
-		if (playerHook == nullptr)
+		if (playerHook != nullptr)
 		{
-			newObject = builder_.buildPlayerHook(componentSystem_, name);
-			playerHook = newObject;
+			playerHook->kill();
+			playerHook = nullptr;
 		}
+		
+		newObject = builder_.buildPlayerHook(componentSystem_, name);
+		playerHook = newObject;
 	}
 	else if (type == "Drop")
 	{
@@ -94,6 +97,11 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		//SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
 		//newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
 		newObject = builder_.buildBackground(componentSystem_, name);
+		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
+	}
+	else if (type == "ScrollingBackground")
+	{
+		newObject = builder_.buildScrollingBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
 	}
 	else

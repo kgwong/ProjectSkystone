@@ -22,9 +22,20 @@ void Camera::setLevelBounds(int maxX, int maxY)
 	maxY_ = maxY;
 }
 
-void Camera::followObject(GameObject& object, float percBehind)
+void Camera::useDefaultLocation()
 {
-	auto t = object.getComponent<SpriteRenderer>();
+	position_ = Point{ 0, 0 };
+}
+
+void Camera::followObject(GameObject* object, float percBehind)
+{
+	if (object == nullptr) 
+	{
+		useDefaultLocation();
+		return;
+	}
+
+	auto t = object->getComponent<SpriteRenderer>();
 
 	if (t != nullptr)
 	{

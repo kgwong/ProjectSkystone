@@ -22,7 +22,6 @@
 #include "Components/Collider/ColliderComponent.h"
 
 
-#include "Components/Render/TextRenderer.h"
 EnemyBuilder::EnemyBuilder()
 {
 }
@@ -56,7 +55,16 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<AlligatorAIComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNew<TextRenderer>(enemyToBuild)); 
+	}
+	else if (enemyName == "TestMob2")
+	{
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<BasicEnemyMovementComponent>(enemyToBuild));
 	}
 	else if (enemyName == "BasicEnemy")
 	{
@@ -132,7 +140,6 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 1000));
 
 		enemyToBuild.addComponent(componentSystem.getNew<SwingingAIComponent>(enemyToBuild));
-		
 	}
 	return newEnemy;
 }

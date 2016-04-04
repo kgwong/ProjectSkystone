@@ -4,7 +4,7 @@
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Collider/ColliderComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
-#include "StickOnCollision.h"
+#include "Components/Common/StickOnCollision.h"
 
 
 PlayerHookBuilder::PlayerHookBuilder()

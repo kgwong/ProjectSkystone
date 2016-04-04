@@ -20,16 +20,16 @@ WalkingState::~WalkingState()
 {
 }
 
-void WalkingState::onEnter(GameObject& player)
+void WalkingState::onEnter(Scene& scene, GameObject& player)
 {
 	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
 }
 
-void WalkingState::onExit(GameObject& player)
+void WalkingState::onExit(Scene& scene, GameObject& player)
 {
 }
 
-void WalkingState::handleInput(GameObject& player, SDL_Event& e)
+void WalkingState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, JUMP))
 	{
@@ -37,13 +37,17 @@ void WalkingState::handleInput(GameObject& player, SDL_Event& e)
 	}
 }
 
-void WalkingState::update(GameObject& player)
+void WalkingState::update(Scene& scene, GameObject& player)
 {
+	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	{
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::hangState);
+	}
 
 	if (player.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(&PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
 		return;
 	}
 
