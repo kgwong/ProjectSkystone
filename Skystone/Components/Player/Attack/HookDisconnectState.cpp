@@ -28,7 +28,7 @@ void HookDisconnectState::handleInput(Scene& scene, GameObject& player, SDL_Even
 {
 	//if LAUNCH_HOOK button is released
 	//switch state to LAUNCH STATE.
-	if (GameInputs::keyUp(e, ControlType::LAUNCH_HOOK))
+	if (GameInputs::keyDown(e,ControlType::LAUNCH_HOOK) && GameInputs::keyHeld(ControlType::LAUNCH_HOOK)) //if (GameInputs::keyUp(e, ControlType::LAUNCH_HOOK))
 	{
 		//states need to also pass the reference to the hook here.
 		LOG("INFO") << player.getComponent<PlayerControlComponent>()->HookState().getState()->name();
