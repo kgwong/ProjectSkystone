@@ -43,11 +43,12 @@ void AlligatorAIComponent::start(Scene & scene)
 
 void AlligatorAIComponent::update(Scene & scene)
 {
-	timer_ += Time::getElapsedUpdateTimeSeconds();
+	timer_ += Time::getElapsedUpdateTimeSeconds(); //cooldown for movement
 	float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 	float playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 	
-	if (owner_.getPosY() <= scene.gameObjects.getPlayer().getPosY() +32 && shot_ready_)
+	//check if on the same x plane and ready to fire
+	if (owner_.getPosY() == scene.gameObjects.getPlayer().getPosY() + 32 && shot_ready_)
 	{
 		timer_ = 0;
 		moving_ = false;
@@ -60,6 +61,7 @@ void AlligatorAIComponent::update(Scene & scene)
 		float newVelX = (DEFAULT_PROJECTILE_VELOCITY * playerSide);
 		physics->setVelX(newVelX * 60.0f);
 	}
+
 	if (!shot_ready_)
 	{
 		shot_timer_ += Time::getElapsedUpdateTimeSeconds();
@@ -68,6 +70,8 @@ void AlligatorAIComponent::update(Scene & scene)
 			shot_ready_ = true;
 		}
 	}
+
+	//if not shooting, take an action
 	if (timer_ > action_time_)
 	{
 		int generate_action = rand() % 3;
@@ -79,6 +83,7 @@ void AlligatorAIComponent::update(Scene & scene)
 
 	}
 
+	//continue moving for duration
 	if (moving_)
 	{
 		move_timer_ += Time::getElapsedUpdateTimeSeconds();

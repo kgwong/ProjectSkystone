@@ -90,6 +90,7 @@
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
+    <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\HangState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\EnemyProjectile\EnemyProjectileComponent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
+    <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="Components\Common\StickOnCollision.h" />

@@ -24,7 +24,7 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 	auto& projectileToBuild = *newProjectile;
 
 	projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
-	projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/playerProjectile.png")));
+	projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
 	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
 	projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 5));
