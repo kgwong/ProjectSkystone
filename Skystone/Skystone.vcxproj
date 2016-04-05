@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
