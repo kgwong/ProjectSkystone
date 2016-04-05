@@ -48,7 +48,7 @@ void AlligatorAIComponent::update(Scene & scene)
 	float playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 	
 	//check if on the same x plane and ready to fire
-	if (owner_.getPosY() == scene.gameObjects.getPlayer().getPosY() +32 && shot_ready_)
+	if (owner_.getPosY() == scene.gameObjects.getPlayer().getPosY() + 32 && shot_ready_)
 	{
 		timer_ = 0;
 		moving_ = false;

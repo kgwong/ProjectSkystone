@@ -50,9 +50,8 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	else if (enemyName == "TestMob1") 
 	{
 		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
-		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
-
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
+		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
@@ -142,8 +141,17 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 1000));
-
 		enemyToBuild.addComponent(componentSystem.getNew<SwingingAIComponent>(enemyToBuild));
+	}
+	else if (enemyName == "Gator")
+	{
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 600));
+		enemyToBuild.addComponent(componentSystem.getNew<AlligatorAIComponent>(enemyToBuild));
 	}
 	return newEnemy;
 }

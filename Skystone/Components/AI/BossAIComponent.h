@@ -3,16 +3,17 @@
 
 #include "AIComponent.h"
 
-class HealthComponent;
+//class HealthComponent;
 class PhysicsComponent;
 
 class BossAIComponent :
 	public AIComponent
 {
 public:
-	const float DEFAULT_COOLDOWN_SECONDS = 5;
-	const float DEFAULT_CLOSE_RANGE = 500;
-	const float DEFAULT_MEDIUM_RANGE = 750;
+	const float DEFAULT_COOLDOWN_SECONDS = 6;
+	const float DEFAULT_CLOSE_RANGE = 300;
+	const float DEFAULT_MEDIUM_RANGE = 500;
+	const float DEFAULT_MOVE_SPEED = 3;
 
 
 public:
@@ -28,6 +29,8 @@ private:
 	bool cooldown_;
 	float close_range_;
 	float medium_range_;
+	float facing_;
+	PhysicsComponent* physics_;
 };
 
 #endif
