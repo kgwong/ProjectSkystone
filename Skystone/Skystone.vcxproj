@@ -93,6 +93,7 @@
     <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
     <ClCompile Include="Components\Player\Movement\HangState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
+    <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
+    <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
