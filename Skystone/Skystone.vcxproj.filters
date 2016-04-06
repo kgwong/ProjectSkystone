@@ -93,18 +93,15 @@
     <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Scene\SceneLoader.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
     <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
-=======
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="ComponentEvents\CollisionEvent.cpp" />
     <ClCompile Include="ComponentEvents\ComponentEvent.cpp" />
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
->>>>>>> 209c83b5acd5e3fd2dc6ddbbdb47ace94f9b6722
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -207,11 +204,9 @@
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Scene\SceneLoader.h" />
-<<<<<<< HEAD
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
     <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
-=======
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="ComponentEvents\CollisionEvent.h" />
     <ClInclude Include="ComponentEvents\ComponentEvent.h" />
@@ -219,6 +214,5 @@
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
->>>>>>> 209c83b5acd5e3fd2dc6ddbbdb47ace94f9b6722
   </ItemGroup>
 </Project>
