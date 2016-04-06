@@ -41,13 +41,13 @@ void StunState::update(Scene& scene, GameObject& player)
 		if (player.getComponent<PlayerControlComponent>()->HookState().hanging)
 		{
 			player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+			player.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;
 		}
 
 		if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
 		{
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
-			player.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;
 		}
 	}

@@ -98,6 +98,7 @@
     <ClCompile Include="ComponentEvents\ComponentEvent.cpp" />
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
+    <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -206,5 +207,6 @@
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
+    <ClInclude Include="Components\Player\Movement\LaunchState.h" />
   </ItemGroup>
 </Project>

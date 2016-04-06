@@ -32,7 +32,7 @@ void Level::onEnter()
 	gameObjects.start();
 	LOG("INFO") << "enter level";
 	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
-//	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
+	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
 	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 }
 
