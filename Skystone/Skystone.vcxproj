@@ -182,11 +182,8 @@
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
-=======
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
->>>>>>> 209c83b5acd5e3fd2dc6ddbbdb47ace94f9b6722
     <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
