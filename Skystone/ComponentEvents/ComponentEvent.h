@@ -2,25 +2,19 @@
 #define COMPONENT_EVENT_H
 
 class Scene;
+class ComponentEventReceiver;
 
 class ComponentEvent
 {
 public:
-	enum class Type {
-		onDeath, 
-		onCollision,
-		onDamageTaken
-	};
-
-public:
-	ComponentEvent(Type type, Scene& scene);
+	ComponentEvent(Scene& scene);
 	virtual ~ComponentEvent();
 
+	virtual void dispatch(ComponentEventReceiver& eventReceiver) const;
+
 	Scene& getScene() const;
-	Type getType() const;
 
 private:
-	Type type_;
 	Scene& scene_;
 };
 

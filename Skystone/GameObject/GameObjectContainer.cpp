@@ -1,6 +1,7 @@
 #include "GameObjectContainer.h"
 
-#include "Components/Events/ComponentEvent.h"
+#include "ComponentEvents/ComponentEvent.h"
+#include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
 
 // duct taping code together
@@ -141,7 +142,7 @@ void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 		auto& obj = vector[i];
 		if (!obj->alive())
 		{
-			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, scene));
+			obj->broadcastEvent(OnDeathEvent(scene));
 			ComponentSystem::vector_remove(vector, i);
 		}
 		else

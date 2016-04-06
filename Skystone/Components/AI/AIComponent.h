@@ -11,7 +11,7 @@ public:
 	virtual ~AIComponent();
 
 	virtual void handleEvent(const CollisionEvent& e);
-	virtual void handleEvent(const ComponentEvent& e);
+	virtual void handleEvent(const OnDeathEvent& e);
 
 	virtual Component::Type getType() final;
 
