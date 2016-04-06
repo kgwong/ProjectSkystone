@@ -2,10 +2,8 @@
 
 #include "Components/Component.h" //for CallStartOnComponents... 
 
-
 GameObject::GameObject()
-	:alive_(true), 
-	type_(GameObject::Type::UNKNOWN)
+	: GameObject(Point(0, 0))
 {
 }
 
@@ -17,9 +15,7 @@ GameObject::GameObject(Point position)
 }
 
 GameObject::GameObject(int x, int y)
-	:position_(Point(x, y)), 
-	alive_(true), 
-	type_(GameObject::Type::UNKNOWN)
+	:GameObject(Point(x, y)) 
 {
 }
 
@@ -119,14 +115,6 @@ void GameObject::broadcastEvent(const ComponentEvent& e)
 {
 	for (auto& c : components_)
 	{
-		c.second->handleEvent(e);
-	}
-}
-
-void GameObject::broadcastEvent(const CollisionEvent & e)
-{
-	for (auto& c : components_)
-	{
-		c.second->handleEvent(e);
+		e.dispatch(*c.second);
 	}
 }

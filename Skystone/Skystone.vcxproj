@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
+    <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
@@ -95,6 +96,8 @@
     <ClCompile Include="Components\Player\Attack\HookLaunchState.cpp" />
     <ClCompile Include="Components\Player\Movement\HangState.cpp" />
     <ClCompile Include="Components\Player\Attack\HookStateManager.cpp" />
+    <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
+    <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -104,9 +107,9 @@
     <ClCompile Include="Components\Tile\BurnTileComponent.cpp" />
     <ClCompile Include="Application\Camera.cpp" />
     <ClCompile Include="Components\Collider\ColliderComponent.cpp" />
-    <ClCompile Include="Components\Events\CollisionEvent.cpp" />
+    <ClCompile Include="ComponentEvents\CollisionEvent.cpp" />
     <ClCompile Include="Components\Component.cpp" />
-    <ClCompile Include="Components\Events\ComponentEvent.cpp" />
+    <ClCompile Include="ComponentEvents\ComponentEvent.cpp" />
     <ClCompile Include="ComponentSystem\ComponentSubsystem.cpp" />
     <ClCompile Include="ComponentSystem\ComponentSystem.cpp" />
     <ClCompile Include="Components\Render\SpriteRenderer.cpp" />
@@ -179,8 +182,13 @@
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
+=======
+    <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
+>>>>>>> 209c83b5acd5e3fd2dc6ddbbdb47ace94f9b6722
     <ClInclude Include="Components\AI\BossAIComponent.h" />
+    <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -194,6 +202,8 @@
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
+    <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
+    <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
@@ -205,8 +215,8 @@
     <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="Scene\Level\Block.h" />
     <ClInclude Include="Application\Camera.h" />
-    <ClInclude Include="Components\Events\CollisionEvent.h" />
-    <ClInclude Include="Components\Events\ComponentEvent.h" />
+    <ClInclude Include="ComponentEvents\CollisionEvent.h" />
+    <ClInclude Include="ComponentEvents\ComponentEvent.h" />
     <ClInclude Include="ComponentSystem\ComponentSubsystem.h" />
     <ClInclude Include="ComponentSystem\ComponentSystem.h" />
     <ClInclude Include="Components\Render\SpriteRenderer.h" />

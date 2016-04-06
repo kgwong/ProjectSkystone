@@ -3,12 +3,13 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 #include "GameMath/CircleMath.h"
+#include "LaunchState.h"
 
 
 //CONSTANTS
 const float HangState::MAX_ANGLE = 80.0f;
-const float HangState::DEFAULT_SPEED = 4.5f;
-const float HangState::MAX_SPEED = 16.4f;
+const float HangState::DEFAULT_SPEED = 3.14f;
+const float HangState::MAX_SPEED = 8.45f;
 
 HangState::HangState()
 {
@@ -19,6 +20,8 @@ HangState::HangState()
 	hookPosition_.x = 0.0f;
 	hookPosition_.y = 0.0f;
 	radius_ = 0.0f;
+	currentSpeed_ = DEFAULT_SPEED;
+	direction_ = 1;
 }
 
 HangState::~HangState()
@@ -34,17 +37,24 @@ void HangState::onEnter(Scene& scene, GameObject& player)
 	oldPlayerYVelocity = player.getComponent<PhysicsComponent>()->getVelY();
 	oldPlayerPos_ = player.getPos();
 	player.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
+	direction_ = 1;
 }
 void HangState::onExit(Scene& scene, GameObject& player)
 {
+
+	//player.getComponent<PlayerControlComponent>()->MovementState().setDirection(direction_);
+	//LOG("INFO") << "this direction: " << direction_;
+	//LOG("INFO") << "component direction: " << player.getComponent<PlayerControlComponent>()->MovementState().direction;
 	//reset everything
 	swingVector_.x = 0.0f;
 	swingVector_.y = 0.0f;
-	direction_ = 0;
+	//direction_ = 1;
 	currentAngle_ = 0.0f;
 	hookPosition_.x = 0.0f;
 	hookPosition_.y = 0.0f;
 	radius_ = 0.0f;
+	currentSpeed_ = DEFAULT_SPEED;
+
 
 }
 void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
@@ -53,11 +63,36 @@ void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 	//Look in PlayerHookState's connectState to see how hook gets created/destroyed.
 	if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
-		direction_ = -1;
+		if (direction_ > 0)
+		{
+			currentSpeed_ -= 0.2f;
+			if (currentSpeed_ <= DEFAULT_SPEED)
+				currentSpeed_ = DEFAULT_SPEED;
+		}
+		else
+		{
+			currentSpeed_ += 0.2f;
+			if (currentSpeed_ > MAX_SPEED)
+				currentSpeed_ = MAX_SPEED;
+		}
+		//direction_ = -1;
 	}
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
-		direction_ = 1;
+
+		if (direction_ < 0)
+		{
+			currentSpeed_-= 0.2f;
+			if (currentSpeed_ <= DEFAULT_SPEED)
+				currentSpeed_ = DEFAULT_SPEED;
+		}
+		else
+		{
+			currentSpeed_ += 0.2f;
+			if (currentSpeed_ > MAX_SPEED)
+				currentSpeed_ = MAX_SPEED;
+		}
+		//direction_ = 1;
 	}
 }
 void HangState::update(Scene& scene, GameObject& player)
@@ -72,11 +107,12 @@ void HangState::update(Scene& scene, GameObject& player)
 
 	if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::launchState);
 		player.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 	else
 	{
+	//	LOG("INFO") << "Direction: " << direction_;
 		auto playerPhysics = player.getComponent<PhysicsComponent>();
 		playerPhysics->enableGravity(false);
 
@@ -93,9 +129,9 @@ void HangState::update(Scene& scene, GameObject& player)
 		}
 
 		if (direction_ > 0)
-			currentAngle_ += 3.14f;
+			currentAngle_ += currentSpeed_;
 		if (direction_ < 0)
-			currentAngle_ -= 3.14f;
+			currentAngle_ -= currentSpeed_;
 
 		swingVector_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 		swingVector_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
@@ -106,6 +142,10 @@ void HangState::update(Scene& scene, GameObject& player)
 		{
 			oldPlayerPos_ = swingVector_;
 			player.setPos(swingVector_);
+		}
+		else if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
+		{
+			player.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
 		}
 	}
 	
@@ -119,4 +159,9 @@ Point HangState::SwingVector()
 Point HangState::OldPlayerPos()
 {
 	return oldPlayerPos_;
+}
+
+int HangState::getDirection()
+{
+	return direction_;
 }

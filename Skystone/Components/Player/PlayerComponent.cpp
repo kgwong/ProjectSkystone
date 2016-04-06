@@ -26,33 +26,6 @@ void PlayerComponent::start(Scene& scene)
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }
 
-void PlayerComponent::handleEvent(const ComponentEvent& e)
-{
-	switch (e.getType())
-	{
-	case ComponentEvent::Type::onDeath:
-		e.getScene().setNextScene(SceneID::GAME_OVER);
-		break;
-	case ComponentEvent::Type::onDamageTaken:
-		LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
-		health_->setInvincible(true);
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(e.getScene(), &PlayerMovementState::stunState);
-
-		if (physics_->isMovingLeft())
-		{
-			physics_->setVelX(10 * 60.0f);
-		}
-		else
-		{
-			physics_->setVelX(-10 * 60.0f);
-		}
-		physics_->setVelY(-10 * 60.0f);
-		break;
-	default:
-		break;
-	}
-}
-
 void PlayerComponent::handleEvent(const CollisionEvent& e)
 {
 	switch (e.getOtherObject().getType())
@@ -66,9 +39,30 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
 		if (health_->takeDamage(damage->getDamage()))
 		{
-			owner_.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDamageTaken, e.getScene()));
-			LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
+			owner_.broadcastEvent(DamageTakenEvent(e.getScene()));
 		}
 		break;
 	}
+}
+
+void PlayerComponent::handleEvent(const OnDeathEvent& e)
+{
+	e.getScene().setNextScene(SceneID::GAME_OVER);
+}
+
+void PlayerComponent::handleEvent(const DamageTakenEvent& e)
+{
+	LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
+	health_->setInvincible(true);
+	owner_.getComponent<PlayerControlComponent>()->changeMovementState(e.getScene(), &PlayerMovementState::stunState);
+
+	if (physics_->isMovingLeft())
+	{
+		physics_->setVelX(10 * 60.0f);
+	}
+	else
+	{
+		physics_->setVelX(-10 * 60.0f);
+	}
+	physics_->setVelY(-10 * 60.0f);
 }

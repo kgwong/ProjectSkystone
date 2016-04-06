@@ -25,10 +25,11 @@ void HookConnectState::onExit(Scene& scene, GameObject& player)
 }
 void HookConnectState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 {
-	if (GameInputs::keyDown(e, LAUNCH_HOOK))
+	if (GameInputs::keyUp(e, LAUNCH_HOOK))
 	{
 		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
 		player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+		player.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 
 }

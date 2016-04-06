@@ -3,17 +3,22 @@
 #include "PlayerState.h"
 #include "Application/Log.h"
 
+#include "ComponentEvents/CollisionEvent.h" 
+
 WalkingState PlayerMovementState::walkingState;
 FlyingState PlayerMovementState::flyingState;
 AirborneState PlayerMovementState::airborneState;
 StunState PlayerMovementState::stunState;
 HangState PlayerMovementState::hangState;
+LaunchState PlayerMovementState::launchState;
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner), 
 	currentState_(&PlayerMovementState::airborneState)
 {
+	LOG("INFO") << "HI";
 	canSwing = true;
+	direction = 0;
 }
 
 PlayerMovementState::~PlayerMovementState()
@@ -51,18 +56,17 @@ void PlayerMovementState::handleEvent(const CollisionEvent & e)
 	{
 		if (e.getOtherObject().getType() == GameObject::Type::TILE)
 		{
+
 			Point swingVector = hangState.SwingVector();
 			//at the right edge of the tile or inside.
 			if (swingVector.x >= e.getOtherObject().getPosX())
 			{
-				LOG("INFO") << "HELLO";
 				canSwing = false;
 				Point offSet{e.getOtherObject().getPosX() + 32,e.getOtherObject().getPosY()};
 				owner_.setPos(offSet);
 			}
 			else
 			{
-				LOG("INFO") << "FAIL";
 				canSwing = true;
 			//	owner_.setPos(swingVector);
 			}
@@ -75,4 +79,8 @@ void PlayerMovementState::setCanSwing(bool swing)
 	canSwing = swing;
 }
 
+void PlayerMovementState::setDirection(int dir)
+{
+	direction = dir;
+}
 

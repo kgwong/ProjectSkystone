@@ -9,6 +9,7 @@
 #include "StunState.h"
 
 #include "HangState.h"
+#include "LaunchState.h"
 
 class PlayerMovementState : public InputComponent
 {
@@ -18,6 +19,7 @@ public:
 	static AirborneState airborneState;
 	static StunState stunState;
 	static HangState hangState;
+	static LaunchState launchState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
@@ -30,6 +32,8 @@ public:
 	virtual void handleEvent(const CollisionEvent& e);
 	void setCanSwing(bool swing);
 	bool canSwing;
+	void setDirection(int dir);
+	int direction;
 
 private:
 	PlayerState* currentState_;
