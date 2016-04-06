@@ -35,20 +35,20 @@ void BossAIComponent::update(Scene & scene)
 	timer_ += Time::getElapsedUpdateTimeSeconds();
 	if (!cooldown_)
 	{
-		LOG("INFO") << "player Y: " << scene.gameObjects.getPlayer().getPosY();
-		LOG("INFO") << "boss Y: " << owner_.getPosY();
+		LOG("AARON") << "player Y: " << scene.gameObjects.getPlayer().getPosY();
+		LOG("AARON") << "boss Y: " << owner_.getPosY();
 		float xDistanceFromPlayer = owner_.getPosX() - scene.gameObjects.getPlayer().getPosX();
 		if ((facing_ < 0 && xDistanceFromPlayer < 0) || (facing_ > 0 && xDistanceFromPlayer > 0))
 		{
 			//backward tail swing, then jump back and turn around
-			LOG("INFO") << "INITIATING TAIL SWING";
+			LOG("AARON") << "INITIATING TAIL SWING";
 			cooldown_ = true;
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
 		{
 			//close range attack
-			LOG("INFO") << "INITIATING SHORT RANGE ATTACK";
+			LOG("AARON") << "INITIATING SHORT RANGE ATTACK";
 			cooldown_ = true;
 		}
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
@@ -59,15 +59,15 @@ void BossAIComponent::update(Scene & scene)
 			{
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
-				LOG("INFO") << "INITIATING JUMP ATTACK";
+				LOG("AARON") << "INITIATING JUMP ATTACK";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
-				LOG("INFO") << "INITIATING TRIPLE SHOT";
+				LOG("AARON") << "INITIATING TRIPLE SHOT";
 				break;
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
-				LOG("INFO") << "INITIATING LAZER";
+				LOG("AARON") << "INITIATING LAZER";
 				break;
 			}
 			cooldown_ = true;
@@ -92,4 +92,9 @@ void BossAIComponent::update(Scene & scene)
 		cooldown_ = false;
 		timer_ = 0;
 	}
+}
+
+float BossAIComponent::getFacing()
+{
+	return facing_;
 }

@@ -96,6 +96,8 @@
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Scene\SceneLoader.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
+    <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
+    <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -201,5 +203,7 @@
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
+    <ClInclude Include="Components\AI\SlamAIComponent.h" />
+    <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
   </ItemGroup>
 </Project>

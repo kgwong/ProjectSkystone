@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
@@ -175,8 +176,10 @@
     <ClCompile Include="Components\Common\StickOnCollision.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
+    <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
@@ -280,6 +283,7 @@
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
+    <ClInclude Include="Components\AI\SlamAIComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
