@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
@@ -182,7 +181,6 @@
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />

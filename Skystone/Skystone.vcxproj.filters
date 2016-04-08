@@ -95,7 +95,6 @@
     <ClCompile Include="Scene\SceneLoader.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
-    <ClCompile Include="GameObject\Builders\BossClawProjectileBuilder.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="ComponentEvents\CollisionEvent.cpp" />
     <ClCompile Include="ComponentEvents\ComponentEvent.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
-    <ClInclude Include="GameObject\Builders\BossClawProjectileBuilder.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="ComponentEvents\CollisionEvent.h" />
     <ClInclude Include="ComponentEvents\ComponentEvent.h" />

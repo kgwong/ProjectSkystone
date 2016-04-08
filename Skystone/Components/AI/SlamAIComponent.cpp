@@ -38,7 +38,7 @@ void SlamAIComponent::update(Scene & scene)
 	else
 	{
 		attack_initiated_ = true;
-		auto attack = scene.gameObjects.add("SlamAI", "", owner_.getPos() + Point(0, 18));
+		auto attack = scene.gameObjects.add("EnemyProjectile", "ClawProjectile", owner_.getPos() + Point(0, 18));
 		auto physics = attack->getComponent<PhysicsComponent>();
 		physics->setVelX(windup_speed_ * 60.0f);
 

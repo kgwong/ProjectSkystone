@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
+#include "GameMath/RNG.h"
 
 using namespace std;
 
@@ -54,7 +55,7 @@ void BossAIComponent::update(Scene & scene)
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
 		{
 			//pick between 3 attacks
-			int pickAttack = rand() % 3;
+			int pickAttack = RNG::getInt(0, 3);//rand() % 3;
 			switch (pickAttack)
 			{
 			case 0:
@@ -74,7 +75,7 @@ void BossAIComponent::update(Scene & scene)
 		}
 		else
 		{
-			int pickMove = rand() % 2;
+			int pickMove = RNG::getInt(0, 2);//rand() % 2;
 
 			switch (pickMove)
 			{

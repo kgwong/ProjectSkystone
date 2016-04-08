@@ -65,8 +65,16 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "EnemyProjectile")
 	{
-		newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		if (name == "AcidProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
+		else if (type == "ClawProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
 	}
 	else if (type == "PlayerHook")
 	{
@@ -105,11 +113,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		newObject = builder_.buildScrollingBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
 	}
-	else if (type == "SlamAI")
-	{
-		newObject = builder_.buildBossClawProjectile(componentSystem_, name);
-		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
-	}
+
 	else
 	{
 		LOG("Warning") << "Invalid game object type. No object created";

@@ -22,14 +22,29 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 {
 	auto newProjectile = std::make_shared<GameObject>();
 	auto& projectileToBuild = *newProjectile;
-
 	projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
-	projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
-	projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
-	projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
-	projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 5));
-	projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
-	projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
 
+	if (name == "AcidProjectile")
+	{
+
+		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
+		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 5));
+		projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
+
+	}
+	else if (name == "ClawProjectile")
+	{
+
+		projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
+		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
+		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 20));
+		projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
+
+	}
 	return newProjectile;
 }
