@@ -15,9 +15,12 @@ public:
 
 	std::string getText();
 	void setText(const std::string& newText);
+	void setBg(SDL_Color bg);
+
 private:
-	TTF_Font* font;
-	std::string text;
+	TTF_Font* font_;
+	std::string text_;
+	SDL_Color bg_;
 };
 
 #endif //TEXT_RENDERER_H

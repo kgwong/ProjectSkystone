@@ -35,6 +35,8 @@ private:
 
 	SceneID nextSceneID_;
  
+private:
+	void initLevels(GameObject* player);
 };
 
 #endif //SCENE_MANAGER_H

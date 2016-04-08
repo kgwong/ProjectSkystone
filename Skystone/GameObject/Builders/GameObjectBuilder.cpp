@@ -69,9 +69,9 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildScrollingBackground(Componen
 	return scrollingBackgroundBuilder_.build(componentSystem, backgroundName);
 }
 
-std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
+std::shared_ptr<GameObject> GameObjectBuilder::buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player, GameObject* textSelector)
 {
-	return playerHookBuilder_.build(componentSystem, name);
+	return guiBuilder_.build(componentSystem, name, player, textSelector);
 }
 
 std::shared_ptr<GameObject> GameObjectBuilder::buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name)
@@ -79,3 +79,7 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildEnemyProjectile(ComponentSys
 	return enemyProjectileBuilder_.build(componentSystem, name);
 }
 
+std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& componentSystem, const std::string& name)
+{
+	return playerHookBuilder_.build(componentSystem, name);
+}
