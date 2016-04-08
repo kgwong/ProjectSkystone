@@ -26,7 +26,8 @@ public:
 		DROP,
 		BACKGROUND,
 		UNKNOWN,
-		PLAYER_HOOK
+		PLAYER_HOOK,
+		GUI
 	};
 public:
 	GameObject();

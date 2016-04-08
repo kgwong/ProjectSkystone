@@ -100,7 +100,11 @@
     <ClCompile Include="ComponentEvents\ComponentEvent.cpp" />
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
+    <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
+    <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
+    <ClCompile Include="Components\Render\SelectableText.cpp" />
+    <ClCompile Include="Components\Render\TextSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -203,6 +207,7 @@
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="Components\Common\StickOnCollision.h" />
     <ClInclude Include="Scene\SceneLoader.h" />
+    <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
@@ -212,5 +217,8 @@
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
+    <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
+    <ClInclude Include="Components\Render\SelectableText.h" />
+    <ClInclude Include="Components\Render\TextSelector.h" />
   </ItemGroup>
 </Project>

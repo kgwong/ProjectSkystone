@@ -20,6 +20,13 @@ GameObject* SceneManager::getCameraFollowObject()
 void SceneManager::setPlayer(GameObject* player)
 {
 	player_ = player;
+	initLevels(player);
+	currentScene_ = sceneLoader_.getSceneWithID(SceneID::MAIN_MENU);
+	currentScene_->setSceneManager(this);
+}
+
+void SceneManager::initLevels(GameObject* player)
+{
 	currentScene_ = sceneLoader_.getSceneWithID(SceneID::LEVEL);
 	currentScene_->setPlayer(player);
 	currentScene_->setSceneManager(this);
@@ -46,7 +53,7 @@ void SceneManager::update()
 		//currentScene_ = levelLoader_.getLevelWithID(nextLevelID_);
 		currentScene_ = sceneLoader_.getSceneWithID(nextSceneID_);
 		currentScene_->setSceneManager(this);
-		currentScene_->setPlayer(player_);
+		currentScene_->setPlayer(player_, player_->getPos());
 		currentScene_->onEnter();
 		nextSceneID_ = SceneID::INVALID;
 	}

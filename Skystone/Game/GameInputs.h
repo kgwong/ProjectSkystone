@@ -15,7 +15,8 @@ enum ControlType
 	RIGHT = 3,
 	JUMP = 4,
 	ATTACK = 5,
-	LAUNCH_HOOK = 6
+	LAUNCH_HOOK = 6,
+	RETURN = 7
 };
 
 class GameInputs {
