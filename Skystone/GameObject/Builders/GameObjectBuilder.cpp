@@ -78,3 +78,4 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildEnemyProjectile(ComponentSys
 {
 	return enemyProjectileBuilder_.build(componentSystem, name);
 }
+

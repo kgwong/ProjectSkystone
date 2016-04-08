@@ -55,6 +55,11 @@ void HookLaunchState::update(Scene& scene, GameObject& player)
 		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
 		return;
 	}
+	else
+	{
+		//create out of bounds function.
+		LOG("INFO") << player.getComponent<PlayerControlComponent>()->HookState().hookRef->getPos();
+	}
 
 	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
 	{

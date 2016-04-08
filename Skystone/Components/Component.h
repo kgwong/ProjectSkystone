@@ -4,10 +4,9 @@
 #include "GameObject/GameObject.h"
 #include "Scene/Scene.h"
 
-#include "Events/ComponentEvent.h"
-#include "Events/CollisionEvent.h"
+#include "ComponentEvents/ComponentEventReceiver.h"
 
-class Component
+class Component : public ComponentEventReceiver
 {
 public:
 	enum class Type {
@@ -24,11 +23,8 @@ public:
 	Component(GameObject& owner);
 	virtual ~Component() = 0;
 
-	virtual void start(Scene& scene);
-	virtual void update(Scene& scene);
-
-	virtual void handleEvent(const CollisionEvent& e);
-	virtual void handleEvent(const ComponentEvent& e);
+	virtual void start(Scene& scene) {}
+	virtual void update(Scene& scene) {}
 
 	virtual Type getType();
 

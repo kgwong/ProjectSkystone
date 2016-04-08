@@ -19,6 +19,7 @@ public:
 	virtual void update(Scene& scene, GameObject& player);
 	Point SwingVector();
 	Point OldPlayerPos();
+	int getDirection();
 
 	virtual std::string name() { return "Hang"; }
 private:
@@ -29,6 +30,7 @@ private:
 
 	Point hookPosition_;
 	float radius_;
+	float currentSpeed_;
 
 	float oldPlayerYVelocity;
 

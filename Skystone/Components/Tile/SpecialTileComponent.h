@@ -3,7 +3,6 @@
 
 #include "Components/UpdatingComponent.h"
 #include "GameTypes/Point.h"
-#include "Components/Events/CollisionEvent.h"
 
 class PhysicsComponent;
 

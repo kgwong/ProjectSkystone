@@ -1,9 +1,9 @@
 #include "CollisionEvent.h"
 
-
+#include "ComponentEventReceiver.h"
 
 CollisionEvent::CollisionEvent(Scene& scene, GameObject& other, ColliderComponent& otherCollider)
-	:ComponentEvent(ComponentEvent::Type::onCollision, scene),
+	: ComponentEvent(scene),
 	other_(other),
 	otherCollider_(otherCollider)
 {
@@ -11,6 +11,11 @@ CollisionEvent::CollisionEvent(Scene& scene, GameObject& other, ColliderComponen
 
 CollisionEvent::~CollisionEvent()
 {
+}
+
+void CollisionEvent::dispatch(ComponentEventReceiver & eventReceiver) const
+{
+	eventReceiver.handleEvent(*this);
 }
 
 GameObject& CollisionEvent::getOtherObject() const

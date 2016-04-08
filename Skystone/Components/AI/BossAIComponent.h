@@ -23,6 +23,8 @@ public:
 	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
+	float getFacing();
+
 private:
 	float cooldown_time_;
 	double timer_;

@@ -1,6 +1,7 @@
 #include "GameObjectContainer.h"
 
-#include "Components/Events/ComponentEvent.h"
+#include "ComponentEvents/ComponentEvent.h"
+#include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
 
 // duct taping code together
@@ -64,8 +65,16 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "EnemyProjectile")
 	{
-		newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		if (name == "AcidProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
+		else if (type == "ClawProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
 	}
 	else if (type == "PlayerHook")
 	{
@@ -104,6 +113,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		newObject = builder_.buildScrollingBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
 	}
+
 	else
 	{
 		LOG("Warning") << "Invalid game object type. No object created";
@@ -141,7 +151,7 @@ void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 		auto& obj = vector[i];
 		if (!obj->alive())
 		{
-			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, scene));
+			obj->broadcastEvent(OnDeathEvent(scene));
 			ComponentSystem::vector_remove(vector, i);
 		}
 		else

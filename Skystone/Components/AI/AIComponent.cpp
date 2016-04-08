@@ -22,12 +22,9 @@ void AIComponent::handleEvent(const CollisionEvent& e)
 	}
 }
 
-void AIComponent::handleEvent(const ComponentEvent& e)
+void AIComponent::handleEvent(const OnDeathEvent & e)
 {
-	if (e.getType() == ComponentEvent::Type::onDeath)
-	{
-		auto drop = e.getScene().gameObjects.add("Drop", "", owner_.getPos());
-	}
+	auto drop = e.getScene().gameObjects.add("Drop", "", owner_.getPos());
 }
 
 Component::Type AIComponent::getType()

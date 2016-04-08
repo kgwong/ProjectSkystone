@@ -14,8 +14,9 @@ public:
 
 	virtual void start(Scene& scene);
 
-	virtual void handleEvent(const ComponentEvent& e);
 	virtual void handleEvent(const CollisionEvent& e);
+	virtual void handleEvent(const OnDeathEvent& e);
+	virtual void handleEvent(const DamageTakenEvent& e);
 
 private:
 	HealthComponent* health_;
