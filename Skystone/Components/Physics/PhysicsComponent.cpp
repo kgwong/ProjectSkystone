@@ -1,6 +1,7 @@
 #include "PhysicsComponent.h"
 
 #include "Components/Collider/ColliderComponent.h"
+#include "ComponentEvents/CollisionEvent.h"
 #include "Game/GameConstants.h"
 #include "Game/GameTime.h"
 #include "Application/Log.h"

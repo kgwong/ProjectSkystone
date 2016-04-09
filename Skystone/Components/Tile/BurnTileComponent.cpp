@@ -56,8 +56,6 @@ void BurnTileComponent::handleEvent(const CollisionEvent & other)
 
 			playerPhysics_->setAccelX(slow_ * direction * 3600.0f);
 
-			float something = playerPhysics_->getAccelX();
-			LOG("INFO") << "hey:" << something;
 
 			time_++;
 		}

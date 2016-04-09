@@ -56,7 +56,7 @@ void AlligatorAIComponent::update(Scene & scene)
 		physics_->setVelX(0);
 		shot_ready_ = false;
 		shot_timer_ = 0;
-		auto bullet = scene.gameObjects.add("EnemyProjectile", "", owner_.getPos() + Point(0, 18));
+		auto bullet = scene.gameObjects.add("EnemyProjectile", "AcidProjectile", owner_.getPos() + Point(0, 18));
 		auto physics = bullet->getComponent<PhysicsComponent>();
 		float newVelX = (DEFAULT_PROJECTILE_VELOCITY * playerSide);
 		physics->setVelX(newVelX * 60.0f);

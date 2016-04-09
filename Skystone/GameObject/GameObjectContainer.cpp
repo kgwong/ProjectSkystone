@@ -1,11 +1,13 @@
 #include "GameObjectContainer.h"
 
-#include "Components/Events/ComponentEvent.h"
+#include "ComponentEvents/ComponentEvent.h"
+#include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
 
 // duct taping code together
 #include "Components/Render/SpriteRenderer.h"
 #include "Resources/Resources.h"
+#include "Components/Render/TextSelector.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 
@@ -64,8 +66,16 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "EnemyProjectile")
 	{
-		newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		if (name == "AcidProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
+		else if (type == "ClawProjectile")
+		{
+			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		}
 	}
 	else if (type == "PlayerHook")
 	{
@@ -74,7 +84,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 			playerHook->kill();
 			playerHook = nullptr;
 		}
-		
+
 		newObject = builder_.buildPlayerHook(componentSystem_, name);
 		playerHook = newObject;
 	}
@@ -103,6 +113,17 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	{
 		newObject = builder_.buildScrollingBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
+	}
+	else if (type == "GUI")
+	{
+		if (objects_[GameObject::Type::GUI].size() == 0)
+		{
+			auto textSelector = std::make_shared<GameObject>();
+			textSelector->addComponent(componentSystem_.getNew<TextSelector>(*newObject));
+			objects_[GameObject::Type::GUI].push_back(textSelector);
+		}
+		newObject = builder_.buildGUI(componentSystem_, name, player_, objects_[GameObject::Type::GUI].at(0).get());
+		objects_[GameObject::Type::GUI].push_back(newObject);
 	}
 	else
 	{
@@ -141,7 +162,7 @@ void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 		auto& obj = vector[i];
 		if (!obj->alive())
 		{
-			obj->broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, scene));
+			obj->broadcastEvent(OnDeathEvent(scene));
 			ComponentSystem::vector_remove(vector, i);
 		}
 		else

@@ -40,7 +40,7 @@ void SceneLoader::load(SceneID sceneID)
 {
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 	scene->setSceneManager(sceneManager_);
-
+	
 	loadObjects(sceneID, scene.get());
 	loadedScenes_.insert({sceneID, scene});
 }

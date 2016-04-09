@@ -12,6 +12,8 @@ public:
 	CollisionEvent(Scene& scene, GameObject& other, ColliderComponent& otherCollider);
 	virtual ~CollisionEvent();
 
+	virtual void dispatch(ComponentEventReceiver& eventReceiver) const;
+
 	GameObject& getOtherObject() const;
 	ColliderComponent& getOtherCollider() const;
 

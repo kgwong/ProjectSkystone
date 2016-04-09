@@ -26,7 +26,8 @@ public:
 		DROP,
 		BACKGROUND,
 		UNKNOWN,
-		PLAYER_HOOK
+		PLAYER_HOOK,
+		GUI
 	};
 public:
 	GameObject();
@@ -61,9 +62,6 @@ public:
 	virtual void startComponents(Scene& scene);
 
 	void broadcastEvent(const ComponentEvent& e);
-	//FIX THIS LATER!!
-	//http://stackoverflow.com/questions/6897662/matching-an-overloaded-function-to-its-polymorphic-argument
-	void broadcastEvent(const CollisionEvent& e);
 
 protected:
 	Point position_;
@@ -71,10 +69,6 @@ protected:
 
 	bool alive_;
 	Type type_;
-
-//gets reference to its scene.
-public:
-
 };
 
 //http://gamedev.stackexchange.com/questions/55950/entity-component-systems-with-c-accessing-components

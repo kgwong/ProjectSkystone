@@ -10,22 +10,6 @@ Component::~Component()
 {
 }
 
-void Component::start(Scene& scene)
-{
-}
-
-void Component::update(Scene& scene)
-{
-}
-
-void Component::handleEvent(const CollisionEvent& e)
-{
-}
-
-void Component::handleEvent(const ComponentEvent& e)
-{
-}
-
 Component::Type Component::getType()
 {
 	return Component::Type::UNKNOWN;

@@ -9,6 +9,7 @@
 #include "ScrollingBackgroundBuilder.h"
 #include "PlayerHookBuilder.h"
 #include "EnemyProjectileBuilder.h"
+#include "GUIBuilder.h"
 
 class ComponentSystem;
 
@@ -29,7 +30,7 @@ public:
 	std::shared_ptr<GameObject> buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name);
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
-	
+	std::shared_ptr<GameObject> buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player, GameObject* textSelector);
 
 private:
 	EnemyBuilder enemyBuilder_;
@@ -38,6 +39,7 @@ private:
 	PlayerProjectileBuilder playerProjectileBuilder_;
 	BackgroundBuilder backgroundBuilder_;
 	ScrollingBackgroundBuilder scrollingBackgroundBuilder_;
+	GUIBuilder guiBuilder_;
 	/////////////////////////////////////////////////
 	PlayerHookBuilder playerHookBuilder_;
 	EnemyProjectileBuilder enemyProjectileBuilder_;

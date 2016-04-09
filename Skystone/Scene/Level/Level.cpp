@@ -7,7 +7,8 @@
 
 #include "Application/Log.h"
 
-#include "Components\Events\ComponentEvent.h"
+#include "ComponentEvents/ComponentEvent.h"
+#include "ComponentEvents/OnDeathEvent.h"
 #include "Components/Player/PlayerControlComponent.h"
 
 Level::Level(int levelID)
@@ -72,7 +73,7 @@ void Level::updatePlayer()
 
 	if (!player.alive())
 	{
-		player.broadcastEvent(ComponentEvent(ComponentEvent::Type::onDeath, *this));
+		player.broadcastEvent(OnDeathEvent(*this));
 	}
 }
 
