@@ -24,6 +24,8 @@ public:
 	int getWidth();
 	int getHeight();
 
+	bool hasQuitGame();
+
 private:
 	Scene* currentScene_;
 	GameObject* player_;
@@ -34,7 +36,9 @@ private:
 
 
 	SceneID nextSceneID_;
- 
+
+	bool quitGame_;
+
 private:
 	void initLevels(GameObject* player);
 };

@@ -47,7 +47,7 @@ void SceneManager::handleInput(SDL_Event& e)
 void SceneManager::update()
 {
 	currentScene_->update();
-	if (nextSceneID_ != SceneID::INVALID)
+	if (nextSceneID_ != SceneID::INVALID && !hasQuitGame())
 	{
 		currentScene_->onExit();
 		//currentScene_ = levelLoader_.getLevelWithID(nextLevelID_);
@@ -84,4 +84,9 @@ int SceneManager::getWidth()
 int SceneManager::getHeight()
 {
 	return currentScene_->getHeight();
+}
+
+bool SceneManager::hasQuitGame()
+{
+	return nextSceneID_ == SceneID::QUIT_GAME;
 }
