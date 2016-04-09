@@ -33,19 +33,16 @@ void LevelManager::setPlayer(GameObject* player)
 	player_ = player;
 }
 
-void LevelManager::initStartingLevel()
+void LevelManager::setPlayer(GameObject* player, const Point& startPos)
 {
-	if (player_ != nullptr)
-	{
-		currLevel_ = levelLoader_.getLevelWithID(4);
-		currLevel_->setSceneManager(sceneManager_); //
-		currLevel_->setPlayer(player_, Point{ currLevel_->getWidth() / 2, currLevel_->getHeight() / 2 });
-		currLevel_->onEnter();
-	}
-	else
-	{
-		LOG("WARNING") << "set Player first";
-	}
+	Scene::setPlayer(player, startPos);
+	player_ = player;
+}
+
+void LevelManager::onEnter()
+{
+	if (currLevel_ == nullptr)
+		initStartingLevel();
 }
 
 LevelMap* LevelManager::getLevelMap()
@@ -104,5 +101,20 @@ int LevelManager::getWidth()
 int LevelManager::getHeight()
 {
 	return currLevel_->getHeight();
+}
+
+void LevelManager::initStartingLevel()
+{
+	if (player_ != nullptr)
+	{
+		currLevel_ = levelLoader_.getLevelWithID(4);
+		currLevel_->setSceneManager(sceneManager_); //
+		currLevel_->setPlayer(player_, Point{ currLevel_->getWidth() / 2, currLevel_->getHeight() / 2 });
+		currLevel_->onEnter();
+	}
+	else
+	{
+		LOG("WARNING") << "set Player first";
+	}
 }
 
