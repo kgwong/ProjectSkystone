@@ -30,16 +30,16 @@ void Level::onEnter()
 {
 	gameObjects.getPlayer().registerComponents(componentSystem_);
 	gameObjects.start();
-	LOG("INFO") << "enter level";
-	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
+	LOG("FLAPJACKS") << "enter level";
+	LOG("FLAPJACKS") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
-	LOG("INFO") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
+	LOG("FLAPJACKS") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 }
 
 
 void Level::onExit()
 {
-	LOG("INFO") << "EXIT LEVEL";
+	LOG("FLAPJACKS") << "EXIT LEVEL";
 	if (gameObjects.playerHook != nullptr)
 	{
 		gameObjects.playerHook->kill();

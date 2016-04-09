@@ -33,7 +33,7 @@ void MainGame::run()
 	uint32_t msecBehind = Time::timeStep;
 	uint32_t elapsed = 0;
 	uint32_t prev = Time::getCurrentTime();
-	while (!quit_)
+	while (!quit_ && !sceneManager_.hasQuitGame())
 	{
 		msecBehind += elapsed;
 		processInput();

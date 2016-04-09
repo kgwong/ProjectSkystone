@@ -26,7 +26,7 @@ void StickOnCollision::handleEvent(const CollisionEvent& e)
 		hookPhysics->setVelX(0);
 		hookPhysics->setVelY(0);
 		isConnected = true;
-		LOG("INFO") << "Hook is connected at " << hookPoint;
+		//LOG("INFO") << "Hook is connected at " << hookPoint;
 		
 	}
 }

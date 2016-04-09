@@ -1,6 +1,7 @@
 #include "SelectableText.h"
 
-
+#define LARGE_TEXT_SIZE 40
+#define SMALL_TEXT_SIZE 28
 
 SelectableText::SelectableText(GameObject& owner)
 	: TextRenderer(owner), selected_(false)
@@ -25,9 +26,9 @@ void SelectableText::setSelected(bool selected)
 void SelectableText::render(GameWindow& window, float percBehind)
 {
 	if (selected_)
-		TextRenderer::setBg({ 255, 255, 0 });
+		setFontSize(LARGE_TEXT_SIZE);
 	else
-		TextRenderer::setBg({ 0,0,0 });
+		setFontSize(SMALL_TEXT_SIZE);
 	TextRenderer::render(window, percBehind);
 }
 

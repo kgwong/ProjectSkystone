@@ -3,6 +3,8 @@
 #include "GameObject/GameObject.h"
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Render/SpriteRenderer.h"
+#include "Resources/Resources.h"
 
 const float FlyingState::FLIGHT_VELOCITY = 5 * 60.0f;
 
@@ -18,6 +20,7 @@ FlyingState::~FlyingState()
 void FlyingState::onEnter(Scene& scene, GameObject& player)
 {
 	player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
+	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jetcycle.png"));
 }
 
 void FlyingState::onExit(Scene& scene, GameObject& player)

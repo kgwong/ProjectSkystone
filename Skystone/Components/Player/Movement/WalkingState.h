@@ -10,6 +10,14 @@ public:
 	static const float JUMP_VELOCITY;
 	static const float WALK_VELOCITY;
 
+	enum class SubState
+	{
+		LEFT,
+		IDLE,
+		RIGHT
+	};
+
+
 public:
 	WalkingState();
 	virtual ~WalkingState();
@@ -20,6 +28,13 @@ public:
 	virtual void update(Scene& scene, GameObject& player);
 
 	virtual std::string name() { return "Walking"; }
+
+private:
+	static SubState subState_;
+
+private:
+	void changeSubState(GameObject& player, SubState newSubState);
+	std::string subStateToString(SubState subState);
 };
 
 #endif // WALKING_STATE_H

@@ -16,7 +16,7 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner), 
 	currentState_(&PlayerMovementState::airborneState)
 {
-	LOG("INFO") << "HI";
+	LOG("FLAPJACKS") << "HI";
 	canSwing = true;
 	direction = 0;
 }
