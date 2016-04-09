@@ -24,7 +24,7 @@ WalkingState::~WalkingState()
 
 void WalkingState::onEnter(Scene& scene, GameObject& player)
 {
-	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
+	changeSubState(player, subState_);
 }
 
 void WalkingState::onExit(Scene& scene, GameObject& player)
@@ -37,7 +37,6 @@ void WalkingState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 	{
 		player.getComponent<PhysicsComponent>()->setVelY(JUMP_VELOCITY);
 	}
-	
 }
 
 void WalkingState::update(Scene& scene, GameObject& player)
