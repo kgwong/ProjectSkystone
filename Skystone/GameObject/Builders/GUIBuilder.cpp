@@ -37,7 +37,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
 		guiToBuild.addComponent(text);
 		text->setText("Exit");
-		text->setSceneOnSelection(SceneID::GAME_OVER);
+		text->setSceneOnSelection(SceneID::QUIT_GAME);
 		textSelector->addText(text);
 	}
 	else

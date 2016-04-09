@@ -10,7 +10,8 @@ enum class SceneID {
 	INVALID,
 	LEVEL,
 	MAIN_MENU,
-	GAME_OVER
+	GAME_OVER,
+	QUIT_GAME
 };
 
 class Scene
