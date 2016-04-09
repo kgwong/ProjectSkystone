@@ -31,6 +31,15 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		text->setSceneOnSelection(SceneID::LEVEL);
 		textSelector->addText(text);
 	}
+	else if (name == "ExitGameButton")
+	{
+
+		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("Exit");
+		text->setSceneOnSelection(SceneID::GAME_OVER);
+		textSelector->addText(text);
+	}
 	else
 	{
 		LOG("Warning") << "Invalid GUI name: " << name << ", nothing added";
