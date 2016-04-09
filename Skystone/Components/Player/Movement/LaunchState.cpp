@@ -32,7 +32,7 @@ void LaunchState::onEnter(Scene& scene, GameObject& player)
 	}
 	else
 	{
-		LOG("INFO") << "direction is " << direction_;
+		LOG("FLAPJACKS") << "direction is " << direction_;
 	}
 }
 
