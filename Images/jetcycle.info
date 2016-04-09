@@ -1,10 +1,12 @@
-numSprites 3
+numSprites 5
 spriteWidth 48
 spriteHeight 64
 numRows 1
-numCols 3
+numCols 5
 padding 0
 
-450
-450
-50
+150
+150
+150
+150
+150
