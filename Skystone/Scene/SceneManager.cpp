@@ -3,7 +3,9 @@
 
 
 SceneManager::SceneManager()
-	:nextSceneID_(SceneID::INVALID)
+	:currentScene_(nullptr),
+	player_(nullptr),
+	nextSceneID_(SceneID::INVALID)
 {
 }
 
