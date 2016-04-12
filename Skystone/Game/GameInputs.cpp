@@ -14,7 +14,8 @@ std::vector<SDL_Keycode> GameInputs::controlMap{
 	SDLK_a,
 	SDLK_s,
 	SDLK_d,
-	SDLK_RETURN
+	SDLK_RETURN,
+	SDLK_ESCAPE
 };
 
 void GameInputs::init()

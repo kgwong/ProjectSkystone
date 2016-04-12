@@ -33,11 +33,34 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 	}
 	else if (name == "ExitGameButton")
 	{
-
 		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
 		guiToBuild.addComponent(text);
 		text->setText("Exit");
 		text->setSceneOnSelection(SceneID::QUIT_GAME);
+		textSelector->addText(text);
+	}
+	else if (name == "ExitToDesktopButton")
+	{
+		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("Exit to desktop");
+		text->setSceneOnSelection(SceneID::QUIT_GAME);
+		textSelector->addText(text);
+	}
+	else if (name == "ExitToMainMenuButton")
+	{
+		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("Exit to main menu");
+		text->setSceneOnSelection(SceneID::MAIN_MENU);
+		textSelector->addText(text);
+	}
+	else if (name == "ContinueGameButton")
+	{
+		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("Continue");
+		text->setSceneOnSelection(SceneID::LEVEL);
 		textSelector->addText(text);
 	}
 	else

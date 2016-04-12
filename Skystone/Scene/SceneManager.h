@@ -38,9 +38,6 @@ private:
 	SceneID nextSceneID_;
 
 	bool quitGame_;
-
-private:
-	void initLevels(GameObject* player);
 };
 
 #endif //SCENE_MANAGER_H

@@ -17,8 +17,8 @@ public:
 
 	virtual GameObject* getCameraFollowObject();
 	virtual void setPlayer(GameObject* player);
-
-	void initStartingLevel();
+	virtual void setPlayer(GameObject* player, const Point& startPos);
+	virtual void onEnter();
 
 	LevelMap* getLevelMap();
 	Level* getCurrentLevel();
@@ -43,6 +43,8 @@ private:
 	int nextLevelID_;
 	Point newPlayerPosition_;
 
+private:
+	void initStartingLevel();
 };
 
 #endif //LEVEL_MANAGER_H
