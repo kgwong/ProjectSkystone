@@ -34,11 +34,13 @@ void SlamAIComponent::update(Scene & scene)
 {
 	if (attack_initiated_)
 	{
-		LOG("AARON") << "WINDING UP";
 		timer_ += Time::getElapsedUpdateTimeSeconds();
 		if (timer_ > windup_time_ + swing_time_ + lag_time_)
 		{
 			claw_->kill();
+			attack_initiated_ = false;
+			timer_ = 0;
+			boss_->setAttack("Idle");
 		}
 		else if (timer_ > swing_time_ + windup_time_)
 		{

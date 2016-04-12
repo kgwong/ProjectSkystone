@@ -43,13 +43,14 @@ void BossAIComponent::update(Scene & scene)
 		if ((facing_ < 0 && xDistanceFromPlayer < 0) || (facing_ > 0 && xDistanceFromPlayer > 0))
 		{
 			//backward tail swing, then jump back and turn around
+			attack_ = "tail swing";
 			initiate_attack_ = false;
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
 		{
 			//close range attack
-			attack_ = "Tail swing";
+			attack_ = "claw attack";
 			initiate_attack_ = false;
 		}
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
@@ -61,14 +62,17 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
+				attack_ = "jump attack";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
 				LOG("AARON") << "INITIATING TRIPLE SHOT";
+				attack_ = "triple shot";
 				break;
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
 				LOG("AARON") << "INITIATING LAZER";
+				attack_ = "lazer";
 				break;
 			}
 			initiate_attack_ = false;
@@ -96,9 +100,24 @@ void BossAIComponent::update(Scene & scene)
 	}
 	else 
 	{
-		if (attack_ == "Tail swing")
+		if (attack_ == "claw attack")
 		{
 			claw_.update(scene);
+		}
+
+		else if (attack_ == "jump attack")
+		{
+
+		}
+
+		else if (attack_ == "triple shot")
+		{
+
+		}
+
+		else if (attack_ == "lazer")
+		{
+
 		}
 	}
 }
@@ -106,4 +125,9 @@ void BossAIComponent::update(Scene & scene)
 float BossAIComponent::getFacing()
 {
 	return facing_;
+}
+
+void BossAIComponent::setAttack(string attack)
+{
+	attack_ = attack;
 }

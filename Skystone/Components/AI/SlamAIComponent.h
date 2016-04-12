@@ -15,7 +15,7 @@ class SlamAIComponent :
 public:
 	const double DEFAULT_WINDUP_TIME = 0.4;
 	const double DEFAULT_WINDUP_SPEED = 1;
-	const double DEFAULT_SWING_SPEED = 4;
+	const double DEFAULT_SWING_SPEED = 6;
 	const double DEFAULT_SWING_TIME = 0.7;
 	const double DEFAULT_LAG_TIME = 0.3;
 

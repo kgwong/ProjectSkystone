@@ -26,6 +26,7 @@ public:
 	virtual void update(Scene& scene);
 
 	float getFacing();
+	void setAttack(std::string attack);
 
 private:
 	float cooldown_time_;
