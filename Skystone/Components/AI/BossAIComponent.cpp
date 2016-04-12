@@ -5,7 +5,7 @@
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
 #include "GameMath/RNG.h"
-
+#include <string>
 using namespace std;
 
 
@@ -14,10 +14,12 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	AIComponent(owner),
 	cooldown_time_(DEFAULT_COOLDOWN_SECONDS),
 	timer_(0),
-	cooldown_(true),
+	initiate_attack_(false),
 	close_range_(DEFAULT_CLOSE_RANGE),
 	medium_range_(DEFAULT_MEDIUM_RANGE),
-	facing_(-1)
+	facing_(-1),
+	claw_(owner),
+	attack_("Idle")
 {
 }
 
@@ -29,28 +31,26 @@ BossAIComponent::~BossAIComponent()
 void BossAIComponent::start(Scene & scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
+	claw_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
 {
 	timer_ += Time::getElapsedUpdateTimeSeconds();
-	if (!cooldown_)
+	if (initiate_attack_)
 	{
-		LOG("AARON") << "player Y: " << scene.gameObjects.getPlayer().getPosY();
-		LOG("AARON") << "boss Y: " << owner_.getPosY();
 		float xDistanceFromPlayer = owner_.getPosX() - scene.gameObjects.getPlayer().getPosX();
 		if ((facing_ < 0 && xDistanceFromPlayer < 0) || (facing_ > 0 && xDistanceFromPlayer > 0))
 		{
 			//backward tail swing, then jump back and turn around
-			LOG("AARON") << "INITIATING TAIL SWING";
-			cooldown_ = true;
+			initiate_attack_ = false;
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
 		{
 			//close range attack
-			LOG("AARON") << "INITIATING SHORT RANGE ATTACK";
-			cooldown_ = true;
+			attack_ = "Tail swing";
+			initiate_attack_ = false;
 		}
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
 		{
@@ -71,7 +71,7 @@ void BossAIComponent::update(Scene & scene)
 				LOG("AARON") << "INITIATING LAZER";
 				break;
 			}
-			cooldown_ = true;
+			initiate_attack_ = false;
 		}
 		else
 		{
@@ -90,8 +90,16 @@ void BossAIComponent::update(Scene & scene)
 	//if on cooldown, don't attack, possibly move around
 	if (timer_ > cooldown_time_)
 	{
-		cooldown_ = false;
+		initiate_attack_ = true;
 		timer_ = 0;
+
+	}
+	else 
+	{
+		if (attack_ == "Tail swing")
+		{
+			claw_.update(scene);
+		}
 	}
 }
 
