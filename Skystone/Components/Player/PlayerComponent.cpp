@@ -54,7 +54,7 @@ void PlayerComponent::handleEvent(const DamageTakenEvent& e)
 {
 	LOG("GAME") << "Hit by enemy! " << health_->getHealth() << "hp left";
 	health_->setInvincible(true);
-	owner_.getComponent<PlayerControlComponent>()->changeMovementState(e.getScene(), &PlayerMovementState::stunState);
+	owner_.getComponent<PlayerControlComponent>()->changeMovementState(e.getScene(), "StunState");
 
 	if (physics_->isMovingLeft())
 	{

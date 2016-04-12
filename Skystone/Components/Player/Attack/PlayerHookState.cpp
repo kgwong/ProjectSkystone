@@ -10,13 +10,11 @@
 
 #include "GameMath/CircleMath.h"
 
-//forward declare
-HookLaunchState PlayerHookState::launchState;
-HookConnectState PlayerHookState::connectState;
-HookDisconnectState PlayerHookState::disconnectState;
-
 PlayerHookState::PlayerHookState(GameObject& owner)
 	:InputComponent(owner),
+	launchState(owner),
+	connectState(owner),
+	disconnectState(owner),
 	_degrees(0),
 	_currentAimState(DEFAULT_AIM_STATE),
 	hookStateManager_(&disconnectState)
@@ -33,7 +31,7 @@ void PlayerHookState::handleInput(Scene& scene, SDL_Event& e)
 {
 
 	//POLYMORPHISM
-	hookStateManager_->handleInput(scene, owner_, e);
+	hookStateManager_->handleInput(scene, e);
 
 
 	//key pressed
@@ -71,11 +69,11 @@ double PlayerHookState::getDegrees()
 	return _degrees;
 }
 
-void PlayerHookState::changeState(Scene& scene, HookStateManager* state)
+void PlayerHookState::changeState(Scene& scene, const std::string& stateName)
 {
-	hookStateManager_->onExit(scene,owner_);
-	hookStateManager_ = state;
-	hookStateManager_->onEnter(scene, owner_);
+	hookStateManager_->onExit(scene);
+	hookStateManager_ = getStateFromName(stateName);
+	hookStateManager_->onEnter(scene);
 }
 
 void PlayerHookState::instantiateHook(Scene& scene)
@@ -157,10 +155,10 @@ void PlayerHookState::update(Scene& scene)
 	if (hookRef != nullptr && hookStateManager_->name() == disconnectState.name())
 		disconnectHook(scene);
 	else if (hookRef != nullptr && hookRef->getComponent<StickOnCollision>()->isConnected)
-		this->changeState(scene, &connectState);
+		this->changeState(scene, "HookConnectState");
 	
 	//polymorphism
-	hookStateManager_->update(scene, owner_);
+	hookStateManager_->update(scene);
 	if (hookRef == nullptr && hookStateManager_->name() == launchState.name())
 	{
 		instantiateHook(scene);
@@ -194,7 +192,28 @@ void PlayerHookState::handleEvent(const CollisionEvent& e)
 	if (e.getOtherObject().getType() == GameObject::Type::TILE 
 		&& hookStateManager_ == &connectState)
 	{
-		this->changeState(e.getScene(), &disconnectState);
+		this->changeState(e.getScene(), "HookDisconnectState");
+	}
+}
+
+HookStateManager* PlayerHookState::getStateFromName(const std::string& name)
+{
+	if (name == launchState.name())
+	{
+		return &launchState;
+	}
+	else if (name == connectState.name())
+	{
+		return &connectState;
+	}
+	else if (name == disconnectState.name())
+	{
+		return &disconnectState;
+	}
+	else
+	{
+		LOG("ERROR") << "Unknown State";
+		return nullptr;
 	}
 }
 

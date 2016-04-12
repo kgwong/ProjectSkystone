@@ -5,16 +5,17 @@
 
 #include "ComponentEvents/CollisionEvent.h" 
 
-WalkingState PlayerMovementState::walkingState;
-FlyingState PlayerMovementState::flyingState;
-AirborneState PlayerMovementState::airborneState;
-StunState PlayerMovementState::stunState;
-HangState PlayerMovementState::hangState;
-LaunchState PlayerMovementState::launchState;
+#include <cassert>
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
-	: InputComponent(owner), 
-	currentState_(&PlayerMovementState::airborneState)
+	: InputComponent(owner),
+	walkingState(owner),
+	flyingState(owner),
+	airborneState(owner),
+	stunState(owner),
+	hangState(owner),
+	launchState(owner),
+	currentState_(&airborneState)
 {
 	LOG("FLAPJACKS") << "HI";
 	canSwing = true;
@@ -27,21 +28,21 @@ PlayerMovementState::~PlayerMovementState()
 
 void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 {
-	currentState_->handleInput(scene, owner_, e);
+	currentState_->handleInput(scene, e);
 }
 
 void PlayerMovementState::update(Scene& scene)
 {
-	currentState_->update(scene,owner_);
+	currentState_->update(scene);
 	//LOG("INFO") << currentState_->name();
 	canSwing = true;
 }
 
-void PlayerMovementState::changeState(Scene& scene, PlayerState* state)
+void PlayerMovementState::changeState(Scene& scene, const std::string& stateName)
 {
-	currentState_->onExit(scene, owner_);
-	currentState_ = state;
-	currentState_->onEnter(scene, owner_);
+	currentState_->onExit(scene);
+	currentState_ = getStateFromName(stateName);
+	currentState_->onEnter(scene);
 }
 
 PlayerState* PlayerMovementState::getState()
@@ -52,7 +53,7 @@ PlayerState* PlayerMovementState::getState()
 void PlayerMovementState::handleEvent(const CollisionEvent & e)
 {
 	//might not be in airborne state.
-	if (currentState_ == &PlayerMovementState::hangState)
+	if (currentState_->name() == "Hang")
 	{
 		if (e.getOtherObject().getType() == GameObject::Type::TILE)
 		{
@@ -82,5 +83,39 @@ void PlayerMovementState::setCanSwing(bool swing)
 void PlayerMovementState::setDirection(int dir)
 {
 	direction = dir;
+}
+
+PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
+{
+	if (name == walkingState.name())
+	{
+		return &walkingState;
+	}
+	else if (name == flyingState.name())
+	{
+		return &flyingState;
+	}
+	else if (name == airborneState.name())
+	{
+		return &airborneState;
+	}
+	else if (name == stunState.name())
+	{
+		return &stunState;
+	}
+	else if (name == hangState.name())
+	{
+		return &hangState;
+	}
+	else if (name == launchState.name())
+	{
+		return &launchState;
+	}
+	else
+	{
+		LOG("ERROR") << "Unknown state";
+		assert(false);
+		return nullptr;
+	}
 }
 

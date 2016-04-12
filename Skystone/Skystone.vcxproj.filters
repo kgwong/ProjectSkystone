@@ -105,6 +105,7 @@
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
     <ClCompile Include="Components\Render\SelectableText.cpp" />
     <ClCompile Include="Components\Render\TextSelector.cpp" />
+    <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />

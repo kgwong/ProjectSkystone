@@ -10,13 +10,13 @@ public:
 	static const float DEFAULT_SPEED;
 	static const float MAX_SPEED;
 public:
-	HangState();
+	HangState(GameObject& owner);
 	virtual ~HangState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
 	Point SwingVector();
 	Point OldPlayerPos();
 	int getDirection();

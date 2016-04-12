@@ -8,7 +8,8 @@
 
 const float FlyingState::FLIGHT_VELOCITY = 5 * 60.0f;
 
-FlyingState::FlyingState()
+FlyingState::FlyingState(GameObject& owner)
+	:PlayerState(owner)
 {
 }
 
@@ -17,53 +18,53 @@ FlyingState::~FlyingState()
 {
 }
 
-void FlyingState::onEnter(Scene& scene, GameObject& player)
+void FlyingState::onEnter(Scene& scene)
 {
-	player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
-	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jetcycle.png"));
+	owner_.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
+	owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jetcycle.png"));
 }
 
-void FlyingState::onExit(Scene& scene, GameObject& player)
+void FlyingState::onExit(Scene& scene)
 {
 }
 
-void FlyingState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void FlyingState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, JUMP))
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 	}
 }
 
-void FlyingState::update(Scene& scene, GameObject& player)
+void FlyingState::update(Scene& scene)
 {
-	if (!player.getComponent<PhysicsComponent>()->isFalling())
+	if (!owner_.getComponent<PhysicsComponent>()->isFalling())
 	{
 		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::walkingState);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "WalkingState");
 		return;
 	}
-	player.getComponent<PhysicsComponent>()->setVelX(0);
+	owner_.getComponent<PhysicsComponent>()->setVelX(0);
 
 	if (GameInputs::keyHeld(LEFT))
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-FLIGHT_VELOCITY);
+		owner_.getComponent<PhysicsComponent>()->setVelX(-FLIGHT_VELOCITY);
 	}
 	if (GameInputs::keyHeld(RIGHT))
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(FLIGHT_VELOCITY);
+		owner_.getComponent<PhysicsComponent>()->setVelX(FLIGHT_VELOCITY);
 	}
 	if (GameInputs::keyHeld(JUMP))
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(0);
+		owner_.getComponent<PhysicsComponent>()->setVelY(0);
 	}
 	if (GameInputs::keyHeld(UP))
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
+		owner_.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
 	}
 	if (GameInputs::keyHeld(DOWN))
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(FLIGHT_VELOCITY);
+		owner_.getComponent<PhysicsComponent>()->setVelY(FLIGHT_VELOCITY);
 	}
 }

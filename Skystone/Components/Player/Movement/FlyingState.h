@@ -9,16 +9,16 @@ public:
 	static const float FLIGHT_VELOCITY;
 
 public:
-	FlyingState();
+	FlyingState(GameObject& owner);
 	virtual ~FlyingState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
 
 
-	virtual std::string name() { return "Flying"; }
+	virtual std::string name() { return "FlyingState"; }
 };
 
 #endif //FLYING_STATE_H

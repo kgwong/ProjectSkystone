@@ -5,7 +5,8 @@
 #include "Application/Log.h"
 #include "Components/Common/StickOnCollision.h"
 
-HookLaunchState::HookLaunchState()
+HookLaunchState::HookLaunchState(GameObject& owner)
+	: HookStateManager(owner)
 {
 }
 
@@ -13,8 +14,9 @@ HookLaunchState::~HookLaunchState()
 {
 }
 
-void HookLaunchState::onEnter(Scene& scene, GameObject& player)
+void HookLaunchState::onEnter(Scene& scene)
 {
+	LOG("Kevin") << "Enter " +  name();
 	//player.getComponent<PlayerHookState>()->instantiateHook();
 	//float testvel = 5.0f;
 	//auto physics = player.getComponent<PlayerHookState>()->hookRef->getComponent<PhysicsComponent>();
@@ -22,14 +24,15 @@ void HookLaunchState::onEnter(Scene& scene, GameObject& player)
 	//physics->setVelY(testvel * 60.0f);
 }
 
-void HookLaunchState::onExit(Scene& scene, GameObject& player)
+void HookLaunchState::onExit(Scene& scene)
 {
+	LOG("Kevin") << "Exit " + name();
 	//set hook's x and y velocity to zero
 	//if connectstate.. do not destroy hook
 	//if disconnect state destroy hook.
 }
 
-void HookLaunchState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void HookLaunchState::handleInput(Scene& scene, SDL_Event& e)
 {
 	//if hook is launched already, and key is pressed again, switch to disconnect state.
 	//if (GameInputs::keyDown(e, LAUNCH_HOOK))
@@ -41,18 +44,22 @@ void HookLaunchState::handleInput(Scene& scene, GameObject& player, SDL_Event& e
 }
 
 //change player to hook.
-void HookLaunchState::update(Scene& scene, GameObject& player)
+void HookLaunchState::update(Scene& scene)
 {
 	//hook shots can be interrupted by enemy touching u
-	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::stunState)
+	if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "StunState")
 	{
-		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
+		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
 		return;
 	}
 
-	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef == nullptr)
+	// owner_.getComponent<PlayerControlComponent>()->HookState() 
+	//return null[tr when HookState() returns by reference. 
+	//Currently returns HookState copy, so hookRef is not null or some reason
+	//this makes no sense.
+	if (owner_.getComponent<PlayerControlComponent>()->HookState().hookRef == nullptr)
 	{
-		player.getComponent<PlayerControlComponent>()->HookState().changeState(scene, &PlayerHookState::disconnectState);
+		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
 		return;
 	}
 	else
@@ -61,9 +68,9 @@ void HookLaunchState::update(Scene& scene, GameObject& player)
 		//LOG("INFO") << player.getComponent<PlayerControlComponent>()->HookState().hookRef->getPos();
 	}
 
-	if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
+	if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "Hang")
 	{
-		player.getComponent<PlayerControlComponent>()->MovementState().changeState(scene,&PlayerMovementState::airborneState);
+		owner_.getComponent<PlayerControlComponent>()->MovementState().changeState(scene, "AirborneState");
 	}
 
 	//StickOnCollision* hook_collision = nullptr;

@@ -6,17 +6,17 @@
 class AimUpState : public PlayerAimState
 {
 public:
-	AimUpState();
+	AimUpState(GameObject& owner);
 	virtual ~AimUpState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player) {};
+	virtual void onEnter(Scene& scene);
 
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
+
+	virtual std::string name();
 
 	virtual double getAngle();
-	virtual std::string name();
 
 private:
 	enum class Direction

@@ -15,10 +15,9 @@ class PlayerHookState :
 public:
 	static const AimState DEFAULT_AIM_STATE = AimState::RIGHT;
 
-	//static states.
-	static HookLaunchState launchState;
-	static HookConnectState connectState;
-	static HookDisconnectState disconnectState;
+	HookLaunchState launchState;
+	HookConnectState connectState;
+	HookDisconnectState disconnectState;
 public:
 	PlayerHookState(GameObject& owner);
 	~PlayerHookState();
@@ -26,7 +25,7 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	void update(Scene& scene);
 	double getDegrees();
-	void changeState(Scene& scene, HookStateManager* state);
+	void changeState(Scene& scene, const std::string& stateName);
 
 	std::shared_ptr<GameObject> hookRef;
 	void instantiateHook(Scene& scene);
@@ -46,6 +45,9 @@ private:
 	HookStateManager* hookStateManager_;
 	double _degrees;
 	AimState _currentAimState;
+
+private:
+	HookStateManager* getStateFromName(const std::string& name);
 
 };
 

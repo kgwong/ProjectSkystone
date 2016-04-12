@@ -11,7 +11,8 @@ const float HangState::MAX_ANGLE = 80.0f;
 const float HangState::DEFAULT_SPEED = 3.14f;
 const float HangState::MAX_SPEED = 8.45f;
 
-HangState::HangState()
+HangState::HangState(GameObject& owner)
+	:PlayerState(owner)
 {
 	swingVector_.x = 0.0f;
 	swingVector_.y = 0.0f;
@@ -29,17 +30,17 @@ HangState::~HangState()
 }
 
 
-void HangState::onEnter(Scene& scene, GameObject& player)
+void HangState::onEnter(Scene& scene)
 {
 	//CANNOT change physics here....must do in update.
-	hookPosition_ = player.getComponent<PlayerControlComponent>()->HookState().getPosition();
-	radius_ = fabsf(hookPosition_.y - player.getPosY());
-	oldPlayerYVelocity = player.getComponent<PhysicsComponent>()->getVelY();
-	oldPlayerPos_ = player.getPos();
-	player.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
+	hookPosition_ = owner_.getComponent<PlayerControlComponent>()->HookState().getPosition();
+	radius_ = fabsf(hookPosition_.y - owner_.getPosY());
+	oldPlayerYVelocity = owner_.getComponent<PhysicsComponent>()->getVelY();
+	oldPlayerPos_ = owner_.getPos();
+	owner_.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
 	direction_ = 1;
 }
-void HangState::onExit(Scene& scene, GameObject& player)
+void HangState::onExit(Scene& scene)
 {
 
 	//player.getComponent<PlayerControlComponent>()->MovementState().setDirection(direction_);
@@ -57,7 +58,7 @@ void HangState::onExit(Scene& scene, GameObject& player)
 
 
 }
-void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void HangState::handleInput(Scene& scene, SDL_Event& e)
 {
 	//controls swinging motion only. 
 	//Look in PlayerHookState's connectState to see how hook gets created/destroyed.
@@ -95,25 +96,25 @@ void HangState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 		//direction_ = 1;
 	}
 }
-void HangState::update(Scene& scene, GameObject& player)
+void HangState::update(Scene& scene)
 {
-	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::launchState)
+	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookLaunchState")
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
-		player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-		player.getComponent<PhysicsComponent>()->enableGravity(true);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 		return;
 	}
 
-	if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
+	if (!owner_.getComponent<PlayerControlComponent>()->HookState().hanging)
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::launchState);
-		player.getComponent<PhysicsComponent>()->enableGravity(true);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Launch");
+		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 	else
 	{
 	//	LOG("INFO") << "Direction: " << direction_;
-		auto playerPhysics = player.getComponent<PhysicsComponent>();
+		auto playerPhysics = owner_.getComponent<PhysicsComponent>();
 		playerPhysics->enableGravity(false);
 
 		playerPhysics->setVelY(0);
@@ -138,14 +139,14 @@ void HangState::update(Scene& scene, GameObject& player)
 		
 		//player.getComponent<PhysicsComponent>()->setVelX(swingVector_.x);
 		//player.getComponent<PhysicsComponent>()->setVelY(swingVector_.y);
-		if (player.getComponent<PlayerControlComponent>()->MovementState().canSwing)
+		if (owner_.getComponent<PlayerControlComponent>()->MovementState().canSwing)
 		{
 			oldPlayerPos_ = swingVector_;
-			player.setPos(swingVector_);
+			owner_.setPos(swingVector_);
 		}
-		else if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
+		else if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "Hang")
 		{
-			player.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
+			owner_.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
 		}
 	}
 	

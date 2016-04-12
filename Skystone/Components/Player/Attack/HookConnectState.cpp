@@ -3,7 +3,8 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 
-HookConnectState::HookConnectState()
+HookConnectState::HookConnectState(GameObject& owner)
+	:HookStateManager(owner)
 {
 }
 
@@ -12,28 +13,28 @@ HookConnectState::~HookConnectState()
 {
 }
 
-void HookConnectState::onEnter(Scene& scene, GameObject& player)
+void HookConnectState::onEnter(Scene& scene)
 {
 	//player.getComponent<PlayerControlComponent>()->MovementState().changeState(&PlayerMovementState::hangState);
 }
-void HookConnectState::onExit(Scene& scene, GameObject& player) 
+void HookConnectState::onExit(Scene& scene) 
 {
 	//player
 	//set gravity to true
 
 	//hook is killed after exit.
 }
-void HookConnectState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void HookConnectState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, LAUNCH_HOOK))
 	{
-		player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
-		player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-		player.getComponent<PhysicsComponent>()->enableGravity(true);
+		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
+		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 
 }
-void HookConnectState::update(Scene& scene, GameObject& player)
+void HookConnectState::update(Scene& scene)
 {
 	//if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
 	//{
