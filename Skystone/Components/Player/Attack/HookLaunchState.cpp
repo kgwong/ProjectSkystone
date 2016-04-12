@@ -16,7 +16,6 @@ HookLaunchState::~HookLaunchState()
 
 void HookLaunchState::onEnter(Scene& scene)
 {
-	LOG("Kevin") << "Enter " +  name();
 	//player.getComponent<PlayerHookState>()->instantiateHook();
 	//float testvel = 5.0f;
 	//auto physics = player.getComponent<PlayerHookState>()->hookRef->getComponent<PhysicsComponent>();
@@ -26,7 +25,6 @@ void HookLaunchState::onEnter(Scene& scene)
 
 void HookLaunchState::onExit(Scene& scene)
 {
-	LOG("Kevin") << "Exit " + name();
 	//set hook's x and y velocity to zero
 	//if connectstate.. do not destroy hook
 	//if disconnect state destroy hook.
@@ -54,9 +52,10 @@ void HookLaunchState::update(Scene& scene)
 	}
 
 	// owner_.getComponent<PlayerControlComponent>()->HookState() 
-	//return null[tr when HookState() returns by reference. 
+	//returns nullptr when HookState() returns by reference. 
 	//Currently returns HookState copy, so hookRef is not null or some reason
-	//this makes no sense.
+	//this makes no sense, you normally want to return my reference since there's no 
+	//reason to copy your state object... is there?
 	if (owner_.getComponent<PlayerControlComponent>()->HookState().hookRef == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");

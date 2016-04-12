@@ -15,7 +15,6 @@ HookDisconnectState::~HookDisconnectState()
 
 void HookDisconnectState::onEnter(Scene& scene)
 {
-	LOG("Kevin") << "Enter " + name();
 	if (owner_.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
@@ -24,7 +23,6 @@ void HookDisconnectState::onEnter(Scene& scene)
 }
 void HookDisconnectState::onExit(Scene& scene)
 {
-	LOG("Kevin") << "Exit " + name();
 	//goes to launch state... prepare for that. do nothing.
 }
 void HookDisconnectState::handleInput(Scene& scene, SDL_Event& e)

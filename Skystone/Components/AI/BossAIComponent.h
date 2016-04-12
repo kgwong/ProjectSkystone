@@ -2,6 +2,8 @@
 #define BOSS_AI_COMPONENT_H
 
 #include "AIComponent.h"
+#include "SlamAIComponent.h"
+#include <string>
 
 //class HealthComponent;
 class PhysicsComponent;
@@ -24,15 +26,18 @@ public:
 	virtual void update(Scene& scene);
 
 	float getFacing();
+	void setAttack(std::string attack);
 
 private:
 	float cooldown_time_;
 	double timer_;
-	bool cooldown_;
+	bool initiate_attack_;
 	float close_range_;
 	float medium_range_;
 	float facing_;
+	std::string attack_;
 	PhysicsComponent* physics_;
+	SlamAIComponent claw_;
 };
 
 #endif

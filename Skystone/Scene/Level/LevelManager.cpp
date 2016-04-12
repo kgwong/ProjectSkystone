@@ -3,6 +3,7 @@
 #include "Level.h"
 
 #include "Application/Log.h"
+#include "Game/GameInputs.h"
 
 LevelManager::LevelManager()
 	:player_(nullptr),
@@ -79,7 +80,10 @@ bool LevelManager::changeLevelIfNecessary()
 
 void LevelManager::handleInput(SDL_Event& e)
 {
-	currLevel_->handleInput(e);
+	if (GameInputs::keyDown(e, ControlType::ESC))
+		setNextScene(SceneID::PAUSE);
+	else
+		currLevel_->handleInput(e);
 }
 
 void LevelManager::update()

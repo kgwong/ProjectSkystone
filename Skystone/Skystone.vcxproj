@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Components\Render\SelectableText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
