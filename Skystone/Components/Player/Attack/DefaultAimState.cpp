@@ -4,8 +4,9 @@
 #include "PlayerAttackState.h"
 #include "Components/Player/PlayerControlComponent.h"
 
-DefaultAimState::DefaultAimState()
-	:facingRight_(true)
+DefaultAimState::DefaultAimState(GameObject& owner)
+	: PlayerAimState(owner),
+	facingRight_(true)
 {
 }
 
@@ -14,15 +15,7 @@ DefaultAimState::~DefaultAimState()
 {
 }
 
-void DefaultAimState::onEnter(Scene& scene, GameObject& player)
-{
-}
-
-void DefaultAimState::onExit(Scene& scene, GameObject& player)
-{
-}
-
-void DefaultAimState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void DefaultAimState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, RIGHT))
 	{
@@ -34,12 +27,11 @@ void DefaultAimState::handleInput(Scene& scene, GameObject& player, SDL_Event& e
 	}
 	else if (GameInputs::keyDown(e, UP))
 	{
-		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::aimUpState);
-		player.getComponent<PlayerControlComponent>()->changeAttackState(scene, &PlayerAttackState::aimUpState);
+		owner_.getComponent<PlayerControlComponent>()->changeAttackState(scene, "AimUpState");
 	}
 }
 
-void DefaultAimState::update(Scene& scene, GameObject& player)
+void DefaultAimState::update(Scene& scene)
 {
 }
 
@@ -50,5 +42,5 @@ double DefaultAimState::getAngle()
 
 std::string DefaultAimState::name()
 {
-	return "Default Aim State";
+	return "DefaultAimState";
 }

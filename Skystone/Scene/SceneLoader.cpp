@@ -62,7 +62,6 @@ void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 		iss >> type >> name >> pos.x >> pos.y;
 		scene->gameObjects.add(type, name, pos);
 	}
-
 }
 
 std::string SceneLoader::generateFilePath(SceneID sceneID)
@@ -80,6 +79,9 @@ std::string SceneLoader::sceneIDToString(SceneID sceneID)
 			break;
 		case SceneID::GAME_OVER:
 			result = "GameOver";
+			break;
+		case SceneID::PAUSE:
+			result = "Pause";
 			break;
 		default:
 			break;

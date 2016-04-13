@@ -18,8 +18,8 @@ public:
 
 	static const int PROJECTILE_VELOCITY = 20;
 
-	static DefaultAimState defaultAimState;
-	static AimUpState aimUpState;
+	DefaultAimState defaultAimState;
+	AimUpState aimUpState;
 
 	//the hook states
 	//static LaunchHookState launchstate;
@@ -33,7 +33,7 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
-	void changeState(Scene& scene, PlayerAimState* state);
+	void changeState(Scene& scene, const std::string& stateName);
 
 private:
 	PlayerAimState* currentState_;
@@ -42,9 +42,8 @@ private:
 	double degrees_;
 	bool shoot_;
 
-	//for hook ~ move to a different state
-	//bool launch_;
-
+private:
+	PlayerAimState* getStateFromName(const std::string& name);
 
 };
 

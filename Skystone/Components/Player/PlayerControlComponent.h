@@ -18,14 +18,14 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
-	void changeMovementState(Scene& scene, PlayerState* state);
-	void changeAttackState(Scene& scene, PlayerAimState* state);
+	void changeMovementState(Scene& scene, const std::string& stateName);
+	void changeAttackState(Scene& scene, const std::string& stateName);
 
 	//----harvey function----///
-	void changeHookState(Scene& scene, HookStateManager* state);
+	void changeHookState(Scene& scene, const std::string& stateName);
 	PlayerHookState HookState();
-	PlayerMovementState MovementState();
-	PlayerAttackState AttackState();
+	PlayerMovementState& MovementState();
+	PlayerAttackState& AttackState();
 	virtual void handleEvent(const CollisionEvent& e);
 
 	//will delete later.

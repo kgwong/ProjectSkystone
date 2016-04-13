@@ -5,7 +5,7 @@
 #include <math.h> 
 #include "Components/Physics/PhysicsComponent.h"
 #include "GameMath/RNG.h"
-
+#include <string>
 using namespace std;
 
 
@@ -14,10 +14,12 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	AIComponent(owner),
 	cooldown_time_(DEFAULT_COOLDOWN_SECONDS),
 	timer_(0),
-	cooldown_(true),
+	initiate_attack_(false),
 	close_range_(DEFAULT_CLOSE_RANGE),
 	medium_range_(DEFAULT_MEDIUM_RANGE),
-	facing_(-1)
+	facing_(-1),
+	claw_(owner),
+	attack_("Idle")
 {
 }
 
@@ -29,28 +31,27 @@ BossAIComponent::~BossAIComponent()
 void BossAIComponent::start(Scene & scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
+	claw_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
 {
 	timer_ += Time::getElapsedUpdateTimeSeconds();
-	if (!cooldown_)
+	if (initiate_attack_)
 	{
-		LOG("AARON") << "player Y: " << scene.gameObjects.getPlayer().getPosY();
-		LOG("AARON") << "boss Y: " << owner_.getPosY();
 		float xDistanceFromPlayer = owner_.getPosX() - scene.gameObjects.getPlayer().getPosX();
 		if ((facing_ < 0 && xDistanceFromPlayer < 0) || (facing_ > 0 && xDistanceFromPlayer > 0))
 		{
 			//backward tail swing, then jump back and turn around
-			LOG("AARON") << "INITIATING TAIL SWING";
-			cooldown_ = true;
+			attack_ = "tail swing";
+			initiate_attack_ = false;
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
 		{
 			//close range attack
-			LOG("AARON") << "INITIATING SHORT RANGE ATTACK";
-			cooldown_ = true;
+			attack_ = "claw attack";
+			initiate_attack_ = false;
 		}
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
 		{
@@ -61,17 +62,20 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
+				attack_ = "jump attack";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
 				LOG("AARON") << "INITIATING TRIPLE SHOT";
+				attack_ = "triple shot";
 				break;
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
 				LOG("AARON") << "INITIATING LAZER";
+				attack_ = "lazer";
 				break;
 			}
-			cooldown_ = true;
+			initiate_attack_ = false;
 		}
 		else
 		{
@@ -90,12 +94,40 @@ void BossAIComponent::update(Scene & scene)
 	//if on cooldown, don't attack, possibly move around
 	if (timer_ > cooldown_time_)
 	{
-		cooldown_ = false;
+		initiate_attack_ = true;
 		timer_ = 0;
+
+	}
+	else 
+	{
+		if (attack_ == "claw attack")
+		{
+			claw_.update(scene);
+		}
+
+		else if (attack_ == "jump attack")
+		{
+
+		}
+
+		else if (attack_ == "triple shot")
+		{
+
+		}
+
+		else if (attack_ == "lazer")
+		{
+
+		}
 	}
 }
 
 float BossAIComponent::getFacing()
 {
 	return facing_;
+}
+
+void BossAIComponent::setAttack(string attack)
+{
+	attack_ = attack;
 }

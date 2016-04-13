@@ -5,12 +5,10 @@ class HookStateManager :
 	public PlayerState
 {
 public:
-	HookStateManager();
+	HookStateManager(GameObject& owner);
 	virtual ~HookStateManager();
 	virtual std::string name() { return "Hook State Manager"; }
 
-	//tricky hacks
-	//virtual void update(GameObject& player, Scene& scene) = 0;
 };
 #endif
 

@@ -6,7 +6,8 @@
 
 #include "Application/Log.h"
 
-AimUpState::AimUpState()
+AimUpState::AimUpState(GameObject& owner)
+	:PlayerAimState(owner)
 {
 }
 
@@ -15,17 +16,17 @@ AimUpState::~AimUpState()
 {
 }
 
-void AimUpState::onEnter(Scene& scene, GameObject& player)
+void AimUpState::onEnter(Scene& scene)
 {
 	dir_ = AimUpState::Direction::NONE;
 }
 
-void AimUpState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void AimUpState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, UP))
 	{
 		//player.getComponent<PlayerAttackState>()->changeState(&PlayerAttackState::defaultAimState);
-		player.getComponent<PlayerControlComponent>()->changeAttackState(scene, &PlayerAttackState::defaultAimState);
+		owner_.getComponent<PlayerControlComponent>()->changeAttackState(scene, "DefaultAimState");
 	}
 	if (GameInputs::keyDown(e, LEFT))
 	{
@@ -46,12 +47,17 @@ void AimUpState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
 
 }
 
-void AimUpState::update(Scene& scene, GameObject& player)
+void AimUpState::update(Scene& scene)
 {
 	if (dir_ != AimUpState::Direction::NONE)
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(0);
+		owner_.getComponent<PhysicsComponent>()->setVelX(0);
 	}
+}
+
+std::string AimUpState::name()
+{
+	return "AimUpState";
 }
 
 double AimUpState::getAngle()
@@ -67,7 +73,3 @@ double AimUpState::getAngle()
 	}
 }
 
-std::string AimUpState::name()
-{
-	return "Aim Up State";
-}

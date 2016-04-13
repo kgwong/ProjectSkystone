@@ -14,12 +14,12 @@
 class PlayerMovementState : public InputComponent
 {
 public:
-	static WalkingState walkingState;
-	static FlyingState flyingState;
-	static AirborneState airborneState;
-	static StunState stunState;
-	static HangState hangState;
-	static LaunchState launchState;
+	WalkingState walkingState;
+	FlyingState flyingState;
+	AirborneState airborneState;
+	StunState stunState;
+	HangState hangState;
+	LaunchState launchState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
@@ -27,7 +27,7 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene);
 
-	void changeState(Scene& scene, PlayerState* state);
+	void changeState(Scene& scene, const std::string& stateName);
 	PlayerState* getState();
 	virtual void handleEvent(const CollisionEvent& e);
 	void setCanSwing(bool swing);
@@ -37,6 +37,9 @@ public:
 
 private:
 	PlayerState* currentState_;
+
+private:
+	PlayerState* getStateFromName(const std::string& name);
 };
 
 #endif //PLAYER_MOVEMENT_STATE_H

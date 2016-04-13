@@ -6,16 +6,14 @@
 class DefaultAimState : public PlayerAimState
 {
 public:
-	DefaultAimState();
+	DefaultAimState(GameObject& owner);
 	virtual ~DefaultAimState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player) ;
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
 
 	virtual double getAngle();
+
 	virtual std::string name();
 
 private:

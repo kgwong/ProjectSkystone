@@ -19,21 +19,21 @@ public:
 
 
 public:
-	WalkingState();
+	WalkingState(GameObject& owner);
 	virtual ~WalkingState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
 
-	virtual std::string name() { return "Walking"; }
+	virtual std::string name() { return "WalkingState"; }
 
 private:
 	static SubState subState_;
 
 private:
-	void changeSubState(GameObject& player, SubState newSubState);
+	void changeSubState(SubState newSubState);
 	std::string subStateToString(SubState subState);
 };
 

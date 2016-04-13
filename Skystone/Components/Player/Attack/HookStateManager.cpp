@@ -1,6 +1,7 @@
 #include "HookStateManager.h"
 
-HookStateManager::HookStateManager()
+HookStateManager::HookStateManager(GameObject& owner)
+	:PlayerState(owner)
 {
 }
 

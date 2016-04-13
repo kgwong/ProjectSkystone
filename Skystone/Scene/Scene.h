@@ -9,9 +9,10 @@ class SceneManager;
 enum class SceneID {
 	INVALID,
 	LEVEL,
+	PAUSE,
 	MAIN_MENU,
 	GAME_OVER,
-	QUIT_GAME
+	QUIT_GAME,
 };
 
 class Scene

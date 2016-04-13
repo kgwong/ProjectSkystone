@@ -5,7 +5,8 @@
 #include <SDL/SDL.h>
 
 const static int defaultFontSize = 28;
-const static std::string defaultFontPath = "../Assets/Fonts/LDFComicSans.ttf";
+//const static std::string defaultFontPath = "../Assets/Fonts/LDFComicSans.ttf";
+const static std::string defaultFontPath = "../Assets/Fonts/MaiandraGDRegular.ttf";
 
 TextRenderer::TextRenderer(GameObject& owner)
 	: RenderComponent(owner), font_(TTF_OpenFont(defaultFontPath.c_str(), defaultFontSize)), text_("")
