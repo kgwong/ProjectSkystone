@@ -4,6 +4,7 @@
 #include "Application/Log.h"
 
 #include "ComponentEvents/CollisionEvent.h" 
+#include "Game/GameConstants.h"
 
 WalkingState PlayerMovementState::walkingState;
 FlyingState PlayerMovementState::flyingState;
@@ -62,7 +63,7 @@ void PlayerMovementState::handleEvent(const CollisionEvent & e)
 			if (swingVector.x >= e.getOtherObject().getPosX())
 			{
 				canSwing = false;
-				Point offSet{e.getOtherObject().getPosX() + 32,e.getOtherObject().getPosY()};
+				Point offSet{e.getOtherObject().getPosX() + Constants::TILE_SIZE,e.getOtherObject().getPosY()};
 				owner_.setPos(offSet);
 			}
 			else
