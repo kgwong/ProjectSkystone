@@ -3,6 +3,7 @@
 #include "Game/GameInputs.h"
 #include "PlayerAttackState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Render/SpriteRenderer.h"
 
 DefaultAimState::DefaultAimState(GameObject& owner)
 	: PlayerAimState(owner),
@@ -13,6 +14,11 @@ DefaultAimState::DefaultAimState(GameObject& owner)
 
 DefaultAimState::~DefaultAimState()
 {
+}
+
+void DefaultAimState::onEnter(Scene& scene)
+{
+	//renderer_->setSprite()
 }
 
 void DefaultAimState::handleInput(Scene& scene, SDL_Event& e)
@@ -27,8 +33,13 @@ void DefaultAimState::handleInput(Scene& scene, SDL_Event& e)
 	}
 	else if (GameInputs::keyDown(e, UP))
 	{
-		owner_.getComponent<PlayerControlComponent>()->changeAttackState(scene, "AimUpState");
+		controlComponent_->changeAttackState(scene, "AimUpState");
 	}
+}
+
+void DefaultAimState::start(Scene& scene)
+{
+	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
 }
 
 void DefaultAimState::update(Scene& scene)

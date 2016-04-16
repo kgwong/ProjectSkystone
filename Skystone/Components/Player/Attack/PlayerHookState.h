@@ -23,6 +23,8 @@ public:
 	~PlayerHookState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	void update(Scene& scene);
 	double getDegrees();
 	void changeState(Scene& scene, const std::string& stateName);

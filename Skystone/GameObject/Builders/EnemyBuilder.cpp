@@ -103,7 +103,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Flying")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Flying.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/stalin_4_turtle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
