@@ -6,9 +6,6 @@
 
 #include "Components/Render/SpriteRenderer.h"
 
-#include "Resources/Resources.h"
-
-
 const float WalkingState::JUMP_VELOCITY = -1200;
 const float WalkingState::WALK_VELOCITY = 300;
 
@@ -110,14 +107,14 @@ void WalkingState::changeSubState(SubState newSubState)
 	switch (newSubState)
 	{
 	case SubState::IDLE:
-		owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
+		owner_.getComponent<SpriteRenderer>()->setSprite("Images/idle cycle.png");
 		break;
 	case SubState::LEFT:
-		owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
+		owner_.getComponent<SpriteRenderer>()->setSprite("Images/run_cycle.png");
 		owner_.getComponent<SpriteRenderer>()->setFlipHorz(true);
 		break;
 	case SubState::RIGHT:
-		owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
+		owner_.getComponent<SpriteRenderer>()->setSprite("Images/run_cycle.png");
 		owner_.getComponent<SpriteRenderer>()->setFlipHorz(false);
 		break;
 	}

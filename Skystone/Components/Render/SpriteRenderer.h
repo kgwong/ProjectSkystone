@@ -6,9 +6,12 @@
 #include "RenderComponent.h"
 #include "GameTypes/Axis.h"
 
+#include <string>
+
 class SpriteRenderer : public RenderComponent
 {
 public:
+	SpriteRenderer(GameObject& owner, const std::string& relPath);
 	SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet);
 	virtual ~SpriteRenderer();
 
@@ -16,6 +19,7 @@ public:
 	void setFlipHorz(bool value);
 	void setFlipVert(bool value);
 
+	void setSprite(const std::string& relPath);
 	void setSprite(SpriteSheet* newSpriteSheet);
 
 	void render(GameWindow& gameWindow, float percBehind);

@@ -31,6 +31,16 @@ void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 	currentState_->handleInput(scene, e);
 }
 
+void PlayerMovementState::start(Scene& scene)
+{
+	walkingState.start(scene);
+	flyingState.start(scene);
+	airborneState.start(scene);
+	stunState.start(scene);
+	hangState.start(scene);
+	launchState.start(scene);
+}
+
 void PlayerMovementState::update(Scene& scene)
 {
 	currentState_->update(scene);

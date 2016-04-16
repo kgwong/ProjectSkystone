@@ -31,6 +31,8 @@ public:
 	virtual ~PlayerAttackState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
 	void changeState(Scene& scene, const std::string& stateName);

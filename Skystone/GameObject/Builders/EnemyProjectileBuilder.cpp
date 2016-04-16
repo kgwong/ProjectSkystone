@@ -1,6 +1,5 @@
 #include "EnemyProjectileBuilder.h"
 
-#include "Resources/Resources.h"
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Collider/ColliderComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
@@ -27,7 +26,7 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 	if (name == "AcidProjectile")
 	{
 
-		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
+		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, "Assets/Animations/acidprojectile.png"));
 		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 5));
@@ -39,7 +38,7 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 	{
 
 		projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
-		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, Resources::getSpriteSheet("Assets/Animations/acidprojectile.png")));
+		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, "Assets/Animations/acidprojectile.png"));
 		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 20));
