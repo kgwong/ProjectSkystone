@@ -104,9 +104,9 @@
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
     <ClCompile Include="Components\Render\SelectableText.cpp" />
-    <ClCompile Include="Components\Render\TextSelector.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
+    <ClCompile Include="Components\Input\TextSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -221,7 +221,7 @@
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
     <ClInclude Include="Components\Render\SelectableText.h" />
-    <ClInclude Include="Components\Render\TextSelector.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
+    <ClInclude Include="Components\Input\TextSelector.h" />
   </ItemGroup>
 </Project>

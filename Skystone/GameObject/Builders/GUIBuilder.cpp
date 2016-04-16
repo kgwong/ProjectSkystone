@@ -2,7 +2,7 @@
 
 #include "Resources/Resources.h"
 #include "Application/Log.h"
-#include "Components/Render/TextSelector.h"
+#include "Components/Input/TextSelector.h"
 #include "Components/Render/SelectableText.h"
 #include "Components/Scene/InputSceneChanger.h"
 #include "Scene/Scene.h"

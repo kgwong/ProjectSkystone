@@ -100,7 +100,7 @@
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
-    <ClCompile Include="Components\Render\TextSelector.cpp" />
+    <ClCompile Include="Components\Input\TextSelector.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
@@ -207,7 +207,7 @@
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="Components\Render\TextSelector.h" />
+    <ClInclude Include="Components\Input\TextSelector.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
