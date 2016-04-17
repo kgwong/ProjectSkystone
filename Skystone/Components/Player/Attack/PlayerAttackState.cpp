@@ -38,6 +38,12 @@ void PlayerAttackState::handleInput(Scene& scene, SDL_Event& e)
 	}
 }
 
+void PlayerAttackState::start(Scene& scene)
+{
+	defaultAimState.start(scene);
+	aimUpState.start(scene);
+}
+
 void PlayerAttackState::update(Scene& scene)
 {
 	

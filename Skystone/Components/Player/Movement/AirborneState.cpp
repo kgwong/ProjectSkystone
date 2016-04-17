@@ -5,8 +5,6 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Render/SpriteRenderer.h"
 
-#include "Resources/Resources.h"
-
 AirborneState::AirborneState(GameObject& owner)
 	:PlayerState(owner)
 {
@@ -19,8 +17,7 @@ AirborneState::~AirborneState()
 
 void AirborneState::onEnter(Scene& scene)
 {
-	jumpHeld_ = true;
-	owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jump cycle.png"));
+	renderer_->setSprite("Images/jump cycle.png");
 }
 
 void AirborneState::onExit(Scene& scene)
@@ -29,45 +26,50 @@ void AirborneState::onExit(Scene& scene)
 
 void AirborneState::handleInput(Scene& scene, SDL_Event& e)
 {
-	if (!jumpHeld_)
+	if (GameInputs::keyHeld(JUMP))
 	{
 		if (GameInputs::keyDown(e, JUMP))
 		{
-			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::flyingState);
-			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "FlyingState");
+			controlComponent_->changeMovementState(scene, "FlyingState");
 		}
 	}
 }
 
+void AirborneState::start(Scene& scene)
+{
+	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
+	renderer_ = owner_.getComponent<SpriteRenderer>();
+}
+
 void AirborneState::update(Scene& scene)
 {
-	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookConnectState")
+	if (controlComponent_->HookState().getState()->name() == "HookConnectState")
 	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
+		controlComponent_->changeMovementState(scene, "Hang");
 		return;
 	}
 	
-	if (!owner_.getComponent<PhysicsComponent>()->isFalling())
+	if (!physics_->isFalling())
 	{
-		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "WalkingState");
 		return;
 	}
 
 	if (GameInputs::keyHeld(LEFT))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelX(-5 * 60.0f);
+		physics_->setVelX(-5 * 60.0f);
+		renderer_->setFlipHorz(true);
 	}
 	else if (GameInputs::keyHeld(RIGHT))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelX(5 * 60.0f);
+		physics_->setVelX(5 * 60.0f);
+		renderer_->setFlipHorz(false);
 	}
 	else
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelX(0);
+		physics_->setVelX(0);
 	}
-
-	jumpHeld_ = GameInputs::keyHeld(JUMP);
 }
 
 std::string AirborneState::name()

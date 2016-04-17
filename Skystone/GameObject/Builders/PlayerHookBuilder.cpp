@@ -1,6 +1,5 @@
 #include "PlayerHookBuilder.h"
 
-#include "Resources/Resources.h"
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Collider/ColliderComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
@@ -26,7 +25,7 @@ std::shared_ptr<GameObject> PlayerHookBuilder::build(ComponentSystem& componentS
 
 	//setting components to add ~ are smart pointers
 	hookToBuild.setType(GameObject::Type::PLAYER_HOOK);
-	std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, Resources::getSpriteSheet("Assets/Animations/playerHook.png"));
+	std::shared_ptr<SpriteRenderer> spriteRenderer_ptr = componentSystem.getNew<SpriteRenderer>(hookToBuild, "Assets/Animations/playerHook.png");
 	hookToBuild.addComponent(spriteRenderer_ptr);
 	std::shared_ptr<PhysicsComponent> physics_ptr = componentSystem.getNew<PhysicsComponent>(hookToBuild);
 	hookToBuild.addComponent(physics_ptr);

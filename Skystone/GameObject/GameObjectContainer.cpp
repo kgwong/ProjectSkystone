@@ -7,7 +7,7 @@
 // duct taping code together
 #include "Components/Render/SpriteRenderer.h"
 #include "Resources/Resources.h"
-#include "Components/Render/TextSelector.h"
+#include "Components/Input/TextSelector.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 

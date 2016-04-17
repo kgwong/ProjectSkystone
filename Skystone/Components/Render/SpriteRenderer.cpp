@@ -3,7 +3,13 @@
 #include "Application/GameWindow.h"
 #include "Game/GameTime.h"
 
+#include "Resources/Resources.h"
 #include "Application/Log.h"
+
+SpriteRenderer::SpriteRenderer(GameObject& owner, const std::string& relPath)
+	:SpriteRenderer(owner, Resources::getSpriteSheet(relPath))
+{
+}
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
 	:RenderComponent(owner), spriteSheet_(spriteSheet),
@@ -37,6 +43,11 @@ void SpriteRenderer::setFlipHorz(bool value)
 void SpriteRenderer::setFlipVert(bool value)
 {
 	flipVert_ = value;
+}
+
+void SpriteRenderer::setSprite(const std::string& relPath)
+{
+	setSprite(Resources::getSpriteSheet(relPath));
 }
 
 void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
