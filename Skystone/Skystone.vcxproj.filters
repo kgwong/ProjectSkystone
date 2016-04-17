@@ -107,6 +107,7 @@
     <ClCompile Include="Components\Render\TextSelector.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
+    <ClCompile Include="Components\AI\BossPounceAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -223,5 +224,6 @@
     <ClInclude Include="Components\Render\SelectableText.h" />
     <ClInclude Include="Components\Render\TextSelector.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
+    <ClInclude Include="Components\AI\BossPounceAIComponent.h" />
   </ItemGroup>
 </Project>
