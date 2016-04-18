@@ -102,6 +102,7 @@
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
     <ClCompile Include="Components\Input\TextSelector.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
+    <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
     <ClInclude Include="Components\Input\TextSelector.h" />
+    <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
