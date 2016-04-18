@@ -3,17 +3,14 @@
 #include <iostream> //
 
 HealthComponent::HealthComponent(GameObject& owner)
-	:UpdatingComponent(owner),
-	health_(DEFAULT_HEALTH),
-	invincible_(false),
-	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
-	remainingInvincibilityTime_(0)
+	: HealthComponent(owner, DEFAULT_HEALTH)
 {
 }
 
 HealthComponent::HealthComponent(GameObject& owner, int initHealth)
 	: UpdatingComponent(owner),
-	health_(initHealth),
+	currentHealth_(initHealth),
+	maxHealth_(initHealth),
 	invincible_(false),
 	invincibilityTime_(DEFAULT_INVINCIBILITY_TIME),
 	remainingInvincibilityTime_(0)
@@ -37,7 +34,7 @@ void HealthComponent::update(Scene& scene)
 		//std::cout << "Invincible " << remainingInvincibilityTime_ << std::endl;
 	}
 
-	if (health_ <= 0)
+	if (currentHealth_ <= 0)
 	{
 		owner_.kill();
 	}
@@ -61,7 +58,7 @@ bool HealthComponent::takeDamage(int damage)
 {
 	if (!invincible_)
 	{
-		health_ -= damage;
+		currentHealth_ -= damage;
 		return true;
 	}
 	return false;
@@ -69,16 +66,21 @@ bool HealthComponent::takeDamage(int damage)
 
 bool HealthComponent::heal(int addedHealth)
 {
-	health_ += addedHealth;
+	currentHealth_ += addedHealth;
 	return true;
 }
 	
 int HealthComponent::getHealth()
 {
-	return health_;
+	return currentHealth_;
+}
+
+int HealthComponent::getMaxHealth()
+{
+	return maxHealth_;
 }
 
 bool HealthComponent::isDead()
 {
-	return health_ <= 0;
+	return currentHealth_ <= 0;
 }
