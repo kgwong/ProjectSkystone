@@ -4,6 +4,7 @@
 #include "Application/Path.h"
 #include "Application/Log.h"
 #include "Level/LevelManager.h"
+#include "MainMenu.h"
 
 #include <fstream>
 
@@ -12,8 +13,8 @@ const std::string SceneLoader::SCENE_FILEPATH_PREFIX = "Scenes/";
 SceneLoader::SceneLoader()
 {
 	loadedScenes_.insert({SceneID::LEVEL, std::make_shared<LevelManager>()});
+	loadMainMenu();
 }
-
 
 SceneLoader::~SceneLoader()
 {
@@ -45,6 +46,19 @@ void SceneLoader::load(SceneID sceneID)
 	loadedScenes_.insert({sceneID, scene});
 }
 
+void SceneLoader::unload(SceneID sceneID)
+{
+	if (sceneID == SceneID::LEVEL)
+	{
+		// can't load levelManager the same way, let it handle itself
+		loadedScenes_[SceneID::LEVEL] = std::make_shared<LevelManager>();
+	}
+	else
+	{
+		loadedScenes_.erase(sceneID);
+	}
+}
+
 void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 {
 	
@@ -56,12 +70,20 @@ void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 	std::string line;
 	std::string type, name;
 	Point pos;
+
 	while (getline(ifs, line))
 	{
 		std::istringstream iss(line);
 		iss >> type >> name >> pos.x >> pos.y;
 		scene->gameObjects.add(type, name, pos);
 	}
+}
+
+void SceneLoader::loadMainMenu()
+{
+	std::shared_ptr<MainMenu> mainMenu = std::make_shared<MainMenu>();
+	loadObjects(SceneID::MAIN_MENU, mainMenu.get());
+	loadedScenes_.insert({SceneID::MAIN_MENU, mainMenu});
 }
 
 std::string SceneLoader::generateFilePath(SceneID sceneID)

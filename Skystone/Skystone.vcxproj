@@ -100,8 +100,10 @@
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
-    <ClCompile Include="Components\Input\TextSelector.cpp" />
+    <ClCompile Include="Components\GUI\TextSelector.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
+    <ClCompile Include="Components\GUI\HealthBar.cpp" />
+    <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
@@ -184,8 +186,8 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
-    <ClCompile Include="Components\Render\SelectableText.cpp" />
     <ClCompile Include="Components\AI\BossPounceAIComponent.cpp" />
+    <ClCompile Include="Components\GUI\SelectableText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
@@ -208,7 +210,9 @@
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="Components\Input\TextSelector.h" />
+    <ClInclude Include="Components\GUI\TextSelector.h" />
+    <ClInclude Include="Components\GUI\HealthBar.h" />
+    <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
     <ClInclude Include="Components\Player\Attack\AimState.h" />
@@ -299,8 +303,8 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
-    <ClInclude Include="Components\Render\SelectableText.h" />
     <ClInclude Include="Components\AI\BossPounceAIComponent.h" />
+    <ClInclude Include="Components\GUI\SelectableText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

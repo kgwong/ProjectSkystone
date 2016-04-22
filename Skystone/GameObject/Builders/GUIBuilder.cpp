@@ -2,8 +2,9 @@
 
 #include "Resources/Resources.h"
 #include "Application/Log.h"
-#include "Components/Input/TextSelector.h"
-#include "Components/Render/SelectableText.h"
+#include "Components/GUI/TextSelector.h"
+#include "Components/GUI/SelectableText.h"
+#include "Components/GUI/HealthBar.h"
 #include "Components/Scene/InputSceneChanger.h"
 #include "Scene/Scene.h"
 
@@ -63,6 +64,10 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		text->setText("Continue");
 		text->setSceneOnSelection(SceneID::LEVEL);
 		textSelector->addText(text);
+	}
+	else if (name == "HealthBar")
+	{
+		guiToBuild.addComponent(componentSystem.getNew<HealthBar>(guiToBuild, *player));
 	}
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{

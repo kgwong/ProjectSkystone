@@ -72,7 +72,6 @@
     <ClCompile Include="Components\AI\TrackerComponent.cpp" />
     <ClCompile Include="Components\UpdatingComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\WalkingState.cpp" />
-    <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
@@ -103,12 +102,15 @@
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
-    <ClCompile Include="Components\Render\SelectableText.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\AI\BossPounceAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
-    <ClCompile Include="Components\Input\TextSelector.cpp" />
+    <ClCompile Include="Scene\MainMenu.cpp" />
+    <ClCompile Include="Components\GUI\SelectableText.cpp" />
+    <ClCompile Include="Components\GUI\HealthBar.cpp" />
+    <ClCompile Include="Components\GUI\TextSelector.cpp" />
+    <ClCompile Include="Components\Render\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -188,7 +190,6 @@
     <ClInclude Include="GameObject\Builders\TileBuilder.h" />
     <ClInclude Include="Components\UpdatingComponent.h" />
     <ClInclude Include="Components\Player\Movement\WalkingState.h" />
-    <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Game\GameInputs.h" />
     <ClInclude Include="GameObject\GameObjectContainer.h" />
     <ClInclude Include="Scene\SceneManager.h" />
@@ -222,10 +223,14 @@
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="Components\Render\SelectableText.h" />
     <ClInclude Include="Components\AI\BossPounceAIComponent.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Components\Input\TextSelector.h" />
->>>>>>> f79d5062839039865bbde1906ea7ff0fa4233f39
+    <ClInclude Include="Components\Scene\InputSceneChanger.h" />
+    <ClInclude Include="Scene\MainMenu.h" />
+    <ClInclude Include="Components\GUI\SelectableText.h" />
+    <ClInclude Include="Components\GUI\HealthBar.h" />
+    <ClInclude Include="Components\GUI\TextSelector.h" />
+    <ClInclude Include="Components\Render\TextRenderer.h" />
   </ItemGroup>
 </Project>

@@ -69,3 +69,8 @@ bool SceneManager::hasQuitGame()
 {
 	return nextSceneID_ == SceneID::QUIT_GAME;
 }
+
+void SceneManager::unload(SceneID sceneID)
+{
+	sceneLoader_.unload(sceneID);
+}
