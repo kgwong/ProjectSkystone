@@ -15,7 +15,6 @@
 PlayerAttackState::PlayerAttackState(GameObject& owner)
 	:InputComponent(owner),
 	defaultAimState(owner),
-	aimUpState(owner),
 	currentState_(&defaultAimState),
 	aimState_(AimState::RIGHT),
 	degrees_(0),
@@ -41,7 +40,6 @@ void PlayerAttackState::handleInput(Scene& scene, SDL_Event& e)
 void PlayerAttackState::start(Scene& scene)
 {
 	defaultAimState.start(scene);
-	aimUpState.start(scene);
 }
 
 void PlayerAttackState::update(Scene& scene)
@@ -84,10 +82,6 @@ PlayerAimState* PlayerAttackState::getStateFromName(const std::string& name)
 	if (name == defaultAimState.name())
 	{
 		return &defaultAimState;
-	}
-	else if (name == aimUpState.name())
-	{
-		return &aimUpState;
 	}
 	else
 	{

@@ -3,9 +3,8 @@
 
 #include "Components/InputComponent.h"
 
-#include "PlayerAimState.h"
-#include "DefaultAimState.h"
-#include "AimUpState.h"
+#include "Aim/PlayerAimState.h"
+#include "Aim/DefaultAimState.h"
 
 #include "PlayerHookState.h"
 class PlayerAttackState : public InputComponent
@@ -19,7 +18,6 @@ public:
 	static const int PROJECTILE_VELOCITY = 20;
 
 	DefaultAimState defaultAimState;
-	AimUpState aimUpState;
 
 	//the hook states
 	//static LaunchHookState launchstate;

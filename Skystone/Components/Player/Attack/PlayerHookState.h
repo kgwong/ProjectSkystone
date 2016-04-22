@@ -2,12 +2,13 @@
 #define PLAYER_HOOK_STATE
 
 #include "Components/InputComponent.h"
-#include "AimState.h"
 #include "HookStateManager.h"
 
 #include "HookLaunchState.h"
 #include "HookConnectState.h"
 #include "HookDisconnectState.h"
+
+#include "Aim/AimState.h"
 
 class PlayerHookState :
 	public InputComponent
