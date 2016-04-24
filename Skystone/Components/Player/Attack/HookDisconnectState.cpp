@@ -15,10 +15,10 @@ HookDisconnectState::~HookDisconnectState()
 
 void HookDisconnectState::onEnter(Scene& scene)
 {
-	if (owner_.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
+	if (scene.gameObjects.playerHook != nullptr)
 	{
-		owner_.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
-		owner_.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
+		scene.gameObjects.playerHook->kill();
+		scene.gameObjects.playerHook = nullptr;
 	}
 }
 void HookDisconnectState::onExit(Scene& scene)
@@ -29,7 +29,7 @@ void HookDisconnectState::handleInput(Scene& scene, SDL_Event& e)
 {
 	//if LAUNCH_HOOK button is released
 	//switch state to LAUNCH STATE.
-	if (GameInputs::keyDown(e,ControlType::LAUNCH_HOOK) && GameInputs::keyHeld(ControlType::LAUNCH_HOOK)) //if (GameInputs::keyUp(e, ControlType::LAUNCH_HOOK))
+	if (GameInputs::keyDown(e,ControlType::LAUNCH_HOOK)) //if (GameInputs::keyUp(e, ControlType::LAUNCH_HOOK))
 	{
 		//states need to also pass the reference to the hook here.
 		LOG("FLAPJACKS") << owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name();

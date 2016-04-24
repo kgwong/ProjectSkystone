@@ -4,6 +4,7 @@
 #include "Components/Common/StickOnCollision.h"
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Collider/ColliderComponent.h"
 
 #include "Scene/Level/Level.h"
 #include "Application/Log.h"
@@ -94,14 +95,16 @@ void PlayerHookState::instantiateHook(Scene& scene)
 	else if (_degrees == upSideDegree)
 		hookPosition.y -= 50;
 
-	hookRef = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
+	scene.gameObjects.playerHook = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
+
+	//hookRef = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
 	
 	float testVel = 5.0f;
 	float newVelX = (float)(testVel * cos(toRadians(getDegrees())));
 	float newVelY = (float)(testVel * sin(toRadians(getDegrees())));
-	hookRef->getComponent<PhysicsComponent>()->enableGravity(false);
-	hookRef->getComponent<PhysicsComponent>()->setVelX(newVelX * 60.0f);
-	hookRef->getComponent<PhysicsComponent>()->setVelY(newVelY * 60.0f);
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->enableGravity(false);
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelX(newVelX * 60.0f);
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelY(newVelY * 60.0f);
 }
 
 void PlayerHookState::connectHook(Scene& scene)
@@ -114,8 +117,8 @@ void PlayerHookState::connectHook(Scene& scene)
 	{
 		if (hook_collision->isConnected)
 		{
-			hookRef->getComponent<PhysicsComponent>()->setVelX(0.0f);
-			hookRef->getComponent<PhysicsComponent>()->setVelY(0.0f);
+			scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelX(0.0f);
+			scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelY(0.0f);
 			hanging = true;
 		}
 
@@ -129,12 +132,6 @@ void PlayerHookState::disconnectHook(Scene& scene)
 	{
 		scene.gameObjects.playerHook->kill();
 		scene.gameObjects.playerHook = nullptr;
-	}
-
-	if (hookRef != nullptr)
-	{
-		hookRef->kill();
-		hookRef = nullptr;
 	}
 }
 
@@ -152,14 +149,14 @@ HookStateManager* PlayerHookState::getState()
 void PlayerHookState::update(Scene& scene)
 {
 	//Level& level = static_cast<Level&>(scene);
-	if (hookRef != nullptr && hookStateManager_->name() == disconnectState.name())
+	if (scene.gameObjects.playerHook != nullptr && hookStateManager_->name() == disconnectState.name())
 		disconnectHook(scene);
-	else if (hookRef != nullptr && hookRef->getComponent<StickOnCollision>()->isConnected)
+	else if (scene.gameObjects.playerHook != nullptr && scene.gameObjects.playerHook->getComponent<StickOnCollision>()->isConnected)
 		this->changeState(scene, "HookConnectState");
 	
 	//polymorphism
 	hookStateManager_->update(scene);
-	if (hookRef == nullptr && hookStateManager_->name() == launchState.name())
+	if (scene.gameObjects.playerHook == nullptr && hookStateManager_->name() == launchState.name())
 	{
 		instantiateHook(scene);
 	}
@@ -167,18 +164,13 @@ void PlayerHookState::update(Scene& scene)
 	{ 
 		connectHook(scene); 
 	}
-	else if (hookRef != nullptr && hookStateManager_->name() == disconnectState.name())
+	else if (scene.gameObjects.playerHook != nullptr && hookStateManager_->name() == disconnectState.name())
 	{
 		disconnectHook(scene);
 	}
 
 	//LOG("INFO") << scene.gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 
-}
-
-Point PlayerHookState::getPosition()
-{
-	return hookRef->getPos();
 }
 
 void PlayerHookState::setHanging(bool h)
@@ -191,6 +183,23 @@ void PlayerHookState::handleEvent(const CollisionEvent& e)
 	//hook can only be connected if the player is not on a tile.
 	if (e.getOtherObject().getType() == GameObject::Type::TILE 
 		&& hookStateManager_ == &connectState)
+	{
+		/*GameObject::Type someObject = e.getOtherObject().getType();
+		if (someObject == GameObject::Type::TILE)
+		{
+			LOG("HARVEY") << "gameobject is a tile with position: " << e.getOtherObject().getPos();
+		}*/
+		bool canDisconnect = false;
+		ColliderComponent* tileCollider = e.getOtherObject().getComponent<ColliderComponent>();
+		ColliderComponent* playerCollider = owner_.getComponent<ColliderComponent>();
+
+
+	//	if (playerCollider->getBottom() < tileCollider->getTop())
+			this->changeState(e.getScene(), "HookDisconnectState");
+			//owner_.getComponent<PlayerControlComponent>()->changeMovementState(e.getScene(), "AirborneState");
+	}
+
+	if (e.getOtherObject().getType() == GameObject::Type::ENEMY)
 	{
 		this->changeState(e.getScene(), "HookDisconnectState");
 	}
