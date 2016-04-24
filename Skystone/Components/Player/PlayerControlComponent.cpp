@@ -20,6 +20,13 @@ void PlayerControlComponent::handleInput(Scene& scene, SDL_Event& e)
 	HookKeyInput = e.key.keysym.sym;
 }
 
+void PlayerControlComponent::start(Scene& scene)
+{
+	movement_.start(scene);
+	attack_.start(scene);
+	hooker_.start(scene);
+}
+
 void PlayerControlComponent::update(Scene& scene)
 {
 	movement_.update(scene);

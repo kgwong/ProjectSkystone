@@ -12,6 +12,7 @@
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner),
 	walkingState(owner),
+	lockMovementState(owner),
 	flyingState(owner),
 	airborneState(owner),
 	stunState(owner),
@@ -34,6 +35,17 @@ void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 	currentState_->handleInput(scene, e);
 }
 
+void PlayerMovementState::start(Scene& scene)
+{
+	walkingState.start(scene);
+	lockMovementState.start(scene);
+	flyingState.start(scene);
+	airborneState.start(scene);
+	stunState.start(scene);
+	hangState.start(scene);
+	launchState.start(scene);
+}
+
 void PlayerMovementState::update(Scene& scene)
 {
 	currentState_->update(scene);
@@ -41,8 +53,10 @@ void PlayerMovementState::update(Scene& scene)
 
 void PlayerMovementState::changeState(Scene& scene, const std::string& stateName)
 {
+	LOG("Kevin") << "LEAVING: " << currentState_->name();
 	currentState_->onExit(scene);
 	currentState_ = getStateFromName(stateName);
+	LOG("Kevin") << "ENTERING: " << currentState_->name();
 	currentState_->onEnter(scene);
 }
 
@@ -80,6 +94,10 @@ PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
 	if (name == walkingState.name())
 	{
 		return &walkingState;
+	}
+	else if (name == lockMovementState.name())
+	{
+		return &lockMovementState;
 	}
 	else if (name == flyingState.name())
 	{

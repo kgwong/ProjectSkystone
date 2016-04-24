@@ -1,7 +1,7 @@
 #ifndef HOOK_CONNECT_STATE_H
 #define HOOK_CONNECT_STATE_H
 
-#include "Components/Player/Attack/PlayerAimState.h"
+#include "Components/Player/Attack/Aim/PlayerAimState.h"
 #include "HookStateManager.h"
 
 class HookConnectState : public HookStateManager

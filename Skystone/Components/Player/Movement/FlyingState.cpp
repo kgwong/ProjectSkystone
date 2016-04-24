@@ -4,7 +4,6 @@
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Render/SpriteRenderer.h"
-#include "Resources/Resources.h"
 
 const float FlyingState::FLIGHT_VELOCITY = 5 * 60.0f;
 
@@ -20,8 +19,8 @@ FlyingState::~FlyingState()
 
 void FlyingState::onEnter(Scene& scene)
 {
-	owner_.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
-	owner_.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jetcycle.png"));
+	physics_->setVelY(-FLIGHT_VELOCITY);
+	renderer_->setSprite("Images/jetcycle.png");
 }
 
 void FlyingState::onExit(Scene& scene)
@@ -32,39 +31,46 @@ void FlyingState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, JUMP))
 	{
-		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+		controlComponent_->changeMovementState(scene, "AirborneState");
 	}
+}
+
+void FlyingState::start(Scene& scene)
+{
+	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
+	renderer_ = owner_.getComponent<SpriteRenderer>();
 }
 
 void FlyingState::update(Scene& scene)
 {
-	if (!owner_.getComponent<PhysicsComponent>()->isFalling())
+	if (!physics_->isFalling())
 	{
-		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "WalkingState");
 		return;
 	}
-	owner_.getComponent<PhysicsComponent>()->setVelX(0);
+	physics_->setVelX(0);
 
 	if (GameInputs::keyHeld(LEFT))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelX(-FLIGHT_VELOCITY);
+		physics_->setVelX(-FLIGHT_VELOCITY);
+		renderer_->setFlipHorz(true);
 	}
 	if (GameInputs::keyHeld(RIGHT))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelX(FLIGHT_VELOCITY);
+		physics_->setVelX(FLIGHT_VELOCITY);
+		renderer_->setFlipHorz(false);
 	}
 	if (GameInputs::keyHeld(JUMP))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelY(0);
+		physics_->setVelY(0);
 	}
 	if (GameInputs::keyHeld(UP))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelY(-FLIGHT_VELOCITY);
+		physics_->setVelY(-FLIGHT_VELOCITY);
 	}
 	if (GameInputs::keyHeld(DOWN))
 	{
-		owner_.getComponent<PhysicsComponent>()->setVelY(FLIGHT_VELOCITY);
+		physics_->setVelY(FLIGHT_VELOCITY);
 	}
 }

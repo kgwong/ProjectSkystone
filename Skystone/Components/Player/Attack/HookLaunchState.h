@@ -1,6 +1,6 @@
 #ifndef HOOK_LAUNCH_STATE_H
 #define HOOK_LAUNCH_STATE_H
-#include "Components\Player\Attack\PlayerAimState.h"
+#include "Components\Player\Attack\Aim\PlayerAimState.h"
 
 #include "HookStateManager.h"
 class HookLaunchState : public HookStateManager

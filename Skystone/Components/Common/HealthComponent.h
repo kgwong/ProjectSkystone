@@ -24,10 +24,13 @@ public:
 	bool heal(int addedHealth);
 
 	int getHealth();
+	int getMaxHealth();
 	bool isDead();
 
 private:
-	int health_; 
+	int currentHealth_; 
+	int maxHealth_;
+	
 	bool invincible_;
 
 	int invincibilityTime_;

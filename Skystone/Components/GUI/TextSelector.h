@@ -2,7 +2,7 @@
 #define TEXT_SELECTOR_H
 
 #include "Components/InputComponent.h"
-#include "Components/Render/SelectableText.h"
+#include "Components/GUI/SelectableText.h"
 
 #include <memory>
 

@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Game/GameConstants.h"
-#include "Resources/Resources.h"
 
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Common/HealthComponent.h"
@@ -26,7 +25,7 @@ GameObjectBuilder::~GameObjectBuilder()
 void GameObjectBuilder::buildPlayer(GameObject& player)
 {
 	player.setType(GameObject::Type::PLAYER);
-	player.addComponent(std::make_shared<SpriteRenderer>(player, Resources::getSpriteSheet("Images/run_cycle.png")));
+	player.addComponent(std::make_shared<SpriteRenderer>(player, "Images/run_cycle.png"));
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
 	player.addComponent(std::make_shared<ColliderComponent>(player));

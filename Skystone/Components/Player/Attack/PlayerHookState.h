@@ -2,12 +2,13 @@
 #define PLAYER_HOOK_STATE
 
 #include "Components/InputComponent.h"
-#include "AimState.h"
 #include "HookStateManager.h"
 
 #include "HookLaunchState.h"
 #include "HookConnectState.h"
 #include "HookDisconnectState.h"
+
+#include "Aim/AimState.h"
 
 class PlayerHookState :
 	public InputComponent
@@ -23,6 +24,8 @@ public:
 	virtual ~PlayerHookState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	void update(Scene& scene);
 	double getDegrees();
 	void changeState(Scene& scene, const std::string& stateName);

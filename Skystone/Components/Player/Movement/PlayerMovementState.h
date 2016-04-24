@@ -7,6 +7,7 @@
 #include "WalkingState.h"
 #include "FlyingState.h"
 #include "StunState.h"
+#include "LockMovementState.h"
 
 #include "HangState.h"
 #include "LaunchState.h"
@@ -15,7 +16,9 @@
 class PlayerMovementState : public InputComponent
 {
 public:
+	//a bad idea
 	WalkingState walkingState;
+	LockMovementState lockMovementState;
 	FlyingState flyingState;
 	AirborneState airborneState;
 	StunState stunState;
@@ -27,6 +30,8 @@ public:
 	virtual ~PlayerMovementState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
 	void changeState(Scene& scene, const std::string& stateName);

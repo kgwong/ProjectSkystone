@@ -16,6 +16,8 @@ public:
 	virtual ~PlayerControlComponent();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+	
+	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
 	void changeMovementState(Scene& scene, const std::string& stateName);

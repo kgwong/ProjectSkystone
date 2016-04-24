@@ -21,6 +21,7 @@ public:
 
 	void setSceneManager(SceneManager* sceneManager);
 	Scene* getSceneWithID(SceneID sceneID);
+	void unload(SceneID sceneID);
 
 private:
 	SceneManager* sceneManager_;
@@ -31,6 +32,7 @@ private:
 private:
 	bool sceneLoaded(SceneID sceneID);
 	void load(SceneID sceneID);
+	void loadMainMenu();
 	void loadObjects(SceneID, Scene* scene);
 	std::string generateFilePath(SceneID sceneID);
 	std::string sceneIDToString(SceneID sceneID);

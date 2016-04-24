@@ -1,20 +1,19 @@
-#ifndef AIRBORNE_STATE_H
-#define AIRBORNE_STATE_H
+#ifndef LOCK_MOVEMENT_STATE_H
+#define LOCK_MOVEMENT_STATE_H
 
 #include "PlayerState.h"
 
 class PlayerControlComponent;
 class PhysicsComponent;
-class SpriteRenderer;
 
-class AirborneState : public PlayerState
+class LockMovementState : public PlayerState
 {
 public:
-	AirborneState(GameObject& owner);
-	virtual ~AirborneState();
+	LockMovementState(GameObject& owner);
+	virtual ~LockMovementState();
 
 	virtual void onEnter(Scene& scene);
-	virtual void onExit(Scene& scene);
+	//virtual void onExit(Scene& scene);
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 
 	virtual void start(Scene& scene);
@@ -25,8 +24,7 @@ public:
 private:
 	PlayerControlComponent* controlComponent_;
 	PhysicsComponent* physics_;
-	SpriteRenderer* renderer_;
 
 };
 
-#endif //AIRBORNE_STATE_H
+#endif //LOCK_MOVEMENT_STATE_H

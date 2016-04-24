@@ -146,6 +146,13 @@ HookStateManager* PlayerHookState::getState()
 	return hookStateManager_;
 }
 
+void PlayerHookState::start(Scene& scene)
+{
+	launchState.start(scene);
+	connectState.start(scene);
+	disconnectState.start(scene);
+}
+
 void PlayerHookState::update(Scene& scene)
 {
 	//Level& level = static_cast<Level&>(scene);
