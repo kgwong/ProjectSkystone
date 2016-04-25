@@ -56,7 +56,7 @@ void HookLaunchState::update(Scene& scene)
 	//Currently returns HookState copy, so hookRef is not null or some reason
 	//this makes no sense, you normally want to return my reference since there's no 
 	//reason to copy your state object... is there?
-	if (owner_.getComponent<PlayerControlComponent>()->HookState().hookRef == nullptr)
+	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
 		return;
@@ -70,6 +70,16 @@ void HookLaunchState::update(Scene& scene)
 	if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "Hang")
 	{
 		owner_.getComponent<PlayerControlComponent>()->MovementState().changeState(scene, "AirborneState");
+	}
+
+	auto hook_collision = scene.gameObjects.playerHook->getComponent<StickOnCollision>();
+	if (hook_collision != nullptr)
+	{
+		if (hook_collision->isConnected)
+		{
+			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(true);
+			owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookConnectState");
+		}
 	}
 
 	//StickOnCollision* hook_collision = nullptr;

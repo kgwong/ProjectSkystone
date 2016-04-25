@@ -11,6 +11,7 @@
 
 #include "HangState.h"
 #include "LaunchState.h"
+#include "SwingState.h"
 
 class PlayerMovementState : public InputComponent
 {
@@ -23,6 +24,7 @@ public:
 	StunState stunState;
 	HangState hangState;
 	LaunchState launchState;
+	SwingState swingState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();

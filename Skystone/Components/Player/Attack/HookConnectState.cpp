@@ -15,6 +15,8 @@ HookConnectState::~HookConnectState()
 
 void HookConnectState::onEnter(Scene& scene)
 {
+
+	//LOG("HARVEY") << owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name();
 	//player.getComponent<PlayerControlComponent>()->MovementState().changeState(&PlayerMovementState::hangState);
 }
 void HookConnectState::onExit(Scene& scene) 
@@ -26,6 +28,7 @@ void HookConnectState::onExit(Scene& scene)
 }
 void HookConnectState::handleInput(Scene& scene, SDL_Event& e)
 {
+	//may change to using 2 different controls for launching hook and disconnecting.
 	if (GameInputs::keyUp(e, LAUNCH_HOOK))
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
@@ -36,20 +39,6 @@ void HookConnectState::handleInput(Scene& scene, SDL_Event& e)
 }
 void HookConnectState::update(Scene& scene)
 {
-	//if (player.getComponent<PlayerControlComponent>()->MovementState().getState() == &PlayerMovementState::hangState)
-	//{
-	//	player.getComponent<PhysicsComponent>()->enableGravity(false);
-	//}
-
-	//if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::disconnectState)
-	//{
-	//	player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-	//	if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
-	//	{
-	//		player.getComponent<PlayerControlComponent>()->HookState().hookRef->kill();
-	//		player.getComponent<PlayerControlComponent>()->HookState().hookRef = nullptr;
-	//	}
-	//}
 }
 
 double HookConnectState::getAngle()

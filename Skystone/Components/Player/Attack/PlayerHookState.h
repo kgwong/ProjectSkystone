@@ -21,7 +21,7 @@ public:
 	HookDisconnectState disconnectState;
 public:
 	PlayerHookState(GameObject& owner);
-	~PlayerHookState();
+	virtual ~PlayerHookState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 
@@ -30,14 +30,15 @@ public:
 	double getDegrees();
 	void changeState(Scene& scene, const std::string& stateName);
 
+	//will deprecate--------------------
 	std::shared_ptr<GameObject> hookRef;
+	///////------------------
 	void instantiateHook(Scene& scene);
 	void connectHook(Scene& scene);
 	void disconnectHook(Scene& scene);
 	void resetState();
 
 	HookStateManager* getState();
-	Point getPosition();
 	void setHanging(bool h);
 	bool hanging;
 	bool enterOtherLevel;

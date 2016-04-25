@@ -36,8 +36,8 @@ public:
 
 	std::shared_ptr<GameObject> playerHook;
 
-	GameObject& getHook();
-	void setHook(GameObject* hook);
+	//GameObject& getHook();
+	//void setHook(GameObject* hook);
 
 private:
 	Scene& scene_;

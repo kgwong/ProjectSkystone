@@ -17,6 +17,11 @@ git status
 2. git pull origin master : downloads from git
 3. git push origin master : uploads to git
 
+1. KEEP STUFF for myself.
+	1. git stash push
+	2. git pull
+	3 git stash pop
+
 //urls for fetch and push
 git remote -v
 
