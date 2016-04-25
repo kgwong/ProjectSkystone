@@ -103,7 +103,6 @@
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
-    <ClCompile Include="Components\AI\BossPounceAIComponent.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
@@ -223,7 +222,6 @@
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="Components\AI\BossPounceAIComponent.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Components\Input\TextSelector.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />

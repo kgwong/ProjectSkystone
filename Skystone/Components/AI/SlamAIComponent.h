@@ -1,7 +1,7 @@
 #ifndef SLAM_AI_COMPONENT_H
 #define SLAM_AI_COMPONENT_H
 
-
+#include <string>
 #include "AIComponent.h"
 
 class BossAIComponent;
@@ -21,7 +21,7 @@ public:
 
 
 public:
-	SlamAIComponent(GameObject& owner);
+	SlamAIComponent(GameObject& owner, std::string enemyType);
 	virtual ~SlamAIComponent();
 
 	virtual void start(Scene& scene);
@@ -40,6 +40,7 @@ private:
 	double swing_speed_;
 	double swing_time_;
 	double lag_time_;
+	std::string enemy_type_;
 	
 };
 

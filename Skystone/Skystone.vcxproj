@@ -186,7 +186,6 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
-    <ClCompile Include="Components\AI\BossPounceAIComponent.cpp" />
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -303,7 +302,6 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
-    <ClInclude Include="Components\AI\BossPounceAIComponent.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

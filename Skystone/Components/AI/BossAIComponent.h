@@ -1,11 +1,11 @@
 #ifndef BOSS_AI_COMPONENT_H
 #define BOSS_AI_COMPONENT_H
 
-#include "AIComponent.h"
+
 #include "SlamAIComponent.h"
+#include "PounceAIComponent.h"
 #include <string>
 
-//class HealthComponent;
 class PhysicsComponent;
 
 class BossAIComponent :
@@ -26,6 +26,7 @@ public:
 	virtual void update(Scene& scene);
 
 	float getFacing();
+	PhysicsComponent * getPhysics();
 	void setAttack(std::string attack);
 
 private:
@@ -38,6 +39,7 @@ private:
 	std::string attack_;
 	PhysicsComponent* physics_;
 	SlamAIComponent claw_;
+	PounceAIComponent pounce_;
 };
 
 #endif
