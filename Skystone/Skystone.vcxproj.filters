@@ -7,7 +7,6 @@
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
-    <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp" />
     <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Components\Tile\BurnTileComponent.cpp" />
@@ -18,7 +17,6 @@
     <ClCompile Include="ComponentSystem\ComponentSystem.cpp" />
     <ClCompile Include="Components\Render\SpriteRenderer.cpp" />
     <ClCompile Include="Components\Common\DamageComponent.cpp" />
-    <ClCompile Include="Components\Player\Attack\DefaultAimState.cpp" />
     <ClCompile Include="Components\Common\DieOnCollision.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyBuilder.cpp" />
     <ClCompile Include="Application\Errors.cpp" />
@@ -41,7 +39,6 @@
     <ClCompile Include="Components\Physics\PhysicsComponent.cpp" />
     <ClCompile Include="GameMath\CircleMath.cpp" />
     <ClCompile Include="Components\ItemDrop\PickupComponent.cpp" />
-    <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp" />
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp" />
     <ClCompile Include="Components\Player\PlayerComponent.cpp" />
     <ClCompile Include="Components\Player\PlayerControlComponent.cpp" />
@@ -102,6 +99,7 @@
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
+    <ClCompile Include="SwingState.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
@@ -110,6 +108,9 @@
     <ClCompile Include="Components\GUI\HealthBar.cpp" />
     <ClCompile Include="Components\GUI\TextSelector.cpp" />
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\DefaultAimState.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\PlayerAimState.cpp" />
+    <ClCompile Include="Components\Player\Movement\LockMovementState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -117,8 +118,6 @@
     <ClInclude Include="Components\PlayerProjectile\PlayerProjectileComponent.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
-    <ClInclude Include="Components\Player\Attack\AimState.h" />
-    <ClInclude Include="Components\Player\Attack\AimUpState.h" />
     <ClInclude Include="Components\Player\Movement\AirborneState.h" />
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
@@ -127,7 +126,6 @@
     <ClInclude Include="ComponentSystem\ComponentSubsystem.h" />
     <ClInclude Include="ComponentSystem\ComponentSystem.h" />
     <ClInclude Include="Components\Render\SpriteRenderer.h" />
-    <ClInclude Include="Components\Player\Attack\DefaultAimState.h" />
     <ClInclude Include="Components\Common\DieOnCollision.h" />
     <ClInclude Include="Components\AI\FallingAIComponent.h" />
     <ClInclude Include="Components\AI\FlyingAIComponent.h" />
@@ -138,7 +136,6 @@
     <ClInclude Include="Components\Player\LevelChangeComponent.h" />
     <ClInclude Include="Components\NonUpdatingComponent.h" />
     <ClInclude Include="Components\ItemDrop\PickupComponent.h" />
-    <ClInclude Include="Components\Player\Attack\PlayerAimState.h" />
     <ClInclude Include="Components\Player\Attack\PlayerAttackState.h" />
     <ClInclude Include="Components\Player\PlayerComponent.h" />
     <ClInclude Include="Components\Player\PlayerControlComponent.h" />
@@ -222,6 +219,7 @@
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
+    <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Components\Input\TextSelector.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
@@ -230,5 +228,9 @@
     <ClInclude Include="Components\GUI\HealthBar.h" />
     <ClInclude Include="Components\GUI\TextSelector.h" />
     <ClInclude Include="Components\Render\TextRenderer.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\AimState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\DefaultAimState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\PlayerAimState.h" />
+    <ClInclude Include="Components\Player\Movement\LockMovementState.h" />
   </ItemGroup>
 </Project>

@@ -4,17 +4,21 @@
 #include "Application/Log.h"
 
 #include "ComponentEvents/CollisionEvent.h" 
+#include "Game/GameConstants.h"
+#include "Components/Collider/ColliderComponent.h"
 
 #include <cassert>
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner),
 	walkingState(owner),
+	lockMovementState(owner),
 	flyingState(owner),
 	airborneState(owner),
 	stunState(owner),
 	hangState(owner),
 	launchState(owner),
+	swingState(owner),
 	currentState_(&airborneState)
 {
 	LOG("FLAPJACKS") << "HI";
@@ -34,6 +38,7 @@ void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 void PlayerMovementState::start(Scene& scene)
 {
 	walkingState.start(scene);
+	lockMovementState.start(scene);
 	flyingState.start(scene);
 	airborneState.start(scene);
 	stunState.start(scene);
@@ -44,14 +49,14 @@ void PlayerMovementState::start(Scene& scene)
 void PlayerMovementState::update(Scene& scene)
 {
 	currentState_->update(scene);
-	//LOG("INFO") << currentState_->name();
-	canSwing = true;
 }
 
 void PlayerMovementState::changeState(Scene& scene, const std::string& stateName)
 {
+	LOG("Kevin") << "LEAVING: " << currentState_->name();
 	currentState_->onExit(scene);
 	currentState_ = getStateFromName(stateName);
+	LOG("Kevin") << "ENTERING: " << currentState_->name();
 	currentState_->onEnter(scene);
 }
 
@@ -62,26 +67,15 @@ PlayerState* PlayerMovementState::getState()
 
 void PlayerMovementState::handleEvent(const CollisionEvent & e)
 {
-	//might not be in airborne state.
-	if (currentState_->name() == "Hang")
+	currentState_->handleEvent(e);
+	
+	if (e.getOtherObject().getType() == GameObject::Type::TILE)
 	{
-		if (e.getOtherObject().getType() == GameObject::Type::TILE)
-		{
-
-			Point swingVector = hangState.SwingVector();
-			//at the right edge of the tile or inside.
-			if (swingVector.x >= e.getOtherObject().getPosX())
-			{
-				canSwing = false;
-				Point offSet{e.getOtherObject().getPosX() + 32,e.getOtherObject().getPosY()};
-				owner_.setPos(offSet);
-			}
-			else
-			{
-				canSwing = true;
-			//	owner_.setPos(swingVector);
-			}
-		}
+		canSwing = false;
+	}
+	else
+	{
+		canSwing = true;
 	}
 }
 
@@ -100,6 +94,10 @@ PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
 	if (name == walkingState.name())
 	{
 		return &walkingState;
+	}
+	else if (name == lockMovementState.name())
+	{
+		return &lockMovementState;
 	}
 	else if (name == flyingState.name())
 	{
@@ -120,6 +118,10 @@ PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
 	else if (name == launchState.name())
 	{
 		return &launchState;
+	}
+	else if (name == swingState.name())
+	{
+		return &swingState;
 	}
 	else
 	{

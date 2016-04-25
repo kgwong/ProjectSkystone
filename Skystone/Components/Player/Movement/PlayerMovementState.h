@@ -7,19 +7,24 @@
 #include "WalkingState.h"
 #include "FlyingState.h"
 #include "StunState.h"
+#include "LockMovementState.h"
 
 #include "HangState.h"
 #include "LaunchState.h"
+#include "SwingState.h"
 
 class PlayerMovementState : public InputComponent
 {
 public:
+	//a bad idea
 	WalkingState walkingState;
+	LockMovementState lockMovementState;
 	FlyingState flyingState;
 	AirborneState airborneState;
 	StunState stunState;
 	HangState hangState;
 	LaunchState launchState;
+	SwingState swingState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();

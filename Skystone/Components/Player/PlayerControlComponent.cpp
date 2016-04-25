@@ -38,6 +38,7 @@ void PlayerControlComponent::update(Scene& scene)
 void PlayerControlComponent::changeMovementState(Scene& scene, const std::string& stateName)
 {
 	movement_.changeState(scene, stateName);
+	LOG("HARVEY") << movement_.getState()->name();
 }
 
 void PlayerControlComponent::changeAttackState(Scene& scene, const std::string& stateName)
@@ -48,6 +49,7 @@ void PlayerControlComponent::changeAttackState(Scene& scene, const std::string& 
 void PlayerControlComponent::changeHookState(Scene& scene, const std::string& stateName)
 {
 	hooker_.changeState(scene, stateName);
+	LOG("HARVEY") << hooker_.getState()->name();
 }
 
 PlayerHookState PlayerControlComponent::HookState()

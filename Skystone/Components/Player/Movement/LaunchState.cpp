@@ -19,22 +19,25 @@ void LaunchState::onEnter(Scene& scene)
 {
 	someSwitch_ = true;
 	//hack -- Kevin
-	direction_ = owner_.getComponent<PlayerControlComponent>()->MovementState().hangState.getDirection();
 	
+	direction_ = 0;
+	direction_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	//LOG("INFO") << "direction: " << direction_;
 	if (direction_ > 0)
 	{
 		owner_.getComponent<PhysicsComponent>()->setVelX(5.0f * 60.0f);
 		owner_.getComponent<PhysicsComponent>()->setVelY(5.0f * -60.0f);
+		LOG("HARVEY") << "DIRECTION IS: " << direction_;
 	}
 	else if (direction_ < 0)
 	{
 		owner_.getComponent<PhysicsComponent>()->setVelX(5.0f * -60.0f);
 		owner_.getComponent<PhysicsComponent>()->setVelY(5.0f * -60.0f);
+		LOG("HARVEY") << "direction is " << direction_;
 	}
 	else
 	{
-		LOG("FLAPJACKS") << "direction is " << direction_;
+		LOG("HARVEY") << "DDirection is " << direction_;
 	}
 }
 
@@ -50,20 +53,14 @@ void LaunchState::handleInput(Scene& scene, SDL_Event& e)
 
 void LaunchState::update(Scene& scene)
 {
+
 	if (!someSwitch_)
 	{
+		auto playerPhysics = owner_.getComponent<PhysicsComponent>();
+		playerPhysics->enableGravity(true);
 		if (!owner_.getComponent<PhysicsComponent>()->isFalling())
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-			return;
-		}
-
-		if (owner_.getComponent<PlayerControlComponent>()->HookState().hanging)
-		{
-			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
-			return;
 		}
 	}
 	else
