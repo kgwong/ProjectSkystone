@@ -13,11 +13,10 @@ class PounceAIComponent :
 {
 
 public:
-	//use Time::
-	const double DEFAULT_JUMP_HEIGHT = -10;
-	const double DEFAULT_JUMP_DISTANCE = 7;
-	const double DEFAULT_RADIUS = 175.0f;
-	const double PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.5;
+	const float DEFAULT_JUMP_HEIGHT = -10;
+	const float DEFAULT_JUMP_DISTANCE = 7;
+	const float DEFAULT_RADIUS = 175.0f;
+	const float PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.5;
 
 
 public:
@@ -29,13 +28,13 @@ public:
 
 private:
 	PhysicsComponent* physics_;
-	double radius_;
-	double timer_;
-	double cooldown_time_;
+	float radius_;
+	float timer_;
+	float cooldown_time_;
 	bool cooldown_;
 	std::string enemy_type_;
-	double jump_height_;
-	double jump_distance_;
+	float jump_height_;
+	float jump_distance_;
 	BossAIComponent* boss_;
 
 

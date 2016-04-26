@@ -188,6 +188,7 @@
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
     <ClCompile Include="SwingState.cpp" />
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
+    <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
@@ -305,6 +306,7 @@
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
     <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
+    <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

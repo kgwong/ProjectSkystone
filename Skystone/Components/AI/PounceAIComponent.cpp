@@ -40,8 +40,8 @@ void PounceAIComponent::start(Scene& scene)
 
 void PounceAIComponent::update(Scene& scene)
 {
-	double final_height_ = jump_height_;
-	double final_distance_ = jump_distance_;
+	float final_height_ = jump_height_;
+	float final_distance_ = jump_distance_;
 	if (enemy_type_ == "Boss")
 	{
 		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());

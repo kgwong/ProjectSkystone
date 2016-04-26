@@ -111,6 +111,7 @@
     <ClCompile Include="Components\Player\Attack\Aim\DefaultAimState.cpp" />
     <ClCompile Include="Components\Player\Attack\Aim\PlayerAimState.cpp" />
     <ClCompile Include="Components\Player\Movement\LockMovementState.cpp" />
+    <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -221,7 +222,6 @@
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
     <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
-    <ClInclude Include="Components\Input\TextSelector.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
@@ -232,5 +232,6 @@
     <ClInclude Include="Components\Player\Attack\Aim\DefaultAimState.h" />
     <ClInclude Include="Components\Player\Attack\Aim\PlayerAimState.h" />
     <ClInclude Include="Components\Player\Movement\LockMovementState.h" />
+    <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
   </ItemGroup>
 </Project>

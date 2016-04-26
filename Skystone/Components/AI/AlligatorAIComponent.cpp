@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//will most likely split this into an IdleAIComponent and a ShootAIComponent
 
 AlligatorAIComponent::AlligatorAIComponent(GameObject & owner)
 	:AIComponent(owner),
