@@ -12,7 +12,7 @@
 #include "Components/Player/LevelChangeComponent.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Collider/ColliderComponent.h"
-
+#include "Components/GUI/HealthBar.h"
 
 GameObjectBuilder::GameObjectBuilder()
 {
@@ -34,7 +34,7 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	//player.addComponent(std::make_shared<PlayerMovementState>(player));
 	//player.addComponent(std::make_shared<PlayerAttackState>(player));
 	player.addComponent(std::make_shared<PlayerControlComponent>(player));
-
+	player.addComponent(std::make_shared<HealthBar>(player));
 	//player.addComponent(std::make_shared<HookComponent>(player));
 }
 
