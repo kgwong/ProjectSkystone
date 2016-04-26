@@ -37,10 +37,19 @@ public:
 	void changeState(Scene& scene, const std::string& stateName);
 	PlayerState* getState();
 	virtual void handleEvent(const CollisionEvent& e);
+
 	void setCanSwing(bool swing);
 	bool canSwing;
+
 	void setDirection(int dir);
+	void setSpeed(float s);
+	void setAngle(float a);
+	void setRadius(float r);
+
 	int direction;
+	float speed;
+	float angle;
+	float radius;
 
 private:
 	PlayerState* currentState_;

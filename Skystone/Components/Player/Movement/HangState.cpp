@@ -4,7 +4,7 @@
 #include "Application/Log.h"
 #include "GameMath/CircleMath.h"
 #include "LaunchState.h"
-
+#include "Components/Player/Attack/Aim/AimState.h"
 
 //CONSTANTS
 const float HangState::MAX_ANGLE = 80.0f;
@@ -35,12 +35,27 @@ void HangState::onEnter(Scene& scene)
 	ropeLength_ = fabsf(hookPosition_.y - owner_.getPosY());
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
+	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 	ySpeed_ = DEFAULT_SPEED;
 	yDirection_ = 0;
+	
+	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
+	if (playerAim == AimState::LEFT || playerAim == AimState::RIGHT)
+	{
+		LOG("HARVEY") << "were in here";
+		if (playerAim == AimState::LEFT)
+			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
+		else
+			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
 
-	//player will teleport right under hook
-	hangPosition_.x = hookPosition_.x;
-	hangPosition_.y = ropeLength_ + hookPosition_.y;
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+	}
+	else
+	{
+		//player will teleport right under hook
+		hangPosition_.x = hookPosition_.x;
+		hangPosition_.y = ropeLength_ + hookPosition_.y;
+	}
 }
 void HangState::onExit(Scene& scene)
 {
@@ -57,7 +72,6 @@ void HangState::onExit(Scene& scene)
 }
 void HangState::handleInput(Scene& scene, SDL_Event& e)
 {
-
 	if (GameInputs::keyDown(e, ControlType::UP))
 	{
 		ySpeed_ += 0.65f;
@@ -86,38 +100,42 @@ void HangState::handleInput(Scene& scene, SDL_Event& e)
 		yDirection_ = 0;
 
 }
+
 void HangState::handleEvent(const CollisionEvent & e)
 {
 }
 void HangState::update(Scene& scene)
 {
-	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookLaunchState")
+	if (owner_.getComponent<PlayerControlComponent>()->MovementState().direction == 0)
 	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
-	}	
-	else if(owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookDisconnectState")
-	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
-	}
-	else
-	{
-		auto playerPhysics = owner_.getComponent<PhysicsComponent>();
-		//if not turned off will build downward velocity
-		playerPhysics->enableGravity(false);
-
-		hangPosition_.y += ySpeed_ * yDirection_;
-		ropeLength_ = fabsf(hangPosition_.y - hookPosition_.y);
-
-		if (MIN_ROPE_LENGTH > ropeLength_)
+		if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookLaunchState")
 		{
-			ropeLength_ = MIN_ROPE_LENGTH;
-			hangPosition_.y -= ySpeed_ * yDirection_;
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 		}
+		else if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookDisconnectState")
+		{
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
+		}
+		else
+		{
+			auto playerPhysics = owner_.getComponent<PhysicsComponent>();
+			//if not turned off will build downward velocity
+			playerPhysics->enableGravity(false);
 
-		owner_.setPos(hangPosition_);
+			hangPosition_.y += ySpeed_ * yDirection_;
+			ropeLength_ = fabsf(hangPosition_.y - hookPosition_.y);
+
+			if (MIN_ROPE_LENGTH > ropeLength_)
+			{
+				ropeLength_ = MIN_ROPE_LENGTH;
+				hangPosition_.y -= ySpeed_ * yDirection_;
+			}
+
+			owner_.setPos(hangPosition_);
+		}
 	}
 	
 }

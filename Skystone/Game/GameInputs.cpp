@@ -28,6 +28,8 @@ namespace
 			return "RETURN";
 		case ESC:
 			return "ESC";
+		case SPACEBAR:
+			return "SPACEBAR";
 		default:
 			assert(false);
 			return "dummystring";
@@ -45,7 +47,8 @@ std::vector<SDL_Keycode> GameInputs::controlMap{
 	SDLK_s,
 	SDLK_d,
 	SDLK_RETURN,
-	SDLK_ESCAPE
+	SDLK_ESCAPE,
+	SDLK_SPACE
 };
 
 void GameInputs::init()

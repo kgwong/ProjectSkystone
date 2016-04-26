@@ -28,6 +28,7 @@ public:
 	virtual void start(Scene& scene);
 	void update(Scene& scene);
 	double getDegrees();
+	AimState& getAimState();
 	void changeState(Scene& scene, const std::string& stateName);
 
 	//will deprecate--------------------
