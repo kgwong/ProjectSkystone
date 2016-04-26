@@ -6,7 +6,7 @@
 #include "BossAIComponent.h"
 #define SPEED 60.0f
 
-SlamAIComponent::SlamAIComponent(GameObject & owner) :
+SlamAIComponent::SlamAIComponent(GameObject & owner, std::string enemyType) :
 	AIComponent(owner),
 	attack_initiated_(false),
 	timer_(0),
@@ -14,7 +14,8 @@ SlamAIComponent::SlamAIComponent(GameObject & owner) :
 	windup_speed_(DEFAULT_WINDUP_SPEED),
 	swing_speed_(DEFAULT_SWING_SPEED),
 	swing_time_(DEFAULT_SWING_TIME),
-	lag_time_(DEFAULT_LAG_TIME)
+	lag_time_(DEFAULT_LAG_TIME),
+	enemy_type_(enemyType)
 {
 }
 
@@ -32,6 +33,11 @@ void SlamAIComponent::start(Scene & scene)
 
 void SlamAIComponent::update(Scene & scene)
 {
+	int facing = -1;
+	if (enemy_type_ == "Boss")
+	{
+		facing = boss_->getFacing();
+	}
 	if (attack_initiated_)
 	{
 		timer_ += Time::getElapsedUpdateTimeSeconds();
@@ -44,12 +50,12 @@ void SlamAIComponent::update(Scene & scene)
 		}
 		else if (timer_ > swing_time_ + windup_time_)
 		{
-			claw_physics_->setVelX(boss_->getFacing() * SPEED * windup_speed_);
+			claw_physics_->setVelX(facing * SPEED * windup_speed_);
 
 		}
 		else if (timer_ > swing_time_)
 		{
-			claw_physics_->setVelX(boss_->getFacing() * SPEED * swing_speed_);
+			claw_physics_->setVelX(facing * SPEED * swing_speed_);
 		}
 
 	}

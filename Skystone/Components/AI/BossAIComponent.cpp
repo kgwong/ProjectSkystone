@@ -18,8 +18,9 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	close_range_(DEFAULT_CLOSE_RANGE),
 	medium_range_(DEFAULT_MEDIUM_RANGE),
 	facing_(-1),
-	claw_(owner),
-	attack_("Idle")
+	claw_(owner, "Boss"),
+	attack_("Idle"),
+	pounce_(owner, "Boss")
 {
 }
 
@@ -32,6 +33,7 @@ void BossAIComponent::start(Scene & scene)
 {
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	claw_.start(scene);
+	pounce_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
@@ -50,6 +52,7 @@ void BossAIComponent::update(Scene & scene)
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
 		{
 			//close range attack
+			LOG("AARON") << "INITIATING CLOSE RANGE ATTACK";
 			attack_ = "claw attack";
 			initiate_attack_ = false;
 		}
@@ -107,7 +110,7 @@ void BossAIComponent::update(Scene & scene)
 
 		else if (attack_ == "jump attack")
 		{
-
+			pounce_.update(scene);
 		}
 
 		else if (attack_ == "triple shot")
@@ -130,4 +133,9 @@ float BossAIComponent::getFacing()
 void BossAIComponent::setAttack(string attack)
 {
 	attack_ = attack;
+}
+
+PhysicsComponent* BossAIComponent::getPhysics()
+{
+	return physics_;
 }
