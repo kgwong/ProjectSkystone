@@ -30,6 +30,9 @@ HangState::~HangState()
 
 void HangState::onEnter(Scene& scene)
 {
+	if (scene.gameObjects.playerHook == nullptr)
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+
 	//CANNOT change physics here....must do in update.
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	ropeLength_ = fabsf(hookPosition_.y - owner_.getPosY());
