@@ -54,7 +54,15 @@ void PounceAIComponent::update(Scene& scene)
 	if (enemy_type_ == "Boss")
 	{
 		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-		int distance_ratio = xDist / radius_;
+		if (xDist < 0)
+		{
+			LOG("AARON") << "RIGHT";
+		}
+		else
+		{
+			LOG("AARON") << "LEFT";
+		}
+		float distance_ratio = xDist / radius_;
 		final_height_ = jump_height_ * distance_ratio;
 		final_distance_ = jump_distance_ * distance_ratio;
 

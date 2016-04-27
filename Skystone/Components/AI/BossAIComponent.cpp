@@ -7,6 +7,7 @@
 #include "GameMath/RNG.h"
 #include <string>
 using namespace std;
+#define SPEED 60.0f
 
 
 
@@ -44,11 +45,22 @@ void BossAIComponent::update(Scene & scene)
 	if (initiate_attack_)
 	{
 		float xDistanceFromPlayer = owner_.getPosX() - scene.gameObjects.getPlayer().getPosX();
+		//temporary
+		if (xDistanceFromPlayer < 0)
+		{
+			facing_ = 1;
+		}
+		else
+		{
+			facing_ = -1;
+		}
 		if ((facing_ < 0 && xDistanceFromPlayer < 0) || (facing_ > 0 && xDistanceFromPlayer > 0))
 		{
 			//backward tail swing, then jump back and turn around
+			LOG("AARON") << "Tail swing?";
 			attack_ = "tail swing";
 			initiate_attack_ = false;
+			physics_->setVelX(0);
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
 		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
@@ -57,9 +69,11 @@ void BossAIComponent::update(Scene & scene)
 			LOG("AARON") << "INITIATING CLOSE RANGE ATTACK";
 			attack_ = "claw attack";
 			initiate_attack_ = false;
+			physics_->setVelX(0);
 		}
 		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
 		{
+			physics_->setVelX(0);
 			//pick between 3 attacks
 			int pickAttack = RNG::getInt(0, 3);//rand() % 3;
 			switch (pickAttack)
@@ -67,7 +81,7 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
-				attack_ = "triple shot";
+				attack_ = "jump attack";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
@@ -89,9 +103,16 @@ void BossAIComponent::update(Scene & scene)
 			switch (pickMove)
 			{
 			case 0:
+				physics_->setVelX(0);
+				LOG("AARON") << "JUST IDLING";
+				initiate_attack_ = false;
+				timer_ += 4;
 				break;
 			case 1:
-				physics_->setVelX(xDistanceFromPlayer / abs(xDistanceFromPlayer) * DEFAULT_MOVE_SPEED);
+				LOG("AARON") << "WALKING AROUND";
+				physics_->setVelX(xDistanceFromPlayer / abs(xDistanceFromPlayer) * -DEFAULT_MOVE_SPEED * SPEED);
+				initiate_attack_ = false;
+				timer_ += 4;
 				break;
 			}
 		}

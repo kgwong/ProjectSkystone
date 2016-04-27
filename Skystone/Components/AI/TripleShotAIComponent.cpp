@@ -15,7 +15,10 @@ TripleShotAIComponent::TripleShotAIComponent(GameObject& owner, std::string enem
 	firing_(false),
 	projectile_count_(DEFAULT_PROJECTILE_COUNT),
 	current_count_(0),
-	cooldown_time_(DEFAULT_COOLDOWN_TIME)
+	cooldown_time_(DEFAULT_COOLDOWN_TIME),
+	xDist(0),
+	yDist(0),
+	playerSide(0)
 {
 }
 
@@ -31,14 +34,15 @@ void TripleShotAIComponent::start(Scene& scene)
 
 void TripleShotAIComponent::update(Scene& scene)
 {
-	float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	float playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	float yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+
 	if (!cooldown_)
 	{
-		fireProjectile(xDist, yDist, playerSide, 1, scene);
+		xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+		playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+		yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+		fireProjectile(xDist, yDist, playerSide, 3, scene);
 		fireProjectile(xDist, yDist, playerSide, 0, scene);
-		fireProjectile(xDist, yDist, playerSide, -1, scene);
+		fireProjectile(xDist, yDist, playerSide, -3, scene);
 		cooldown_ = true;
 		firing_ = true;
 		current_count_++;
@@ -51,9 +55,9 @@ void TripleShotAIComponent::update(Scene& scene)
 		{
 			if (timer_ > delay_)
 			{
-				fireProjectile(xDist, yDist, playerSide, 2, scene);
+				fireProjectile(xDist, yDist, playerSide, 3, scene);
 				fireProjectile(xDist, yDist, playerSide, 0, scene);
-				fireProjectile(xDist, yDist, playerSide, -2, scene);
+				fireProjectile(xDist, yDist, playerSide, -3, scene);
 				current_count_++;
 				timer_ = 0;
 				if (current_count_ >= projectile_count_)

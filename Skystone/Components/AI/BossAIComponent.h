@@ -15,7 +15,7 @@ class BossAIComponent :
 public:
 	const float DEFAULT_COOLDOWN_SECONDS = 5;
 	const float DEFAULT_CLOSE_RANGE = 300;
-	const float DEFAULT_MEDIUM_RANGE = 500;
+	const float DEFAULT_MEDIUM_RANGE = 800;
 	const float DEFAULT_MOVE_SPEED = 3;
 
 

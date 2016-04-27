@@ -35,6 +35,9 @@ private:
 	int projectile_count_;
 	int current_count_;
 	float cooldown_time_;
+	float xDist;
+	float yDist;
+	float playerSide;
 };
 
 #endif //TRIPLE_SHOT_AI_COMPONENT_H
