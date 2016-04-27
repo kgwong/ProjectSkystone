@@ -14,7 +14,7 @@ public:
 	const float DEFAULT_LONG_WALK = 0.6;
 	const float DEFAULT_ACTION_TIME = 1.7;
 	const float DEFAULT_MOVE_SPEED = 3;
-	const float DEFAULT_PROJECTILE_VELOCITY = 7;
+	const float DEFAULT_PROJECTILE_SPEED = 7;
 
 
 public:

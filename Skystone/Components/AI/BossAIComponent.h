@@ -4,6 +4,7 @@
 
 #include "SlamAIComponent.h"
 #include "PounceAIComponent.h"
+#include "TripleShotAIComponent.h"
 #include <string>
 
 class PhysicsComponent;
@@ -12,7 +13,7 @@ class BossAIComponent :
 	public AIComponent
 {
 public:
-	const float DEFAULT_COOLDOWN_SECONDS = 6;
+	const float DEFAULT_COOLDOWN_SECONDS = 5;
 	const float DEFAULT_CLOSE_RANGE = 300;
 	const float DEFAULT_MEDIUM_RANGE = 500;
 	const float DEFAULT_MOVE_SPEED = 3;
@@ -27,6 +28,7 @@ public:
 
 	float getFacing();
 	PhysicsComponent * getPhysics();
+	float getCooldown();
 	void setAttack(std::string attack);
 
 private:
@@ -40,6 +42,7 @@ private:
 	PhysicsComponent* physics_;
 	SlamAIComponent claw_;
 	PounceAIComponent pounce_;
+	TripleShotAIComponent triple_shot_;
 };
 
 #endif

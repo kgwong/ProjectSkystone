@@ -21,6 +21,7 @@ public:
 
 
 public:
+	SlamAIComponent(GameObject& owner);
 	SlamAIComponent(GameObject& owner, std::string enemyType);
 	virtual ~SlamAIComponent();
 

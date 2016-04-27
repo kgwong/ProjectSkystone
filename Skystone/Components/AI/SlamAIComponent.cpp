@@ -6,6 +6,20 @@
 #include "BossAIComponent.h"
 #define SPEED 60.0f
 
+
+SlamAIComponent::SlamAIComponent(GameObject & owner) :
+	AIComponent(owner),
+	attack_initiated_(false),
+	timer_(0),
+	windup_time_(DEFAULT_WINDUP_TIME),
+	windup_speed_(DEFAULT_WINDUP_SPEED),
+	swing_speed_(DEFAULT_SWING_SPEED),
+	swing_time_(DEFAULT_SWING_TIME),
+	lag_time_(DEFAULT_LAG_TIME),
+	enemy_type_("")
+{
+}
+
 SlamAIComponent::SlamAIComponent(GameObject & owner, std::string enemyType) :
 	AIComponent(owner),
 	attack_initiated_(false),

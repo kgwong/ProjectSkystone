@@ -20,7 +20,8 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	facing_(-1),
 	claw_(owner, "Boss"),
 	attack_("Idle"),
-	pounce_(owner, "Boss")
+	pounce_(owner, "Boss"),
+	triple_shot_(owner, "Boss")
 {
 }
 
@@ -34,6 +35,7 @@ void BossAIComponent::start(Scene & scene)
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	claw_.start(scene);
 	pounce_.start(scene);
+	triple_shot_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
@@ -65,7 +67,7 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
-				attack_ = "jump attack";
+				attack_ = "triple shot";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
@@ -75,7 +77,7 @@ void BossAIComponent::update(Scene & scene)
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
 				LOG("AARON") << "INITIATING LAZER";
-				attack_ = "lazer";
+				attack_ = "triple shot";
 				break;
 			}
 			initiate_attack_ = false;
@@ -115,7 +117,7 @@ void BossAIComponent::update(Scene & scene)
 
 		else if (attack_ == "triple shot")
 		{
-
+			triple_shot_.update(scene);
 		}
 
 		else if (attack_ == "lazer")
@@ -138,4 +140,9 @@ void BossAIComponent::setAttack(string attack)
 PhysicsComponent* BossAIComponent::getPhysics()
 {
 	return physics_;
+}
+
+float BossAIComponent::getCooldown()
+{
+	return cooldown_time_;
 }

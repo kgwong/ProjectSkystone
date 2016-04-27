@@ -20,6 +20,7 @@ public:
 
 
 public:
+	PounceAIComponent(GameObject& owner);
 	PounceAIComponent(GameObject& owner, std::string enemyType);
 	virtual ~PounceAIComponent();
 

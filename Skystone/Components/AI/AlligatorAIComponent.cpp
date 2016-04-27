@@ -3,6 +3,7 @@
 #include "Game/GameTime.h"
 #include "Components/Physics/PhysicsComponent.h"
 #include "Application/Log.h"
+#define SPEED 60.0f
 
 
 using namespace std;
@@ -53,14 +54,16 @@ void AlligatorAIComponent::update(Scene & scene)
 	{
 		timer_ = 0;
 		moving_ = false;
+
 		physics_->setVelX(playerSide);
 		physics_->setVelX(0);
+
 		shot_ready_ = false;
 		shot_timer_ = 0;
 		auto bullet = scene.gameObjects.add("EnemyProjectile", "AcidProjectile", owner_.getPos() + Point(0, 18));
 		auto physics = bullet->getComponent<PhysicsComponent>();
-		float newVelX = (DEFAULT_PROJECTILE_VELOCITY * playerSide);
-		physics->setVelX(newVelX * 60.0f);
+		float newVelX = (DEFAULT_PROJECTILE_SPEED * playerSide);
+		physics->setVelX(newVelX * SPEED);
 	}
 
 	if (!shot_ready_)
@@ -77,7 +80,7 @@ void AlligatorAIComponent::update(Scene & scene)
 	{
 		int generate_action = rand() % 3;
 		int generate_direction = rand() % 3 - 1;
-		physics_->setVelX(60.0f * move_speed_ * generate_direction);
+		physics_->setVelX(SPEED * move_speed_ * generate_direction);
 		moving_ = true;
 		move_time_ = select_action_[generate_action];
 		timer_ = 0;

@@ -8,7 +8,16 @@
 #define SPEED 60.0f
 
 
-
+PounceAIComponent::PounceAIComponent(GameObject& owner)
+	: AIComponent(owner),
+	radius_(DEFAULT_RADIUS),
+	cooldown_time_(DEFAULT_COOLDOWN_TIME),
+	timer_(0),
+	enemy_type_(""),
+	jump_distance_(DEFAULT_JUMP_DISTANCE),
+	jump_height_(DEFAULT_JUMP_HEIGHT)
+{
+}
 
 PounceAIComponent::PounceAIComponent(GameObject& owner, std::string enemyType)
 	:AIComponent(owner),
@@ -32,10 +41,10 @@ void PounceAIComponent::start(Scene& scene)
 	physics_ = owner_.getComponent<PhysicsComponent>();
 	boss_ = owner_.getComponent<BossAIComponent>();
 	cooldown_ = true;
-	//if (enemy_type_ == "Boss")
-	//{
-	//	cooldown_ = false;
-	//}
+	if (enemy_type_ == "Boss")
+	{
+		cooldown_ = false;
+	}
 }
 
 void PounceAIComponent::update(Scene& scene)
@@ -48,13 +57,20 @@ void PounceAIComponent::update(Scene& scene)
 		int distance_ratio = xDist / radius_;
 		final_height_ = jump_height_ * distance_ratio;
 		final_distance_ = jump_distance_ * distance_ratio;
+
+		if (timer_ > boss_->getCooldown())
+		{
+			timer_ = 0;
+			cooldown_ = false;
+		}
 	}
 
 	//check if we're on cooldown; if not, check if we're on top of the pounce
 	//if not, check which direction to jump, then jump
 	//the cooldown timer only continues when not jumping (sorta)
 
-	if (timer_ > cooldown_time_)
+
+	else if (timer_ > cooldown_time_)
 	{
 		timer_ = 0;
 		cooldown_ = false;
