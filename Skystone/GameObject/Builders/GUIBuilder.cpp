@@ -65,10 +65,6 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		text->setSceneOnSelection(SceneID::LEVEL);
 		textSelector->addText(text);
 	}
-	else if (name == "HealthBar")
-	{
-		guiToBuild.addComponent(componentSystem.getNew<HealthBar>(guiToBuild, *player));
-	}
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{
 		guiToBuild.addComponent(componentSystem.getNew<InputSceneChanger>(guiToBuild, ESC, SceneID::LEVEL));

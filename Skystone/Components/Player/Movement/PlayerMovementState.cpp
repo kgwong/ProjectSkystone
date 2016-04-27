@@ -131,3 +131,18 @@ PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
 	}
 }
 
+void PlayerMovementState::setSpeed(float s)
+{
+	speed = s;
+}
+
+void PlayerMovementState::setAngle(float a)
+{
+	angle = a;
+}
+
+void PlayerMovementState::setRadius(float r)
+{
+	radius = r;
+}
+

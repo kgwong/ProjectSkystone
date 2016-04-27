@@ -35,6 +35,12 @@ private:
 	bool tileLeft_;
 	bool tileRight_;
 
+	float swingTime_;
+	float damp_;
+	bool keyHeld_;
+	float timer_;
+	float maxAngle_;
+
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define HOOK_DISCONNECT_STATE_H
 
 #include "Components\Player\Attack\Aim\PlayerAimState.h"
+#include "Components/Player/Attack/Aim/AimState.h"
 #include "HookStateManager.h"
 class HookDisconnectState : public HookStateManager
 {
@@ -12,9 +13,15 @@ public:
 	virtual void onExit(Scene& scene) ;
 	virtual void handleInput(Scene& scene, SDL_Event& e) ;
 	virtual void update(Scene& scene) ;
-
-	virtual double getAngle();
 	virtual std::string name() { return "HookDisconnectState"; }
+
+	float getDegrees();
+	AimState& getAimState();
+
+private:
+	AimState playerAim_;
+	float degrees_;
+
 };
 
 #endif

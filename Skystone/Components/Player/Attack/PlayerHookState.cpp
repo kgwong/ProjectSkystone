@@ -30,44 +30,46 @@ PlayerHookState::~PlayerHookState()
 //directional input.
 void PlayerHookState::handleInput(Scene& scene, SDL_Event& e)
 {
-
 	//POLYMORPHISM
 	hookStateManager_->handleInput(scene, e);
 
-
-	//key pressed
-	if (GameInputs::keyDown(e, UP))
-	{
-		_currentAimState = AimState::UP;
-	}
-	else if (GameInputs::keyDown(e, LEFT))
-	{
-		_currentAimState = AimState::LEFT;
-	}
-	else if (GameInputs::keyDown(e, RIGHT))
-	{
-		_currentAimState = AimState::RIGHT;
-	}
+	//if (GameInputs::keyDown(e, UP))
+	//{
+	//	_currentAimState = AimState::UP;
+	//}
+	//else if (GameInputs::keyDown(e, LEFT))
+	//{
+	//	_currentAimState = AimState::LEFT;
+	//}
+	//else if (GameInputs::keyDown(e, RIGHT))
+	//{
+	//	_currentAimState = AimState::RIGHT;
+	//}
 }
 
 double PlayerHookState::getDegrees()
 {
-	switch (_currentAimState)
-	{
-	case AimState::UP:
-		_degrees = 270;
-		break;
-	case AimState::LEFT:
-		_degrees = 225;
-		break;
-	case AimState::RIGHT:
-		_degrees = 315;
-		break;
-	default:
-		_degrees = 270;
-	}
+	//switch (_currentAimState)
+	//{
+	//case AimState::UP:
+	//	_degrees = 270;
+	//	break;
+	//case AimState::LEFT:
+	//	_degrees = 225;
+	//	break;
+	//case AimState::RIGHT:
+	//	_degrees = 315;
+	//	break;
+	//default:
+	//	_degrees = 270;
+	//}
 
-	return _degrees;
+	return disconnectState.getDegrees();
+}
+
+AimState& PlayerHookState::getAimState()
+{
+	return _currentAimState;
 }
 
 void PlayerHookState::changeState(Scene& scene, const std::string& stateName)
@@ -99,7 +101,7 @@ void PlayerHookState::instantiateHook(Scene& scene)
 
 	//hookRef = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
 	
-	float testVel = 5.0f;
+	float testVel = 15.0f;
 	float newVelX = (float)(testVel * cos(toRadians(getDegrees())));
 	float newVelY = (float)(testVel * sin(toRadians(getDegrees())));
 	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->enableGravity(false);

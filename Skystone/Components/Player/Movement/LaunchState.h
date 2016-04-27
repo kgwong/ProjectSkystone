@@ -14,10 +14,14 @@ public:
 	virtual void update(Scene& scene);
 
 	virtual std::string name() { return "Launch"; }
+	void setSpeed(float s);
 
 private:
 	bool someSwitch_;//extended version of kevin's hack.
 	int direction_;
+	float speed_;
+	float angle_;
+	float radius_;
 
 };
 

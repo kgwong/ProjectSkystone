@@ -3,7 +3,7 @@
 
 
 TextSelector::TextSelector(GameObject& owner)
-	: InputComponent(owner), selected_(0)
+	: InputComponent(owner), selected_(0), texts_(0)
 {
 }
 
@@ -14,12 +14,12 @@ TextSelector::~TextSelector()
 
 void TextSelector::handleInput(Scene& scene, SDL_Event& e)
 {
-	if (GameInputs::keyDown(e, ControlType::DOWN) && (unsigned int)selected_ < (texts_.size()-1))
+	if (GameInputs::keyDown(e, ControlType::DOWN) && selected_ < ((int)texts_.size()-1))
 	{
 		texts_.at(selected_++)->setSelected(false);
 		texts_.at(selected_)->setSelected(true);
 	}
-	else if (GameInputs::keyDown(e, ControlType::UP) && (unsigned int)selected_ > 0)
+	else if (GameInputs::keyDown(e, ControlType::UP) && selected_ > 0)
 	{
 		texts_.at(selected_--)->setSelected(false);
 		texts_.at(selected_)->setSelected(true);
