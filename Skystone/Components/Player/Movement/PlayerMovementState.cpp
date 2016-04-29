@@ -10,20 +10,21 @@
 #include <cassert>
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
-	: InputComponent(owner),
-	walkingState(owner),
-	lockMovementState(owner),
-	flyingState(owner),
-	airborneState(owner),
-	stunState(owner),
-	hangState(owner),
-	launchState(owner),
-	swingState(owner),
-	currentState_(&airborneState)
+	: InputComponent(owner)
 {
 	LOG("FLAPJACKS") << "HI";
 	canSwing = true;
 	direction = 0;
+
+	addState(std::make_shared<WalkingState>(owner));
+	addState(std::make_shared<LockMovementState>(owner));
+	addState(std::make_shared<FlyingState>(owner));
+	addState(std::make_shared<AirborneState>(owner));
+	addState(std::make_shared<StunState>(owner));
+	addState(std::make_shared<HangState>(owner));
+	addState(std::make_shared<LaunchState>(owner));
+	addState(std::make_shared<SwingState>(owner));
+	currentState_ = getStateFromName("AirborneState");
 }
 
 PlayerMovementState::~PlayerMovementState()
@@ -37,13 +38,10 @@ void PlayerMovementState::handleInput(Scene& scene, SDL_Event& e)
 
 void PlayerMovementState::start(Scene& scene)
 {
-	walkingState.start(scene);
-	lockMovementState.start(scene);
-	flyingState.start(scene);
-	airborneState.start(scene);
-	stunState.start(scene);
-	hangState.start(scene);
-	launchState.start(scene);
+	for (auto& s : states_)
+	{
+		s.second->start(scene);
+	}
 }
 
 void PlayerMovementState::update(Scene& scene)
@@ -91,44 +89,20 @@ void PlayerMovementState::setDirection(int dir)
 
 PlayerState* PlayerMovementState::getStateFromName(const std::string& name)
 {
-	if (name == walkingState.name())
+	if (states_.find(name) != states_.end())
 	{
-		return &walkingState;
-	}
-	else if (name == lockMovementState.name())
-	{
-		return &lockMovementState;
-	}
-	else if (name == flyingState.name())
-	{
-		return &flyingState;
-	}
-	else if (name == airborneState.name())
-	{
-		return &airborneState;
-	}
-	else if (name == stunState.name())
-	{
-		return &stunState;
-	}
-	else if (name == hangState.name())
-	{
-		return &hangState;
-	}
-	else if (name == launchState.name())
-	{
-		return &launchState;
-	}
-	else if (name == swingState.name())
-	{
-		return &swingState;
+		return states_.at(name).get();
 	}
 	else
 	{
-		LOG("ERROR") << "Unknown state";
-		assert(false);
+		__debugbreak();
 		return nullptr;
 	}
+}
+
+void PlayerMovementState::addState(std::shared_ptr<PlayerState> state)
+{
+	states_.insert({ state->name(), state });
 }
 
 void PlayerMovementState::setSpeed(float s)

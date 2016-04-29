@@ -16,7 +16,6 @@ PlayerAttackState::PlayerAttackState(GameObject& owner)
 	:InputComponent(owner),
 	defaultAimState(owner),
 	currentState_(&defaultAimState),
-	aimState_(AimState::RIGHT),
 	degrees_(0),
 	shoot_(false)
 	//launch_(false)
@@ -49,7 +48,6 @@ void PlayerAttackState::update(Scene& scene)
 	degrees_ = currentState_->getAngle();
 	if (shoot_)
 	{
-		//level.addPlayerProjectileAtLocation(owner_.getPos(), PROJECTILE_VELOCITY, degrees_);
 		auto bullet = scene.gameObjects.add("PlayerProjectile", "", owner_.getPos());
 		auto physics = bullet->getComponent<PhysicsComponent>();
 		float newVelX = (float)PROJECTILE_VELOCITY * cos(toRadians(degrees_));

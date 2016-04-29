@@ -10,11 +10,6 @@
 class PlayerAttackState : public InputComponent
 {
 public:
-	enum class AimState
-	{
-		UP, LEFT, RIGHT, UP_LEFT, UP_RIGHT
-	};
-
 	static const int PROJECTILE_VELOCITY = 20;
 
 	DefaultAimState defaultAimState;
@@ -37,7 +32,6 @@ public:
 
 private:
 	PlayerAimState* currentState_;
-	AimState aimState_;
 	AimState prevAimState_;
 	double degrees_;
 	bool shoot_;

@@ -87,7 +87,10 @@ void LevelLoader::loadEnemies(const std::string& filepath, Level* level)
 {
 	std::ifstream ifs(filepath);
 	if (!ifs)
-		LOG_STREAM(std::cerr) << "Failed to load: " << filepath;
+	{
+		LOG("ERROR") << "Failed to load: " << filepath;
+		return;
+	}
 
 	std::string enemyName;
 	Point pos;

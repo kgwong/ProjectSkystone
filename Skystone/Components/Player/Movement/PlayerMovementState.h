@@ -13,18 +13,10 @@
 #include "LaunchState.h"
 #include "SwingState.h"
 
+#include <memory>
+
 class PlayerMovementState : public InputComponent
 {
-public:
-	//a bad idea
-	WalkingState walkingState;
-	LockMovementState lockMovementState;
-	FlyingState flyingState;
-	AirborneState airborneState;
-	StunState stunState;
-	HangState hangState;
-	LaunchState launchState;
-	SwingState swingState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
@@ -54,8 +46,11 @@ public:
 private:
 	PlayerState* currentState_;
 
+	std::unordered_map<std::string, std::shared_ptr<PlayerState>> states_;
+
 private:
 	PlayerState* getStateFromName(const std::string& name);
+	void addState(std::shared_ptr<PlayerState> state);
 };
 
 #endif //PLAYER_MOVEMENT_STATE_H
