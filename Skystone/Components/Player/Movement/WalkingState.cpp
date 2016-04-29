@@ -6,15 +6,12 @@
 
 #include "Components/Render/SpriteRenderer.h"
 
-#include "Resources/Resources.h"
-
-
 const float WalkingState::JUMP_VELOCITY = -1200;
 const float WalkingState::WALK_VELOCITY = 300;
 
-WalkingState::SubState WalkingState::subState_ = SubState::IDLE;
-
-WalkingState::WalkingState()
+WalkingState::WalkingState(GameObject& owner)
+	:PlayerState(owner),
+	subState_(SubState::IDLE)
 {
 }
 
@@ -22,48 +19,60 @@ WalkingState::~WalkingState()
 {
 }
 
-void WalkingState::onEnter(Scene& scene, GameObject& player)
+void WalkingState::onEnter(Scene& scene)
 {
-	changeSubState(player, subState_);
+	changeSubState(subState_);
 }
 
-void WalkingState::onExit(Scene& scene, GameObject& player)
+void WalkingState::onExit(Scene& scene)
 {
 }
 
-void WalkingState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void WalkingState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, JUMP))
 	{
-		player.getComponent<PhysicsComponent>()->setVelY(JUMP_VELOCITY);
+		physics_->setVelY(JUMP_VELOCITY);
+	}
+	else if (GameInputs::keyHeld(UP) && subState_ == SubState::IDLE)
+	{
+		controlComponent_->changeMovementState(scene, "LockMovementState");
 	}
 }
 
-void WalkingState::update(Scene& scene, GameObject& player)
+void WalkingState::start(Scene& scene)
 {
-	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
+	renderer_ = owner_.getComponent<SpriteRenderer>();
+}
+
+void WalkingState::update(Scene& scene)
+{
+	if (controlComponent_->HookState().getState()->name() == "HookConnectState")
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::hangState);
+		controlComponent_->changeMovementState(scene, "Hang");
 	}
 
-	if (player.getComponent<PhysicsComponent>()->isFalling())
+	if (physics_->isFalling())
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+		controlComponent_->changeMovementState(scene, "AirborneState");
 		return;
 	}
 
-	player.getComponent<PhysicsComponent>()->setVelX(0);
+	physics_->setVelX(0);
 
 	switch (subState_)
 	{
 	case SubState::IDLE:
 		if (GameInputs::keyHeld(LEFT))
 		{
-			changeSubState(player, SubState::LEFT);
+			changeSubState(SubState::LEFT);
 		}
 		else if (GameInputs::keyHeld(RIGHT))
 		{
-			changeSubState(player, SubState::RIGHT);
+			changeSubState(SubState::RIGHT);
+
 		}
 		else
 		{
@@ -71,53 +80,54 @@ void WalkingState::update(Scene& scene, GameObject& player)
 		}
 		break;
 	case SubState::LEFT:
-		player.getComponent<PhysicsComponent>()->setVelX(-WALK_VELOCITY);
+		physics_->setVelX(-WALK_VELOCITY);
 		if (GameInputs::keyHeld(LEFT))
 		{
 
 		}
 		else if (GameInputs::keyHeld(RIGHT))
 		{
-			changeSubState(player, SubState::RIGHT);
+			changeSubState(SubState::RIGHT);
 		}
 		else
 		{
-			changeSubState(player, SubState::IDLE);
+			changeSubState(SubState::IDLE);
 		}
 		break;
 	case SubState::RIGHT:
-		player.getComponent<PhysicsComponent>()->setVelX(WALK_VELOCITY);
+		physics_->setVelX(WALK_VELOCITY);
 		if (GameInputs::keyHeld(LEFT))
 		{
-			changeSubState(player, SubState::LEFT);
+			changeSubState(SubState::LEFT);
 		}
 		else if (GameInputs::keyHeld(RIGHT))
 		{
 
+
 		}
 		else
 		{
-			changeSubState(player, SubState::IDLE);
+			changeSubState(SubState::IDLE);
 		}
 	}
 
 }
 
-void WalkingState::changeSubState(GameObject& player, SubState newSubState)
+void WalkingState::changeSubState(SubState newSubState)
 {
 	subState_ = newSubState;
 	switch (newSubState)
 	{
 	case SubState::IDLE:
-		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/idle cycle.png"));
+		renderer_->setSprite("Images/idle cycle.png");
 		break;
 	case SubState::LEFT:
-		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
-		player.getComponent<SpriteRenderer>()->setFlipHorz(true);
+		renderer_->setSprite("Images/run_cycle.png");
+		renderer_->setFlipHorz(true);
 		break;
 	case SubState::RIGHT:
-		player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/run_cycle.png"));
-		player.getComponent<SpriteRenderer>()->setFlipHorz(false);
+		renderer_->setSprite("Images/run_cycle.png");
+		renderer_->setFlipHorz(false);
 		break;
 	}
 }

@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Game/GameConstants.h"
-#include "Resources/Resources.h"
 
 #include "Components/Render/SpriteRenderer.h"
 #include "Components/Common/HealthComponent.h"
@@ -13,7 +12,7 @@
 #include "Components/Player/LevelChangeComponent.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Collider/ColliderComponent.h"
-
+#include "Components/GUI/HealthBar.h"
 
 GameObjectBuilder::GameObjectBuilder()
 {
@@ -26,7 +25,7 @@ GameObjectBuilder::~GameObjectBuilder()
 void GameObjectBuilder::buildPlayer(GameObject& player)
 {
 	player.setType(GameObject::Type::PLAYER);
-	player.addComponent(std::make_shared<SpriteRenderer>(player, Resources::getSpriteSheet("Images/run_cycle.png")));
+	player.addComponent(std::make_shared<SpriteRenderer>(player, "Images/run_cycle.png"));
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
 	player.addComponent(std::make_shared<ColliderComponent>(player));
@@ -35,7 +34,9 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	//player.addComponent(std::make_shared<PlayerMovementState>(player));
 	//player.addComponent(std::make_shared<PlayerAttackState>(player));
 	player.addComponent(std::make_shared<PlayerControlComponent>(player));
-
+	player.addComponent(std::make_shared<HealthBar>(player));
+	auto* testbar = player.getComponent<HealthBar>();
+	testbar->setEnabled(false);
 	//player.addComponent(std::make_shared<HookComponent>(player));
 }
 

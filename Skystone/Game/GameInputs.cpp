@@ -4,6 +4,38 @@
 #include "Application/Path.h"
 
 #include <fstream>
+#include <cassert>
+
+namespace 
+{
+	std::string toString(ControlType type)
+	{
+		switch (type)
+		{
+		case UP:
+			return "UP";
+		case DOWN:
+			return "DOWN";
+		case LEFT:
+			return "LEFT";
+		case JUMP:
+			return "JUMP";
+		case ATTACK:
+			return "ATTACK";
+		case LAUNCH_HOOK:
+			return "LAUNCH_HOOK";
+		case RETURN:
+			return "RETURN";
+		case ESC:
+			return "ESC";
+		case SPACEBAR:
+			return "SPACEBAR";
+		default:
+			assert(false);
+			return "dummystring";
+		}
+	}
+}
 
 const Uint8* GameInputs::keyboardState = nullptr;
 std::vector<SDL_Keycode> GameInputs::controlMap{
@@ -15,27 +47,33 @@ std::vector<SDL_Keycode> GameInputs::controlMap{
 	SDLK_s,
 	SDLK_d,
 	SDLK_RETURN,
-	SDLK_ESCAPE
+	SDLK_ESCAPE,
+	SDLK_SPACE
 };
 
 void GameInputs::init()
 {
 	keyboardState = SDL_GetKeyboardState(NULL);
 
-	std::ifstream ifs(Path::getFullPath("controls.config"));
-	if (!ifs.good())
+	std::fstream fs(Path::getFullPath("controls.config"));
+	if (!fs.good())
 	{
 		LOG("WARNING") << "Failed to open controls.config from" << Path::getBasePath();
 		return;
 	}
 
 	std::string dummy;
-	int decimalForKeyCode;
-	//https://wiki.libsdl.org/SDLKeycodeLookup
-	for (size_t i = 0; i < controlMap.size(); ++i) 
+	int decimalForKeyCode; //https://wiki.libsdl.org/SDLKeycodeLookup
+	int count = 0;
+	while (fs >> dummy >> decimalForKeyCode)
 	{
-		ifs >> dummy >> decimalForKeyCode;
-		controlMap[i] = static_cast<SDL_Keycode>(decimalForKeyCode);
+		controlMap[count++] = static_cast<SDL_Keycode>(decimalForKeyCode);
+	}
+	fs.clear();
+	for (size_t i = count; i < controlMap.size(); ++i)
+	{
+		fs << std::endl;
+		fs << toString(static_cast<ControlType>(i)) << " " << static_cast<int>(controlMap[i]);
 	}
 	
 }

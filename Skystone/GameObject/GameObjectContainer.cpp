@@ -7,7 +7,7 @@
 // duct taping code together
 #include "Components/Render/SpriteRenderer.h"
 #include "Resources/Resources.h"
-#include "Components/Render/TextSelector.h"
+#include "Components/GUI/TextSelector.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 
@@ -71,7 +71,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
 			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
 		}
-		else if (type == "ClawProjectile")
+		else if (name == "ClawProjectile")
 		{
 			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
 			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
@@ -86,7 +86,6 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		}
 
 		newObject = builder_.buildPlayerHook(componentSystem_, name);
-		playerHook = newObject;
 	}
 	else if (type == "Drop")
 	{
@@ -172,14 +171,6 @@ void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 	}
 }
 
-GameObject& GameObjectContainer::getHook()
-{
-	return *hook_;
-}
-void GameObjectContainer::setHook(GameObject* hook)
-{
-	hook_ = hook;
-}
 
 
 

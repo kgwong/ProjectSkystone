@@ -25,6 +25,7 @@ public:
 	int getHeight();
 
 	bool hasQuitGame();
+	void unload(SceneID sceneID);
 
 private:
 	Scene* currentScene_;

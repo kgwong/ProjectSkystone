@@ -107,7 +107,7 @@ float Point::getFacingDirection(float distance, Point&a, Point&b)
 	
 	else
 	{
-		playerSide = (float)(-distance / getXDistance(a, b));
+		playerSide = (float)(-distance / (a.x - b.x));
 	}
 	return playerSide;
 }

@@ -3,22 +3,29 @@
 
 #include "PlayerState.h"
 
+class PlayerControlComponent;
+class PhysicsComponent;
+class SpriteRenderer;
+
 class AirborneState : public PlayerState
 {
 public:
-	AirborneState();
+	AirborneState(GameObject& owner);
 	virtual ~AirborneState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
 
-	virtual std::string name() { return "Airborne"; }
+	virtual std::string name();
 
 private:
-	bool jumpHeld_;
+	PlayerControlComponent* controlComponent_;
+	PhysicsComponent* physics_;
+	SpriteRenderer* renderer_;
 
 };
 

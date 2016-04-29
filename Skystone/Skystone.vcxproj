@@ -81,8 +81,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
+    <ClCompile Include="Components\Player\Movement\CrouchState.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyProjectileBuilder.cpp" />
     <ClCompile Include="GameObject\Builders\BackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\AlligatorAIComponent.cpp" />
@@ -99,11 +101,14 @@
     <ClCompile Include="ComponentEvents\OnDeathEvent.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
-    <ClCompile Include="Components\Render\TextSelector.cpp" />
+    <ClCompile Include="Components\GUI\TextSelector.cpp" />
+    <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
+    <ClCompile Include="Components\GUI\HealthBar.cpp" />
+    <ClCompile Include="Components\Player\Movement\LockMovementState.cpp" />
+    <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
     <ClCompile Include="Components\AI\AIjump.cpp" />
-    <ClCompile Include="Components\Player\Attack\AimUpState.cpp" />
     <ClCompile Include="Components\Player\Movement\AirborneState.cpp" />
     <ClCompile Include="Components\AI\BasicEnemyMovementComponent.cpp" />
     <ClCompile Include="Components\Tile\BurnTileComponent.cpp" />
@@ -116,7 +121,7 @@
     <ClCompile Include="ComponentSystem\ComponentSystem.cpp" />
     <ClCompile Include="Components\Render\SpriteRenderer.cpp" />
     <ClCompile Include="Components\Common\DamageComponent.cpp" />
-    <ClCompile Include="Components\Player\Attack\DefaultAimState.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\DefaultAimState.cpp" />
     <ClCompile Include="Components\Common\DieOnCollision.cpp" />
     <ClCompile Include="GameObject\Builders\EnemyBuilder.cpp" />
     <ClCompile Include="Application\Errors.cpp" />
@@ -144,7 +149,7 @@
     <ClCompile Include="Components\Physics\PhysicsComponent.cpp" />
     <ClCompile Include="GameMath\CircleMath.cpp" />
     <ClCompile Include="Components\ItemDrop\PickupComponent.cpp" />
-    <ClCompile Include="Components\Player\Attack\PlayerAimState.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\PlayerAimState.cpp" />
     <ClCompile Include="Components\Player\Attack\PlayerAttackState.cpp" />
     <ClCompile Include="Components\Player\PlayerComponent.cpp" />
     <ClCompile Include="Components\Player\PlayerControlComponent.cpp" />
@@ -182,12 +187,16 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
-    <ClCompile Include="Components\Render\SelectableText.cpp" />
+    <ClCompile Include="SwingState.cpp" />
+    <ClCompile Include="Components\GUI\SelectableText.cpp" />
+    <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
+    <ClInclude Include="Components\Player\Movement\CrouchState.h" />
     <ClInclude Include="GameObject\Builders\EnemyProjectileBuilder.h" />
     <ClInclude Include="GameObject\Builders\BackgroundBuilder.h" />
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -204,11 +213,13 @@
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="Components\Render\TextSelector.h" />
+    <ClInclude Include="Components\GUI\TextSelector.h" />
+    <ClInclude Include="Components\GUI\HealthBar.h" />
+    <ClInclude Include="Components\Player\Movement\LockMovementState.h" />
+    <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
-    <ClInclude Include="Components\Player\Attack\AimState.h" />
-    <ClInclude Include="Components\Player\Attack\AimUpState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\AimState.h" />
     <ClInclude Include="Components\Player\Movement\AirborneState.h" />
     <ClInclude Include="GameTypes\Axis.h" />
     <ClInclude Include="Components\AI\BasicEnemyMovementComponent.h" />
@@ -221,7 +232,7 @@
     <ClInclude Include="ComponentSystem\ComponentSubsystem.h" />
     <ClInclude Include="ComponentSystem\ComponentSystem.h" />
     <ClInclude Include="Components\Render\SpriteRenderer.h" />
-    <ClInclude Include="Components\Player\Attack\DefaultAimState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\DefaultAimState.h" />
     <ClInclude Include="Components\Common\DieOnCollision.h" />
     <ClInclude Include="Components\AI\FallingAIComponent.h" />
     <ClInclude Include="Components\AI\FlyingAIComponent.h" />
@@ -232,7 +243,7 @@
     <ClInclude Include="Components\Player\LevelChangeComponent.h" />
     <ClInclude Include="Components\NonUpdatingComponent.h" />
     <ClInclude Include="Components\ItemDrop\PickupComponent.h" />
-    <ClInclude Include="Components\Player\Attack\PlayerAimState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\PlayerAimState.h" />
     <ClInclude Include="Components\Player\Attack\PlayerAttackState.h" />
     <ClInclude Include="Components\Player\PlayerComponent.h" />
     <ClInclude Include="Components\Player\PlayerControlComponent.h" />
@@ -295,7 +306,9 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
-    <ClInclude Include="Components\Render\SelectableText.h" />
+    <ClInclude Include="SwingState.h" />
+    <ClInclude Include="Components\GUI\SelectableText.h" />
+    <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

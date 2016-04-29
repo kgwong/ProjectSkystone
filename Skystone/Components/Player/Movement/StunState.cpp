@@ -4,8 +4,9 @@
 #include "GameObject/GameObject.h"
 #include "Components/Player/PlayerControlComponent.h"
 
-StunState::StunState()
-	:firstUpdate_(true)
+StunState::StunState(GameObject& owner)
+	: PlayerState(owner), 
+	firstUpdate_(true)
 {
 }
 
@@ -14,46 +15,55 @@ StunState::~StunState()
 {
 }
 
-void StunState::onEnter(Scene& scene, GameObject& player)
+void StunState::onEnter(Scene& scene)
 {
 	firstUpdate_ = true;
 }
 
-void StunState::onExit(Scene& scene, GameObject& player)
+void StunState::onExit(Scene& scene)
 {
 }
 
-void StunState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void StunState::handleInput(Scene& scene, SDL_Event& e)
 {
 }
 
-void StunState::update(Scene& scene, GameObject& player)
+void StunState::update(Scene& scene)
 {
 	if (!firstUpdate_)
 	{
-		if (!player.getComponent<PhysicsComponent>()->isFalling())
+		if (!owner_.getComponent<PhysicsComponent>()->isFalling())
 		{
 			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::airborneState);
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 			return;
 		}
 
-		if (player.getComponent<PlayerControlComponent>()->HookState().hanging)
+		if (owner_.getComponent<PlayerControlComponent>()->HookState().hanging)
 		{
-			player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
-			player.getComponent<PhysicsComponent>()->enableGravity(true);
+			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;
 		}
 
-		if (!player.getComponent<PlayerControlComponent>()->HookState().hanging)
+		if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() != "HookConnectState")
 		{
+			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;
 		}
+
 	}
 	else
 	{
 		firstUpdate_ = false;
 	}
 
+}
+
+std::string StunState::name()
+{
+	return "StunState";
 }

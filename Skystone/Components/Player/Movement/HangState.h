@@ -9,30 +9,26 @@ public:
 	static const float MAX_ANGLE; 
 	static const float DEFAULT_SPEED;
 	static const float MAX_SPEED;
+	static const float MIN_ROPE_LENGTH;
+	static const float MAX_ROPE_LENGTH;
 public:
-	HangState();
+	HangState(GameObject& owner);
 	virtual ~HangState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
-	Point SwingVector();
-	Point OldPlayerPos();
-	int getDirection();
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void handleEvent(const CollisionEvent& e);
+	virtual void update(Scene& scene);
+
 
 	virtual std::string name() { return "Hang"; }
 private:
-	Point swingVector_;
-	Point oldPlayerPos_;
-	int direction_;
-	float currentAngle_;
-
 	Point hookPosition_;
-	float radius_;
-	float currentSpeed_;
-
-	float oldPlayerYVelocity;
+	Point hangPosition_;
+	float ropeLength_;
+	float ySpeed_;//how fast player can increase/decrease rope length.
+	int yDirection_;
 
 };
 

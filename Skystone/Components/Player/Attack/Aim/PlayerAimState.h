@@ -6,7 +6,7 @@
 class PlayerAimState : public PlayerState
 {
 public:
-	PlayerAimState();
+	PlayerAimState(GameObject& owner);
 	virtual ~PlayerAimState();
 
 	virtual double getAngle() = 0;

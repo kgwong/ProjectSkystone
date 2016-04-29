@@ -50,13 +50,13 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	else if (enemyName == "TestMob1") 
 	{
 		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
-		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
+		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<BossAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<PounceAIComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
 	}
 	else if (enemyName == "TestMob2")
@@ -67,7 +67,8 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
-		enemyToBuild.addComponent(componentSystem.getNew<BasicEnemyMovementComponent>(enemyToBuild));
+		//enemyToBuild.addComponent(componentSystem.getNew<BasicEnemyMovementComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<BossAIComponent>(enemyToBuild));
 	}
 	else if (enemyName == "BasicEnemy")
 	{
@@ -103,7 +104,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Flying")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Flying.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/stalin_4_turtle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));

@@ -33,8 +33,8 @@ void SwingingAIComponent::start(Scene& scene)
 	//calculate period of oscilation
 	//~ keep in here as long as radius_ does not change per update.
 	swingTime_ = 2 * (float)PI * sqrtf(radius_ / physics_->GRAVITY);
-
-	//initial angle.
+	//swingTime_ *= 2 * (float)PI;
+	//initial angle. ~ some physics formula.
 	currentAngle_ = maxAngle_ * sinf(sqrt(physics_->GRAVITY / radius_) * swingTime_);
 
 	//damp coeficcient

@@ -1,3 +1,4 @@
 GUI ContinueGameButton 320 200
 GUI ExitToMainMenuButton 320 350
 GUI ExitToDesktopButton 320 400
+GUI InvisibleContinueOnEscButton 0 0

@@ -4,70 +4,84 @@
 #include "GameObject/GameObject.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
+#include "GameMath/CircleMath.h"
 
-LaunchState::LaunchState()
+LaunchState::LaunchState(GameObject& owner)
+	:PlayerState(owner)
 {
 	someSwitch_ = true;
+	speed_ = 0.0f;
 }
 
 LaunchState::~LaunchState()
 {
 }
 
-void LaunchState::onEnter(Scene& scene, GameObject& player)
+void LaunchState::onEnter(Scene& scene)
 {
 	someSwitch_ = true;
-	direction_ = PlayerMovementState::hangState.getDirection();
+	//hack -- Kevin
+	direction_ = 0;
+	direction_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
+	speed_ = owner_.getComponent<PlayerControlComponent>()->MovementState().speed;
+	angle_ = owner_.getComponent<PlayerControlComponent>()->MovementState().angle;
+	radius_ = owner_.getComponent<PlayerControlComponent>()->MovementState().radius;
+	//LOG("HARVEY") << "direction: " << direction_;
+	LOG("HARVEY") << "SPEED: " << speed_;
 	
-	//LOG("INFO") << "direction: " << direction_;
-	if (direction_ > 0)
-	{
-		player.getComponent<PhysicsComponent>()->setVelX(5.0f * 60.0f);
-		player.getComponent<PhysicsComponent>()->setVelY(5.0f * -60.0f);
-	}
-	else if (direction_ < 0)
-	{
-		player.getComponent<PhysicsComponent>()->setVelX(5.0f * -60.0f);
-		player.getComponent<PhysicsComponent>()->setVelY(5.0f * -60.0f);
-	}
-	else
-	{
-		LOG("FLAPJACKS") << "direction is " << direction_;
-	}
+	//SCALING needs to be based on how long the rope is. ~ lookup momentum from releasing rope.
+	auto physics = owner_.getComponent<PhysicsComponent>();
+	angle_ = toRadians(angle_);
+	float xVelocity = radius_ / cosf(angle_) * direction_;
+	if (angle_ <= 0)
+		angle_ = -angle_;
+	float yVelocity = sqrtf((physics->GRAVITY * radius_) / sinf(2 * angle_)) * -1;
+	float multiplier = 2.5f;
+
+	LOG("HARVEY") << "XVELOCITY: " << xVelocity;
+	LOG("HARVEY") << "YVELOCITY: " << yVelocity;
+	LOG("HARVEY") << "radius: " << radius_;
+	LOG("HARVEY") << "angle_: " << angle_;
+	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * multiplier);
+	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * multiplier);
+	
+	//x-velocity = rope length / (cos(theta) * time);
+	//assume time = 1;
+	//y-velocity = sqrt ( (rope length * gravity) / sin(2 * theta) )
+	//theta = is the angle of the player relative to its pivot.
+	//http://datagenetics.com/blog/september42014/index.html
 }
 
-void LaunchState::onExit(Scene& scene, GameObject& player)
+void LaunchState::onExit(Scene& scene)
 {
-	player.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
+	speed_ = 0.0f;
+	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 }
 
-void LaunchState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void LaunchState::handleInput(Scene& scene, SDL_Event& e)
 {
 
 }
 
-void LaunchState::update(Scene& scene, GameObject& player)
+void LaunchState::update(Scene& scene)
 {
+
 	if (!someSwitch_)
 	{
-		if (!player.getComponent<PhysicsComponent>()->isFalling())
+		auto playerPhysics = owner_.getComponent<PhysicsComponent>();
+		playerPhysics->enableGravity(true);
+		if (!owner_.getComponent<PhysicsComponent>()->isFalling())
 		{
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
-			return;
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 		}
-
-		if (player.getComponent<PlayerControlComponent>()->HookState().hanging)
-		{
-			player.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::airborneState);
-			player.getComponent<PhysicsComponent>()->enableGravity(true);
-			return;
-		}
-
-		
 	}
 	else
 	{
 		someSwitch_ = false;
 	}
+}
+
+void LaunchState::setSpeed(float s)
+{
+	speed_ = s;
 }

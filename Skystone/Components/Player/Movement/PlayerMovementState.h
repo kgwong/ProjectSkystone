@@ -7,36 +7,50 @@
 #include "WalkingState.h"
 #include "FlyingState.h"
 #include "StunState.h"
+#include "LockMovementState.h"
 
 #include "HangState.h"
 #include "LaunchState.h"
+#include "SwingState.h"
+
+#include <memory>
 
 class PlayerMovementState : public InputComponent
 {
-public:
-	static WalkingState walkingState;
-	static FlyingState flyingState;
-	static AirborneState airborneState;
-	static StunState stunState;
-	static HangState hangState;
-	static LaunchState launchState;
 public:
 	PlayerMovementState(GameObject& owner);
 	virtual ~PlayerMovementState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
-	void changeState(Scene& scene, PlayerState* state);
+	void changeState(Scene& scene, const std::string& stateName);
 	PlayerState* getState();
 	virtual void handleEvent(const CollisionEvent& e);
+
 	void setCanSwing(bool swing);
 	bool canSwing;
+
 	void setDirection(int dir);
+	void setSpeed(float s);
+	void setAngle(float a);
+	void setRadius(float r);
+
 	int direction;
+	float speed;
+	float angle;
+	float radius;
 
 private:
 	PlayerState* currentState_;
+
+	std::unordered_map<std::string, std::shared_ptr<PlayerState>> states_;
+
+private:
+	PlayerState* getStateFromName(const std::string& name);
+	void addState(std::shared_ptr<PlayerState> state);
 };
 
 #endif //PLAYER_MOVEMENT_STATE_H

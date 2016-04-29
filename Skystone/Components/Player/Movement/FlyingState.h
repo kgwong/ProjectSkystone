@@ -3,22 +3,33 @@
 
 #include "PlayerState.h"
 
+class PlayerControlComponent;
+class PhysicsComponent;
+class SpriteRenderer;
+
 class FlyingState : public PlayerState
 {
 public:
 	static const float FLIGHT_VELOCITY;
 
 public:
-	FlyingState();
+	FlyingState(GameObject& owner);
 	virtual ~FlyingState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
 
+	virtual void handleInput(Scene& scene, SDL_Event& e);
 
-	virtual std::string name() { return "Flying"; }
+	virtual void start(Scene& scene);
+	virtual void update(Scene& scene);
+
+	virtual std::string name() { return "FlyingState"; }
+
+private:
+	PlayerControlComponent* controlComponent_;
+	PhysicsComponent* physics_;
+	SpriteRenderer* renderer_;
 };
 
 #endif //FLYING_STATE_H

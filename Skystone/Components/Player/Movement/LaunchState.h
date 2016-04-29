@@ -5,19 +5,23 @@ class LaunchState :
 	public PlayerState
 {
 public:
-	LaunchState();
+	LaunchState(GameObject& owner);
 	virtual ~LaunchState();
 
-	virtual void onEnter(Scene& scene, GameObject& player);
-	virtual void onExit(Scene& scene, GameObject& player);
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e);
-	virtual void update(Scene& scene, GameObject& player);
+	virtual void onEnter(Scene& scene);
+	virtual void onExit(Scene& scene);
+	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void update(Scene& scene);
 
 	virtual std::string name() { return "Launch"; }
+	void setSpeed(float s);
 
 private:
 	bool someSwitch_;//extended version of kevin's hack.
 	int direction_;
+	float speed_;
+	float angle_;
+	float radius_;
 
 };
 

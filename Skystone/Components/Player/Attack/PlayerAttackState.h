@@ -3,23 +3,16 @@
 
 #include "Components/InputComponent.h"
 
-#include "PlayerAimState.h"
-#include "DefaultAimState.h"
-#include "AimUpState.h"
+#include "Aim/PlayerAimState.h"
+#include "Aim/DefaultAimState.h"
 
 #include "PlayerHookState.h"
 class PlayerAttackState : public InputComponent
 {
 public:
-	enum class AimState
-	{
-		UP, LEFT, RIGHT, UP_LEFT, UP_RIGHT
-	};
-
 	static const int PROJECTILE_VELOCITY = 20;
 
-	static DefaultAimState defaultAimState;
-	static AimUpState aimUpState;
+	DefaultAimState defaultAimState;
 
 	//the hook states
 	//static LaunchHookState launchstate;
@@ -31,20 +24,20 @@ public:
 	virtual ~PlayerAttackState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+
+	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
-	void changeState(Scene& scene, PlayerAimState* state);
+	void changeState(Scene& scene, const std::string& stateName);
 
 private:
 	PlayerAimState* currentState_;
-	AimState aimState_;
 	AimState prevAimState_;
 	double degrees_;
 	bool shoot_;
 
-	//for hook ~ move to a different state
-	//bool launch_;
-
+private:
+	PlayerAimState* getStateFromName(const std::string& name);
 
 };
 

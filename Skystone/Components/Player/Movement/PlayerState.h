@@ -7,22 +7,18 @@
 
 #include "GameObject/GameObject.h"
 #include "Components/Physics/PhysicsComponent.h"
+#include "Components/InputComponent.h"
 
-class PlayerState
+class PlayerState : public InputComponent
 {
 public:
-	virtual void onEnter(Scene& scene, GameObject& player) = 0;
-	virtual void onExit(Scene& scene, GameObject& player) = 0;
-	virtual void handleInput(Scene& scene, GameObject& player, SDL_Event& e) = 0;
-	virtual void update(Scene& scene, GameObject& player) = 0;
+	PlayerState(GameObject& owner);
+	virtual ~PlayerState();
+
+	virtual void onEnter(Scene& scene) {}
+	virtual void onExit(Scene& scene) {}
 
 	virtual std::string name() = 0;
-
-	//adding these!!! ~ make these their own components.
-	//virtual void onEnter(Scene& scene) = 0;
-	//virtual void onExit(Scene& scene) = 0;
-	//virtual void handleInput(Scene& scene, SDL_Event& e) = 0;
-	//virtual void update(Scene& scene) = 0;
 
 };
 

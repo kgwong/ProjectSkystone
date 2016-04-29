@@ -20,6 +20,13 @@ void PlayerControlComponent::handleInput(Scene& scene, SDL_Event& e)
 	HookKeyInput = e.key.keysym.sym;
 }
 
+void PlayerControlComponent::start(Scene& scene)
+{
+	movement_.start(scene);
+	attack_.start(scene);
+	hooker_.start(scene);
+}
+
 void PlayerControlComponent::update(Scene& scene)
 {
 	movement_.update(scene);
@@ -28,19 +35,21 @@ void PlayerControlComponent::update(Scene& scene)
 
 }
 
-void PlayerControlComponent::changeMovementState(Scene& scene, PlayerState* state)
+void PlayerControlComponent::changeMovementState(Scene& scene, const std::string& stateName)
 {
-	movement_.changeState(scene, state);
+	movement_.changeState(scene, stateName);
+	LOG("HARVEY") << movement_.getState()->name();
 }
 
-void PlayerControlComponent::changeAttackState(Scene& scene, PlayerAimState* state)
+void PlayerControlComponent::changeAttackState(Scene& scene, const std::string& stateName)
 {
-	attack_.changeState(scene, state);
+	attack_.changeState(scene, stateName);
 }
 
-void PlayerControlComponent::changeHookState(Scene& scene, HookStateManager* state)
+void PlayerControlComponent::changeHookState(Scene& scene, const std::string& stateName)
 {
-	hooker_.changeState(scene, state);
+	hooker_.changeState(scene, stateName);
+	LOG("HARVEY") << hooker_.getState()->name();
 }
 
 PlayerHookState PlayerControlComponent::HookState()
@@ -48,12 +57,12 @@ PlayerHookState PlayerControlComponent::HookState()
 	return hooker_;
 }
 
-PlayerMovementState PlayerControlComponent::MovementState()
+PlayerMovementState& PlayerControlComponent::MovementState()
 {
 	return movement_;
 }
 
-PlayerAttackState PlayerControlComponent::AttackState()
+PlayerAttackState& PlayerControlComponent::AttackState()
 {
 	return attack_;
 }

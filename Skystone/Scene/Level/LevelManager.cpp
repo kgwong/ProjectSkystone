@@ -11,10 +11,15 @@ LevelManager::LevelManager()
 	currLevel_(nullptr),
 	nextLevelID_(INVALID_LEVEL_ID)
 {
-	levelMap_.addLevel(1, 2, 2, 1, 1);
-	levelMap_.addLevel(2, 1, 2, 1, 3);
-	levelMap_.addLevel(3, 2, 1, 0, 2);
-	levelMap_.addLevel(4, 1, 1, 0, 4);
+	//levelMap_.addLevel(1, 2, 2, 1, 1);
+	//levelMap_.addLevel(2, 1, 2, 1, 3);
+	//levelMap_.addLevel(3, 2, 1, 0, 2);
+	//levelMap_.addLevel(4, 1, 1, 0, 4);
+
+	levelMap_.addLevel(0, 1, 6, 1, 1);
+	levelMap_.addLevel(1, 2, 2, 5, 2);
+	levelMap_.addLevel(2, 2, 2, 5, 4);
+	levelMap_.addLevel(3, 3, 2, 5, 6);
 
 	levelLoader_.setLevelManager(this);
 }
@@ -80,6 +85,11 @@ bool LevelManager::changeLevelIfNecessary()
 
 void LevelManager::handleInput(SDL_Event& e)
 {
+	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+	{
+		levelMap_.print();
+	}
+
 	if (GameInputs::keyDown(e, ControlType::ESC))
 		setNextScene(SceneID::PAUSE);
 	else
@@ -111,7 +121,7 @@ void LevelManager::initStartingLevel()
 {
 	if (player_ != nullptr)
 	{
-		currLevel_ = levelLoader_.getLevelWithID(4);
+		currLevel_ = levelLoader_.getLevelWithID(0);
 		currLevel_->setSceneManager(sceneManager_); //
 		currLevel_->setPlayer(player_, Point{ currLevel_->getWidth() / 2, currLevel_->getHeight() / 2 });
 		currLevel_->onEnter();

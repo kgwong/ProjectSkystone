@@ -30,6 +30,14 @@ int SpriteSheet::getFrameDuration(int index)
 
 int SpriteSheet::getNextIndex(int index)
 {
+	//test to freeze animation on last frame
+	int ind = index + 1;
+	if (ind >= frames_.size())
+	{
+		ind = frames_.size() - 1;
+	}
+	return ind;
+
 	return (index + 1) % frames_.size();
 }
 

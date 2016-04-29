@@ -3,7 +3,7 @@
 #include "Resources\Resources.h"
 
 #include "Log.h"
-#include "Components/Render/TextRenderer.h"
+
 GameWindow::GameWindow(const std::string& windowName, int width, int height)
 	:width_(width), height_(height),
 	window_(MySDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN)),

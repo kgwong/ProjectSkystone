@@ -2,7 +2,8 @@
 
 
 
-PlayerAimState::PlayerAimState()
+PlayerAimState::PlayerAimState(GameObject& owner)
+	:PlayerState(owner)
 {
 }
 

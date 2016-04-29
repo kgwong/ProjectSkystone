@@ -5,9 +5,8 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Render/SpriteRenderer.h"
 
-#include "Resources/Resources.h"
-
-AirborneState::AirborneState()
+AirborneState::AirborneState(GameObject& owner)
+	:PlayerState(owner)
 {
 }
 
@@ -16,56 +15,64 @@ AirborneState::~AirborneState()
 {
 }
 
-void AirborneState::onEnter(Scene& scene, GameObject& player)
+void AirborneState::onEnter(Scene& scene)
 {
-	jumpHeld_ = true;
-	player.getComponent<SpriteRenderer>()->setSprite(Resources::getSpriteSheet("Images/jump cycle.png"));
+	renderer_->setSprite("Images/jump cycle.png");
 }
 
-void AirborneState::onExit(Scene& scene, GameObject& player)
+void AirborneState::onExit(Scene& scene)
 {
 }
 
-void AirborneState::handleInput(Scene& scene, GameObject& player, SDL_Event& e)
+void AirborneState::handleInput(Scene& scene, SDL_Event& e)
 {
-	if (!jumpHeld_)
+	if (GameInputs::keyHeld(JUMP))
 	{
 		if (GameInputs::keyDown(e, JUMP))
 		{
-			//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::flyingState);
-			player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::flyingState);
-
+			controlComponent_->changeMovementState(scene, "FlyingState");
 		}
 	}
 }
 
-void AirborneState::update(Scene& scene, GameObject& player)
+void AirborneState::start(Scene& scene)
 {
-	if (player.getComponent<PlayerControlComponent>()->HookState().getState() == &PlayerHookState::connectState)
+	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
+	physics_ = owner_.getComponent<PhysicsComponent>();
+	renderer_ = owner_.getComponent<SpriteRenderer>();
+}
+
+void AirborneState::update(Scene& scene)
+{
+	if (controlComponent_->HookState().getState()->name() == "HookConnectState")
 	{
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::hangState);
+		controlComponent_->changeMovementState(scene, "Hang");
 		return;
 	}
 	
-	if (!player.getComponent<PhysicsComponent>()->isFalling())
+	if (!physics_->isFalling())
 	{
-		//player.getComponent<PlayerMovementState>()->changeState(&PlayerMovementState::walkingState);
-		player.getComponent<PlayerControlComponent>()->changeMovementState(scene, &PlayerMovementState::walkingState);
+		controlComponent_->changeMovementState(scene, "WalkingState");
 		return;
 	}
 
 	if (GameInputs::keyHeld(LEFT))
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(-5 * 60.0f);
+		physics_->setVelX(-5 * 60.0f);
+		renderer_->setFlipHorz(true);
 	}
 	else if (GameInputs::keyHeld(RIGHT))
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(5 * 60.0f);
+		physics_->setVelX(5 * 60.0f);
+		renderer_->setFlipHorz(false);
 	}
 	else
 	{
-		player.getComponent<PhysicsComponent>()->setVelX(0);
+		physics_->setVelX(0);
 	}
+}
 
-	jumpHeld_ = GameInputs::keyHeld(JUMP);
+std::string AirborneState::name()
+{
+	return "AirborneState";
 }
