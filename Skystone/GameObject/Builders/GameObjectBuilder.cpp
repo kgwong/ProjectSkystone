@@ -35,8 +35,6 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	//player.addComponent(std::make_shared<PlayerAttackState>(player));
 	player.addComponent(std::make_shared<PlayerControlComponent>(player));
 	player.addComponent(std::make_shared<HealthBar>(player));
-	auto* testbar = player.getComponent<HealthBar>();
-	testbar->setEnabled(false);
 	//player.addComponent(std::make_shared<HookComponent>(player));
 }
 
