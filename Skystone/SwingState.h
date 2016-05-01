@@ -39,7 +39,7 @@ private:
 	float damp_;
 	bool keyHeld_;
 	float timer_;
-	float maxAngle_;
+	float angleRange_;
 
 };
 

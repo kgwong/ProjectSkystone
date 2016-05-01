@@ -13,6 +13,7 @@ SwingState::SwingState(GameObject& owner)
 {
 	xSpeed_ = 0.0f;
 	currentAngle_ = 0.0f;
+	angleRange_ = 0.0f;
 	xDirection_ = 0;
 	tileHit_ = false;
 	tileLeft_  = false;
@@ -44,8 +45,7 @@ void SwingState::onEnter(Scene& scene)
 	auto physics = owner_.getComponent<PhysicsComponent>();
 	swingTime_ = 2 * float(PI) * sqrtf(radius_ / physics->GRAVITY);
 	damp_ = 0.075;
-	maxAngle_ = MAX_ANGLE;//20 should be MIN_ANGLE;
-	//rename maxAngle_ to angleRange_;
+	angleRange_ = MAX_ANGLE;//20 should be MIN_ANGLE;
 
 	//this allows player to swing across if hook is shot from the left or right
 	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
@@ -54,16 +54,21 @@ void SwingState::onEnter(Scene& scene)
 		xSpeed_ = 3.141f;
 		currentAngle_ = tanhf((swingPosition_.y - hookPosition_.y) / (swingPosition_.x - hookPosition_.x));
 		currentAngle_ = toDegrees(currentAngle_);
+		float dx = swingPosition_.x - hookPosition_.x;
+		float dy = swingPosition_.y - hookPosition_.y;
+		radius_ = sqrtf((dx * dx) + (dy * dy));
+		angleRange_ = 35;
 	}
+	LOG("HARVEY") << owner_.getPos();
 	LOG("HARVEY") << currentAngle_;
 	//LOG("HARVEY") << hookPosition_ << ", " << swingPosition_;
 }
 void SwingState::onExit(Scene& scene)
 {
-	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setSpeed(xSpeed_);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setAngle(currentAngle_);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setRadius(radius_);
+	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
 	xSpeed_ = 1.1f;
 	currentAngle_ = 0.0f;
 	xDirection_ = 0;
@@ -73,7 +78,7 @@ void SwingState::onExit(Scene& scene)
 	tileRight_ = false;
 	keyHeld_ = false;
 	timer_ = 0.0f;
-	maxAngle_ = MAX_ANGLE;
+	angleRange_ = MAX_ANGLE;
 
 }
 void SwingState::handleInput(Scene& scene, SDL_Event& e)
@@ -99,14 +104,14 @@ void SwingState::update(Scene& scene)
 	auto playerPhysics = owner_.getComponent<PhysicsComponent>();
 	playerPhysics->enableGravity(false);
 
-	if (currentAngle_ > maxAngle_)
+	if (currentAngle_ > angleRange_)
 	{
-		currentAngle_ = maxAngle_;
+		currentAngle_ = angleRange_;
 		xDirection_ = -xDirection_;
 	}
-	if (currentAngle_ < -maxAngle_)
+	if (currentAngle_ < -angleRange_)
 	{
-		currentAngle_ = -maxAngle_;
+		currentAngle_ = -angleRange_;
 		xDirection_ = -xDirection_;
 	}	
 
@@ -116,10 +121,10 @@ void SwingState::update(Scene& scene)
 		if (timer_ >= swingTime_)
 		{
 			timer_ = 0.0f;
-			maxAngle_ += maxAngle_ * 1.04f;
-			if (maxAngle_ > MAX_ANGLE)
-				maxAngle_ = MAX_ANGLE;
-			xSpeed_ *= 1.12f;
+			angleRange_ += angleRange_ * 1.04f;
+			if (angleRange_ > MAX_ANGLE)
+				angleRange_ = MAX_ANGLE;
+			xSpeed_ *= 1.5f;
 			if (xSpeed_ > 6.61f)
 				xSpeed_ = 6.61f;
 		}
@@ -134,14 +139,14 @@ void SwingState::update(Scene& scene)
 		if (timer_ >= swingTime_)
 		{
 			timer_ = 0.0f;
-			maxAngle_ -= maxAngle_ * 0.15f;
+			angleRange_ -= angleRange_ * 0.15f;
 
 			xSpeed_ -= (xSpeed_ * .15f);
 			if (xSpeed_ < 0.0f)
 				xSpeed_ = 0.0f;
 		}
 
-		if (maxAngle_ < 5)
+		if (angleRange_ < 5)
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
 			return;

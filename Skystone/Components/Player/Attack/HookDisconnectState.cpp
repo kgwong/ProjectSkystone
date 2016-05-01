@@ -16,6 +16,7 @@ HookDisconnectState::~HookDisconnectState()
 void HookDisconnectState::onEnter(Scene& scene)
 {
 	degrees_ = 0.0f;
+	playerAim_ = AimState::UP;
 	if (scene.gameObjects.playerHook != nullptr)
 	{
 		scene.gameObjects.playerHook->kill();

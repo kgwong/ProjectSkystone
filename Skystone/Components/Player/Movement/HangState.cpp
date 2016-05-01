@@ -48,15 +48,18 @@ void HangState::onEnter(Scene& scene)
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	ropeLength_ = fabsf(hookPosition_.y - owner_.getPosY());
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
+	hangPosition_ = owner_.getPos();
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setCanSwing(true);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 	ySpeed_ = DEFAULT_SPEED;
 	yDirection_ = 0;
 	
 	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
+	
+	owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
 	if (playerAim == AimState::LEFT || playerAim == AimState::RIGHT)
 	{
-		LOG("HARVEY") << "were in here";
+		LOG("HARVEY") << owner_.getPos();
 		if (playerAim == AimState::LEFT)
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
 		else

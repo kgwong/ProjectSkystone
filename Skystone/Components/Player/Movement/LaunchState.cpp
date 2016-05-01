@@ -36,14 +36,14 @@ void LaunchState::onEnter(Scene& scene)
 	if (angle_ <= 0)
 		angle_ = -angle_;
 	float yVelocity = sqrtf((physics->GRAVITY * radius_) / sinf(2 * angle_)) * -1;
-	float multiplier = 2.5f;
-
+	float multiplier = 2.67f;
+	LOG("HARVEY") << "DIRECTION: " << direction_;
 	LOG("HARVEY") << "XVELOCITY: " << xVelocity;
 	LOG("HARVEY") << "YVELOCITY: " << yVelocity;
 	LOG("HARVEY") << "radius: " << radius_;
 	LOG("HARVEY") << "angle_: " << angle_;
 	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * multiplier);
-	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * multiplier);
+	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * 7.5);
 	
 	//x-velocity = rope length / (cos(theta) * time);
 	//assume time = 1;
