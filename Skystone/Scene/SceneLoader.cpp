@@ -39,29 +39,27 @@ bool SceneLoader::sceneLoaded(SceneID sceneID)
 
 void SceneLoader::load(SceneID sceneID)
 {
-	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
-	scene->setSceneManager(sceneManager_);
-	
-	loadObjects(sceneID, scene.get());
-	loadedScenes_.insert({sceneID, scene});
+	if (sceneID == SceneID::LEVEL)
+	{
+		loadedScenes_.insert({sceneID, std::make_shared<LevelManager>()});
+	}
+	else
+	{
+		std::shared_ptr<Scene> scene = std::make_shared<Scene>();
+		scene->setSceneManager(sceneManager_);
+		
+		loadObjects(sceneID, scene.get());
+		loadedScenes_.insert({sceneID, scene});
+	}
 }
 
 void SceneLoader::unload(SceneID sceneID)
 {
-	if (sceneID == SceneID::LEVEL)
-	{
-		// can't load levelManager the same way, let it handle itself
-		loadedScenes_[SceneID::LEVEL] = std::make_shared<LevelManager>();
-	}
-	else
-	{
-		loadedScenes_.erase(sceneID);
-	}
+	loadedScenes_.erase(sceneID);
 }
 
 void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 {
-	
 	std::string filepath = generateFilePath(sceneID);
 	std::ifstream ifs(filepath);
 	if (!ifs)

@@ -58,15 +58,15 @@ void HealthBar::renderBar(GameWindow& window, float percBehind)
 {
 	float hpPerc = getHpPercent();
 	SDL_Rect* max = barSheet_->getFrameRect(0);
-	SDL_Rect src = { 0, 0, max->w*hpPerc, max->h };
-	SDL_Rect dest = {healthBarLoc.x, healthBarLoc.y, src.w, src.h };
+	SDL_Rect src = { 0, 0, (int)(max->w * hpPerc), max->h };
+	SDL_Rect dest = {(int)healthBarLoc.x, (int)healthBarLoc.y, src.w, src.h };
 	window.renderOnCamera(barSheet_->getTexture(), &src, &dest);
 }
 
 void HealthBar::renderOutline(GameWindow& window, float percBehind)
 {
 	SDL_Rect src = { 0, 0, outlineSheet_->getFrameRect(0)->w, outlineSheet_->getFrameRect(0)->h};
-	SDL_Rect dest = { outlineLoc.x, outlineLoc.y, src.w, src.h };
+	SDL_Rect dest = { (int)outlineLoc.x, (int)outlineLoc.y, src.w, src.h };
 	window.renderOnCamera(outlineSheet_->getTexture(), &src, &dest);
 }
 
