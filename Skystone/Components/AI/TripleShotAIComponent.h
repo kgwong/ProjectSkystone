@@ -5,6 +5,8 @@
 #include "GameTypes/Point.h"
 #include <string>;
 
+class BossAIComponent;
+
 class TripleShotAIComponent :
 	public AIComponent
 {
@@ -38,6 +40,7 @@ private:
 	float xDist;
 	float yDist;
 	float playerSide;
+	BossAIComponent* boss_;
 };
 
 #endif //TRIPLE_SHOT_AI_COMPONENT_H

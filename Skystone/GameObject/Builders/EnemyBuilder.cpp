@@ -66,7 +66,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
+		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 10000));
 		//enemyToBuild.addComponent(componentSystem.getNew<BasicEnemyMovementComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<BossAIComponent>(enemyToBuild));
 	}
@@ -114,7 +114,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Coward")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Coward.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));

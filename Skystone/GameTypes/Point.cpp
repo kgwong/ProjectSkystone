@@ -97,7 +97,7 @@ float Point::getYMidPoint(Point& a, Point &b)
 	return fabsf(a.y + b.y) / 2;
 }
 
-float Point::getFacingDirection(float distance, Point&a, Point&b)
+float Point::getFacingDirection(Point&a, Point&b)
 {
 	float playerSide = 0;
 	if (getXDistance(a, b) == 0)
@@ -107,7 +107,7 @@ float Point::getFacingDirection(float distance, Point&a, Point&b)
 	
 	else
 	{
-		playerSide = (float)(-distance / (a.x - b.x));
+		playerSide = - (float)(abs(a.x - b.x)/ (a.x - b.x));
 	}
 	return playerSide;
 }
