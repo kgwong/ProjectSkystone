@@ -10,10 +10,25 @@
 
 const std::string SceneLoader::SCENE_FILEPATH_PREFIX = "Scenes/";
 
+namespace
+{
+	std::shared_ptr<Scene> getScenePointer(SceneID sceneID)
+	{
+		switch (sceneID)
+		{
+		case SceneID::MAIN_MENU:
+			return std::make_shared<MainMenu>();
+		case SceneID::LEVEL:
+			return std::make_shared<LevelManager>();
+		default:
+			return std::make_shared<Scene>();
+		}
+	}
+}
+
+
 SceneLoader::SceneLoader()
 {
-	loadedScenes_.insert({SceneID::LEVEL, std::make_shared<LevelManager>()});
-	loadMainMenu();
 }
 
 SceneLoader::~SceneLoader()
@@ -39,18 +54,10 @@ bool SceneLoader::sceneLoaded(SceneID sceneID)
 
 void SceneLoader::load(SceneID sceneID)
 {
-	if (sceneID == SceneID::LEVEL)
-	{
-		loadedScenes_.insert({sceneID, std::make_shared<LevelManager>()});
-	}
-	else
-	{
-		std::shared_ptr<Scene> scene = std::make_shared<Scene>();
-		scene->setSceneManager(sceneManager_);
-		
-		loadObjects(sceneID, scene.get());
-		loadedScenes_.insert({sceneID, scene});
-	}
+	std::shared_ptr<Scene> scene = getScenePointer(sceneID);
+	scene->setSceneManager(sceneManager_);
+	loadObjects(sceneID, scene.get());
+	loadedScenes_.insert({sceneID, scene});
 }
 
 void SceneLoader::unload(SceneID sceneID)
@@ -60,6 +67,9 @@ void SceneLoader::unload(SceneID sceneID)
 
 void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 {
+	if (sceneID == SceneID::LEVEL)
+		return;
+	
 	std::string filepath = generateFilePath(sceneID);
 	std::ifstream ifs(filepath);
 	if (!ifs)
@@ -75,13 +85,6 @@ void SceneLoader::loadObjects(SceneID sceneID, Scene* scene)
 		iss >> type >> name >> pos.x >> pos.y;
 		scene->gameObjects.add(type, name, pos);
 	}
-}
-
-void SceneLoader::loadMainMenu()
-{
-	std::shared_ptr<MainMenu> mainMenu = std::make_shared<MainMenu>();
-	loadObjects(SceneID::MAIN_MENU, mainMenu.get());
-	loadedScenes_.insert({SceneID::MAIN_MENU, mainMenu});
 }
 
 std::string SceneLoader::generateFilePath(SceneID sceneID)
