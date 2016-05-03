@@ -4,6 +4,8 @@
 #include "Component.h"
 #include "SDL\SDL.h"
 
+#include "Game/GameInputs.h"
+
 class InputComponent : public Component
 {
 public:

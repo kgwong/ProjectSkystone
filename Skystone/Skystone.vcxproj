@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Render\ColliderBoxRenderer.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
