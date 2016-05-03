@@ -17,21 +17,26 @@ GUIBuilder::~GUIBuilder()
 {
 }
 
-std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, const std::string& name, GameObject* player, GameObject* wrapper)
+std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, const std::string& name, GameObject* player)
 {
 	auto gui = std::make_shared<GameObject>();
 	auto& guiToBuild = *gui;
 
-	guiToBuild.setType(GameObject::Type::GUI);
-	auto textSelector = wrapper->getComponent<TextSelector>();
-
-	if (name == "StartGameButton")
+	// all buttons are controlled by the most recently constructed TextSelector
+	if (name == "TextSelector")
+	{
+		textSelector_ = gui = std::make_shared<GameObject>();
+		auto& textSelectorToBuild = *textSelector_;
+		textSelectorToBuild.setType(GameObject::Type::GUI);
+		textSelectorToBuild.addComponent(componentSystem.getNew<TextSelector>(textSelectorToBuild));
+	}
+	else if (name == "StartGameButton")
 	{
 		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
 		guiToBuild.addComponent(text);
 		text->setText("Start game");
 		text->setSceneOnSelection(SceneID::LEVEL);
-		textSelector->addText(text);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "ExitGameButton")
 	{
@@ -39,7 +44,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		guiToBuild.addComponent(text);
 		text->setText("Exit");
 		text->setSceneOnSelection(SceneID::QUIT_GAME);
-		textSelector->addText(text);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "ExitToDesktopButton")
 	{
@@ -47,7 +52,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		guiToBuild.addComponent(text);
 		text->setText("Exit to desktop");
 		text->setSceneOnSelection(SceneID::QUIT_GAME);
-		textSelector->addText(text);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "ExitToMainMenuButton")
 	{
@@ -55,7 +60,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		guiToBuild.addComponent(text);
 		text->setText("Exit to main menu");
 		text->setSceneOnSelection(SceneID::MAIN_MENU);
-		textSelector->addText(text);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "ContinueGameButton")
 	{
@@ -63,7 +68,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		guiToBuild.addComponent(text);
 		text->setText("Continue");
 		text->setSceneOnSelection(SceneID::LEVEL);
-		textSelector->addText(text);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{

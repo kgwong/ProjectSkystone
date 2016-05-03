@@ -14,7 +14,7 @@ class PounceAIComponent :
 
 public:
 	const float DEFAULT_JUMP_HEIGHT = -10;
-	const float DEFAULT_JUMP_DISTANCE = 7;
+	const float DEFAULT_JUMP_DISTANCE = 8;
 	const float DEFAULT_RADIUS = 175.0f;
 	const float PounceAIComponent::DEFAULT_COOLDOWN_TIME = 1.5;
 

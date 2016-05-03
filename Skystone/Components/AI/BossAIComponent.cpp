@@ -71,7 +71,7 @@ void BossAIComponent::update(Scene & scene)
 			initiate_attack_ = false;
 			physics_->setVelX(0);
 		}
-		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
+		else if (abs(xDistanceFromPlayer) < medium_range_)
 		{
 			physics_->setVelX(0);
 			//pick between 3 attacks
@@ -91,7 +91,7 @@ void BossAIComponent::update(Scene & scene)
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
 				LOG("AARON") << "INITIATING LAZER";
-				attack_ = "triple shot";
+				attack_ = "jump attack";
 				break;
 			}
 			initiate_attack_ = false;
@@ -106,13 +106,11 @@ void BossAIComponent::update(Scene & scene)
 				physics_->setVelX(0);
 				LOG("AARON") << "JUST IDLING";
 				initiate_attack_ = false;
-				timer_ += 4;
 				break;
 			case 1:
 				LOG("AARON") << "WALKING AROUND";
 				physics_->setVelX(xDistanceFromPlayer / abs(xDistanceFromPlayer) * -DEFAULT_MOVE_SPEED * SPEED);
 				initiate_attack_ = false;
-				timer_ += 4;
 				break;
 			}
 		}
@@ -122,7 +120,6 @@ void BossAIComponent::update(Scene & scene)
 	{
 		initiate_attack_ = true;
 		timer_ = 0;
-
 	}
 	else 
 	{

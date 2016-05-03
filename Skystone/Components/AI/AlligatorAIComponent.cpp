@@ -47,7 +47,7 @@ void AlligatorAIComponent::update(Scene & scene)
 {
 	timer_ += Time::getElapsedUpdateTimeSeconds(); //cooldown for movement
 	float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	float playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+	float playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 	
 	//check if on the same x plane and ready to fire
 	if (owner_.getPosY() == scene.gameObjects.getPlayer().getPosY() + 32 && shot_ready_)

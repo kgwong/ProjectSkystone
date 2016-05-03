@@ -4,10 +4,6 @@
 #include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
 
-// duct taping code together
-#include "Components/Render/SpriteRenderer.h"
-#include "Resources/Resources.h"
-#include "Components/GUI/TextSelector.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 
@@ -97,14 +93,8 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		newObject = builder_.buildEnemy(componentSystem_, name);
 		objects_[GameObject::Type::ENEMY].push_back(newObject);
 	}
-	//duct taping code together
 	else if (type == "Background")
 	{
-		//newObject = std::make_shared<GameObject>();
-		//newObject->setType(GameObject::Type::BACKGROUND);
-		//objects_[GameObject::Type::BACKGROUND].push_back(newObject);
-		//SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
-		//newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
 		newObject = builder_.buildBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
 	}
@@ -117,11 +107,12 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	{
 		if (objects_[GameObject::Type::GUI].size() == 0)
 		{
-			auto textSelector = std::make_shared<GameObject>();
-			textSelector->addComponent(componentSystem_.getNew<TextSelector>(*newObject));
+			// buttons go on the most recently constructed TextSelector
+			// first GUI should be the TextSelector
+			auto textSelector = builder_.buildGUI(componentSystem_, "TextSelector", player_);
 			objects_[GameObject::Type::GUI].push_back(textSelector);
 		}
-		newObject = builder_.buildGUI(componentSystem_, name, player_, objects_[GameObject::Type::GUI].at(0).get());
+		newObject = builder_.buildGUI(componentSystem_, name, player_);
 		objects_[GameObject::Type::GUI].push_back(newObject);
 	}
 	else

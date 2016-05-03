@@ -66,7 +66,13 @@ bool HealthComponent::takeDamage(int damage)
 
 bool HealthComponent::heal(int addedHealth)
 {
-	currentHealth_ += addedHealth;
+	if (currentHealth_ == maxHealth_)
+		return false;
+
+	if(currentHealth_ + addedHealth <= maxHealth_)
+		currentHealth_ += addedHealth;
+	else
+		currentHealth_ = maxHealth_;
 	return true;
 }
 	
