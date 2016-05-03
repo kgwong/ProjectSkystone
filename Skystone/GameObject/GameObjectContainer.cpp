@@ -66,16 +66,10 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "EnemyProjectile")
 	{
-		if (name == "AcidProjectile")
-		{
-			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
-		}
-		else if (name == "ClawProjectile")
-		{
-			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
-		}
+	
+		newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		
 	}
 	else if (type == "PlayerHook")
 	{

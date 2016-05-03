@@ -37,21 +37,6 @@ void TripleShotAIComponent::start(Scene& scene)
 void TripleShotAIComponent::update(Scene& scene)
 {
 
-	//if (!cooldown_)
-	//{
-	//	xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	//	playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	//	yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-	//	fireProjectile(xDist, yDist, playerSide, 3, scene);
-	//	fireProjectile(xDist, yDist, playerSide, 0, scene);
-	//	fireProjectile(xDist, yDist, playerSide, -3, scene);
-	//	cooldown_ = true;
-	//	firing_ = true;
-	//	current_count_++;
-	//}
-	
-	//else
-	//{
 		timer_ += Time::getElapsedUpdateTimeSeconds();
 		LOG("AARON") << "TIMER: " << timer_;
 			if (timer_ > delay_)
@@ -66,17 +51,11 @@ void TripleShotAIComponent::update(Scene& scene)
 				timer_ = 0;
 				if (current_count_ >= projectile_count_)
 				{
-					//firing_ = false;
 					current_count_ = 0;
 					boss_->setAttack("Idle");
 				}
 			}
 		
-		//else if (timer_ > cooldown_time_)
-		//{
-		//	timer_ = 0;
-		//	cooldown_ = false;
-		//}
 
 	}
 //}

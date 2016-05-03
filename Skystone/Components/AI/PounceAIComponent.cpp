@@ -89,9 +89,7 @@ void PounceAIComponent::update(Scene& scene)
 		{
 			boss_->getPhysics()->setVelY(final_height_ * SPEED);
 			boss_->getPhysics()->setVelX(final_distance_ * playerSide * SPEED);
-				LOG("AARON") << "playerSide: " << playerSide;
-				LOG("AARON") << "final_height_: " << final_height_;
-				LOG("AARON") << "final_distance_: " << final_distance_;
+
 			
 			
 		}

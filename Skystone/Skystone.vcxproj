@@ -105,6 +105,7 @@
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\GUI\HealthBar.cpp" />
     <ClCompile Include="Components\Player\Movement\LockMovementState.cpp" />
+    <ClCompile Include="Components\AI\LazerAIComponent.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Resources\AudioPlayer.cpp" />
     <ClCompile Include="Components\AI\AIComponent.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Components\GUI\TextSelector.h" />
     <ClInclude Include="Components\GUI\HealthBar.h" />
     <ClInclude Include="Components\Player\Movement\LockMovementState.h" />
+    <ClInclude Include="Components\AI\LazerAIComponent.h" />
     <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Resources\AudioPlayer.h" />
     <ClInclude Include="Components\AI\AIjump.h" />
