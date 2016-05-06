@@ -311,6 +311,7 @@
     <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
+    <ClInclude Include="Util\vector_util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

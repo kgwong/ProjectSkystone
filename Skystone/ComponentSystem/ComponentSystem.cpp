@@ -2,7 +2,7 @@
 
 #include "Scene/Scene.h"
 
-#include "Components\Render\RenderComponent.h"
+#include "Components/Render/RenderComponent.h"
 
 #include "Application/Log.h"
 #include <memory>
@@ -47,6 +47,7 @@ void ComponentSystem::addComponent(std::shared_ptr<Component> component)
 	switch (component->getType())
 	{
 	case Component::Type::INPUT:
+		//
 		inputSystem_.addComponent(component);
 		generalComponentSystem_.addComponent(component);
 		break;

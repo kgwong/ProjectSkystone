@@ -237,5 +237,6 @@
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
     <ClInclude Include="Components\Player\Movement\CrouchState.h" />
     <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
+    <ClInclude Include="Util\vector_util.h" />
   </ItemGroup>
 </Project>

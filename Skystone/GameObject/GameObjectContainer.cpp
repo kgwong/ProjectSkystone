@@ -3,7 +3,7 @@
 #include "ComponentEvents/ComponentEvent.h"
 #include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
-
+#include "Util/vector_util.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 
@@ -147,19 +147,12 @@ ObjectVector& GameObjectContainer::get(GameObject::Type type)
 
 void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 {
-	for (size_t i = 0; i < vector.size(); /*empty*/)
-	{
-		auto& obj = vector[i];
-		if (!obj->alive())
-		{
-			obj->broadcastEvent(OnDeathEvent(scene));
-			ComponentSystem::vector_remove(vector, i);
-		}
-		else
-		{
-			++i;
-		}
-	}
+
+	typedef std::shared_ptr<GameObject> obj;
+	util::vector::remove(vector,
+		[](obj& o) { return !o->alive(); },
+		[&scene](obj& o) { o->broadcastEvent(OnDeathEvent(scene)); }
+	);
 }
 
 

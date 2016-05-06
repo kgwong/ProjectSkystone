@@ -1,6 +1,7 @@
 #include "ComponentSubsystem.h"
 
 #include "Components/Component.h"
+#include "Util/vector_util.h"
 
 ComponentSubsystem::ComponentSubsystem()
 {
@@ -18,33 +19,18 @@ void ComponentSubsystem::addComponent(std::shared_ptr<Component> component)
 
 void ComponentSubsystem::update(Scene& scene)
 {
-	for (size_t i = 0; i < components_.size(); /*EMPTY*/)
-	{
-		auto& component = components_[i];
-		if (component->owned())
-		{
-			component->update(scene);
-			++i;
-		}
-		else
-		{
-			ComponentSystem::vector_remove(components_, i);
-		}
-	}
+	typedef std::shared_ptr<Component> comp;
+	util::vector::update_or_remove(components_,
+									[](comp& c) { return !c->owned(); },
+									[&scene](comp& c) { return c->update(scene);}
+	);
 }
 
 void ComponentSubsystem::cleanup()
 {
-	for (size_t i = 0; i < components_.size(); /*EMPTY*/)
-	{
-		auto& component = components_[i];
-		if (component->owned())
-		{
-			++i;
-		}
-		else
-		{
-			ComponentSystem::vector_remove(components_, i);
-		}
-	}
+	typedef std::shared_ptr<Component> comp;
+	util::vector::update_or_remove(components_,
+		[](comp& c) { return !c->owned(); },
+		[](comp& c) {}
+	);
 }
