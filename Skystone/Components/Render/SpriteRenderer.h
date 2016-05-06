@@ -19,6 +19,8 @@ public:
 	void setFlipHorz(bool value);
 	void setFlipVert(bool value);
 
+	void setRotation(double degrees);
+
 	void setSprite(const std::string& relPath);
 	void setSprite(SpriteSheet* newSpriteSheet);
 
@@ -34,6 +36,8 @@ private:
 	int msOnFrame;
 
 	bool flipHorz_, flipVert_; 
+
+	double rotationDegrees_;
 };
 
 #endif //SPRITE_RENDERER_H
