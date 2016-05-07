@@ -19,7 +19,11 @@ LazerAIComponent::LazerAIComponent(GameObject& owner, std::string enemyType) :
 	enemy_type_(enemyType),
 	xDist(0),
 	yDist(0),
-	playerSide(-1)
+	playerSide(-1),
+	firing_(false),
+	Dist(0),
+	projectile_delay_(DEFAULT_PROJECTILE_DELAY),
+	delay_timer_(0)
 {
 }
 
@@ -48,7 +52,7 @@ void LazerAIComponent::update(Scene& scene)
 			charge_physics_->setVelY(1 * SPEED);
 		}
 
-		else if (timer_ > charge_time_)
+		else if (timer_ > charge_time_ && !firing_)
 		{
 			charge_->kill();
 			firing_ = true;
@@ -56,16 +60,29 @@ void LazerAIComponent::update(Scene& scene)
 			xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 			playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 			yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+			Dist = Point::getDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 		}
 
 		else if (firing_)
 		{
-			fireProjectile(xDist, yDist, playerSide, offset_, scene);
-			if (timer_ < move_time_ && timer_ > still_time_)
+			delay_timer_ += Time::getElapsedUpdateTime();
+			if (delay_timer_ > projectile_delay_)
 			{
-				offset_ += lazer_speed_;
+				fireProjectile(xDist, yDist, playerSide, offset_, scene);
+				delay_timer_ = 0;
 			}
-			else if (timer_ > move_time_)
+			if (timer_ < (move_time_ + still_time_) && timer_ > still_time_)
+			{
+				if (Point::getDistance(owner_.getPos(), scene.gameObjects.getPlayer().getPos()) < Dist)
+				{
+					offset_ += lazer_speed_;
+				}
+				else
+				{
+					offset_ -= lazer_speed_;
+				}
+			}
+			else if (timer_ > (move_time_ + still_time_))
 			{
 				offset_ = 0;
 				firing_ = false;
@@ -81,6 +98,7 @@ void LazerAIComponent::fireProjectile(float xDist, float yDist, float playerSide
 	auto bullet = scene.gameObjects.add("EnemyProjectile", "LazerProjectile", owner_.getPos() + Point(0, 25));
 	auto bullet_physics = bullet->getComponent<PhysicsComponent>();
 	float newVelX = projectile_speed_ * playerSide;
+	LOG("AARON") << projectile_speed_;
 	bullet_physics->setVelX(newVelX * SPEED);
 	bullet_physics->setVelY((newVelX * yDist / xDist + offset) * SPEED);
 }

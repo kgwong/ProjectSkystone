@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Render\ColliderBoxRenderer.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
     <ClCompile Include="ComponentEvents\DamageTakenEvent.cpp" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
     <ClInclude Include="Components\AI\BossAIComponent.h" />
@@ -311,6 +313,7 @@
     <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
+    <ClInclude Include="Util\vector_util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

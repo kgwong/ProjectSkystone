@@ -3,15 +3,7 @@
 
 #include "Components/InputComponent.h"
 
-#include "AirborneState.h"
-#include "WalkingState.h"
-#include "FlyingState.h"
-#include "StunState.h"
-#include "LockMovementState.h"
-
-#include "HangState.h"
-#include "LaunchState.h"
-#include "SwingState.h"
+#include "PlayerState.h"
 
 #include <memory>
 

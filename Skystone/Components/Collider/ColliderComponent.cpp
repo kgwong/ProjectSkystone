@@ -3,27 +3,29 @@
 #include "Components/Render/RenderComponent.h"
 #include "Components/Render/SpriteRenderer.h"
 
+#include "Application/Log.h"
+
 ColliderComponent::ColliderComponent(GameObject& owner)
 	: NonUpdatingComponent(owner),
-	_collider{0, 0, 0 ,0}, _offsetX(0), _offsetY(0)
+	collider_{0, 0, 0 ,0}, offsetX_(0), offsetY_(0)
 {
 	//by default, use the size of the sprite
 	RenderComponent* render = owner.getComponent<SpriteRenderer>();
 	if (render != nullptr)
-		_collider = { 0, 0, (float)render->getWidth(), (float)render->getHeight() };
+		collider_ = { 0, 0, (float)render->getWidth(), (float)render->getHeight() };
 }
 
 ColliderComponent::ColliderComponent(GameObject& owner, float offsetX, float offsetY, float width, float height)
 	: NonUpdatingComponent(owner),
-	_collider{0, 0, width, height}, _offsetX(offsetX), _offsetY(offsetY)
+	collider_{0, 0, width, height}, offsetX_(offsetX), offsetY_(offsetY)
 {
 
 }
 
 ColliderComponent::ColliderComponent(GameObject& owner, BoxCollider collider)
-	: NonUpdatingComponent(owner), _offsetX(0), _offsetY(0)
+	: NonUpdatingComponent(owner), offsetX_(0), offsetY_(0),
+	collider_(collider)
 {
-	_collider = collider;
 }
 
 ColliderComponent::~ColliderComponent()
@@ -31,59 +33,74 @@ ColliderComponent::~ColliderComponent()
 }
 
 void ColliderComponent::update()
-{
-	_collider.x = owner_.getPosX() + _offsetX;
-	_collider.y = owner_.getPosY() + _offsetY;
+{	
+	collider_.x = owner_.getPosX() + offsetX_;
+	collider_.y = owner_.getPosY() + offsetY_;
 }
 
 
 void ColliderComponent::setCollider(BoxCollider newCollider)
 {
-	_collider = newCollider;
+	collider_ = newCollider;
+}
+
+ColliderComponent::BoxCollider ColliderComponent::getCollider()
+{
+	return collider_;
 }
 
 float ColliderComponent::getHeight()
 {
-	return _collider.height;
+	return collider_.height;
 }
 
 float ColliderComponent::getWidth()
 {
-	return _collider.width;
+	return collider_.width;
 }
 
 float ColliderComponent::getTop()
 {
 	this->update();
-	return _collider.y;
+	return collider_.y;
 }
 
 float ColliderComponent::getBottom()
 {
 	this->update();
-	return _collider.y + _collider.height;
+	return collider_.y + collider_.height;
 }
 
 float ColliderComponent::getLeft()
 {
 	this->update();
-	return _collider.x;
+	return collider_.x;
 }
 
 float ColliderComponent::getRight()
 {
 	this->update();
-	return _collider.x + _collider.width;
+	return collider_.x + collider_.width;
 }
 
 float ColliderComponent::getOffsetX()
 {
-	return _offsetX;
+	return offsetX_;
 }
 
 float ColliderComponent::getOffsetY()
 {
-	return _offsetY;
+	return offsetY_;
+}
+
+void ColliderComponent::setOffsetX(float offsetX)
+{
+	offsetX_ = offsetX;
+}
+
+void ColliderComponent::setOffsetY(float offsetY)
+{
+	offsetY_ = offsetY;
 }
 
 bool ColliderComponent::checkCollision(GameObject& other)
@@ -111,7 +128,7 @@ bool ColliderComponent::checkCollision(ColliderComponent* other)
 
 	float rightOther = other->getRight();
 	float rightSelf = getRight(); 
-
+	
 	if (topSelf >= bottomOther)
 		return false;
 	if (bottomSelf <= topOther)

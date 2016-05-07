@@ -30,7 +30,7 @@ public:
 	std::shared_ptr<GameObject> buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name);
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
-	std::shared_ptr<GameObject> buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player, GameObject* textSelector);
+	std::shared_ptr<GameObject> buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player);
 
 private:
 	EnemyBuilder enemyBuilder_;

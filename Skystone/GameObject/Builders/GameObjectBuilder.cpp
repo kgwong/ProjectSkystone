@@ -5,6 +5,7 @@
 #include "Game/GameConstants.h"
 
 #include "Components/Render/SpriteRenderer.h"
+#include "Components/Render/ColliderBoxRenderer.h"
 #include "Components/Common/HealthComponent.h"
 #include "Components/Player/Attack/PlayerAttackState.h"
 #include "Components/Player/PlayerComponent.h"
@@ -26,6 +27,7 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 {
 	player.setType(GameObject::Type::PLAYER);
 	player.addComponent(std::make_shared<SpriteRenderer>(player, "Images/run_cycle.png"));
+	//player.addComponent(std::make_shared<ColliderBoxRenderer>(player));
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
 	player.addComponent(std::make_shared<ColliderComponent>(player));
@@ -68,9 +70,9 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildScrollingBackground(Componen
 	return scrollingBackgroundBuilder_.build(componentSystem, backgroundName);
 }
 
-std::shared_ptr<GameObject> GameObjectBuilder::buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player, GameObject* textSelector)
+std::shared_ptr<GameObject> GameObjectBuilder::buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player)
 {
-	return guiBuilder_.build(componentSystem, name, player, textSelector);
+	return guiBuilder_.build(componentSystem, name, player);
 }
 
 std::shared_ptr<GameObject> GameObjectBuilder::buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name)

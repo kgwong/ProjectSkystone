@@ -9,11 +9,12 @@ class LazerAIComponent :
 	public AIComponent
 {
 public:
-	const float DEFAULT_CHARGE_TIME = 0.4;
+	const float DEFAULT_CHARGE_TIME = 0.7;
 	const float DEFAULT_STILL_TIME = 1;
 	const float DEFAULT_MOVE_TIME = 1;
-	const float DEFAULT_PROJECTILE_SPEED = 3;
-	const float DEFAULT_LAZER_SPEED = .2;
+	const float DEFAULT_PROJECTILE_SPEED = 15;
+	const float DEFAULT_LAZER_SPEED = .3;
+	const float DEFAULT_PROJECTILE_DELAY = 40;
 
 public:
 	LazerAIComponent(GameObject & owner, std::string enemyType);
@@ -40,6 +41,9 @@ private:
 	float playerSide;
 	float lazer_speed_;
 	std::string enemy_type_;
+	float Dist;
+	float projectile_delay_;
+	float delay_timer_;
 };
 
 #endif //LAZER_AI_COMPONENT_H

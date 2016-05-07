@@ -5,7 +5,6 @@
 #include <SDL/SDL.h>
 
 const static int defaultFontSize = 28;
-//const static std::string defaultFontPath = "../Assets/Fonts/LDFComicSans.ttf";
 const static std::string defaultFontPath = "../Assets/Fonts/MaiandraGDRegular.ttf";
 
 TextRenderer::TextRenderer(GameObject& owner)
@@ -24,6 +23,8 @@ void TextRenderer::render(GameWindow& window, float percentBehind)
 {
 	if (text_ != "")
 	{
+		// Always create a new texture, even when it hasn't changed
+		// Cache them in a map<string, texture> ?
 		SDL_Color color = { 255, 255, 255 };
 		SDL_Surface* message = TTF_RenderText_Blended(font_, text_.c_str(), color);
 		SDL_Texture* text_texture = SDL_CreateTextureFromSurface(window.getRenderer(), message);

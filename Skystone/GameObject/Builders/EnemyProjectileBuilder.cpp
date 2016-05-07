@@ -55,6 +55,8 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 1));
 		projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
+
 
 	}
 	return newProjectile;

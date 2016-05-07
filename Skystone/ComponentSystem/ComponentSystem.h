@@ -26,9 +26,6 @@ public:
 	template <typename T, typename... Args>
 	std::shared_ptr<T> getNew(Args&& ...args);
 
-	template <typename T>
-	static void vector_remove(std::vector<T>& v, int index);
-
 public:
 	InputSystem inputSystem_;
 	ComponentSubsystem generalComponentSystem_;
@@ -43,13 +40,6 @@ inline std::shared_ptr<T> ComponentSystem::getNew(Args && ...args)
 	auto& newComponent = std::make_shared<T>(args...);
 	addComponent(newComponent);
 	return newComponent;
-}
-
-template <typename T>
-void ComponentSystem::vector_remove(std::vector<T>& v, int index)
-{
-	v[index] = v.back();
-	v.pop_back();
 }
 
 #endif //COMPONENT_SYSTEM_H
