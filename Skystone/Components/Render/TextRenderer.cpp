@@ -115,6 +115,6 @@ void TextRenderer::renderOutline(GameWindow& window, SDL_Texture* outline)
 	double hd = h;
 
 	SDL_Rect src = { 0,0, w, h };
-	SDL_Rect dest = { (int)std::ceil(owner_.getPosX() - wd/2), (int)(owner_.getPosY() - hd/2), w, h };
+	SDL_Rect dest = { (int)(owner_.getPosX() - std::floor(wd/2)), (int)(owner_.getPosY() - std::ceil(hd/2)), w, h };
 	window.render(outline, &src, &dest);
 }
