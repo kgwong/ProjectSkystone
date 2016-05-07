@@ -3,11 +3,7 @@
 #include "ComponentEvents/ComponentEvent.h"
 #include "ComponentEvents/OnDeathEvent.h"
 #include "Application/Log.h"
-
-// duct taping code together
-#include "Components/Render/SpriteRenderer.h"
-#include "Resources/Resources.h"
-#include "Components/GUI/TextSelector.h"
+#include "Util/vector_util.h"
 
 GameObjectBuilder GameObjectContainer::builder_;
 
@@ -66,16 +62,10 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "EnemyProjectile")
 	{
-		if (name == "AcidProjectile")
-		{
-			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
-		}
-		else if (name == "ClawProjectile")
-		{
-			newObject = builder_.buildEnemyProjectile(componentSystem_, name);
-			objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
-		}
+	
+		newObject = builder_.buildEnemyProjectile(componentSystem_, name);
+		objects_[GameObject::Type::ENEMY_PROJECTILE].push_back(newObject);
+		
 	}
 	else if (type == "PlayerHook")
 	{
@@ -99,14 +89,8 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		newObject = builder_.buildEnemy(componentSystem_, name);
 		objects_[GameObject::Type::ENEMY].push_back(newObject);
 	}
-	//duct taping code together
 	else if (type == "Background")
 	{
-		//newObject = std::make_shared<GameObject>();
-		//newObject->setType(GameObject::Type::BACKGROUND);
-		//objects_[GameObject::Type::BACKGROUND].push_back(newObject);
-		//SpriteSheet* sprite = Resources::getSpriteSheet("Assets/GameOverScreen.png");
-		//newObject->addComponent(componentSystem_.getNew<SpriteRenderer>(*newObject, sprite));
 		newObject = builder_.buildBackground(componentSystem_, name);
 		objects_[GameObject::Type::BACKGROUND].push_back(newObject);
 	}
@@ -119,11 +103,12 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	{
 		if (objects_[GameObject::Type::GUI].size() == 0)
 		{
-			auto textSelector = std::make_shared<GameObject>();
-			textSelector->addComponent(componentSystem_.getNew<TextSelector>(*newObject));
+			// buttons go on the most recently constructed TextSelector
+			// first GUI should be the TextSelector
+			auto textSelector = builder_.buildGUI(componentSystem_, "TextSelector", player_);
 			objects_[GameObject::Type::GUI].push_back(textSelector);
 		}
-		newObject = builder_.buildGUI(componentSystem_, name, player_, objects_[GameObject::Type::GUI].at(0).get());
+		newObject = builder_.buildGUI(componentSystem_, name, player_);
 		objects_[GameObject::Type::GUI].push_back(newObject);
 	}
 	else
@@ -158,19 +143,12 @@ ObjectVector& GameObjectContainer::get(GameObject::Type type)
 
 void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 {
-	for (size_t i = 0; i < vector.size(); /*empty*/)
-	{
-		auto& obj = vector[i];
-		if (!obj->alive())
-		{
-			obj->broadcastEvent(OnDeathEvent(scene));
-			ComponentSystem::vector_remove(vector, i);
-		}
-		else
-		{
-			++i;
-		}
-	}
+
+	typedef std::shared_ptr<GameObject> obj;
+	util::vector::remove(vector,
+		[](obj& o) { return !o->alive(); },
+		[&scene](obj& o) { o->broadcastEvent(OnDeathEvent(scene)); }
+	);
 }
 
 

@@ -22,7 +22,8 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	claw_(owner, "Boss"),
 	attack_("Idle"),
 	pounce_(owner, "Boss"),
-	triple_shot_(owner, "Boss")
+	triple_shot_(owner, "Boss"),
+	lazer_(owner, "Boss")
 {
 }
 
@@ -37,6 +38,7 @@ void BossAIComponent::start(Scene & scene)
 	claw_.start(scene);
 	pounce_.start(scene);
 	triple_shot_.start(scene);
+	lazer_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
@@ -71,7 +73,7 @@ void BossAIComponent::update(Scene & scene)
 			initiate_attack_ = false;
 			physics_->setVelX(0);
 		}
-		else if (scene.gameObjects.getPlayer().getPosX() < medium_range_)
+		else if (abs(xDistanceFromPlayer) < medium_range_)
 		{
 			physics_->setVelX(0);
 			//pick between 3 attacks
@@ -81,17 +83,17 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
-				attack_ = "jump attack";
+				attack_ = "lazer";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
 				LOG("AARON") << "INITIATING TRIPLE SHOT";
-				attack_ = "triple shot";
+				attack_ = "lazer";
 				break;
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing
 				LOG("AARON") << "INITIATING LAZER";
-				attack_ = "triple shot";
+				attack_ = "lazer";
 				break;
 			}
 			initiate_attack_ = false;
@@ -106,23 +108,20 @@ void BossAIComponent::update(Scene & scene)
 				physics_->setVelX(0);
 				LOG("AARON") << "JUST IDLING";
 				initiate_attack_ = false;
-				timer_ += 4;
 				break;
 			case 1:
 				LOG("AARON") << "WALKING AROUND";
 				physics_->setVelX(xDistanceFromPlayer / abs(xDistanceFromPlayer) * -DEFAULT_MOVE_SPEED * SPEED);
 				initiate_attack_ = false;
-				timer_ += 4;
 				break;
 			}
 		}
 	}
 	//if on cooldown, don't attack, possibly move around
-	if (timer_ > cooldown_time_)
+	if (timer_ > cooldown_time_ && attack_ == "Idle")
 	{
 		initiate_attack_ = true;
 		timer_ = 0;
-
 	}
 	else 
 	{
@@ -143,7 +142,7 @@ void BossAIComponent::update(Scene & scene)
 
 		else if (attack_ == "lazer")
 		{
-
+			lazer_.update(scene);
 		}
 	}
 }

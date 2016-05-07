@@ -44,6 +44,20 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 20));
 		projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
 
+
+	}
+	else if (name == "LazerProjectile")
+	{
+
+		projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
+		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, "Assets/Animations/acidprojectile.png"));
+		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<DamageComponent>(projectileToBuild, 1));
+		projectileToBuild.addComponent(componentSystem.getNew<EnemyProjectileComponent>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<DieOnCollision>(projectileToBuild));
+		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));
+
+
 	}
 	return newProjectile;
 }

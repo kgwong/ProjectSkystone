@@ -28,6 +28,8 @@ void PlayerComponent::start(Scene& scene)
 
 void PlayerComponent::handleEvent(const CollisionEvent& e)
 {
+	DamageComponent* pDamage = e.getOtherObject().getComponent<DamageComponent>();
+
 	switch (e.getOtherObject().getType())
 	{
 	case GameObject::Type::DROP:
@@ -35,6 +37,8 @@ void PlayerComponent::handleEvent(const CollisionEvent& e)
 		LOG("GAME") << "Picked up a thing to heal 10hp!";
 		break;
 	case GameObject::Type::ENEMY_PROJECTILE:
+		health_->takeDamage(pDamage->getDamage());
+		break;
 	case GameObject::Type::ENEMY:
 		DamageComponent* damage = e.getOtherObject().getComponent<DamageComponent>();
 		if (health_->takeDamage(damage->getDamage()))

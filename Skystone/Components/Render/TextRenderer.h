@@ -17,9 +17,22 @@ public:
 	void setText(const std::string& newText);
 	void setFontSize(int size);
 
+	void setTextColor(SDL_Color color);
+	void setOutlineColor(SDL_Color color);
+
 private:
 	TTF_Font* font_;
+	TTF_Font* outline_;
+
+	SDL_Color textColor_, outlineColor_;
 	std::string text_;
+
+
+	SDL_Texture* getTextTexture(GameWindow& window);
+	SDL_Texture* getOutlineTexture(GameWindow& window);
+
+	void renderText(GameWindow& window, SDL_Texture* text);
+	void renderOutline(GameWindow& window, SDL_Texture* outline);
 };
 
 #endif //TEXT_RENDERER_H

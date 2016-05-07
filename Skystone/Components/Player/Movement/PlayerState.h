@@ -18,6 +18,8 @@ public:
 	virtual void onEnter(Scene& scene) {}
 	virtual void onExit(Scene& scene) {}
 
+	virtual void handleInput(Scene& scene, SDL_Event& e) = 0;
+
 	virtual std::string name() = 0;
 
 };

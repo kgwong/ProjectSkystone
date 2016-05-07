@@ -1,13 +1,17 @@
 #include "PlayerMovementState.h"
 
-#include "PlayerState.h"
 #include "Application/Log.h"
 
-#include "ComponentEvents/CollisionEvent.h" 
-#include "Game/GameConstants.h"
-#include "Components/Collider/ColliderComponent.h"
+#include "AirborneState.h"
+#include "WalkingState.h"
+#include "CrouchState.h"
+#include "FlyingState.h"
+#include "StunState.h"
+#include "LockMovementState.h"
 
-#include <cassert>
+#include "HangState.h"
+#include "LaunchState.h"
+#include "SwingState.h"
 
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner)
@@ -17,6 +21,7 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	direction = 0;
 
 	addState(std::make_shared<WalkingState>(owner));
+	addState(std::make_shared<CrouchState>(owner));
 	addState(std::make_shared<LockMovementState>(owner));
 	addState(std::make_shared<FlyingState>(owner));
 	addState(std::make_shared<AirborneState>(owner));
@@ -42,6 +47,7 @@ void PlayerMovementState::start(Scene& scene)
 	{
 		s.second->start(scene);
 	}
+	currentState_->onEnter(scene);
 }
 
 void PlayerMovementState::update(Scene& scene)
@@ -51,10 +57,8 @@ void PlayerMovementState::update(Scene& scene)
 
 void PlayerMovementState::changeState(Scene& scene, const std::string& stateName)
 {
-	LOG("Kevin") << "LEAVING: " << currentState_->name();
 	currentState_->onExit(scene);
 	currentState_ = getStateFromName(stateName);
-	LOG("Kevin") << "ENTERING: " << currentState_->name();
 	currentState_->onEnter(scene);
 }
 
@@ -119,4 +123,3 @@ void PlayerMovementState::setRadius(float r)
 {
 	radius = r;
 }
-

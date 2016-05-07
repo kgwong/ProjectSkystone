@@ -54,15 +54,8 @@ void PounceAIComponent::update(Scene& scene)
 	if (enemy_type_ == "Boss")
 	{
 		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-		if (xDist < 0)
-		{
-			LOG("AARON") << "RIGHT";
-		}
-		else
-		{
-			LOG("AARON") << "LEFT";
-		}
-		float distance_ratio = xDist / radius_;
+
+		float distance_ratio = abs(xDist) / radius_;
 		final_height_ = jump_height_ * distance_ratio;
 		final_distance_ = jump_distance_ * distance_ratio;
 
@@ -90,12 +83,14 @@ void PounceAIComponent::update(Scene& scene)
 		float xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 		float playerSide;
 
-		playerSide = Point::getFacingDirection(xDist, owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-
+		playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+		LOG("AARON") << playerSide;
 		if (enemy_type_ == "Boss")
 		{
 			boss_->getPhysics()->setVelY(final_height_ * SPEED);
 			boss_->getPhysics()->setVelX(final_distance_ * playerSide * SPEED);
+
+			
 			
 		}
 		else if (AIComponent::isNearby(xDist, radius_))
@@ -117,6 +112,8 @@ void PounceAIComponent::update(Scene& scene)
 			if (!boss_->getPhysics()->isFalling())
 			{
 				boss_->getPhysics()->setVelX(0);
+				boss_->setAttack("Idle");
+				cooldown_ = false;
 			}
 		}
 	}

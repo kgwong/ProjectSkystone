@@ -14,7 +14,8 @@ SpriteRenderer::SpriteRenderer(GameObject& owner, const std::string& relPath)
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
 	:RenderComponent(owner), spriteSheet_(spriteSheet),
 	currFrameIndex(0), msOnFrame(0),
-	flipHorz_(false), flipVert_(false)
+	flipHorz_(false), flipVert_(false),
+	rotationDegrees_(0)
 {
 }
 
@@ -43,6 +44,11 @@ void SpriteRenderer::setFlipHorz(bool value)
 void SpriteRenderer::setFlipVert(bool value)
 {
 	flipVert_ = value;
+}
+
+void SpriteRenderer::setRotation(double degrees)
+{
+	rotationDegrees_ = degrees;
 }
 
 void SpriteRenderer::setSprite(const std::string& relPath)
@@ -94,7 +100,7 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 	{
 		finalFlip = SDL_FLIP_NONE;
 	}
-	gameWindow.render(spriteSheet_->getTexture(), spriteSheet_->getFrameRect(currFrameIndex), &drawDest, NULL, NULL, finalFlip);
+	gameWindow.render(spriteSheet_->getTexture(), spriteSheet_->getFrameRect(currFrameIndex), &drawDest, rotationDegrees_, NULL, finalFlip);
 }
 
 int SpriteRenderer::getWidth()

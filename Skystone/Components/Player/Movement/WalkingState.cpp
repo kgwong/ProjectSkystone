@@ -38,6 +38,10 @@ void WalkingState::handleInput(Scene& scene, SDL_Event& e)
 	{
 		controlComponent_->changeMovementState(scene, "LockMovementState");
 	}
+	else if (GameInputs::keyDown(e, DOWN))
+	{
+		controlComponent_->changeMovementState(scene, "CrouchState");
+	}
 }
 
 void WalkingState::start(Scene& scene)

@@ -33,6 +33,11 @@ void AirborneState::handleInput(Scene& scene, SDL_Event& e)
 			controlComponent_->changeMovementState(scene, "FlyingState");
 		}
 	}
+	//temp
+	if (GameInputs::keyDown(e, DOWN))
+	{
+		controlComponent_->changeMovementState(scene, "CrouchState");
+	}
 }
 
 void AirborneState::start(Scene& scene)

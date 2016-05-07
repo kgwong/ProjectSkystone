@@ -23,7 +23,8 @@ public:
 	virtual void start(Scene& scene) {};
 	void update();
 
-	void setCollider(BoxCollider newCollider); 
+	void setCollider(BoxCollider newCollider);
+	BoxCollider getCollider();
 
 	float getHeight();
 	float getWidth();
@@ -36,12 +37,15 @@ public:
 	float getOffsetX();
 	float getOffsetY();
 
+	void setOffsetX(float offsetX);
+	void setOffsetY(float offsetY);
+
 	bool checkCollision(GameObject& other);
 	bool checkCollision(ColliderComponent* other);
 
 private:
-	BoxCollider _collider;
-	float _offsetX, _offsetY;
+	BoxCollider collider_;
+	float offsetX_, offsetY_;
 };
 
 #endif //COLLIDERCOMPONENT_H

@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-const float PhysicsComponent::GRAVITY = 60.0f;
+const float PhysicsComponent::GRAVITY = 3600.0f;
 const float PhysicsComponent::TERMINAL_VELOCITY = 1200.0f;
 
 PhysicsComponent::PhysicsComponent(GameObject& owner)
@@ -59,7 +59,7 @@ void PhysicsComponent::enactGravity()
 {
 	if (gravityEnabled_)
 	{
-		velY_ += GRAVITY * Time::getElapsedUpdateTimeSeconds() * 60;
+		velY_ += GRAVITY * Time::getElapsedUpdateTimeSeconds();
 		if (velY_ > TERMINAL_VELOCITY)
 		{
 			velY_ = TERMINAL_VELOCITY;
@@ -148,6 +148,7 @@ void PhysicsComponent::updatePosition(Scene& scene, Axis axis)
 			owner_.setPosY(owner_.getPosY() + velY_ * Time::getElapsedUpdateTimeSeconds());
 			break;
 		default:
+			__debugbreak();
 			break;
 	}
 	
@@ -161,10 +162,10 @@ void PhysicsComponent::correctPositionAfterCollision(Scene& scene, Axis axis)
 {
 	if (owner_.getType() != GameObject::Type::TILE)
 	{
-		int startC = std::max(0, (int) (owner_.getPosX() / Constants::TILE_SIZE));
-		int startR = std::max(0, (int) (owner_.getPosY() / Constants::TILE_SIZE));
-		int endC = std::min(scene.gameObjects.getTiles().cols - 1, (int)((owner_.getPosX() + collider_->getWidth()) / Constants::TILE_SIZE));
-		int endR = std::min(scene.gameObjects.getTiles().rows - 1, (int)((owner_.getPosY() + collider_->getHeight()) / Constants::TILE_SIZE));
+		int startC = std::max(0, (int) (collider_->getLeft() / Constants::TILE_SIZE));
+		int startR = std::max(0, (int) (collider_->getTop() / Constants::TILE_SIZE));
+		int endC = std::min(scene.gameObjects.getTiles().cols - 1, (int)((collider_->getRight()) / Constants::TILE_SIZE));
+		int endR = std::min(scene.gameObjects.getTiles().rows - 1, (int)((collider_->getBottom()) / Constants::TILE_SIZE));
 
 
 		for (int c = startC; c <= endC; ++c)
@@ -246,6 +247,7 @@ void PhysicsComponent::correctPosition(GameObject& other, Scene& scene, Axis axi
 			setVelY(0.0f);
 			break;
 		default:
+			__debugbreak();
 			break;
 	}
 }
