@@ -52,7 +52,7 @@ void PlayerControlComponent::changeHookState(Scene& scene, const std::string& st
 	LOG("HARVEY") << hooker_.getState()->name();
 }
 
-PlayerHookState PlayerControlComponent::HookState()
+PlayerHookState& PlayerControlComponent::HookState()
 {
 	return hooker_;
 }

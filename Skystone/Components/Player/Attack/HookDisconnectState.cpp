@@ -28,7 +28,7 @@ void HookDisconnectState::onExit(Scene& scene)
 }
 void HookDisconnectState::handleInput(Scene& scene, SDL_Event& e)
 {
-
+	
 	if (GameInputs::keyDown(e, UP))
 	{
 		playerAim_ = AimState::UP;
@@ -63,6 +63,11 @@ void HookDisconnectState::update(Scene& scene)
 AimState& HookDisconnectState::getAimState()
 {
 	return playerAim_;
+}
+
+void HookDisconnectState::setAimState(AimState aim)
+{
+	playerAim_ = aim;
 }
 
 float HookDisconnectState::getDegrees()

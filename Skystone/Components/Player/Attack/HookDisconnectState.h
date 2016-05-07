@@ -17,6 +17,7 @@ public:
 
 	float getDegrees();
 	AimState& getAimState();
+	void setAimState(AimState aim);
 
 private:
 	AimState playerAim_;

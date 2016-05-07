@@ -30,6 +30,7 @@ HangState::~HangState()
 
 void HangState::onEnter(Scene& scene)
 {
+	LOG("HARVEY") << "direction: " << owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
@@ -54,15 +55,23 @@ void HangState::onEnter(Scene& scene)
 	ySpeed_ = DEFAULT_SPEED;
 	yDirection_ = 0;
 	
-	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
+	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
 	
-	owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
-	if (playerAim == AimState::LEFT || playerAim == AimState::RIGHT)
+	//possible solution - put getting direction from keyboard input in separate state.
+	//write it independent of control code input.
+	//glitch is that it always swings.. from swing to hang!!!!
+
+	float xDistance = hookPosition_.x - owner_.getPosX();
+	LOG("HARVEY") << "HOOKPOSITION: " << hookPosition_;
+	LOG("HARVEY") << "owner position: " << owner_.getPos();
+	LOG("HARVEY") << "AIM STATE: " << owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
+
+	if (playerAim != AimState::UP)
 	{
 		LOG("HARVEY") << owner_.getPos();
 		if (playerAim == AimState::LEFT)
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
-		else
+		else if (playerAim == AimState::RIGHT)
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
 
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");

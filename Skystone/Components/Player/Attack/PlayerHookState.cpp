@@ -5,6 +5,7 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Collider/ColliderComponent.h"
+#include "Components/Render/SpriteRenderer.h"
 
 #include "Scene/Level/Level.h"
 #include "Application/Log.h"
@@ -32,7 +33,7 @@ void PlayerHookState::handleInput(Scene& scene, SDL_Event& e)
 {
 	//POLYMORPHISM
 	hookStateManager_->handleInput(scene, e);
-
+	_currentAimState = disconnectState.getAimState();
 	//if (GameInputs::keyDown(e, UP))
 	//{
 	//	_currentAimState = AimState::UP;
@@ -72,6 +73,29 @@ AimState& PlayerHookState::getAimState()
 	return _currentAimState;
 }
 
+void PlayerHookState::setAimState(AimState state)
+{
+	_currentAimState = state;
+	disconnectState.setAimState(_currentAimState);
+}
+
+std::string PlayerHookState::AimStateName()
+{
+	switch (_currentAimState)
+	{
+	case AimState::LEFT:
+		return "LEFT";
+	case AimState::RIGHT:
+			return "RIGHT";
+	case AimState::UP:
+		return "UP";
+	default:
+		return "NO DIRECTION";
+	}
+
+	return "NO DIRECTION";
+}
+
 void PlayerHookState::changeState(Scene& scene, const std::string& stateName)
 {
 	hookStateManager_->onExit(scene);
@@ -98,8 +122,6 @@ void PlayerHookState::instantiateHook(Scene& scene)
 		hookPosition.y -= 50;
 
 	scene.gameObjects.playerHook = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
-
-	//hookRef = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
 	
 	float testVel = 15.0f;
 	float newVelX = (float)(testVel * cos(toRadians(getDegrees())));
@@ -147,12 +169,18 @@ HookStateManager* PlayerHookState::getState()
 {
 	return hookStateManager_;
 }
-
+//NOT BUILDING HOOKS
 void PlayerHookState::start(Scene& scene)
 {
+	LOG("HARVEY") << "DONE";
 	launchState.start(scene);
 	connectState.start(scene);
 	disconnectState.start(scene);
+
+	if (scene.gameObjects.playerHook != nullptr)
+		LOG("HARVEY") << scene.gameObjects.playerHook->getComponent<SpriteRenderer>()->getHeight();
+	else
+		LOG("HARVEY") << scene.gameObjects.playerHook->getComponent<SpriteRenderer>()->getWidth();
 }
 
 void PlayerHookState::update(Scene& scene)

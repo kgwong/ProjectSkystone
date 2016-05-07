@@ -15,7 +15,13 @@ public:
 	virtual void update(Scene& scene);
 
 	virtual double getAngle();
-	virtual std::string name() { return "HookLaunchState"; }
+	virtual std::string name();
+
+	void instantiateHook(Scene& scene);
+
+private:
+	float _degrees;
+
 
 };
 

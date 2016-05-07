@@ -4,6 +4,7 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 #include "Components/Common/StickOnCollision.h"
+#include "GameMath/CircleMath.h"
 
 HookLaunchState::HookLaunchState(GameObject& owner)
 	: HookStateManager(owner)
@@ -21,6 +22,7 @@ void HookLaunchState::onEnter(Scene& scene)
 	//auto physics = player.getComponent<PlayerHookState>()->hookRef->getComponent<PhysicsComponent>();
 	//physics->setVelX(testvel * 60.0f);
 	//physics->setVelY(testvel * 60.0f);
+	instantiateHook(scene);
 }
 
 void HookLaunchState::onExit(Scene& scene)
@@ -39,6 +41,35 @@ void HookLaunchState::handleInput(Scene& scene, SDL_Event& e)
 	//}
 
 	//or to be simple do nothing.
+}
+
+
+void HookLaunchState::instantiateHook(Scene& scene)
+{
+	int test_velocity = 5;
+	_degrees = owner_.getComponent<PlayerControlComponent>()->HookState().getDegrees();
+	float leftSideDegree = 225;
+	float rightSideDegree = 315;
+	float upSideDegree = 270;
+
+	Point hookPosition = scene.gameObjects.getPlayer().getPos();
+
+	//offset.
+	if (_degrees == leftSideDegree)
+		hookPosition.x -= 20;
+	else if (_degrees == rightSideDegree)
+		hookPosition.x += 30;
+	else if (_degrees == upSideDegree)
+		hookPosition.y -= 50;
+
+	scene.gameObjects.playerHook = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
+
+	float testVel = 15.0f;
+	float newVelX = (float)(testVel * cos(toRadians(_degrees)));
+	float newVelY = (float)(testVel * sin(toRadians(_degrees)));
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->enableGravity(false);
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelX(newVelX * 60.0f);
+	scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelY(newVelY * 60.0f);
 }
 
 //change player to hook.
@@ -103,5 +134,10 @@ void HookLaunchState::update(Scene& scene)
 double HookLaunchState::getAngle()
 {
 	return 0.0;
+}
+
+std::string HookLaunchState::name()
+{
+	return "HookLaunchState"; 
 }
 

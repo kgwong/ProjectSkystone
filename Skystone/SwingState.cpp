@@ -68,7 +68,6 @@ void SwingState::onExit(Scene& scene)
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setSpeed(xSpeed_);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setAngle(currentAngle_);
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setRadius(radius_);
-	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
 	xSpeed_ = 1.1f;
 	currentAngle_ = 0.0f;
 	xDirection_ = 0;
@@ -97,6 +96,7 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Launch");
+		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
 	}
 }
 void SwingState::update(Scene& scene)
@@ -124,7 +124,7 @@ void SwingState::update(Scene& scene)
 			angleRange_ += angleRange_ * 1.04f;
 			if (angleRange_ > MAX_ANGLE)
 				angleRange_ = MAX_ANGLE;
-			xSpeed_ *= 1.5f;
+			xSpeed_ *= 1.9f;
 			if (xSpeed_ > 6.61f)
 				xSpeed_ = 6.61f;
 		}
@@ -149,6 +149,10 @@ void SwingState::update(Scene& scene)
 		if (angleRange_ < 5)
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
+			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
+			owner_.setPos(hookPosition_.x, hookPosition_.y + radius_);//where player should be, perfectly aligned with the hook's x-coordinate.
+			owner_.getComponent<PlayerControlComponent>()->HookState().setAimState(AimState::UP);
+			LOG("HARVEY") << "HI " <<owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
 			return;
 		}
 	}

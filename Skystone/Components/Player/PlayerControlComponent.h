@@ -25,7 +25,7 @@ public:
 
 	//----harvey function----///
 	void changeHookState(Scene& scene, const std::string& stateName);
-	PlayerHookState HookState();
+	PlayerHookState& HookState();//needs to be returned as reference.
 	PlayerMovementState& MovementState();
 	PlayerAttackState& AttackState();
 	virtual void handleEvent(const CollisionEvent& e);

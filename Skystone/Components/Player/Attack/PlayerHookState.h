@@ -29,11 +29,10 @@ public:
 	void update(Scene& scene);
 	double getDegrees();
 	AimState& getAimState();
+	void setAimState(AimState state);
+	std::string AimStateName();
 	void changeState(Scene& scene, const std::string& stateName);
 
-	//will deprecate--------------------
-	std::shared_ptr<GameObject> hookRef;
-	///////------------------
 	void instantiateHook(Scene& scene);
 	void connectHook(Scene& scene);
 	void disconnectHook(Scene& scene);
