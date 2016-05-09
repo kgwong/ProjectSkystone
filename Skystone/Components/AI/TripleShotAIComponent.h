@@ -25,7 +25,6 @@ public:
 	virtual void start(Scene & scene);
 	virtual void update(Scene & scene);
 
-	void fireProjectile(float xDist, float yDist, float playerSide, float offset, Scene& scene);
 
 private:
 	float delay_;

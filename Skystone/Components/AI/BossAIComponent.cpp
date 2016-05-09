@@ -65,7 +65,7 @@ void BossAIComponent::update(Scene & scene)
 			physics_->setVelX(0);
 		}
 		//CHANGE THE Y POS CHECKER AFTER ACTUAL SIZE IS IMPLEMENTED
-		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() < owner_.getPosY())
+		else if (abs(xDistanceFromPlayer) < close_range_ && scene.gameObjects.getPlayer().getPosY() >= owner_.getPosY())
 		{
 			//close range attack
 			LOG("AARON") << "INITIATING CLOSE RANGE ATTACK";
@@ -83,12 +83,12 @@ void BossAIComponent::update(Scene & scene)
 			case 0:
 				//jumps into air, damages area nearby when it hits the ground (stays airborn for a moment)
 				LOG("AARON") << "INITIATING JUMP ATTACK";
-				attack_ = "lazer";
+				attack_ = "jump attack";
 				break;
 			case 1:
 				//low damage, should be hard to dodge
 				LOG("AARON") << "INITIATING TRIPLE SHOT";
-				attack_ = "lazer";
+				attack_ = "triple shot";
 				break;
 			case 2:
 				//visibly charges a shot, then shoots a line, which moves for a second then stops firing

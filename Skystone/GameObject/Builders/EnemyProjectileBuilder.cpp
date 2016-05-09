@@ -37,7 +37,7 @@ std::shared_ptr<GameObject> EnemyProjectileBuilder::build(ComponentSystem& compo
 	else if (name == "ClawProjectile")
 	{
 
-		projectileToBuild.setType(GameObject::Type::ENEMY_PROJECTILE);
+		projectileToBuild.setType(GameObject::Type::ENEMY);
 		projectileToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(projectileToBuild, "Assets/Animations/acidprojectile.png"));
 		projectileToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(projectileToBuild));
 		projectileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(projectileToBuild));

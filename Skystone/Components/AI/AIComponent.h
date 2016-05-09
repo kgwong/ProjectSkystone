@@ -14,6 +14,7 @@ public:
 	virtual void handleEvent(const OnDeathEvent& e);
 
 	virtual Component::Type getType() final;
+	virtual void fireProjectile(float xDist, float yDist, float playerSide, float offset, Scene& scene, float speed);
 
 	static bool isNearby(float dist, float radius);
 

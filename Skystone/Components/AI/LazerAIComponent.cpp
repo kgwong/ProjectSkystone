@@ -4,6 +4,8 @@
 #include "Game/GameTime.h"
 #include "Application/Log.h"
 #include "Components/Physics/PhysicsComponent.h"
+#include <math.h>
+#include "Components/Render/SpriteRenderer.h"
 #define SPEED 60.0f
 
 LazerAIComponent::LazerAIComponent(GameObject& owner, std::string enemyType) :
@@ -68,7 +70,7 @@ void LazerAIComponent::update(Scene& scene)
 			delay_timer_ += Time::getElapsedUpdateTime();
 			if (delay_timer_ > projectile_delay_)
 			{
-				fireProjectile(xDist, yDist, playerSide, offset_, scene);
+				fireProjectile(xDist, yDist, playerSide, offset_, scene, projectile_speed_);
 				delay_timer_ = 0;
 			}
 			if (timer_ < (move_time_ + still_time_) && timer_ > still_time_)
@@ -92,13 +94,4 @@ void LazerAIComponent::update(Scene& scene)
 			}
 		}
 	}
-}
-void LazerAIComponent::fireProjectile(float xDist, float yDist, float playerSide, float offset, Scene& scene)
-{
-	auto bullet = scene.gameObjects.add("EnemyProjectile", "LazerProjectile", owner_.getPos() + Point(0, 25));
-	auto bullet_physics = bullet->getComponent<PhysicsComponent>();
-	float newVelX = projectile_speed_ * playerSide;
-	LOG("AARON") << projectile_speed_;
-	bullet_physics->setVelX(newVelX * SPEED);
-	bullet_physics->setVelY((newVelX * yDist / xDist + offset) * SPEED);
 }
