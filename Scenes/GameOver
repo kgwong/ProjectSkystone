@@ -1,1 +1,3 @@
-Background GameOverScreen
+Background GameOverScreenScaled
+GUI ContinueGameButton 320 300
+GUI ExitToMainMenuButton 320 350
