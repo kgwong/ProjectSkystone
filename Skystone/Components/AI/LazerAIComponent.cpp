@@ -70,10 +70,8 @@ void LazerAIComponent::update(Scene& scene)
 		if (start_)
 		{
 			start_ = false;
-			charge_ = fireProjectile(0, 1, scene, 0, -50);
-			//charge_ = scene.gameObjects.add("EnemyProjectile", "LazerProjectile", owner_.getPos() - Point(0, 50));
-			//PhysicsComponent* charge_physics_ = charge_->getComponent<PhysicsComponent>();
-			//charge_physics_->setVelY(1 * SPEED);
+			charge_ = fireProjectile(0, 1, scene, 0, 0, -50);
+
 		}
 
 		else if (timer_ > charge_time_ && !firing_)

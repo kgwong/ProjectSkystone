@@ -92,6 +92,7 @@
     <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
+    <ClCompile Include="Scene\GameOverScene.cpp" />
     <ClCompile Include="Game\GameInputs.cpp" />
     <ClCompile Include="GameTypes\Point.cpp" />
     <ClCompile Include="Components\PlayerProjectile\PlayerProjectileComponent.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
+    <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="GameTypes\Quadrant.h" />
     <ClInclude Include="ComponentEvents\OnDeathEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />

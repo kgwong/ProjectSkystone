@@ -23,7 +23,8 @@ BossAIComponent::BossAIComponent(GameObject & owner):
 	attack_("Idle"),
 	pounce_(owner, "Boss"),
 	triple_shot_(owner, "Boss"),
-	lazer_(owner, "Boss")
+	lazer_(owner, "Boss"),
+	shockwave_(owner, "Boss")
 {
 }
 
@@ -39,6 +40,7 @@ void BossAIComponent::start(Scene & scene)
 	pounce_.start(scene);
 	triple_shot_.start(scene);
 	lazer_.start(scene);
+	shockwave_.start(scene);
 }
 
 void BossAIComponent::update(Scene & scene)
@@ -47,7 +49,7 @@ void BossAIComponent::update(Scene & scene)
 	if (initiate_attack_)
 	{
 		float xDistanceFromPlayer = owner_.getPosX() - scene.gameObjects.getPlayer().getPosX();
-		//temporary
+		//TEMPORARY
 		if (xDistanceFromPlayer < 0)
 		{
 			facing_ = 1;
@@ -143,6 +145,11 @@ void BossAIComponent::update(Scene & scene)
 		else if (attack_ == "lazer")
 		{
 			lazer_.update(scene);
+		}
+
+		else if (attack_ == "shockwave")
+		{
+			shockwave_.update(scene);
 		}
 	}
 }

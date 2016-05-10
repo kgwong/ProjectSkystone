@@ -58,9 +58,9 @@ void AIComponent::fireProjectileDirection(float xDist, float yDist, float player
 
 }
 
-std::shared_ptr<GameObject> AIComponent::fireProjectile(float xSpeed, float ySpeed, Scene& scene, int degrees, int position)
+std::shared_ptr<GameObject> AIComponent::fireProjectile(float xSpeed, float ySpeed, Scene& scene, int degrees, int positionX, int positionY, std::string attack)
 {
-	auto bullet = scene.gameObjects.add("EnemyProjectile", "AcidProjectile", owner_.getPos() + Point(0, position));
+	auto bullet = scene.gameObjects.add("EnemyProjectile", attack, owner_.getPos() + Point(0, positionY) + Point(positionX, 0));
 	auto bullet_physics = bullet->getComponent<PhysicsComponent>();
 	
 	bullet_physics->setVelX(xSpeed * SPEED);

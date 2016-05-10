@@ -70,6 +70,13 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		text->setSceneOnSelection(SceneID::LEVEL);
 		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
+	else if (name == "GameOverHeader")
+	{
+		auto text = componentSystem.getNew<TextRenderer>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("GAME OVER");
+		text->setFontSize((int)(TextRenderer::DEFAULT_FONT_SIZE * 1.5));
+	}
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{
 		guiToBuild.addComponent(componentSystem.getNew<InputSceneChanger>(guiToBuild, ESC, SceneID::LEVEL));

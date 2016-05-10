@@ -54,7 +54,10 @@ void TripleShotAIComponent::update(Scene& scene)
 				if (current_count_ >= projectile_count_)
 				{
 					current_count_ = 0;
-					boss_->setAttack("Idle");
+					if (enemy_type_ == "Boss")
+					{
+						boss_->setAttack("Idle");
+					}	
 				}
 			}
 		

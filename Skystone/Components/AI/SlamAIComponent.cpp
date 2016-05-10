@@ -60,7 +60,7 @@ void SlamAIComponent::update(Scene & scene)
 			claw_->kill();
 			attack_initiated_ = false;
 			timer_ = 0;
-			boss_->setAttack("Idle");
+			boss_->setAttack("shockwave");
 		}
 		else if (timer_ > swing_time_ + windup_time_)
 		{

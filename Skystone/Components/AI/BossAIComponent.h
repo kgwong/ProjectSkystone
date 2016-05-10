@@ -6,6 +6,7 @@
 #include "PounceAIComponent.h"
 #include "TripleShotAIComponent.h"
 #include "LazerAIComponent.h"
+#include "ShockwaveAIComponent.h"
 #include <string>
 
 class PhysicsComponent;
@@ -45,6 +46,8 @@ private:
 	PounceAIComponent pounce_;
 	TripleShotAIComponent triple_shot_;
 	LazerAIComponent lazer_;
+	ShockwaveAIComponent shockwave_;
+
 };
 
 #endif
