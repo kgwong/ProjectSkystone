@@ -5,15 +5,25 @@
 #include <iostream>
 #include <iomanip>
 
-LevelMap::LevelMap(int rows, int cols)
-	:levels_(rows, std::vector<int>(cols, LevelManager::INVALID_LEVEL_ID)),
-	numRows_(rows),
-	numCols_(cols)
+LevelMap::LevelMap()
 {
+	setSize(0, 0);
+}
+
+LevelMap::LevelMap(int rows, int cols)
+{
+	setSize(rows, cols);
 }
 
 LevelMap::~LevelMap()
 {
+}
+
+void LevelMap::setSize(int rows, int cols)
+{
+	levels_ = std::vector<std::vector<int>>(rows, std::vector<int>(cols, LevelManager::INVALID_LEVEL_ID));
+	numRows_ = rows;
+	numCols_ = cols;
 }
 
 void LevelMap::addLevel(int id, int blockWidth, int blockHeight, int row, int col)

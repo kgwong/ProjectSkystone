@@ -12,8 +12,12 @@ class Level;
 class LevelMap
 {
 public:
+	LevelMap();
 	LevelMap(int rows, int cols);
 	~LevelMap();
+
+	/*Erases the levelmap*/
+	void setSize(int rows, int cols);
 
 	void addLevel(int id, int blockWidth, int blockHeight, int row, int col);	
 	

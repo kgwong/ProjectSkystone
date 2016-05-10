@@ -1,7 +1,7 @@
 #include "LevelManager.h"
 
 #include "Level.h"
-
+#include "LevelMapLoader.h"
 #include "Application/Log.h"
 #include "Game/GameInputs.h"
 
@@ -11,10 +11,7 @@ LevelManager::LevelManager()
 	currLevel_(nullptr),
 	nextLevelID_(INVALID_LEVEL_ID)
 {
-	//levelMap_.addLevel(1, 2, 2, 1, 1);
-	//levelMap_.addLevel(2, 1, 2, 1, 3);
-	//levelMap_.addLevel(3, 2, 1, 0, 2);
-	//levelMap_.addLevel(4, 1, 1, 0, 4);
+	//LevelMapLoader::load(levelMap_, "LevelMaps/test.txt");
 	
 	levelMap_.addLevel(0, 1, 6, 1, 1);
 	levelMap_.addLevel(1, 4, 2, 5, 2);
