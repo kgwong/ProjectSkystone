@@ -9,6 +9,8 @@
 class TextRenderer : public RenderComponent
 {
 public:
+	static const int DEFAULT_FONT_SIZE = 28;
+
 	TextRenderer(GameObject& owner);
 	virtual ~TextRenderer();
 	virtual void render(GameWindow& window, float percentBehind);
@@ -26,7 +28,6 @@ private:
 
 	SDL_Color textColor_, outlineColor_;
 	std::string text_;
-
 
 	SDL_Texture* getTextTexture(GameWindow& window);
 	SDL_Texture* getOutlineTexture(GameWindow& window);
