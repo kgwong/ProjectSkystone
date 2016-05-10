@@ -43,7 +43,7 @@ void LaunchState::onEnter(Scene& scene)
 	LOG("HARVEY") << "radius: " << radius_;
 	LOG("HARVEY") << "angle_: " << angle_;
 	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * multiplier);
-	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * 7.5);
+	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * multiplier);
 	
 	//x-velocity = rope length / (cos(theta) * time);
 	//assume time = 1;

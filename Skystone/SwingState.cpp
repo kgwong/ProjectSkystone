@@ -95,6 +95,7 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
+		LOG("HARVEY") << "SETTING DIRECTION HERE";
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Launch");
 		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
 	}
