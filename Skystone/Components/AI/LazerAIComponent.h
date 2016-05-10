@@ -18,12 +18,12 @@ public:
 
 public:
 	LazerAIComponent(GameObject & owner, std::string enemyType);
+	LazerAIComponent(GameObject & owner);
 	virtual ~LazerAIComponent();
 
 	void start(Scene & scene);
 	void update(Scene & scene);
 
-	void fireProjectile(float xDist, float yDist, float playerSide, float offset, Scene& scene);
 
 private:
 	float charge_time_;

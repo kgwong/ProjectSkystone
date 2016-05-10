@@ -6,6 +6,7 @@
 #include "PounceAIComponent.h"
 #include "TripleShotAIComponent.h"
 #include "LazerAIComponent.h"
+#include "ShockwaveAIComponent.h"
 #include <string>
 
 class PhysicsComponent;
@@ -15,8 +16,8 @@ class BossAIComponent :
 {
 public:
 	const float DEFAULT_COOLDOWN_SECONDS = 2;
-	const float DEFAULT_CLOSE_RANGE = 300;
-	const float DEFAULT_MEDIUM_RANGE = 800;
+	const float DEFAULT_CLOSE_RANGE = 200;
+	const float DEFAULT_MEDIUM_RANGE = 700;
 	const float DEFAULT_MOVE_SPEED = 3;
 
 
@@ -45,6 +46,8 @@ private:
 	PounceAIComponent pounce_;
 	TripleShotAIComponent triple_shot_;
 	LazerAIComponent lazer_;
+	ShockwaveAIComponent shockwave_;
+
 };
 
 #endif

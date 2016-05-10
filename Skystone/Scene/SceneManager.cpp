@@ -1,7 +1,5 @@
 #include "SceneManager.h"
 
-
-
 SceneManager::SceneManager()
 	:currentScene_(nullptr),
 	player_(nullptr),

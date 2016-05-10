@@ -38,21 +38,26 @@ void TripleShotAIComponent::update(Scene& scene)
 {
 
 		timer_ += Time::getElapsedUpdateTimeSeconds();
-		LOG("AARON") << "TIMER: " << timer_;
 			if (timer_ > delay_)
 			{	
-				xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-				playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-				yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
-				fireProjectile(xDist, yDist, playerSide, 3, scene);
-				fireProjectile(xDist, yDist, playerSide, 0, scene);
-				fireProjectile(xDist, yDist, playerSide, -3, scene);
+				if (current_count_ == 0)
+				{
+					xDist = Point::getXDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+					playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+					yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
+				}
+				fireProjectileDirection(xDist, yDist, playerSide, 3, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, 0, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, -3, scene, projectile_speed_);
 				current_count_++;
 				timer_ = 0;
 				if (current_count_ >= projectile_count_)
 				{
 					current_count_ = 0;
-					boss_->setAttack("Idle");
+					if (enemy_type_ == "Boss")
+					{
+						boss_->setAttack("Idle");
+					}	
 				}
 			}
 		
@@ -60,11 +65,3 @@ void TripleShotAIComponent::update(Scene& scene)
 	}
 //}
 
-void TripleShotAIComponent::fireProjectile(float xDist, float yDist, float playerSide, float offset, Scene& scene)
-{
-	auto bullet = scene.gameObjects.add("EnemyProjectile", "AcidProjectile", owner_.getPos() + Point(0, 25));
-	auto bullet_physics = bullet->getComponent<PhysicsComponent>();
-	float newVelX = projectile_speed_ * playerSide;
-	bullet_physics->setVelX(newVelX * SPEED);
-	bullet_physics->setVelY((newVelX * yDist  / xDist + offset) * SPEED);
-}

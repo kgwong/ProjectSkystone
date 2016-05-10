@@ -93,6 +93,11 @@ void GameObject::kill()
 	this->disownComponents();
 }
 
+void GameObject::setAlive(bool alive)
+{
+	alive_ = alive;
+}
+
 void GameObject::setType(GameObject::Type type)
 {
 	type_ = type;

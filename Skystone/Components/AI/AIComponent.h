@@ -14,7 +14,8 @@ public:
 	virtual void handleEvent(const OnDeathEvent& e);
 
 	virtual Component::Type getType() final;
-
+	virtual void fireProjectileDirection(float xDist, float yDist, float playerSide, float offset, Scene & scene, float speed, int position = 25);
+	virtual std::shared_ptr<GameObject> fireProjectile(float xSpeed, float ySpeed, Scene & scene, int degrees, int positionX, int positionY, std::string attack = "AcidProjectile");
 	static bool isNearby(float dist, float radius);
 
 
