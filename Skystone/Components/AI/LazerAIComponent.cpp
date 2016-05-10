@@ -29,6 +29,27 @@ LazerAIComponent::LazerAIComponent(GameObject& owner, std::string enemyType) :
 {
 }
 
+LazerAIComponent::LazerAIComponent(GameObject& owner) :
+	AIComponent(owner),
+	charge_time_(DEFAULT_CHARGE_TIME),
+	still_time_(DEFAULT_STILL_TIME),
+	move_time_(DEFAULT_MOVE_TIME),
+	timer_(0),
+	start_(true),
+	projectile_speed_(DEFAULT_PROJECTILE_SPEED),
+	offset_(0),
+	lazer_speed_(DEFAULT_LAZER_SPEED),
+	enemy_type_(""),
+	xDist(0),
+	yDist(0),
+	playerSide(-1),
+	firing_(false),
+	Dist(0),
+	projectile_delay_(DEFAULT_PROJECTILE_DELAY),
+	delay_timer_(0)
+{
+}
+
 
 LazerAIComponent::~LazerAIComponent()
 {
@@ -49,9 +70,10 @@ void LazerAIComponent::update(Scene& scene)
 		if (start_)
 		{
 			start_ = false;
-			charge_ = scene.gameObjects.add("EnemyProjectile", "LazerProjectile", owner_.getPos() - Point(0, 50));
-			PhysicsComponent* charge_physics_ = charge_->getComponent<PhysicsComponent>();
-			charge_physics_->setVelY(1 * SPEED);
+			charge_ = fireProjectile(0, 1, scene, 0, -50);
+			//charge_ = scene.gameObjects.add("EnemyProjectile", "LazerProjectile", owner_.getPos() - Point(0, 50));
+			//PhysicsComponent* charge_physics_ = charge_->getComponent<PhysicsComponent>();
+			//charge_physics_->setVelY(1 * SPEED);
 		}
 
 		else if (timer_ > charge_time_ && !firing_)
@@ -70,7 +92,7 @@ void LazerAIComponent::update(Scene& scene)
 			delay_timer_ += Time::getElapsedUpdateTime();
 			if (delay_timer_ > projectile_delay_)
 			{
-				fireProjectile(xDist, yDist, playerSide, offset_, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, offset_, scene, projectile_speed_);
 				delay_timer_ = 0;
 			}
 			if (timer_ < (move_time_ + still_time_) && timer_ > still_time_)

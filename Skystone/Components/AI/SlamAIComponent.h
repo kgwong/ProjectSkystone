@@ -13,10 +13,10 @@ class SlamAIComponent :
 {
 
 public:
-	const double DEFAULT_WINDUP_TIME = 0.4;
+	const double DEFAULT_WINDUP_TIME = 0.3;
 	const double DEFAULT_WINDUP_SPEED = 1;
-	const double DEFAULT_SWING_SPEED = 6;
-	const double DEFAULT_SWING_TIME = 0.7;
+	const double DEFAULT_SWING_SPEED = 10;
+	const double DEFAULT_SWING_TIME = 0.8;
 	const double DEFAULT_LAG_TIME = 0.3;
 
 

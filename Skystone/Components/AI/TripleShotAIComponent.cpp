@@ -38,7 +38,6 @@ void TripleShotAIComponent::update(Scene& scene)
 {
 
 		timer_ += Time::getElapsedUpdateTimeSeconds();
-		LOG("AARON") << "TIMER: " << timer_;
 			if (timer_ > delay_)
 			{	
 				if (current_count_ == 0)
@@ -47,9 +46,9 @@ void TripleShotAIComponent::update(Scene& scene)
 					playerSide = Point::getFacingDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 					yDist = Point::getYDirection(owner_.getPos(), scene.gameObjects.getPlayer().getPos());
 				}
-				fireProjectile(xDist, yDist, playerSide, 3, scene, projectile_speed_);
-				fireProjectile(xDist, yDist, playerSide, 0, scene, projectile_speed_);
-				fireProjectile(xDist, yDist, playerSide, -3, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, 3, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, 0, scene, projectile_speed_);
+				fireProjectileDirection(xDist, yDist, playerSide, -3, scene, projectile_speed_);
 				current_count_++;
 				timer_ = 0;
 				if (current_count_ >= projectile_count_)

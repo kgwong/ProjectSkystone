@@ -18,6 +18,7 @@ public:
 
 public:
 	LazerAIComponent(GameObject & owner, std::string enemyType);
+	LazerAIComponent(GameObject & owner);
 	virtual ~LazerAIComponent();
 
 	void start(Scene & scene);

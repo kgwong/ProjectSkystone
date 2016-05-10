@@ -189,6 +189,7 @@
     <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
+    <ClCompile Include="Components\AI\ShockwaveAIComponent.cpp" />
     <ClCompile Include="SwingState.cpp" />
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
     <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="GameObject\Builders\ScrollingBackgroundBuilder.h" />
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
+    <ClInclude Include="Components\AI\ShockwaveAIComponent.h" />
     <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
