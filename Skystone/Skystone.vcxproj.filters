@@ -115,6 +115,7 @@
     <ClCompile Include="Components\Player\Movement\CrouchState.cpp" />
     <ClCompile Include="Components\AI\LazerAIComponent.cpp" />
     <ClCompile Include="Components\Render\ColliderBoxRenderer.cpp" />
+    <ClCompile Include="Scene\GameOverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -240,5 +241,6 @@
     <ClInclude Include="Components\AI\LazerAIComponent.h" />
     <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
     <ClInclude Include="Util\vector_util.h" />
+    <ClInclude Include="Scene\GameOverScene.h" />
   </ItemGroup>
 </Project>

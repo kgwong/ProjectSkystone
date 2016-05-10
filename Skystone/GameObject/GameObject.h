@@ -55,6 +55,7 @@ public:
 
 	bool alive();
 	void kill();
+	void setAlive(bool alive);
 
 	virtual void setType(Type type);
 	virtual Type getType() const;

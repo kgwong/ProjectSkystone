@@ -5,6 +5,7 @@
 #include "Application/Log.h"
 #include "Level/LevelManager.h"
 #include "MainMenu.h"
+#include "GameOverScene.h"
 
 #include <fstream>
 
@@ -12,7 +13,7 @@ const std::string SceneLoader::SCENE_FILEPATH_PREFIX = "Scenes/";
 
 namespace
 {
-	std::shared_ptr<Scene> getScenePointer(SceneID sceneID)
+	std::shared_ptr<Scene> getDerivedScenePointer(SceneID sceneID)
 	{
 		switch (sceneID)
 		{
@@ -20,6 +21,8 @@ namespace
 			return std::make_shared<MainMenu>();
 		case SceneID::LEVEL:
 			return std::make_shared<LevelManager>();
+		case SceneID::GAME_OVER:
+			return std::make_shared<GameOverScene>();
 		default:
 			return std::make_shared<Scene>();
 		}
@@ -54,7 +57,7 @@ bool SceneLoader::sceneLoaded(SceneID sceneID)
 
 void SceneLoader::load(SceneID sceneID)
 {
-	std::shared_ptr<Scene> scene = getScenePointer(sceneID);
+	std::shared_ptr<Scene> scene = getDerivedScenePointer(sceneID);
 	scene->setSceneManager(sceneManager_);
 	loadObjects(sceneID, scene.get());
 	loadedScenes_.insert({sceneID, scene});

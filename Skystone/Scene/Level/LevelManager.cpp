@@ -7,7 +7,7 @@
 
 LevelManager::LevelManager()
 	:player_(nullptr),
-	levelMap_(10, 10),
+	levelMap_(20, 36),
 	currLevel_(nullptr),
 	nextLevelID_(INVALID_LEVEL_ID)
 {
@@ -15,11 +15,18 @@ LevelManager::LevelManager()
 	//levelMap_.addLevel(2, 1, 2, 1, 3);
 	//levelMap_.addLevel(3, 2, 1, 0, 2);
 	//levelMap_.addLevel(4, 1, 1, 0, 4);
-
+	
 	levelMap_.addLevel(0, 1, 6, 1, 1);
-	levelMap_.addLevel(1, 2, 2, 5, 2);
-	levelMap_.addLevel(2, 2, 2, 5, 4);
-	levelMap_.addLevel(3, 3, 2, 5, 6);
+	levelMap_.addLevel(1, 4, 2, 5, 2);
+	levelMap_.addLevel(2, 4, 2, 5, 6);
+	levelMap_.addLevel(3, 2, 2, 5, 10);
+	levelMap_.addLevel(4, 3, 2, 5, 12);
+	levelMap_.addLevel(5, 3, 2, 5, 15);
+	levelMap_.addLevel(6, 2, 2, 5, 18);
+	levelMap_.addLevel(7, 2, 2, 5, 20);
+	levelMap_.addLevel(8, 2, 2, 5, 22);
+	levelMap_.addLevel(9, 3, 2, 5, 24);
+	levelMap_.addLevel(10, 6, 6, 1, 27);
 
 	levelLoader_.setLevelManager(this);
 }

@@ -5,7 +5,6 @@
 #include <SDL/SDL.h>
 #include <cmath>
 
-#define DEFAULT_FONT_SIZE 28
 #define OUTLINE_SIZE 1 
 
 const static std::string defaultFontPath = "../Assets/Fonts/coolvetica.ttf";
