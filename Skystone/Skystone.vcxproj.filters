@@ -117,6 +117,7 @@
     <ClCompile Include="Components\Render\ColliderBoxRenderer.cpp" />
     <ClCompile Include="Components\AI\ShockwaveAIComponent.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
+    <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -244,5 +245,6 @@
     <ClInclude Include="Util\vector_util.h" />
     <ClInclude Include="Components\AI\ShockwaveAIComponent.h" />
     <ClInclude Include="Scene\GameOverScene.h" />
+    <ClInclude Include="Scene\Level\LevelMapLoader.h" />
   </ItemGroup>
 </Project>
