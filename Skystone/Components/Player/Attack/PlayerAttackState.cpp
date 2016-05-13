@@ -10,6 +10,7 @@
 #include "Resources/Resources.h"
 
 #include "GameMath/CircleMath.h"
+#include "Components/Render/SpriteRenderer.h"
 
 
 PlayerAttackState::PlayerAttackState(GameObject& owner)
@@ -57,6 +58,9 @@ void PlayerAttackState::update(Scene& scene)
 		shoot_ = false;
 
 		Resources::audioPlayer.PlayClip("laser1");
+
+		auto renderer = bullet->getComponent<SpriteRenderer>();
+		renderer->setRotation(degrees_);
 	}
 
 
