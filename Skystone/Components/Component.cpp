@@ -1,7 +1,7 @@
 #include "Component.h"
 
 Component::Component(GameObject& owner)
-	:owner_(owner)
+	:owner_(owner), owned_(false)
 {
 
 }
