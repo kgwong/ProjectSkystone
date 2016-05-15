@@ -36,7 +36,7 @@ void ScrollingQuad::setQuadrant(Quadrant quadrant)
 	quadrant_ = quadrant;
 }
 
-void ScrollingQuad::advance(int xBound, int yBound, Point currCam)
+void ScrollingQuad::advance(int xBound, int yBound)
 {
 	/*
 		Quadrant refers to mathmatical quadrants:       

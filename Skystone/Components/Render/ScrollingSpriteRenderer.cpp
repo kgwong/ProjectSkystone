@@ -58,7 +58,7 @@ void ScrollingSpriteRenderer::advanceQuads(GameWindow& gameWindow)
 	for (int i = 0; i < N_QUADRANTS; i++)
 	{
 		Point currCam = gameWindow.getCamera().getPos();
-		quads[i].advance(findXBound(currCam), findYBound(currCam), currCam);
+		quads[i].advance(findXBound(currCam), findYBound(currCam));
 	}
 }
 

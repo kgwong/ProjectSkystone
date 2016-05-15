@@ -15,7 +15,7 @@ public:
 	~ScrollingQuad();
 	
 	void setQuadrant(Quadrant quadrant);
-	void advance(int xBound, int yBound, Point currCam);
+	void advance(int xBound, int yBound);
 	virtual void render(GameWindow& gameWindow, float percBehind);
 
 private:
