@@ -69,4 +69,5 @@ void ComponentSystem::addComponent(std::shared_ptr<Component> component)
 		LOG("WARNING") << "Warning: unknown component!";
 		break;
 	}
+	component->setOwned(true);
 }
