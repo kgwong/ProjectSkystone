@@ -32,6 +32,7 @@ void SwingState::onEnter(Scene& scene)
 	currentAngle_ = 0.0f;
 	xDirection_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	LOG("HARVEY") << "direction is " << xDirection_;
+	//problem here references a null ptr.
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	swingPosition_ = owner_.getPos();
 	oldPosition_ = owner_.getPos();

@@ -17,11 +17,6 @@ HookLaunchState::~HookLaunchState()
 
 void HookLaunchState::onEnter(Scene& scene)
 {
-	//player.getComponent<PlayerHookState>()->instantiateHook();
-	//float testvel = 5.0f;
-	//auto physics = player.getComponent<PlayerHookState>()->hookRef->getComponent<PhysicsComponent>();
-	//physics->setVelX(testvel * 60.0f);
-	//physics->setVelY(testvel * 60.0f);
 	instantiateHook(scene);
 }
 
@@ -108,27 +103,9 @@ void HookLaunchState::update(Scene& scene)
 	{
 		if (hook_collision->isConnected)
 		{
-			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(true);
 			owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookConnectState");
 		}
 	}
-
-	//StickOnCollision* hook_collision = nullptr;
-	//auto control = player.getComponent<PlayerControlComponent>();
-	//if (player.getComponent<PlayerControlComponent>()->HookState().hookRef != nullptr)
-	//	hook_collision = control->HookState().hookRef->getComponent<StickOnCollision>();
-
-	//if (hook_collision != nullptr)
-	//{
-	//	if (hook_collision->isConnected)
-	//	{
-	//		auto localref = control->HookState().hookRef;
-	//		localref->getComponent<PhysicsComponent>()->setVelX(0.0f);
-	//		localref->getComponent<PhysicsComponent>()->setVelY(0.0f);
-	//		control->HookState().setHanging(true);
-	//	}
-
-	//}
 }
 
 double HookLaunchState::getAngle()

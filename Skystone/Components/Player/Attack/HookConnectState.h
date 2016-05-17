@@ -18,6 +18,8 @@ public:
 	virtual double getAngle();
 	virtual std::string name() { return "HookConnectState"; }
 
+	void connectHook(Scene& scene);
+
 private:
 	SDL_Keycode _keyInput;
 };

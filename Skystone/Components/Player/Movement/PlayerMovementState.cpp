@@ -62,6 +62,11 @@ void PlayerMovementState::changeState(Scene& scene, const std::string& stateName
 	currentState_->onEnter(scene);
 }
 
+void PlayerMovementState::resetState()
+{
+	currentState_ = getStateFromName("AirborneState");
+}
+
 PlayerState* PlayerMovementState::getState()
 {
 	return currentState_;

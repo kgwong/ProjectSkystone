@@ -39,8 +39,6 @@ public:
 	void resetState();
 
 	HookStateManager* getState();
-	void setHanging(bool h);
-	bool hanging;
 	bool enterOtherLevel;
 
 	virtual void handleEvent(const CollisionEvent& e);

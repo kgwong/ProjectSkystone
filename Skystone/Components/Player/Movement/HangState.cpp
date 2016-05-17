@@ -34,14 +34,12 @@ void HangState::onEnter(Scene& scene)
 	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 		return;
 	}
 	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookDisconnectState")
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 		return;
 	}
@@ -137,7 +135,6 @@ void HangState::update(Scene& scene)
 		if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookLaunchState")
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 		}
 		else if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() == "HookDisconnectState")

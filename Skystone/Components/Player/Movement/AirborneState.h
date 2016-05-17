@@ -16,6 +16,7 @@ public:
 	virtual void onEnter(Scene& scene);
 	virtual void onExit(Scene& scene);
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void handleEvent(const CollisionEvent& e);
 
 	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);

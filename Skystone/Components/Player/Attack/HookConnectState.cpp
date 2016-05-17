@@ -1,6 +1,7 @@
 #include "HookConnectState.h"
 #include "PlayerHookState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Common/StickOnCollision.h"
 #include "Application/Log.h"
 
 HookConnectState::HookConnectState(GameObject& owner)
@@ -15,7 +16,7 @@ HookConnectState::~HookConnectState()
 
 void HookConnectState::onEnter(Scene& scene)
 {
-
+	connectHook(scene);
 	//LOG("HARVEY") << owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name();
 	//player.getComponent<PlayerControlComponent>()->MovementState().changeState(&PlayerMovementState::hangState);
 }
@@ -32,7 +33,6 @@ void HookConnectState::handleInput(Scene& scene, SDL_Event& e)
 	if (GameInputs::keyUp(e, LAUNCH_HOOK))
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
-		owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 		owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 	}
 
@@ -45,5 +45,22 @@ double HookConnectState::getAngle()
 {
 	//record player's angle relative to the pivot.
 	return 0.0; 
+}
+
+void HookConnectState::connectHook(Scene& scene)
+{
+	StickOnCollision* hook_collision = nullptr;
+	if (scene.gameObjects.playerHook != nullptr)
+		hook_collision = scene.gameObjects.playerHook->getComponent<StickOnCollision>();
+
+	if (hook_collision != nullptr)
+	{
+		if (hook_collision->isConnected)
+		{
+			scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelX(0.0f);
+			scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->setVelY(0.0f);
+		}
+
+	}
 }
 

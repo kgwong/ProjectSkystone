@@ -29,22 +29,16 @@ GameObject* Level::getCameraFollowObject()
 void Level::onEnter()
 {
 	gameObjects.getPlayer().registerComponents(componentSystem_);
-	gameObjects.start();
-	LOG("FLAPJACKS") << "enter level";
-	LOG("FLAPJACKS") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
-	LOG("FLAPJACKS") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().getState()->name();
+	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().resetState();
+	gameObjects.start();
 }
 
 
 void Level::onExit()
 {
-	LOG("FLAPJACKS") << "EXIT LEVEL";
-	if (gameObjects.playerHook != nullptr)
-	{
-		gameObjects.playerHook->kill();
-		gameObjects.playerHook = nullptr;
-	}
+	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
+	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().resetState();
 	gameObjects.getPlayer().disownComponents();
 	ObjectVector& playerProjectiles = gameObjects.get(GameObject::Type::PLAYER_PROJECTILE);
 	for (auto& p : playerProjectiles)

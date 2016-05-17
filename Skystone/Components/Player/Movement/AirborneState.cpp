@@ -35,6 +35,13 @@ void AirborneState::handleInput(Scene& scene, SDL_Event& e)
 	}
 }
 
+void AirborneState::handleEvent(const CollisionEvent & e)
+{
+	if (e.getOtherObject().getType() == GameObject::Type::TILE)
+	{
+	}
+}
+
 void AirborneState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
