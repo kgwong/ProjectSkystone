@@ -23,9 +23,6 @@ public:
 	PlayerState* getState();
 	virtual void handleEvent(const CollisionEvent& e);
 
-	void setCanSwing(bool swing);
-	bool canSwing;
-
 	void setDirection(int dir);
 	void setSpeed(float s);
 	void setAngle(float a);

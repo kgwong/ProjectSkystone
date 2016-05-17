@@ -17,7 +17,6 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner)
 {
 	LOG("FLAPJACKS") << "HI";
-	canSwing = true;
 	direction = 0;
 
 	addState(std::make_shared<WalkingState>(owner));
@@ -75,21 +74,8 @@ PlayerState* PlayerMovementState::getState()
 void PlayerMovementState::handleEvent(const CollisionEvent & e)
 {
 	currentState_->handleEvent(e);
-	
-	if (e.getOtherObject().getType() == GameObject::Type::TILE)
-	{
-		canSwing = false;
-	}
-	else
-	{
-		canSwing = true;
-	}
 }
 
-void PlayerMovementState::setCanSwing(bool swing)
-{
-	canSwing = swing;
-}
 
 void PlayerMovementState::setDirection(int dir)
 {

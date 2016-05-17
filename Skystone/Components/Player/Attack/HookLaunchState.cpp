@@ -77,6 +77,11 @@ void HookLaunchState::update(Scene& scene)
 		return;
 	}
 
+	if (!Point::inBounds(scene.gameObjects.playerHook->getPos(), scene.getWidth(), scene.getHeight()))
+	{
+		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
+	}
+
 	// owner_.getComponent<PlayerControlComponent>()->HookState() 
 	//returns nullptr when HookState() returns by reference. 
 	//Currently returns HookState copy, so hookRef is not null or some reason
