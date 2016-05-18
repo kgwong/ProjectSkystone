@@ -4,6 +4,7 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 #include "Components/Common/StickOnCollision.h"
+#include "Components/Collider/ColliderComponent.h"
 #include "GameMath/CircleMath.h"
 
 HookLaunchState::HookLaunchState(GameObject& owner)
@@ -22,20 +23,10 @@ void HookLaunchState::onEnter(Scene& scene)
 
 void HookLaunchState::onExit(Scene& scene)
 {
-	//set hook's x and y velocity to zero
-	//if connectstate.. do not destroy hook
-	//if disconnect state destroy hook.
 }
 
 void HookLaunchState::handleInput(Scene& scene, SDL_Event& e)
 {
-	//if hook is launched already, and key is pressed again, switch to disconnect state.
-	//if (GameInputs::keyDown(e, LAUNCH_HOOK))
-	//{
-	//	player.getComponent<PlayerControlComponent>()->changeHookState(scene, &PlayerHookState::disconnectState);
-	//}
-
-	//or to be simple do nothing.
 }
 
 
@@ -49,7 +40,7 @@ void HookLaunchState::instantiateHook(Scene& scene)
 
 	Point hookPosition = scene.gameObjects.getPlayer().getPos();
 
-	//offset.
+	////offset.
 	if (_degrees == leftSideDegree)
 		hookPosition.x -= 20;
 	else if (_degrees == rightSideDegree)
@@ -57,6 +48,7 @@ void HookLaunchState::instantiateHook(Scene& scene)
 	else if (_degrees == upSideDegree)
 		hookPosition.y -= 50;
 
+	//check to see if the hook is spawned inside of a tile.
 	scene.gameObjects.playerHook = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
 
 	float testVel = 15.0f;
@@ -70,32 +62,26 @@ void HookLaunchState::instantiateHook(Scene& scene)
 //change player to hook.
 void HookLaunchState::update(Scene& scene)
 {
-	//hook shots can be interrupted by enemy touching u
-	if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "StunState")
+
+	auto hook_collision = scene.gameObjects.playerHook->getComponent<StickOnCollision>();
+	if (hook_collision != nullptr && hook_collision->isConnected)
+	{
+		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookConnectState");
+	}
+	//if hooks velocity is 0, set the player's hookstate to disconnect
+	else if (scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->getVelX() == 0 && scene.gameObjects.playerHook->getComponent<PhysicsComponent>()->getVelY() == 0)
 	{
 		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
-		return;
+	}
+	//hook shots can be interrupted by enemy touching u
+	else if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "StunState")
+	{
+		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
 	}
 
-	if (!scene.gameObjects.playerHook->getPos().inBounds(scene.getWidth(), scene.getHeight()))
+	if (scene.gameObjects.playerHook == nullptr || !scene.gameObjects.playerHook->getPos().inBounds(scene.getWidth(), scene.getHeight()))
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
-	}
-
-	// owner_.getComponent<PlayerControlComponent>()->HookState() 
-	//returns nullptr when HookState() returns by reference. 
-	//Currently returns HookState copy, so hookRef is not null or some reason
-	//this makes no sense, you normally want to return my reference since there's no 
-	//reason to copy your state object... is there?
-	if (scene.gameObjects.playerHook == nullptr)
-	{
-		owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookDisconnectState");
-		return;
-	}
-	else
-	{
-		//create out of bounds function.
-		//LOG("INFO") << player.getComponent<PlayerControlComponent>()->HookState().hookRef->getPos();
 	}
 
 	if (owner_.getComponent<PlayerControlComponent>()->MovementState().getState()->name() == "Hang")
@@ -103,14 +89,6 @@ void HookLaunchState::update(Scene& scene)
 		owner_.getComponent<PlayerControlComponent>()->MovementState().changeState(scene, "AirborneState");
 	}
 
-	auto hook_collision = scene.gameObjects.playerHook->getComponent<StickOnCollision>();
-	if (hook_collision != nullptr)
-	{
-		if (hook_collision->isConnected)
-		{
-			owner_.getComponent<PlayerControlComponent>()->HookState().changeState(scene, "HookConnectState");
-		}
-	}
 }
 
 double HookLaunchState::getAngle()

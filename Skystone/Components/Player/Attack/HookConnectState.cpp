@@ -2,6 +2,7 @@
 #include "PlayerHookState.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Common/StickOnCollision.h"
+#include "Components/Collider/ColliderComponent.h"
 #include "Application/Log.h"
 
 HookConnectState::HookConnectState(GameObject& owner)
@@ -35,6 +36,8 @@ void HookConnectState::handleInput(Scene& scene, SDL_Event& e)
 	}
 
 }
+
+
 void HookConnectState::update(Scene& scene)
 {
 }

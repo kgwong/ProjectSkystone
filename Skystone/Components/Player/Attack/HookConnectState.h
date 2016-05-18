@@ -15,6 +15,7 @@ public:
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 	virtual void update(Scene& scene) ;
 
+
 	virtual double getAngle();
 	virtual std::string name() { return "HookConnectState"; }
 
@@ -22,6 +23,7 @@ public:
 
 private:
 	SDL_Keycode _keyInput;
+	bool stateChange_;
 };
 
 #endif

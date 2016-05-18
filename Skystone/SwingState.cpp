@@ -26,6 +26,13 @@ SwingState::~SwingState()
 
 void SwingState::onEnter(Scene& scene)
 {
+	//if hook is not connected LEAVE THIS STATE.
+	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() != "HookConnectState")
+	{
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+		return;
+	}
+
 	xSpeed_ = 1.1f;
 	currentAngle_ = 0.0f;
 	xDirection_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;

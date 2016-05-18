@@ -52,6 +52,12 @@ void HangState::onEnter(Scene& scene)
 	yDirection_ = 0;
 	
 	//swing from a jumping start while launching the hook to the left or right.
+
+	//1. calculate the xDistance from player to hook.
+	//2. divide by absolute value of xDistance to obtain direction.
+	float xdist = Point::getXDirection(hangPosition_, hookPosition_);
+	int dir = 0;
+
 	//AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
 	
 	//possible solution - put getting direction from keyboard input in separate state.
@@ -68,13 +74,25 @@ void HangState::onEnter(Scene& scene)
 
 	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
 	//}
-	//else
+	//if(xdist > 5 || xdist < -5)
+	//	dir = (int)(xdist / fabsf(xdist));
+
+	////if player is to the right of the hook, swing left
+	//if (dir > 0)
 	//{
-		//player will teleport right under hook
-		hangPosition_.x = hookPosition_.x;
-		//hangPosition_.y = ropeLength_ + hookPosition_.y;
-		owner_.setPos(hangPosition_);
+	//	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
+	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+
 	//}
+	////if player is to the left of the hook, swing right
+	//else if (dir < 0)
+	//{
+	//	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
+	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+	//}
+
+	hangPosition_.x = hookPosition_.x;
+	owner_.setPos(hangPosition_);
 }
 void HangState::onExit(Scene& scene)
 {
