@@ -76,7 +76,7 @@ float Point::getYDirection(Point & a, Point & b)
 	return a.y - b.y;
 }
 
-bool Point::onPoint(Point&a, Point&b, float dist)
+bool Point::sameDistance(Point&a, Point&b, float dist)
 {
 	return getDistance(a, b) == dist;
 }
@@ -112,9 +112,9 @@ float Point::getFacingDirection(Point&a, Point&b)
 	return playerSide;
 }
 
-bool Point::inBounds(Point& gameObj, float levelWidth, float levelHeight)
+bool Point::inBounds(float levelWidth, float levelHeight)
 {
-	if (gameObj.x >= 0 && gameObj.x < levelWidth && gameObj.y >= 0 && gameObj.y < levelHeight)
+	if (x >= 0 && x < levelWidth && y >= 0 && y < levelHeight)
 		return true;
 
 	return false;

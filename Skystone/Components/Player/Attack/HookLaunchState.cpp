@@ -77,7 +77,7 @@ void HookLaunchState::update(Scene& scene)
 		return;
 	}
 
-	if (!Point::inBounds(scene.gameObjects.playerHook->getPos(), scene.getWidth(), scene.getHeight()))
+	if (!scene.gameObjects.playerHook->getPos().inBounds(scene.getWidth(), scene.getHeight()))
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
 	}

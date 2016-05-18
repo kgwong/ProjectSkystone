@@ -156,7 +156,6 @@ void SwingState::update(Scene& scene)
 			playerPhysics->setVelX(0);
 			playerPhysics->setVelY(0);
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
-			//owner_.setPos(hookPosition_.x, hookPosition_.y + radius_);//where player should be, perfectly aligned with the hook's x-coordinate.
 			owner_.getComponent<PlayerControlComponent>()->HookState().setAimState(AimState::UP);
 			//LOG("HARVEY") << "HI " <<owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
 			return;
@@ -168,7 +167,7 @@ void SwingState::update(Scene& scene)
 	swingPosition_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 	swingPosition_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
 
-	if (Point::inBounds(owner_.getPos(), scene.getWidth(), scene.getHeight()))
+	if (owner_.getPos().inBounds(scene.getWidth(), scene.getHeight()))
 	{
 		//change to it so it sets the velocity every update.
 		float deltaTime = Time::getElapsedUpdateTimeSeconds();
