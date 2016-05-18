@@ -4,6 +4,7 @@
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Render/SpriteRenderer.h"
+#include "Application/Log.h"
 
 AirborneState::AirborneState(GameObject& owner)
 	:PlayerState(owner)
@@ -15,13 +16,22 @@ AirborneState::~AirborneState()
 {
 }
 
+//Airborne state can mean that you are either falling or jumping which is not explicitly expressed as 2 different PlayerStates.
 void AirborneState::onEnter(Scene& scene)
 {
 	renderer_->setSprite("Images/jump cycle.png");
+
+	//useful if switching between levels because airbornestate is a vague state to be in.
+	if (physics_->isFalling())
+	{
+		//LOG("HARVEY") << "I am FALLING";
+		physics_->enableGravity(true);
+	}
 }
 
 void AirborneState::onExit(Scene& scene)
 {
+
 }
 
 void AirborneState::handleInput(Scene& scene, SDL_Event& e)
@@ -56,7 +66,7 @@ void AirborneState::update(Scene& scene)
 		controlComponent_->changeMovementState(scene, "Hang");
 		return;
 	}
-	
+
 	if (!physics_->isFalling())
 	{
 		controlComponent_->changeMovementState(scene, "WalkingState");

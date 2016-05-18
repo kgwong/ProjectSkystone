@@ -32,6 +32,8 @@ void Level::onEnter()
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().resetState();
 	gameObjects.start();
+
+	LOG("HARVEY") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().getState()->name();
 }
 
 

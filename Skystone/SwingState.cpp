@@ -18,7 +18,6 @@ SwingState::SwingState(GameObject& owner)
 	xDirection_ = 0;
 	keyHeld_ = false;
 	timer_ = 0.0f;
-	someCollision_ = false;
 }
 
 SwingState::~SwingState()
@@ -37,7 +36,7 @@ void SwingState::onEnter(Scene& scene)
 	oldPosition_ = owner_.getPos();
 	radius_ = fabsf(hookPosition_.y - swingPosition_.y);
 	keyHeld_ = false;
-	someCollision_ = false;
+	tileHit_ = false;
 	timer_ = 0.0f;
 	
 	auto physics = owner_.getComponent<PhysicsComponent>();
@@ -71,7 +70,7 @@ void SwingState::onExit(Scene& scene)
 	xDirection_ = 0;
 	radius_ = 0.0f;
 	keyHeld_ = false;
-	someCollision_ = false;
+	tileHit_ = false;
 	timer_ = 0.0f;
 	angleRange_ = MAX_ANGLE;
 
@@ -98,8 +97,16 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 }
 void SwingState::update(Scene& scene)
 {
-	auto playerPhysics = owner_.getComponent<PhysicsComponent>();
+
+	auto playerPhysics = owner_.getComponent<PhysicsComponent>();	
 	playerPhysics->enableGravity(false);
+
+	if (tileHit_)
+	{
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+		playerPhysics->enableGravity(true);
+		return;
+	}
 
 	if (currentAngle_ > angleRange_)
 	{
@@ -146,10 +153,12 @@ void SwingState::update(Scene& scene)
 		if (angleRange_ < 5)
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
+			playerPhysics->setVelX(0);
+			playerPhysics->setVelY(0);
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
-			owner_.setPos(hookPosition_.x, hookPosition_.y + radius_);//where player should be, perfectly aligned with the hook's x-coordinate.
+			//owner_.setPos(hookPosition_.x, hookPosition_.y + radius_);//where player should be, perfectly aligned with the hook's x-coordinate.
 			owner_.getComponent<PlayerControlComponent>()->HookState().setAimState(AimState::UP);
-			LOG("HARVEY") << "HI " <<owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
+			//LOG("HARVEY") << "HI " <<owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
 			return;
 		}
 	}
@@ -158,15 +167,6 @@ void SwingState::update(Scene& scene)
 
 	swingPosition_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 	swingPosition_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
-	
-	if (someCollision_)
-	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		playerPhysics->enableGravity(true);
-		playerPhysics->setVelX(0.0f);
-		playerPhysics->setVelY(0.0f);
-		return;
-	}
 
 	if (Point::inBounds(owner_.getPos(), scene.getWidth(), scene.getHeight()))
 	{
@@ -181,11 +181,11 @@ void SwingState::update(Scene& scene)
 		//owner_.setPos(swingPosition_);
 		oldPosition_ = swingPosition_;
 	}
-	else//out of bounds... correct position here.
-	{
-		playerPhysics->setVelX(0.0f);
-		playerPhysics->setVelY(0.0f);
-	}
+	//else//out of bounds... correct position here.
+	//{
+	//	playerPhysics->setVelX(0.0f);
+	//	playerPhysics->setVelY(0.0f);
+	//}
 }
 
 std::string SwingState::name()
@@ -202,10 +202,6 @@ void SwingState::handleEvent(const CollisionEvent& e)
 {
 	if (e.getOtherObject().getType() == GameObject::Type::TILE)
 	{
-		auto tileCollider = e.getOtherCollider();
-		auto playerCollider = owner_.getComponent<ColliderComponent>();
-		someCollision_ = playerCollider->checkCollision(e.getOtherObject());
-
-		
+		tileHit_ = true;		
 	}
 }

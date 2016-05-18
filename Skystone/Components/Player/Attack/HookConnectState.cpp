@@ -17,8 +17,6 @@ HookConnectState::~HookConnectState()
 void HookConnectState::onEnter(Scene& scene)
 {
 	connectHook(scene);
-	//LOG("HARVEY") << owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name();
-	//player.getComponent<PlayerControlComponent>()->MovementState().changeState(&PlayerMovementState::hangState);
 }
 void HookConnectState::onExit(Scene& scene) 
 {

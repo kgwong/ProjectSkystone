@@ -36,7 +36,7 @@ private:
 	bool keyHeld_;
 	float timer_;
 	float angleRange_;
-	bool someCollision_;
+	bool tileHit_;
 
 };
 

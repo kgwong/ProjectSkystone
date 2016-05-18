@@ -3,13 +3,14 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 #include "GameMath/CircleMath.h"
+#include "Game/GameTime.h"
 #include "LaunchState.h"
 #include "Components/Player/Attack/Aim/AimState.h"
 
 //CONSTANTS
 const float HangState::MAX_ANGLE = 80.0f;
 const float HangState::DEFAULT_SPEED = 4.24f;
-const float HangState::MAX_SPEED = 5.24f;
+const float HangState::MAX_SPEED = 10.24f;
 const float HangState::MIN_ROPE_LENGTH = 10.0f;
 const float HangState::MAX_ROPE_LENGTH = 75.0f;
 
@@ -30,7 +31,6 @@ HangState::~HangState()
 
 void HangState::onEnter(Scene& scene)
 {
-	LOG("HARVEY") << "direction: " << owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
@@ -45,39 +45,36 @@ void HangState::onEnter(Scene& scene)
 	}
 	//CANNOT change physics here....must do in update.
 	hookPosition_ = scene.gameObjects.playerHook->getPos();
-	ropeLength_ = fabsf(hookPosition_.y - owner_.getPosY());
-	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	hangPosition_ = owner_.getPos();
+	ropeLength_ = owner_.getPosY() - hookPosition_.y;
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 	ySpeed_ = DEFAULT_SPEED;
 	yDirection_ = 0;
 	
-	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
+	//swing from a jumping start while launching the hook to the left or right.
+	//AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
 	
 	//possible solution - put getting direction from keyboard input in separate state.
 	//write it independent of control code input.
 	//glitch is that it always swings.. from swing to hang!!!!
 
-	float xDistance = hookPosition_.x - owner_.getPosX();
-	LOG("HARVEY") << "HOOKPOSITION: " << hookPosition_;
-	LOG("HARVEY") << "owner position: " << owner_.getPos();
-	LOG("HARVEY") << "AIM STATE: " << owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
 
-	if (playerAim != AimState::UP)
-	{
-		if (playerAim == AimState::LEFT)
-			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
-		else if (playerAim == AimState::RIGHT)
-			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
+	//if (playerAim != AimState::UP)
+	//{
+	//	if (playerAim == AimState::LEFT)
+	//		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
+	//	else if (playerAim == AimState::RIGHT)
+	//		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
 
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
-	}
-	else
-	{
+	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+	//}
+	//else
+	//{
 		//player will teleport right under hook
 		hangPosition_.x = hookPosition_.x;
-		hangPosition_.y = ropeLength_ + hookPosition_.y;
-	}
+		//hangPosition_.y = ropeLength_ + hookPosition_.y;
+		owner_.setPos(hangPosition_);
+	//}
 }
 void HangState::onExit(Scene& scene)
 {
@@ -145,6 +142,7 @@ void HangState::update(Scene& scene)
 			auto playerPhysics = owner_.getComponent<PhysicsComponent>();
 			//if not turned off will build downward velocity
 			playerPhysics->enableGravity(false);
+			playerPhysics->setVelY(yDirection_ * ySpeed_ * Time::getElapsedUpdateTime());
 
 			hangPosition_.y += ySpeed_ * yDirection_;
 			ropeLength_ = fabsf(hangPosition_.y - hookPosition_.y);
@@ -155,7 +153,7 @@ void HangState::update(Scene& scene)
 				hangPosition_.y -= ySpeed_ * yDirection_;
 			}
 
-			owner_.setPos(hangPosition_);
+			//owner_.setPos(hangPosition_);
 		}
 	}
 	
