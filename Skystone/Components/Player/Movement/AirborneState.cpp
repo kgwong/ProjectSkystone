@@ -3,7 +3,6 @@
 #include "GameObject/GameObject.h"
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
-#include "Components/Render/SpriteRenderer.h"
 #include "Application/Log.h"
 #include "Components/Render/SpriteAnimator.h"
 
