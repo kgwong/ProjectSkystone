@@ -24,26 +24,21 @@ public:
 	virtual ~PlayerHookState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
-
 	virtual void start(Scene& scene);
+	virtual void handleEvent(const CollisionEvent& e);
 	void update(Scene& scene);
+	
 	double getDegrees();
+	
 	AimState& getAimState();
 	void setAimState(AimState state);
 	std::string AimStateName();
-	void changeState(Scene& scene, const std::string& stateName);
 
-	void instantiateHook(Scene& scene);
-	void connectHook(Scene& scene);
-	void disconnectHook(Scene& scene);
+	void changeState(Scene& scene, const std::string& stateName);
 	void resetState();
 
 	HookStateManager* getState();
-	void setHanging(bool h);
-	bool hanging;
 	bool enterOtherLevel;
-
-	virtual void handleEvent(const CollisionEvent& e);
 
 private:
 	HookStateManager* hookStateManager_;

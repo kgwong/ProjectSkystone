@@ -76,7 +76,7 @@ float Point::getYDirection(Point & a, Point & b)
 	return a.y - b.y;
 }
 
-bool Point::isDistance(Point&a, Point&b, float dist)
+bool Point::sameDistance(Point&a, Point&b, float dist)
 {
 	return getDistance(a, b) == dist;
 }
@@ -110,6 +110,14 @@ float Point::getFacingDirection(Point&a, Point&b)
 		playerSide = - (float)(abs(a.x - b.x)/ (a.x - b.x));
 	}
 	return playerSide;
+}
+
+bool Point::inBounds(float levelWidth, float levelHeight)
+{
+	if (x >= 0 && x < levelWidth && y >= 0 && y < levelHeight)
+		return true;
+
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& out, const Point& f)

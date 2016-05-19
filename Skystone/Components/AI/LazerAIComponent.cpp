@@ -6,6 +6,7 @@
 #include "Components/Physics/PhysicsComponent.h"
 #include <math.h>
 #include "Components/Render/SpriteRenderer.h"
+#include "Resources/Resources.h"
 #define SPEED 60.0f
 
 LazerAIComponent::LazerAIComponent(GameObject& owner, std::string enemyType) :
@@ -90,6 +91,7 @@ void LazerAIComponent::update(Scene& scene)
 			delay_timer_ += Time::getElapsedUpdateTime();
 			if (delay_timer_ > projectile_delay_)
 			{
+				Resources::audioPlayer.PlayClip("laser1");
 				fireProjectileDirection(xDist, yDist, playerSide, offset_, scene, projectile_speed_);
 				delay_timer_ = 0;
 			}

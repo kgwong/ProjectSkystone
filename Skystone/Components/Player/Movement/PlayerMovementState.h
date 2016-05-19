@@ -19,11 +19,9 @@ public:
 	virtual void update(Scene& scene);
 
 	void changeState(Scene& scene, const std::string& stateName);
+	void resetState();
 	PlayerState* getState();
 	virtual void handleEvent(const CollisionEvent& e);
-
-	void setCanSwing(bool swing);
-	bool canSwing;
 
 	void setDirection(int dir);
 	void setSpeed(float s);

@@ -90,3 +90,12 @@ float HookDisconnectState::getDegrees()
 	return degrees_;
 }
 
+void HookDisconnectState::disconnectHook(Scene& scene)
+{
+	if (scene.gameObjects.playerHook != nullptr)
+	{
+		scene.gameObjects.playerHook->kill();
+		scene.gameObjects.playerHook = nullptr;
+	}
+}
+

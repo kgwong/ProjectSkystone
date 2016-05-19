@@ -31,15 +31,12 @@ private:
 	Point oldPosition_;
 	float radius_;
 
-	bool tileHit_;
-	bool tileLeft_;
-	bool tileRight_;
-
 	float swingTime_;
 	float damp_;
 	bool keyHeld_;
 	float timer_;
 	float angleRange_;
+	bool tileHit_;
 
 };
 
