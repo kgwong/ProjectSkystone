@@ -58,6 +58,7 @@ void PlayerMovementState::changeState(Scene& scene, const std::string& stateName
 {
 	currentState_->onExit(scene);
 	currentState_ = getStateFromName(stateName);
+	LOG("Kevin") << "ENTERING: " << currentState_->name();
 	currentState_->onEnter(scene);
 }
 

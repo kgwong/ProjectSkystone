@@ -7,7 +7,8 @@
 
 GameObjectBuilder GameObjectContainer::builder_;
 
-GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) : scene_(scene),
+GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) 
+	: scene_(scene),
 	componentSystem_(componentSystem),
 	player_(nullptr)
 {
@@ -143,7 +144,6 @@ ObjectVector& GameObjectContainer::get(GameObject::Type type)
 
 void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 {
-
 	typedef std::shared_ptr<GameObject> obj;
 	util::vector::remove(vector,
 		[](obj& o) { return !o->alive(); },

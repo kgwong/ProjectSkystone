@@ -12,8 +12,8 @@ SpriteRenderer::SpriteRenderer(GameObject& owner, const std::string& relPath)
 }
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
-	:RenderComponent(owner), spriteSheet_(spriteSheet),
-	currFrameIndex(0), msOnFrame(0),
+	:RenderComponent(owner), sprite_(spriteSheet, 0),
+	//currFrameIndex(0), msOnFrame(0),
 	flipHorz_(false), flipVert_(false),
 	rotationDegrees_(0)
 {
@@ -51,7 +51,7 @@ void SpriteRenderer::setRotation(double degrees)
 	rotationDegrees_ = degrees;
 }
 
-void SpriteRenderer::setSprite(const std::string& relPath)
+/*void SpriteRenderer::setSprite(const std::string& relPath)
 {
 	setSprite(Resources::getSpriteSheet(relPath));
 }
@@ -61,11 +61,33 @@ void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
 	spriteSheet_ = newSpriteSheet;
 	currFrameIndex = 0;
 	msOnFrame = 0;
+}*/
+
+
+void SpriteRenderer::setSpriteSheet(const std::string& relPath)
+{
+	setSpriteSheet(Resources::getSpriteSheet(relPath));
+}
+
+void SpriteRenderer::setSpriteSheet(SpriteSheet* spriteSheet)
+{
+	sprite_.spriteSheet = spriteSheet;
+	//set sprite index too?
+}
+
+void SpriteRenderer::setSpriteIndex(int index)
+{
+	sprite_.index = index;
+}
+
+void SpriteRenderer::setSprite(Sprite sprite)
+{
+	sprite_ = sprite;
 }
 
 void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
-	msOnFrame += Time::getElapsedRenderTime();
+	/*msOnFrame += Time::getElapsedRenderTime();
 	
 	int currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
 	while (msOnFrame >= currFrameDuration)
@@ -74,14 +96,11 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 		currFrameIndex = spriteSheet_->getNextIndex(currFrameIndex);
 		currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
 	}
-
-
-	int frameWidth = spriteSheet_->getFrameRect(currFrameIndex)->w;
-	int frameHeight = spriteSheet_->getFrameRect(currFrameIndex)->h;
+	*/
 
 	//cleaner way to incorporate this?
 	Point adjPos = RenderComponent::getRenderPosition(percBehind); 
-	SDL_Rect drawDest = SDL_Rect{ (int)adjPos.x, (int)adjPos.y, frameWidth, frameHeight };
+	SDL_Rect drawDest = SDL_Rect{ (int)adjPos.x, (int)adjPos.y, getWidth(), getHeight() };
 
 	SDL_RendererFlip finalFlip;
 	if (flipHorz_ && flipVert_)
@@ -100,15 +119,20 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 	{
 		finalFlip = SDL_FLIP_NONE;
 	}
-	gameWindow.render(spriteSheet_->getTexture(), spriteSheet_->getFrameRect(currFrameIndex), &drawDest, rotationDegrees_, NULL, finalFlip);
+	gameWindow.render(sprite_.spriteSheet->getTexture(), 
+					sprite_.spriteSheet->getFrameRect(sprite_.index), 
+					&drawDest, 
+					rotationDegrees_, 
+					NULL, 
+					finalFlip);
 }
 
 int SpriteRenderer::getWidth()
 {
-	return spriteSheet_->getFrameRect(currFrameIndex)->w;
+	return sprite_.getWidth();
 }
 
 int SpriteRenderer::getHeight()
 {
-	return spriteSheet_->getFrameRect(currFrameIndex)->h;
+	return sprite_.getHeight();
 }

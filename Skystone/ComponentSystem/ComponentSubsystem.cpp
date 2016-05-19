@@ -29,8 +29,7 @@ void ComponentSubsystem::update(Scene& scene)
 void ComponentSubsystem::cleanup()
 {
 	typedef std::shared_ptr<Component> comp;
-	util::vector::update_or_remove(components_,
-		[](comp& c) { return !c->owned(); },
-		[](comp& c) {}
+	util::vector::remove(components_,
+		[](comp& c) { return !c->owned(); }
 	);
 }

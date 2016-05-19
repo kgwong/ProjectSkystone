@@ -118,6 +118,8 @@
     <ClCompile Include="Components\AI\ShockwaveAIComponent.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
     <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
+    <ClCompile Include="Components\Render\SpriteAnimator.cpp" />
+    <ClCompile Include="Resources\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -246,5 +248,7 @@
     <ClInclude Include="Components\AI\ShockwaveAIComponent.h" />
     <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="Scene\Level\LevelMapLoader.h" />
+    <ClInclude Include="Components\Render\SpriteAnimator.h" />
+    <ClInclude Include="Resources\Sprite.h" />
   </ItemGroup>
 </Project>
