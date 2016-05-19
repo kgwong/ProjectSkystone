@@ -2,7 +2,7 @@
 
 #include "../PlayerControlComponent.h"
 
-#include "Components/Render/SpriteRenderer.h"
+#include "Components/Render/SpriteAnimator.h"
 #include "Components/Collider/ColliderComponent.h"
 
 #include "Application/Log.h"
@@ -21,7 +21,8 @@ CrouchState::~CrouchState()
 
 void CrouchState::onEnter(Scene& scene)
 {
-	renderer_->setSprite("Images/crouch cycle.png");
+	animator_->setSpriteSheet("Images/crouch cycle.png");
+	animator_->setLoopCount(1);
 	ColliderComponent::BoxCollider newBoxCollider = {0, 0, 48, 32};
 	collider_->setCollider(newBoxCollider);
 	collider_->setOffsetY(32);
@@ -45,11 +46,11 @@ void CrouchState::handleInput(Scene& scene, SDL_Event& e)
 
 	if (GameInputs::keyDown(e, LEFT))
 	{
-		renderer_->setFlipHorz(true);
+		animator_->setFlipHorz(true);
 	}
 	if (GameInputs::keyDown(e, RIGHT))
 	{
-		renderer_->setFlipHorz(false);
+		animator_->setFlipHorz(false);
 	}
 }
 
@@ -60,7 +61,7 @@ void CrouchState::update(Scene& scene)
 void CrouchState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
-	renderer_ = owner_.getComponent<SpriteRenderer>();
+	animator_ = owner_.getComponent<SpriteAnimator>();
 	collider_ = owner_.getComponent<ColliderComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
 }

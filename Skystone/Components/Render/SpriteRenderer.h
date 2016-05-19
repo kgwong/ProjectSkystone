@@ -2,6 +2,7 @@
 #define SPRITE_RENDERER_H
 
 #include "Resources/SpriteSheet.h"
+#include "Resources/Sprite.h"
 
 #include "RenderComponent.h"
 #include "GameTypes/Axis.h"
@@ -21,8 +22,13 @@ public:
 
 	void setRotation(double degrees);
 
-	void setSprite(const std::string& relPath);
-	void setSprite(SpriteSheet* newSpriteSheet);
+	//void setSprite(const std::string& relPath);
+	//void setSprite(SpriteSheet* newSpriteSheet);
+
+	void setSpriteSheet(const std::string& relPath);
+	void setSpriteSheet(SpriteSheet* spriteSheet);
+	void setSpriteIndex(int index);
+	void setSprite(Sprite sprite);
 
 	void render(GameWindow& gameWindow, float percBehind);
 
@@ -30,13 +36,14 @@ public:
 	virtual int getHeight();
 
 private:
-	SpriteSheet* spriteSheet_;
+	Sprite sprite_;
 
-	int currFrameIndex;
-	int msOnFrame;
+	//SpriteSheet* spriteSheet_;
+
+	/*int currFrameIndex;
+	int msOnFrame;*/
 
 	bool flipHorz_, flipVert_; 
-
 	double rotationDegrees_;
 };
 

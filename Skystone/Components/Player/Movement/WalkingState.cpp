@@ -3,15 +3,19 @@
 #include "GameObject/GameObject.h"
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Application/Log.h"
 
-#include "Components/Render/SpriteRenderer.h"
+#include "Components/Render/SpriteAnimator.h"
 
 const float WalkingState::JUMP_VELOCITY = -1200;
 const float WalkingState::WALK_VELOCITY = 300;
 
 WalkingState::WalkingState(GameObject& owner)
 	:PlayerState(owner),
-	subState_(SubState::IDLE)
+	subState_(SubState::IDLE),
+	controlComponent_(nullptr),
+	physics_(nullptr),
+	animator_(nullptr)
 {
 }
 
@@ -48,7 +52,7 @@ void WalkingState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
-	renderer_ = owner_.getComponent<SpriteRenderer>();
+	animator_ = owner_.getComponent<SpriteAnimator>();
 }
 
 void WalkingState::update(Scene& scene)
@@ -123,15 +127,15 @@ void WalkingState::changeSubState(SubState newSubState)
 	switch (newSubState)
 	{
 	case SubState::IDLE:
-		renderer_->setSprite("Images/idle cycle.png");
+		animator_->setSpriteSheet("Images/idle cycle.png");
 		break;
 	case SubState::LEFT:
-		renderer_->setSprite("Images/run_cycle.png");
-		renderer_->setFlipHorz(true);
+		animator_->setSpriteSheet("Images/run_cycle.png");
+		animator_->setFlipHorz(true);
 		break;
 	case SubState::RIGHT:
-		renderer_->setSprite("Images/run_cycle.png");
-		renderer_->setFlipHorz(false);
+		animator_->setSpriteSheet("Images/run_cycle.png");
+		animator_->setFlipHorz(false);
 		break;
 	}
 }
