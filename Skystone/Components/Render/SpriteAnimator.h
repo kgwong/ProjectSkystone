@@ -18,7 +18,7 @@ public:
 	virtual void render(GameWindow& gameWindow, float percBehind);
 
 	//-1 means loop forever
-	void setLoopCount(int numLoops);
+	void setTimesToPlay(int numLoops);
 
 	void setSpriteSheet(const std::string& relPath);
 	void setSpriteSheet(SpriteSheet* spriteSheet);

@@ -60,7 +60,7 @@ void SpriteAnimator::render(GameWindow& gameWindow, float percBehind)
 	spriteRenderer_->setSprite(Sprite{spriteSheet_, currFrameIndex_});
 }
 
-void SpriteAnimator::setLoopCount(int numLoops)
+void SpriteAnimator::setTimesToPlay(int numLoops)
 {
 	loopCount_ = numLoops;
 }
