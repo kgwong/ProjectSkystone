@@ -19,6 +19,8 @@ public:
 	AimState& getAimState();
 	void setAimState(AimState aim);
 
+	void disconnectHook(Scene& scene);
+
 private:
 	AimState playerAim_;
 	float degrees_;

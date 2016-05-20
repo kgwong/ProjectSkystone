@@ -39,7 +39,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	enemyToBuild.setType(GameObject::Type::ENEMY);
 	if (enemyName == "TestMobStrong")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemyStrong.png");
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemyStrong1.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));

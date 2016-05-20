@@ -17,7 +17,6 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner)
 {
 	LOG("FLAPJACKS") << "HI";
-	canSwing = true;
 	direction = 0;
 
 	addState(std::make_shared<WalkingState>(owner));
@@ -30,6 +29,7 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	addState(std::make_shared<LaunchState>(owner));
 	addState(std::make_shared<SwingState>(owner));
 	currentState_ = getStateFromName("AirborneState");
+	previousState_ = getStateFromName("AirborneState");
 }
 
 PlayerMovementState::~PlayerMovementState()
@@ -58,8 +58,16 @@ void PlayerMovementState::update(Scene& scene)
 void PlayerMovementState::changeState(Scene& scene, const std::string& stateName)
 {
 	currentState_->onExit(scene);
+	previousState_ = currentState_;
 	currentState_ = getStateFromName(stateName);
+	LOG("Kevin") << "ENTERING: " << currentState_->name();
 	currentState_->onEnter(scene);
+}
+
+void PlayerMovementState::resetState()
+{
+	if(currentState_->name() != "FlyingState")
+		currentState_ = getStateFromName("AirborneState");
 }
 
 PlayerState* PlayerMovementState::getState()
@@ -67,24 +75,16 @@ PlayerState* PlayerMovementState::getState()
 	return currentState_;
 }
 
+PlayerState* PlayerMovementState::getPrevState()
+{
+	return previousState_;
+}
+
 void PlayerMovementState::handleEvent(const CollisionEvent & e)
 {
 	currentState_->handleEvent(e);
-	
-	if (e.getOtherObject().getType() == GameObject::Type::TILE)
-	{
-		canSwing = false;
-	}
-	else
-	{
-		canSwing = true;
-	}
 }
 
-void PlayerMovementState::setCanSwing(bool swing)
-{
-	canSwing = swing;
-}
 
 void PlayerMovementState::setDirection(int dir)
 {

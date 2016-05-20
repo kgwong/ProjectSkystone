@@ -9,23 +9,27 @@ struct MusicTags
 	static std::string player_hit;// = "player_hit";
 	static std::string enemy_hit;// = "enemy_hit";
 	static std::string enemy_death;// = "enemy_death";
+	static std::string gunShot;
 };
 
 std::string MusicTags::bgMusic = "bgMusic";
 std::string MusicTags::laser1 = "laser1";
 std::string MusicTags::laser2 = "laser2";
+std::string MusicTags::gunShot = "gunShot";
 
 struct FileNames
 {
 	static std::string laser1;// = "Laser_Shoot1.wav";
 	static std::string laser2;// = "Laser_Shoot2.wav";
 	static std::string bgMusic;
+	static std::string christian_shot;
 };
 
 std::string FileNames::laser1 = "Laser_Shoot1.wav";
 std::string FileNames::laser2 = "Laser_Shoot2.wav";
 //std::string FileNames::bgMusic = "canton_Benbient-160.mp3";
 std::string FileNames::bgMusic = "junior85_-_03_-_As_It_Happens_pt_4.mp3";
+std::string FileNames::christian_shot = "christian_shot.wav";
 
 AudioPlayer::AudioPlayer()
 	:clip_(nullptr)
@@ -60,6 +64,7 @@ void AudioPlayer::SetFilePaths(std::string audiofilepath, std::string musicfilep
 	audioFiles_[MusicTags::laser1] = audiofilepath + FileNames::laser1;
 	audioFiles_[MusicTags::laser2] = audiofilepath + FileNames::laser2;
 	audioFiles_[MusicTags::bgMusic] = musicfilepath + FileNames::bgMusic;
+	audioFiles_[MusicTags::gunShot] = audiofilepath + FileNames::christian_shot;
 }
 
 //should load actual music .mp3 files.
@@ -93,6 +98,7 @@ void AudioPlayer::LoadAllClips()
 	//make them here
 	audioClips_["laser1"] = std::move(LoadClip("laser1"));
 	audioClips_["laser2"] = std::move(LoadClip("laser2"));
+	audioClips_["gunShot"] = std::move(LoadClip("gunShot"));
 	music_ = std::move(LoadMusic());
 }
 

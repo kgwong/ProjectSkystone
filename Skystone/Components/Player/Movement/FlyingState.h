@@ -5,7 +5,7 @@
 
 class PlayerControlComponent;
 class PhysicsComponent;
-class SpriteRenderer;
+class SpriteAnimator;
 
 class FlyingState : public PlayerState
 {
@@ -29,7 +29,7 @@ public:
 private:
 	PlayerControlComponent* controlComponent_;
 	PhysicsComponent* physics_;
-	SpriteRenderer* renderer_;
+	SpriteAnimator* animator_;
 };
 
 #endif //FLYING_STATE_H
