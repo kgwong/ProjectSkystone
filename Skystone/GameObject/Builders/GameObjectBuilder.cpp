@@ -87,3 +87,8 @@ std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerHook(ComponentSystem& 
 {
 	return playerHookBuilder_.build(componentSystem, name);
 }
+
+std::shared_ptr<GameObject> GameObjectBuilder::buildPlayerRopeSegment(ComponentSystem & componentSystem, const std::string & name)
+{
+	return playerRopeSegmentBuilder_.build(componentSystem, name);
+}

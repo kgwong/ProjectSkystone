@@ -99,7 +99,6 @@
     <ClCompile Include="GameObject\Builders\ScrollingBackgroundBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\LaunchState.cpp" />
     <ClCompile Include="GameObject\Builders\GUIBuilder.cpp" />
-    <ClCompile Include="SwingState.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Player\Movement\PlayerState.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
@@ -120,6 +119,8 @@
     <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
     <ClCompile Include="Components\Render\SpriteAnimator.cpp" />
     <ClCompile Include="Resources\Sprite.cpp" />
+    <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
+    <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -228,7 +229,6 @@
     <ClInclude Include="ComponentEvents\DamageTakenEvent.h" />
     <ClInclude Include="Components\Player\Movement\LaunchState.h" />
     <ClInclude Include="GameObject\Builders\GUIBuilder.h" />
-    <ClInclude Include="SwingState.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="Scene\MainMenu.h" />
@@ -250,5 +250,7 @@
     <ClInclude Include="Scene\Level\LevelMapLoader.h" />
     <ClInclude Include="Components\Render\SpriteAnimator.h" />
     <ClInclude Include="Resources\Sprite.h" />
+    <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
+    <ClInclude Include="Components\Player\Movement\SwingState.h" />
   </ItemGroup>
 </Project>

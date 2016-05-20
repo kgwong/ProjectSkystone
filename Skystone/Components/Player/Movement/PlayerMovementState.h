@@ -21,6 +21,7 @@ public:
 	void changeState(Scene& scene, const std::string& stateName);
 	void resetState();
 	PlayerState* getState();
+	PlayerState* getPrevState();
 	virtual void handleEvent(const CollisionEvent& e);
 
 	void setDirection(int dir);
@@ -35,6 +36,7 @@ public:
 
 private:
 	PlayerState* currentState_;
+	PlayerState* previousState_;
 
 	std::unordered_map<std::string, std::shared_ptr<PlayerState>> states_;
 

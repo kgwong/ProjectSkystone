@@ -92,6 +92,7 @@
     <ClCompile Include="Components\Player\Attack\HookDisconnectState.cpp" />
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
+    <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
     <ClCompile Include="Resources\Sprite.cpp" />
     <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
@@ -194,7 +195,7 @@
     <ClCompile Include="Components\AI\SlamAIComponent.cpp" />
     <ClCompile Include="Components\AI\ShockwaveAIComponent.cpp" />
     <ClCompile Include="Components\Render\SpriteAnimator.cpp" />
-    <ClCompile Include="SwingState.cpp" />
+    <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
     <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
   </ItemGroup>
@@ -217,6 +218,7 @@
     <ClInclude Include="Components\Player\Attack\HookLaunchState.h" />
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
+    <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
     <ClInclude Include="Resources\Sprite.h" />
     <ClInclude Include="Scene\Level\LevelMapLoader.h" />
     <ClInclude Include="Scene\GameOverScene.h" />
@@ -320,7 +322,7 @@
     <ClInclude Include="Components\AI\SlamAIComponent.h" />
     <ClInclude Include="Components\AI\ShockwaveAIComponent.h" />
     <ClInclude Include="Components\Render\SpriteAnimator.h" />
-    <ClInclude Include="SwingState.h" />
+    <ClInclude Include="Components\Player\Movement\SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
     <ClInclude Include="Util\vector_util.h" />
