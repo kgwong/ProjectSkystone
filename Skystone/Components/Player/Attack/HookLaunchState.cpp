@@ -48,9 +48,7 @@ void HookLaunchState::instantiateHook(Scene& scene)
 	else if (_degrees == upSideDegree)
 		hookPosition.y -= 50;
 
-	//check to see if the hook is spawned inside of a tile.
 	scene.gameObjects.playerHook = scene.gameObjects.add("PlayerHook", "Player Hook", hookPosition);
-
 	float testVel = 15.0f;
 	float newVelX = (float)(testVel * cos(toRadians(_degrees)));
 	float newVelY = (float)(testVel * sin(toRadians(_degrees)));

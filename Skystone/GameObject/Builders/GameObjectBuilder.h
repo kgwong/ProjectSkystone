@@ -8,6 +8,7 @@
 #include "BackgroundBuilder.h"
 #include "ScrollingBackgroundBuilder.h"
 #include "PlayerHookBuilder.h"
+#include "PlayerRopeSegmentBuilder.h"
 #include "EnemyProjectileBuilder.h"
 #include "GUIBuilder.h"
 
@@ -30,6 +31,7 @@ public:
 	std::shared_ptr<GameObject> buildEnemyProjectile(ComponentSystem& componentSystem, const std::string& name);
 	//the hooks
 	std::shared_ptr<GameObject> buildPlayerHook(ComponentSystem& componentSystem, const std::string& name);
+	std::shared_ptr<GameObject> buildPlayerRopeSegment(ComponentSystem& omponentSystem, const std::string& name);
 	std::shared_ptr<GameObject> buildGUI(ComponentSystem& componentSystem, const std::string& name, GameObject* player);
 
 private:
@@ -42,6 +44,7 @@ private:
 	GUIBuilder guiBuilder_;
 	/////////////////////////////////////////////////
 	PlayerHookBuilder playerHookBuilder_;
+	PlayerRopeSegmentBuilder playerRopeSegmentBuilder_;
 	EnemyProjectileBuilder enemyProjectileBuilder_;
 };
 

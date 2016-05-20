@@ -27,7 +27,8 @@ public:
 		BACKGROUND,
 		UNKNOWN,
 		PLAYER_HOOK,
-		GUI
+		GUI,
+		ROPE_SEGMENT
 	};
 public:
 	GameObject();

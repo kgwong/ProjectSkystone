@@ -38,7 +38,10 @@ void SwingState::onEnter(Scene& scene)
 	xDirection_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	LOG("HARVEY") << "direction is " << xDirection_;
 	//problem here references a null ptr.
-	hookPosition_ = scene.gameObjects.playerHook->getPos();
+	if (scene.gameObjects.playerHook != nullptr)
+		hookPosition_ = scene.gameObjects.playerHook->getPos();
+	else
+		hookPosition_ = { 0,0 };
 	swingPosition_ = owner_.getPos();
 	oldPosition_ = owner_.getPos();
 	radius_ = fabsf(hookPosition_.y - swingPosition_.y);

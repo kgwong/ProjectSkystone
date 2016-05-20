@@ -1,6 +1,7 @@
 #include "HangState.h"
 #include "Components/Player/Attack/PlayerHookState.h"
 #include "Components/Player/PlayerControlComponent.h"
+#include "Components/Collider/ColliderComponent.h"
 #include "Application/Log.h"
 #include "GameMath/CircleMath.h"
 #include "Game/GameTime.h"
@@ -31,6 +32,7 @@ HangState::~HangState()
 
 void HangState::onEnter(Scene& scene)
 {
+
 	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
@@ -50,7 +52,21 @@ void HangState::onEnter(Scene& scene)
 	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 	ySpeed_ = DEFAULT_SPEED;
 	yDirection_ = 0;
-	
+
+	//length of each rope segment is 2 pixels
+	//total number of rope segments to be drawn = ropeLength_ / 2
+	int ropeSegCount = (int)(ropeLength_ - hookPosition_.y)/ 2;
+
+	//draw rope segments
+	for (int i = 0;i < ropeSegCount; ++i)
+	{
+		Point segmentPos = owner_.getPos();
+		segmentPos.x += scene.gameObjects.playerHook->getComponent<ColliderComponent>()->getWidth() / 2;
+	//	segmentPos.y = segmentPos.y - (owner_.getComponent<ColliderComponent>()->getHeight() / 6);
+		segmentPos.y -= i * 2;
+		scene.gameObjects.add("RopeSegment", "rope Segment", segmentPos);
+	}
+
 	//swing from a jumping start while launching the hook to the left or right.
 
 	//1. calculate the xDistance from player to hook.
@@ -58,41 +74,27 @@ void HangState::onEnter(Scene& scene)
 	float xdist = Point::getXDirection(hangPosition_, hookPosition_);
 	int dir = 0;
 
-	//AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().getAimState();
-	
-	//possible solution - put getting direction from keyboard input in separate state.
-	//write it independent of control code input.
-	//glitch is that it always swings.. from swing to hang!!!!
+	if(xdist != 0 && owner_.getComponent<PlayerControlComponent>()->MovementState().getPrevState()->name() != "SwingState")
+		dir = (int)(xdist / fabsf(xdist));
 
+	//if player is to the right of the hook, swing left
+	if (dir > 0)
+	{
+		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
 
-	//if (playerAim != AimState::UP)
-	//{
-	//	if (playerAim == AimState::LEFT)
-	//		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
-	//	else if (playerAim == AimState::RIGHT)
-	//		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
-
-	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
-	//}
-	//if(xdist > 5 || xdist < -5)
-	//	dir = (int)(xdist / fabsf(xdist));
-
-	////if player is to the right of the hook, swing left
-	//if (dir > 0)
-	//{
-	//	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
-	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
-
-	//}
-	////if player is to the left of the hook, swing right
-	//else if (dir < 0)
-	//{
-	//	owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
-	//	owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
-	//}
-
-	hangPosition_.x = hookPosition_.x;
-	owner_.setPos(hangPosition_);
+	}
+	//if player is to the left of the hook, swing right
+	else if (dir < 0)
+	{
+		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+	}
+	else
+	{
+		hangPosition_.x = hookPosition_.x;
+		owner_.setPos(hangPosition_);
+	}
 }
 void HangState::onExit(Scene& scene)
 {
@@ -161,9 +163,32 @@ void HangState::update(Scene& scene)
 			//if not turned off will build downward velocity
 			playerPhysics->enableGravity(false);
 			playerPhysics->setVelY(yDirection_ * ySpeed_ * Time::getElapsedUpdateTime());
-
 			hangPosition_.y += ySpeed_ * yDirection_;
 			ropeLength_ = fabsf(hangPosition_.y - hookPosition_.y);
+
+			//length of each rope segment is 2 pixels
+			//total number of rope segments to be drawn = ropeLength_ / 2
+			int ropeSegCount = (int)(ropeLength_ - hookPosition_.y) / 2;
+
+			//add rope segments of going down the rope.
+			if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
+			{
+				if (yDirection_ > 0)
+				{
+					Point ropeSegPos = owner_.getPos();
+					scene.gameObjects.add("RopeSegment", "Rope Segment", owner_.getPos());
+				}
+				//remove rope segments if going up the rope.
+				if (yDirection_ < 0)
+				{
+					scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).erase(scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).begin());
+				}
+			}
+	/*		for (int i = 0;i < ropeSegCount; ++i)
+			{
+				scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).
+			}*/
+
 
 			if (MIN_ROPE_LENGTH > ropeLength_)
 			{

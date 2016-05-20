@@ -22,6 +22,9 @@ void HookDisconnectState::onEnter(Scene& scene)
 		scene.gameObjects.playerHook->kill();
 		scene.gameObjects.playerHook = nullptr;
 	}
+
+	//if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
+		scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).clear();
 }
 void HookDisconnectState::onExit(Scene& scene)
 {
