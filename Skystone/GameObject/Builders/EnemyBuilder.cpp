@@ -38,7 +38,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	auto newEnemy = std::make_shared<GameObject>();
 	auto& enemyToBuild = *newEnemy;
 	enemyToBuild.setType(GameObject::Type::ENEMY);
-	if (enemyName == "TestMobStrong")
+	if (enemyName == "FallingBlock")
 	{
 		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/enemyStrong1.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
@@ -61,7 +61,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<PounceAIComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 100));
 	}
-	else if (enemyName == "TestMob2")
+	else if (enemyName == "CrawfishBoss")
 	{
 		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));

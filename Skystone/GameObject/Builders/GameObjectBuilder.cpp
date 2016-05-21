@@ -30,10 +30,14 @@ void GameObjectBuilder::buildPlayer(GameObject& player)
 	auto spriteRenderer = std::make_shared<SpriteRenderer>(player, "Images/run_cycle.png");
 	player.addComponent(spriteRenderer);
 	player.addComponent(std::make_shared<SpriteAnimator>(player, spriteRenderer.get()));
-	//player.addComponent(std::make_shared<ColliderBoxRenderer>(player));
+	//player.addComponent(std::make_shared<ColliderBoxRenderer>(player)); //
 	player.addComponent(std::make_shared<PhysicsComponent>(player));
 	player.addComponent(std::make_shared<HealthComponent>(player, 100));
-	player.addComponent(std::make_shared<ColliderComponent>(player));
+	auto collider = std::make_shared<ColliderComponent>(player);
+	collider->setWidth(15);
+	collider->setOffsetX(17);
+	player.addComponent(collider);
+
 	player.addComponent(std::make_shared<LevelChangeComponent>(player));
 	player.addComponent(std::make_shared<PlayerComponent>(player));
 	//player.addComponent(std::make_shared<PlayerMovementState>(player));

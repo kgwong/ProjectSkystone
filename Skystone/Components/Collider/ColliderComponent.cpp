@@ -49,6 +49,16 @@ ColliderComponent::BoxCollider ColliderComponent::getCollider()
 	return collider_;
 }
 
+void ColliderComponent::setHeight(float height)
+{
+	collider_.height = height;
+}
+
+void ColliderComponent::setWidth(float width)
+{
+	collider_.width = width;
+}
+
 float ColliderComponent::getHeight()
 {
 	return collider_.height;

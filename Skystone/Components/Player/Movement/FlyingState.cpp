@@ -21,7 +21,7 @@ void FlyingState::onEnter(Scene& scene)
 {
 	physics_->setVelY(-FLIGHT_VELOCITY);
 	animator_->setSpriteSheet("Images/jetcycle.png");
-	animator_->setLoopCount(1);
+	animator_->setTimesToPlay(1);
 }
 
 void FlyingState::onExit(Scene& scene)
