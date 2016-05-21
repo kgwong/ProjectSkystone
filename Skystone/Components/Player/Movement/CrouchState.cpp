@@ -22,9 +22,8 @@ CrouchState::~CrouchState()
 void CrouchState::onEnter(Scene& scene)
 {
 	animator_->setSpriteSheet("Images/crouch cycle.png");
-	animator_->setLoopCount(1);
-	ColliderComponent::BoxCollider newBoxCollider = {0, 0, 48, 32};
-	collider_->setCollider(newBoxCollider);
+	animator_->setTimesToPlay(1);
+	collider_->setHeight(32);
 	collider_->setOffsetY(32);
 
 	physics_->setVelX(0);
@@ -32,8 +31,7 @@ void CrouchState::onEnter(Scene& scene)
 
 void CrouchState::onExit(Scene& scene)
 {
-	ColliderComponent::BoxCollider newBoxCollider = { 0, 0, 48, 64 };
-	collider_->setCollider(newBoxCollider);
+	collider_->setHeight(64);
 	collider_->setOffsetY(0);
 }
 
