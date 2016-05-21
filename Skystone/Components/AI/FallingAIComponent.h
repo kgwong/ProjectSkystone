@@ -12,7 +12,8 @@ class FallingAIComponent :
 	{
 		NEUTRAL,
 		FALLING,
-		RISING
+		RISING,
+		DELAY
 	};
 
 
@@ -29,17 +30,17 @@ public:
 
 	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
+	virtual void handleEvent(const CollisionEvent& e);
 
 private:
 	float yVelocity_;
-	float xRadius_;
-	float yRadius_;
+	Point upperLeftCorner_;
+	Point upperRightCorner_;
+	Point playerPos_;
 	PhysicsComponent* physics_;
 
 	int timer_;
-	bool isFalling_;
-
-	STATE state;
+	STATE state_;
 };
 
 #endif
