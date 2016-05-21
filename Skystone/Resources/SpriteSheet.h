@@ -27,14 +27,14 @@ public:
 	int getFrameDuration(int index);
 	int getNextIndex(int index);
 
+	int getNumFrames();
+
 private:
 	std::shared_ptr<SDL_Texture> texture_;
 	std::vector<Frame> frames_;
 
 private:
 	void setFrames(SpriteSheetInfo* sInfo);
-
-
 };
 
 #endif //SPRITE_SHEET_H

@@ -22,6 +22,9 @@ void HookDisconnectState::onEnter(Scene& scene)
 		scene.gameObjects.playerHook->kill();
 		scene.gameObjects.playerHook = nullptr;
 	}
+
+	//if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
+		scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).clear();
 }
 void HookDisconnectState::onExit(Scene& scene)
 {
@@ -88,5 +91,14 @@ float HookDisconnectState::getDegrees()
 	}
 
 	return degrees_;
+}
+
+void HookDisconnectState::disconnectHook(Scene& scene)
+{
+	if (scene.gameObjects.playerHook != nullptr)
+	{
+		scene.gameObjects.playerHook->kill();
+		scene.gameObjects.playerHook = nullptr;
+	}
 }
 

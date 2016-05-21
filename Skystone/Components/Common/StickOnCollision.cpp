@@ -1,6 +1,8 @@
 #include "StickOnCollision.h"
 #include "Components/Physics/PhysicsComponent.h"
 #include "Application/Log.h"
+#include "Components/Collider/ColliderComponent.h"
+#include "Game/GameConstants.h"
 
 StickOnCollision::StickOnCollision(GameObject& owner)
 	:NonUpdatingComponent(owner),
@@ -25,7 +27,22 @@ void StickOnCollision::handleEvent(const CollisionEvent& e)
 		PhysicsComponent * hookPhysics = owner_.getComponent<PhysicsComponent>();
 		hookPhysics->setVelX(0);
 		hookPhysics->setVelY(0);
-		isConnected = true;
+		
+		auto tileCollider = e.getOtherCollider();
+		auto hookCollider = owner_.getComponent<ColliderComponent>();
+
+		float hookBot = hookCollider->getBottom();
+		float tileBot = tileCollider.getBottom();
+		float tileTop = tileCollider.getTop();
+
+		if (hookBot == tileTop)
+		{
+			isConnected = false;
+		}
+		else
+		{
+			isConnected = true;
+		}
 		//LOG("INFO") << "Hook is connected at " << hookPoint;
 		
 	}

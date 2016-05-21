@@ -56,7 +56,7 @@ void PlayerAttackState::update(Scene& scene)
 		physics->setVelY(newVelY * 60.0f);
 		shoot_ = false;
 
-		Resources::audioPlayer.PlayClip("laser1");
+		Resources::audioPlayer.PlayClip("gunShot");
 	}
 
 

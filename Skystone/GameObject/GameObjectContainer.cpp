@@ -7,7 +7,8 @@
 
 GameObjectBuilder GameObjectContainer::builder_;
 
-GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) : scene_(scene),
+GameObjectContainer::GameObjectContainer(Scene& scene, ComponentSystem& componentSystem) 
+	: scene_(scene),
 	componentSystem_(componentSystem),
 	player_(nullptr)
 {
@@ -79,6 +80,11 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 		//objects_[GameObject::Type::PLAYER_HOOK].push_back(newObject);
 
 	}
+	else if (type == "RopeSegment")
+	{
+		newObject = builder_.buildPlayerRopeSegment(componentSystem_, name);
+		objects_[GameObject::Type::ROPE_SEGMENT].push_back(newObject);
+	}
 	else if (type == "Drop")
 	{
 		newObject = builder_.buildItemDrop(componentSystem_, name);
@@ -143,7 +149,6 @@ ObjectVector& GameObjectContainer::get(GameObject::Type type)
 
 void GameObjectContainer::removeDeadObjects(ObjectVector& vector, Scene& scene)
 {
-
 	typedef std::shared_ptr<GameObject> obj;
 	util::vector::remove(vector,
 		[](obj& o) { return !o->alive(); },

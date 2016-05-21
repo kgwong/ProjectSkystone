@@ -39,17 +39,9 @@ void StunState::update(Scene& scene)
 			return;
 		}
 
-		if (owner_.getComponent<PlayerControlComponent>()->HookState().hanging)
-		{
-			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
-			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
-			return;
-		}
 
 		if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() != "HookConnectState")
 		{
-			owner_.getComponent<PlayerControlComponent>()->HookState().setHanging(false);
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 			owner_.getComponent<PhysicsComponent>()->enableGravity(true);
 			return;

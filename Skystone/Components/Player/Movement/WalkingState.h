@@ -6,7 +6,7 @@
 
 class PlayerControlComponent;
 class PhysicsComponent;
-class SpriteRenderer;
+class SpriteAnimator;
 
 class WalkingState : public PlayerState
 {
@@ -38,7 +38,7 @@ public:
 private:
 	PlayerControlComponent* controlComponent_;
 	PhysicsComponent* physics_;
-	SpriteRenderer* renderer_;
+	SpriteAnimator* animator_;
 	SubState subState_;
 
 private:

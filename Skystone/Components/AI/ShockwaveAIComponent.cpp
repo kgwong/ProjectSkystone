@@ -3,6 +3,7 @@
 #include "BossAIComponent.h"
 #include "../Collider/ColliderComponent.h"
 #include "Application/Log.h"
+#include "Resources/Resources.h"
 
 
 
@@ -62,7 +63,7 @@ void ShockwaveAIComponent::update(Scene& scene)
 	////////////////////////////////////////////////////////////////////////////////////////
 	if (timer_ > delay_)
 	{
-
+		Resources::audioPlayer.PlayClip("laser2");
 		waves_[current_count_] = fireProjectile(0, -projectile_speed_, scene, 90, facing_ * start_distance_ + current_count_ * distance_interval_ * facing_, collider_->getBottom() - owner_.getPosY() - 10, "ClawProjectile");
 		current_count_++;
 		timer_ = 0;
