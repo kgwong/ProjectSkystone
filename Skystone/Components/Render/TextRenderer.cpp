@@ -9,17 +9,24 @@
 
 const static std::string defaultFontPath = "../Assets/Fonts/coolvetica.ttf";
 const static SDL_Color defaultTextColor = { 255, 255, 255 };
-const static SDL_Color defaultOutlineColor = { 0, 0, 0 };
+const static SDL_Color defaultOutlineColor = { 0, 0, 0 }; 
+
+namespace
+{
+TTF_Font* getDefaultFont()
+{
+	return TTF_OpenFont(defaultFontPath.c_str(), TextRenderer::DEFAULT_FONT_SIZE);
+}
+}
+
 
 TextRenderer::TextRenderer(GameObject& owner)
 	: RenderComponent(owner),
-	font_(TTF_OpenFont(defaultFontPath.c_str(), DEFAULT_FONT_SIZE)),
-	outline_(TTF_OpenFont(defaultFontPath.c_str(), DEFAULT_FONT_SIZE)),
+	font_(getDefaultFont()), outline_(getDefaultFont()),
 	textColor_(defaultTextColor), outlineColor_(defaultOutlineColor),
-	text_("")
+	renderMode_(TextRenderer::RenderMode::RENDER_FROM_CENTER)
 {
 	TTF_SetFontOutline(outline_, OUTLINE_SIZE);
-
 	if (font_ == nullptr)
 		LOG("Warning") << "No font loaded: " << TTF_GetError();
 }
@@ -29,18 +36,17 @@ TextRenderer::~TextRenderer()
 {
 }
 
-void TextRenderer::render(GameWindow& window, float percentBehind)
+void TextRenderer::render(GameWindow& window, float percBehind)
 {
 	// Always create a new texture, even when it hasn't changed
 	// Cache them in a map<string, texture> ?
-
 	if (text_ != "")
 	{
 		SDL_Texture* textTexture = getTextTexture(window);
 		SDL_Texture* outlineTexture = getOutlineTexture(window);
 
-		renderOutline(window, outlineTexture);
-		renderText(window, textTexture);
+		renderTextTexture(window, outlineTexture, TextTextureType::OUTLINE);
+		renderTextTexture(window, textTexture, TextTextureType::TEXT);
 
 		SDL_DestroyTexture(textTexture);
 		SDL_DestroyTexture(outlineTexture);
@@ -64,6 +70,11 @@ void TextRenderer::setFontSize(int size)
 	font_ = TTF_OpenFont(defaultFontPath.c_str(), size);
 	outline_ = TTF_OpenFont(defaultFontPath.c_str(), size);
 	TTF_SetFontOutline(outline_, OUTLINE_SIZE);
+}
+
+void TextRenderer::setRenderMode(TextRenderer::RenderMode mode)
+{
+	renderMode_ = mode;
 }
 
 void TextRenderer::setTextColor(SDL_Color color)
@@ -92,28 +103,23 @@ SDL_Texture* TextRenderer::getOutlineTexture(GameWindow& window)
 	return result;
 }
 
-void TextRenderer::renderText(GameWindow& window, SDL_Texture* text)
+void TextRenderer::renderTextTexture(GameWindow& window, SDL_Texture* textTexture, TextTextureType type)
 {
 	int w, h;
-	SDL_QueryTexture(text, NULL, NULL, &w, &h);
-
-	double wd = w;
-	double hd = h;
-
+	SDL_QueryTexture(textTexture, NULL, NULL, &w, &h);
 	SDL_Rect src = { 0,0, w, h };
-	SDL_Rect dest = { (int)(owner_.getPosX() - std::floor(wd/2)), (int)(owner_.getPosY()- std::floor(hd/2)), w, h };
-	window.render(text, &src, &dest);
+	SDL_Rect dest = getTextDest((double)w, (double)h);
+	if(type == TextTextureType::OUTLINE)
+		dest.y -= OUTLINE_SIZE;
+	window.render(textTexture, &src, &dest);
 }
 
-void TextRenderer::renderOutline(GameWindow& window, SDL_Texture* outline)
+SDL_Rect TextRenderer::getTextDest(double w, double h)
 {
-	int w, h;
-	SDL_QueryTexture(outline, NULL, NULL, &w, &h);
-
-	double wd = w;
-	double hd = h;
-
-	SDL_Rect src = { 0,0, w, h };
-	SDL_Rect dest = { (int)(owner_.getPosX() - std::floor(wd/2)), (int)(owner_.getPosY() - std::ceil(hd/2)), w, h };
-	window.render(outline, &src, &dest);
+	SDL_Rect dest;
+	if (renderMode_ == TextRenderer::RenderMode::RENDER_FROM_CENTER)
+		dest = { (int)(owner_.getPosX() - std::floor(w / 2)), (int)(owner_.getPosY() - std::ceil(h / 2)), (int)w, (int)h };
+	else
+		dest = { (int)(owner_.getPosX()), (int)(owner_.getPosY()), (int)w, (int)h };
+	return dest;
 }

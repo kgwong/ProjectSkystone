@@ -121,6 +121,7 @@
     <ClCompile Include="Resources\Sprite.cpp" />
     <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
+    <ClCompile Include="Components\Render\ScrollingTextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -252,5 +253,6 @@
     <ClInclude Include="Resources\Sprite.h" />
     <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
     <ClInclude Include="Components\Player\Movement\SwingState.h" />
+    <ClInclude Include="Components\Render\ScrollingTextRenderer.h" />
   </ItemGroup>
 </Project>

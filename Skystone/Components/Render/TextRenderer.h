@@ -2,38 +2,37 @@
 #define TEXT_RENDERER_H
 
 #include <string>
-#include "Components/Render/RenderComponent.h"
-
 #include <SDL/SDL_ttf.h>
+#include "Components/Render/RenderComponent.h"
 
 class TextRenderer : public RenderComponent
 {
 public:
+	enum class RenderMode {RENDER_FROM_CENTER, RENDER_FROM_TOP_LEFT};
 	static const int DEFAULT_FONT_SIZE = 28;
 
 	TextRenderer(GameObject& owner);
 	virtual ~TextRenderer();
-	virtual void render(GameWindow& window, float percentBehind);
+	virtual void render(GameWindow& window, float percBehind);
 
 	std::string getText();
 	void setText(const std::string& newText);
 	void setFontSize(int size);
-
+	void setRenderMode(RenderMode mode);
 	void setTextColor(SDL_Color color);
 	void setOutlineColor(SDL_Color color);
 
 private:
-	TTF_Font* font_;
-	TTF_Font* outline_;
-
+	enum class TextTextureType{OUTLINE, TEXT};
+	TTF_Font* font_, *outline_;
 	SDL_Color textColor_, outlineColor_;
 	std::string text_;
+	RenderMode renderMode_;
 
 	SDL_Texture* getTextTexture(GameWindow& window);
 	SDL_Texture* getOutlineTexture(GameWindow& window);
-
-	void renderText(GameWindow& window, SDL_Texture* text);
-	void renderOutline(GameWindow& window, SDL_Texture* outline);
+	SDL_Rect getTextDest(double w, double h);
+	void renderTextTexture(GameWindow& window, SDL_Texture* textTexture, TextTextureType type);
 };
 
 #endif //TEXT_RENDERER_H

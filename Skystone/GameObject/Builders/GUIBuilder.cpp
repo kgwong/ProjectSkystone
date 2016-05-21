@@ -1,12 +1,17 @@
 #include "GUIBuilder.h"
 
+#include <string>
+
 #include "Resources/Resources.h"
 #include "Application/Log.h"
 #include "Components/GUI/TextSelector.h"
 #include "Components/GUI/SelectableText.h"
 #include "Components/GUI/HealthBar.h"
 #include "Components/Scene/InputSceneChanger.h"
+#include "Components/Render/ScrollingTextRenderer.h"
 #include "Scene/Scene.h"
+
+static const std::string SCRIPT_FOLDER = "GameScripts/";
 
 GUIBuilder::GUIBuilder()
 {
@@ -29,6 +34,14 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 		auto& textSelectorToBuild = *textSelector_;
 		textSelectorToBuild.setType(GameObject::Type::GUI);
 		textSelectorToBuild.addComponent(componentSystem.getNew<TextSelector>(textSelectorToBuild));
+	}
+	else if (name == "PlayIntroButton")
+	{
+		auto text = componentSystem.getNew<SelectableText>(guiToBuild);
+		guiToBuild.addComponent(text);
+		text->setText("Play Intro");
+		text->setSceneOnSelection(SceneID::INTRO);
+		textSelector_->getComponent<TextSelector>()->addText(text);
 	}
 	else if (name == "StartGameButton")
 	{
@@ -80,6 +93,12 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{
 		guiToBuild.addComponent(componentSystem.getNew<InputSceneChanger>(guiToBuild, ESC, SceneID::LEVEL));
+	}
+	else if (name.substr(0, 7) == "Script_")
+	{
+		std::string scriptName = name.substr(7);
+		std::string relPath = SCRIPT_FOLDER + scriptName;
+		guiToBuild.addComponent(componentSystem.getNew<ScrollingTextRenderer>(guiToBuild, relPath));
 	}
 	else
 	{

@@ -107,7 +107,7 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "GUI")
 	{
-		if (objects_[GameObject::Type::GUI].size() == 0)
+		if (objects_[GameObject::Type::GUI].empty())
 		{
 			// buttons go on the most recently constructed TextSelector
 			// first GUI should be the TextSelector

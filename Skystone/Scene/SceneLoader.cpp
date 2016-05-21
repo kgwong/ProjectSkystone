@@ -109,6 +109,9 @@ std::string SceneLoader::sceneIDToString(SceneID sceneID)
 		case SceneID::PAUSE:
 			result = "Pause";
 			break;
+		case SceneID::INTRO:
+			result = "Intro";
+			break;
 		default:
 			break;
 	}

@@ -11,6 +11,7 @@ enum class SceneID {
 	LEVEL,
 	PAUSE,
 	MAIN_MENU,
+	INTRO,
 	GAME_OVER,
 	QUIT_GAME,
 };
