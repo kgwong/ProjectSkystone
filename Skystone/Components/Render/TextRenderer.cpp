@@ -2,6 +2,7 @@
 
 #include "Application/GameWindow.h"
 #include "Application/Log.h"
+#include "Game/GameConstants.h"
 #include <SDL/SDL.h>
 #include <cmath>
 
@@ -89,7 +90,7 @@ void TextRenderer::setOutlineColor(SDL_Color color)
 
 SDL_Texture* TextRenderer::getTextTexture(GameWindow& window)
 {
-	SDL_Surface* textSurface = TTF_RenderText_Blended(font_, text_.c_str(), textColor_);
+	SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font_, text_.c_str(), textColor_, Constants::SCREEN_WIDTH-1);
 	SDL_Texture* result = SDL_CreateTextureFromSurface(window.getRenderer(), textSurface);
 	SDL_FreeSurface(textSurface);
 	return result;
@@ -97,7 +98,7 @@ SDL_Texture* TextRenderer::getTextTexture(GameWindow& window)
 
 SDL_Texture* TextRenderer::getOutlineTexture(GameWindow& window)
 {
-	SDL_Surface* outlineSurface = TTF_RenderText_Blended(outline_, text_.c_str(), outlineColor_);
+	SDL_Surface* outlineSurface = TTF_RenderText_Blended_Wrapped(outline_, text_.c_str(), outlineColor_, Constants::SCREEN_WIDTH+1);
 	SDL_Texture* result = SDL_CreateTextureFromSurface(window.getRenderer(), outlineSurface);
 	SDL_FreeSurface(outlineSurface);
 	return result;
@@ -109,8 +110,12 @@ void TextRenderer::renderTextTexture(GameWindow& window, SDL_Texture* textTextur
 	SDL_QueryTexture(textTexture, NULL, NULL, &w, &h);
 	SDL_Rect src = { 0,0, w, h };
 	SDL_Rect dest = getTextDest((double)w, (double)h);
-	if(type == TextTextureType::OUTLINE)
+	if (type == TextTextureType::OUTLINE)
+	{
+		if (renderMode_ == RenderMode::RENDER_FROM_TOP_LEFT)
+			dest.x -= OUTLINE_SIZE;
 		dest.y -= OUTLINE_SIZE;
+	}
 	window.render(textTexture, &src, &dest);
 }
 

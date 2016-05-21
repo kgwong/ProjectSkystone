@@ -13,7 +13,7 @@ public:
 
 private:
 	std::string text_;
-
+	float timeSinceLastUpdate_;
 };
 
 #endif // SCROLLING_TEXT_RENDERER_H
