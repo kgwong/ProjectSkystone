@@ -24,7 +24,7 @@ void HookDisconnectState::onEnter(Scene& scene)
 	}
 
 	//if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
-		scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).clear();
+		//scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).clear();
 }
 void HookDisconnectState::onExit(Scene& scene)
 {

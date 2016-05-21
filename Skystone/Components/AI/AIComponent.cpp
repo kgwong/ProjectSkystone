@@ -21,7 +21,8 @@ void AIComponent::handleEvent(const CollisionEvent& e)
 	GameObject& other = e.getOtherObject();
 	if (other.getType() == GameObject::Type::PLAYER_PROJECTILE)
 	{
-		owner_.getComponent<HealthComponent>()->takeDamage(other.getComponent<DamageComponent>()->getDamage());
+		if(owner_.getComponent<HealthComponent>() != nullptr)
+			owner_.getComponent<HealthComponent>()->takeDamage(other.getComponent<DamageComponent>()->getDamage());
 	}
 }
 
