@@ -4,9 +4,16 @@
 
 class PhysicsComponent;
 
+
 class FallingAIComponent :
 	public AIComponent
 {
+	enum class STATE
+	{
+		NEUTRAL,
+		FALLING,
+		RISING
+	};
 
 
 public:
@@ -31,6 +38,8 @@ private:
 
 	int timer_;
 	bool isFalling_;
+
+	STATE state;
 };
 
 #endif

@@ -55,17 +55,17 @@ void HangState::onEnter(Scene& scene)
 
 	//length of each rope segment is 2 pixels
 	//total number of rope segments to be drawn = ropeLength_ / 2
-	int ropeSegCount = (int)(ropeLength_ - hookPosition_.y)/ 2;
+	//int ropeSegCount = (int)(ropeLength_ - hookPosition_.y)/ 2;
 
-	//draw rope segments
-	for (int i = 0;i < ropeSegCount; ++i)
-	{
-		Point segmentPos = owner_.getPos();
-		segmentPos.x += scene.gameObjects.playerHook->getComponent<ColliderComponent>()->getWidth() / 2;
-	//	segmentPos.y = segmentPos.y - (owner_.getComponent<ColliderComponent>()->getHeight() / 6);
-		segmentPos.y -= i * 2;
-		scene.gameObjects.add("RopeSegment", "rope Segment", segmentPos);
-	}
+	////draw rope segments
+	//for (int i = 0;i < ropeSegCount; ++i)
+	//{
+	//	Point segmentPos = owner_.getPos();
+	//	segmentPos.x += scene.gameObjects.playerHook->getComponent<ColliderComponent>()->getWidth() / 2;
+	////	segmentPos.y = segmentPos.y - (owner_.getComponent<ColliderComponent>()->getHeight() / 6);
+	//	segmentPos.y -= i * 2;
+	//	scene.gameObjects.add("RopeSegment", "rope Segment", segmentPos);
+	//}
 
 	//swing from a jumping start while launching the hook to the left or right.
 
@@ -171,19 +171,19 @@ void HangState::update(Scene& scene)
 			int ropeSegCount = (int)(ropeLength_ - hookPosition_.y) / 2;
 
 			//add rope segments of going down the rope.
-			if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
-			{
-				if (yDirection_ > 0)
-				{
-					Point ropeSegPos = owner_.getPos();
-					scene.gameObjects.add("RopeSegment", "Rope Segment", owner_.getPos());
-				}
-				//remove rope segments if going up the rope.
-				if (yDirection_ < 0)
-				{
-					scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).erase(scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).begin());
-				}
-			}
+			//if (!scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).empty())
+			//{
+			//	if (yDirection_ > 0)
+			//	{
+			//		Point ropeSegPos = owner_.getPos();
+			//		scene.gameObjects.add("RopeSegment", "Rope Segment", owner_.getPos());
+			//	}
+			//	//remove rope segments if going up the rope.
+			//	if (yDirection_ < 0)
+			//	{
+			//		scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).erase(scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).begin());
+			//	}
+			//}
 	/*		for (int i = 0;i < ropeSegCount; ++i)
 			{
 				scene.gameObjects.get(GameObject::Type::ROPE_SEGMENT).

@@ -21,6 +21,7 @@
 
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Collider/ColliderComponent.h"
+#include "Components/Common/StickOnCollision.h"
 
 
 EnemyBuilder::EnemyBuilder()
@@ -44,8 +45,9 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
-		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 500));
+		//enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 500));
 		enemyToBuild.addComponent(componentSystem.getNew<FallingAIComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<StickOnCollision>(enemyToBuild));
 	}
 	else if (enemyName == "TestMob1") 
 	{
