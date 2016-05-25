@@ -113,6 +113,27 @@ bool Point::inBounds(float levelWidth, float levelHeight)
 	return false;
 }
 
+bool Point::inGameObject(Point pt, float height, float width)
+{
+	Point upperLeft, bottomRight;
+
+	upperLeft.x = pt.x;
+	upperLeft.y = pt.y;
+
+	bottomRight.x = pt.x + width;
+	bottomRight.y = pt.y + height;
+
+	if (x > upperLeft.x && x < bottomRight.x)
+	{
+		if (y > upperLeft.y && y < bottomRight.y)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 std::ostream& operator<<(std::ostream& out, const Point& f)
 {
 	out << "(" << f.x << ", " << f.y << ")";

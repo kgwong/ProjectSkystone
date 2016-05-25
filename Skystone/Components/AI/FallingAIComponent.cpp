@@ -63,7 +63,7 @@ void FallingAIComponent::update(Scene& scene)
 	{
 		physics_->enableGravity(true);
 		float yvel = physics_->getVelY();
-		physics_->setVelY(yvel * 1.2);
+		physics_->setVelY(yvel * 1.05);
 	}
 
 	if (state_ == STATE::RISING)

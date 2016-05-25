@@ -32,16 +32,19 @@ void SwingState::onEnter(Scene& scene)
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 		return;
 	}
+	if (scene.gameObjects.playerHook == nullptr)
+	{
+		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
+		return;
+	}
+
 
 	xSpeed_ = 1.1f;
 	currentAngle_ = 0.0f;
 	xDirection_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
-	LOG("HARVEY") << "direction is " << xDirection_;
 	//problem here references a null ptr.
-	if (scene.gameObjects.playerHook != nullptr)
-		hookPosition_ = scene.gameObjects.playerHook->getPos();
-	else
-		hookPosition_ = { 0,0 };
+	hookPosition_ = scene.gameObjects.playerHook->getPos();
 	swingPosition_ = owner_.getPos();
 	oldPosition_ = owner_.getPos();
 	radius_ = fabsf(hookPosition_.y - swingPosition_.y);
@@ -68,7 +71,7 @@ void SwingState::onEnter(Scene& scene)
 	}
 	LOG("HARVEY") << owner_.getPos();
 	LOG("HARVEY") << currentAngle_;
-	//LOG("HARVEY") << hookPosition_ << ", " << swingPosition_;
+	LOG("HARVEY") << "STARTING RADIUS: " << radius_;
 }
 void SwingState::onExit(Scene& scene)
 {
@@ -92,8 +95,7 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 	{
 		keyHeld_ = true;
 	}
-
-	if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e,ControlType::RIGHT))
+	else if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e,ControlType::RIGHT))
 	{
 		keyHeld_ = false;
 	}
@@ -107,16 +109,18 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 }
 void SwingState::update(Scene& scene)
 {
+	LOG("HARVEY") << "UPDATED PLAYERPOS: " << owner_.getPos();
+	LOG("HARVEY") << "UPDATED CURRENTANGLE: " << currentAngle_;
 
 	auto playerPhysics = owner_.getComponent<PhysicsComponent>();	
 	playerPhysics->enableGravity(false);
 
-	if (tileHit_)
+	/*if (tileHit_)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
 		playerPhysics->enableGravity(true);
 		return;
-	}
+	}*/
 
 	if (currentAngle_ > angleRange_)
 	{
@@ -160,7 +164,7 @@ void SwingState::update(Scene& scene)
 				xSpeed_ = 0.0f;
 		}
 
-		if (angleRange_ < 5)
+		if (angleRange_ < 0.5)
 		{
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
 			playerPhysics->setVelX(0);
@@ -171,8 +175,11 @@ void SwingState::update(Scene& scene)
 			return;
 		}
 	}
-
+	float dx = swingPosition_.x - hookPosition_.x;
+	float dy = swingPosition_.y - hookPosition_.y;
+	radius_ = sqrtf((dx * dx) + (dy * dy));
 	currentAngle_ += xSpeed_ * xDirection_;
+	LOG("HARVEY") << "RADIUS: " << radius_;
 
 	swingPosition_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 	swingPosition_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;

@@ -14,6 +14,8 @@ struct Point
 	bool operator!=(const Point& rhs) const;
 	bool inBounds(float levelWidth, float levelHeight);
 
+	bool inGameObject(Point pt, float height, float width);
+
 	float x;
 	float y;
 

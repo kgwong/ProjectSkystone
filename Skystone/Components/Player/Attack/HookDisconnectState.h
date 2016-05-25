@@ -9,11 +9,12 @@ class HookDisconnectState : public HookStateManager
 public:
 	HookDisconnectState(GameObject& owner);
 	virtual ~HookDisconnectState();
+
 	virtual void onEnter(Scene& scene) ;
 	virtual void onExit(Scene& scene) ;
 	virtual void handleInput(Scene& scene, SDL_Event& e) ;
 	virtual void update(Scene& scene) ;
-	virtual std::string name() { return "HookDisconnectState"; }
+	virtual std::string name();
 
 	float getDegrees();
 	AimState& getAimState();

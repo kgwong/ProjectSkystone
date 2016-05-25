@@ -12,15 +12,20 @@ public:
 	virtual void onEnter(Scene& scene);
 	virtual void onExit(Scene& scene);
 	virtual void handleInput(Scene& scene, SDL_Event& e);
+	virtual void handleEvent(const CollisionEvent& e);
 	virtual void update(Scene& scene);
-
-	virtual double getAngle();
 	virtual std::string name();
 
 	void instantiateHook(Scene& scene);
 
 private:
-	float _degrees;
+	float degrees_;
+	float hookWidth_;
+	float hookHeight_;
+	float hookVelocity_;
+	Point hookPosition_;
+	PhysicsComponent* physics_;
+
 
 
 };
