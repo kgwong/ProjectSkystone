@@ -14,19 +14,18 @@
     <ProjectGuid>{98698B03-B817-4C1F-BBA2-47517B7659FC}</ProjectGuid>
     <RootNamespace>Test_Game</RootNamespace>
     <ProjectName>Skystone</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -46,17 +45,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\dependencies\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <Profile>true</Profile>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -65,14 +61,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\Skystone;..\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>..\dependencies\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -81,6 +75,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Player\Attack\Aim\AimDiagonalState.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\AimUpState.cpp" />
     <ClCompile Include="Components\Render\ColliderBoxRenderer.cpp" />
     <ClCompile Include="Components\Scene\InputSceneChanger.cpp" />
     <ClCompile Include="Components\AI\BossAIComponent.cpp" />
@@ -93,6 +89,7 @@
     <ClCompile Include="Components\EnemyProjectile\EnemyProjectileComponent.cpp" />
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
     <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
+    <ClCompile Include="Components\Player\PlayerAnimationController.cpp" />
     <ClCompile Include="Resources\Sprite.cpp" />
     <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
@@ -201,6 +198,8 @@
     <ClCompile Include="Components\Render\ScrollingTextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Player\Attack\Aim\AimDiagonalState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\AimUpState.h" />
     <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
     <ClInclude Include="Components\Scene\InputSceneChanger.h" />
     <ClInclude Include="ComponentEvents\ComponentEventReceiver.h" />
@@ -220,6 +219,8 @@
     <ClInclude Include="Components\Player\Movement\HangState.h" />
     <ClInclude Include="Components\Player\Attack\HookStateManager.h" />
     <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
+    <ClInclude Include="GameTypes\FacingDirection.h" />
+    <ClInclude Include="Components\Player\PlayerAnimationController.h" />
     <ClInclude Include="Resources\Sprite.h" />
     <ClInclude Include="Scene\Level\LevelMapLoader.h" />
     <ClInclude Include="Scene\GameOverScene.h" />

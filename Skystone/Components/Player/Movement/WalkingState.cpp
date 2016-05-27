@@ -121,6 +121,11 @@ void WalkingState::update(Scene& scene)
 
 }
 
+WalkingState::SubState WalkingState::getSubState()
+{
+	return subState_;
+}
+
 void WalkingState::changeSubState(SubState newSubState)
 {
 	subState_ = newSubState;
@@ -130,11 +135,11 @@ void WalkingState::changeSubState(SubState newSubState)
 		animator_->setSpriteSheet("Images/idle cycle.png");
 		break;
 	case SubState::LEFT:
-		animator_->setSpriteSheet("Images/run_cycle.png");
+		animator_->setSpriteSheet("Images/forward shoot run cycle.png");
 		animator_->setFlipHorz(true);
 		break;
 	case SubState::RIGHT:
-		animator_->setSpriteSheet("Images/run_cycle.png");
+		animator_->setSpriteSheet("Images/forward shoot run cycle.png");
 		animator_->setFlipHorz(false);
 		break;
 	}

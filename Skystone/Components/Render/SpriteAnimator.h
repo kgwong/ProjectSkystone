@@ -22,6 +22,7 @@ public:
 
 	void setSpriteSheet(const std::string& relPath);
 	void setSpriteSheet(SpriteSheet* spriteSheet);
+	void setSpriteIndex(int index);
 
 	void flip(Axis axis);
 	void setFlipHorz(bool value);

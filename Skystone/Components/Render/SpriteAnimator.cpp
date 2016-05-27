@@ -79,6 +79,12 @@ void SpriteAnimator::setSpriteSheet(SpriteSheet* spriteSheet)
 	msOnFrame_ = 0;
 }
 
+void SpriteAnimator::setSpriteIndex(int index)
+{
+	spriteRenderer_->setSpriteIndex(index);
+	currFrameIndex_ = index;
+}
+
 void SpriteAnimator::flip(Axis axis)
 {
 	spriteRenderer_->flip(axis);

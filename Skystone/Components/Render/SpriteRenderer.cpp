@@ -13,7 +13,6 @@ SpriteRenderer::SpriteRenderer(GameObject& owner, const std::string& relPath)
 
 SpriteRenderer::SpriteRenderer(GameObject& owner, SpriteSheet* spriteSheet)
 	:RenderComponent(owner), sprite_(spriteSheet, 0),
-	//currFrameIndex(0), msOnFrame(0),
 	flipHorz_(false), flipVert_(false),
 	rotationDegrees_(0)
 {
@@ -51,19 +50,6 @@ void SpriteRenderer::setRotation(double degrees)
 	rotationDegrees_ = degrees;
 }
 
-/*void SpriteRenderer::setSprite(const std::string& relPath)
-{
-	setSprite(Resources::getSpriteSheet(relPath));
-}
-
-void SpriteRenderer::setSprite(SpriteSheet* newSpriteSheet)
-{
-	spriteSheet_ = newSpriteSheet;
-	currFrameIndex = 0;
-	msOnFrame = 0;
-}*/
-
-
 void SpriteRenderer::setSpriteSheet(const std::string& relPath)
 {
 	setSpriteSheet(Resources::getSpriteSheet(relPath));
@@ -87,17 +73,6 @@ void SpriteRenderer::setSprite(Sprite sprite)
 
 void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 {
-	/*msOnFrame += Time::getElapsedRenderTime();
-	
-	int currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
-	while (msOnFrame >= currFrameDuration)
-	{
-		msOnFrame -= currFrameDuration;
-		currFrameIndex = spriteSheet_->getNextIndex(currFrameIndex);
-		currFrameDuration = spriteSheet_->getFrameDuration(currFrameIndex);
-	}
-	*/
-
 	//cleaner way to incorporate this?
 	Point adjPos = RenderComponent::getRenderPosition(percBehind); 
 	SDL_Rect drawDest = SDL_Rect{ (int)adjPos.x, (int)adjPos.y, getWidth(), getHeight() };

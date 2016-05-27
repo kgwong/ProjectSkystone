@@ -35,6 +35,8 @@ public:
 
 	virtual std::string name() { return "WalkingState"; }
 
+	virtual SubState getSubState();
+
 private:
 	PlayerControlComponent* controlComponent_;
 	PhysicsComponent* physics_;

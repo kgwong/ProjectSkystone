@@ -122,6 +122,9 @@
     <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
     <ClCompile Include="Components\Render\ScrollingTextRenderer.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\AimUpState.cpp" />
+    <ClCompile Include="Components\Player\Attack\Aim\AimDiagonalState.cpp" />
+    <ClCompile Include="Components\Player\PlayerAnimationController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -254,5 +257,9 @@
     <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
     <ClInclude Include="Components\Player\Movement\SwingState.h" />
     <ClInclude Include="Components\Render\ScrollingTextRenderer.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\AimUpState.h" />
+    <ClInclude Include="Components\Player\Attack\Aim\AimDiagonalState.h" />
+    <ClInclude Include="GameTypes\FacingDirection.h" />
+    <ClInclude Include="Components\Player\PlayerAnimationController.h" />
   </ItemGroup>
 </Project>
