@@ -30,10 +30,9 @@ void Level::onEnter()
 {
 	gameObjects.getPlayer().registerComponents(componentSystem_);
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->HookState().resetState();
-	//this line below caused the player to stop using his jetpack when going to another level.
 	gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().resetState();
 	gameObjects.start();
-
+	LOG("HARVEY") << "PlayerPosition: " << gameObjects.getPlayer().getPos();
 	LOG("HARVEY") << gameObjects.getPlayer().getComponent<PlayerControlComponent>()->MovementState().getState()->name();
 }
 
