@@ -113,4 +113,22 @@ void PlayerAnimationController::changeAnimation(PlayerMovementState& movementSta
 			animator_->setTimesToPlay(1);
 		}
 	}
+	else if (movementStateName == "AirborneState")
+	{
+		if (attackStateName == "AimUpState")
+		{
+			animator_->setSpriteSheet("Images/Player/Jump/shoot_up_jump_cycle_truncated.png");
+			animator_->setTimesToPlay(1);
+		}
+		else if (attackStateName == "AimDiagonalState")
+		{
+			animator_->setSpriteSheet("Images/Player/Jump/seig_heil_jump_shoot_truncated.png");
+			animator_->setTimesToPlay(1);
+		}
+		else if (attackStateName == "DefaultAimState")
+		{
+			animator_->setSpriteSheet("Images/Player/Jump/shoot_forward_jump_truncated.png");
+			animator_->setTimesToPlay(1);
+		}
+	}
 }

@@ -9,7 +9,7 @@ PlayerControlComponent::PlayerControlComponent(GameObject& owner)
 	movement_(owner), 
 	attack_(owner), 
 	hooker_(owner)
-{	
+{
 }
 
 
@@ -31,6 +31,7 @@ void PlayerControlComponent::start(Scene& scene)
 	attack_.start(scene);
 	hooker_.start(scene);
 	animationController_.setAnimator(owner_.getComponent<SpriteAnimator>());
+	animationController_.changeAnimation(movement_, attack_);
 }
 
 void PlayerControlComponent::update(Scene& scene)
