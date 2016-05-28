@@ -50,6 +50,11 @@ void SpriteRenderer::setRotation(double degrees)
 	rotationDegrees_ = degrees;
 }
 
+SpriteSheet* SpriteRenderer::getSpriteSheet()
+{
+	return sprite_.spriteSheet;
+}
+
 void SpriteRenderer::setSpriteSheet(const std::string& relPath)
 {
 	setSpriteSheet(Resources::getSpriteSheet(relPath));
@@ -77,6 +82,26 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 	Point adjPos = RenderComponent::getRenderPosition(percBehind); 
 	SDL_Rect drawDest = SDL_Rect{ (int)adjPos.x, (int)adjPos.y, getWidth(), getHeight() };
 
+	gameWindow.render(sprite_.spriteSheet->getTexture(), 
+					sprite_.spriteSheet->getFrameRect(sprite_.index), 
+					&drawDest, 
+					rotationDegrees_, 
+					NULL, 
+					determineFinalFlip());
+}
+
+int SpriteRenderer::getWidth()
+{
+	return sprite_.getWidth();
+}
+
+int SpriteRenderer::getHeight()
+{
+	return sprite_.getHeight();
+}
+
+SDL_RendererFlip SpriteRenderer::determineFinalFlip()
+{
 	SDL_RendererFlip finalFlip;
 	if (flipHorz_ && flipVert_)
 	{
@@ -94,20 +119,5 @@ void SpriteRenderer::render(GameWindow& gameWindow, float percBehind)
 	{
 		finalFlip = SDL_FLIP_NONE;
 	}
-	gameWindow.render(sprite_.spriteSheet->getTexture(), 
-					sprite_.spriteSheet->getFrameRect(sprite_.index), 
-					&drawDest, 
-					rotationDegrees_, 
-					NULL, 
-					finalFlip);
-}
-
-int SpriteRenderer::getWidth()
-{
-	return sprite_.getWidth();
-}
-
-int SpriteRenderer::getHeight()
-{
-	return sprite_.getHeight();
+	return finalFlip;
 }

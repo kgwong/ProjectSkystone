@@ -11,6 +11,7 @@
 SpriteAnimator::SpriteAnimator(GameObject& owner, SpriteRenderer* renderer)
 	:RenderComponent(owner),
 	spriteRenderer_(renderer),
+	spriteSheet_(renderer->getSpriteSheet()),
 	loopCount_(-1),
 	currFrameIndex_(0),
 	msOnFrame_(0)

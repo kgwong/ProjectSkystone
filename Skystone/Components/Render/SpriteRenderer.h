@@ -22,6 +22,8 @@ public:
 
 	void setRotation(double degrees);
 
+	SpriteSheet* getSpriteSheet();
+
 	void setSpriteSheet(const std::string& relPath);
 	void setSpriteSheet(SpriteSheet* spriteSheet);
 	void setSpriteIndex(int index);
@@ -37,6 +39,9 @@ private:
 
 	bool flipHorz_, flipVert_; 
 	double rotationDegrees_;
+
+private:
+	SDL_RendererFlip determineFinalFlip();
 };
 
 #endif //SPRITE_RENDERER_H

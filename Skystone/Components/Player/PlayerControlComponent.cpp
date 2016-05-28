@@ -39,7 +39,6 @@ void PlayerControlComponent::update(Scene& scene)
 	movement_.update(scene);
 	attack_.update(scene);
 	hooker_.update(scene);
-
 }
 
 void PlayerControlComponent::changeMovementState(Scene& scene, const std::string& stateName)
@@ -69,6 +68,7 @@ void PlayerControlComponent::setFacingDirection(FacingDirection direction)
 {
 	facingDirection_ = direction;
 	animationController_.updatePlayerSpriteFlip(facingDirection_);
+	animationController_.calculateShootOffset(movement_, attack_);
 }
 
 void PlayerControlComponent::changeHookState(Scene& scene, const std::string& stateName)

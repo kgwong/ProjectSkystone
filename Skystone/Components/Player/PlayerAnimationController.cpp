@@ -5,6 +5,7 @@
 
 #include "Components/Render/SpriteAnimator.h"
 
+#include "Application/Log.h"
 
 PlayerAnimationController::PlayerAnimationController()
 	:animator_(nullptr)
@@ -34,6 +35,8 @@ void PlayerAnimationController::updatePlayerSpriteFlip(FacingDirection facingDir
 	default:
 		__debugbreak();
 	}
+
+	facingDirection_ = facingDirection;
 }
 
 void PlayerAnimationController::changeAnimation(PlayerMovementState& movementState, PlayerAttackState& attackState)
@@ -56,14 +59,14 @@ void PlayerAnimationController::changeAnimation(PlayerMovementState& movementSta
 		}
 		else if (attackStateName == "DefaultAimState")
 		{
-			
+			//shouldn't happen
 		}
 	}
 	else if (movementStateName == "WalkingState")
 	{
 		if (attackStateName == "AimUpState")
 		{
-
+			//shoudln't happen
 		}
 		else if (attackStateName == "AimDiagonalState")
 		{
@@ -86,7 +89,7 @@ void PlayerAnimationController::changeAnimation(PlayerMovementState& movementSta
 		}
 		else if (attackStateName == "AimDiagonalState")
 		{
-			// should be in LockMovementState;
+			// shouldn't happen
 		}
 		else if (attackStateName == "DefaultAimState")
 		{
@@ -154,4 +157,38 @@ void PlayerAnimationController::changeAnimation(PlayerMovementState& movementSta
 		animator_->setSpriteSheet("Images/crouch_shoot.png");
 		animator_->setTimesToPlay(1);
 	}
+
+	calculateShootOffset(movementState, attackState);
+}
+
+void PlayerAnimationController::calculateShootOffset(PlayerMovementState& movementState, PlayerAttackState& attackState)
+{
+	std::string movementStateName = movementState.getState()->name();
+	std::string attackStateName = attackState.getCurrentState()->name();
+	int x;
+	int y;
+	if (attackStateName == "AimUpState")
+	{
+		x = 16;
+		y = 0;
+	}
+	else if (attackStateName == "AimDiagonalState")
+	{
+		x = 44;
+		y = 4;
+	}
+	else if (attackStateName == "DefaultAimState")
+	{
+		x = 48;
+		y = 22;
+	}
+	if (facingDirection_ == FacingDirection::LEFT)
+		x = 48 - x;
+
+	if (movementStateName == "CrouchState")
+	{
+		y = 30;
+	}
+
+	attackState.setShootOffset(Point(x, y));
 }

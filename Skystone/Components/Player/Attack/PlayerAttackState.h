@@ -33,17 +33,19 @@ public:
 
 	void changeState(Scene& scene, const std::string& stateName);
 
+	void setShootOffset(Point offset);
+
 private:
 	PlayerAimState* currentState_;
 	AimState prevAimState_;
 	double degrees_;
 	bool shoot_;
 
+	Point shootOffset_;
+
 private:
 	PlayerAimState* getStateFromName(const std::string& name);
-
 	Point getProjectileSpawnPoint();
-
 };
 
 #endif //PLAYER_ATTACK_STATE_H
