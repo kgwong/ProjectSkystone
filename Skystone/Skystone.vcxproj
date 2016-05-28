@@ -90,6 +90,7 @@
     <ClCompile Include="GameObject\GameObjectContainer.cpp" />
     <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
     <ClCompile Include="Components\Player\PlayerAnimationController.cpp" />
+    <ClCompile Include="Components\Player\Movement\IdleState.cpp" />
     <ClCompile Include="Resources\Sprite.cpp" />
     <ClCompile Include="Scene\Level\LevelMapLoader.cpp" />
     <ClCompile Include="Scene\GameOverScene.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
     <ClInclude Include="GameTypes\FacingDirection.h" />
     <ClInclude Include="Components\Player\PlayerAnimationController.h" />
+    <ClInclude Include="Components\Player\Movement\IdleState.h" />
     <ClInclude Include="Resources\Sprite.h" />
     <ClInclude Include="Scene\Level\LevelMapLoader.h" />
     <ClInclude Include="Scene\GameOverScene.h" />
