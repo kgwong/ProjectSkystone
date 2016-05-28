@@ -1,17 +1,15 @@
-#ifndef DEFAULT_AIM_STATE_H
-#define DEFAULT_AIM_STATE_H
+#ifndef AIM_DIAGONAL_STATE
+#define AIM_DIAGONAL_STATE
 
 #include "PlayerAimState.h"
 
 class PlayerControlComponent;
 
-class DefaultAimState : public PlayerAimState
+class AimDiagonalState : public PlayerAimState
 {
 public:
-	DefaultAimState(GameObject& owner);
-	virtual ~DefaultAimState();
-
-	virtual void onEnter(Scene& scene);
+	AimDiagonalState(GameObject& owner);
+	virtual ~AimDiagonalState();
 
 	virtual void handleInput(Scene& scene, SDL_Event& e);
 
@@ -19,12 +17,10 @@ public:
 	virtual void update(Scene& scene);
 
 	virtual double getAngle();
-
 	virtual std::string name();
 
 private:
 	PlayerControlComponent* controlComponent_;
-
 };
 
-#endif //DEFAULT_AIM_STATE_H
+#endif //AIM_DIAGONAL_STATE_H

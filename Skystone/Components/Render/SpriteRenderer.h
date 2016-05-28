@@ -22,9 +22,6 @@ public:
 
 	void setRotation(double degrees);
 
-	//void setSprite(const std::string& relPath);
-	//void setSprite(SpriteSheet* newSpriteSheet);
-
 	void setSpriteSheet(const std::string& relPath);
 	void setSpriteSheet(SpriteSheet* spriteSheet);
 	void setSpriteIndex(int index);
@@ -37,11 +34,6 @@ public:
 
 private:
 	Sprite sprite_;
-
-	//SpriteSheet* spriteSheet_;
-
-	/*int currFrameIndex;
-	int msOnFrame;*/
 
 	bool flipHorz_, flipVert_; 
 	double rotationDegrees_;

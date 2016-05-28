@@ -2,6 +2,8 @@
 
 #include "Components/Player/PlayerControlComponent.h"
 #include "Components/Physics/PhysicsComponent.h"
+#include "Components/Render/SpriteRenderer.h"
+#include "Components/Render/SpriteAnimator.h"
 
 #include "WalkingState.h"
 
@@ -20,6 +22,10 @@ void LockMovementState::onEnter(Scene& scene)
 	physics_->setVelX(0);
 }
 
+void LockMovementState::onExit(Scene& scene)
+{
+}
+
 void LockMovementState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyDown(e, JUMP))
@@ -28,7 +34,7 @@ void LockMovementState::handleInput(Scene& scene, SDL_Event& e)
 	}
 	else if (GameInputs::keyUp(e, UP)) 
 	{
-		controlComponent_->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "IdleState");
 	}
 }
 
@@ -36,6 +42,8 @@ void LockMovementState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
+	renderer_ = owner_.getComponent<SpriteRenderer>();
+	animator_ = owner_.getComponent<SpriteAnimator>();
 }
 
 void LockMovementState::update(Scene& scene)

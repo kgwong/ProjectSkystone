@@ -5,6 +5,7 @@
 
 #include "Resources/Resources.h"
 #include "Components/Render/TileRenderer.h"
+#include "Components/Render/SpriteRenderer.h"
 #include "Components/Tile/TileComponent.h"
 #include "Components/Tile/LiftTileComponent.h"
 #include "Components/Tile/BurnTileComponent.h"
@@ -30,6 +31,7 @@ GameObject& TileBuilder::build(ComponentSystem& componentSystem, int tileType, G
 		tileToBuild.addComponent(componentSystem.getNew<ColliderComponent>(tileToBuild, 0.0f, 0.0f, (float)Constants::TILE_SIZE, (float)Constants::TILE_SIZE));
 	}
 	
+	//replace TileRenderer with SpriteRenderer?
 	if (tileType == 1)
 	{
 		tileToBuild.addComponent(componentSystem.getNew<TileRenderer>(tileToBuild, tileSet, tileType));
