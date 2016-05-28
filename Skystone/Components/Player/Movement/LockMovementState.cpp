@@ -34,7 +34,7 @@ void LockMovementState::handleInput(Scene& scene, SDL_Event& e)
 	}
 	else if (GameInputs::keyUp(e, UP)) 
 	{
-		controlComponent_->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "IdleState");
 	}
 }
 

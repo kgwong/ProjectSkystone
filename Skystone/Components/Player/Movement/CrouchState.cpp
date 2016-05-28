@@ -39,7 +39,7 @@ void CrouchState::handleInput(Scene& scene, SDL_Event& e)
 {
 	if (GameInputs::keyUp(e, DOWN))
 	{
-		controlComponent_->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "IdleState");
 	}
 
 	if (GameInputs::keyDown(e, LEFT))

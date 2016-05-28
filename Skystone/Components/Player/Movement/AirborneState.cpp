@@ -72,7 +72,7 @@ void AirborneState::update(Scene& scene)
 
 	if (!physics_->isFalling())
 	{
-		controlComponent_->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "IdleState");
 		return;
 	}
 

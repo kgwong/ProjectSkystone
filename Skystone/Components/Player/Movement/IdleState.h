@@ -1,21 +1,15 @@
-#ifndef WALKING_STATE_H
-#define WALKING_STATE_H
+#ifndef IDLE_STATE_H
+#define IDLE_STATE_H
 
 #include "PlayerState.h"
-#include "GameTypes/Direction.h"
 
 class PlayerControlComponent;
-class PhysicsComponent;
 
-class WalkingState : public PlayerState
+class IdleState : public PlayerState
 {
 public:
-	static const float JUMP_VELOCITY;
-	static const float WALK_VELOCITY;
-
-public:
-	WalkingState(GameObject& owner);
-	virtual ~WalkingState();
+	IdleState(GameObject& owner);
+	virtual ~IdleState();
 
 	virtual void onEnter(Scene& scene);
 	virtual void onExit(Scene& scene);
@@ -31,4 +25,4 @@ private:
 	PhysicsComponent* physics_;
 };
 
-#endif // WALKING_STATE_H
+#endif //IDLE_STATE_H

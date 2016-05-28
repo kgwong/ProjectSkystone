@@ -5,17 +5,13 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 
-#include "Components/Render/SpriteAnimator.h"
-
 const float WalkingState::JUMP_VELOCITY = -1200;
 const float WalkingState::WALK_VELOCITY = 300;
 
 WalkingState::WalkingState(GameObject& owner)
 	:PlayerState(owner),
-	subState_(SubState::IDLE),
 	controlComponent_(nullptr),
-	physics_(nullptr),
-	animator_(nullptr)
+	physics_(nullptr)
 {
 }
 
@@ -25,7 +21,6 @@ WalkingState::~WalkingState()
 
 void WalkingState::onEnter(Scene& scene)
 {
-	changeSubState(subState_);
 }
 
 void WalkingState::onExit(Scene& scene)
@@ -34,13 +29,17 @@ void WalkingState::onExit(Scene& scene)
 
 void WalkingState::handleInput(Scene& scene, SDL_Event& e)
 {
-	if (GameInputs::keyDown(e, JUMP))
+	if (GameInputs::keyUp(e, LEFT) && controlComponent_->isFacing(FacingDirection::LEFT))
+	{
+		controlComponent_->changeMovementState(scene, "IdleState");
+	}
+	else if (GameInputs::keyUp(e, RIGHT) && controlComponent_->isFacing(FacingDirection::RIGHT))
+	{
+		controlComponent_->changeMovementState(scene, "IdleState");
+	}
+	else if (GameInputs::keyDown(e, JUMP))
 	{
 		physics_->setVelY(JUMP_VELOCITY);
-	}
-	else if (GameInputs::keyHeld(UP) && subState_ == SubState::IDLE)
-	{
-		controlComponent_->changeMovementState(scene, "LockMovementState");
 	}
 	else if (GameInputs::keyDown(e, DOWN))
 	{
@@ -52,7 +51,6 @@ void WalkingState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
-	animator_ = owner_.getComponent<SpriteAnimator>();
 }
 
 void WalkingState::update(Scene& scene)
@@ -69,94 +67,17 @@ void WalkingState::update(Scene& scene)
 	}
 
 	physics_->setVelX(0);
-
-	switch (subState_)
+	if (GameInputs::keyHeld(LEFT))
 	{
-	case SubState::IDLE:
-		if (GameInputs::keyHeld(LEFT))
-		{
-			changeSubState(SubState::LEFT);
-		}
-		else if (GameInputs::keyHeld(RIGHT))
-		{
-			changeSubState(SubState::RIGHT);
-
-		}
-		else
-		{
-
-		}
-		break;
-	case SubState::LEFT:
 		physics_->setVelX(-WALK_VELOCITY);
-		if (GameInputs::keyHeld(LEFT))
-		{
-
-		}
-		else if (GameInputs::keyHeld(RIGHT))
-		{
-			changeSubState(SubState::RIGHT);
-		}
-		else
-		{
-			changeSubState(SubState::IDLE);
-		}
-		break;
-	case SubState::RIGHT:
+	}
+	else if (GameInputs::keyHeld(RIGHT))
+	{
 		physics_->setVelX(WALK_VELOCITY);
-		if (GameInputs::keyHeld(LEFT))
-		{
-			changeSubState(SubState::LEFT);
-		}
-		else if (GameInputs::keyHeld(RIGHT))
-		{
-
-
-		}
-		else
-		{
-			changeSubState(SubState::IDLE);
-		}
-	}
-
-}
-
-WalkingState::SubState WalkingState::getSubState()
-{
-	return subState_;
-}
-
-void WalkingState::changeSubState(SubState newSubState)
-{
-	subState_ = newSubState;
-	switch (newSubState)
-	{
-	case SubState::IDLE:
-		animator_->setSpriteSheet("Images/idle cycle.png");
-		break;
-	case SubState::LEFT:
-		animator_->setSpriteSheet("Images/forward shoot run cycle.png");
-		animator_->setFlipHorz(true);
-		break;
-	case SubState::RIGHT:
-		animator_->setSpriteSheet("Images/forward shoot run cycle.png");
-		animator_->setFlipHorz(false);
-		break;
 	}
 }
 
-std::string WalkingState::subStateToString(SubState subState)
+std::string WalkingState::name()
 {
-	switch (subState)
-	{
-	case SubState::IDLE:
-		return "IDLE";
-	case SubState::LEFT:
-		return "LEFT";
-	case SubState::RIGHT:
-		return "RIGHT";
-	default:
-		return "ERROR";
-	}
+	return "WalkingState";
 }
-
