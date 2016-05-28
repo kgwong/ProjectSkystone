@@ -4,7 +4,6 @@
 #include "PlayerState.h"
 
 class PlayerControlComponent;
-class SpriteAnimator;
 class ControlComponent;
 class ColliderComponent;
 class PhysicsComponent;
@@ -27,7 +26,6 @@ public:
 
 private:
 	PlayerControlComponent* controlComponent_;
-	SpriteAnimator* animator_;
 	ColliderComponent* collider_;
 	PhysicsComponent* physics_;
 };
