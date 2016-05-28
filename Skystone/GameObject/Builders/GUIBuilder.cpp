@@ -2,13 +2,13 @@
 
 #include <string>
 
+#include "Components/GUI/ScrollingTextRenderer.h"
 #include "Resources/Resources.h"
 #include "Application/Log.h"
 #include "Components/GUI/TextSelector.h"
 #include "Components/GUI/SelectableText.h"
 #include "Components/GUI/HealthBar.h"
 #include "Components/Scene/InputSceneChanger.h"
-#include "Components/Render/ScrollingTextRenderer.h"
 #include "Scene/Scene.h"
 
 static const std::string SCRIPT_FOLDER = "GameScripts/";
@@ -30,7 +30,7 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 	// all buttons are controlled by the most recently constructed TextSelector
 	if (name == "TextSelector")
 	{
-		textSelector_ = gui = std::make_shared<GameObject>();
+		textSelector_ = gui;
 		auto& textSelectorToBuild = *textSelector_;
 		textSelectorToBuild.setType(GameObject::Type::GUI);
 		textSelectorToBuild.addComponent(componentSystem.getNew<TextSelector>(textSelectorToBuild));
@@ -93,6 +93,10 @@ std::shared_ptr<GameObject> GUIBuilder::build(ComponentSystem& componentSystem, 
 	else if (name == "InvisibleContinueOnEscButton") // invisible isn't really gui
 	{
 		guiToBuild.addComponent(componentSystem.getNew<InputSceneChanger>(guiToBuild, ESC, SceneID::LEVEL));
+	}
+	else if (name == "InvisibleMainMenuOnEnterButton") // invisible isn't really gui
+	{
+		guiToBuild.addComponent(componentSystem.getNew<InputSceneChanger>(guiToBuild, RETURN, SceneID::MAIN_MENU));
 	}
 	else if (name.substr(0, 7) == "Script_")
 	{

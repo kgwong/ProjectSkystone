@@ -106,7 +106,6 @@
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
     <ClCompile Include="Components\GUI\HealthBar.cpp" />
     <ClCompile Include="Components\GUI\TextSelector.cpp" />
-    <ClCompile Include="Components\Render\TextRenderer.cpp" />
     <ClCompile Include="Components\Player\Attack\Aim\DefaultAimState.cpp" />
     <ClCompile Include="Components\Player\Attack\Aim\PlayerAimState.cpp" />
     <ClCompile Include="Components\Player\Movement\LockMovementState.cpp" />
@@ -121,7 +120,9 @@
     <ClCompile Include="Resources\Sprite.cpp" />
     <ClCompile Include="GameObject\Builders\PlayerRopeSegmentBuilder.cpp" />
     <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
-    <ClCompile Include="Components\Render\ScrollingTextRenderer.cpp" />
+    <ClCompile Include="Components\GUI\ScrollingTextRenderer.cpp" />
+    <ClCompile Include="Components\Render\TextRenderer.cpp" />
+    <ClCompile Include="Components\GUI\ScrollingTextLine.cpp" />
     <ClCompile Include="Components\Player\Attack\Aim\AimUpState.cpp" />
     <ClCompile Include="Components\Player\Attack\Aim\AimDiagonalState.cpp" />
     <ClCompile Include="Components\Player\PlayerAnimationController.cpp" />
@@ -240,7 +241,6 @@
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\GUI\HealthBar.h" />
     <ClInclude Include="Components\GUI\TextSelector.h" />
-    <ClInclude Include="Components\Render\TextRenderer.h" />
     <ClInclude Include="Components\Player\Attack\Aim\AimState.h" />
     <ClInclude Include="Components\Player\Attack\Aim\DefaultAimState.h" />
     <ClInclude Include="Components\Player\Attack\Aim\PlayerAimState.h" />
@@ -257,7 +257,9 @@
     <ClInclude Include="Resources\Sprite.h" />
     <ClInclude Include="GameObject\Builders\PlayerRopeSegmentBuilder.h" />
     <ClInclude Include="Components\Player\Movement\SwingState.h" />
-    <ClInclude Include="Components\Render\ScrollingTextRenderer.h" />
+    <ClInclude Include="Components\GUI\ScrollingTextRenderer.h" />
+    <ClInclude Include="Components\Render\TextRenderer.h" />
+    <ClInclude Include="Components\GUI\ScrollingTextLine.h" />
     <ClInclude Include="Components\Player\Attack\Aim\AimUpState.h" />
     <ClInclude Include="Components\Player\Attack\Aim\AimDiagonalState.h" />
     <ClInclude Include="GameTypes\FacingDirection.h" />

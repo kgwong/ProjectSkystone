@@ -107,13 +107,6 @@ std::shared_ptr<GameObject> GameObjectContainer::add(const std::string& type, co
 	}
 	else if (type == "GUI")
 	{
-		if (objects_[GameObject::Type::GUI].empty())
-		{
-			// buttons go on the most recently constructed TextSelector
-			// first GUI should be the TextSelector
-			auto textSelector = builder_.buildGUI(componentSystem_, "TextSelector", player_);
-			objects_[GameObject::Type::GUI].push_back(textSelector);
-		}
 		newObject = builder_.buildGUI(componentSystem_, name, player_);
 		objects_[GameObject::Type::GUI].push_back(newObject);
 	}

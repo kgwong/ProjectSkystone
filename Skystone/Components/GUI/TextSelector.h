@@ -18,6 +18,9 @@ public:
 private:
 	std::vector<std::shared_ptr<SelectableText>> texts_;
 	int selected_;
+
+	void selectNext();
+	void selectPrev();
 };
 
 #endif // MAIN_MENU_TEXT_SELECTOR_H
