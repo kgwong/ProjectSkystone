@@ -1,0 +1,4 @@
+1 = basic swamp block
+2 = topsoil swamp block
+3 = corner swamp block
+4 = cobblestone
