@@ -127,6 +127,7 @@
     <ClCompile Include="Components\Player\Attack\Aim\AimDiagonalState.cpp" />
     <ClCompile Include="Components\Player\PlayerAnimationController.cpp" />
     <ClCompile Include="Components\Player\Movement\IdleState.cpp" />
+    <ClCompile Include="Scene\IntroScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AI\AlligatorAIComponent.h" />
@@ -265,5 +266,6 @@
     <ClInclude Include="GameTypes\FacingDirection.h" />
     <ClInclude Include="Components\Player\PlayerAnimationController.h" />
     <ClInclude Include="Components\Player\Movement\IdleState.h" />
+    <ClInclude Include="Scene\IntroScene.h" />
   </ItemGroup>
 </Project>
