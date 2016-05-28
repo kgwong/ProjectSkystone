@@ -6,6 +6,7 @@
 #include "Level/LevelManager.h"
 #include "MainMenu.h"
 #include "GameOverScene.h"
+#include "IntroScene.h"
 
 #include <fstream>
 
@@ -23,6 +24,8 @@ namespace
 			return std::make_shared<LevelManager>();
 		case SceneID::GAME_OVER:
 			return std::make_shared<GameOverScene>();
+		case SceneID::INTRO:
+			return std::make_shared<IntroScene>();
 		default:
 			return std::make_shared<Scene>();
 		}
