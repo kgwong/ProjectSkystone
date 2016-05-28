@@ -198,7 +198,8 @@
     <ClCompile Include="Components\Player\Movement\SwingState.cpp" />
     <ClCompile Include="Components\GUI\SelectableText.cpp" />
     <ClCompile Include="Components\AI\TripleShotAIComponent.cpp" />
-    <ClCompile Include="Components\Render\ScrollingTextRenderer.cpp" />
+    <ClCompile Include="Components\GUI\ScrollingTextRenderer.cpp" />
+    <ClCompile Include="Components\GUI\ScrollingTextLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Render\ColliderBoxRenderer.h" />
@@ -326,7 +327,8 @@
     <ClInclude Include="Components\Player\Movement\SwingState.h" />
     <ClInclude Include="Components\GUI\SelectableText.h" />
     <ClInclude Include="Components\AI\TripleShotAIComponent.h" />
-    <ClInclude Include="Components\Render\ScrollingTextRenderer.h" />
+    <ClInclude Include="Components\GUI\ScrollingTextRenderer.h" />
+    <ClInclude Include="Components\GUI\ScrollingTextLine.h" />
     <ClInclude Include="Util\vector_util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

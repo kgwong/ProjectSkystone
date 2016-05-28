@@ -8,7 +8,8 @@
 
 #define OUTLINE_SIZE 1 
 
-const static std::string defaultFontPath = "../Assets/Fonts/coolvetica.ttf";
+//const static std::string defaultFontPath = "../Assets/Fonts/coolvetica.ttf";
+const static std::string defaultFontPath = "../Assets/Fonts/Clobot-Regular-Free.ttf";
 const static SDL_Color defaultTextColor = { 255, 255, 255 };
 const static SDL_Color defaultOutlineColor = { 0, 0, 0 }; 
 
@@ -57,6 +58,16 @@ void TextRenderer::render(GameWindow& window, float percBehind)
 std::string TextRenderer::getText()
 {
 	return text_;
+}
+
+TTF_Font* TextRenderer::getFont()
+{
+	return font_;
+}
+
+TTF_Font* TextRenderer::getOutlineFont()
+{
+	return outline_;
 }
 
 void TextRenderer::setText(const std::string& newText)

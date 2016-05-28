@@ -1,7 +1,7 @@
 #include "SelectableText.h"
 
-#define LARGE_TEXT_SIZE 40
-#define SMALL_TEXT_SIZE 28
+#define LARGE_TEXT_SIZE 80
+#define SMALL_TEXT_SIZE 50 
 
 SelectableText::SelectableText(GameObject& owner)
 	: TextRenderer(owner), selected_(false)
