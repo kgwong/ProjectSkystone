@@ -34,7 +34,7 @@ HangState::~HangState()
 
 void HangState::onEnter(Scene& scene)
 {
-
+	LOG("HARVEY") << "HELLO";
 	if (scene.gameObjects.playerHook == nullptr)
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
@@ -86,21 +86,34 @@ void HangState::onEnter(Scene& scene)
 	{
 		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(-1);
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
-
+		return;
 	}
 	//if player is to the left of the hook, swing right
-	else if (dir < 0)
+	if (dir < 0)
 	{
 		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(1);
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "SwingState");
+		return;
 	}
-	else
+	if(dir == 0)
 	{
 		hangPosition_.x = hookPosition_.x;
 		float frow = hangPosition_.y / Constants::TILE_SIZE;
 		float fcol = hangPosition_.x / Constants::TILE_SIZE;
 		int row = (int)roundf(frow);
 		int col = (int)roundf(fcol);
+		if (row < 0 || row >= scene.gameObjects.getTiles().rows)
+		{
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			return;
+		}
+
+		if (col < 0 || col >= scene.gameObjects.getTiles().cols)
+		{
+			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
+			return;
+		}
+
 		TileComponent::Type tileType = scene.gameObjects.getTiles().tiles[row][col].getComponent<TileComponent>()->getTileType();
 		LOG("HARVEY") << "float row,col: " << frow << ", " << fcol;
 		LOG("HARVEY") << "int row,col: " << row << ", " << col;

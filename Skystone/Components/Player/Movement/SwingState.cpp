@@ -55,19 +55,18 @@ void SwingState::onEnter(Scene& scene)
 	auto physics = owner_.getComponent<PhysicsComponent>();
 	swingTime_ = 2 * float(PI) * sqrtf(radius_ / physics->GRAVITY);
 	damp_ = 0.075;
-	angleRange_ = MAX_ANGLE;//20 should be MIN_ANGLE;
+	angleRange_ = 180;// MAX_ANGLE;//20 should be MIN_ANGLE;
 
 	//this allows player to swing across if hook is shot from the left or right
 	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
 	if (playerAim == AimState::RIGHT || playerAim == AimState::LEFT)
 	{
 		xSpeed_ = 3.141f;
-		currentAngle_ = tanhf((swingPosition_.y - hookPosition_.y) / (swingPosition_.x - hookPosition_.x));
+		currentAngle_ = tanhf((fabsf(swingPosition_.y - hookPosition_.y)) / (swingPosition_.x - hookPosition_.x));
 		currentAngle_ = toDegrees(currentAngle_);
 		float dx = swingPosition_.x - hookPosition_.x;
 		float dy = swingPosition_.y - hookPosition_.y;
 		radius_ = sqrtf((dx * dx) + (dy * dy));
-		angleRange_ = 35;
 	}
 	LOG("HARVEY") << owner_.getPos();
 	LOG("HARVEY") << currentAngle_;
@@ -85,7 +84,7 @@ void SwingState::onExit(Scene& scene)
 	keyHeld_ = false;
 	tileHit_ = false;
 	timer_ = 0.0f;
-	angleRange_ = MAX_ANGLE;
+	angleRange_ = 360;//MAX_ANGLE;
 
 }
 void SwingState::handleInput(Scene& scene, SDL_Event& e)
@@ -109,8 +108,6 @@ void SwingState::handleInput(Scene& scene, SDL_Event& e)
 }
 void SwingState::update(Scene& scene)
 {
-	LOG("HARVEY") << "UPDATED PLAYERPOS: " << owner_.getPos();
-	LOG("HARVEY") << "UPDATED CURRENTANGLE: " << currentAngle_;
 
 	auto playerPhysics = owner_.getComponent<PhysicsComponent>();	
 	playerPhysics->enableGravity(false);
@@ -140,8 +137,8 @@ void SwingState::update(Scene& scene)
 		{
 			timer_ = 0.0f;
 			angleRange_ += angleRange_ * 1.04f;
-			if (angleRange_ > MAX_ANGLE)
-				angleRange_ = MAX_ANGLE;
+			if (angleRange_ > 180)
+				angleRange_ = 180;
 			xSpeed_ *= 1.9f;
 			if (xSpeed_ > 6.61f)
 				xSpeed_ = 6.61f;
@@ -166,12 +163,12 @@ void SwingState::update(Scene& scene)
 
 		if (angleRange_ < 0.5)
 		{
+			LOG("HARVEY") << "ANGLE RANGE: " << angleRange_;
 			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
 			playerPhysics->setVelX(0);
 			playerPhysics->setVelY(0);
 			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
 			owner_.getComponent<PlayerControlComponent>()->HookState().setAimState(AimState::UP);
-			//LOG("HARVEY") << "HI " <<owner_.getComponent<PlayerControlComponent>()->HookState().AimStateName();
 			return;
 		}
 	}
@@ -179,10 +176,13 @@ void SwingState::update(Scene& scene)
 	float dy = swingPosition_.y - hookPosition_.y;
 	radius_ = sqrtf((dx * dx) + (dy * dy));
 	currentAngle_ += xSpeed_ * xDirection_;
-	LOG("HARVEY") << "RADIUS: " << radius_;
 
 	swingPosition_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
 	swingPosition_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
+
+	LOG("HARVEY") << "RADIUS: " << radius_;
+	LOG("HARVEY") << "UPDATED PLAYERPOS: " << owner_.getPos();
+	LOG("HARVEY") << "UPDATED CURRENTANGLE: " << currentAngle_;
 
 	if (owner_.getPos().inBounds(scene.getWidth(), scene.getHeight()))
 	{
