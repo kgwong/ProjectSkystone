@@ -75,6 +75,11 @@ void PlayerAttackState::changeState(Scene& scene, const std::string& stateName)
 	currentState_->onEnter(scene);
 }
 
+void PlayerAttackState::setShootOffset(Point offset)
+{
+	shootOffset_ = offset;
+}
+
 PlayerAimState* PlayerAttackState::getStateFromName(const std::string& name)
 {
 	if (name == defaultAimState.name())
@@ -98,8 +103,5 @@ PlayerAimState* PlayerAttackState::getStateFromName(const std::string& name)
 
 Point PlayerAttackState::getProjectileSpawnPoint()
 {
-	Point pos = owner_.getPos();
-
-	return pos;
-	//double angle = currentState_-
+	return owner_.getPos() + shootOffset_;
 }

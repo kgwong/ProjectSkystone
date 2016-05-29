@@ -4,6 +4,7 @@
 #include "GameObject/GameObject.h"
 
 #include "Components/Render/SpriteRenderer.h"
+#include "Components/Render/SpriteAnimator.h"
 #include "Components/AI/BasicEnemyMovementComponent.h"
 #include "Components/AI/RandomJumperComponent.h"
 #include "Components/AI/TrackerComponent.h"
@@ -21,6 +22,7 @@
 
 #include "Components/Physics/PhysicsComponent.h"
 #include "Components/Collider/ColliderComponent.h"
+#include "Components/Render/ColliderBoxRenderer.h"
 #include "Components/Common/StickOnCollision.h"
 
 
@@ -63,9 +65,12 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "CrawfishBoss")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
-		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/sam's mom walk cycle.png");
+		auto renderer = componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite);
+		enemyToBuild.addComponent(renderer);
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteAnimator>(enemyToBuild, renderer.get()));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
+		enemyToBuild.addComponent(componentSystem.getNew<ColliderBoxRenderer>(enemyToBuild)); //
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 4000));
