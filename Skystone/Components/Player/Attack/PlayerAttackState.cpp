@@ -15,10 +15,11 @@
 PlayerAttackState::PlayerAttackState(GameObject& owner)
 	:InputComponent(owner),
 	defaultAimState(owner),
+	aimUpState(owner),
+	aimDiagonalState(owner),
 	currentState_(&defaultAimState),
 	degrees_(0),
 	shoot_(false)
-	//launch_(false)
 {
 }
 
@@ -39,16 +40,18 @@ void PlayerAttackState::handleInput(Scene& scene, SDL_Event& e)
 void PlayerAttackState::start(Scene& scene)
 {
 	defaultAimState.start(scene);
+	aimUpState.start(scene);
+	aimDiagonalState.start(scene);
+	//call on enter here?
 }
 
 void PlayerAttackState::update(Scene& scene)
 {
-	
 	currentState_->update(scene);
 	degrees_ = currentState_->getAngle();
 	if (shoot_)
 	{
-		auto bullet = scene.gameObjects.add("PlayerProjectile", "", owner_.getPos());
+		auto bullet = scene.gameObjects.add("PlayerProjectile", "", getProjectileSpawnPoint());
 		auto physics = bullet->getComponent<PhysicsComponent>();
 		float newVelX = (float)PROJECTILE_VELOCITY * cos(toRadians(degrees_));
 		float newVelY = (float)PROJECTILE_VELOCITY * sin(toRadians(degrees_));
@@ -58,14 +61,11 @@ void PlayerAttackState::update(Scene& scene)
 
 		Resources::audioPlayer.PlayClip("gunShot");
 	}
+}
 
-
-	/*if (launch_)
-	{
-		int testVelocity = 5;
-		level.addPlayerHookAtLocation(owner_.getPos(), testVelocity, degrees_);
-		launch_ = false;
-	}*/
+PlayerAimState* PlayerAttackState::getCurrentState()
+{
+	return currentState_;
 }
 
 void PlayerAttackState::changeState(Scene& scene, const std::string& stateName)
@@ -75,15 +75,33 @@ void PlayerAttackState::changeState(Scene& scene, const std::string& stateName)
 	currentState_->onEnter(scene);
 }
 
+void PlayerAttackState::setShootOffset(Point offset)
+{
+	shootOffset_ = offset;
+}
+
 PlayerAimState* PlayerAttackState::getStateFromName(const std::string& name)
 {
 	if (name == defaultAimState.name())
 	{
 		return &defaultAimState;
 	}
+	else if (name == aimUpState.name())
+	{
+		return &aimUpState;
+	}
+	else if (name == aimDiagonalState.name())
+	{
+		return &aimDiagonalState;
+	}
 	else
 	{
 		LOG("ERROR") << "Unknown state";
 		return nullptr;
 	}
+}
+
+Point PlayerAttackState::getProjectileSpawnPoint()
+{
+	return owner_.getPos() + shootOffset_;
 }

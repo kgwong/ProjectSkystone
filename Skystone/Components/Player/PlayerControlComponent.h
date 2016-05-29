@@ -5,6 +5,9 @@
 #include "Movement/PlayerMovementState.h"
 #include "Attack/PlayerAttackState.h"
 
+#include "GameTypes/FacingDirection.h"
+#include "PlayerAnimationController.h"
+
 //-------Harvey's include-----///
 #include "Attack/PlayerHookState.h"
 #include "ATtack/HookStateManager.h"
@@ -23,6 +26,10 @@ public:
 	void changeMovementState(Scene& scene, const std::string& stateName);
 	void changeAttackState(Scene& scene, const std::string& stateName);
 
+	bool isFacing(FacingDirection facingDirection);
+	FacingDirection getFacingDirection();
+	void setFacingDirection(FacingDirection direction);
+
 	//----harvey function----///
 	void changeHookState(Scene& scene, const std::string& stateName);
 	PlayerHookState& HookState();//needs to be returned as reference.
@@ -35,6 +42,8 @@ public:
 	SDL_Keycode HookKeyInput;
 
 private:
+	FacingDirection facingDirection_;
+	PlayerAnimationController animationController_;
 	PlayerMovementState movement_;
 	PlayerAttackState attack_;
 

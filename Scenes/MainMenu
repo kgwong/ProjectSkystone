@@ -1,4 +1,5 @@
 Background mainmenuimage 0 0
+GUI TextSelector 0 0
 GUI PlayIntroButton 320 240
 GUI StartGameButton 320 300
 GUI ExitGameButton 320 360

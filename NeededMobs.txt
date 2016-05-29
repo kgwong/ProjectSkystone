@@ -1,0 +1,8 @@
+1. Alligators (already have it)
+2. Birdman (not implemented)
+3. FlyingMob (already have it)
+4. JihadElephant (need it)
+5. SwingMob (have it, but needs fixing)
+6. RandomJumper (needs a concept, but complete)
+7. Coward (complete, but needs animation
+8. TestMob1 (needs a concept)

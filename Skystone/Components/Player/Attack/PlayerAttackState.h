@@ -5,19 +5,20 @@
 
 #include "Aim/PlayerAimState.h"
 #include "Aim/DefaultAimState.h"
+#include "Aim/AimUpState.h"
+#include "Aim/AimDiagonalState.h"
+
 
 #include "PlayerHookState.h"
+
 class PlayerAttackState : public InputComponent
 {
 public:
 	static const int PROJECTILE_VELOCITY = 20;
 
 	DefaultAimState defaultAimState;
-
-	//the hook states
-	//static LaunchHookState launchstate;
-	//static ConnectHookState connectState;
-	//static DisconnectHookState disconnectState;
+	AimUpState aimUpState;
+	AimDiagonalState aimDiagonalState;
 
 public:
 	PlayerAttackState(GameObject& owner);
@@ -28,7 +29,11 @@ public:
 	virtual void start(Scene& scene);
 	virtual void update(Scene& scene);
 
+	PlayerAimState* getCurrentState();
+
 	void changeState(Scene& scene, const std::string& stateName);
+
+	void setShootOffset(Point offset);
 
 private:
 	PlayerAimState* currentState_;
@@ -36,9 +41,11 @@ private:
 	double degrees_;
 	bool shoot_;
 
+	Point shootOffset_;
+
 private:
 	PlayerAimState* getStateFromName(const std::string& name);
-
+	Point getProjectileSpawnPoint();
 };
 
 #endif //PLAYER_ATTACK_STATE_H

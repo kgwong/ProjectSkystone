@@ -4,13 +4,11 @@
 #include "PlayerMovementState.h"
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
-#include "Components/Render/SpriteAnimator.h"
 
 AirborneState::AirborneState(GameObject& owner)
 	:PlayerState(owner),
 	controlComponent_(nullptr),
-	physics_(nullptr),
-	animator_(nullptr)
+	physics_(nullptr)
 {
 }
 
@@ -29,7 +27,6 @@ void AirborneState::onEnter(Scene& scene)
 		//LOG("HARVEY") << "I am FALLING";
 		physics_->enableGravity(true);
 	}
-	animator_->setSpriteSheet("Images/jump cycle.png");
 }
 
 void AirborneState::onExit(Scene& scene)
@@ -59,7 +56,6 @@ void AirborneState::start(Scene& scene)
 {
 	controlComponent_ = owner_.getComponent<PlayerControlComponent>();
 	physics_ = owner_.getComponent<PhysicsComponent>();
-	animator_ = owner_.getComponent<SpriteAnimator>();
 }
 
 void AirborneState::update(Scene& scene)
@@ -72,19 +68,17 @@ void AirborneState::update(Scene& scene)
 
 	if (!physics_->isFalling())
 	{
-		controlComponent_->changeMovementState(scene, "WalkingState");
+		controlComponent_->changeMovementState(scene, "IdleState");
 		return;
 	}
 
 	if (GameInputs::keyHeld(LEFT))
 	{
 		physics_->setVelX(-5 * 60.0f);
-		animator_->setFlipHorz(true);
 	}
 	else if (GameInputs::keyHeld(RIGHT))
 	{
 		physics_->setVelX(5 * 60.0f);
-		animator_->setFlipHorz(false);
 	}
 	else
 	{

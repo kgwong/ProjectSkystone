@@ -11,6 +11,7 @@
 SpriteAnimator::SpriteAnimator(GameObject& owner, SpriteRenderer* renderer)
 	:RenderComponent(owner),
 	spriteRenderer_(renderer),
+	spriteSheet_(renderer->getSpriteSheet()),
 	loopCount_(-1),
 	currFrameIndex_(0),
 	msOnFrame_(0)
@@ -77,6 +78,12 @@ void SpriteAnimator::setSpriteSheet(SpriteSheet* spriteSheet)
 	loopCount_ = -1;
 	currFrameIndex_ = 0;
 	msOnFrame_ = 0;
+}
+
+void SpriteAnimator::setSpriteIndex(int index)
+{
+	spriteRenderer_->setSpriteIndex(index);
+	currFrameIndex_ = index;
 }
 
 void SpriteAnimator::flip(Axis axis)

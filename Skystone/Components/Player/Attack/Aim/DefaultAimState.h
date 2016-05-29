@@ -4,7 +4,6 @@
 #include "PlayerAimState.h"
 
 class PlayerControlComponent;
-class SpriteRenderer;
 
 class DefaultAimState : public PlayerAimState
 {
@@ -24,9 +23,8 @@ public:
 	virtual std::string name();
 
 private:
-	bool facingRight_;
 	PlayerControlComponent* controlComponent_;
-	SpriteRenderer* renderer_;
+
 };
 
 #endif //DEFAULT_AIM_STATE_H

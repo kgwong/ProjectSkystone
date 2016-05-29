@@ -9,13 +9,16 @@ class TextRenderer : public RenderComponent
 {
 public:
 	enum class RenderMode {RENDER_FROM_CENTER, RENDER_FROM_TOP_LEFT};
-	static const int DEFAULT_FONT_SIZE = 28;
+	static const int DEFAULT_FONT_SIZE = 50;
 
 	TextRenderer(GameObject& owner);
 	virtual ~TextRenderer();
 	virtual void render(GameWindow& window, float percBehind);
 
 	std::string getText();
+	TTF_Font* getFont();
+	TTF_Font* getOutlineFont();
+
 	void setText(const std::string& newText);
 	void setFontSize(int size);
 	void setRenderMode(RenderMode mode);

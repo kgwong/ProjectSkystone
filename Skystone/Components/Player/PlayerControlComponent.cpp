@@ -1,10 +1,15 @@
 #include "PlayerControlComponent.h"
 
 #include "Application/Log.h"
+#include "Components/Render/SpriteAnimator.h"
 
 PlayerControlComponent::PlayerControlComponent(GameObject& owner)
-	:InputComponent(owner), movement_(owner), attack_(owner), hooker_(owner)
-{	
+	:InputComponent(owner),
+	facingDirection_(FacingDirection::RIGHT),
+	movement_(owner), 
+	attack_(owner), 
+	hooker_(owner)
+{
 }
 
 
@@ -25,6 +30,8 @@ void PlayerControlComponent::start(Scene& scene)
 	movement_.start(scene);
 	attack_.start(scene);
 	hooker_.start(scene);
+	animationController_.setAnimator(owner_.getComponent<SpriteAnimator>());
+	animationController_.changeAnimation(movement_, attack_);
 }
 
 void PlayerControlComponent::update(Scene& scene)
@@ -32,18 +39,36 @@ void PlayerControlComponent::update(Scene& scene)
 	movement_.update(scene);
 	attack_.update(scene);
 	hooker_.update(scene);
-
 }
 
 void PlayerControlComponent::changeMovementState(Scene& scene, const std::string& stateName)
 {
 	movement_.changeState(scene, stateName);
+	animationController_.changeAnimation(movement_, attack_);
 	LOG("HARVEY") << movement_.getState()->name();
 }
 
 void PlayerControlComponent::changeAttackState(Scene& scene, const std::string& stateName)
 {
 	attack_.changeState(scene, stateName);
+	animationController_.changeAnimation(movement_, attack_);
+}
+
+bool PlayerControlComponent::isFacing(FacingDirection facingDirection)
+{
+	return facingDirection_ == facingDirection;
+}
+
+FacingDirection PlayerControlComponent::getFacingDirection()
+{
+	return facingDirection_;
+}
+
+void PlayerControlComponent::setFacingDirection(FacingDirection direction)
+{
+	facingDirection_ = direction;
+	animationController_.updatePlayerSpriteFlip(facingDirection_);
+	animationController_.calculateShootOffset(movement_, attack_);
 }
 
 void PlayerControlComponent::changeHookState(Scene& scene, const std::string& stateName)

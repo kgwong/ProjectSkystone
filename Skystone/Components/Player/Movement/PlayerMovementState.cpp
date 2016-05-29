@@ -3,6 +3,7 @@
 #include "Application/Log.h"
 
 #include "AirborneState.h"
+#include "IdleState.h"
 #include "WalkingState.h"
 #include "CrouchState.h"
 #include "FlyingState.h"
@@ -28,6 +29,7 @@ PlayerMovementState::PlayerMovementState(GameObject& owner)
 	addState(std::make_shared<HangState>(owner));
 	addState(std::make_shared<LaunchState>(owner));
 	addState(std::make_shared<SwingState>(owner));
+	addState(std::make_shared<IdleState>(owner));
 	currentState_ = getStateFromName("AirborneState");
 	previousState_ = getStateFromName("AirborneState");
 }
