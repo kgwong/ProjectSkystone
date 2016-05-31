@@ -6,6 +6,7 @@
 class TileComponent : public NonUpdatingComponent
 {
 public:
+	//warning: no longer accurate
 	enum Type
 	{
 		EMPTY = 0,
@@ -18,6 +19,7 @@ public:
 	TileComponent(GameObject& owner, Type type);
 	virtual ~TileComponent();
 
+	//warning: no longer accurate
 	Type getTileType();
 
 private:
