@@ -75,6 +75,10 @@ void WalkingState::update(Scene& scene)
 	{
 		physics_->setVelX(WALK_VELOCITY);
 	}
+	else
+	{
+		controlComponent_->changeMovementState(scene, "IdleState");
+	}
 }
 
 std::string WalkingState::name()
