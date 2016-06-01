@@ -55,7 +55,7 @@ void SwingState::onEnter(Scene& scene)
 	auto physics = owner_.getComponent<PhysicsComponent>();
 	swingTime_ = 2 * float(PI) * sqrtf(radius_ / physics->GRAVITY);
 	damp_ = 0.075;
-	angleRange_ = 180;// MAX_ANGLE;//20 should be MIN_ANGLE;
+	angleRange_ = 80;// MAX_ANGLE;//20 should be MIN_ANGLE;
 
 	//this allows player to swing across if hook is shot from the left or right
 	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
@@ -84,7 +84,7 @@ void SwingState::onExit(Scene& scene)
 	keyHeld_ = false;
 	tileHit_ = false;
 	timer_ = 0.0f;
-	angleRange_ = 360;//MAX_ANGLE;
+	angleRange_ = 80;//MAX_ANGLE;
 
 }
 void SwingState::handleInput(Scene& scene, SDL_Event& e)
@@ -137,8 +137,8 @@ void SwingState::update(Scene& scene)
 		{
 			timer_ = 0.0f;
 			angleRange_ += angleRange_ * 1.04f;
-			if (angleRange_ > 180)
-				angleRange_ = 180;
+			if (angleRange_ > MAX_ANGLE)
+				angleRange_ = MAX_ANGLE;
 			xSpeed_ *= 1.9f;
 			if (xSpeed_ > 6.61f)
 				xSpeed_ = 6.61f;
