@@ -60,37 +60,51 @@ void SwingState::onExit(Scene & scene)
 
 void SwingState::handleInput(Scene & scene, SDL_Event & e)
 {
-	if (GameInputs::keyDown(e, ControlType::LEFT))
+	if (GameInputs::keyHeld(ControlType::LEFT) || GameInputs::keyHeld(ControlType::RIGHT))
 	{
 		keyHeld_ = true;
-		xDirection_ = -1;
-		orient_ = 1;
 		xSpeed_ += 1.0f;
-		if (xSpeed_ > MAX_SPEED)
-		{
+		if(xSpeed_ > MAX_SPEED)
 			xSpeed_ = MAX_SPEED;
-		}
-
-		angleRange_++;
-		if (angleRange_ >= ANGLE_RANGE)
-			angleRange_ = ANGLE_RANGE;
-
 	}
-	else if (GameInputs::keyDown(e, ControlType::RIGHT))
+	else if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e, ControlType::RIGHT))
 	{
-		keyHeld_ = true;
-		xDirection_ = 1;
-		orient_ = -1;
-		xSpeed_ += 1.0f;
-		if (xSpeed_ > MAX_SPEED)
-		{
-			xSpeed_ = MAX_SPEED;
-		}
-
-		angleRange_++;
-		if (angleRange_ >= ANGLE_RANGE)
-			angleRange_ = ANGLE_RANGE;
+		keyHeld_ = false;
 	}
+	
+	//if (GameInputs::keyDown(e, ControlType::LEFT))
+	//{
+	//	keyHeld_ = true;
+	//	xDirection_ = -1;
+	//	orient_ = 1;
+	//	xSpeed_ += 1.0f;
+	//	if (xSpeed_ > MAX_SPEED)
+	//	{
+	//		xSpeed_ = MAX_SPEED;
+	//	}
+
+	//	angleRange_++;
+	//	if (angleRange_ >= ANGLE_RANGE)
+	//		angleRange_ = ANGLE_RANGE;
+
+	//}
+	//else if (GameInputs::keyDown(e, ControlType::RIGHT))
+	//{
+	//	keyHeld_ = true;
+	//	xDirection_ = 1;
+	//	orient_ = -1;
+	//	xSpeed_ += 1.0f;
+	//	if (xSpeed_ > MAX_SPEED)
+	//	{
+	//		xSpeed_ = MAX_SPEED;
+	//	}
+
+	//	angleRange_++;
+	//	if (angleRange_ >= ANGLE_RANGE)
+	//		angleRange_ = ANGLE_RANGE;
+	//}
+	//else
+	//	keyHeld_ = false;
 
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
@@ -128,11 +142,14 @@ void SwingState::update(Scene & scene)
 		xDirection_ = -xDirection_;
 	}
 	
-	//reduce angle over time.
-	angleRange_ -= 1.0f;
-	xSpeed_ -= (xSpeed_ * .15f);
-	if (xSpeed_ < STARTING_SPEED)
-		xSpeed_ = STARTING_SPEED;
+	if (!keyHeld_)
+	{
+		//reduce angle over time.
+		angleRange_ -= 1.0f;
+		xSpeed_ -= (xSpeed_ * .15f);
+		if (xSpeed_ < STARTING_SPEED)
+			xSpeed_ = STARTING_SPEED;
+	}
 	if (angleRange_ <= 0)
 	{
 		physics_->setVelX(0.0f);

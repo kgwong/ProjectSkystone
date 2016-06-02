@@ -50,7 +50,7 @@ void LaunchState::onEnter(Scene& scene)
 	else
 		yVelocity = sqrtf((physics->GRAVITY * radius_) / divisionbyZeroisDangerous) * -1;
 
-	float multiplier = 2.67f;
+	float multiplier = 5.24f;
 
 	if (xVelocity > TERMINAL_VELOCITY)
 		xVelocity = TERMINAL_VELOCITY;
@@ -60,7 +60,7 @@ void LaunchState::onEnter(Scene& scene)
 		yVelocity = TERMINAL_VELOCITY;
 	if (yVelocity < -TERMINAL_VELOCITY)
 		yVelocity = -TERMINAL_VELOCITY;
-	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * direction_);
+	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * direction_ * multiplier);
 	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity);
 	
 	//x-velocity = rope length / (cos(theta) * time);
