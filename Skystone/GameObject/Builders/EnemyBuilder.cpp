@@ -56,7 +56,9 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
 		//SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
 		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/birdmanruncycle.png");
-		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		auto renderer = componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite);
+		enemyToBuild.addComponent(renderer);
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteAnimator>(enemyToBuild, renderer.get()));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
@@ -70,7 +72,7 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 		enemyToBuild.addComponent(renderer);
 		enemyToBuild.addComponent(componentSystem.getNew<SpriteAnimator>(enemyToBuild, renderer.get()));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
-		enemyToBuild.addComponent(componentSystem.getNew<ColliderBoxRenderer>(enemyToBuild)); //
+		//enemyToBuild.addComponent(componentSystem.getNew<ColliderBoxRenderer>(enemyToBuild)); //
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
 		enemyToBuild.addComponent(componentSystem.getNew<HealthComponent>(enemyToBuild, 4000));
@@ -90,8 +92,10 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "RandomJumper")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/RandomJumper.png");
-		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/boarcycle.png");
+		auto renderer = componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite);
+		enemyToBuild.addComponent(renderer);
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteAnimator>(enemyToBuild, renderer.get()));;
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
@@ -121,8 +125,10 @@ std::shared_ptr<GameObject> EnemyBuilder::build(ComponentSystem& componentSystem
 	}
 	else if (enemyName == "Coward")
 	{
-		SpriteSheet* enemySprite = Resources::getSpriteSheet("Assets/Enemies/Coward.png");
-		enemyToBuild.addComponent(componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite));
+		SpriteSheet* enemySprite = Resources::getSpriteSheet("Images/gator cycle.png");
+		auto renderer = componentSystem.getNew<SpriteRenderer>(enemyToBuild, enemySprite);
+		enemyToBuild.addComponent(renderer);
+		enemyToBuild.addComponent(componentSystem.getNew<SpriteAnimator>(enemyToBuild, renderer.get()));
 		enemyToBuild.addComponent(componentSystem.getNew<ColliderComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<PhysicsComponent>(enemyToBuild));
 		enemyToBuild.addComponent(componentSystem.getNew<DamageComponent>(enemyToBuild, 10));
