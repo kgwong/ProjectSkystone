@@ -5,8 +5,8 @@
 
 const float SwingState::ANGLE_RANGE = 80.0f;
 const float SwingState::RESTING_ANGLE = 90.0f;
-const float SwingState::STARTING_SPEED = 1.24f;
-const float SwingState::MAX_SPEED = 2.24f;
+const float SwingState::STARTING_SPEED = 2.24f;
+const float SwingState::MAX_SPEED = 10.24f;
 
 SwingState::SwingState(GameObject & owner) : PlayerState(owner) {}
 SwingState::~SwingState() {}
@@ -51,6 +51,10 @@ void SwingState::onExit(Scene & scene)
 	stateManager_->MovementState().setSpeed(xSpeed_);
 	stateManager_->MovementState().setAngle(angle_);
 	stateManager_->MovementState().setRadius(radius_);
+	if (angleRange_ <= 0)
+	{
+		stateManager_->MovementState().setAngle(RESTING_ANGLE);
+	}
 	resetVariables();
 }
 
@@ -61,11 +65,15 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 		keyHeld_ = true;
 		xDirection_ = -1;
 		orient_ = 1;
-		xSpeed_ += 0.06f;
+		xSpeed_ += 0.8f;
 		if (xSpeed_ > MAX_SPEED)
 		{
 			xSpeed_ = MAX_SPEED;
 		}
+
+		angleRange_++;
+		if (angleRange_ >= ANGLE_RANGE)
+			angleRange_ = ANGLE_RANGE;
 
 	}
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
@@ -78,6 +86,10 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 		{
 			xSpeed_ = MAX_SPEED;
 		}
+
+		angleRange_++;
+		if (angleRange_ >= ANGLE_RANGE)
+			angleRange_ = ANGLE_RANGE;
 	}
 
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
@@ -99,16 +111,27 @@ void SwingState::update(Scene & scene)
     LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
 	physics_->enableGravity(false);
 
-	if (angle_ > ANGLE_RANGE * 2 + 10)
+	if (angle_ > angleRange_ * 2 + 10)
 	{
-		angle_ = ANGLE_RANGE * 2 + 10;
+		angle_ = angleRange_ * 2 + 10;
 		xDirection_ = -xDirection_;
 	}
 
-	if (angle_ < RESTING_ANGLE - ANGLE_RANGE)
+	if (angle_ < RESTING_ANGLE - angleRange_)
 	{
-		angle_ = RESTING_ANGLE - ANGLE_RANGE;
+		angle_ = RESTING_ANGLE - angleRange_;
 		xDirection_ = -xDirection_;
+	}
+	
+	//reduce angle over time.
+	angleRange_ -= 0.06f;
+	xSpeed_ -= (xSpeed_ * .15f);
+	if (xSpeed_ < STARTING_SPEED)
+		xSpeed_ = STARTING_SPEED;
+	if (angleRange_ <= 0)
+	{
+		stateManager_->changeMovementState(scene, "Hang");
+		return;
 	}
 
 	angle_ += xSpeed_ * xDirection_;

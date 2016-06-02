@@ -22,10 +22,6 @@ void HangState::onEnter(Scene& scene)
 
 		float dx = playerPos_.x - hookPosition_.x;
 		float dy = playerPos_.y - hookPosition_.y;
-
-		//angle_ = atanf(dy / dx) * (180 / M_PI);//CONVERT FROM RADIANS TO DEGREES without kevin's function.
-//		angle_ = atanf(playerPos_.y / playerPos_.x) * 180 / M_PI;
-//		angle_ = atanf((playerPos_.y - hookPosition_.y) / (playerPos_.x - hookPosition_.x)) * 180 / M_PI;
 		angle_ = atan2f(dy, dx) * (180 / M_PI);
 
 		if (angle_ < 0)
