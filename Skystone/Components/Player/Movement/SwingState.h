@@ -44,6 +44,9 @@ private:
 	float angleRange_;
 	bool enemyHit_;
 
+	float xVelocity;
+	float yVelocity;
+
 	PlayerControlComponent* stateManager_;
 	PhysicsComponent* physics_;
 

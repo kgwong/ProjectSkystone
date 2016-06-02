@@ -58,7 +58,9 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 {
 	if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
+		keyHeld_ = true;
 		xDirection_ = -1;
+		orient_ = 1;
 		xSpeed_ += 0.06f;
 		if (xSpeed_ > MAX_SPEED)
 		{
@@ -68,7 +70,9 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 	}
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
+		keyHeld_ = true;
 		xDirection_ = 1;
+		orient_ = -1;
 		xSpeed_ += 0.06f;
 		if (xSpeed_ > MAX_SPEED)
 		{
@@ -79,7 +83,7 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
 		stateManager_->MovementState().setDirection(xDirection_);
-		stateManager_->MovementState().setXVelocity(xSpeed_ * xDirection_);
+		stateManager_->MovementState().setXVelocity(xVelocity);
 		stateManager_->changeMovementState(scene, "Launch");
 	}
 }
@@ -119,8 +123,10 @@ void SwingState::update(Scene & scene)
 
 	float deltax = swingPosition_.x - oldPosition_.x;
 	float deltay = swingPosition_.y - oldPosition_.y;
-	physics_->setVelX(deltax / Time::getElapsedUpdateTimeSeconds());
-	physics_->setVelY(deltay / Time::getElapsedUpdateTimeSeconds());
+	xVelocity = deltax / Time::getElapsedUpdateTimeSeconds();
+	yVelocity = deltay / Time::getElapsedUpdateTimeSeconds();
+	physics_->setVelX(xVelocity);
+	physics_->setVelY(yVelocity);
 
 	oldPosition_ = swingPosition_;
 }

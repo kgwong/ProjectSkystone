@@ -25,8 +25,9 @@ void LaunchState::onEnter(Scene& scene)
 {
 	someSwitch_ = true;
 	//hack -- Kevin
-	direction_ = 0;
-	direction_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
+	float xVel = owner_.getComponent<PlayerControlComponent>()->MovementState().xVelocity;
+	direction_ = fabsf(xVel) / xVel;
+	//owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
 	speed_ = owner_.getComponent<PlayerControlComponent>()->MovementState().speed;
 	angle_ = owner_.getComponent<PlayerControlComponent>()->MovementState().angle;
 	radius_ = owner_.getComponent<PlayerControlComponent>()->MovementState().radius;
@@ -38,6 +39,7 @@ void LaunchState::onEnter(Scene& scene)
 
 	float divisionbyZeroisDangerous = sinf(2 * M_PI * angle_);
 	float yVelocity = 0;
+
 	if (divisionbyZeroisDangerous == 0)
 		yVelocity = TERMINAL_VELOCITY;
 	else if (divisionbyZeroisDangerous < 0)
@@ -50,22 +52,16 @@ void LaunchState::onEnter(Scene& scene)
 
 	float multiplier = 2.67f;
 
-	int xdir = 0, ydir = 0;
-	if (xVelocity < 0)
-		xdir = -1;
-	else
-		xdir = 1;
-	if (yVelocity < 0)
-		ydir = -1;
-	else
-		ydir = 1;
-
-	if ((xVelocity = fabsf(xVelocity)) > TERMINAL_VELOCITY)
+	if (xVelocity > TERMINAL_VELOCITY)
 		xVelocity = TERMINAL_VELOCITY;
-	if ((yVelocity = fabsf(yVelocity)) > TERMINAL_VELOCITY)
+	if (xVelocity < -TERMINAL_VELOCITY)
+		xVelocity = -TERMINAL_VELOCITY;
+	if (yVelocity > TERMINAL_VELOCITY)
 		yVelocity = TERMINAL_VELOCITY;
-	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * xdir);
-	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * ydir);
+	if (yVelocity < -TERMINAL_VELOCITY)
+		yVelocity = -TERMINAL_VELOCITY;
+	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * direction_);
+	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity);
 	
 	//x-velocity = rope length / (cos(theta) * time);
 	//assume time = 1;
