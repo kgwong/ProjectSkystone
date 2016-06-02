@@ -7,6 +7,15 @@
 
 #include <memory>
 
+//holds fields that are shared between swing and hang state.
+//struct sharedVariables
+//{
+//	int direction;
+//	float speed;
+//	float angle;
+//	float radius;
+//};
+
 class PlayerMovementState : public InputComponent
 {
 public:

@@ -17,7 +17,6 @@
 PlayerMovementState::PlayerMovementState(GameObject& owner)
 	: InputComponent(owner)
 {
-	LOG("FLAPJACKS") << "HI";
 	direction = 0;
 
 	addState(std::make_shared<WalkingState>(owner));

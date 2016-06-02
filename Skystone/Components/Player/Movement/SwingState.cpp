@@ -1,223 +1,160 @@
 #include "SwingState.h"
-#include "GameMath/CircleMath.h"
-#include "Components/Player/PlayerControlComponent.h"
-#include "ComponentEvents/CollisionEvent.h"
-#include "Components/collider/ColliderComponent.h"
 #include "Application/Log.h"
-#include "Game/GameConstants.h"
+#include "GameMath/CircleMath.h"
 #include "Game/GameTime.h"
 
-const float SwingState::MAX_ANGLE = 80.0f;
+const float SwingState::ANGLE_RANGE = 80.0f;
+const float SwingState::RESTING_ANGLE = 90.0f;
+const float SwingState::STARTING_SPEED = 10.24f;
+const float SwingState::MAX_SPEED = 20.24f;
 
-SwingState::SwingState(GameObject& owner)
-	:PlayerState(owner)
-{
-	xSpeed_ = 0.0f;
-	currentAngle_ = 0.0f;
-	angleRange_ = 0.0f;
-	xDirection_ = 0;
-	keyHeld_ = false;
-	timer_ = 0.0f;
-}
+SwingState::SwingState(GameObject & owner) : PlayerState(owner) {}
+SwingState::~SwingState() {}
 
-SwingState::~SwingState()
+void SwingState::onEnter(Scene & scene)
 {
-}
+	if (verifiedState(scene))
+	{
+		physics_ = owner_.getComponent<PhysicsComponent>();
+		stateManager_ = owner_.getComponent<PlayerControlComponent>();
+		xSpeed_ = STARTING_SPEED;
+		//obtain variables from previous state.
+		angle_ = stateManager_->MovementState().angle;
+		xDirection_ = stateManager_->MovementState().direction;
+		radius_ = stateManager_->MovementState().radius;
+		swingPosition_ = owner_.getPos();
+		oldPosition_ = owner_.getPos();
+		hookPosition_ = scene.gameObjects.playerHook->getPos();
 
-void SwingState::onEnter(Scene& scene)
-{
-	//if hook is not connected LEAVE THIS STATE.
-	if (owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() != "HookConnectState")
+		LOG("HARVEY") << "ON ENTER angle in degrees: " << angle_;
+		LOG("HARVEY") << "ON ENTER angle in radians: " << toRadians(angle_);
+		LOG("HARVEY") << "ON ENTER radius: " << radius_;
+		LOG("HARVEY") << "ON ENTER hook Position: " << hookPosition_;
+		LOG("HARVEY") << "ON ENTER player position: " << swingPosition_;
+		LOG("HARVEY") << "ON ENTER direction: " << xDirection_;
+	}
+	else
 	{
 		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		return;
 	}
-	if (scene.gameObjects.playerHook == nullptr)
-	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
-		return;
-	}
-
-
-	xSpeed_ = 1.1f;
-	currentAngle_ = 0.0f;
-	xDirection_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
-	//problem here references a null ptr.
-	hookPosition_ = scene.gameObjects.playerHook->getPos();
-	swingPosition_ = owner_.getPos();
-	oldPosition_ = owner_.getPos();
-	radius_ = fabsf(hookPosition_.y - swingPosition_.y);
-	keyHeld_ = false;
-	tileHit_ = false;
-	timer_ = 0.0f;
-	
-	auto physics = owner_.getComponent<PhysicsComponent>();
-	swingTime_ = 2 * float(PI) * sqrtf(radius_ / physics->GRAVITY);
-	damp_ = 0.075;
-	angleRange_ = 80;// MAX_ANGLE;//20 should be MIN_ANGLE;
-
-	//this allows player to swing across if hook is shot from the left or right
-	AimState playerAim = owner_.getComponent<PlayerControlComponent>()->HookState().disconnectState.getAimState();
-	if (playerAim == AimState::RIGHT || playerAim == AimState::LEFT)
-	{
-		xSpeed_ = 3.141f;
-		currentAngle_ = tanhf((fabsf(swingPosition_.y - hookPosition_.y)) / (swingPosition_.x - hookPosition_.x));
-		currentAngle_ = toDegrees(currentAngle_);
-		float dx = swingPosition_.x - hookPosition_.x;
-		float dy = swingPosition_.y - hookPosition_.y;
-		radius_ = sqrtf((dx * dx) + (dy * dy));
-	}
-	LOG("HARVEY") << owner_.getPos();
-	LOG("HARVEY") << currentAngle_;
-	LOG("HARVEY") << "STARTING RADIUS: " << radius_;
-}
-void SwingState::onExit(Scene& scene)
-{
-	owner_.getComponent<PlayerControlComponent>()->MovementState().setSpeed(xSpeed_);
-	owner_.getComponent<PlayerControlComponent>()->MovementState().setAngle(currentAngle_);
-	owner_.getComponent<PlayerControlComponent>()->MovementState().setRadius(radius_);
-	xSpeed_ = 1.1f;
-	currentAngle_ = 0.0f;
-	xDirection_ = 0;
-	radius_ = 0.0f;
-	keyHeld_ = false;
-	tileHit_ = false;
-	timer_ = 0.0f;
-	angleRange_ = 80;//MAX_ANGLE;
 
 }
-void SwingState::handleInput(Scene& scene, SDL_Event& e)
-{
 
-	if (GameInputs::keyHeld(ControlType::LEFT) || GameInputs::keyHeld(ControlType::RIGHT))
+void SwingState::onExit(Scene & scene)
+{
+	resetVariables();
+}
+
+void SwingState::handleInput(Scene & scene, SDL_Event & e)
+{
+	if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
-		keyHeld_ = true;
+		xDirection_ = -1;
+		xSpeed_ += 0.06f;
+		if (xSpeed_ > MAX_SPEED)
+		{
+			xSpeed_ = MAX_SPEED;
+		}
+
 	}
-	else if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e,ControlType::RIGHT))
+	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
-		keyHeld_ = false;
+		xDirection_ = 1;
+		xSpeed_ += 0.06f;
+		if (xSpeed_ > MAX_SPEED)
+		{
+			xSpeed_ = MAX_SPEED;
+		}
 	}
 
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
-		LOG("HARVEY") << "SETTING DIRECTION HERE";
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Launch");
-		owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(xDirection_);
+		stateManager_->MovementState().setDirection(xDirection_);
+		stateManager_->changeMovementState(scene, "Launch");
 	}
 }
-void SwingState::update(Scene& scene)
+
+void SwingState::update(Scene & scene)
 {
+	if (enemyHit_)
+		stateManager_->changeMovementState(scene, "AirborneState");
 
-	auto playerPhysics = owner_.getComponent<PhysicsComponent>();	
-	playerPhysics->enableGravity(false);
+//	LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
+	physics_->enableGravity(false);
 
-	/*if (tileHit_)
+	if (angle_ > ANGLE_RANGE * 2 + 10)
 	{
-		owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "AirborneState");
-		playerPhysics->enableGravity(true);
-		return;
-	}*/
-
-	if (currentAngle_ > angleRange_)
-	{
-		currentAngle_ = angleRange_;
+		angle_ = ANGLE_RANGE * 2 + 10;
 		xDirection_ = -xDirection_;
 	}
-	if (currentAngle_ < -angleRange_)
+
+	if (angle_ < RESTING_ANGLE - ANGLE_RANGE)
 	{
-		currentAngle_ = -angleRange_;
+		angle_ = RESTING_ANGLE - ANGLE_RANGE;
 		xDirection_ = -xDirection_;
-	}	
-
-	if (keyHeld_)
-	{
-		timer_ += 0.5f;
-		if (timer_ >= swingTime_)
-		{
-			timer_ = 0.0f;
-			angleRange_ += angleRange_ * 1.04f;
-			if (angleRange_ > MAX_ANGLE)
-				angleRange_ = MAX_ANGLE;
-			xSpeed_ *= 1.9f;
-			if (xSpeed_ > 6.61f)
-				xSpeed_ = 6.61f;
-		}
-
-	
-
 	}
-	else//damp
-	{
 
-		timer_ += 0.5f;
-		if (timer_ >= swingTime_)
-		{
-			timer_ = 0.0f;
-			angleRange_ -= angleRange_ * 0.15f;
+	angle_ += 1.0f * xDirection_;//xSpeed_ * xDirection_;
+	//if (angle_ > 360.0f)
+	//	angle_ = 360.0f;
 
-			xSpeed_ -= (xSpeed_ * .15f);
-			if (xSpeed_ < 0.0f)
-				xSpeed_ = 0.0f;
-		}
-
-		if (angleRange_ < 0.5)
-		{
-			LOG("HARVEY") << "ANGLE RANGE: " << angleRange_;
-			owner_.getComponent<PlayerControlComponent>()->changeMovementState(scene, "Hang");
-			playerPhysics->setVelX(0);
-			playerPhysics->setVelY(0);
-			owner_.getComponent<PlayerControlComponent>()->MovementState().setDirection(0);
-			owner_.getComponent<PlayerControlComponent>()->HookState().setAimState(AimState::UP);
-			return;
-		}
-	}
 	float dx = swingPosition_.x - hookPosition_.x;
 	float dy = swingPosition_.y - hookPosition_.y;
 	radius_ = sqrtf((dx * dx) + (dy * dy));
-	currentAngle_ += xSpeed_ * xDirection_;
 
-	swingPosition_.x = hookPosition_.x + sin(toRadians(currentAngle_)) * radius_;
-	swingPosition_.y = hookPosition_.y + cos(toRadians(currentAngle_)) * radius_;
+	swingPosition_.x = hookPosition_.x + cos(angle_ * M_PI / 180.0f) * radius_;
+	swingPosition_.y = hookPosition_.y + sin(angle_ * M_PI / 180.0f) * radius_;
+	
+	//owner_.setPos(swingPosition_);
 
-	LOG("HARVEY") << "RADIUS: " << radius_;
-	LOG("HARVEY") << "UPDATED PLAYERPOS: " << owner_.getPos();
-	LOG("HARVEY") << "UPDATED CURRENTANGLE: " << currentAngle_;
+	float drcos = radius_ * cos(angle_ * M_PI / 180.0f);
+	float drsin = radius_ * sin(angle_ * M_PI / 180.0f);
 
-	if (owner_.getPos().inBounds(scene.getWidth(), scene.getHeight()))
+	//physics_->setVelX(drcos);
+	//physics_->setVelY(drsin);
+	float deltax = swingPosition_.x - oldPosition_.x;
+	float deltay = swingPosition_.y - oldPosition_.y;
+	physics_->setVelX(deltax / Time::getElapsedUpdateTimeSeconds());
+	physics_->setVelY(deltay / Time::getElapsedUpdateTimeSeconds());
+
+	oldPosition_ = swingPosition_;
+	//swingPosition_ = owner_.getPos();
+}
+
+std::string SwingState::name(){ return "SwingState"; }
+
+void SwingState::resetVariables()
+{
+	xSpeed_ = 0.0f;
+	angle_ = 0.0f;
+	xDirection_ = 0.0f;
+	swingPosition_ = Point { 0.0f, 0.0f };
+	hookPosition_ = Point{ 0.0f, 0.0f };
+	oldPosition_ = Point{ 0.0f, 0.0f };
+	radius_ = 0.0f;
+	swingTime_ = 0.0f;
+	damp_ = 0.0f;
+	keyHeld_ = false;
+	timer_ = 0.0f;
+	angleRange_ = ANGLE_RANGE;
+	physics_->enableGravity(true);
+	enemyHit_ = false;
+}
+
+bool SwingState::verifiedState(Scene & scene)
+{
+	if (scene.gameObjects.playerHook == nullptr || owner_.getComponent<PlayerControlComponent>()->HookState().getState()->name() != "HookConnectState")
 	{
-		//change to it so it sets the velocity every update.
-		float deltaTime = Time::getElapsedUpdateTimeSeconds();
-		float xVelocity = (swingPosition_.x - oldPosition_.x) / deltaTime;
-		float yVelocity = (swingPosition_.y - oldPosition_.y) / deltaTime;
-
-		playerPhysics->setVelX(xVelocity);
-		playerPhysics->setVelY(yVelocity);
-
-		//owner_.setPos(swingPosition_);
-		oldPosition_ = swingPosition_;
+		return false;
 	}
-	//else//out of bounds... correct position here.
-	//{
-	//	playerPhysics->setVelX(0.0f);
-	//	playerPhysics->setVelY(0.0f);
-	//}
+
+	return true;
 }
 
-std::string SwingState::name()
+void SwingState::handleEvent(const CollisionEvent & e)
 {
-	return "SwingState";
-}
-
-Point SwingState::swingPosition()
-{
-	return swingPosition_;
-}
-
-void SwingState::handleEvent(const CollisionEvent& e)
-{
-	if (e.getOtherObject().getType() == GameObject::Type::TILE)
+	if (e.getOtherObject().getType() == GameObject::Type::ENEMY)
 	{
-		tileHit_ = true;		
+		enemyHit_ = true;
 	}
 }

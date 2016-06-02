@@ -60,6 +60,7 @@ void AirborneState::start(Scene& scene)
 
 void AirborneState::update(Scene& scene)
 {
+	//harvey's flaw if the hook is connected it can be either in hang or swing state.
 	if (controlComponent_->HookState().getState()->name() == "HookConnectState")
 	{
 		controlComponent_->changeMovementState(scene, "Hang");

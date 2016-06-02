@@ -23,7 +23,7 @@ void LaunchState::onEnter(Scene& scene)
 	//hack -- Kevin
 	direction_ = 0;
 	direction_ = owner_.getComponent<PlayerControlComponent>()->MovementState().direction;
-	speed_ = owner_.getComponent<PlayerControlComponent>()->MovementState().speed;
+	speed_ = 30.0f;//owner_.getComponent<PlayerControlComponent>()->MovementState().speed;
 	angle_ = owner_.getComponent<PlayerControlComponent>()->MovementState().angle;
 	radius_ = owner_.getComponent<PlayerControlComponent>()->MovementState().radius;
 	//LOG("HARVEY") << "direction: " << direction_;
