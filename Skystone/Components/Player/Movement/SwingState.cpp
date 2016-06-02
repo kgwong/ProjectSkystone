@@ -3,10 +3,10 @@
 #include "GameMath/CircleMath.h"
 #include "Game/GameTime.h"
 
-const float SwingState::ANGLE_RANGE = 80.0f;
+const float SwingState::ANGLE_RANGE = 90.0f;
 const float SwingState::RESTING_ANGLE = 90.0f;
-const float SwingState::STARTING_SPEED = 2.24f;
-const float SwingState::MAX_SPEED = 10.24f;
+const float SwingState::STARTING_SPEED = 2.0f;
+const float SwingState::MAX_SPEED = 10.0f;
 
 SwingState::SwingState(GameObject & owner) : PlayerState(owner) {}
 SwingState::~SwingState() {}
@@ -65,7 +65,7 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 		keyHeld_ = true;
 		xDirection_ = -1;
 		orient_ = 1;
-		xSpeed_ += 0.8f;
+		xSpeed_ += 1.0f;
 		if (xSpeed_ > MAX_SPEED)
 		{
 			xSpeed_ = MAX_SPEED;
@@ -81,7 +81,7 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 		keyHeld_ = true;
 		xDirection_ = 1;
 		orient_ = -1;
-		xSpeed_ += 0.06f;
+		xSpeed_ += 1.0f;
 		if (xSpeed_ > MAX_SPEED)
 		{
 			xSpeed_ = MAX_SPEED;
@@ -111,25 +111,31 @@ void SwingState::update(Scene & scene)
     LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
 	physics_->enableGravity(false);
 
-	if (angle_ > angleRange_ * 2 + 10)
+
+	float maxAngle = angleRange_ * 2;
+	float minAngle = RESTING_ANGLE - angleRange_;
+	LOG("HARVEY") << "MIN ANGLE: " << minAngle;
+	LOG("HARVEY") << "MAX ANGLE: " << maxAngle;
+	if (angle_ > maxAngle)
 	{
-		angle_ = angleRange_ * 2 + 10;
+		angle_ = maxAngle;
 		xDirection_ = -xDirection_;
 	}
 
-	if (angle_ < RESTING_ANGLE - angleRange_)
+	if (angle_ < minAngle)
 	{
-		angle_ = RESTING_ANGLE - angleRange_;
+		angle_ = minAngle;
 		xDirection_ = -xDirection_;
 	}
 	
 	//reduce angle over time.
-	angleRange_ -= 0.06f;
+	angleRange_ -= 1.0f;
 	xSpeed_ -= (xSpeed_ * .15f);
 	if (xSpeed_ < STARTING_SPEED)
 		xSpeed_ = STARTING_SPEED;
 	if (angleRange_ <= 0)
 	{
+		physics_->setVelX(0.0f);
 		stateManager_->changeMovementState(scene, "Hang");
 		return;
 	}
