@@ -37,11 +37,13 @@ public:
 	void setSpeed(float s);
 	void setAngle(float a);
 	void setRadius(float r);
+	void setXVelocity(float v);
 
 	int direction;
 	float speed;
 	float angle;
 	float radius;
+	float xVelocity;
 
 private:
 	PlayerState* currentState_;

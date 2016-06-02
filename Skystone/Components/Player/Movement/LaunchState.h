@@ -5,6 +5,8 @@ class LaunchState :
 	public PlayerState
 {
 public:
+	static const float TERMINAL_VELOCITY;
+public:
 	LaunchState(GameObject& owner);
 	virtual ~LaunchState();
 

@@ -5,8 +5,8 @@
 
 const float SwingState::ANGLE_RANGE = 80.0f;
 const float SwingState::RESTING_ANGLE = 90.0f;
-const float SwingState::STARTING_SPEED = 10.24f;
-const float SwingState::MAX_SPEED = 20.24f;
+const float SwingState::STARTING_SPEED = 1.24f;
+const float SwingState::MAX_SPEED = 2.24f;
 
 SwingState::SwingState(GameObject & owner) : PlayerState(owner) {}
 SwingState::~SwingState() {}
@@ -20,7 +20,12 @@ void SwingState::onEnter(Scene & scene)
 		xSpeed_ = STARTING_SPEED;
 		//obtain variables from previous state.
 		angle_ = stateManager_->MovementState().angle;
-		xDirection_ = stateManager_->MovementState().direction;
+		orient_ = stateManager_->MovementState().direction;
+		if (orient_ > 0)
+			xDirection_ = -1;
+		else
+			xDirection_ = 1;
+
 		radius_ = stateManager_->MovementState().radius;
 		swingPosition_ = owner_.getPos();
 		oldPosition_ = owner_.getPos();
@@ -42,6 +47,10 @@ void SwingState::onEnter(Scene & scene)
 
 void SwingState::onExit(Scene & scene)
 {
+	stateManager_->MovementState().setDirection(xDirection_);
+	stateManager_->MovementState().setSpeed(xSpeed_);
+	stateManager_->MovementState().setAngle(angle_);
+	stateManager_->MovementState().setRadius(radius_);
 	resetVariables();
 }
 
@@ -70,6 +79,7 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
 		stateManager_->MovementState().setDirection(xDirection_);
+		stateManager_->MovementState().setXVelocity(xSpeed_ * xDirection_);
 		stateManager_->changeMovementState(scene, "Launch");
 	}
 }
@@ -77,9 +87,12 @@ void SwingState::handleInput(Scene & scene, SDL_Event & e)
 void SwingState::update(Scene & scene)
 {
 	if (enemyHit_)
+	{
 		stateManager_->changeMovementState(scene, "AirborneState");
+		return;
+	}
 
-//	LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
+    LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
 	physics_->enableGravity(false);
 
 	if (angle_ > ANGLE_RANGE * 2 + 10)
@@ -94,9 +107,7 @@ void SwingState::update(Scene & scene)
 		xDirection_ = -xDirection_;
 	}
 
-	angle_ += 1.0f * xDirection_;//xSpeed_ * xDirection_;
-	//if (angle_ > 360.0f)
-	//	angle_ = 360.0f;
+	angle_ += xSpeed_ * xDirection_;
 
 	float dx = swingPosition_.x - hookPosition_.x;
 	float dy = swingPosition_.y - hookPosition_.y;
@@ -105,20 +116,13 @@ void SwingState::update(Scene & scene)
 	swingPosition_.x = hookPosition_.x + cos(angle_ * M_PI / 180.0f) * radius_;
 	swingPosition_.y = hookPosition_.y + sin(angle_ * M_PI / 180.0f) * radius_;
 	
-	//owner_.setPos(swingPosition_);
 
-	float drcos = radius_ * cos(angle_ * M_PI / 180.0f);
-	float drsin = radius_ * sin(angle_ * M_PI / 180.0f);
-
-	//physics_->setVelX(drcos);
-	//physics_->setVelY(drsin);
 	float deltax = swingPosition_.x - oldPosition_.x;
 	float deltay = swingPosition_.y - oldPosition_.y;
 	physics_->setVelX(deltax / Time::getElapsedUpdateTimeSeconds());
 	physics_->setVelY(deltay / Time::getElapsedUpdateTimeSeconds());
 
 	oldPosition_ = swingPosition_;
-	//swingPosition_ = owner_.getPos();
 }
 
 std::string SwingState::name(){ return "SwingState"; }

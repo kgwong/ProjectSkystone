@@ -30,6 +30,7 @@ private:
 	float xSpeed_;
 	float angle_;
 	int xDirection_;
+	int orient_;
 
 	Point hookPosition_;
 	Point swingPosition_;

@@ -124,3 +124,8 @@ void PlayerMovementState::setRadius(float r)
 {
 	radius = r;
 }
+
+void PlayerMovementState::setXVelocity(float v)
+{
+	xVelocity = v;
+}

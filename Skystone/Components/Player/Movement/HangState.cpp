@@ -27,10 +27,14 @@ void HangState::onEnter(Scene& scene)
 //		angle_ = atanf(playerPos_.y / playerPos_.x) * 180 / M_PI;
 //		angle_ = atanf((playerPos_.y - hookPosition_.y) / (playerPos_.x - hookPosition_.x)) * 180 / M_PI;
 		angle_ = atan2f(dy, dx) * (180 / M_PI);
-		if (angle_ != RESTING_ANGLE)
+
+		if (angle_ < 0)
+		{
+			stateManager_->changeMovementState(scene, "AirborneState");
+		}
+		else if (angle_ != RESTING_ANGLE)
 		{
 			radius_ = sqrtf((dx * dx) + (dy * dy));
-			LOG("HARVEY") << "STARTING ANGLE: " << angle_;
 			stateManager_->MovementState().setDirection(swingDirection());
 			stateManager_->MovementState().setAngle(angle_);
 			stateManager_->MovementState().setRadius(radius_);
@@ -40,6 +44,8 @@ void HangState::onEnter(Scene& scene)
 		{
 			radius_ = dy;
 		}
+
+		LOG("HARVEY") << "STARTING ANGLE: " << angle_;
 	}
 	else
 	{
@@ -69,11 +75,17 @@ void HangState::handleInput(Scene& scene,SDL_Event& e)
 	else if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
 		stateManager_->MovementState().setDirection(-1);
+		stateManager_->MovementState().setDirection(swingDirection());
+		stateManager_->MovementState().setAngle(angle_);
+		stateManager_->MovementState().setRadius(radius_);
 		stateManager_->changeMovementState(scene, "SwingState");
 	}
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
 		stateManager_->MovementState().setDirection(1);
+		stateManager_->MovementState().setDirection(swingDirection());
+		stateManager_->MovementState().setAngle(angle_);
+		stateManager_->MovementState().setRadius(radius_);
 		stateManager_->changeMovementState(scene, "SwingState");
 	}
 	else
