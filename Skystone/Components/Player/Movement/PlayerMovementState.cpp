@@ -129,3 +129,8 @@ void PlayerMovementState::setXVelocity(float v)
 {
 	xVelocity = v;
 }
+
+void PlayerMovementState::setKeyDirection(bool k)
+{
+	keyDirection = k;
+}

@@ -29,6 +29,10 @@ void HookLaunchState::onExit(Scene& scene)
 
 void HookLaunchState::handleInput(Scene& scene, SDL_Event& e)
 {
+	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
+	{
+		owner_.getComponent<PlayerControlComponent>()->changeHookState(scene, "HookDisconnectState");
+	}
 }
 
 

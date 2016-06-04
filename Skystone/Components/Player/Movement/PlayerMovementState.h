@@ -38,12 +38,14 @@ public:
 	void setAngle(float a);
 	void setRadius(float r);
 	void setXVelocity(float v);
+	void setKeyDirection(bool k);
 
 	int direction;
 	float speed;
 	float angle;
 	float radius;
 	float xVelocity;
+	bool keyDirection;
 
 private:
 	PlayerState* currentState_;

@@ -5,6 +5,7 @@
 #include "Components/Player/PlayerControlComponent.h"
 #include "Application/Log.h"
 #include "GameMath/CircleMath.h"
+#include "Game/GameTime.h"
 
 
 const float LaunchState::TERMINAL_VELOCITY = 2000.0f;
@@ -35,7 +36,7 @@ void LaunchState::onEnter(Scene& scene)
 	//SCALING needs to be based on how long the rope is. ~ lookup momentum from releasing rope.
 	auto physics = owner_.getComponent<PhysicsComponent>();
 	angle_ = toRadians(angle_);
-	float xVelocity = radius_ / cosf(angle_) * direction_;
+	float xVelocity = 2 * (radius_ / cosf(angle_)) * direction_;
 
 	float divisionbyZeroisDangerous = sinf(2 * M_PI * angle_);
 	float yVelocity = 0;
@@ -50,18 +51,32 @@ void LaunchState::onEnter(Scene& scene)
 	else
 		yVelocity = sqrtf((physics->GRAVITY * radius_) / divisionbyZeroisDangerous) * -1;
 
-	float multiplier = 5.24f;
+	float xmultiplier = 10.24f;
+	float ymultiplier = 20.24f;
 
-	if (xVelocity > TERMINAL_VELOCITY)
-		xVelocity = TERMINAL_VELOCITY;
-	if (xVelocity < -TERMINAL_VELOCITY)
-		xVelocity = -TERMINAL_VELOCITY;
-	if (yVelocity > TERMINAL_VELOCITY)
-		yVelocity = TERMINAL_VELOCITY;
-	if (yVelocity < -TERMINAL_VELOCITY)
-		yVelocity = -TERMINAL_VELOCITY;
-	owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * direction_ * multiplier);
-	owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity);
+	//capping out velocities.
+	//if (xVelocity > TERMINAL_VELOCITY)
+	//	xVelocity = TERMINAL_VELOCITY;
+	//if (xVelocity < -TERMINAL_VELOCITY)
+	//	xVelocity = -TERMINAL_VELOCITY;
+	//if (yVelocity > TERMINAL_VELOCITY)
+	//	yVelocity = TERMINAL_VELOCITY;
+	//if (yVelocity < -TERMINAL_VELOCITY)
+	//	yVelocity = -TERMINAL_VELOCITY;
+	Point projectedPosition = owner_.getPos();
+	projectedPosition.x += xVelocity * direction_ * xmultiplier;
+	projectedPosition.y += yVelocity * ymultiplier;
+
+	if (projectedPosition.inBounds(scene.getWidth(), scene.getHeight()))
+	{
+		//comment this out for fast launches.
+		owner_.getComponent<PhysicsComponent>()->setVelX(xVelocity * direction_ * xmultiplier * Time::getElapsedUpdateTime());
+		owner_.getComponent<PhysicsComponent>()->setVelY(yVelocity * ymultiplier * Time::getElapsedUpdateTime());
+		
+		//comment this out for smooth launches.
+		//owner_.getComponent<PhysicsComponent>()->setAccelX(xVelocity * direction_ * xmultiplier);
+		//owner_.getComponent<PhysicsComponent>()->setAccelY(yVelocity * ymultiplier);
+	}
 	
 	//x-velocity = rope length / (cos(theta) * time);
 	//assume time = 1;
@@ -84,7 +99,6 @@ void LaunchState::onExit(Scene& scene)
 
 void LaunchState::handleInput(Scene& scene, SDL_Event& e)
 {
-
 }
 
 void LaunchState::update(Scene& scene)

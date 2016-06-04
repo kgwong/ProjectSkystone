@@ -5,8 +5,8 @@
 
 const float SwingState::ANGLE_RANGE = 90.0f;
 const float SwingState::RESTING_ANGLE = 90.0f;
-const float SwingState::STARTING_SPEED = 2.0f;
-const float SwingState::MAX_SPEED = 10.0f;
+const float SwingState::STARTING_SPEED = 4.0f;
+const float SwingState::MAX_SPEED = 8.0f;
 
 SwingState::SwingState(GameObject & owner) : PlayerState(owner) {}
 SwingState::~SwingState() {}
@@ -26,17 +26,20 @@ void SwingState::onEnter(Scene & scene)
 		else
 			xDirection_ = 1;
 
+
 		radius_ = stateManager_->MovementState().radius;
 		swingPosition_ = owner_.getPos();
 		oldPosition_ = owner_.getPos();
 		hookPosition_ = scene.gameObjects.playerHook->getPos();
 
-		LOG("HARVEY") << "ON ENTER angle in degrees: " << angle_;
+
+		LOG("HARVEY") << "ON ENTER direction: " << xDirection_;
+		/*LOG("HARVEY") << "ON ENTER angle in degrees: " << angle_;
 		LOG("HARVEY") << "ON ENTER angle in radians: " << toRadians(angle_);
 		LOG("HARVEY") << "ON ENTER radius: " << radius_;
 		LOG("HARVEY") << "ON ENTER hook Position: " << hookPosition_;
 		LOG("HARVEY") << "ON ENTER player position: " << swingPosition_;
-		LOG("HARVEY") << "ON ENTER direction: " << xDirection_;
+		LOG("HARVEY") << "ON ENTER direction: " << xDirection_;*/
 	}
 	else
 	{
@@ -51,6 +54,7 @@ void SwingState::onExit(Scene & scene)
 	stateManager_->MovementState().setSpeed(xSpeed_);
 	stateManager_->MovementState().setAngle(angle_);
 	stateManager_->MovementState().setRadius(radius_);
+	stateManager_->MovementState().setKeyDirection(false);
 	if (angleRange_ <= 0)
 	{
 		stateManager_->MovementState().setAngle(RESTING_ANGLE);
@@ -60,51 +64,56 @@ void SwingState::onExit(Scene & scene)
 
 void SwingState::handleInput(Scene & scene, SDL_Event & e)
 {
-	if (GameInputs::keyHeld(ControlType::LEFT) || GameInputs::keyHeld(ControlType::RIGHT))
+	//control 1 uncomment reduced angle range code over time.
+	//if (GameInputs::keyHeld(ControlType::LEFT) || GameInputs::keyHeld(ControlType::RIGHT))
+	//{
+	//	keyHeld_ = true;
+	//	xSpeed_ += 1.0f;
+	//	if(xSpeed_ > MAX_SPEED)
+	//		xSpeed_ = MAX_SPEED;
+	//		angleRange_++;
+	//		if (angleRange_ >= ANGLE_RANGE)
+	//			angleRange_ = ANGLE_RANGE;
+	//}
+	//else if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e, ControlType::RIGHT))
+	//{
+	//	keyHeld_ = false;
+	//}
+	
+	//control 2 comment reduced angle range code over time.
+	if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
 		keyHeld_ = true;
+		xDirection_ = -1;
+		orient_ = 1;
 		xSpeed_ += 1.0f;
-		if(xSpeed_ > MAX_SPEED)
+		if (xSpeed_ > MAX_SPEED)
+		{
 			xSpeed_ = MAX_SPEED;
+		}
+
+		angleRange_++;
+		if (angleRange_ >= ANGLE_RANGE)
+			angleRange_ = ANGLE_RANGE;
+
 	}
-	else if (GameInputs::keyUp(e, ControlType::LEFT) || GameInputs::keyUp(e, ControlType::RIGHT))
+	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
-		keyHeld_ = false;
+		keyHeld_ = true;
+		xDirection_ = 1;
+		orient_ = -1;
+		xSpeed_ += 1.0f;
+		if (xSpeed_ > MAX_SPEED)
+		{
+			xSpeed_ = MAX_SPEED;
+		}
+
+		angleRange_++;
+		if (angleRange_ >= ANGLE_RANGE)
+			angleRange_ = ANGLE_RANGE;
 	}
-	
-	//if (GameInputs::keyDown(e, ControlType::LEFT))
-	//{
-	//	keyHeld_ = true;
-	//	xDirection_ = -1;
-	//	orient_ = 1;
-	//	xSpeed_ += 1.0f;
-	//	if (xSpeed_ > MAX_SPEED)
-	//	{
-	//		xSpeed_ = MAX_SPEED;
-	//	}
-
-	//	angleRange_++;
-	//	if (angleRange_ >= ANGLE_RANGE)
-	//		angleRange_ = ANGLE_RANGE;
-
-	//}
-	//else if (GameInputs::keyDown(e, ControlType::RIGHT))
-	//{
-	//	keyHeld_ = true;
-	//	xDirection_ = 1;
-	//	orient_ = -1;
-	//	xSpeed_ += 1.0f;
-	//	if (xSpeed_ > MAX_SPEED)
-	//	{
-	//		xSpeed_ = MAX_SPEED;
-	//	}
-
-	//	angleRange_++;
-	//	if (angleRange_ >= ANGLE_RANGE)
-	//		angleRange_ = ANGLE_RANGE;
-	//}
-	//else
-	//	keyHeld_ = false;
+	else
+		keyHeld_ = false;
 
 	if (GameInputs::keyDown(e, ControlType::LAUNCH_HOOK))
 	{
@@ -122,14 +131,14 @@ void SwingState::update(Scene & scene)
 		return;
 	}
 
-    LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
+  //  LOG("HARVEY") << "UPDATE angle in degrees: " << angle_;
 	physics_->enableGravity(false);
 
 
 	float maxAngle = angleRange_ * 2;
 	float minAngle = RESTING_ANGLE - angleRange_;
-	LOG("HARVEY") << "MIN ANGLE: " << minAngle;
-	LOG("HARVEY") << "MAX ANGLE: " << maxAngle;
+//	LOG("HARVEY") << "MIN ANGLE: " << minAngle;
+//	LOG("HARVEY") << "MAX ANGLE: " << maxAngle;
 	if (angle_ > maxAngle)
 	{
 		angle_ = maxAngle;
@@ -142,20 +151,21 @@ void SwingState::update(Scene & scene)
 		xDirection_ = -xDirection_;
 	}
 	
-	if (!keyHeld_)
-	{
-		//reduce angle over time.
-		angleRange_ -= 1.0f;
-		xSpeed_ -= (xSpeed_ * .15f);
-		if (xSpeed_ < STARTING_SPEED)
-			xSpeed_ = STARTING_SPEED;
-	}
-	if (angleRange_ <= 0)
-	{
-		physics_->setVelX(0.0f);
-		stateManager_->changeMovementState(scene, "Hang");
-		return;
-	}
+	//reduce angle over time.
+	//if (!keyHeld_)
+	//{
+	//	angleRange_ -= 1.0f;
+	//	xSpeed_ -= (xSpeed_ * .15f);
+	//	if (xSpeed_ < STARTING_SPEED)
+	//		xSpeed_ = STARTING_SPEED;
+	//}
+	//if (angleRange_ <= 0)
+	//{
+	//	physics_->setVelX(0.0f);
+	//	stateManager_->changeMovementState(scene, "Hang");
+	//	return;
+	//}
+	///////////////////////
 
 	angle_ += xSpeed_ * xDirection_;
 
@@ -163,18 +173,22 @@ void SwingState::update(Scene & scene)
 	float dy = swingPosition_.y - hookPosition_.y;
 	radius_ = sqrtf((dx * dx) + (dy * dy));
 
-	swingPosition_.x = hookPosition_.x + cos(angle_ * M_PI / 180.0f) * radius_;
-	swingPosition_.y = hookPosition_.y + sin(angle_ * M_PI / 180.0f) * radius_;
+	Point projectedPosition = swingPosition_;
+
+	projectedPosition.x = hookPosition_.x + cos(angle_ * M_PI / 180.0f) * radius_;
+	projectedPosition.y = hookPosition_.y + sin(angle_ * M_PI / 180.0f) * radius_;
 	
-
-	float deltax = swingPosition_.x - oldPosition_.x;
-	float deltay = swingPosition_.y - oldPosition_.y;
-	xVelocity = deltax / Time::getElapsedUpdateTimeSeconds();
-	yVelocity = deltay / Time::getElapsedUpdateTimeSeconds();
-	physics_->setVelX(xVelocity);
-	physics_->setVelY(yVelocity);
-
-	oldPosition_ = swingPosition_;
+	if (projectedPosition.inBounds(scene.getWidth(), scene.getHeight()))
+	{
+		swingPosition_ = projectedPosition;
+		float deltax = swingPosition_.x - oldPosition_.x;
+		float deltay = swingPosition_.y - oldPosition_.y;
+		xVelocity = deltax / Time::getElapsedUpdateTimeSeconds();
+		yVelocity = deltay / Time::getElapsedUpdateTimeSeconds();
+		physics_->setVelX(xVelocity);
+		physics_->setVelY(yVelocity);
+		oldPosition_ = swingPosition_;
+	}
 }
 
 std::string SwingState::name(){ return "SwingState"; }

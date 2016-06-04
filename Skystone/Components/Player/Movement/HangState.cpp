@@ -70,16 +70,18 @@ void HangState::handleInput(Scene& scene,SDL_Event& e)
 	}
 	else if (GameInputs::keyDown(e, ControlType::LEFT))
 	{
-		stateManager_->MovementState().setDirection(-1);
-		stateManager_->MovementState().setDirection(swingDirection());
+		LOG("HARVEY") << "LEFT KEY PRESSED";
+		stateManager_->MovementState().setKeyDirection(true);
+		stateManager_->MovementState().setDirection(1);
 		stateManager_->MovementState().setAngle(angle_);
 		stateManager_->MovementState().setRadius(radius_);
 		stateManager_->changeMovementState(scene, "SwingState");
 	}
 	else if (GameInputs::keyDown(e, ControlType::RIGHT))
 	{
-		stateManager_->MovementState().setDirection(1);
-		stateManager_->MovementState().setDirection(swingDirection());
+		LOG("HARVEY") << "RIGHT KEY PRESSED";
+		stateManager_->MovementState().setKeyDirection(false);
+		stateManager_->MovementState().setDirection(-1);
 		stateManager_->MovementState().setAngle(angle_);
 		stateManager_->MovementState().setRadius(radius_);
 		stateManager_->changeMovementState(scene, "SwingState");
